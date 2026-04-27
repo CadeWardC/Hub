@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lift PR Tracker</title>
+    <link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <a href="../index.html" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Hub
+            </a>
+            <h1 class="app-title">LIFT PRs</h1>
+        </header>
+
+        <main class="main">
+            <div class="pr-header">
+                <h2>Personal Records</h2>
+                <p>Track your one-rep maxes. Synced to your database.</p>
+            </div>
+
+            <div class="pr-form">
+                <div class="form-row">
+                    <input type="text" id="liftName" class="form-input" placeholder="Lift name (e.g. Squat, Bench, Deadlift)">
+                    <input type="number" id="liftWeight" class="form-input" placeholder="Weight (e.g. 405)">
+                    <button id="addLiftBtn" class="form-btn">Add PR</button>
+                </div>
+                <div id="dbStatus" class="db-status">Loading from database...</div>
+            </div>
+
+            <div class="pr-list" id="prList">
+                <!-- Populated by JS -->
+            </div>
+        </main>
+    </div>
+
+    <script src="directus.js?v=1"></script>
+    <script src="app.js?v=1"></script>
+</body>
+</html>
