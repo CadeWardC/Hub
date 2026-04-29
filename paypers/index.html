@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paypers</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Onboarding -->
+    <section id="onboarding" class="view active">
+      <div class="onboarding-content">
+        <h1>Paypers</h1>
+        <p class="subtitle">Discover biomedical research tailored to you.</p>
+
+        <div class="section">
+          <h2>What are you interested in?</h2>
+          <div class="keyword-input-wrap">
+            <input
+              type="text"
+              id="keyword-input"
+              placeholder="Type a keyword and press Enter"
+              maxlength="40"
+            />
+            <button id="add-keyword">Add</button>
+          </div>
+          <div id="selected-keywords" class="keywords-list"></div>
+          <p id="keyword-limit" class="hint hidden">You can add up to 5 keywords.</p>
+        </div>
+
+        <div class="section">
+          <h3>Or pick from hot topics</h3>
+          <div id="topic-pills" class="pills"></div>
+        </div>
+
+        <button id="start-btn" class="primary-btn" disabled>Start Discovering</button>
+      </div>
+    </section>
+
+    <!-- Main App -->
+    <section id="main" class="view">
+      <header class="top-bar">
+        <div class="logo">Paypers</div>
+      </header>
+
+      <div class="main-body">
+        <!-- Swipe Tab -->
+        <div id="tab-swipe" class="tab-content active">
+          <div class="card-area">
+            <div id="card-stack" class="card-stack">
+              <div id="empty-state" class="empty-state hidden">
+                <p>Loading more papers…</p>
+              </div>
+            </div>
+
+            <div class="swipe-hints">
+              <div class="hint left">
+                <span class="arrow">&#8592;</span>
+                <span>Not interested</span>
+              </div>
+              <div class="hint right">
+                <span>Save &amp; boost</span>
+                <span class="arrow">&#8594;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saved Tab -->
+        <div id="tab-saved" class="tab-content">
+          <div class="saved-header">
+            <h2>Saved Papers</h2>
+            <p id="saved-subtitle" class="saved-subtitle">No papers saved yet.</p>
+          </div>
+          <div id="saved-list" class="saved-list"></div>
+        </div>
+      </div>
+
+      <!-- Bottom Tabs -->
+      <nav class="bottom-tabs">
+        <button id="tab-btn-swipe" class="tab-btn active" data-tab="swipe">
+          <span class="tab-icon">&#9673;</span>
+          <span class="tab-label">Swipe</span>
+        </button>
+        <button id="tab-btn-saved" class="tab-btn" data-tab="saved">
+          <span class="tab-icon">&#9733;</span>
+          <span class="tab-label">Saved</span>
+          <span id="saved-badge" class="tab-badge">0</span>
+        </button>
+      </nav>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
