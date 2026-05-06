@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,12 +17,7 @@
         <div class="section">
           <h2>What are you interested in?</h2>
           <div class="keyword-input-wrap">
-            <input
-              type="text"
-              id="keyword-input"
-              placeholder="Type a keyword and press Enter"
-              maxlength="40"
-            />
+            <input type="text" id="keyword-input" placeholder="Type a keyword and press Enter" maxlength="40" autocomplete="off" />
             <button id="add-keyword">Add</button>
           </div>
           <div id="selected-keywords" class="keywords-list"></div>
@@ -42,7 +37,14 @@
     <section id="main" class="view">
       <header class="top-bar">
         <div class="logo">Paypers</div>
+        <div class="top-bar-actions">
+          <div id="stats-bar" class="stats-bar"></div>
+          <button id="dark-toggle" class="dark-toggle" title="Toggle dark mode">☾</button>
+        </div>
       </header>
+
+      <!-- Digest Banner -->
+      <div id="digest-banner" class="digest-banner hidden"></div>
 
       <div class="main-body">
         <!-- Swipe Tab -->
@@ -50,7 +52,9 @@
           <div class="card-area">
             <div id="card-stack" class="card-stack">
               <div id="empty-state" class="empty-state hidden">
-                <p>Loading more papers…</p>
+                <div class="loading-spinner"></div>
+                <p id="empty-state-msg">Loading more papers…</p>
+                <button id="retry-btn" class="retry-btn hidden">Retry</button>
               </div>
             </div>
 
@@ -72,6 +76,10 @@
           <div class="saved-header">
             <h2>Saved Papers</h2>
             <p id="saved-subtitle" class="saved-subtitle">No papers saved yet.</p>
+            <div class="saved-header-row">
+              <input type="text" id="saved-filter" class="saved-filter hidden" placeholder="Filter saved papers…" />
+              <button id="undo-save-btn" class="undo-save-btn hidden">Undo last save</button>
+            </div>
           </div>
           <div id="saved-list" class="saved-list"></div>
         </div>

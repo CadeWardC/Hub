@@ -1,0 +1,99 @@
+- generic [ref=e24]:
+  - banner [ref=e25]:
+    - generic [ref=e26]:
+      - link "← Hub" [ref=e27] [cursor=pointer]:
+        - /url: ../index.html
+      - generic [ref=e28]:
+        - generic [ref=e29]: ✦
+        - generic [ref=e30]: LaserEngraving
+    - button "↺ Reset" [ref=e31] [cursor=pointer]
+  - generic [ref=e32]:
+    - complementary [ref=e33]:
+      - button "Select (V)" [ref=e34] [cursor=pointer]:
+        - img [ref=e35]
+      - button "Rectangle (R)" [ref=e37] [cursor=pointer]:
+        - img [ref=e38]
+      - button "Circle (C)" [ref=e40] [cursor=pointer]:
+        - img [ref=e41]
+      - button "Upload image" [ref=e44] [cursor=pointer]:
+        - img [ref=e45]
+      - button "Zoom In (+)" [ref=e49] [cursor=pointer]:
+        - img [ref=e50]
+      - button "Zoom Out (-)" [ref=e53] [cursor=pointer]:
+        - img [ref=e54]
+      - button "Fit to View (F)" [ref=e57] [cursor=pointer]:
+        - img [ref=e58]
+      - button "Export G-code" [active] [ref=e61] [cursor=pointer]:
+        - img [ref=e62]
+    - complementary [ref=e67]:
+      - generic [ref=e68]: Layers
+      - generic [ref=e69]:
+        - generic [ref=e141] [cursor=pointer]:
+          - button "Toggle visibility" [ref=e142]:
+            - img [ref=e143]
+          - generic [ref=e146]: Circle 1
+          - generic [ref=e147]:
+            - button "▲" [ref=e148]
+            - button "▼" [ref=e149]
+            - button "×" [ref=e150]
+        - generic [ref=e151] [cursor=pointer]:
+          - button "Toggle visibility" [ref=e152]:
+            - img [ref=e153]
+          - generic [ref=e156]: Rectangle 1
+          - generic [ref=e157]:
+            - button "▲" [ref=e158]
+            - button "▼" [ref=e159]
+            - button "×" [ref=e160]
+    - img [ref=e71]
+    - complementary [ref=e74]:
+      - generic [ref=e75]: Properties
+      - generic [ref=e76]:
+        - generic [ref=e163]:
+          - generic [ref=e164]: Name
+          - textbox [ref=e165]: Circle 1
+        - generic [ref=e166]:
+          - generic [ref=e167]: Type
+          - textbox [disabled] [ref=e168]: Circle
+        - generic [ref=e169]:
+          - generic [ref=e170]: Mode
+          - textbox [disabled] [ref=e171]: Cut
+        - generic [ref=e172]:
+          - generic [ref=e173]: Preset
+          - combobox [ref=e174] [cursor=pointer]:
+            - option "Custom" [selected]
+        - generic [ref=e175]:
+          - generic [ref=e176]: X Position
+          - spinbutton [ref=e177]: "268.439"
+        - generic [ref=e178]:
+          - generic [ref=e179]: Y Position
+          - spinbutton [ref=e180]: "131.389"
+        - generic [ref=e181]:
+          - generic [ref=e182]: Width
+          - spinbutton [ref=e183]: "68.611"
+        - generic [ref=e184]:
+          - generic [ref=e185]: Height
+          - spinbutton [ref=e186]: "68.611"
+        - generic [ref=e187]:
+          - generic [ref=e188]: Power (%)
+          - spinbutton [ref=e189]: "30"
+        - generic [ref=e190]:
+          - generic [ref=e191]: Speed (mm/min)
+          - spinbutton [ref=e192]: "3000"
+        - generic [ref=e193]:
+          - generic [ref=e194]: Passes
+          - spinbutton [ref=e195]: "1"
+        - button "Delete Object" [ref=e197] [cursor=pointer]
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - button "Cut" [ref=e80] [cursor=pointer]
+          - button "Engrave" [ref=e81] [cursor=pointer]
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Presets
+            - button "+" [ref=e85] [cursor=pointer]
+          - combobox [ref=e87] [cursor=pointer]:
+            - option "Select a preset..." [selected]
+  - generic [ref=e88]:
+    - generic [ref=e89]: "-228.988, 247.17 mm"
+    - generic [ref=e90]: 117%
+    - generic [ref=e91]: 400 × 400 mm

@@ -1,0 +1,8 @@
+- generic [ref=e3]:
+  - link "← Hub" [ref=e4] [cursor=pointer]:
+    - /url: ../index.html
+  - generic [ref=e5]:
+    - generic [ref=e6]: ✦
+    - heading "LaserEngraving" [level=1] [ref=e7]
+    - paragraph [ref=e8]: Set up your laser bed and start planning perfect prints.
+    - button "Get Started" [ref=e9] [cursor=pointer]

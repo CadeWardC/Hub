@@ -1,0 +1,31 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]: 🀄 Mandarin Learning
+    - navigation [ref=e4]:
+      - button "Daily" [ref=e5] [cursor=pointer]
+      - button "Roadmap" [active] [ref=e6] [cursor=pointer]
+      - button "Vocab" [ref=e7] [cursor=pointer]
+  - main [ref=e8]:
+    - generic [ref=e60]:
+      - heading "Learning Roadmap" [level=2] [ref=e61]
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e64]: ✓
+          - generic [ref=e65]:
+            - strong [ref=e66]: Basics
+            - generic [ref=e67]: Greetings & Numbers
+        - generic [ref=e69]:
+          - generic [ref=e70]: "2"
+          - generic [ref=e71]:
+            - strong [ref=e72]: Foundation
+            - generic [ref=e73]: Pronouns & Verbs
+        - generic [ref=e75]:
+          - generic [ref=e76]: 🔒
+          - generic [ref=e77]:
+            - strong [ref=e78]: Intermediate
+            - generic [ref=e79]: Food & Travel
+        - generic [ref=e81]:
+          - generic [ref=e82]: 🔒
+          - generic [ref=e83]:
+            - strong [ref=e84]: Advanced
+            - generic [ref=e85]: Conversation & Idioms

@@ -226,6 +226,33 @@ a {
     width: 100%;
     aspect-ratio: 16 / 10;
     overflow: hidden;
+    position: relative;
+}
+
+.placeholder-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+    background: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.placeholder-card {
+    cursor: default;
+}
+
+.placeholder-card:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: rgba(255, 255, 255, 0.05);
 }
 
 .image-placeholder {
@@ -408,7 +435,7 @@ a {
 .project-card.is-visible {
     animation: none;
 }
-   ======================================== */
+
 @keyframes fadeUp {
     from {
         opacity: 0;

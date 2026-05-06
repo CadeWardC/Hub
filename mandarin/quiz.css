@@ -1,0 +1,244 @@
+/* Quiz */
+.quiz-header {
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+#progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  width: 0%;
+  transition: width 0.3s;
+}
+
+.quiz-meta {
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.question-card {
+  text-align: center;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.question-type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--bg);
+  color: var(--text-secondary);
+}
+
+.char-display {
+  font-size: 5rem;
+  line-height: 1;
+  margin: 0.5rem 0;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.pinyin-display {
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.meaning-display {
+  font-size: 1.25rem;
+  color: var(--text);
+}
+
+.prompt-text {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 400px;
+}
+
+/* Options Grid */
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.btn-option {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  padding: 1rem;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.btn-option:hover {
+  border-color: var(--primary);
+  background: #fff5f5;
+}
+
+.btn-option.correct {
+  border-color: var(--success);
+  background: #e8f5e9;
+  color: var(--success);
+}
+
+.btn-option.wrong {
+  border-color: var(--error);
+  background: #ffebee;
+  color: var(--error);
+}
+
+.btn-option:disabled {
+  cursor: default;
+  opacity: 0.9;
+}
+
+/* Writing Input */
+.write-input {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.write-input:focus {
+  border-color: var(--primary);
+}
+
+/* Audio & Record Buttons */
+.btn-audio {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.btn-audio:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+.btn-record {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 3px solid var(--primary);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  position: relative;
+}
+
+.btn-recording {
+  background: var(--primary);
+  color: white;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(198, 40, 40, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(198, 40, 40, 0); }
+}
+
+/* Pitch Canvas */
+.pitch-container {
+  width: 100%;
+  max-width: 360px;
+  height: 120px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+#pitch-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.record-hint {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Submit / Next */
+.submit-row {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.submit-row .btn-primary {
+  flex: 1;
+}
+
+/* Stage Quiz Overlay */
+.stage-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg);
+  z-index: 200;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.stage-overlay.hidden {
+  display: none;
+}
+
+.stage-overlay-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Grammar Tip */
+.grammar-tip {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #fff8e1;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.85rem;
+  color: #5d4037;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.grammar-tip::before {
+  content: '\1F4A1 Grammar: ';
+  font-weight: 600;
+}

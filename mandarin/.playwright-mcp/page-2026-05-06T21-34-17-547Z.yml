@@ -1,0 +1,20 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]: 🀄 Mandarin Learning
+    - navigation [ref=e4]:
+      - button "Daily" [ref=e5] [cursor=pointer]
+      - button "Roadmap" [ref=e6] [cursor=pointer]
+      - button "Vocab" [ref=e7] [cursor=pointer]
+  - main [ref=e8]:
+    - generic [ref=e176]:
+      - generic [ref=e179]: Question 1 / 10
+      - generic [ref=e180]:
+        - generic [ref=e181]: Recognize Character
+        - generic [ref=e182]: 木
+        - generic [ref=e183]: mù
+        - generic [ref=e184]: Select the correct meaning
+        - generic [ref=e185]:
+          - button "wood" [ref=e186] [cursor=pointer]
+          - button "I / me" [ref=e187] [cursor=pointer]
+          - button "mountain" [ref=e188] [cursor=pointer]
+          - button "mouth" [ref=e189] [cursor=pointer]

@@ -447,6 +447,7 @@
 
     // --- Weight Math ---
     function roundW(w) {
+        w = Number(w);
         if (currentUnit === 'lb') return Math.round(w / 5) * 5;
         return Math.round(w / 2.5) * 2.5;
     }
@@ -455,6 +456,8 @@
 
     // --- Program Builder ---
     function buildProgram(max, unit, increment) {
+        // Ensure numeric types — Directus API may return strings
+        increment = Number(increment) || 0;
         const sessions = [];
         let dayNum = 0;
 

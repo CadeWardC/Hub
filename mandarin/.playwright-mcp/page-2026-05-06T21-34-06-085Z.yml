@@ -1,0 +1,25 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]: 🀄 Mandarin Learning
+    - navigation [ref=e4]:
+      - button "Daily" [active] [ref=e5] [cursor=pointer]
+      - button "Roadmap" [ref=e6] [cursor=pointer]
+      - button "Vocab" [ref=e7] [cursor=pointer]
+  - main [ref=e8]:
+    - generic [ref=e11]:
+      - heading "Daily Quiz Settings" [level=2] [ref=e12]
+      - paragraph [ref=e13]: Customize your 10-question session
+      - generic [ref=e14]:
+        - generic [ref=e16] [cursor=pointer]:
+          - strong [ref=e17]: Show Pinyin
+          - generic [ref=e18]: Display pinyin romanization in prompts
+        - generic [ref=e21] [cursor=pointer]:
+          - strong [ref=e22]: Include Characters
+          - generic [ref=e23]: Show Chinese characters and ask for them in writing
+        - generic [ref=e26] [cursor=pointer]:
+          - strong [ref=e27]: Include Listening
+          - generic [ref=e28]: Add audio-only multiple choice questions
+        - generic [ref=e31] [cursor=pointer]:
+          - strong [ref=e32]: Include Speaking
+          - generic [ref=e33]: Add microphone tone & speech questions
+      - button "Start Daily Quiz" [ref=e35] [cursor=pointer]

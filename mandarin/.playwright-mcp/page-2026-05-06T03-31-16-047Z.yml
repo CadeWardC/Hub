@@ -1,0 +1,22 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]: 🀄 Mandarin Learning
+    - navigation [ref=e4]:
+      - button "Daily" [ref=e5] [cursor=pointer]
+      - button "Roadmap" [ref=e6] [cursor=pointer]
+      - button "Vocab" [ref=e7] [cursor=pointer]
+  - main [ref=e8]:
+    - generic [ref=e36]:
+      - generic [ref=e39]: Question 1 / 10
+      - generic [ref=e40]:
+        - generic [ref=e41]: Writing
+        - generic [ref=e42]: five
+        - generic [ref=e43]: 五
+        - textbox "Type character or pinyin" [disabled] [ref=e44]: wu
+        - generic [ref=e45]:
+          - button "▶" [ref=e46] [cursor=pointer]
+          - button "Submit" [active] [ref=e47] [cursor=pointer]
+        - generic [ref=e48]:
+          - text: ✗ The answer was
+          - strong [ref=e49]: 五
+          - text: (wǔ)

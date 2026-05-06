@@ -1,106 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Mandarin</title>
-    <link rel="stylesheet" href="main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandarin Learning</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="quiz.css">
+  <link rel="stylesheet" href="roadmap.css">
+  <link rel="stylesheet" href="vocab.css">
 </head>
 <body>
-    <div class="app">
-        <!-- Top Bar -->
-        <header class="topbar">
-            <a href="../index.html" class="back-btn">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Hub
-            </a>
-            <h1 class="app-title">MANDARIN</h1>
-            <div class="stats-bar">
-                <span class="stat-xp" id="topXp">0 XP</span>
-            </div>
-        </header>
+  <header>
+    <div class="logo">🀄 Mandarin Learning</div>
+    <nav id="tab-nav">
+      <button data-tab="daily" class="active">Daily</button>
+      <button data-tab="roadmap">Roadmap</button>
+      <button data-tab="vocab">Vocab</button>
+    </nav>
+  </header>
 
-        <!-- Welcome Screen -->
-        <div id="welcomeScreen" class="welcome-screen">
-            <div class="welcome-content">
-                <div class="welcome-emoji">🏮</div>
-                <h2 class="welcome-title">Learn Mandarin</h2>
-                <p class="welcome-sub">Your roadmap to real conversation.</p>
-                <div class="welcome-features">
-                    <div class="w-feature"><span class="w-f-icon">🎙️</span><span class="w-f-text">Speak tones into your mic and get real-time feedback</span></div>
-                    <div class="w-feature"><span class="w-f-icon">📖</span><span class="w-f-text">Topic-based vocabulary: greetings, food, family, travel...</span></div>
-                    <div class="w-feature"><span class="w-f-icon">💬</span><span class="w-f-text">Build sentences with every word you learn</span></div>
-                </div>
-                <button id="testAudioBtn" class="test-audio-btn">🔊 Test Audio</button>
-                <button id="startLearningBtn" class="start-btn" onclick="document.getElementById('welcomeScreen').style.display='none';document.getElementById('mainApp').style.display='flex';document.getElementById('mainApp').classList.remove('hidden');renderRoadmap();">Start Learning</button>
-                <p class="welcome-note">Step 1: Master tones with your mic. Step 2: Learn topic vocabulary. Step 3: Build sentences. Step 4: Have conversations.</p>
-            </div>
+  <main>
+    <!-- Daily Tab -->
+    <section id="daily-tab" class="tab-panel active">
+      <!-- Settings View -->
+      <div id="daily-settings" class="view">
+        <div class="card settings-card">
+          <h2>Daily Quiz Settings</h2>
+          <p class="subtitle">Customize your 10-question session</p>
+
+          <div class="toggle-list">
+            <label class="toggle-row">
+              <span class="toggle-label">
+                <strong>Show Pinyin</strong>
+                <small>Display pinyin romanization in prompts</small>
+              </span>
+              <input type="checkbox" id="setting-pinyin" checked>
+              <span class="toggle-switch"></span>
+            </label>
+
+            <label class="toggle-row">
+              <span class="toggle-label">
+                <strong>Include Characters</strong>
+                <small>Show Chinese characters and ask for them in writing</small>
+              </span>
+              <input type="checkbox" id="setting-chars" checked>
+              <span class="toggle-switch"></span>
+            </label>
+
+            <label class="toggle-row">
+              <span class="toggle-label">
+                <strong>Include Listening</strong>
+                <small>Add audio-only multiple choice questions</small>
+              </span>
+              <input type="checkbox" id="setting-listen" checked>
+              <span class="toggle-switch"></span>
+            </label>
+
+            <label class="toggle-row">
+              <span class="toggle-label">
+                <strong>Include Speaking</strong>
+                <small>Add microphone tone &amp; speech questions</small>
+              </span>
+              <input type="checkbox" id="setting-speak" checked>
+              <span class="toggle-switch"></span>
+            </label>
+          </div>
+
+          <button id="start-quiz" class="btn-primary">Start Daily Quiz</button>
         </div>
+      </div>
 
-        <!-- Main App -->
-        <div id="mainApp" class="main-app hidden">
-
-            <!-- Roadmap Dashboard -->
-            <div id="roadmapView" class="view active">
-                <div class="roadmap-header">
-                    <h2 class="roadmap-title">Your Roadmap to Fluency</h2>
-                    <p class="roadmap-sub">Complete each topic to unlock the next. Every word comes with sentences.</p>
-                </div>
-                <div class="roadmap-path" id="roadmapPath">
-                    <!-- Generated by JS -->
-                </div>
-            </div>
-
-            <!-- Topic Lesson View -->
-            <div id="lessonView" class="view">
-                <div class="lesson-header">
-                    <button class="back-lesson" id="backToRoadmap">← Roadmap</button>
-                    <h2 class="lesson-title" id="lessonTitle">Topic</h2>
-                    <span class="lesson-progress" id="lessonProgress">0 / 5</span>
-                </div>
-                <div class="lesson-tabs">
-                    <button class="l-tab active" data-ltab="learn">Learn</button>
-                    <button class="l-tab" data-ltab="sentences">Sentences</button>
-                    <button class="l-tab" data-ltab="quiz">Quiz</button>
-                </div>
-                <div id="tonePracticeWrap" style="display:none;">
-                    <div style="text-align:center; margin:1rem 0 1.5rem;">
-                        <button class="start-btn" id="tonePracticeBtn" style="max-width:320px; margin:0 auto; background:var(--jade);">🎤 Practice Tones with Mic (+50 XP)</button>
-                        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem;">Hold the mic and speak. Match the pitch contour.</p>
-                    </div>
-                </div>
-                <div class="lesson-body" id="lessonBody">
-                    <!-- Generated by JS -->
-                </div>
-            </div>
-
-            <!-- Tone Practice View (embedded in Foundation) -->
-            <div id="tonePracticeView" class="view">
-                <div class="lesson-header">
-                    <button class="back-lesson" id="backFromTone">← Back</button>
-                    <h2 class="lesson-title">Tone Practice</h2>
-                </div>
-                <div class="tone-practice-content" id="tonePracticeContent">
-                    <!-- Generated by JS -->
-                </div>
-            </div>
-
-            <!-- Quiz Overlay -->
-            <div id="quizOverlay" class="quiz-overlay hidden">
-                <div class="quiz-card">
-                    <div class="quiz-header">
-                        <span class="quiz-counter" id="quizCounter">1 / 5</span>
-                        <button class="quiz-close" id="quizClose">✕</button>
-                    </div>
-                    <div class="quiz-body" id="quizBody"></div>
-                </div>
-            </div>
-
-            <!-- XP Pop -->
-            <div id="xpPop" class="xp-pop hidden"><span class="xp-amount" id="xpAmount">+10 XP</span></div>
+      <!-- Quiz View -->
+      <div id="daily-quiz" class="view hidden">
+        <div class="quiz-header">
+          <div class="progress-bar"><div id="progress-fill"></div></div>
+          <div class="quiz-meta">Question <span id="q-current">1</span> / <span id="q-total">10</span></div>
         </div>
+        <div id="question-container" class="card question-card"></div>
+      </div>
+
+      <!-- Results View -->
+      <div id="daily-results" class="view hidden">
+        <div class="card results-card">
+          <h2>Daily Quiz Complete</h2>
+          <div id="results-summary"></div>
+          <div id="results-breakdown"></div>
+          <div class="results-actions">
+            <button id="retake-quiz" class="btn-primary">Retake Quiz</button>
+            <button id="back-settings" class="btn-secondary">Change Settings</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Roadmap Tab -->
+    <section id="roadmap-tab" class="tab-panel">
+      <div id="roadmap-container">
+        <div class="card roadmap-header-card">
+          <div class="roadmap-header-top">
+            <h2>Learning Roadmap</h2>
+            <div class="roadmap-pill" id="roadmap-current-pill">Stage 1: Tones &amp; Pinyin</div>
+          </div>
+          <div class="roadmap-overall-progress">
+            <div class="progress-bar"><div id="roadmap-progress-fill"></div></div>
+            <div class="roadmap-progress-meta"><span id="roadmap-progress-pct">0%</span> complete</div>
+          </div>
+        </div>
+        <div id="roadmap-phases"></div>
+      </div>
+    </section>
+
+    <!-- Vocab Tab -->
+    <section id="vocab-tab" class="tab-panel">
+      <div class="card placeholder-card">
+        <h2>Vocabulary List</h2>
+        <p class="subtitle">Searchable dictionary coming soon...</p>
+        <div class="vocab-preview" id="vocab-preview"></div>
+      </div>
+    </section>
+
+    <!-- Stage Quiz Overlay -->
+    <div id="stage-quiz-overlay" class="stage-overlay hidden">
+      <div class="stage-overlay-inner">
+        <div class="quiz-header">
+          <div class="progress-bar"><div id="stage-progress-fill"></div></div>
+          <div class="quiz-meta">
+            <span id="stage-quiz-title"></span> &mdash;
+            Question <span id="stage-q-current">1</span> / <span id="stage-q-total">8</span>
+          </div>
+        </div>
+        <div id="stage-question-container" class="card question-card"></div>
+      </div>
     </div>
 
-    <script src="mandarin.js"></script>
+    <!-- Stage Results -->
+    <div id="stage-results" class="stage-overlay hidden">
+      <div class="stage-overlay-inner">
+        <div class="card results-card">
+          <h2 id="stage-results-title"></h2>
+          <div id="stage-results-summary"></div>
+          <div id="stage-results-breakdown"></div>
+          <div class="results-actions">
+            <button id="retake-stage-quiz" class="btn-primary">Retake Quiz</button>
+            <button id="back-to-roadmap" class="btn-secondary">Back to Roadmap</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Vocab List Overlay -->
+    <div id="vocab-overlay" class="stage-overlay hidden">
+      <div class="stage-overlay-inner">
+        <div class="card">
+          <div class="vocab-overlay-header">
+            <h2 id="vocab-overlay-title"></h2>
+            <button id="vocab-overlay-close" class="btn-close">&times;</button>
+          </div>
+          <div id="vocab-overlay-list"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="app.js"></script>
 </body>
 </html>

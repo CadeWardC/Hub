@@ -41,6 +41,10 @@ function initCardInteractions() {
 
     cards.forEach(card => {
         const isLink = card.tagName === 'A' && card.getAttribute('href');
+        const isPlaceholder = card.classList.contains('placeholder-card');
+
+        // Skip interactivity for placeholder cards
+        if (isPlaceholder) return;
 
         // Click feedback - subtle scale pulse (skip for real links to allow navigation)
         if (!isLink) {
@@ -138,7 +142,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ========================================
 // HEADER SHADOW ON SCROLL
 // ========================================
-let lastScroll = 0;
 const header = document.querySelector('.site-header');
 
 window.addEventListener('scroll', () => {
@@ -149,6 +152,4 @@ window.addEventListener('scroll', () => {
     } else {
         header.style.borderColor = 'rgba(255, 255, 255, 0.04)';
     }
-    
-    lastScroll = currentScroll;
 });

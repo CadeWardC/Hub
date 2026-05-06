@@ -1,0 +1,111 @@
+/* Vocab Preview */
+.vocab-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.vocab-chip {
+  background: var(--bg);
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.vocab-chip .vc-char {
+  font-size: 1.25rem;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.vocab-chip .vc-pinyin {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Vocab List Overlay */
+.vocab-overlay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.vocab-overlay-header h2 {
+  margin-bottom: 0;
+  font-size: 1.2rem;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-close:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.vocab-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.vocab-list-item:last-child {
+  border-bottom: none;
+}
+
+.vocab-play-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.vocab-play-btn:hover {
+  background: var(--primary-dark);
+}
+
+.vocab-list-char {
+  font-size: 1.75rem;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  min-width: 3rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.vocab-list-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.vocab-list-pinyin {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.vocab-list-meaning {
+  font-size: 0.95rem;
+  color: var(--text);
+}

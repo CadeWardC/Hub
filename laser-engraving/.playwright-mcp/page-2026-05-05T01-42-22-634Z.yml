@@ -1,0 +1,47 @@
+- generic [ref=e24]:
+  - banner [ref=e25]:
+    - generic [ref=e26]:
+      - link "← Hub" [ref=e27] [cursor=pointer]:
+        - /url: ../index.html
+      - generic [ref=e28]:
+        - generic [ref=e29]: ✦
+        - generic [ref=e30]: LaserEngraving
+    - button "↺ Reset" [ref=e31] [cursor=pointer]
+  - generic [ref=e32]:
+    - complementary [ref=e33]:
+      - button "Select (V)" [ref=e34] [cursor=pointer]:
+        - img [ref=e35]
+      - button "Rectangle (R)" [active] [ref=e37] [cursor=pointer]:
+        - img [ref=e38]
+      - button "Circle (C)" [ref=e40] [cursor=pointer]:
+        - img [ref=e41]
+      - button "Upload image" [ref=e44] [cursor=pointer]:
+        - img [ref=e45]
+      - button "Zoom In (+)" [ref=e49] [cursor=pointer]:
+        - img [ref=e50]
+      - button "Zoom Out (-)" [ref=e53] [cursor=pointer]:
+        - img [ref=e54]
+      - button "Fit to View (F)" [ref=e57] [cursor=pointer]:
+        - img [ref=e58]
+      - button "Export G-code" [ref=e61] [cursor=pointer]:
+        - img [ref=e62]
+    - complementary [ref=e67]:
+      - generic [ref=e68]: Layers
+    - img [ref=e71]
+    - complementary [ref=e74]:
+      - generic [ref=e75]: Properties
+      - paragraph [ref=e77]: Select an object to edit its properties.
+      - generic [ref=e78]:
+        - generic [ref=e79]:
+          - button "Cut" [ref=e80] [cursor=pointer]
+          - button "Engrave" [ref=e81] [cursor=pointer]
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - generic [ref=e84]: Presets
+            - button "+" [ref=e85] [cursor=pointer]
+          - combobox [ref=e87] [cursor=pointer]:
+            - option "Select a preset..." [selected]
+  - generic [ref=e88]:
+    - generic [ref=e89]: "-228.988, -22.985 mm"
+    - generic [ref=e90]: 117%
+    - generic [ref=e91]: 400 × 400 mm

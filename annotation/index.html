@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annotation — PDF Viewer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>📄</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+
+        <!-- ====== ONBOARDING ====== -->
+        <section id="onboarding" class="view active">
+            <a href="../index.html" class="hub-link onboarding-hub-link">← Hub</a>
+            <div class="onboarding-content">
+                <div class="onboarding-header">
+                    <h1>Annotation</h1>
+                    <p class="subtitle">Upload a research paper to read, scroll, zoom, and annotate</p>
+                </div>
+
+                <div id="drop-zone" class="drop-zone" tabindex="0">
+                    <div class="drop-zone-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M24 32V12"/>
+                            <path d="M16 20l8-8 8 8"/>
+                            <path d="M8 36h32"/>
+                            <rect x="6" y="6" width="36" height="36" rx="4" stroke-opacity="0.4"/>
+                        </svg>
+                    </div>
+                    <p class="drop-zone-text">Drag &amp; drop your PDF or session file here</p>
+                    <p class="drop-zone-hint">or click to browse files</p>
+                    <input type="file" id="file-input" accept=".pdf" hidden>
+                </div>
+
+                <button id="upload-btn" class="upload-btn">Choose PDF</button>
+                <p class="supported-hint">Supports PDF files &middot; Works entirely in your browser</p>
+
+                <div class="import-divider"><span>or</span></div>
+                <button id="import-btn" class="import-btn">&#128194; Import Session</button>
+                <p class="supported-hint">Restore a saved <code>.annotations.json</code> file</p>
+                <input type="file" id="import-input" accept=".json" hidden>
+            </div>
+        </section>
+
+        <!-- ====== VIEWER ====== -->
+        <section id="viewer" class="view">
+            <header id="toolbar" class="toolbar">
+                <a href="../index.html" class="hub-link toolbar-hub-link" title="Back to hub">← Hub</a>
+                <button id="back-btn" class="toolbar-btn" title="Back to upload">↺</button>
+                <span id="file-name" class="toolbar-file-name">document.pdf</span>
+                <span class="toolbar-sep"></span>
+                <span id="page-indicator" class="page-indicator">Page 1 of 1</span>
+                <div class="toolbar-spacer"></div>
+
+                <button id="delete-btn" class="toolbar-btn delete-btn hidden" title="Delete shape">&#128465;</button>
+
+                <div class="toolbar-sep" id="export-sep"></div>
+                <button id="save-btn" class="toolbar-btn tb-save" title="Save session to file">&#128190;</button>
+                <button id="export-btn" class="toolbar-btn tb-export" title="Export annotated PDF as file">&#128196;</button>
+
+                <div class="toolbar-zoom">
+                    <button id="zoom-out" class="toolbar-btn" title="Zoom out (Ctrl+−)">−</button>
+                    <span id="zoom-level" class="zoom-level">100%</span>
+                    <button id="zoom-in" class="toolbar-btn" title="Zoom in (Ctrl+=)">+</button>
+                    <button id="fit-btn" class="toolbar-btn fit-btn" title="Fit to width (Ctrl+0)">☐</button>
+                </div>
+            </header>
+
+            <div class="viewer-body" id="viewer-body">
+                <div id="page-container" class="page-container">
+                    <div class="page-container-inner" id="page-container-inner"></div>
+                </div>
+
+                <div id="anno-sidebar" class="anno-sidebar hidden">
+                    <div class="anno-sidebar-header">
+                        <span class="anno-sidebar-title">Annotations</span>
+                        <button id="anno-close" class="toolbar-btn" title="Close sidebar">&times;</button>
+                    </div>
+                    <div id="anno-sidebar-body" class="anno-sidebar-body"></div>
+                </div>
+            </div>
+
+            <div id="loading-overlay" class="loading-overlay hidden">
+                <div class="loading-spinner"></div>
+                <p id="loading-text" class="loading-text">Loading PDF…</p>
+            </div>
+
+            <div id="error-toast" class="error-toast hidden">
+                <span id="error-text">Error</span>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

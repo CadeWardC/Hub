@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\cadel\\\\Documents\\\\Coding_Projects\\\\Hub\\\\mandarin\\\\\" -Recurse | Select-Object FullName | head -30)"
+    ]
+  }
+}
