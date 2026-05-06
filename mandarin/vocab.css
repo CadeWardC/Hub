@@ -172,3 +172,43 @@
   font-size: 0.95rem;
   color: var(--text);
 }
+
+.vocab-sentences-section {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--primary);
+}
+
+.vocab-sentences-heading {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary);
+}
+
+.vocab-sentence-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.vocab-sentence-item:last-child {
+  border-bottom: none;
+}
+
+.vocab-sentence-mandarin {
+  font-size: 1.15rem;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  line-height: 1.5;
+}
+
+.vocab-sentence-pinyin {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.vocab-sentence-translation {
+  font-size: 0.85rem;
+  color: var(--text);
+  margin-top: 0.15rem;
+}

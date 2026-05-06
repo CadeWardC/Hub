@@ -4,14 +4,26 @@ import { state, getVocabForStageSub } from './state.js';
 import { say } from './audio.js';
 import { startStageQuiz } from './stage-quiz.js';
 
+let allSentences = [];
 let sentences = [];
 let sentenceIndex = 0;
 
 export function loadSentences() {
   return fetch('sentences.json')
     .then(r => r.json())
-    .then(data => { sentences = Array.isArray(data) ? data : []; })
-    .catch(() => { sentences = []; });
+    .then(data => { allSentences = Array.isArray(data) ? data : []; sentences = allSentences; })
+    .catch(() => { allSentences = []; sentences = []; });
+}
+
+function filterSentences(stageId, subIndex) {
+  if (stageId == null) {
+    sentences = allSentences;
+  } else if (subIndex == null) {
+    sentences = allSentences.filter(s => s.stage === stageId);
+  } else {
+    sentences = allSentences.filter(s => s.stage === stageId && s.sub === subIndex);
+  }
+  sentenceIndex = 0;
 }
 
 function renderSentenceCard() {
@@ -62,13 +74,14 @@ function renderSentenceCard() {
   });
 }
 
-export function renderSentenceReveal() {
-  if (sentences.length === 0) {
+export function renderSentenceReveal(stageId, subIndex) {
+  if (allSentences.length === 0) {
     loadSentences().then(() => {
-      sentenceIndex = 0;
+      filterSentences(stageId, subIndex);
       renderSentenceCard();
     });
   } else {
+    filterSentences(stageId, subIndex);
     renderSentenceCard();
   }
 }
@@ -192,13 +205,28 @@ export function showVocabList(stageId, subIndex) {
   const listEl = document.getElementById('vocab-overlay-list');
   const closeBtn = document.getElementById('vocab-overlay-close');
   titleEl.textContent = subName + ' \u2014 Vocab';
+
+  const matchingSentences = allSentences.filter(s => s.stage === stageId && s.sub === subIndex);
+
   listEl.innerHTML = words.map(w => `
     <div class="vocab-list-item">
       <button class="vocab-play-btn" data-char="${escapeHtml(w.char)}" title="Play audio">\u25B6</button>
       <div class="vocab-list-char">${escapeHtml(w.char)}</div>
       <div class="vocab-list-details"><div class="vocab-list-pinyin">${escapeHtml(w.pinyin)}</div><div class="vocab-list-meaning">${escapeHtml(w.meaning)}</div></div>
     </div>
-  `).join('');
+  `).join('') + (matchingSentences.length > 0 ? `
+    <div class="vocab-sentences-section">
+      <h3 class="vocab-sentences-heading">Example Sentences</h3>
+      ${matchingSentences.map(s => `
+        <div class="vocab-sentence-item">
+          <div class="vocab-sentence-mandarin">${escapeHtml(s.mandarin)}</div>
+          <div class="vocab-sentence-pinyin">${escapeHtml(s.pinyin)}</div>
+          <div class="vocab-sentence-translation">${escapeHtml(s.translation)}</div>
+        </div>
+      `).join('')}
+    </div>
+  ` : '');
+
   listEl.querySelectorAll('.vocab-play-btn').forEach(btn => btn.addEventListener('click', () => say(btn.dataset.char)));
   closeBtn.onclick = () => overlay.classList.add('hidden');
   overlay.classList.remove('hidden');
