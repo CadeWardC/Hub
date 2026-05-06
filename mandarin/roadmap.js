@@ -1,18 +1,18 @@
 import { ROADMAP, VOCAB } from './data.js';
+import { SENTENCES } from './sentences.js';
 import { escapeHtml } from './utils.js';
 import { state, getVocabForStageSub } from './state.js';
 import { say } from './audio.js';
 import { startStageQuiz } from './stage-quiz.js';
 
-let allSentences = [];
-let sentences = [];
+let allSentences = SENTENCES;
+let sentences = SENTENCES;
 let sentenceIndex = 0;
 
 export function loadSentences() {
-  return fetch('sentences.json')
-    .then(r => r.json())
-    .then(data => { allSentences = Array.isArray(data) ? data : []; sentences = allSentences; })
-    .catch(() => { allSentences = []; sentences = []; });
+  allSentences = SENTENCES;
+  sentences = SENTENCES;
+  return Promise.resolve();
 }
 
 function filterSentences(stageId, subIndex) {
