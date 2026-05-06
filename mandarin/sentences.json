@@ -1,0 +1,77 @@
+[
+  {
+    "mandarin": "你好吗？",
+    "pinyin": "nǐ hǎo ma?",
+    "translation": "How are you?"
+  },
+  {
+    "mandarin": "我叫小明。",
+    "pinyin": "wǒ jiào xiǎo míng.",
+    "translation": "My name is Xiao Ming."
+  },
+  {
+    "mandarin": "谢谢你帮助我。",
+    "pinyin": "xiè xiè nǐ bāng zhù wǒ.",
+    "translation": "Thank you for helping me."
+  },
+  {
+    "mandarin": "这是什么意思？",
+    "pinyin": "zhè shì shén me yì si?",
+    "translation": "What does this mean?"
+  },
+  {
+    "mandarin": "我想喝水。",
+    "pinyin": "wǒ xiǎng hē shuǐ.",
+    "translation": "I want to drink water."
+  },
+  {
+    "mandarin": "今天天气很好。",
+    "pinyin": "jīn tiān tiān qì hěn hǎo.",
+    "translation": "The weather is very nice today."
+  },
+  {
+    "mandarin": "你吃饭了吗？",
+    "pinyin": "nǐ chī fàn le ma?",
+    "translation": "Have you eaten?"
+  },
+  {
+    "mandarin": "我妈妈做的菜很好吃。",
+    "pinyin": "wǒ mā ma zuò de cài hěn hǎo chī.",
+    "translation": "My mom's cooking is delicious."
+  },
+  {
+    "mandarin": "我不知道他在哪里。",
+    "pinyin": "wǒ bù zhī dào tā zài nǎ lǐ.",
+    "translation": "I don't know where he is."
+  },
+  {
+    "mandarin": "请问地铁站在哪儿？",
+    "pinyin": "qǐng wèn dì tiě zhàn zài nǎr?",
+    "translation": "Excuse me, where is the subway station?"
+  },
+  {
+    "mandarin": "这个多少钱？",
+    "pinyin": "zhè gè duō shǎo qián?",
+    "translation": "How much does this cost?"
+  },
+  {
+    "mandarin": "我喜欢学习中文。",
+    "pinyin": "wǒ xǐ huān xué xí zhōng wén.",
+    "translation": "I like learning Chinese."
+  },
+  {
+    "mandarin": "明天我们一起去看电影吧。",
+    "pinyin": "míng tiān wǒ men yī qǐ qù kàn diàn yǐng ba.",
+    "translation": "Let's go watch a movie together tomorrow."
+  },
+  {
+    "mandarin": "你可以再说一遍吗？",
+    "pinyin": "nǐ kě yǐ zài shuō yī biàn ma?",
+    "translation": "Can you say that again?"
+  },
+  {
+    "mandarin": "他比我高一点。",
+    "pinyin": "tā bǐ wǒ gāo yī diǎn.",
+    "translation": "He is a little taller than me."
+  }
+]

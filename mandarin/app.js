@@ -3,7 +3,7 @@ import { state, loadState, saveState } from './state.js';
 import { releaseMic } from './audio.js';
 import { initQuizDOM, startQuiz } from './quiz.js';
 import { initStageQuizDOM, startStageQuiz } from './stage-quiz.js';
-import { renderRoadmap, renderVocabPreview } from './roadmap.js';
+import { renderRoadmap, renderVocabPreview, loadSentences, renderSentenceReveal, initSentenceNav } from './roadmap.js';
 
 function switchTab(name) {
   state.currentTab = name;
@@ -15,6 +15,8 @@ function init() {
   loadState();
   initQuizDOM();
   initStageQuizDOM();
+  initSentenceNav();
+  loadSentences().then(() => renderSentenceReveal());
   renderVocabPreview();
   renderRoadmap();
 
@@ -22,7 +24,7 @@ function init() {
     btn.addEventListener('click', () => {
       switchTab(btn.dataset.tab);
       if (btn.dataset.tab === 'roadmap') renderRoadmap();
-      if (btn.dataset.tab === 'vocab') renderVocabPreview();
+      if (btn.dataset.tab === 'vocab') { renderVocabPreview(); renderSentenceReveal(); }
     });
   });
 

@@ -4,6 +4,82 @@ import { state, getVocabForStageSub } from './state.js';
 import { say } from './audio.js';
 import { startStageQuiz } from './stage-quiz.js';
 
+let sentences = [];
+let sentenceIndex = 0;
+
+export function loadSentences() {
+  return fetch('sentences.json')
+    .then(r => r.json())
+    .then(data => { sentences = Array.isArray(data) ? data : []; })
+    .catch(() => { sentences = []; });
+}
+
+function renderSentenceCard() {
+  const container = document.getElementById('sentence-container');
+  const counter = document.getElementById('sentence-counter');
+  const prevBtn = document.getElementById('sentence-prev');
+  const nextBtn = document.getElementById('sentence-next');
+  if (!container) return;
+
+  if (sentences.length === 0) {
+    container.innerHTML = '<p class="sentence-empty">No sentences yet. Add some to <code>sentences.json</code>.</p>';
+    if (counter) counter.textContent = '';
+    if (prevBtn) prevBtn.disabled = true;
+    if (nextBtn) nextBtn.disabled = true;
+    return;
+  }
+
+  const s = sentences[sentenceIndex];
+  container.innerHTML = `
+    <div class="sentence-card">
+      <div class="sentence-layer sentence-mandarin" data-layer="mandarin">
+        <span class="sentence-text">${escapeHtml(s.mandarin)}</span>
+      </div>
+      <div class="sentence-layer sentence-pinyin hidden" data-layer="pinyin">
+        <span class="sentence-text">${escapeHtml(s.pinyin)}</span>
+      </div>
+      <div class="sentence-layer sentence-translation hidden" data-layer="translation">
+        <span class="sentence-text">${escapeHtml(s.translation)}</span>
+      </div>
+      <button id="sentence-reveal-btn" class="btn-primary sentence-reveal-btn">Reveal Next</button>
+    </div>
+  `;
+
+  if (counter) counter.textContent = (sentenceIndex + 1) + ' / ' + sentences.length;
+  if (prevBtn) prevBtn.disabled = sentenceIndex === 0;
+  if (nextBtn) nextBtn.disabled = sentenceIndex >= sentences.length - 1;
+
+  const revealBtn = document.getElementById('sentence-reveal-btn');
+  revealBtn.addEventListener('click', () => {
+    const hidden = container.querySelector('.sentence-layer.hidden');
+    if (hidden) {
+      hidden.classList.remove('hidden');
+      if (!container.querySelector('.sentence-layer.hidden')) {
+        revealBtn.textContent = 'All Revealed';
+        revealBtn.disabled = true;
+      }
+    }
+  });
+}
+
+export function renderSentenceReveal() {
+  if (sentences.length === 0) {
+    loadSentences().then(() => {
+      sentenceIndex = 0;
+      renderSentenceCard();
+    });
+  } else {
+    renderSentenceCard();
+  }
+}
+
+export function initSentenceNav() {
+  const prevBtn = document.getElementById('sentence-prev');
+  const nextBtn = document.getElementById('sentence-next');
+  if (prevBtn) prevBtn.addEventListener('click', () => { if (sentenceIndex > 0) { sentenceIndex--; renderSentenceCard(); } });
+  if (nextBtn) nextBtn.addEventListener('click', () => { if (sentenceIndex < sentences.length - 1) { sentenceIndex++; renderSentenceCard(); } });
+}
+
 export function getStageStatus(stageId) {
   const rp = state.roadmapProgress;
   if (rp.completedStages.includes(stageId)) return 'completed';

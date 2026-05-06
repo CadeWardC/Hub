@@ -113,6 +113,16 @@
 
     <!-- Vocab Tab -->
     <section id="vocab-tab" class="tab-panel">
+      <div class="card">
+        <h2>Sentence Practice</h2>
+        <p class="subtitle">Click to reveal each layer of the sentence</p>
+        <div id="sentence-container"></div>
+        <div id="sentence-nav">
+          <button id="sentence-prev" class="btn-secondary" disabled>&larr; Previous</button>
+          <span id="sentence-counter"></span>
+          <button id="sentence-next" class="btn-secondary" disabled>Next &rarr;</button>
+        </div>
+      </div>
       <div class="card placeholder-card">
         <h2>Vocabulary List</h2>
         <p class="subtitle">Searchable dictionary coming soon...</p>
@@ -162,6 +172,6 @@
     </div>
   </main>
 
-  <script type="module" src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
