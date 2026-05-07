@@ -80,7 +80,7 @@ function buildQuestions(words, types, pool) {
       q.options = shuffle([word, ...d]);
       q.correctOption = word.id;
     }
-    if (type === 'write') { q.acceptPinyin = true; q.acceptChar = state.settings.chars; }
+    if (type === 'write') { q.acceptPinyin = true; q.acceptChar = true; }
     if (type === 'speak') { q.checkWord = true; q.checkTone = word.tone > 0; }
     questions.push(q);
   }
@@ -89,8 +89,8 @@ function buildQuestions(words, types, pool) {
 
 export function startQuiz() {
   state.settings = {
-    pinyin: document.getElementById('setting-pinyin').checked,
-    chars: document.getElementById('setting-chars').checked,
+    pinyin: false,
+    chars: true,
     listen: document.getElementById('setting-listen').checked,
     speak: document.getElementById('setting-speak').checked
   };
@@ -142,13 +142,13 @@ export function renderInto(container, question, progressFn) {
   if (question.type === 'mc-char') {
     html += `
       <div class="char-display">${escapeHtml(question.word.char)}</div>
-      ${state.settings.pinyin ? `<div class="pinyin-display">${escapeHtml(question.word.pinyin)}</div>` : ''}
       <div class="prompt-text">Select the correct meaning</div>
       <div class="options-grid">${question.options.map(opt => `<button class="btn-option" data-id="${opt.id}">${escapeHtml(opt.meaning)}</button>`).join('')}</div>
     `;
     container.innerHTML = html;
     container.querySelectorAll('.btn-option').forEach(btn => btn.addEventListener('click', () => handleMC(btn, question, container, progressFn)));
     say(question.word.char);
+    addPeekPinyin(container, question.word);
   }
   else if (question.type === 'mc-listen') {
     html += `
@@ -161,9 +161,10 @@ export function renderInto(container, question, progressFn) {
     container.querySelectorAll('.btn-option').forEach(btn => btn.addEventListener('click', () => handleMC(btn, question, container, progressFn)));
     container.querySelector('#replay-audio').addEventListener('click', () => say(question.word.char));
     say(question.word.char);
+    addPeekPinyin(container, question.word);
   }
   else if (question.type === 'write') {
-    const placeholder = state.settings.chars ? 'Type the character or pinyin' : 'Type pinyin (e.g. ni3 hao3)';
+    const placeholder = 'Type the character or pinyin';
     html += `
       <div class="meaning-display">${escapeHtml(question.word.meaning)}</div>
       <input type="text" class="write-input" id="write-answer" placeholder="${placeholder}" autocomplete="off">
@@ -184,12 +185,12 @@ export function renderInto(container, question, progressFn) {
     input.addEventListener('keydown', e => { if (e.key === 'Enter') checkWrite(question, container, progressFn); });
     container.querySelector('#submit-write').addEventListener('click', () => checkWrite(question, container, progressFn));
     container.querySelector('#play-hint').addEventListener('click', () => say(question.word.char));
+    addPeekPinyin(container, question.word);
   }
   else if (question.type === 'speak') {
     html += `
       <div class="meaning-display">${escapeHtml(question.word.meaning)}</div>
-      ${state.settings.chars ? `<div class="char-display" style="font-size:3rem">${question.word.char}</div>` : ''}
-      ${state.settings.pinyin ? `<div class="pinyin-display">${escapeHtml(question.word.pinyin)}</div>` : ''}
+      <div class="char-display" style="font-size:3rem">${question.word.char}</div>
       <button class="btn-audio" id="speak-play-hint" title="Play audio">\u25B6</button>
       <div class="pitch-container"><canvas id="pitch-canvas" width="360" height="120"></canvas></div>
       <button class="btn-record" id="record-btn">\u{1F3A4}</button>
@@ -200,6 +201,7 @@ export function renderInto(container, question, progressFn) {
     container.querySelector('#speak-play-hint').addEventListener('click', () => say(question.word.char));
     const btn = container.querySelector('#record-btn');
     btn.addEventListener('click', () => toggleRecord(btn, question, container, progressFn));
+    addPeekPinyin(container, question.word);
   }
 }
 
@@ -307,6 +309,21 @@ function showInlineFeedback(isCorrect, word, container, grammarTip) {
   fb.className = 'feedback ' + (isCorrect ? 'correct' : 'wrong');
   fb.innerHTML = isCorrect ? '\u2713 Correct!' : `\u2717 It was <strong>${escapeHtml(word.char)}</strong> \u2014 ${escapeHtml(word.meaning)}`;
   if (grammarTip && !isCorrect) fb.innerHTML += `<div class="grammar-tip">${escapeHtml(grammarTip)}</div>`;
+}
+
+function addPeekPinyin(container, word) {
+  const btn = document.createElement('button');
+  btn.className = 'btn-peek-pinyin';
+  btn.textContent = '👁 Pinyin';
+  btn.addEventListener('click', () => {
+    const popup = document.createElement('div');
+    popup.className = 'pinyin-popup';
+    popup.textContent = word.pinyin;
+    container.appendChild(popup);
+    btn.disabled = true;
+    setTimeout(() => { popup.remove(); btn.disabled = false; }, 2000);
+  });
+  container.appendChild(btn);
 }
 
 let onStageNext = null;

@@ -242,3 +242,58 @@
   content: '\1F4A1 Grammar: ';
   font-weight: 600;
 }
+
+/* Peek Pinyin */
+.question-card {
+  position: relative;
+}
+
+.btn-peek-pinyin {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.15s;
+  z-index: 2;
+}
+
+.btn-peek-pinyin:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.btn-peek-pinyin:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pinyin-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--surface);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  animation: pinyinFade 2s ease-in-out forwards;
+  pointer-events: none;
+}
+
+@keyframes pinyinFade {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  10% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}

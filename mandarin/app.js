@@ -55,12 +55,11 @@ function init() {
     });
   }
 
-  ['setting-pinyin', 'setting-chars', 'setting-listen', 'setting-speak'].forEach(id => {
+  ['setting-listen', 'setting-speak'].forEach(id => {
     const el = document.getElementById(id);
     el.addEventListener('change', () => {
       state.settings = {
-        pinyin: document.getElementById('setting-pinyin').checked,
-        chars: document.getElementById('setting-chars').checked,
+        ...state.settings,
         listen: document.getElementById('setting-listen').checked,
         speak: document.getElementById('setting-speak').checked
       };
@@ -75,8 +74,6 @@ function init() {
     speakEl.closest('.toggle-row').querySelector('small').textContent += ' (not supported in this browser)';
   }
 
-  document.getElementById('setting-pinyin').checked = state.settings.pinyin;
-  document.getElementById('setting-chars').checked = state.settings.chars;
   document.getElementById('setting-listen').checked = state.settings.listen;
   document.getElementById('setting-speak').checked = state.settings.speak;
 }

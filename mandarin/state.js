@@ -47,7 +47,7 @@ export const state = {
   quizMode: 'daily',
   quizStageId: null,
   quizSubIndex: null,
-  settings: { pinyin: true, chars: true, listen: true, speak: true },
+  settings: { pinyin: false, chars: true, listen: true, speak: true },
   history: [],
   roadmapProgress: {
     currentStage: 1,
