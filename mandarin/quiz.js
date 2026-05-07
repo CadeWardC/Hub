@@ -1,6 +1,6 @@
 import { VOCAB, ROADMAP } from './data.js';
 import { shuffle, pickDistractors, escapeHtml, formatType, hasSpeechRecognition, normalizePinyin, convertNumberedPinyin, toneNumberName } from './utils.js';
-import { state, saveState, getLearnedVocab, getVocabForStageSub, getVocabForStage } from './state.js';
+import { state, saveState, getVocabForStageSub, getVocabForStage, getCompletedSubVocab, wordStats, recordWordResult, saveWordStats } from './state.js';
 import { say, classifyTone, getRecordingState, setRecording, getRecog, setRecog, setRecogResult, startPitchTracking, stopPitchTracking, getMicStream, setupRecognition } from './audio.js';
 
 let qContainer, progressFill, qCurrent, qTotal;
@@ -21,29 +21,30 @@ export function generateQuestions() {
   if (s.speak && hasSpeechRecognition()) types.push('speak');
   if (types.length === 0) types.push('write');
 
-  const learned = getLearnedVocab();
-  const currentStage = state.roadmapProgress.currentStage;
-  const recentVocab = learned.filter(v => v.stage === currentStage - 1 || v.stage === currentStage);
-  const olderVocab = learned.filter(v => v.stage < currentStage - 1);
+  const pool = getCompletedSubVocab();
+  const totalQuestions = Math.min(15, pool.length);
 
-  let selectedWords = [];
-  const totalQuestions = 15;
+  const weighted = pool.map(w => {
+    const stats = wordStats[w.id] || { wrong: 0, streak: 0 };
+    return { word: w, weight: Math.max(1, 1 + stats.wrong * 2 - stats.streak * 0.5) };
+  });
 
-  if (recentVocab.length > 0 && olderVocab.length > 0) {
-    const recentCount = Math.ceil(totalQuestions * 0.5);
-    const reviewCount = Math.ceil(totalQuestions * 0.3);
-    const generalCount = totalQuestions - recentCount - reviewCount;
-    selectedWords = [
-      ...shuffle(recentVocab).slice(0, recentCount),
-      ...shuffle(olderVocab).slice(0, reviewCount),
-      ...shuffle(learned).slice(0, generalCount)
-    ];
-  } else {
-    selectedWords = shuffle(learned).slice(0, totalQuestions);
+  const selectedWords = [];
+  const available = [...weighted];
+  for (let i = 0; i < totalQuestions && available.length > 0; i++) {
+    const totalWeight = available.reduce((sum, w) => sum + w.weight, 0);
+    let r = Math.random() * totalWeight;
+    for (let j = 0; j < available.length; j++) {
+      r -= available[j].weight;
+      if (r <= 0) {
+        selectedWords.push(available[j].word);
+        available.splice(j, 1);
+        break;
+      }
+    }
   }
-  selectedWords = shuffle(selectedWords).slice(0, totalQuestions);
 
-  return buildQuestions(selectedWords, types);
+  return buildQuestions(shuffle(selectedWords), types);
 }
 
 export function generateStageQuestions(stageId, subIndex) {
@@ -189,12 +190,14 @@ export function renderInto(container, question, progressFn) {
       <div class="meaning-display">${escapeHtml(question.word.meaning)}</div>
       ${state.settings.chars ? `<div class="char-display" style="font-size:3rem">${question.word.char}</div>` : ''}
       ${state.settings.pinyin ? `<div class="pinyin-display">${escapeHtml(question.word.pinyin)}</div>` : ''}
+      <button class="btn-audio" id="speak-play-hint" title="Play audio">\u25B6</button>
       <div class="pitch-container"><canvas id="pitch-canvas" width="360" height="120"></canvas></div>
       <button class="btn-record" id="record-btn">\u{1F3A4}</button>
       <div class="record-hint" id="record-hint">Tap to record</div>
       <div id="speak-feedback"></div>
     `;
     container.innerHTML = html;
+    container.querySelector('#speak-play-hint').addEventListener('click', () => say(question.word.char));
     const btn = container.querySelector('#record-btn');
     btn.addEventListener('click', () => toggleRecord(btn, question, container, progressFn));
   }
@@ -348,5 +351,10 @@ function showDailyResults() {
     return `<div class="breakdown-item ${cls}"><div class="bq-icon">${icon}</div><div class="bq-info"><strong>${formatType(qs.type)}</strong><div class="bq-answer">${escapeHtml(qs.word.char)} \u2014 ${escapeHtml(qs.word.meaning)}</div></div></div>`;
   }).join('');
   state.history.push({ date: Date.now(), score, total, pct });
+  q.questions.forEach(qs => {
+    const isCorrect = qs.correct === true || qs.correct === 'partial';
+    recordWordResult(qs.word.id, isCorrect);
+  });
+  saveWordStats();
   saveState();
 }

@@ -25,6 +25,39 @@
   font-style: italic;
 }
 
+.vocab-chip.troublesome {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  position: relative;
+}
+
+.trouble-dot {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+.vocab-section-title {
+  grid-column: 1 / -1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ef4444;
+  margin: 0.5rem 0 0.25rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #fecaca;
+}
+
+.vocab-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 1.5rem 0;
+}
+
 /* Sentence Reveal */
 .sentence-card {
   display: flex;

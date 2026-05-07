@@ -1,5 +1,5 @@
 import { hasSpeechRecognition } from './utils.js';
-import { state, loadState, saveState } from './state.js';
+import { state, loadState, saveState, loadWordStats } from './state.js';
 import { releaseMic } from './audio.js';
 import { initQuizDOM, startQuiz } from './quiz.js';
 import { initStageQuizDOM, startStageQuiz } from './stage-quiz.js';
@@ -13,6 +13,7 @@ function switchTab(name) {
 
 function init() {
   loadState();
+  loadWordStats();
   initQuizDOM();
   initStageQuizDOM();
   initSentenceNav();

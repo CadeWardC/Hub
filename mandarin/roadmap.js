@@ -1,7 +1,7 @@
-import { ROADMAP, VOCAB } from './data.js';
+import { ROADMAP } from './data.js';
 import { SENTENCES } from './sentences.js';
 import { escapeHtml } from './utils.js';
-import { state, getVocabForStageSub } from './state.js';
+import { state, getVocabForStageSub, getCompletedSubVocab, wordStats } from './state.js';
 import { say } from './audio.js';
 import { startStageQuiz } from './stage-quiz.js';
 
@@ -235,8 +235,41 @@ export function showVocabList(stageId, subIndex) {
 export function renderVocabPreview() {
   const el = document.getElementById('vocab-preview');
   if (!el) return;
-  const learned = VOCAB.filter(v => v.stage <= state.roadmapProgress.currentStage);
-  el.innerHTML = learned.slice(0, 12).map(v => `
-    <div class="vocab-chip"><div class="vc-char">${escapeHtml(v.char)}</div><div class="vc-pinyin">${escapeHtml(v.pinyin)} \u2014 ${escapeHtml(v.meaning)}</div></div>
-  `).join('');
+  const pool = getCompletedSubVocab();
+
+  const troublesome = [];
+  const normal = [];
+  pool.forEach(v => {
+    const stats = wordStats[v.id];
+    if (stats && stats.wrong > 0 && stats.streak < 2) {
+      troublesome.push(v);
+    } else {
+      normal.push(v);
+    }
+  });
+
+  troublesome.sort((a, b) => {
+    const sa = wordStats[a.id] || { wrong: 0 };
+    const sb = wordStats[b.id] || { wrong: 0 };
+    return sb.wrong - sa.wrong;
+  });
+
+  const all = [...troublesome, ...normal];
+
+  if (all.length === 0) {
+    el.innerHTML = '<p class="vocab-empty">Complete subtopics in the Roadmap to unlock vocabulary here.</p>';
+    return;
+  }
+
+  el.innerHTML =
+    (troublesome.length > 0 ? `<h3 class="vocab-section-title">Troublesome Words</h3>` : '') +
+    all.map(v => {
+      const stats = wordStats[v.id];
+      const isTroublesome = stats && stats.wrong > 0 && stats.streak < 2;
+      return `<div class="vocab-chip${isTroublesome ? ' troublesome' : ''}">
+        ${isTroublesome ? '<span class="trouble-dot"></span>' : ''}
+        <div class="vc-char">${escapeHtml(v.char)}</div>
+        <div class="vc-pinyin">${escapeHtml(v.pinyin)} \u2014 ${escapeHtml(v.meaning)}</div>
+      </div>`;
+    }).join('');
 }

@@ -1,5 +1,46 @@
 import { ROADMAP, VOCAB } from './data.js';
 
+export let wordStats = {};
+
+export function loadWordStats() {
+  try {
+    const raw = localStorage.getItem('mandarinWordStats');
+    if (raw) wordStats = JSON.parse(raw);
+  } catch (e) {}
+}
+
+export function saveWordStats() {
+  localStorage.setItem('mandarinWordStats', JSON.stringify(wordStats));
+}
+
+export function recordWordResult(wordId, isCorrect) {
+  if (!wordStats[wordId]) wordStats[wordId] = { wrong: 0, right: 0, streak: 0 };
+  const s = wordStats[wordId];
+  if (isCorrect) {
+    s.right++;
+    s.streak++;
+  } else {
+    s.wrong++;
+    s.streak = 0;
+  }
+}
+
+export function getCompletedSubVocab() {
+  const completed = state.roadmapProgress.completedSubTopics;
+  const keys = Object.keys(completed);
+  if (keys.length === 0) {
+    return VOCAB.filter(v => v.stage === 1 && v.sub === 0);
+  }
+  const words = [];
+  keys.forEach(stageId => {
+    const subs = completed[stageId];
+    subs.forEach(subIndex => {
+      words.push(...VOCAB.filter(v => v.stage === parseInt(stageId) && v.sub === subIndex));
+    });
+  });
+  return words;
+}
+
 export const state = {
   currentTab: 'daily',
   quiz: null,
