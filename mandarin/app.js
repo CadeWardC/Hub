@@ -2,8 +2,8 @@ import { hasSpeechRecognition } from './utils.js';
 import { state, loadState, saveState, loadWordStats } from './state.js';
 import { releaseMic } from './audio.js';
 import { initQuizDOM, startQuiz } from './quiz.js';
-import { initStageQuizDOM, startStageQuiz } from './stage-quiz.js';
-import { renderRoadmap, renderVocabPreview, loadSentences, renderSentenceReveal, initSentenceNav } from './roadmap.js';
+import { initStageQuizDOM, startStageQuiz, closeStageQuiz } from './stage-quiz.js';
+import { renderRoadmap, renderVocabPreview, loadSentences, renderSentenceReveal, initSentenceNav, renderQuizHistory } from './roadmap.js';
 
 function switchTab(name) {
   state.currentTab = name;
@@ -25,7 +25,7 @@ function init() {
     btn.addEventListener('click', () => {
       switchTab(btn.dataset.tab);
       if (btn.dataset.tab === 'roadmap') renderRoadmap();
-      if (btn.dataset.tab === 'vocab') { renderVocabPreview(); renderSentenceReveal(); }
+      if (btn.dataset.tab === 'vocab') { renderVocabPreview(); renderSentenceReveal(); renderQuizHistory(); }
     });
   });
 
@@ -47,12 +47,7 @@ function init() {
     });
   }
   if (backToRoadmapBtn) {
-    backToRoadmapBtn.addEventListener('click', () => {
-      releaseMic();
-      document.getElementById('stage-results').classList.add('hidden');
-      document.getElementById('stage-quiz-overlay').classList.add('hidden');
-      renderRoadmap();
-    });
+    backToRoadmapBtn.addEventListener('click', closeStageQuiz);
   }
 
   ['setting-listen', 'setting-speak'].forEach(id => {
@@ -76,6 +71,11 @@ function init() {
 
   document.getElementById('setting-listen').checked = state.settings.listen;
   document.getElementById('setting-speak').checked = state.settings.speak;
+
+  const vocabSearch = document.getElementById('vocab-search');
+  if (vocabSearch) {
+    vocabSearch.addEventListener('input', () => renderVocabPreview());
+  }
 }
 
 if (document.readyState === 'loading') {

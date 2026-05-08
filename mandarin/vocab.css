@@ -1,3 +1,29 @@
+/* Vocab Search */
+.vocab-search-bar {
+  margin-bottom: 1rem;
+}
+
+.vocab-search-input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-size: 0.95rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.vocab-search-input:focus {
+  border-color: var(--primary);
+}
+
+.vocab-search-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
 /* Vocab Preview */
 .vocab-preview {
   display: grid;
@@ -245,3 +271,44 @@
   color: var(--text);
   margin-top: 0.15rem;
 }
+
+/* Quiz History */
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-date {
+  flex: 1;
+  color: var(--text);
+}
+
+.history-time {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.history-score {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.history-pct {
+  font-weight: 600;
+  min-width: 3rem;
+  text-align: right;
+}
+
+.history-good .history-pct { color: var(--success); }
+.history-ok .history-pct { color: #f57f17; }
+.history-low .history-pct { color: var(--error); }

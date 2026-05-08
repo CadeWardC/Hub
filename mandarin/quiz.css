@@ -1,6 +1,7 @@
 /* Quiz */
 .quiz-header {
   margin-bottom: 1rem;
+  position: relative;
 }
 
 .progress-bar {
@@ -214,6 +215,13 @@
   z-index: 200;
   overflow-y: auto;
   padding: 1.5rem;
+}
+
+.stage-quiz-close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
 }
 
 .stage-overlay.hidden {

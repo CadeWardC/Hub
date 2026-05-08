@@ -53,20 +53,33 @@ const state = {
   },
   cardViewStartTime: 0,
   darkMode: false,
+  lastSwipe: null,
+  prefs: { sort: 'cited', yearFrom: null, yearTo: null },
 };
 try {
   const s = localStorage.getItem('paypersState');
   if (s) {
     const parsed = JSON.parse(s);
+    const prefsDefault = state.prefs;
     Object.assign(state, parsed);
+    state.prefs = { ...prefsDefault, ...(parsed.prefs || {}) };
     state.history = new Set(parsed.history || []);
   }
 } catch (e) {}
-function saveState() {
-  const { queue, cursorMark, isLoading, history, ...rest } = state;
+function _persistStateNow() {
+  const { queue, cursorMark, isLoading, history, lastSwipe, ...rest } = state;
   const flat = { ...rest, history: [...history] };
   try { localStorage.setItem('paypersState', JSON.stringify(flat)); } catch (e) {}
 }
+let _saveTimer = null;
+function saveState() {
+  if (_saveTimer) return;
+  _saveTimer = setTimeout(() => { _saveTimer = null; _persistStateNow(); }, 300);
+}
+window.addEventListener('beforeunload', () => {
+  if (_saveTimer) { clearTimeout(_saveTimer); _saveTimer = null; }
+  _persistStateNow();
+});
 
 /* ═══ DOM refs ═══ */
 const els = {
@@ -104,6 +117,60 @@ function stripHtml(html) {
 function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+const ABSTRACT_HEADERS = /^(BACKGROUND|METHODS?|RESULTS?|CONCLUSIONS?|OBJECTIVES?|AIM|AIMS|FINDINGS|INTERPRETATION|INTRODUCTION|DISCUSSION|PURPOSE|CONTEXT|DESIGN|SETTING|PARTICIPANTS|INTERVENTIONS?|OUTCOMES?|MEASUREMENTS?|FUNDING|TRIAL\s+REGISTRATION|SIGNIFICANCE|RATIONALE|IMPORTANCE)$/i;
+
+function parseAbstractSections(rawHtml) {
+  if (!rawHtml) return [{ header: '', text: 'No abstract available.' }];
+  const sections = [];
+  if (/<h[3-5][\s>]/i.test(rawHtml)) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = rawHtml;
+    let current = { header: '', text: '' };
+    const flush = () => {
+      const t = current.text.replace(/\s+/g, ' ').trim();
+      if (t || current.header) sections.push({ header: current.header, text: t });
+    };
+    for (const node of tmp.childNodes) {
+      if (node.nodeType === 1 && /^h[3-5]$/i.test(node.tagName)) {
+        const label = node.textContent.replace(/:$/, '').trim();
+        if (ABSTRACT_HEADERS.test(label)) {
+          flush();
+          current = { header: label.toUpperCase(), text: '' };
+          continue;
+        }
+      }
+      current.text += ' ' + (node.textContent || '');
+    }
+    flush();
+  }
+  if (!sections.length) {
+    const flat = stripHtml(rawHtml).trim();
+    if (!flat) return [{ header: '', text: 'No abstract available.' }];
+    // Inline label fallback (e.g. "BACKGROUND: ... METHODS: ...")
+    const labelRe = /\b(BACKGROUND|METHODS?|RESULTS?|CONCLUSIONS?|OBJECTIVES?|AIM|AIMS|FINDINGS|INTERPRETATION|INTRODUCTION|DISCUSSION|PURPOSE|SIGNIFICANCE|RATIONALE|IMPORTANCE)\s*:\s+/g;
+    const matches = [...flat.matchAll(labelRe)];
+    if (matches.length >= 2) {
+      for (let i = 0; i < matches.length; i++) {
+        const m = matches[i];
+        const next = matches[i + 1];
+        const text = flat.slice(m.index + m[0].length, next ? next.index : flat.length).trim();
+        sections.push({ header: m[1].toUpperCase(), text });
+      }
+      return sections;
+    }
+    return [{ header: '', text: flat }];
+  }
+  return sections;
+}
+
+function renderAbstractHtml(paper) {
+  const sections = paper.abstractSections || [{ header: '', text: paper.abstract || '' }];
+  return sections.map(s => {
+    const head = s.header ? `<strong class="abstract-section">${escapeHtml(s.header)}</strong> ` : '';
+    return `<p class="abstract-para">${head}${escapeHtml(s.text)}</p>`;
+  }).join('');
+}
+
 function truncateAuthors(authorsStr) {
   if (!authorsStr) return '';
   const parts = authorsStr.split(',').map(s => s.trim()).filter(Boolean);
@@ -278,10 +345,55 @@ function buildQuery() {
     const all = state.keywords.map(k => k.text);
     if (all.length > pool.length) pool = all.sort(() => Math.random() - 0.5).slice(0, 3);
   }
-  return pool.map(t => `"${t}"`).join(' OR ');
+  return pool.map(t => fieldQualifiedTerm(t)).join(' OR ');
+}
+
+function fieldQualifiedTerm(text) {
+  const safe = text.replace(/"/g, '\\"');
+  return `(TITLE:"${safe}" OR ABSTRACT:"${safe}" OR KW:"${safe}")`;
+}
+
+function buildYearClause() {
+  const { yearFrom, yearTo } = state.prefs || {};
+  const f = Number.isFinite(yearFrom) ? yearFrom : null;
+  const t = Number.isFinite(yearTo) ? yearTo : null;
+  if (!f && !t) return '';
+  const lo = f || 1900;
+  const hi = t || new Date().getFullYear();
+  return `PUB_YEAR:[${lo} TO ${hi}]`;
+}
+
+function buildSortParam() {
+  const sort = state.prefs?.sort || 'cited';
+  if (sort === 'recent') return '&sort=P_PDATE_D+desc';
+  if (sort === 'cited') return '&sort=CITED+desc';
+  return ''; // relevance — Europe PMC default
 }
 
 /* ═══ API ═══ */
+const API_ROOT = API_BASE.replace(/\/search$/, '');
+
+function mapPaperRecord(r) {
+  const rawAbstract = r.abstractText || '';
+  const sections = parseAbstractSections(rawAbstract);
+  const cleanAbstract = sections.map(s => (s.header ? s.header + ': ' : '') + s.text).join('\n\n').trim();
+  const rawTitle = r.title || 'Untitled';
+  const cleanTitle = stripHtml(rawTitle).trim();
+  return {
+    id: r.id,
+    title: cleanTitle,
+    abstract: cleanAbstract || 'No abstract available.',
+    abstractSections: sections,
+    authors: r.authorString || 'Unknown authors',
+    year: r.pubYear || '',
+    journal: r.journalTitle || r.journalInfo?.journal?.title || '',
+    doi: r.doi,
+    pmid: r.pmid,
+    source: r.source || (r.pmid ? 'MED' : null),
+    paperKeywords: extractPaperKeywords(r),
+  };
+}
+
 async function fetchPapers() {
   if (state.isLoading) return;
   state.isLoading = true;
@@ -291,9 +403,29 @@ async function fetchPapers() {
   if (retryBtn) retryBtn.classList.add('hidden');
   if (emptyMsg) emptyMsg.textContent = 'Loading more papers…';
 
-  const query = buildQuery();
+  let query = buildQuery();
+  // 'related' mode: seed from a recently-saved paper's citations/references when possible
+  if (state.fetchMode === 'related' && state.saved.length > 0) {
+    const seed = state.saved[Math.max(0, state.saved.length - 1 - Math.floor(Math.random() * Math.min(5, state.saved.length)))];
+    try {
+      const ids = await fetchRelatedIds(seed);
+      const hydrated = await hydrateByExtIds(ids, 10);
+      const fresh = hydrated.filter(p => p.id !== seed.id && !state.history.has(p.id));
+      if (fresh.length) {
+        state.queue.push(...fresh);
+        fresh.forEach(p => state.history.add(p.id));
+        state.isLoading = false;
+        if (state.queue.length > 0) els.emptyState?.classList.add('hidden');
+        renderTopCard();
+        return;
+      }
+    } catch (e) { /* fall through to keyword search */ }
+  }
+  const yearClause = buildYearClause();
+  if (yearClause) query = `(${query}) AND ${yearClause}`;
+  const sortParam = buildSortParam();
   const cursorParam = state.cursorMark ? `&cursorMark=${encodeURIComponent(state.cursorMark)}` : '';
-  const url = `${API_BASE}?query=${encodeURIComponent(query)}&format=json&pageSize=10&sort=CITED+desc&resultType=core${cursorParam}`;
+  const url = `${API_BASE}?query=${encodeURIComponent(query)}&format=json&pageSize=10${sortParam}&resultType=core${cursorParam}`;
 
   try {
     const res = await fetch(url);
@@ -301,29 +433,12 @@ async function fetchPapers() {
     const data = await res.json();
     const results = data.resultList?.result || [];
     const seen = state.history;
-    const fresh = results
-      .filter(r => !seen.has(r.id))
-      .map(r => {
-        const rawAbstract = r.abstractText || '';
-        const cleanAbstract = stripHtml(rawAbstract).trim();
-        const rawTitle = r.title || 'Untitled';
-        const cleanTitle = stripHtml(rawTitle).trim();
-        return {
-          id: r.id,
-          title: cleanTitle,
-          abstract: cleanAbstract || 'No abstract available.',
-          authors: r.authorString || 'Unknown authors',
-          year: r.pubYear || '',
-          journal: r.journalTitle || '',
-          doi: r.doi,
-          pmid: r.pmid,
-          paperKeywords: extractPaperKeywords(r),
-        };
-      });
+    const fresh = results.filter(r => !seen.has(r.id)).map(mapPaperRecord);
     state.cursorMark = data.nextCursorMark || null;
     if (fresh.length) {
       state.queue.push(...fresh);
       fresh.forEach(p => state.history.add(p.id));
+      pruneHistory();
       renderTopCard();
     } else if (state.cursorMark) {
       state.isLoading = false;
@@ -339,25 +454,54 @@ async function fetchPapers() {
   }
 }
 
-async function fetchSimilar(paper) {
-  if (!paper.pmid && !paper.doi) return [];
-  const id = paper.pmid ? `EXT_ID:${paper.pmid}` : `DOI:${paper.doi}`;
+async function fetchRelatedIds(paper) {
+  const source = paper.source || (paper.pmid ? 'MED' : null);
+  const id = paper.pmid || (source ? paper.id : null);
+  if (!source || !id) return [];
+  const base = `${API_ROOT}/article/${source}/${id}`;
+  const safeJson = (url) => fetch(url).then(r => r.ok ? r.json() : null).catch(() => null);
+  const [refData, citData] = await Promise.all([
+    safeJson(`${base}/references?format=json&pageSize=15`),
+    safeJson(`${base}/citations?format=json&pageSize=15`),
+  ]);
+  const refs = refData?.referenceList?.reference || [];
+  const cits = citData?.citationList?.citation || [];
+  const ids = [...refs, ...cits]
+    .map(r => r.pmid || r.id)
+    .filter(Boolean);
+  return [...new Set(ids)];
+}
+
+async function hydrateByExtIds(ids, limit = 12) {
+  if (!ids.length) return [];
+  const capped = ids.slice(0, 25);
+  const q = capped.map(id => `EXT_ID:${id}`).join(' OR ');
   try {
-    const res = await fetch(`${API_BASE}?query=${encodeURIComponent(id)}&format=json&pageSize=6&sort=RELEVANCE&resultType=core`);
+    const res = await fetch(`${API_BASE}?query=${encodeURIComponent(q)}&format=json&pageSize=${capped.length}&resultType=core`);
     if (!res.ok) return [];
     const data = await res.json();
-    const results = (data.resultList?.result || []).filter(r => r.id !== paper.id);
-    return results.filter(r => !state.history.has(r.id)).map(r => {
-      const rawAbstract = r.abstractText || '';
-      const cleanAbstract = stripHtml(rawAbstract).trim();
-      return {
-        id: r.id, title: stripHtml(r.title || 'Untitled').trim(),
-        abstract: cleanAbstract || 'No abstract available.',
-        authors: r.authorString || '', year: r.pubYear || '',
-        journal: r.journalTitle || '', doi: r.doi, pmid: r.pmid,
-        paperKeywords: extractPaperKeywords(r),
-      };
-    });
+    return (data.resultList?.result || []).slice(0, limit).map(mapPaperRecord);
+  } catch (e) {
+    return [];
+  }
+}
+
+async function fetchSimilar(paper) {
+  try {
+    const relatedIds = await fetchRelatedIds(paper);
+    let papers = await hydrateByExtIds(relatedIds, 12);
+    papers = papers.filter(p => p.id !== paper.id && !state.history.has(p.id));
+    if (papers.length) return papers;
+    // Fallback: keyword search using the paper's top mesh-major tags
+    const tags = (paper.paperKeywords || []).filter(kw => kw.type === 'mesh-major').slice(0, 3);
+    if (!tags.length) return [];
+    const q = tags.map(t => fieldQualifiedTerm(t.text)).join(' OR ');
+    const res = await fetch(`${API_BASE}?query=${encodeURIComponent(q)}&format=json&pageSize=10&sort=CITED+desc&resultType=core`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.resultList?.result || [])
+      .filter(r => r.id !== paper.id && !state.history.has(r.id))
+      .map(mapPaperRecord);
   } catch (e) {
     console.error('Failed to fetch similar papers:', e);
     return [];
@@ -366,6 +510,15 @@ async function fetchSimilar(paper) {
 
 function ensureBuffer() {
   if (state.queue.length < 3 && !state.isLoading) fetchPapers();
+}
+
+const HISTORY_CAP = 5000;
+const HISTORY_TRIM_TO = 4000;
+function pruneHistory() {
+  if (state.history.size <= HISTORY_CAP) return;
+  // Sets preserve insertion order — keep the most recent additions
+  const ids = [...state.history];
+  state.history = new Set(ids.slice(ids.length - HISTORY_TRIM_TO));
 }
 
 /* ═══ Tabs ═══ */
@@ -383,6 +536,7 @@ function switchTab(tab) {
 function renderTopCard() {
   const existing = els.cardStack.querySelectorAll('.paper-card');
   existing.forEach(c => c.remove());
+  document.getElementById('undo-swipe-btn')?.classList.toggle('hidden', !state.lastSwipe);
   const paper = state.queue[0];
   if (!paper) { els.emptyState?.classList.remove('hidden'); ensureBuffer(); return; }
   els.emptyState?.classList.add('hidden');
@@ -420,7 +574,7 @@ function createCardEl(paper) {
     <div class="card-title">${escapeHtml(paper.title)}</div>
     <div class="card-authors">${authors}</div>
     ${kwHtml}
-    <div class="card-abstract">${escapeHtml(paper.abstract)}</div>
+    <div class="card-abstract">${renderAbstractHtml(paper)}</div>
     <div class="card-footer">
       ${doiLink}${divider}${pmidLink}
       <button class="share-btn" data-url="${escapeHtml(shareUrl)}" title="Share this paper">⤴</button>
@@ -545,6 +699,26 @@ function animateSwipe(card, paper, direction) {
 
 function handleDecision(direction, paper) {
   const timeOnCard = Date.now() - (state.cardViewStartTime || Date.now());
+  // Snapshot for undo — clone score-bearing state before any mutations.
+  const snapshot = {
+    paper,
+    direction,
+    keywords: structuredClone(state.keywords),
+    discoveredKeywords: structuredClone(state.stats.discoveredKeywords),
+    lastSeenKeywords: structuredClone(state.stats.lastSeenKeywords),
+    stats: {
+      totalSwiped: state.stats.totalSwiped,
+      totalSaved: state.stats.totalSaved,
+      todayDate: state.stats.todayDate,
+      todaySwiped: state.stats.todaySwiped,
+      sessionSwiped: state.stats.sessionSwiped,
+      xp: state.stats.xp,
+      level: state.stats.level,
+      badges: [...state.stats.badges],
+    },
+    historyHadPaper: state.history.has(paper.id),
+  };
+
   state.history.add(paper.id);
   updateScores(paper, direction, timeOnCard);
   // Stats tracking
@@ -565,10 +739,36 @@ function handleDecision(direction, paper) {
   }
   if (state.queue.length > 0 && state.queue[0].id === paper.id) state.queue.shift();
   else { const idx = state.queue.findIndex(p => p.id === paper.id); if (idx !== -1) state.queue.splice(idx, 1); }
+
+  state.lastSwipe = snapshot;
+
   ensureBuffer();
   renderTopCard();
   renderStats();
   saveState();
+}
+
+function undoLastSwipe() {
+  const snap = state.lastSwipe;
+  if (!snap) return false;
+  state.keywords = snap.keywords;
+  state.stats.discoveredKeywords = snap.discoveredKeywords;
+  state.stats.lastSeenKeywords = snap.lastSeenKeywords;
+  Object.assign(state.stats, snap.stats);
+  if (!snap.historyHadPaper) state.history.delete(snap.paper.id);
+  if (snap.direction === 'right') {
+    const idx = state.saved.findIndex(s => s.id === snap.paper.id);
+    if (idx !== -1) state.saved.splice(idx, 1);
+  }
+  if (!state.queue.length || state.queue[0].id !== snap.paper.id) {
+    state.queue.unshift(snap.paper);
+  }
+  state.lastSwipe = null;
+  renderTopCard();
+  renderStats();
+  if (state.activeTab === 'saved') renderSaved();
+  saveState();
+  return true;
 }
 
 /* ═══ Stats, levels, badges ═══ */
@@ -589,7 +789,13 @@ function checkBadges() {
     if (badge.id === 'deep_dive' && s.totalSaved >= 10) earned = true;
     if (badge.id === 'explorer' && s.totalSwiped >= 100) earned = true;
     if (badge.id === 'polyglot') {
-      const uniqueTopics = new Set(state.saved.map(p => p.journal).filter(Boolean));
+      const uniqueTopics = new Set(
+        state.saved.flatMap(p =>
+          (p.paperKeywords || [])
+            .filter(kw => kw.type === 'mesh-major')
+            .map(kw => norm(kw.text))
+        )
+      );
       if (uniqueTopics.size >= 5) earned = true;
     }
     if (badge.id === 'night_owl') { const h = new Date().getHours(); if (h >= 22 || h < 2) earned = true; }
@@ -674,6 +880,79 @@ function showBadgesModal() {
   overlay.querySelector('.badges-modal-close')?.addEventListener('click', () => overlay.remove());
 }
 
+function showSettingsModal() {
+  const existing = document.querySelector('.settings-modal-overlay');
+  if (existing) { existing.remove(); return; }
+  const overlay = document.createElement('div');
+  overlay.className = 'badges-modal-overlay settings-modal-overlay';
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+  const prefs = state.prefs;
+  const yearFromVal = prefs.yearFrom != null ? prefs.yearFrom : '';
+  const yearToVal = prefs.yearTo != null ? prefs.yearTo : '';
+  const opt = (val, label) => `<label class="settings-radio"><input type="radio" name="sort-pref" value="${val}" ${prefs.sort === val ? 'checked' : ''}/> ${label}</label>`;
+  overlay.innerHTML = `
+    <div class="badges-modal settings-modal">
+      <div class="badges-modal-header">
+        <h2>Settings</h2>
+        <button class="badges-modal-close">✕</button>
+      </div>
+      <div class="settings-body">
+        <section class="settings-section">
+          <div class="settings-label">Sort papers by</div>
+          <div class="settings-radio-group">
+            ${opt('relevance', 'Relevance')}
+            ${opt('recent', 'Most recent')}
+            ${opt('cited', 'Most cited')}
+          </div>
+        </section>
+        <section class="settings-section">
+          <div class="settings-label">Year range</div>
+          <div class="settings-year-row">
+            <input type="number" id="pref-year-from" class="settings-year-input" placeholder="From" min="1900" max="2100" value="${yearFromVal}" />
+            <span>–</span>
+            <input type="number" id="pref-year-to" class="settings-year-input" placeholder="To" min="1900" max="2100" value="${yearToVal}" />
+          </div>
+          <p class="settings-hint">Leave blank for no limit.</p>
+        </section>
+        <section class="settings-section">
+          <div class="settings-label settings-label-danger">Danger zone</div>
+          <button class="settings-reset-btn">Reset all data</button>
+          <p class="settings-hint">Clears keywords, saved papers, scores, badges, and stats.</p>
+        </section>
+      </div>
+    </div>
+  `;
+  document.getElementById('app').appendChild(overlay);
+  overlay.querySelector('.badges-modal-close')?.addEventListener('click', () => overlay.remove());
+  overlay.querySelectorAll('input[name="sort-pref"]').forEach(r => {
+    r.addEventListener('change', () => {
+      state.prefs.sort = r.value;
+      state.cursorMark = null; state.queue = [];
+      saveState();
+      fetchPapers();
+      renderTopCard();
+    });
+  });
+  const applyYears = () => {
+    const fromEl = overlay.querySelector('#pref-year-from');
+    const toEl = overlay.querySelector('#pref-year-to');
+    const f = parseInt(fromEl.value, 10);
+    const t = parseInt(toEl.value, 10);
+    state.prefs.yearFrom = Number.isFinite(f) ? f : null;
+    state.prefs.yearTo = Number.isFinite(t) ? t : null;
+    state.cursorMark = null; state.queue = [];
+    saveState();
+    fetchPapers();
+    renderTopCard();
+  };
+  overlay.querySelector('#pref-year-from')?.addEventListener('change', applyYears);
+  overlay.querySelector('#pref-year-to')?.addEventListener('change', applyYears);
+  overlay.querySelector('.settings-reset-btn')?.addEventListener('click', () => {
+    overlay.remove();
+    showResetPopup();
+  });
+}
+
 function showResetPopup() {
   const overlay = document.createElement('div');
   overlay.className = 'badges-modal-overlay';
@@ -712,6 +991,7 @@ function resetToOnboarding() {
   state.cursorMark = null;
   state.isLoading = false;
   state.activeTab = 'swipe';
+  state.lastSwipe = null;
   state.stats = {
     totalSwiped: 0, totalSaved: 0, todayDate: '', todaySwiped: 0,
     sessionSwiped: 0, xp: 0, level: 1, badges: [],
@@ -771,7 +1051,8 @@ function renderSaved() {
   els.savedBadge.textContent = state.saved.length;
   els.savedBadge.style.display = state.saved.length ? 'block' : 'none';
   els.savedList.innerHTML = '';
-  document.getElementById('undo-save-btn')?.classList.toggle('hidden', state.saved.length === 0);
+  const canUndoSave = state.lastSwipe?.direction === 'right';
+  document.getElementById('undo-save-btn')?.classList.toggle('hidden', !canUndoSave);
   els.savedFilter?.classList.toggle('hidden', state.saved.length === 0);
 
   if (!state.saved.length) {
@@ -840,6 +1121,7 @@ function renderSaved() {
       : '';
 
     item.innerHTML = `
+      <button class="saved-remove-btn" title="Remove from saved" aria-label="Remove from saved">&times;</button>
       <h4>${escapeHtml(p.title)}</h4>
       <p>${truncateAuthors(p.authors)} • ${escapeHtml(String(p.year))} • ${escapeHtml(p.journal)}</p>
       <div class="saved-links">
@@ -848,6 +1130,18 @@ function renderSaved() {
       </div>
       ${kwHtml}
     `;
+    item.querySelector('.saved-remove-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = state.saved.findIndex(s => s.id === p.id);
+      if (idx === -1) return;
+      state.saved.splice(idx, 1);
+      state.stats.totalSaved = Math.max(0, state.stats.totalSaved - 1);
+      // If this was the most recent swipe, drop the undo affordance
+      if (state.lastSwipe?.paper?.id === p.id) state.lastSwipe = null;
+      renderSaved();
+      renderStats();
+      saveState();
+    });
     // Similar papers button
     item.querySelector('.similar-btn')?.addEventListener('click', async (e) => {
       e.stopPropagation();
@@ -964,9 +1258,6 @@ function init() {
     els.main.classList.add('active');
     state.cursorMark = null;
     state.queue = [];
-    state.saved = [];
-    state.history = new Set();
-    state.keywords.forEach(k => k.score = 0);
     state.stats.sessionSwiped = 0;
     state.stats.todayDate = new Date().toISOString().split('T')[0];
     state.stats.todaySwiped = 0;
@@ -978,14 +1269,17 @@ function init() {
   });
 
   els.tabBtnSwipe.addEventListener('click', () => switchTab('swipe'));
-  els.tabBtnSaved.addEventListener('click', () => {
-    if (state.activeTab === 'saved') {
-      showResetPopup();
-    } else {
-      switchTab('saved');
+  els.tabBtnSaved.addEventListener('click', () => switchTab('saved'));
+  document.getElementById('settings-btn')?.addEventListener('click', showSettingsModal);
+  document.getElementById('undo-save-btn')?.addEventListener('click', () => {
+    if (state.lastSwipe?.direction === 'right') {
+      undoLastSwipe();
+      showToast('Undid last save');
     }
   });
-  document.getElementById('undo-save-btn')?.addEventListener('click', () => { if (state.saved.length > 0) { state.saved.pop(); renderSaved(); } });
+  document.getElementById('undo-swipe-btn')?.addEventListener('click', () => {
+    if (undoLastSwipe()) showToast('Restored previous card');
+  });
 
   els.savedFilter?.addEventListener('input', () => renderSaved());
   els.darkToggle?.addEventListener('click', toggleDarkMode);

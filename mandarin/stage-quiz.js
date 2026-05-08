@@ -1,9 +1,18 @@
 import { ROADMAP } from './data.js';
 import { escapeHtml, formatType } from './utils.js';
 import { state, saveState } from './state.js';
+import { releaseMic } from './audio.js';
 import { renderInto, generateStageQuestions, setStageQuizHandlers } from './quiz.js';
+import { renderRoadmap } from './roadmap.js';
 
 let stageQuizOverlay, stageResultsView, stageQContainer, stageProgressFill, stageQCurrent, stageQTotal, stageQuizTitle;
+
+export function closeStageQuiz() {
+  releaseMic();
+  stageQuizOverlay.classList.add('hidden');
+  stageResultsView.classList.add('hidden');
+  renderRoadmap();
+}
 
 export function initStageQuizDOM() {
   stageQuizOverlay = document.getElementById('stage-quiz-overlay');
@@ -13,6 +22,15 @@ export function initStageQuizDOM() {
   stageQCurrent = document.getElementById('stage-q-current');
   stageQTotal = document.getElementById('stage-q-total');
   stageQuizTitle = document.getElementById('stage-quiz-title');
+
+  const closeBtn = document.getElementById('stage-quiz-close');
+  if (closeBtn) closeBtn.addEventListener('click', closeStageQuiz);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !stageQuizOverlay.classList.contains('hidden')) {
+      closeStageQuiz();
+    }
+  });
 }
 
 export function startStageQuiz(stageId, subIndex) {

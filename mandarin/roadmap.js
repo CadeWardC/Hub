@@ -236,10 +236,21 @@ export function renderVocabPreview() {
   const el = document.getElementById('vocab-preview');
   if (!el) return;
   const pool = getCompletedSubVocab();
+  const searchInput = document.getElementById('vocab-search');
+  const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+  let filtered = pool;
+  if (query) {
+    filtered = pool.filter(v =>
+      v.char.includes(query) ||
+      v.pinyin.toLowerCase().includes(query) ||
+      v.meaning.toLowerCase().includes(query)
+    );
+  }
 
   const troublesome = [];
   const normal = [];
-  pool.forEach(v => {
+  filtered.forEach(v => {
     const stats = wordStats[v.id];
     if (stats && stats.wrong > 0 && stats.streak < 2) {
       troublesome.push(v);
@@ -254,16 +265,20 @@ export function renderVocabPreview() {
     return sb.wrong - sa.wrong;
   });
 
-  const all = [...troublesome, ...normal];
+  const all = query ? filtered : [...troublesome, ...normal];
 
-  if (all.length === 0) {
+  if (pool.length === 0) {
     el.innerHTML = '<p class="vocab-empty">Complete subtopics in the Roadmap to unlock vocabulary here.</p>';
     return;
   }
 
-  el.innerHTML =
-    (troublesome.length > 0 ? `<h3 class="vocab-section-title">Troublesome Words</h3>` : '') +
-    all.map(v => {
+  if (all.length === 0) {
+    el.innerHTML = '<p class="vocab-empty">No matches found.</p>';
+    return;
+  }
+
+  if (query) {
+    el.innerHTML = all.map(v => {
       const stats = wordStats[v.id];
       const isTroublesome = stats && stats.wrong > 0 && stats.streak < 2;
       return `<div class="vocab-chip${isTroublesome ? ' troublesome' : ''}">
@@ -272,4 +287,39 @@ export function renderVocabPreview() {
         <div class="vc-pinyin">${escapeHtml(v.pinyin)} \u2014 ${escapeHtml(v.meaning)}</div>
       </div>`;
     }).join('');
+  } else {
+    el.innerHTML =
+      (troublesome.length > 0 ? `<h3 class="vocab-section-title">Troublesome Words</h3>` : '') +
+      all.map(v => {
+        const stats = wordStats[v.id];
+        const isTroublesome = stats && stats.wrong > 0 && stats.streak < 2;
+        return `<div class="vocab-chip${isTroublesome ? ' troublesome' : ''}">
+          ${isTroublesome ? '<span class="trouble-dot"></span>' : ''}
+          <div class="vc-char">${escapeHtml(v.char)}</div>
+          <div class="vc-pinyin">${escapeHtml(v.pinyin)} \u2014 ${escapeHtml(v.meaning)}</div>
+        </div>`;
+      }).join('');
+  }
+}
+
+export function renderQuizHistory() {
+  const el = document.getElementById('quiz-history');
+  if (!el) return;
+  const history = state.history;
+  if (history.length === 0) {
+    el.innerHTML = '<p class="vocab-empty">No quiz history yet. Take a quiz to see your results here.</p>';
+    return;
+  }
+  const entries = history.slice().reverse();
+  el.innerHTML = entries.map(h => {
+    const date = new Date(h.date);
+    const dateStr = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    const timeStr = date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+    const cls = h.pct >= 80 ? 'history-good' : h.pct >= 60 ? 'history-ok' : 'history-low';
+    return `<div class="history-item ${cls}">
+      <div class="history-date">${dateStr} <span class="history-time">${timeStr}</span></div>
+      <div class="history-score">${h.score}/${h.total}</div>
+      <div class="history-pct">${h.pct}%</div>
+    </div>`;
+  }).join('');
 }

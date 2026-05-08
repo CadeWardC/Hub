@@ -105,10 +105,16 @@
           <button id="sentence-next" class="btn-secondary" disabled>Next &rarr;</button>
         </div>
       </div>
-      <div class="card placeholder-card">
+      <div class="card">
         <h2>Vocabulary List</h2>
-        <p class="subtitle">Searchable dictionary coming soon...</p>
+        <div class="vocab-search-bar">
+          <input type="text" id="vocab-search" class="vocab-search-input" placeholder="Search by character, pinyin, or meaning..." autocomplete="off">
+        </div>
         <div class="vocab-preview" id="vocab-preview"></div>
+      </div>
+      <div class="card">
+        <h2>Quiz History</h2>
+        <div id="quiz-history"></div>
       </div>
     </section>
 
@@ -116,6 +122,7 @@
     <div id="stage-quiz-overlay" class="stage-overlay hidden">
       <div class="stage-overlay-inner">
         <div class="quiz-header">
+          <button id="stage-quiz-close" class="btn-close stage-quiz-close-btn">&times;</button>
           <div class="progress-bar"><div id="stage-progress-fill"></div></div>
           <div class="quiz-meta">
             <span id="stage-quiz-title"></span> &mdash;

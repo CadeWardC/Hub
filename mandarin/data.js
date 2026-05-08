@@ -88,7 +88,6 @@ export const VOCAB = [
   { id: 87, char: '哪个', pinyin: 'nǎ ge',     meaning: 'which one',  tone: 0, stage: 2, sub: 2 },
   { id: 88, char: '什么时候', pinyin: 'shén me shí hou', meaning: 'when', tone: 0, stage: 2, sub: 2 },
   { id: 89, char: '怎么样', pinyin: 'zěn me yàng', meaning: 'how about', tone: 0, stage: 2, sub: 2 },
-  { id: 90, char: '吗', pinyin: 'ma',          meaning: '(question particle)', tone: 0, stage: 2, sub: 2 },
   { id: 91, char: '说', pinyin: 'shuō',        meaning: 'to speak',   tone: 1, stage: 2, sub: 3 },
   { id: 92, char: '慢', pinyin: 'màn',         meaning: 'slow',       tone: 4, stage: 2, sub: 3 },
   { id: 93, char: '懂', pinyin: 'dǒng',        meaning: 'to understand', tone: 3, stage: 2, sub: 3 },

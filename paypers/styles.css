@@ -177,6 +177,7 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
 .card-stack {
   position: relative; width: 100%; max-width: 520px;
   height: 100%; max-height: calc(100vh - 200px);
+  max-height: calc(100dvh - 200px);
 }
 
 .paper-card {
@@ -245,6 +246,12 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
 }
 .card-abstract::-webkit-scrollbar { width: 5px; }
 .card-abstract::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.abstract-para { margin: 0 0 8px; }
+.abstract-para:last-child { margin-bottom: 0; }
+.abstract-section {
+  display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-muted); margin-right: 4px;
+}
 
 /* Card footer */
 .card-footer {
@@ -307,6 +314,13 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
 }
 .undo-save-btn:hover { border-color: var(--danger); color: var(--danger); }
 
+.undo-swipe-btn {
+  padding: 4px 12px; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--bg); color: var(--text-muted); font-size: 0.78rem;
+  font-weight: 600; cursor: pointer; transition: all .2s;
+}
+.undo-swipe-btn:hover { border-color: var(--accent); color: var(--accent); }
+
 /* Saved tab */
 #tab-saved { flex-direction: column; overflow-y: auto; padding: 16px 20px; }
 .saved-header { margin-bottom: 12px; flex-shrink: 0; }
@@ -364,9 +378,18 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
 .sb-score.neg { color: var(--danger); }
 
 .saved-item {
+  position: relative;
   background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
   padding: 16px; margin-bottom: 12px;
 }
+.saved-remove-btn {
+  position: absolute; top: 8px; right: 8px;
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid transparent; background: transparent;
+  color: var(--text-muted); font-size: 1.1rem; line-height: 1;
+  cursor: pointer; transition: all .15s;
+}
+.saved-remove-btn:hover { background: var(--bg); border-color: var(--danger); color: var(--danger); }
 .saved-item h4 { font-size: 1rem; margin-bottom: 6px; line-height: 1.35; font-weight: 600; }
 .saved-item p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px; }
 
@@ -478,6 +501,39 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
 .badge-desc { display: block; font-size: 0.78rem; color: var(--text-muted); }
 .badge-check { color: var(--success); font-weight: 700; font-size: 1rem; flex-shrink: 0; }
 
+/* Settings modal */
+.settings-modal { max-width: 380px; }
+.settings-body { padding: 14px 20px 20px; display: flex; flex-direction: column; gap: 18px; }
+.settings-section { display: flex; flex-direction: column; gap: 8px; }
+.settings-label {
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.settings-label-danger { color: var(--danger); }
+.settings-radio-group { display: flex; flex-direction: column; gap: 6px; }
+.settings-radio {
+  display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+  border: 1px solid var(--border); border-radius: 8px; cursor: pointer;
+  font-size: 0.9rem; color: var(--text-secondary); transition: all .15s;
+}
+.settings-radio:hover { border-color: var(--border-strong); }
+.settings-radio input[type="radio"]:checked + * { color: var(--accent); }
+.settings-radio:has(input:checked) { border-color: var(--accent); background: rgba(37,99,235,0.05); color: var(--text); }
+.settings-year-row { display: flex; align-items: center; gap: 8px; }
+.settings-year-input {
+  flex: 1; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); font-size: 0.9rem; outline: none;
+  transition: border-color .15s;
+}
+.settings-year-input:focus { border-color: var(--accent); }
+.settings-hint { font-size: 0.78rem; color: var(--text-muted); }
+.settings-reset-btn {
+  align-self: flex-start; padding: 8px 16px; border-radius: 8px;
+  border: 1px solid var(--danger); background: transparent; color: var(--danger);
+  font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all .15s;
+}
+.settings-reset-btn:hover { background: var(--danger); color: #fff; }
+
 .reset-cancel-btn {
   padding: 10px 24px; border: 1px solid var(--border); border-radius: 10px;
   background: var(--bg); color: var(--text-secondary); font-size: 0.9rem;
@@ -497,7 +553,10 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
 
 /* Responsive */
 @media (max-width: 640px) {
-  .card-stack { max-height: calc(100vh - 200px); }
+  .card-stack {
+    max-height: calc(100vh - 200px);
+    max-height: calc(100dvh - 200px);
+  }
   .card-title { font-size: 1.05rem; }
   h1 { font-size: 2.2rem; }
   .tab-label { font-size: 0.85rem; }
