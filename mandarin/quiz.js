@@ -1,7 +1,7 @@
 import { VOCAB, ROADMAP } from './data.js';
 import { shuffle, pickDistractors, escapeHtml, formatType, hasSpeechRecognition, normalizePinyin, convertNumberedPinyin, toneNumberName } from './utils.js';
-import { state, saveState, getVocabForStageSub, getVocabForStage, getCompletedSubVocab, wordStats, recordWordResult, saveWordStats } from './state.js';
-import { say, classifyTone, getRecordingState, setRecording, getRecog, setRecog, setRecogResult, startPitchTracking, stopPitchTracking, getMicStream, setupRecognition } from './audio.js';
+import { state, saveState, getVocabForStageSub, getVocabForStage, getCompletedSubVocab, getTroublesomeVocab, wordStats, recordWordResult, saveWordStats } from './state.js';
+import { say, classifyTone, getRecordingState, getPitchDiagnostics, setRecording, getRecog, setRecog, setRecogResult, startPitchTracking, stopPitchTracking, getMicStream, setupRecognition } from './audio.js';
 
 let qContainer, progressFill, qCurrent, qTotal;
 
@@ -61,6 +61,46 @@ export function generateStageQuestions(stageId, subIndex) {
   if (types.length === 0) types.push('write');
   const words = shuffle(pool).slice(0, Math.min(count, pool.length));
   return buildQuestions(words, types, pool);
+}
+
+export function generateTroublesomeQuestions() {
+  const pool = getTroublesomeVocab();
+  if (pool.length === 0) return null;
+  const types = ['mc-char', 'write'];
+  if (hasSpeechRecognition()) types.push('mc-listen');
+  const count = Math.min(10, pool.length);
+  const weighted = pool.map(w => {
+    const stats = wordStats[w.id] || { wrong: 0, streak: 0 };
+    return { word: w, weight: stats.wrong + 1 };
+  });
+  const selected = [];
+  const available = [...weighted];
+  for (let i = 0; i < count && available.length > 0; i++) {
+    const totalWeight = available.reduce((sum, w) => sum + w.weight, 0);
+    let r = Math.random() * totalWeight;
+    for (let j = 0; j < available.length; j++) {
+      r -= available[j].weight;
+      if (r <= 0) {
+        selected.push(available[j].word);
+        available.splice(j, 1);
+        break;
+      }
+    }
+  }
+  return buildQuestions(shuffle(selected), types, pool);
+}
+
+export function startTroublesomeDrill() {
+  const questions = generateTroublesomeQuestions();
+  if (!questions) return false;
+  state.quizMode = 'troublesome';
+  state.quiz = { questions, current: 0, answers: new Array(questions.length).fill(null), done: false };
+  document.getElementById('daily-settings').classList.add('hidden');
+  document.getElementById('daily-results').classList.add('hidden');
+  document.getElementById('daily-quiz').classList.remove('hidden');
+  qTotal.textContent = questions.length;
+  renderQuestion();
+  return true;
 }
 
 function buildQuestions(words, types, pool) {
@@ -279,9 +319,11 @@ function evaluateSpeech(question, container, progressFn) {
   const word = question.word;
   const fb = container.querySelector('#speak-feedback');
   const { recogResult, pitchSamples } = getRecordingState();
+  const diag = getPitchDiagnostics();
   let saidWord = recogResult.trim();
   let wordCorrect = saidWord && saidWord.includes(word.char);
-  const detectedTone = classifyTone(pitchSamples);
+  const toneResult = classifyTone(pitchSamples);
+  const detectedTone = toneResult.tone;
   const toneCorrect = word.tone > 0 && detectedTone !== null && detectedTone === word.tone;
   const toneSkipped = word.tone === 0;
   if (wordCorrect && (toneCorrect || toneSkipped)) question.correct = true;
@@ -289,12 +331,44 @@ function evaluateSpeech(question, container, progressFn) {
   else question.correct = false;
 
   let html = '';
-  html += wordCorrect ? '<div>Word: <strong>Correct \u2713</strong></div>' : `<div>Word: <strong>Incorrect</strong>${saidWord ? ` (heard: "${escapeHtml(saidWord)}")` : ' (no speech detected)'}</div>`;
+  if (wordCorrect) {
+    html += '<div>Word: <strong>Correct \u2713</strong></div>';
+  } else if (saidWord) {
+    html += `<div>Word: <strong>Incorrect</strong> (heard: "${escapeHtml(saidWord)}")</div>`;
+  } else if (diag.frameStats.silent > diag.frameStats.total * 0.7) {
+    html += '<div>Word: <strong>No speech detected</strong> \u2014 try speaking louder</div>';
+  } else if (diag.sampleCount < 10) {
+    html += '<div>Word: <strong>Couldn\u2019t identify the word</strong> \u2014 try speaking more clearly</div>';
+  } else {
+    html += '<div>Word: <strong>No speech detected</strong></div>';
+  }
+
   if (!toneSkipped) {
     if (detectedTone !== null) {
-      html += toneCorrect ? `<div>Tone: <strong>${toneNumberName(detectedTone)} \u2713</strong></div>` : `<div>Tone: Detected ${toneNumberName(detectedTone)}, Expected ${toneNumberName(word.tone)}</div>`;
-    } else { html += '<div>Tone: Could not analyze</div>'; }
+      if (toneCorrect) {
+        html += `<div>Tone: <strong>${toneNumberName(detectedTone)} \u2713</strong></div>`;
+      } else {
+        const details = toneResult.details;
+        let hint = '';
+        if (details && details.pitchRange < 40) {
+          hint = ' \u2014 try exaggerating the tone more';
+        } else if (details && Math.abs(details.diff) < 0.15) {
+          hint = ' \u2014 your pitch barely changed, try more variation';
+        }
+        html += `<div>Tone: Detected ${toneNumberName(detectedTone)}, Expected ${toneNumberName(word.tone)}${hint}</div>`;
+      }
+    } else {
+      const reason = toneResult.details ? toneResult.details.reason : null;
+      if (reason === 'flat-line') {
+        html += '<div>Tone: <strong>Could not analyze</strong> \u2014 your pitch was too flat, try exaggerating the tone</div>';
+      } else if (diag.frameStats.valid < 6) {
+        html += '<div>Tone: <strong>Could not analyze</strong> \u2014 not enough pitch data, try holding the tone longer</div>';
+      } else {
+        html += '<div>Tone: <strong>Could not analyze</strong></div>';
+      }
+    }
   }
+
   const grammarTip = getCurrentGrammarTip();
   if (grammarTip) html += `<div class="grammar-tip">${escapeHtml(grammarTip)}</div>`;
   const cls = question.correct === true ? 'correct' : (question.correct === 'partial' ? 'partial' : 'wrong');
@@ -338,10 +412,10 @@ function nextQuestion(progressFn) {
   const q = state.quiz;
   q.current++;
   if (q.current >= q.questions.length) {
-    if (state.quizMode === 'daily') { showDailyResults(); }
+    if (state.quizMode === 'daily' || state.quizMode === 'troublesome') { showDailyResults(); }
     else if (onStageComplete) { onStageComplete(); }
   } else {
-    if (state.quizMode === 'daily') { renderQuestion(); }
+    if (state.quizMode === 'daily' || state.quizMode === 'troublesome') { renderQuestion(); }
     else if (onStageNext) { onStageNext(); }
   }
 }
@@ -354,6 +428,12 @@ function showDailyResults() {
   let score = 0, partial = 0;
   q.questions.forEach(qs => { if (qs.correct === true) score++; else if (qs.correct === 'partial') partial++; });
   const pct = Math.round(((score + partial * 0.5) / total) * 100);
+
+  const titleEl = document.querySelector('#daily-results h2');
+  if (titleEl) {
+    titleEl.textContent = state.quizMode === 'troublesome' ? 'Troublesome Words Drill Complete' : 'Daily Quiz Complete';
+  }
+
   document.getElementById('results-summary').innerHTML = `
     <div class="score-circle" style="--pct:${pct}"><div class="score-text">${score + partial}/${total}</div></div>
     <div class="results-stats">
@@ -367,7 +447,11 @@ function showDailyResults() {
     const icon = qs.correct === true ? '\u2713' : (qs.correct === 'partial' ? '~' : '\u2717');
     return `<div class="breakdown-item ${cls}"><div class="bq-icon">${icon}</div><div class="bq-info"><strong>${formatType(qs.type)}</strong><div class="bq-answer">${escapeHtml(qs.word.char)} \u2014 ${escapeHtml(qs.word.meaning)}</div></div></div>`;
   }).join('');
-  state.history.push({ date: Date.now(), score, total, pct });
+  state.history.push({ date: Date.now(), score, total, pct, mode: state.quizMode });
+  const today = new Date().toISOString().slice(0, 10);
+  if (state.lastQuizDate !== today) {
+    state.lastQuizDate = today;
+  }
   q.questions.forEach(qs => {
     const isCorrect = qs.correct === true || qs.correct === 'partial';
     recordWordResult(qs.word.id, isCorrect);

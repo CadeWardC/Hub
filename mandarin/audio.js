@@ -8,8 +8,18 @@ let pitchSamples = [];
 let recog = null;
 let recogResult = '';
 let rafId = null;
+let frameStats = { total: 0, silent: 0, outOfRange: 0, valid: 0 };
 
 export function getRecordingState() { return { isRecording, pitchSamples, recogResult }; }
+export function getPitchDiagnostics() {
+  const valid = pitchSamples.filter(p => p > 0);
+  return {
+    sampleCount: valid.length,
+    frameStats: { ...frameStats },
+    pitchRange: valid.length > 1 ? Math.max(...valid) - Math.min(...valid) : 0,
+    avgPitch: valid.length > 0 ? valid.reduce((a, b) => a + b, 0) / valid.length : 0
+  };
+}
 export function setRecogResult(val) { recogResult = val; }
 
 export function say(text, cb) {
@@ -46,12 +56,12 @@ function autoCorrelate(buf, sampleRate) {
   let rms = 0;
   for (let i = 0; i < SIZE; i++) { const v = (buf[i] - 128) / 128.0; rms += v * v; }
   rms = Math.sqrt(rms / SIZE);
-  if (rms < 0.01) return -1;
+  if (rms < 0.01) return { freq: -1, rms };
   let r1 = 0, r2 = SIZE - 1, thres = 0.2;
   for (let i = 0; i < SIZE / 2; i++) { if (Math.abs((buf[i] - 128) / 128.0) < thres) { r1 = i; break; } }
   for (let i = 1; i < SIZE / 2; i++) { if (Math.abs((buf[SIZE - i] - 128) / 128.0) < thres) { r2 = SIZE - i; break; } }
   const newSize = r2 - r1;
-  if (newSize <= 0) return -1;
+  if (newSize <= 0) return { freq: -1, rms };
   const c = new Float32Array(newSize);
   for (let i = 0; i < newSize; i++) {
     for (let j = 0; j < newSize - i; j++) {
@@ -71,7 +81,7 @@ function autoCorrelate(buf, sampleRate) {
     const b2 = (x3 - x1) / 2;
     if (a2) T0 = T0 - b2 / (2 * a2);
   }
-  return sampleRate / T0;
+  return { freq: sampleRate / T0, rms };
 }
 
 export function startPitchTracking(stream) {
@@ -81,12 +91,21 @@ export function startPitchTracking(stream) {
   const source = audioCtx.createMediaStreamSource(stream);
   source.connect(analyser);
   pitchSamples = [];
+  frameStats = { total: 0, silent: 0, outOfRange: 0, valid: 0 };
   const buffer = new Uint8Array(analyser.fftSize);
   function loop() {
     if (!isRecording) return;
     analyser.getByteTimeDomainData(buffer);
-    const pitch = autoCorrelate(buffer, audioCtx.sampleRate);
-    if (pitch > 50 && pitch < 600) pitchSamples.push(pitch);
+    const result = autoCorrelate(buffer, audioCtx.sampleRate);
+    frameStats.total++;
+    if (result.freq < 0) {
+      frameStats.silent++;
+    } else if (result.freq <= 50 || result.freq >= 600) {
+      frameStats.outOfRange++;
+    } else {
+      frameStats.valid++;
+      pitchSamples.push(result.freq);
+    }
     drawPitch();
     rafId = requestAnimationFrame(loop);
   }
@@ -143,7 +162,7 @@ export function drawPitch() {
 
 export function classifyTone(pitches) {
   const valid = pitches.filter(p => p > 0);
-  if (valid.length < 6) return null;
+  if (valid.length < 6) return { tone: null, details: { validSamples: valid.length, reason: 'insufficient' } };
   const min = Math.min(...valid);
   const max = Math.max(...valid);
   const range = max - min || 1;
@@ -158,11 +177,14 @@ export function classifyTone(pitches) {
   const diff = avgLast - avgFirst;
   const midDiff = avgMid - avgFirst;
   const endDiff = avgLast - avgMid;
-  if (Math.abs(diff) < 0.18) return 1;
-  if (diff > 0.22 && avgMid > avgFirst) return 2;
-  if (diff < -0.22 && avgLast < avgMid) return 4;
-  if (midDiff < -0.08 && endDiff > 0.08) return 3;
-  if (diff > 0.1) return 2;
-  if (diff < -0.1) return 4;
-  return 1;
+  const details = { validSamples: valid.length, pitchRange: range, avgFirst, avgMid, avgLast, diff, midDiff, endDiff };
+
+  if (range < 20) return { tone: null, details: { ...details, reason: 'flat-line' } };
+  if (Math.abs(diff) < 0.18) return { tone: 1, details };
+  if (diff > 0.22 && avgMid > avgFirst) return { tone: 2, details };
+  if (diff < -0.22 && avgLast < avgMid) return { tone: 4, details };
+  if (midDiff < -0.08 && endDiff > 0.08) return { tone: 3, details };
+  if (diff > 0.1) return { tone: 2, details };
+  if (diff < -0.1) return { tone: 4, details };
+  return { tone: 1, details };
 }

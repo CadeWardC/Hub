@@ -85,6 +85,44 @@
 }
 
 /* Sentence Reveal */
+.sentence-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.sentence-header h2 {
+  margin-bottom: 0;
+}
+
+.sentence-quiz-btn {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.sentence-controls {
+  margin-bottom: 0.75rem;
+}
+
+.sentence-filter-select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.sentence-filter-select:focus {
+  border-color: var(--primary);
+}
+
 .sentence-card {
   display: flex;
   flex-direction: column;
@@ -312,3 +350,112 @@
 .history-good .history-pct { color: var(--success); }
 .history-ok .history-pct { color: #f57f17; }
 .history-low .history-pct { color: var(--error); }
+
+/* Stats Dashboard */
+.stats-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.stats-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+}
+
+.stats-words-label {
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.stats-words-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stats-words-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 4px;
+  transition: width 0.4s;
+}
+
+.stats-words-count {
+  color: var(--text-secondary);
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.stats-chart-container {
+  margin-bottom: 1.25rem;
+}
+
+.stats-chart {
+  width: 100%;
+  height: 160px;
+  display: block;
+}
+
+.stats-section-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 1rem 0 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #fecaca;
+}
+
+.stats-weak-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stats-weak-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+.stats-weak-item:last-child {
+  border-bottom: none;
+}
+
+.stats-weak-char {
+  font-size: 1.15rem;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.stats-weak-pinyin {
+  font-style: italic;
+  color: var(--text-secondary);
+  min-width: 4rem;
+}
+
+.stats-weak-meaning {
+  flex: 1;
+  color: var(--text);
+}
+
+.stats-weak-wrong {
+  color: var(--error);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.stats-history {
+  margin-top: 0.25rem;
+}

@@ -1,9 +1,9 @@
 import { hasSpeechRecognition } from './utils.js';
-import { state, loadState, saveState, loadWordStats } from './state.js';
+import { state, loadState, saveState, loadWordStats, getTroublesomeVocab } from './state.js';
 import { releaseMic } from './audio.js';
-import { initQuizDOM, startQuiz } from './quiz.js';
+import { initQuizDOM, startQuiz, startTroublesomeDrill } from './quiz.js';
 import { initStageQuizDOM, startStageQuiz, closeStageQuiz } from './stage-quiz.js';
-import { renderRoadmap, renderVocabPreview, loadSentences, renderSentenceReveal, initSentenceNav, renderQuizHistory } from './roadmap.js';
+import { renderRoadmap, renderVocabPreview, loadSentences, renderSentenceReveal, initSentenceNav, renderStatsDashboard, startSentenceQuiz } from './roadmap.js';
 
 function switchTab(name) {
   state.currentTab = name;
@@ -21,16 +21,50 @@ function init() {
   renderVocabPreview();
   renderRoadmap();
 
+  const stageFilter = document.getElementById('sentence-stage-filter');
+  if (stageFilter) {
+    stageFilter.addEventListener('change', () => {
+      const val = stageFilter.value;
+      renderSentenceReveal(val ? parseInt(val) : null, null);
+    });
+  }
+
+  const sentenceQuizBtn = document.getElementById('sentence-quiz-btn');
+  if (sentenceQuizBtn) {
+    sentenceQuizBtn.addEventListener('click', () => {
+      const filterVal = stageFilter ? stageFilter.value : '';
+      const ok = startSentenceQuiz(filterVal ? parseInt(filterVal) : null);
+      if (!ok) alert('Need at least 4 sentences to start a quiz.');
+    });
+  }
+
   document.querySelectorAll('#tab-nav button').forEach(btn => {
     btn.addEventListener('click', () => {
       switchTab(btn.dataset.tab);
       if (btn.dataset.tab === 'roadmap') renderRoadmap();
-      if (btn.dataset.tab === 'vocab') { renderVocabPreview(); renderSentenceReveal(); renderQuizHistory(); }
+      if (btn.dataset.tab === 'vocab') { renderVocabPreview(); renderSentenceReveal(); renderStatsDashboard(); }
     });
   });
 
   document.getElementById('start-quiz').addEventListener('click', startQuiz);
   document.getElementById('retake-quiz').addEventListener('click', startQuiz);
+
+  const drillBtn = document.getElementById('start-drill');
+  if (drillBtn) {
+    drillBtn.addEventListener('click', () => {
+      const ok = startTroublesomeDrill();
+      if (!ok) alert('No troublesome words yet! Keep practicing.');
+    });
+    const troubleWords = getTroublesomeVocab();
+    const drillCount = document.getElementById('drill-count');
+    if (drillCount) {
+      drillCount.textContent = troubleWords.length > 0
+        ? `${troubleWords.length} word${troubleWords.length !== 1 ? 's' : ''} to review`
+        : 'No troublesome words \u2014 you\u2019re doing great!';
+    }
+    if (troubleWords.length === 0) drillBtn.disabled = true;
+  }
+
   document.getElementById('back-settings').addEventListener('click', () => {
     releaseMic();
     document.getElementById('daily-results').classList.add('hidden');

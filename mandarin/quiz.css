@@ -305,3 +305,20 @@
   80% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+/* Sentence Quiz */
+.sentence-quiz-mandarin {
+  font-size: 1.75rem;
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.sentence-quiz-pinyin {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}

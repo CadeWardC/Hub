@@ -41,6 +41,14 @@ export function getCompletedSubVocab() {
   return words;
 }
 
+export function getTroublesomeVocab() {
+  return VOCAB.filter(v => {
+    const s = wordStats[v.id];
+    if (!s) return false;
+    return s.wrong >= 2 || (s.wrong > 0 && s.streak <= 1);
+  });
+}
+
 export const state = {
   currentTab: 'daily',
   quiz: null,
@@ -49,6 +57,7 @@ export const state = {
   quizSubIndex: null,
   settings: { pinyin: false, chars: true, listen: true, speak: true },
   history: [],
+  lastQuizDate: null,
   roadmapProgress: {
     currentStage: 1,
     completedStages: [],
@@ -64,6 +73,7 @@ export function loadState() {
       const parsed = JSON.parse(raw);
       if (parsed.settings) state.settings = { ...state.settings, ...parsed.settings };
       if (parsed.history) state.history = parsed.history;
+      if (parsed.lastQuizDate) state.lastQuizDate = parsed.lastQuizDate;
       if (parsed.roadmapProgress) {
         state.roadmapProgress = {
           ...state.roadmapProgress,
@@ -91,8 +101,9 @@ export function loadState() {
 export function saveState() {
   localStorage.setItem('mandarinState', JSON.stringify({
     settings: state.settings,
-    history: state.history.slice(-20),
-    roadmapProgress: state.roadmapProgress
+    history: state.history.slice(-100),
+    roadmapProgress: state.roadmapProgress,
+    lastQuizDate: state.lastQuizDate
   }));
 }
 

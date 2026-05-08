@@ -50,6 +50,10 @@
           </div>
 
           <button id="start-quiz" class="btn-primary">Start Daily Quiz</button>
+          <div id="drill-section" class="drill-section">
+            <button id="start-drill" class="btn-secondary drill-btn">Troublesome Words Drill</button>
+            <p class="drill-count" id="drill-count"></p>
+          </div>
         </div>
       </div>
 
@@ -96,8 +100,18 @@
     <!-- Vocab Tab -->
     <section id="vocab-tab" class="tab-panel">
       <div class="card">
-        <h2>Sentence Practice</h2>
-        <p class="subtitle">Click to reveal each layer of the sentence</p>
+        <div class="sentence-header">
+          <h2>Sentence Practice</h2>
+          <button id="sentence-quiz-btn" class="btn-secondary sentence-quiz-btn">Quiz Me</button>
+        </div>
+        <div class="sentence-controls">
+          <select id="sentence-stage-filter" class="sentence-filter-select">
+            <option value="">All Stages</option>
+            <option value="1">Stage 1: Tones &amp; Pinyin</option>
+            <option value="2">Stage 2: Survival Phrases</option>
+            <option value="3">Stage 3: Numbers, Time &amp; Dates</option>
+          </select>
+        </div>
         <div id="sentence-container"></div>
         <div id="sentence-nav">
           <button id="sentence-prev" class="btn-secondary" disabled>&larr; Previous</button>
@@ -113,8 +127,8 @@
         <div class="vocab-preview" id="vocab-preview"></div>
       </div>
       <div class="card">
-        <h2>Quiz History</h2>
-        <div id="quiz-history"></div>
+        <h2>Stats &amp; History</h2>
+        <div id="stats-dashboard"></div>
       </div>
     </section>
 
