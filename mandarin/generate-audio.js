@@ -9,6 +9,19 @@ const client = new tts.TextToSpeechClient();
 
 const { VOCAB } = await import('./vocab.js');
 
+const charMap = new Map();
+const dupes = [];
+for (const word of VOCAB) {
+  if (charMap.has(word.char)) {
+    dupes.push(`  "${word.char}" (id ${word.id}) = id ${charMap.get(word.char)}`);
+  } else {
+    charMap.set(word.char, word.id);
+  }
+}
+if (dupes.length > 0) {
+  console.warn(`Duplicate chars found (audio will be shared):\n${dupes.join('\n')}`);
+}
+
 const audioDir = path.join(process.cwd(), 'audio');
 if (!fs.existsSync(audioDir)) fs.mkdirSync(audioDir);
 
