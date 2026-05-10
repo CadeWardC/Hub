@@ -1,4 +1,5 @@
-import { ROADMAP, VOCAB } from './data.js';
+import { ROADMAP } from './data.js';
+import { VOCAB } from './vocab.js';
 
 export let wordStats = {};
 

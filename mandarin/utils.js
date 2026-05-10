@@ -1,4 +1,4 @@
-import { VOCAB } from './data.js';
+import { VOCAB } from './vocab.js';
 
 export function shuffle(arr) {
   const a = arr.slice();

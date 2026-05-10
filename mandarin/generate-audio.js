@@ -7,7 +7,7 @@ const tts = require('@google-cloud/text-to-speech');
 
 const client = new tts.TextToSpeechClient();
 
-const { VOCAB } = await import('./data.js');
+const { VOCAB } = await import('./vocab.js');
 
 const audioDir = path.join(process.cwd(), 'audio');
 if (!fs.existsSync(audioDir)) fs.mkdirSync(audioDir);

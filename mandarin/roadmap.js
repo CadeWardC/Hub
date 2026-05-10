@@ -1,4 +1,5 @@
-import { ROADMAP, VOCAB } from './data.js';
+import { ROADMAP } from './data.js';
+import { VOCAB } from './vocab.js';
 import { SENTENCES } from './sentences.js';
 import { escapeHtml, shuffle } from './utils.js';
 import { state, saveState, getVocabForStageSub, getCompletedSubVocab, wordStats } from './state.js';

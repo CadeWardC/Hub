@@ -1,4 +1,5 @@
-import { VOCAB, ROADMAP } from './data.js';
+import { ROADMAP } from './data.js';
+import { VOCAB } from './vocab.js';
 import { shuffle, pickDistractors, escapeHtml, formatType, hasSpeechRecognition, normalizePinyin, convertNumberedPinyin, toneNumberName } from './utils.js';
 import { state, saveState, getVocabForStageSub, getVocabForStage, getCompletedSubVocab, getTroublesomeVocab, wordStats, recordWordResult, saveWordStats } from './state.js';
 import { say, classifyTone, getRecordingState, getPitchDiagnostics, setRecording, getRecog, setRecog, setRecogResult, startPitchTracking, stopPitchTracking, getMicStream, setupRecognition } from './audio.js';
