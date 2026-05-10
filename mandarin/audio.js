@@ -10,6 +10,58 @@ let recogResult = '';
 let rafId = null;
 let frameStats = { total: 0, silent: 0, outOfRange: 0, valid: 0 };
 
+let playbackCtx = null;
+const bufferCache = new Map();
+
+export function unlockAudio() {
+  if (!playbackCtx) playbackCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (playbackCtx.state === 'suspended') playbackCtx.resume();
+}
+
+async function loadAudioFile(text) {
+  if (bufferCache.has(text)) return bufferCache.get(text);
+  try {
+    const resp = await fetch(`audio/${encodeURIComponent(text)}.mp3`);
+    if (!resp.ok) return null;
+    const arrayBuf = await resp.arrayBuffer();
+    if (!playbackCtx) playbackCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioBuf = await playbackCtx.decodeAudioData(arrayBuf);
+    bufferCache.set(text, audioBuf);
+    return audioBuf;
+  } catch {
+    return null;
+  }
+}
+
+function playBuffer(buffer, cb) {
+  return new Promise(resolve => {
+    const source = playbackCtx.createBufferSource();
+    source.buffer = buffer;
+    source.connect(playbackCtx.destination);
+    source.onended = () => { if (cb) cb(); resolve(); };
+    source.start();
+  });
+}
+
+function sayWithSynthesis(text, cb) {
+  if (!window.speechSynthesis) { if (cb) cb(); return; }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-CN';
+  u.rate = 0.9;
+  if (cb) u.onend = cb;
+  window.speechSynthesis.speak(u);
+}
+
+export async function say(text, cb) {
+  const buffer = await loadAudioFile(text);
+  if (buffer) {
+    await playBuffer(buffer, cb);
+    return;
+  }
+  sayWithSynthesis(text, cb);
+}
+
 export function getRecordingState() { return { isRecording, pitchSamples, recogResult }; }
 export function getPitchDiagnostics() {
   const valid = pitchSamples.filter(p => p > 0);
@@ -21,16 +73,6 @@ export function getPitchDiagnostics() {
   };
 }
 export function setRecogResult(val) { recogResult = val; }
-
-export function say(text, cb) {
-  if (!window.speechSynthesis) { if (cb) cb(); return; }
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'zh-CN';
-  u.rate = 0.9;
-  if (cb) u.onend = cb;
-  window.speechSynthesis.speak(u);
-}
 
 export function setupRecognition() {
   const R = window.SpeechRecognition || window.webkitSpeechRecognition;

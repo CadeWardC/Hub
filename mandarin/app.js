@@ -1,6 +1,6 @@
 import { hasSpeechRecognition } from './utils.js';
 import { state, loadState, saveState, loadWordStats, getTroublesomeVocab } from './state.js';
-import { releaseMic } from './audio.js';
+import { releaseMic, unlockAudio } from './audio.js';
 import { initQuizDOM, startQuiz, startTroublesomeDrill } from './quiz.js';
 import { initStageQuizDOM, startStageQuiz, closeStageQuiz } from './stage-quiz.js';
 import { renderRoadmap, renderVocabPreview, loadSentences, renderSentenceReveal, initSentenceNav, renderStatsDashboard, startSentenceQuiz } from './roadmap.js';
@@ -14,6 +14,12 @@ function switchTab(name) {
 function init() {
   loadState();
   loadWordStats();
+
+  document.addEventListener('click', function unlock() {
+    unlockAudio();
+    document.removeEventListener('click', unlock);
+  }, { once: true });
+
   initQuizDOM();
   initStageQuizDOM();
   initSentenceNav();
