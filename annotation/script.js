@@ -130,10 +130,10 @@ function onDrop(e) {
     const name = file.name.toLowerCase();
     if (file.type === 'application/pdf' || name.endsWith('.pdf')) {
         loadPDF(file);
-    } else if (file.type === 'application/json' || name.endsWith('.json')) {
+    } else if (file.type === 'application/json' || name.endsWith('.json') || name.endsWith('.annotations')) {
         importSession(file);
     } else {
-        showError('Please drop a PDF or .json session file.');
+        showError('Please drop a PDF or .annotations session file.');
     }
 }
 
@@ -1355,7 +1355,7 @@ function saveSession() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = state.fileName.replace(/\.pdf$/i, '') + '.annotations.json';
+    a.download = state.fileName.replace(/\.pdf$/i, '') + '.annotations';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
