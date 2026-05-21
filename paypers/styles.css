@@ -475,7 +475,7 @@ mark.highlight-kw {
 .undo-swipe-btn:hover { border-color: var(--accent); color: var(--accent); }
 
 /* Saved tab */
-#tab-saved { flex-direction: column; overflow-y: auto; padding: 16px 20px; }
+#tab-saved, #tab-skipped { flex-direction: column; overflow-y: auto; padding: 16px 20px; }
 .saved-header { margin-bottom: 12px; flex-shrink: 0; }
 .saved-header h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
 .saved-subtitle { font-size: 0.9rem; color: var(--text-muted); }
