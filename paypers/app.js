@@ -66,7 +66,7 @@ const state = {
   cardViewStartTime: 0,
   darkMode: false,
   lastSwipe: null,
-  prefs: { sort: 'cited', yearFrom: null, yearTo: null, fundamental: false },
+  prefs: { sort: 'cited', yearFrom: null, yearTo: null, fundamental: false, savedSort: 'recent' },
 };
 try {
   const s = localStorage.getItem('paypersState');
@@ -115,6 +115,7 @@ const els = {
   statsBar: document.getElementById('stats-bar'),
   darkToggle: document.getElementById('dark-toggle'),
   savedFilter: document.getElementById('saved-filter'),
+  savedSortSelect: document.getElementById('saved-sort-select'),
   digestBanner: document.getElementById('digest-banner'),
 };
 
@@ -420,6 +421,7 @@ function mapPaperRecord(r) {
     pmid: r.pmid,
     source: r.source || (r.pmid ? 'MED' : null),
     paperKeywords: extractPaperKeywords(r),
+    citations: Number(r.citedByCount) || 0,
   };
 }
 
@@ -1208,6 +1210,7 @@ function resetToOnboarding() {
     lastWeekDigest: '', lastSeenKeywords: {},
     discoveredKeywords: {},
   };
+  state.prefs.savedSort = 'recent';
   _fetchCounter = 0;
   els.main.classList.remove('active');
   els.onboarding.classList.add('active');
@@ -1271,6 +1274,11 @@ function renderSaved() {
   const canUndoSave = state.lastSwipe?.direction === 'right';
   document.getElementById('undo-save-btn')?.classList.toggle('hidden', !canUndoSave);
   els.savedFilter?.classList.toggle('hidden', state.saved.length === 0);
+  els.savedSortSelect?.classList.toggle('hidden', state.saved.length === 0);
+
+  if (els.savedSortSelect) {
+    els.savedSortSelect.value = state.prefs.savedSort || 'recent';
+  }
 
   if (!state.saved.length) {
     els.savedSubtitle.textContent = 'No papers saved yet.';
@@ -1322,7 +1330,17 @@ function renderSaved() {
     els.savedList.innerHTML += '<p style="text-align:center; color:var(--text-muted); padding:2rem;">No saved papers match your filter.</p>';
   }
 
-  filtered.reverse().forEach(p => {
+  const sortOption = state.prefs.savedSort || 'recent';
+  const sorted = [...filtered];
+  if (sortOption === 'recent') {
+    sorted.reverse();
+  } else if (sortOption === 'cited') {
+    sorted.sort((a, b) => (b.citations || 0) - (a.citations || 0));
+  } else if (sortOption === 'year') {
+    sorted.sort((a, b) => (parseInt(b.year, 10) || 0) - (parseInt(a.year, 10) || 0));
+  }
+
+  sorted.forEach(p => {
     const item = document.createElement('div');
     item.className = 'saved-item';
     const link = p.pmid
@@ -1340,7 +1358,7 @@ function renderSaved() {
     item.innerHTML = `
       <button class="saved-remove-btn" title="Remove from saved" aria-label="Remove from saved">${CLOSE_SVG}</button>
       <h4>${escapeHtml(p.title)}</h4>
-      <p>${truncateAuthors(p.authors)} • ${escapeHtml(String(p.year))} • ${escapeHtml(p.journal)}</p>
+      <p>${truncateAuthors(p.authors)} • ${escapeHtml(String(p.year))} • ${escapeHtml(p.journal)}${p.citations ? ` • ${p.citations} citations` : ''}</p>
       <div class="saved-links">
         <a href="${link}" target="_blank" rel="noopener">View on PubMed &rarr;</a>
         <button class="similar-btn" data-id="${p.id}">${SPARKLES_SVG_TINY} Find Similar</button>
@@ -1565,6 +1583,11 @@ function init() {
   });
 
   els.savedFilter?.addEventListener('input', () => renderSaved());
+  els.savedSortSelect?.addEventListener('change', (e) => {
+    state.prefs.savedSort = e.target.value;
+    saveState();
+    renderSaved();
+  });
   els.darkToggle?.addEventListener('click', toggleDarkMode);
 
   applyDarkMode();

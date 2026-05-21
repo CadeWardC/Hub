@@ -489,6 +489,13 @@ mark.highlight-kw {
 .saved-filter:focus { border-color: var(--accent); }
 .saved-filter::placeholder { color: var(--text-muted); }
 
+.saved-sort-select {
+  padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); font-size: 0.85rem; outline: none;
+  transition: border-color .2s; cursor: pointer;
+}
+.saved-sort-select:focus { border-color: var(--accent); }
+
 .saved-list { flex: 1; overflow-y: auto; padding-bottom: 20px; }
 
 /* Saved item links */
