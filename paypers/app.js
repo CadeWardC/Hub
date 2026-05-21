@@ -66,7 +66,7 @@ const state = {
   cardViewStartTime: 0,
   darkMode: false,
   lastSwipe: null,
-  prefs: { sort: 'cited', yearFrom: null, yearTo: null },
+  prefs: { sort: 'cited', yearFrom: null, yearTo: null, fundamental: false },
 };
 try {
   const s = localStorage.getItem('paypersState');
@@ -376,9 +376,15 @@ function fieldQualifiedTerm(text) {
 }
 
 function buildYearClause() {
-  const { yearFrom, yearTo } = state.prefs || {};
-  const f = Number.isFinite(yearFrom) ? yearFrom : null;
-  const t = Number.isFinite(yearTo) ? yearTo : null;
+  const { yearFrom, yearTo, fundamental } = state.prefs || {};
+  let f = Number.isFinite(yearFrom) ? yearFrom : null;
+  let t = Number.isFinite(yearTo) ? yearTo : null;
+  if (fundamental) {
+    const maxFundamentalYear = new Date().getFullYear() - 5;
+    if (t === null || t > maxFundamentalYear) {
+      t = maxFundamentalYear;
+    }
+  }
   if (!f && !t) return '';
   const lo = f || 1900;
   const hi = t || new Date().getFullYear();
@@ -386,7 +392,8 @@ function buildYearClause() {
 }
 
 function buildSortParam() {
-  const sort = state.prefs?.sort || 'cited';
+  const { sort, fundamental } = state.prefs || {};
+  if (fundamental) return '&sort=CITED+desc';
   if (sort === 'recent') return '&sort=P_PDATE_D+desc';
   if (sort === 'cited') return '&sort=CITED+desc';
   return ''; // relevance — Europe PMC default
@@ -1072,6 +1079,13 @@ function showSettingsModal() {
           </div>
         </section>
         <section class="settings-section">
+          <div class="settings-label">Fundamental Mode</div>
+          <label class="settings-checkbox">
+            <input type="checkbox" id="pref-fundamental" ${prefs.fundamental ? 'checked' : ''} />
+            <span>Only show highly-cited, established papers (5+ years old)</span>
+          </label>
+        </section>
+        <section class="settings-section">
           <div class="settings-label">Year range</div>
           <div class="settings-year-row">
             <input type="number" id="pref-year-from" class="settings-year-input" placeholder="From" min="1900" max="2100" value="${yearFromVal}" />
@@ -1090,6 +1104,21 @@ function showSettingsModal() {
   `;
   document.getElementById('app').appendChild(overlay);
   overlay.querySelector('.badges-modal-close')?.addEventListener('click', () => overlay.remove());
+
+  const fundamentalCheckbox = overlay.querySelector('#pref-fundamental');
+  const sortRadios = overlay.querySelectorAll('input[name="sort-pref"]');
+  
+  const updateSortRadiosState = () => {
+    const isFundamental = fundamentalCheckbox?.checked;
+    sortRadios.forEach(r => {
+      r.disabled = isFundamental;
+      r.parentElement.classList.toggle('disabled', isFundamental);
+      if (isFundamental && r.value === 'cited') {
+        r.checked = true;
+      }
+    });
+  };
+
   overlay.querySelectorAll('input[name="sort-pref"]').forEach(r => {
     r.addEventListener('change', () => {
       state.prefs.sort = r.value;
@@ -1099,6 +1128,21 @@ function showSettingsModal() {
       renderTopCard();
     });
   });
+
+  fundamentalCheckbox?.addEventListener('change', (e) => {
+    state.prefs.fundamental = e.target.checked;
+    if (e.target.checked) {
+      state.prefs.sort = 'cited';
+    }
+    updateSortRadiosState();
+    state.cursorMark = null; state.queue = [];
+    saveState();
+    fetchPapers();
+    renderTopCard();
+  });
+
+  updateSortRadiosState();
+
   const applyYears = () => {
     const fromEl = overlay.querySelector('#pref-year-from');
     const toEl = overlay.querySelector('#pref-year-to');
