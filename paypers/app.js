@@ -900,6 +900,7 @@ function handleDecision(direction, paper) {
     state.stats.xp += 4;
     checkLevelUp();
     if (!state.saved.find(s => s.id === paper.id)) state.saved.push(paper);
+    updateSavedBadge();
   }
   if (state.queue.length > 0 && state.queue[0].id === paper.id) state.queue.shift();
   else { const idx = state.queue.findIndex(p => p.id === paper.id); if (idx !== -1) state.queue.splice(idx, 1); }
@@ -923,6 +924,7 @@ function undoLastSwipe() {
   if (snap.direction === 'right') {
     const idx = state.saved.findIndex(s => s.id === snap.paper.id);
     if (idx !== -1) state.saved.splice(idx, 1);
+    updateSavedBadge();
   }
   if (!state.queue.length || state.queue[0].id !== snap.paper.id) {
     state.queue.unshift(snap.paper);
@@ -1167,6 +1169,7 @@ function resetToOnboarding() {
   els.onboarding.classList.add('active');
   renderKeywordTags();
   renderStats();
+  updateSavedBadge();
   saveState();
 }
 
@@ -1210,10 +1213,16 @@ function showDigest() {
   document.getElementById('digest-close')?.addEventListener('click', () => els.digestBanner.classList.add('hidden'));
 }
 
+function updateSavedBadge() {
+  if (els.savedBadge) {
+    els.savedBadge.textContent = state.saved.length;
+    els.savedBadge.style.display = state.saved.length ? 'block' : 'none';
+  }
+}
+
 /* ═══ Saved tab ═══ */
 function renderSaved() {
-  els.savedBadge.textContent = state.saved.length;
-  els.savedBadge.style.display = state.saved.length ? 'block' : 'none';
+  updateSavedBadge();
   els.savedList.innerHTML = '';
   const canUndoSave = state.lastSwipe?.direction === 'right';
   document.getElementById('undo-save-btn')?.classList.toggle('hidden', !canUndoSave);
@@ -1516,6 +1525,7 @@ function init() {
 
   applyDarkMode();
   renderStats();
+  updateSavedBadge();
   checkWeeklyDigest();
   // If returning user has keywords, skip to main view and start fetching
   if (state.keywords.length > 0) {
