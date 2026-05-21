@@ -706,6 +706,57 @@ mark.highlight-kw {
 
 /* Settings modal */
 .settings-modal { max-width: 380px; }
+.settings-keyword-input-wrap {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+}
+#settings-keyword-input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+#settings-keyword-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.settings-add-btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.settings-add-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.settings-keywords-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  min-height: 24px;
+}
+.settings-keywords-list .keyword-tag {
+  padding: 4px 10px;
+  font-size: 0.82rem;
+}
+.settings-keywords-list .keyword-tag button {
+  font-size: 0.9rem;
+}
 .settings-body { padding: 14px 20px 20px; display: flex; flex-direction: column; gap: 18px; }
 .settings-section { display: flex; flex-direction: column; gap: 8px; }
 .settings-label {

@@ -109,21 +109,21 @@ const els = {
   savedList: document.getElementById('saved-list'),
   savedSubtitle: document.getElementById('saved-subtitle'),
   savedBadge: document.getElementById('saved-badge'),
-  tabBtnSkipped: document.getElementById('tab-btn-skipped'),
+  tabBtnSkipped: document.getElementById('tab-btn-skipped') || document.getElementById('tab-btn-passed'),
   tabBtnSwipe: document.getElementById('tab-btn-swipe'),
   tabBtnSaved: document.getElementById('tab-btn-saved'),
-  tabSkipped: document.getElementById('tab-skipped'),
+  tabSkipped: document.getElementById('tab-skipped') || document.getElementById('tab-passed'),
   tabSwipe: document.getElementById('tab-swipe'),
   tabSaved: document.getElementById('tab-saved'),
   statsBar: document.getElementById('stats-bar'),
   darkToggle: document.getElementById('dark-toggle'),
   savedFilter: document.getElementById('saved-filter'),
   savedSortSelect: document.getElementById('saved-sort-select'),
-  skippedBadge: document.getElementById('skipped-badge'),
-  skippedSubtitle: document.getElementById('skipped-subtitle'),
-  skippedFilter: document.getElementById('skipped-filter'),
-  skippedSortSelect: document.getElementById('skipped-sort-select'),
-  skippedList: document.getElementById('skipped-list'),
+  skippedBadge: document.getElementById('skipped-badge') || document.getElementById('passed-badge'),
+  skippedSubtitle: document.getElementById('skipped-subtitle') || document.getElementById('passed-subtitle'),
+  skippedFilter: document.getElementById('skipped-filter') || document.getElementById('passed-filter'),
+  skippedSortSelect: document.getElementById('skipped-sort-select') || document.getElementById('passed-sort-select'),
+  skippedList: document.getElementById('skipped-list') || document.getElementById('passed-list'),
   digestBanner: document.getElementById('digest-banner'),
 };
 
@@ -563,12 +563,12 @@ function pruneHistory() {
 /* ═══ Tabs ═══ */
 function switchTab(tab) {
   state.activeTab = tab;
-  els.tabBtnSkipped.classList.toggle('active', tab === 'skipped');
-  els.tabBtnSwipe.classList.toggle('active', tab === 'swipe');
-  els.tabBtnSaved.classList.toggle('active', tab === 'saved');
-  els.tabSkipped.classList.toggle('active', tab === 'skipped');
-  els.tabSwipe.classList.toggle('active', tab === 'swipe');
-  els.tabSaved.classList.toggle('active', tab === 'saved');
+  els.tabBtnSkipped?.classList.toggle('active', tab === 'skipped');
+  els.tabBtnSwipe?.classList.toggle('active', tab === 'swipe');
+  els.tabBtnSaved?.classList.toggle('active', tab === 'saved');
+  els.tabSkipped?.classList.toggle('active', tab === 'skipped');
+  els.tabSwipe?.classList.toggle('active', tab === 'swipe');
+  els.tabSaved?.classList.toggle('active', tab === 'saved');
   if (tab === 'skipped') renderSkipped();
   if (tab === 'saved') renderSaved();
   if (tab === 'swipe') renderStats();
@@ -1092,6 +1092,15 @@ function showSettingsModal() {
       </div>
       <div class="settings-body">
         <section class="settings-section">
+          <div class="settings-label">Active Keywords</div>
+          <div class="settings-keyword-input-wrap">
+            <input type="text" id="settings-keyword-input" placeholder="Add keyword (max 5)" maxlength="40" autocomplete="off" />
+            <button id="settings-add-keyword" class="settings-add-btn">Add</button>
+          </div>
+          <div id="settings-keywords-list" class="keywords-list settings-keywords-list"></div>
+          <p id="settings-keyword-hint" class="settings-hint hidden">You can have up to 5 keywords.</p>
+        </section>
+        <section class="settings-section">
           <div class="settings-label">Sort papers by</div>
           <div class="settings-radio-group">
             ${opt('relevance', 'Relevance')}
@@ -1125,6 +1134,86 @@ function showSettingsModal() {
   `;
   document.getElementById('app').appendChild(overlay);
   overlay.querySelector('.badges-modal-close')?.addEventListener('click', () => overlay.remove());
+
+  // Keywords bindings
+  const settingsInput = overlay.querySelector('#settings-keyword-input');
+  const settingsAddBtn = overlay.querySelector('#settings-add-keyword');
+  const settingsList = overlay.querySelector('#settings-keywords-list');
+  const settingsHint = overlay.querySelector('#settings-keyword-hint');
+  let settingsSuggestTimer = null;
+
+  const renderSettingsKeywords = () => {
+    if (!settingsList) return;
+    settingsList.innerHTML = '';
+    state.keywords.forEach((k, i) => {
+      const tag = document.createElement('span');
+      tag.className = 'keyword-tag';
+      tag.innerHTML = `${escapeHtml(k.text)} <button>&times;</button>`;
+      tag.querySelector('button').addEventListener('click', () => {
+        if (state.keywords.length <= 1) {
+          showToast('You must keep at least 1 keyword.');
+          return;
+        }
+        state.keywords.splice(i, 1);
+        renderKeywordTags();
+        renderSettingsKeywords();
+        saveState();
+        state.cursorMark = null; state.queue = [];
+        fetchPapers();
+        renderTopCard();
+      });
+      settingsList.appendChild(tag);
+    });
+    settingsHint?.classList.toggle('hidden', state.keywords.length < 5);
+  };
+
+  const handleAddSettingsKeyword = (text) => {
+    const t = text.trim();
+    if (!t) return;
+    if (state.keywords.length >= 5) {
+      showToast('You can have up to 5 keywords.');
+      return;
+    }
+    if (state.keywords.some(k => norm(k.text) === norm(t))) {
+      showToast('Keyword already exists.');
+      return;
+    }
+    state.keywords.push({ text: t, score: 5, lastAction: new Date().toISOString().split('T')[0] });
+    renderKeywordTags();
+    renderSettingsKeywords();
+    saveState();
+    state.cursorMark = null; state.queue = [];
+    fetchPapers();
+    renderTopCard();
+  };
+
+  settingsAddBtn?.addEventListener('click', () => {
+    handleAddSettingsKeyword(settingsInput.value);
+    settingsInput.value = '';
+  });
+
+  settingsInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddSettingsKeyword(settingsInput.value);
+      settingsInput.value = '';
+    }
+    if (e.key === 'Escape') {
+      document.getElementById('suggestions-dropdown')?.remove();
+    }
+  });
+
+  settingsInput?.addEventListener('input', () => {
+    clearTimeout(settingsSuggestTimer);
+    settingsSuggestTimer = setTimeout(() => {
+      showSuggestions(settingsInput.value, settingsInput, (m) => {
+        handleAddSettingsKeyword(m);
+        settingsInput.value = '';
+      });
+    }, 250);
+  });
+
+  renderSettingsKeywords();
 
   const fundamentalCheckbox = overlay.querySelector('#pref-fundamental');
   const sortRadios = overlay.querySelectorAll('input[name="sort-pref"]');
@@ -1233,8 +1322,8 @@ function resetToOnboarding() {
   state.prefs.savedSort = 'recent';
   state.prefs.skippedSort = 'recent';
   _fetchCounter = 0;
-  els.main.classList.remove('active');
-  els.onboarding.classList.add('active');
+  els.main?.classList.remove('active');
+  els.onboarding?.classList.add('active');
   renderKeywordTags();
   renderStats();
   updateSavedBadge();
@@ -1298,6 +1387,7 @@ function updateSkippedBadge() {
 
 function renderSkipped() {
   updateSkippedBadge();
+  if (!els.skippedList) return;
   els.skippedList.innerHTML = '';
   els.skippedFilter?.classList.toggle('hidden', state.skipped.length === 0);
   els.skippedSortSelect?.classList.toggle('hidden', state.skipped.length === 0);
@@ -1306,11 +1396,15 @@ function renderSkipped() {
     els.skippedSortSelect.value = state.prefs.skippedSort || 'recent';
   }
 
-  if (!state.skipped.length) {
-    els.skippedSubtitle.textContent = 'No papers skipped yet.';
+  if (els.skippedSubtitle) {
+    if (!state.skipped.length) {
+      els.skippedSubtitle.textContent = 'No papers skipped yet.';
+      return;
+    }
+    els.skippedSubtitle.textContent = `${state.skipped.length} paper${state.skipped.length !== 1 ? 's' : ''} skipped`;
+  } else if (!state.skipped.length) {
     return;
   }
-  els.skippedSubtitle.textContent = `${state.skipped.length} paper${state.skipped.length !== 1 ? 's' : ''} skipped`;
 
   const filterText = els.skippedFilter?.value?.toLowerCase() || '';
   const filtered = filterText
@@ -1430,6 +1524,7 @@ function renderSkipped() {
 /* ═══ Saved tab ═══ */
 function renderSaved() {
   updateSavedBadge();
+  if (!els.savedList) return;
   els.savedList.innerHTML = '';
   const canUndoSave = state.lastSwipe?.direction === 'right';
   document.getElementById('undo-save-btn')?.classList.toggle('hidden', !canUndoSave);
@@ -1440,11 +1535,15 @@ function renderSaved() {
     els.savedSortSelect.value = state.prefs.savedSort || 'recent';
   }
 
-  if (!state.saved.length) {
-    els.savedSubtitle.textContent = 'No papers saved yet.';
+  if (els.savedSubtitle) {
+    if (!state.saved.length) {
+      els.savedSubtitle.textContent = 'No papers saved yet.';
+      return;
+    }
+    els.savedSubtitle.textContent = `${state.saved.length} paper${state.saved.length !== 1 ? 's' : ''} saved`;
+  } else if (!state.saved.length) {
     return;
   }
-  els.savedSubtitle.textContent = `${state.saved.length} paper${state.saved.length !== 1 ? 's' : ''} saved`;
 
   const filterText = els.savedFilter?.value?.toLowerCase() || '';
   const filtered = filterText
@@ -1562,7 +1661,7 @@ function renderSaved() {
 
 /* ═══ Keyword suggestions (autocomplete) ═══ */
 let suggestTimer = null;
-function showSuggestions(query) {
+function showSuggestions(query, inputEl = els.keywordInput, onSelect = null) {
   const existing = document.getElementById('suggestions-dropdown');
   if (existing) existing.remove();
   if (!query || query.trim().length < 2) return;
@@ -1577,18 +1676,23 @@ function showSuggestions(query) {
     item.className = 'suggestion-item';
     item.textContent = m;
     item.addEventListener('click', () => {
-      addKeyword(m);
-      els.keywordInput.value = '';
+      if (onSelect) {
+        onSelect(m);
+      } else {
+        addKeyword(m);
+        if (els.keywordInput) els.keywordInput.value = '';
+      }
       dropdown.remove();
-      els.keywordInput.focus();
+      inputEl?.focus();
     });
     dropdown.appendChild(item);
   });
-  els.keywordInput.parentElement.appendChild(dropdown);
+  inputEl?.parentElement?.appendChild(dropdown);
 }
 
 /* ═══ Keyword tags ═══ */
 function renderKeywordTags() {
+  if (!els.selectedKeywords) return;
   els.selectedKeywords.innerHTML = '';
   state.keywords.forEach((k, i) => {
     const tag = document.createElement('span');
@@ -1597,8 +1701,8 @@ function renderKeywordTags() {
     tag.querySelector('button').addEventListener('click', () => removeKeyword(i));
     els.selectedKeywords.appendChild(tag);
   });
-  els.keywordLimit.classList.toggle('hidden', state.keywords.length < 5);
-  els.startBtn.disabled = state.keywords.length === 0;
+  if (els.keywordLimit) els.keywordLimit.classList.toggle('hidden', state.keywords.length < 5);
+  if (els.startBtn) els.startBtn.disabled = state.keywords.length === 0;
 }
 function removeKeyword(idx) { state.keywords.splice(idx, 1); renderKeywordTags(); }
 function addKeyword(text) {
@@ -1692,22 +1796,22 @@ function init() {
       btn.classList.add('selected');
       btn.disabled = true;
     });
-    els.topicPills.appendChild(btn);
+    els.topicPills?.appendChild(btn);
   });
 
-  els.addKeywordBtn.addEventListener('click', () => { addKeyword(els.keywordInput.value); els.keywordInput.value = ''; els.keywordInput.focus(); });
-  els.keywordInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') { e.preventDefault(); addKeyword(els.keywordInput.value); els.keywordInput.value = ''; }
+  els.addKeywordBtn?.addEventListener('click', () => { addKeyword(els.keywordInput?.value || ''); if (els.keywordInput) { els.keywordInput.value = ''; els.keywordInput.focus(); } });
+  els.keywordInput?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); addKeyword(els.keywordInput?.value || ''); if (els.keywordInput) els.keywordInput.value = ''; }
     if (e.key === 'Escape') { document.getElementById('suggestions-dropdown')?.remove(); }
   });
-  els.keywordInput.addEventListener('input', () => {
+  els.keywordInput?.addEventListener('input', () => {
     clearTimeout(suggestTimer);
-    suggestTimer = setTimeout(() => showSuggestions(els.keywordInput.value), 250);
+    suggestTimer = setTimeout(() => showSuggestions(els.keywordInput?.value || ''), 250);
   });
 
-  els.startBtn.addEventListener('click', () => {
-    els.onboarding.classList.remove('active');
-    els.main.classList.add('active');
+  els.startBtn?.addEventListener('click', () => {
+    els.onboarding?.classList.remove('active');
+    els.main?.classList.add('active');
     state.cursorMark = null;
     state.queue = [];
     state.stats.sessionSwiped = 0;
@@ -1720,9 +1824,9 @@ function init() {
     checkWeeklyDigest();
   });
 
-  els.tabBtnSkipped.addEventListener('click', () => switchTab('skipped'));
-  els.tabBtnSwipe.addEventListener('click', () => switchTab('swipe'));
-  els.tabBtnSaved.addEventListener('click', () => switchTab('saved'));
+  els.tabBtnSkipped?.addEventListener('click', () => switchTab('skipped'));
+  els.tabBtnSwipe?.addEventListener('click', () => switchTab('swipe'));
+  els.tabBtnSaved?.addEventListener('click', () => switchTab('saved'));
   document.getElementById('settings-btn')?.addEventListener('click', showSettingsModal);
   document.getElementById('undo-save-btn')?.addEventListener('click', () => {
     if (state.lastSwipe?.direction === 'right') {
@@ -1764,8 +1868,8 @@ function init() {
   checkWeeklyDigest();
   // If returning user has keywords, skip to main view and start fetching
   if (state.keywords.length > 0) {
-    els.onboarding.classList.remove('active');
-    els.main.classList.add('active');
+    els.onboarding?.classList.remove('active');
+    els.main?.classList.add('active');
     renderStats();
     fetchPapers();
   }
