@@ -2,6 +2,18 @@
 
 const API_BASE = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search';
 
+const SUN_SVG = `<svg class="icon icon-sun" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+
+const MOON_SVG = `<svg class="icon icon-moon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+const TROPHY_SVG = `<svg class="icon icon-trophy" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px; vertical-align: middle; display: inline-block;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path><path d="M12 2a7 7 0 0 0-7 7v3.58a7 7 0 0 0 14 0V9a7 7 0 0 0-7-7z"></path></svg>`;
+
+const SHARE_SVG = `<svg class="icon icon-share" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; display: inline-block;"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>`;
+
+const CLOSE_SVG = `<svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; display: block; margin: auto;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+
+const SPARKLES_SVG_TINY = `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; display: inline-block; margin-right: 4px;"><path d="M12 3v16M5 12h14m-1.5-5.5l-11 11m11 0l-11-11"></path></svg>`;
+
 const HOT_TOPICS = [
   'Cancer Immunotherapy', 'CRISPR / Gene Editing', "Alzheimer's Disease",
   'mRNA Vaccines', 'Microbiome', 'Stem Cells', 'Antibiotic Resistance',
@@ -619,7 +631,7 @@ function createCardEl(paper) {
     <div class="card-abstract">${renderAbstractHtml(paper)}</div>
     <div class="card-footer">
       ${doiLink}${divider}${pmidLink}
-      <button class="share-btn" data-url="${escapeHtml(shareUrl)}" title="Share this paper">⤴</button>
+      <button class="share-btn" data-url="${escapeHtml(shareUrl)}" title="Share this paper">${SHARE_SVG}</button>
     </div>
     <div class="overlay-label nope">Skip</div>
     <div class="overlay-label like">Save</div>
@@ -972,7 +984,7 @@ function renderStats() {
     <span>Swiped: <strong>${s.totalSwiped}</strong></span>
     <span>Saved: <strong>${s.totalSaved}</strong></span>
     <span>Lv.<strong>${s.level}</strong></span>
-    <button id="badges-btn" class="badges-btn" title="Badges">🏆 ${earnedCount}/${BADGES.length}</button>
+    <button id="badges-btn" class="badges-btn" title="Badges">${TROPHY_SVG} ${earnedCount}/${BADGES.length}</button>
   `;
   document.getElementById('badges-btn')?.addEventListener('click', showBadgesModal);
 }
@@ -1273,12 +1285,12 @@ function renderSaved() {
       : '';
 
     item.innerHTML = `
-      <button class="saved-remove-btn" title="Remove from saved" aria-label="Remove from saved">&times;</button>
+      <button class="saved-remove-btn" title="Remove from saved" aria-label="Remove from saved">${CLOSE_SVG}</button>
       <h4>${escapeHtml(p.title)}</h4>
       <p>${truncateAuthors(p.authors)} • ${escapeHtml(String(p.year))} • ${escapeHtml(p.journal)}</p>
       <div class="saved-links">
         <a href="${link}" target="_blank" rel="noopener">View on PubMed &rarr;</a>
-        <button class="similar-btn" data-id="${p.id}">Find Similar</button>
+        <button class="similar-btn" data-id="${p.id}">${SPARKLES_SVG_TINY} Find Similar</button>
       </div>
       ${kwHtml}
     `;
@@ -1371,12 +1383,12 @@ function addKeyword(text) {
 function toggleDarkMode() {
   state.darkMode = !state.darkMode;
   document.documentElement.setAttribute('data-theme', state.darkMode ? 'dark' : '');
-  if (els.darkToggle) els.darkToggle.textContent = state.darkMode ? '☀' : '☾';
+  if (els.darkToggle) els.darkToggle.innerHTML = state.darkMode ? SUN_SVG : MOON_SVG;
   saveState();
 }
 function applyDarkMode() {
   document.documentElement.setAttribute('data-theme', state.darkMode ? 'dark' : '');
-  if (els.darkToggle) els.darkToggle.textContent = state.darkMode ? '☀' : '☾';
+  if (els.darkToggle) els.darkToggle.innerHTML = state.darkMode ? SUN_SVG : MOON_SVG;
 }
 
 function triggerButtonSwipe(direction) {

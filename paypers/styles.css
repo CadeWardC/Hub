@@ -33,6 +33,22 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* SVG Icons styling */
+svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tab-icon svg {
+  display: block;
+  margin: auto;
+}
+.control-btn svg {
+  display: block;
+  margin: auto;
+}
+
 html, body {
   height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -134,18 +150,37 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
 .stats-bar strong { color: var(--text); }
 
 .badges-btn {
-  background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25);
-  border-radius: 100px; padding: 3px 10px; font-size: 0.7rem; font-weight: 600;
-  color: var(--warning); cursor: pointer; transition: all .2s; white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 100px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--warning);
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
 }
 .badges-btn:hover { background: rgba(245, 158, 11, 0.2); border-color: var(--warning); }
 
 .dark-toggle {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-  padding: 5px 10px; font-size: 1rem; cursor: pointer; color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text-secondary);
   transition: all .2s;
+  padding: 0;
 }
-.dark-toggle:hover { border-color: var(--border-strong); color: var(--text); }
+.dark-toggle:hover { border-color: var(--border-strong); color: var(--text); background: var(--surface-hover); }
 
 /* Digest banner */
 .digest-banner { padding: 12px 20px; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
@@ -262,11 +297,21 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
 .card-footer .divider { color: var(--border-strong); font-size: 0.8rem; }
 
 .share-btn {
-  margin-left: auto; background: var(--surface); border: 1px solid var(--border);
-  border-radius: 8px; padding: 4px 10px; font-size: 1rem; cursor: pointer;
-  color: var(--text-muted); transition: all .2s;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all .2s;
+  padding: 0;
 }
-.share-btn:hover { border-color: var(--accent); color: var(--accent); }
+.share-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--surface-hover); }
 
 /* Overlay labels */
 .overlay-label {
@@ -452,10 +497,20 @@ mark.highlight-kw {
 .saved-links a:hover { text-decoration: underline; }
 
 .similar-btn {
-  font-size: 0.82rem; color: var(--mesh-color); background: none; border: 1px solid var(--border);
-  border-radius: 6px; padding: 3px 10px; cursor: pointer; font-weight: 500; transition: all .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--mesh-color);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all .2s;
 }
-.similar-btn:hover { border-color: var(--mesh-color); }
+.similar-btn:hover { border-color: var(--mesh-color); background: rgba(124, 58, 237, 0.05); }
 .similar-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Scoreboard */
@@ -491,11 +546,21 @@ mark.highlight-kw {
   padding: 16px; margin-bottom: 12px;
 }
 .saved-remove-btn {
-  position: absolute; top: 8px; right: 8px;
-  width: 26px; height: 26px; border-radius: 50%;
-  border: 1px solid transparent; background: transparent;
-  color: var(--text-muted); font-size: 1.1rem; line-height: 1;
-  cursor: pointer; transition: all .15s;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .15s;
+  padding: 0;
 }
 .saved-remove-btn:hover { background: var(--bg); border-color: var(--danger); color: var(--danger); }
 .saved-item h4 { font-size: 1rem; margin-bottom: 6px; line-height: 1.35; font-weight: 600; }
