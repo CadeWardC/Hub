@@ -86,21 +86,21 @@
           </div>
         </div>
 
-        <!-- Passed Tab -->
-        <div id="tab-passed" class="tab-content">
+        <!-- Skipped Tab -->
+        <div id="tab-skipped" class="tab-content">
           <div class="saved-header">
-            <h2>Passed Papers</h2>
-            <p id="passed-subtitle" class="saved-subtitle">No papers passed on yet.</p>
+            <h2>Skipped Papers</h2>
+            <p id="skipped-subtitle" class="saved-subtitle">No papers skipped yet.</p>
             <div class="saved-header-row">
-              <input type="text" id="passed-filter" class="saved-filter hidden" placeholder="Filter passed papers…" />
-              <select id="passed-sort-select" class="saved-sort-select hidden">
-                <option value="recent">Recently Passed</option>
+              <input type="text" id="skipped-filter" class="saved-filter hidden" placeholder="Filter skipped papers…" />
+              <select id="skipped-sort-select" class="saved-sort-select hidden">
+                <option value="recent">Recently Skipped</option>
                 <option value="cited">Most Cited</option>
                 <option value="year">Published Year</option>
               </select>
             </div>
           </div>
-          <div id="passed-list" class="saved-list"></div>
+          <div id="skipped-list" class="saved-list"></div>
         </div>
 
         <!-- Saved Tab -->
@@ -124,12 +124,12 @@
 
       <!-- Bottom Tabs -->
       <nav class="bottom-tabs">
-        <button id="tab-btn-passed" class="tab-btn" data-tab="passed">
+        <button id="tab-btn-skipped" class="tab-btn" data-tab="skipped">
           <span class="tab-icon">
             <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
           </span>
-          <span class="tab-label">Passed</span>
-          <span id="passed-badge" class="tab-badge" style="display: none;">0</span>
+          <span class="tab-label">Skipped</span>
+          <span id="skipped-badge" class="tab-badge" style="display: none;">0</span>
         </button>
         <button id="tab-btn-swipe" class="tab-btn active" data-tab="swipe">
           <span class="tab-icon">
