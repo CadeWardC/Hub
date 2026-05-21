@@ -520,6 +520,23 @@ mark.highlight-kw {
 .similar-btn:hover { border-color: var(--mesh-color); background: rgba(124, 58, 237, 0.05); }
 .similar-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+.restore-feed-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--success);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all .2s;
+}
+.restore-feed-btn:hover { border-color: var(--success); background: rgba(16, 185, 129, 0.05); }
+.restore-feed-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
 /* Scoreboard */
 .scoreboard {
   background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
@@ -536,6 +553,12 @@ mark.highlight-kw {
 }
 .scoreboard-item.primary {
   background: rgba(37, 99, 235, 0.04); border-color: rgba(37, 99, 235, 0.15);
+}
+.scoreboard-item.negative {
+  background: rgba(220, 38, 38, 0.04); border-color: rgba(220, 38, 38, 0.15);
+}
+.scoreboard-item.primary.negative {
+  background: rgba(220, 38, 38, 0.06); border-color: rgba(220, 38, 38, 0.2);
 }
 .scoreboard-section-label {
   font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;

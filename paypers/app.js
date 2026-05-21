@@ -51,6 +51,7 @@ const BADGES = [
 const state = {
   keywords: [],
   saved: [],
+  passed: [],
   queue: [],
   history: new Set(),
   cursorMark: null,
@@ -66,7 +67,7 @@ const state = {
   cardViewStartTime: 0,
   darkMode: false,
   lastSwipe: null,
-  prefs: { sort: 'cited', yearFrom: null, yearTo: null, fundamental: false, savedSort: 'recent' },
+  prefs: { sort: 'cited', yearFrom: null, yearTo: null, fundamental: false, savedSort: 'recent', passedSort: 'recent' },
 };
 try {
   const s = localStorage.getItem('paypersState');
@@ -108,14 +109,21 @@ const els = {
   savedList: document.getElementById('saved-list'),
   savedSubtitle: document.getElementById('saved-subtitle'),
   savedBadge: document.getElementById('saved-badge'),
+  tabBtnPassed: document.getElementById('tab-btn-passed'),
   tabBtnSwipe: document.getElementById('tab-btn-swipe'),
   tabBtnSaved: document.getElementById('tab-btn-saved'),
+  tabPassed: document.getElementById('tab-passed'),
   tabSwipe: document.getElementById('tab-swipe'),
   tabSaved: document.getElementById('tab-saved'),
   statsBar: document.getElementById('stats-bar'),
   darkToggle: document.getElementById('dark-toggle'),
   savedFilter: document.getElementById('saved-filter'),
   savedSortSelect: document.getElementById('saved-sort-select'),
+  passedBadge: document.getElementById('passed-badge'),
+  passedSubtitle: document.getElementById('passed-subtitle'),
+  passedFilter: document.getElementById('passed-filter'),
+  passedSortSelect: document.getElementById('passed-sort-select'),
+  passedList: document.getElementById('passed-list'),
   digestBanner: document.getElementById('digest-banner'),
 };
 
@@ -555,10 +563,13 @@ function pruneHistory() {
 /* ═══ Tabs ═══ */
 function switchTab(tab) {
   state.activeTab = tab;
+  els.tabBtnPassed.classList.toggle('active', tab === 'passed');
   els.tabBtnSwipe.classList.toggle('active', tab === 'swipe');
   els.tabBtnSaved.classList.toggle('active', tab === 'saved');
+  els.tabPassed.classList.toggle('active', tab === 'passed');
   els.tabSwipe.classList.toggle('active', tab === 'swipe');
   els.tabSaved.classList.toggle('active', tab === 'saved');
+  if (tab === 'passed') renderPassed();
   if (tab === 'saved') renderSaved();
   if (tab === 'swipe') renderStats();
 }
@@ -910,6 +921,9 @@ function handleDecision(direction, paper) {
     checkLevelUp();
     if (!state.saved.find(s => s.id === paper.id)) state.saved.push(paper);
     updateSavedBadge();
+  } else if (direction === 'left') {
+    if (!state.passed.find(s => s.id === paper.id)) state.passed.push(paper);
+    updatePassedBadge();
   }
   if (state.queue.length > 0 && state.queue[0].id === paper.id) state.queue.shift();
   else { const idx = state.queue.findIndex(p => p.id === paper.id); if (idx !== -1) state.queue.splice(idx, 1); }
@@ -934,6 +948,10 @@ function undoLastSwipe() {
     const idx = state.saved.findIndex(s => s.id === snap.paper.id);
     if (idx !== -1) state.saved.splice(idx, 1);
     updateSavedBadge();
+  } else if (snap.direction === 'left') {
+    const idx = state.passed.findIndex(s => s.id === snap.paper.id);
+    if (idx !== -1) state.passed.splice(idx, 1);
+    updatePassedBadge();
   }
   if (!state.queue.length || state.queue[0].id !== snap.paper.id) {
     state.queue.unshift(snap.paper);
@@ -942,6 +960,7 @@ function undoLastSwipe() {
   renderTopCard();
   renderStats();
   if (state.activeTab === 'saved') renderSaved();
+  if (state.activeTab === 'passed') renderPassed();
   saveState();
   return true;
 }
@@ -1198,6 +1217,7 @@ function showResetPopup() {
 function resetToOnboarding() {
   state.keywords = [];
   state.saved = [];
+  state.passed = [];
   state.queue = [];
   state.history = new Set();
   state.cursorMark = null;
@@ -1211,12 +1231,14 @@ function resetToOnboarding() {
     discoveredKeywords: {},
   };
   state.prefs.savedSort = 'recent';
+  state.prefs.passedSort = 'recent';
   _fetchCounter = 0;
   els.main.classList.remove('active');
   els.onboarding.classList.add('active');
   renderKeywordTags();
   renderStats();
   updateSavedBadge();
+  updatePassedBadge();
   saveState();
 }
 
@@ -1265,6 +1287,144 @@ function updateSavedBadge() {
     els.savedBadge.textContent = state.saved.length;
     els.savedBadge.style.display = state.saved.length ? 'block' : 'none';
   }
+}
+
+function updatePassedBadge() {
+  if (els.passedBadge) {
+    els.passedBadge.textContent = state.passed.length;
+    els.passedBadge.style.display = state.passed.length ? 'block' : 'none';
+  }
+}
+
+function renderPassed() {
+  updatePassedBadge();
+  els.passedList.innerHTML = '';
+  els.passedFilter?.classList.toggle('hidden', state.passed.length === 0);
+  els.passedSortSelect?.classList.toggle('hidden', state.passed.length === 0);
+
+  if (els.passedSortSelect) {
+    els.passedSortSelect.value = state.prefs.passedSort || 'recent';
+  }
+
+  if (!state.passed.length) {
+    els.passedSubtitle.textContent = 'No papers passed on yet.';
+    return;
+  }
+  els.passedSubtitle.textContent = `${state.passed.length} paper${state.passed.length !== 1 ? 's' : ''} passed`;
+
+  const filterText = els.passedFilter?.value?.toLowerCase() || '';
+  const filtered = filterText
+    ? [...state.passed].filter(p =>
+        p.title.toLowerCase().includes(filterText) ||
+        p.abstract.toLowerCase().includes(filterText) ||
+        (p.paperKeywords || []).some(kw => kw.text.toLowerCase().includes(filterText)))
+    : [...state.passed];
+
+  // Scoreboard — onboarding keywords with negative score first (ascending), then negative discovered MeSH
+  const scoreboard = document.createElement('div');
+  scoreboard.className = 'scoreboard';
+  const negKws = state.keywords.filter(k => k.score < 0).sort((a, b) => a.score - b.score);
+  const dk = state.stats.discoveredKeywords;
+  const negDiscoveredList = Object.entries(dk)
+    .map(([text, entry]) => ({ text, score: entry.score, discovered: true }))
+    .filter(k => k.score < 0)
+    .sort((a, b) => a.score - b.score)
+    .slice(0, 15);
+
+  if (negKws.length || negDiscoveredList.length) {
+    scoreboard.innerHTML = `
+      <div class="scoreboard-title">Negative Keyword Weights</div>
+      ${negKws.length ? `<div class="scoreboard-section-label">Your Disliked Keywords</div>
+      <div class="scoreboard-grid">
+        ${negKws.map(k => `
+          <div class="scoreboard-item primary negative">
+            <span class="sb-keyword">${escapeHtml(k.text)}</span>
+            <span class="sb-score neg">${k.score.toFixed(1)}</span>
+          </div>
+        `).join('')}
+      </div>` : ''}
+      ${negDiscoveredList.length ? `<div class="scoreboard-section-label">Disliked Topics</div>
+      <div class="scoreboard-grid">
+        ${negDiscoveredList.map(k => `
+          <div class="scoreboard-item negative">
+            <span class="sb-keyword">${escapeHtml(k.text)}</span>
+            <span class="sb-score neg">${k.score.toFixed(1)}</span>
+          </div>
+        `).join('')}
+      </div>` : ''}
+    `;
+    els.passedList.appendChild(scoreboard);
+  }
+
+  if (filterText && !filtered.length) {
+    els.passedList.innerHTML += '<p style="text-align:center; color:var(--text-muted); padding:2rem;">No passed papers match your filter.</p>';
+  }
+
+  const sortOption = state.prefs.passedSort || 'recent';
+  const sorted = [...filtered];
+  if (sortOption === 'recent') {
+    sorted.reverse();
+  } else if (sortOption === 'cited') {
+    sorted.sort((a, b) => (b.citations || 0) - (a.citations || 0));
+  } else if (sortOption === 'year') {
+    sorted.sort((a, b) => (parseInt(b.year, 10) || 0) - (parseInt(a.year, 10) || 0));
+  }
+
+  sorted.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'saved-item';
+    const link = p.pmid
+      ? `https://pubmed.ncbi.nlm.nih.gov/${escapeHtml(p.pmid)}/`
+      : (p.doi ? `https://doi.org/${escapeHtml(p.doi)}` : '#');
+
+    const kwList = p.paperKeywords || [];
+    const kwHtml = kwList.length
+      ? `<div class="card-keywords" style="margin-top:8px;">${kwList.map(kw => {
+          const cls = kw.type === 'mesh-major' ? 'matched' : (kw.type === 'mesh' ? 'mesh' : '');
+          return `<span class="card-keyword-tag ${cls}">${escapeHtml(kw.text)}</span>`;
+        }).join('')}</div>`
+      : '';
+
+    item.innerHTML = `
+      <button class="saved-remove-btn" title="Permanently delete from history" aria-label="Permanently delete from history">${CLOSE_SVG}</button>
+      <h4>${escapeHtml(p.title)}</h4>
+      <p>${truncateAuthors(p.authors)} • ${escapeHtml(String(p.year))} • ${escapeHtml(p.journal)}${p.citations ? ` • ${p.citations} citations` : ''}</p>
+      <div class="saved-links">
+        <a href="${link}" target="_blank" rel="noopener">View on PubMed &rarr;</a>
+        <button class="restore-feed-btn" data-id="${p.id}">Restore to Feed</button>
+      </div>
+      ${kwHtml}
+    `;
+
+    item.querySelector('.saved-remove-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = state.passed.findIndex(s => s.id === p.id);
+      if (idx === -1) return;
+      state.passed.splice(idx, 1);
+      renderPassed();
+      saveState();
+      showToast('Permanently deleted from Passed');
+    });
+
+    item.querySelector('.restore-feed-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const idx = state.passed.findIndex(s => s.id === p.id);
+      if (idx === -1) return;
+      state.passed.splice(idx, 1);
+      state.history.delete(p.id);
+
+      const qIdx = state.queue.findIndex(q => q.id === p.id);
+      if (qIdx !== -1) state.queue.splice(qIdx, 1);
+
+      state.queue.unshift(p);
+      renderPassed();
+      renderTopCard();
+      saveState();
+      showToast('Restored paper to the top of Discover deck');
+    });
+
+    els.passedList.appendChild(item);
+  });
 }
 
 /* ═══ Saved tab ═══ */
@@ -1560,6 +1720,7 @@ function init() {
     checkWeeklyDigest();
   });
 
+  els.tabBtnPassed.addEventListener('click', () => switchTab('passed'));
   els.tabBtnSwipe.addEventListener('click', () => switchTab('swipe'));
   els.tabBtnSaved.addEventListener('click', () => switchTab('saved'));
   document.getElementById('settings-btn')?.addEventListener('click', showSettingsModal);
@@ -1588,11 +1749,18 @@ function init() {
     saveState();
     renderSaved();
   });
+  els.passedFilter?.addEventListener('input', () => renderPassed());
+  els.passedSortSelect?.addEventListener('change', (e) => {
+    state.prefs.passedSort = e.target.value;
+    saveState();
+    renderPassed();
+  });
   els.darkToggle?.addEventListener('click', toggleDarkMode);
 
   applyDarkMode();
   renderStats();
   updateSavedBadge();
+  updatePassedBadge();
   checkWeeklyDigest();
   // If returning user has keywords, skip to main view and start fetching
   if (state.keywords.length > 0) {
