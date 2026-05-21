@@ -185,7 +185,7 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
   background: var(--bg); border-radius: var(--radius);
   box-shadow: var(--shadow), 0 4px 12px rgba(0,0,0,0.05);
   border: 1px solid var(--border); display: flex; flex-direction: column;
-  padding: 22px; cursor: grab; touch-action: none; user-select: none;
+  padding: 22px; cursor: grab; touch-action: pan-y; user-select: none;
   will-change: transform, opacity;
 }
 .paper-card:active { cursor: grabbing; }
@@ -281,12 +281,120 @@ h1 { font-size: 2.8rem; font-weight: 800; color: var(--text); margin-bottom: 6px
   left: 24px; color: var(--danger); border: 3px solid var(--danger); transform: rotate(-12deg);
 }
 
-.swipe-hints {
-  display: flex; justify-content: space-between; width: 100%; max-width: 520px;
-  margin-top: 10px; color: var(--text-muted); font-size: 0.8rem; flex-shrink: 0;
+/* Card stack styling */
+.paper-card.card-bottom {
+  transform: scale(0.92) translateY(16px);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 1;
 }
-.hint { display: flex; align-items: center; gap: 6px; }
-.hint .arrow { font-size: 1.1rem; }
+.paper-card.card-middle {
+  transform: scale(0.96) translateY(8px);
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 2;
+}
+.paper-card.card-top {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  z-index: 3;
+}
+
+/* Keyword Highlights */
+mark.highlight-kw {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--accent);
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 0 3px;
+}
+[data-theme="dark"] mark.highlight-kw {
+  background: rgba(96, 165, 250, 0.2);
+  color: var(--accent-hover);
+}
+
+/* Swipe deck control buttons */
+.swipe-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 520px;
+  margin-top: 16px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+.control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.control-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  color: var(--text);
+}
+.control-btn:active {
+  transform: scale(0.95);
+}
+.control-btn.undo {
+  width: 42px;
+  height: 42px;
+  color: var(--warning);
+  background: rgba(245, 158, 10, 0.05);
+  border-color: rgba(245, 158, 10, 0.2);
+}
+.control-btn.undo:hover {
+  background: rgba(245, 158, 10, 0.1);
+  border-color: var(--warning);
+}
+.control-btn.dislike {
+  color: var(--danger);
+  font-size: 1.15rem;
+  background: rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+.control-btn.dislike:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--danger);
+}
+.control-btn.like {
+  color: var(--success);
+  font-size: 1.25rem;
+  background: rgba(34, 197, 94, 0.05);
+  border-color: rgba(34, 197, 94, 0.25);
+  width: 60px;
+  height: 60px;
+}
+.control-btn.like:hover {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: var(--success);
+}
+.control-btn.similar {
+  width: 42px;
+  height: 42px;
+  color: var(--mesh-color);
+  background: rgba(124, 58, 237, 0.05);
+  border-color: rgba(124, 58, 237, 0.2);
+}
+.control-btn.similar:hover {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: var(--mesh-color);
+}
+.control-btn.hidden {
+  display: none !important;
+}
 
 /* Empty state */
 .empty-state {

@@ -117,6 +117,13 @@ function stripHtml(html) {
 function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+function highlightKeywords(safeText, keywords) {
+  if (!keywords || !keywords.length || !safeText) return safeText;
+  const sorted = [...keywords].sort((a, b) => b.length - a.length);
+  const escaped = sorted.map(k => k.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+  const regex = new RegExp(`\\b(${escaped.join('|')})\\b`, 'gi');
+  return safeText.replace(regex, '<mark class="highlight-kw">$1</mark>');
+}
 const ABSTRACT_HEADERS = /^(BACKGROUND|METHODS?|RESULTS?|CONCLUSIONS?|OBJECTIVES?|AIM|AIMS|FINDINGS|INTERPRETATION|INTRODUCTION|DISCUSSION|PURPOSE|CONTEXT|DESIGN|SETTING|PARTICIPANTS|INTERVENTIONS?|OUTCOMES?|MEASUREMENTS?|FUNDING|TRIAL\s+REGISTRATION|SIGNIFICANCE|RATIONALE|IMPORTANCE)$/i;
 
 function parseAbstractSections(rawHtml) {
@@ -165,9 +172,12 @@ function parseAbstractSections(rawHtml) {
 
 function renderAbstractHtml(paper) {
   const sections = paper.abstractSections || [{ header: '', text: paper.abstract || '' }];
+  const keywords = state.keywords ? state.keywords.map(k => k.text) : [];
   return sections.map(s => {
     const head = s.header ? `<strong class="abstract-section">${escapeHtml(s.header)}</strong> ` : '';
-    return `<p class="abstract-para">${head}${escapeHtml(s.text)}</p>`;
+    const safeText = escapeHtml(s.text);
+    const highlighted = highlightKeywords(safeText, keywords);
+    return `<p class="abstract-para">${head}${highlighted}</p>`;
   }).join('');
 }
 
@@ -536,14 +546,43 @@ function switchTab(tab) {
 function renderTopCard() {
   const existing = els.cardStack.querySelectorAll('.paper-card');
   existing.forEach(c => c.remove());
-  document.getElementById('undo-swipe-btn')?.classList.toggle('hidden', !state.lastSwipe);
-  const paper = state.queue[0];
-  if (!paper) { els.emptyState?.classList.remove('hidden'); ensureBuffer(); return; }
+  document.getElementById('swipe-btn-undo')?.classList.toggle('hidden', !state.lastSwipe);
+  
+  if (state.queue.length === 0) {
+    els.emptyState?.classList.remove('hidden');
+    ensureBuffer();
+    return;
+  }
   els.emptyState?.classList.add('hidden');
   state.cardViewStartTime = Date.now();
-  const card = createCardEl(paper);
-  els.cardStack.appendChild(card);
-  initSwipe(card, paper);
+
+  const limit = Math.min(state.queue.length, 3);
+  for (let i = limit - 1; i >= 0; i--) {
+    const paper = state.queue[i];
+    const card = createCardEl(paper);
+    
+    if (i === 0) {
+      card.classList.add('card-top');
+      els.cardStack.appendChild(card);
+      initSwipe(card, paper);
+    } else if (i === 1) {
+      card.classList.add('card-middle');
+      disableInteractiveElements(card);
+      els.cardStack.appendChild(card);
+    } else if (i === 2) {
+      card.classList.add('card-bottom');
+      disableInteractiveElements(card);
+      els.cardStack.appendChild(card);
+    }
+  }
+}
+
+function disableInteractiveElements(card) {
+  card.style.pointerEvents = 'none';
+  card.querySelectorAll('a, button').forEach(el => {
+    el.setAttribute('tabindex', '-1');
+    el.style.pointerEvents = 'none';
+  });
 }
 
 function createCardEl(paper) {
@@ -566,12 +605,15 @@ function createCardEl(paper) {
       }).join('')}</div>`
     : '';
 
+  const keywords = state.keywords ? state.keywords.map(k => k.text) : [];
+  const highlightedTitle = highlightKeywords(escapeHtml(paper.title), keywords);
+
   el.innerHTML = `
     <div class="card-header">
       <span class="card-journal">${escapeHtml(paper.journal)}</span>
       <span class="card-year">${escapeHtml(String(paper.year))}</span>
     </div>
-    <div class="card-title">${escapeHtml(paper.title)}</div>
+    <div class="card-title">${highlightedTitle}</div>
     <div class="card-authors">${authors}</div>
     ${kwHtml}
     <div class="card-abstract">${renderAbstractHtml(paper)}</div>
@@ -649,51 +691,161 @@ function createCardEl(paper) {
 
 /* ═══ Swipe handling ═══ */
 function initSwipe(card, paper) {
-  let startX = 0, currentX = 0, isDragging = false, decided = false;
+  let startX = 0, startY = 0;
+  let currentX = 0, currentY = 0;
+  let isDragging = false;
+  let decided = false;
+  let gestureType = null; // 'swipe', 'scroll', or null
 
-  const onDown = (x) => { startX = x; isDragging = true; };
-  const onMove = (x) => {
+  const onDown = (x, y) => {
+    startX = x;
+    startY = y;
+    currentX = 0;
+    currentY = 0;
+    isDragging = true;
+    gestureType = null;
+  };
+
+  const onMove = (x, y, e) => {
     if (!isDragging || decided) return;
     currentX = x - startX;
-    card.style.transform = `translateX(${currentX}px) rotate(${currentX * 0.05}deg)`;
-    const ratio = Math.max(-1, Math.min(1, currentX / (card.offsetWidth / 2)));
-    card.querySelector('.overlay-label.nope').style.opacity = ratio < 0 ? Math.abs(ratio) : 0;
-    card.querySelector('.overlay-label.like').style.opacity = ratio > 0 ? ratio : 0;
+    currentY = y - startY;
+
+    // Detect gesture type if not yet locked
+    if (!gestureType) {
+      const absX = Math.abs(currentX);
+      const absY = Math.abs(currentY);
+      if (absX > 8 || absY > 8) {
+        if (absY > absX) {
+          gestureType = 'scroll';
+          isDragging = false; // Stop swipe tracking, let native scroll happen
+          return;
+        } else {
+          gestureType = 'swipe';
+        }
+      } else {
+        return; // Wait for a more decisive move
+      }
+    }
+
+    if (gestureType === 'swipe') {
+      if (e) e.preventDefault(); // Stop default browser touch scroll actions
+      card.style.transform = `translateX(${currentX}px) rotate(${currentX * 0.05}deg)`;
+      const ratio = Math.max(-1, Math.min(1, currentX / (card.offsetWidth / 2)));
+      card.querySelector('.overlay-label.nope').style.opacity = ratio < 0 ? Math.abs(ratio) : 0;
+      card.querySelector('.overlay-label.like').style.opacity = ratio > 0 ? ratio : 0;
+
+      // Animate background cards in sync with drag
+      const middleCard = els.cardStack.querySelector('.paper-card.card-middle');
+      const bottomCard = els.cardStack.querySelector('.paper-card.card-bottom');
+      const progress = Math.min(1, Math.abs(currentX) / (card.offsetWidth * 0.3));
+
+      if (middleCard) {
+        const scale = 0.96 + (0.04 * progress);
+        const ty = 8 - (8 * progress);
+        const op = 0.8 + (0.2 * progress);
+        middleCard.style.transform = `scale(${scale}) translateY(${ty}px)`;
+        middleCard.style.opacity = op;
+      }
+      if (bottomCard) {
+        const scale = 0.92 + (0.04 * progress);
+        const ty = 16 - (8 * progress);
+        const op = 0.45 + (0.35 * progress);
+        bottomCard.style.transform = `scale(${scale}) translateY(${ty}px)`;
+        bottomCard.style.opacity = op;
+      }
+    }
   };
+
   const onUp = () => {
     if (!isDragging || decided) return;
     isDragging = false;
-    const threshold = card.offsetWidth * 0.3;
-    if (currentX > threshold) { decided = true; animateSwipe(card, paper, 'right'); }
-    else if (currentX < -threshold) { decided = true; animateSwipe(card, paper, 'left'); }
-    else {
-      card.style.transition = 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)';
-      card.style.transform = 'translateX(0) rotate(0)';
-      card.querySelector('.overlay-label.nope').style.opacity = 0;
-      card.querySelector('.overlay-label.like').style.opacity = 0;
-      setTimeout(() => { card.style.transition = ''; }, 300);
+    
+    if (gestureType === 'swipe') {
+      const threshold = card.offsetWidth * 0.3;
+      if (currentX > threshold) {
+        decided = true;
+        animateSwipe(card, paper, 'right');
+      } else if (currentX < -threshold) {
+        decided = true;
+        animateSwipe(card, paper, 'left');
+      } else {
+        // Reset card and underneath cards with transition
+        card.style.transition = 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s';
+        card.style.transform = 'translateX(0) rotate(0)';
+        card.querySelector('.overlay-label.nope').style.opacity = 0;
+        card.querySelector('.overlay-label.like').style.opacity = 0;
+
+        const middleCard = els.cardStack.querySelector('.paper-card.card-middle');
+        const bottomCard = els.cardStack.querySelector('.paper-card.card-bottom');
+        if (middleCard) {
+          middleCard.style.transition = 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s';
+          middleCard.style.transform = 'scale(0.96) translateY(8px)';
+          middleCard.style.opacity = '0.8';
+        }
+        if (bottomCard) {
+          bottomCard.style.transition = 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s';
+          bottomCard.style.transform = 'scale(0.92) translateY(16px)';
+          bottomCard.style.opacity = '0.45';
+        }
+
+        setTimeout(() => {
+          card.style.transition = '';
+          if (middleCard) middleCard.style.transition = '';
+          if (bottomCard) bottomCard.style.transition = '';
+        }, 300);
+      }
     }
     currentX = 0;
+    currentY = 0;
+    gestureType = null;
   };
+
   card.addEventListener('pointerdown', (e) => {
-    // Don't capture if clicking a link, button, or the card footer
     if (e.target.closest('a') || e.target.closest('button') || e.target.closest('.card-footer')) return;
-    card.setPointerCapture(e.pointerId); onDown(e.clientX);
+    card.setPointerCapture(e.pointerId);
+    onDown(e.clientX, e.clientY);
   });
-  card.addEventListener('pointermove', (e) => onMove(e.clientX));
+  
+  card.addEventListener('pointermove', (e) => {
+    onMove(e.clientX, e.clientY, e);
+  });
+  
   card.addEventListener('pointerup', onUp);
   card.addEventListener('pointercancel', onUp);
 
   const keyHandler = (e) => {
     if (decided) return;
-    if (e.key === 'ArrowRight') { decided = true; window.removeEventListener('keydown', keyHandler); animateSwipe(card, paper, 'right'); }
-    else if (e.key === 'ArrowLeft') { decided = true; window.removeEventListener('keydown', keyHandler); animateSwipe(card, paper, 'left'); }
+    if (e.key === 'ArrowRight') {
+      decided = true;
+      window.removeEventListener('keydown', keyHandler);
+      animateSwipe(card, paper, 'right');
+    } else if (e.key === 'ArrowLeft') {
+      decided = true;
+      window.removeEventListener('keydown', keyHandler);
+      animateSwipe(card, paper, 'left');
+    }
   };
   window.addEventListener('keydown', keyHandler);
 }
 
 function animateSwipe(card, paper, direction) {
   card.classList.add(direction === 'right' ? 'swipe-right' : 'swipe-left');
+  
+  // Promotion transition for background cards
+  const middleCard = els.cardStack.querySelector('.paper-card.card-middle');
+  const bottomCard = els.cardStack.querySelector('.paper-card.card-bottom');
+  if (middleCard) {
+    middleCard.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s';
+    middleCard.style.transform = 'scale(1) translateY(0)';
+    middleCard.style.opacity = '1';
+  }
+  if (bottomCard) {
+    bottomCard.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s';
+    bottomCard.style.transform = 'scale(0.96) translateY(8px)';
+    bottomCard.style.opacity = '0.8';
+  }
+  
   setTimeout(() => handleDecision(direction, paper), 420);
 }
 
@@ -1227,6 +1379,63 @@ function applyDarkMode() {
   if (els.darkToggle) els.darkToggle.textContent = state.darkMode ? '☀' : '☾';
 }
 
+function triggerButtonSwipe(direction) {
+  const card = els.cardStack.querySelector('.paper-card.card-top');
+  if (!card) return;
+  
+  card.style.transition = 'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s';
+  if (direction === 'left') {
+    card.style.transform = 'translateX(-140%) rotate(-18deg)';
+    card.style.opacity = '0';
+    card.querySelector('.overlay-label.nope').style.opacity = '1';
+  } else {
+    card.style.transform = 'translateX(140%) rotate(18deg)';
+    card.style.opacity = '0';
+    card.querySelector('.overlay-label.like').style.opacity = '1';
+  }
+  
+  // Dynamic promotion transition for background cards
+  const middleCard = els.cardStack.querySelector('.paper-card.card-middle');
+  const bottomCard = els.cardStack.querySelector('.paper-card.card-bottom');
+  if (middleCard) {
+    middleCard.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s';
+    middleCard.style.transform = 'scale(1) translateY(0)';
+    middleCard.style.opacity = '1';
+  }
+  if (bottomCard) {
+    bottomCard.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s';
+    bottomCard.style.transform = 'scale(0.96) translateY(8px)';
+    bottomCard.style.opacity = '0.8';
+  }
+
+  const paper = state.queue[0];
+  setTimeout(() => handleDecision(direction, paper), 420);
+}
+
+async function findSimilarToCurrent() {
+  const paper = state.queue[0];
+  if (!paper) return;
+  const btn = document.getElementById('swipe-btn-similar');
+  if (!btn) return;
+  btn.disabled = true;
+  const originalHtml = btn.innerHTML;
+  btn.innerHTML = '<span class="btn-icon">⏳</span>';
+  showToast('Searching for similar papers…');
+  
+  const similar = await fetchSimilar(paper);
+  if (similar.length) {
+    similar.forEach(sp => state.history.add(sp.id));
+    state.queue.splice(1, 0, ...similar); // Insert them directly behind the current card!
+    ensureBuffer();
+    renderTopCard();
+    showToast(`Added ${similar.length} similar papers to your feed`);
+  } else {
+    showToast('No similar papers found');
+  }
+  btn.disabled = false;
+  btn.innerHTML = originalHtml;
+}
+
 /* ═══ Init ═══ */
 function init() {
   HOT_TOPICS.forEach(topic => {
@@ -1277,8 +1486,17 @@ function init() {
       showToast('Undid last save');
     }
   });
-  document.getElementById('undo-swipe-btn')?.addEventListener('click', () => {
+  document.getElementById('swipe-btn-undo')?.addEventListener('click', () => {
     if (undoLastSwipe()) showToast('Restored previous card');
+  });
+  document.getElementById('swipe-btn-dislike')?.addEventListener('click', () => {
+    triggerButtonSwipe('left');
+  });
+  document.getElementById('swipe-btn-like')?.addEventListener('click', () => {
+    triggerButtonSwipe('right');
+  });
+  document.getElementById('swipe-btn-similar')?.addEventListener('click', () => {
+    findSimilarToCurrent();
   });
 
   els.savedFilter?.addEventListener('input', () => renderSaved());
