@@ -370,10 +370,23 @@
                     }
                     canvas.width = dw;
                     canvas.height = dh;
+                    
+                    // Create grayscale version
                     ctx.drawImage(img, 0, 0, dw, dh);
-                    const imageData = ctx.getImageData(0, 0, dw, dh);
-                    ditherImageData(imageData);
-                    ctx.putImageData(imageData, 0, 0);
+                    const grayImageData = ctx.getImageData(0, 0, dw, dh);
+                    const data = grayImageData.data;
+                    for (let i = 0; i < data.length; i += 4) {
+                        const g = Math.round(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
+                        data[i] = g;
+                        data[i + 1] = g;
+                        data[i + 2] = g;
+                    }
+                    ctx.putImageData(grayImageData, 0, 0);
+                    const grayscaleHref = canvas.toDataURL('image/png');
+
+                    // Create dithered version from grayscale
+                    ditherImageData(grayImageData);
+                    ctx.putImageData(grayImageData, 0, 0);
                     const ditheredHref = canvas.toDataURL('image/png');
 
                     const aspect = img.naturalWidth / img.naturalHeight;
@@ -392,9 +405,14 @@
                         width: w,
                         height: h,
                         href: ditheredHref,
+                        grayscaleHref: grayscaleHref,
+                        ditheredHref: ditheredHref,
+                        engraveMode: 'dither',
                         mode: 'engrave',
                         pxWidth: dw,
-                        pxHeight: dh
+                        pxHeight: dh,
+                        power: 40,
+                        speed: 1500
                     });
                 };
                 img.src = ev.target.result;
@@ -1048,6 +1066,15 @@
                 </div>
                 <div class="prop-section">
                     <div class="prop-section-title">Laser Settings</div>
+                    ${obj.type === 'image' ? `
+                    <div class="prop-row">
+                        <label>Engrave Style</label>
+                        <div class="prop-mode-toggle">
+                            <button class="prop-mode-btn${obj.engraveMode === 'dither' ? ' active' : ''}" data-set-style="dither">Dither</button>
+                            <button class="prop-mode-btn${obj.engraveMode === 'grayscale' ? ' active' : ''}" data-set-style="grayscale">Grayscale</button>
+                        </div>
+                    </div>
+                    ` : `
                     <div class="prop-row">
                         <label>Mode</label>
                         <div class="prop-mode-toggle">
@@ -1055,6 +1082,7 @@
                             <button class="prop-mode-btn${obj.mode === 'engrave' ? ' active' : ''}" data-set-mode="engrave">Engrave</button>
                         </div>
                     </div>
+                    `}
                     <div class="prop-row">
                         <label>Preset</label>
                         <select id="prop-preset">${presetOptions}</select>
@@ -1202,9 +1230,19 @@
                 if (!this.selectedId) return;
                 const obj = this.objects.find(o => o.id === this.selectedId);
                 if (!obj) return;
+                const newStyle = e.target.dataset.setStyle;
+                if (newStyle && obj.type === 'image') {
+                    const oldStyle = obj.engraveMode;
+                    obj.engraveMode = newStyle;
+                    this.pushUndo({ type: 'property', objId: obj.id, prop: 'engraveMode', oldVal: oldStyle, newVal: newStyle });
+                    this.updatePropertiesPanel();
+                    this.renderObjects();
+                }
                 const newMode = e.target.dataset.setMode;
                 if (newMode && obj.type !== 'image') {
+                    const oldMode = obj.mode;
                     obj.mode = newMode;
+                    this.pushUndo({ type: 'property', objId: obj.id, prop: 'mode', oldVal: oldMode, newVal: newMode });
                     this.updatePropertiesPanel();
                     this.renderObjects();
                 }
@@ -1385,7 +1423,7 @@
             lines.push(`; Bounds: X${fmt(bounds.x1)} Y${fmt(bounds.y1)} to X${fmt(bounds.x2)} Y${fmt(bounds.y2)}`);
             lines.push('G00 G17 G40 G21 G54');
             lines.push('G90');
-            lines.push('M3');
+            lines.push('M4 ; Dynamic Laser Power Mode (GRBL Standard)');
             lines.push(`; ${obj.type} @ ${fmt(obj.speed)} mm/min, ${fmt(obj.power)}% power`);
             if (obj.mode === 'engrave') lines.push('M8');
             const body = await this.generateObjectMoves(obj);
@@ -1427,42 +1465,79 @@
             ctx.fillText(obj.text || '', 0, 0);
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             const data = imageData.data;
-            const stepX = obj.width / canvas.width;
-            const stepY = obj.height / canvas.height;
-            lines.push(`G0 X${fmt(obj.x)} Y${fmt(this.bed.y - obj.y)}`);
-            lines.push('G91');
-            let firstMove = true;
-            for (let row = 0; row < canvas.height; row++) {
-                const gy = this.bed.y - (obj.y + row * stepY);
-                let pixels = [];
-                for (let col = 0; col < canvas.width; col++) {
-                    const idx = (row * canvas.width + col) * 4;
-                    pixels.push(data[idx] > 128);
+            
+            const cols = canvas.width;
+            const rows = canvas.height;
+            const stepX = obj.width / cols;
+            const stepY = obj.height / rows;
+            
+            const startX = obj.x;
+            const startY = this.bed.y - obj.y;
+            
+            lines.push('G90'); // Absolute mode
+            
+            let currentX = startX;
+            let currentY = startY;
+            
+            for (let pass = 0; pass < passes; pass++) {
+                if (pass > 0) {
+                    lines.push(`G0 X${fmt(startX)} Y${fmt(startY)}`);
+                    currentX = startX;
+                    currentY = startY;
                 }
-                let groups = [];
-                for (let i = 0; i < pixels.length; i++) {
-                    if (groups.length === 0 || groups[groups.length - 1].on !== pixels[i]) {
-                        groups.push({ on: pixels[i], count: 1 });
-                    } else {
-                        groups[groups.length - 1].count++;
+                
+                let isFirstMove = true;
+                for (let r = 0; r < rows; r++) {
+                    const yAbs = startY - r * stepY;
+                    
+                    // Build pixels array (true if pixel is white, i.e. text foreground)
+                    const rowPixels = [];
+                    for (let c = 0; c < cols; c++) {
+                        const idx = (r * cols + c) * 4;
+                        rowPixels.push(data[idx] > 128);
                     }
-                }
-                if (groups.length === 1 && !groups[0].on) {
-                    if (row < canvas.height - 1) lines.push(`G1 Y${fmt(-stepY)}S0`);
-                    continue;
-                }
-                for (const g of groups) {
-                    const dx = g.count * stepX;
-                    const s = g.on ? pwrOn : 0;
-                    if (firstMove) {
-                        lines.push(`G1 X${fmt(dx)}S${s}F${f}`);
-                        firstMove = false;
-                    } else {
-                        lines.push(`G1 X${fmt(dx)}S${s}`);
+                    
+                    // Group consecutive pixels
+                    const groups = [];
+                    for (let i = 0; i < rowPixels.length; i++) {
+                        const on = rowPixels[i];
+                        if (groups.length === 0 || groups[groups.length - 1].on !== on) {
+                            groups.push({ on, count: 1 });
+                        } else {
+                            groups[groups.length - 1].count++;
+                        }
                     }
+                    
+                    const allOff = groups.length === 1 && !groups[0].on;
+                    if (allOff) {
+                        continue;
+                    }
+                    
+                    // Move to start of the row
+                    if (Math.abs(currentX - startX) > 0.01 || Math.abs(currentY - yAbs) > 0.01) {
+                        lines.push(`G0 X${fmt(startX)} Y${fmt(yAbs)}`);
+                        currentX = startX;
+                        currentY = yAbs;
+                    }
+                    
+                    let accumX = startX;
+                    for (const g of groups) {
+                        const dx = g.count * stepX;
+                        accumX += dx;
+                        const s = g.on ? pwrOn : 0;
+                        if (isFirstMove) {
+                            lines.push(`G1 X${fmt(accumX)} S${s} F${f}`);
+                            isFirstMove = false;
+                        } else {
+                            lines.push(`G1 X${fmt(accumX)} S${s}`);
+                        }
+                    }
+                    currentX = accumX;
+                    currentY = yAbs;
                 }
-                if (row < canvas.height - 1) lines.push(`G1 Y${fmt(-stepY)}S0`);
             }
+            
+            lines.push('M5');
             return lines;
         }
 
@@ -1573,7 +1648,7 @@
             return new Promise((resolve, reject) => {
                 const img = new Image();
                 img.onload = () => {
-                    const step = 0.1;
+                    const step = 0.1; // 0.1mm pixel step
                     const cols = Math.max(1, Math.round(obj.width / step));
                     const rows = Math.max(1, Math.round(obj.height / step));
                     const canvas = document.createElement('canvas');
@@ -1584,53 +1659,108 @@
                     ctx.drawImage(img, 0, 0, cols, rows);
                     const imageData = ctx.getImageData(0, 0, cols, rows);
                     const data = imageData.data;
+                    
                     const lines = [];
-                    const pwrOn = Math.round(obj.power * 10);
+                    const pwrOn = Math.round(obj.power * 10); // Standard GRBL S0-S1000 scale
                     const f = fmt(obj.speed);
+                    const passes = obj.passes || 1;
+                    
                     const startX = obj.x;
                     const startY = this.bed.y - obj.y;
-                    lines.push(`G0 X${fmt(startX)} Y${fmt(startY)}`);
-                    lines.push('G91');
-                    let firstMove = true;
-                    for (let row = 0; row < rows; row++) {
-                        const isEven = row % 2 === 0;
-                        let pixels = [];
-                        for (let col = 0; col < cols; col++) {
-                            const idx = (row * cols + col) * 4;
-                            pixels.push(data[idx] < 128);
+                    
+                    lines.push('G90'); // Absolute mode
+                    
+                    let currentX = startX;
+                    let currentY = startY;
+                    
+                    for (let pass = 0; pass < passes; pass++) {
+                        if (pass > 0) {
+                            lines.push(`G0 X${fmt(startX)} Y${fmt(startY)}`);
+                            currentX = startX;
+                            currentY = startY;
                         }
-                        let groups = [];
-                        for (let i = 0; i < pixels.length; i++) {
-                            if (groups.length === 0 || groups[groups.length - 1].on !== pixels[i]) {
-                                groups.push({ on: pixels[i], count: 1 });
-                            } else {
-                                groups[groups.length - 1].count++;
+                        
+                        let isFirstMove = true;
+                        for (let r = 0; r < rows; r++) {
+                            const yAbs = startY - r * step;
+                            const isEven = r % 2 === 0;
+                            
+                            const rowPowers = [];
+                            for (let c = 0; c < cols; c++) {
+                                const idx = (r * cols + c) * 4;
+                                const rVal = data[idx];
+                                const gVal = data[idx + 1];
+                                const bVal = data[idx + 2];
+                                const aVal = data[idx + 3];
+                                
+                                let sVal = 0;
+                                if (aVal < 10) {
+                                    sVal = 0;
+                                } else {
+                                    const gray = 0.299 * rVal + 0.587 * gVal + 0.114 * bVal;
+                                    if (obj.engraveMode === 'grayscale') {
+                                        // Map 0-255 grayscale (white to black) to 0-pwrOn S scale
+                                        sVal = Math.round(pwrOn * (1 - gray / 255));
+                                    } else {
+                                        // Dither mode thresholding
+                                        sVal = gray < 128 ? pwrOn : 0;
+                                    }
+                                }
+                                rowPowers.push(sVal);
                             }
-                        }
-                        if (groups.length === 1 && !groups[0].on) {
-                            if (row < rows - 1) {
-                                lines.push(`G1 Y${fmt(-step)}S0`);
+                            
+                            // Reverse reading direction for bi-directional travel (odd rows)
+                            if (!isEven) {
+                                rowPowers.reverse();
                             }
-                            continue;
-                        }
-                        for (const g of groups) {
-                            const dx = isEven ? g.count * step : -g.count * step;
-                            const s = g.on ? pwrOn : 0;
-                            if (firstMove) {
-                                lines.push(`G1 X${fmt(dx)}S${s}F${f}`);
-                                firstMove = false;
-                            } else {
-                                lines.push(`G1 X${fmt(dx)}S${s}`);
+                            
+                            const groups = [];
+                            for (let i = 0; i < rowPowers.length; i++) {
+                                const p = rowPowers[i];
+                                if (groups.length === 0 || groups[groups.length - 1].power !== p) {
+                                    groups.push({ power: p, count: 1 });
+                                } else {
+                                    groups[groups.length - 1].count++;
+                                }
                             }
-                        }
-                        if (row < rows - 1) {
-                            lines.push(`G1 Y${fmt(-step)}S0`);
+                            
+                            const allOff = groups.length === 1 && groups[0].power === 0;
+                            const rowStartX = isEven ? obj.x : obj.x + obj.width;
+                            const rowEndX = isEven ? obj.x + obj.width : obj.x;
+                            
+                            if (allOff) {
+                                lines.push(`G0 X${fmt(rowEndX)} Y${fmt(yAbs)}`);
+                                currentX = rowEndX;
+                                currentY = yAbs;
+                                continue;
+                            }
+                            
+                            if (Math.abs(currentX - rowStartX) > 0.01 || Math.abs(currentY - yAbs) > 0.01) {
+                                lines.push(`G0 X${fmt(rowStartX)} Y${fmt(yAbs)}`);
+                                currentX = rowStartX;
+                                currentY = yAbs;
+                            }
+                            
+                            let accumX = rowStartX;
+                            for (const g of groups) {
+                                const dx = g.count * step;
+                                accumX = isEven ? (accumX + dx) : (accumX - dx);
+                                if (isFirstMove) {
+                                    lines.push(`G1 X${fmt(accumX)} S${g.power} F${f}`);
+                                    isFirstMove = false;
+                                } else {
+                                    lines.push(`G1 X${fmt(accumX)} S${g.power}`);
+                                }
+                            }
+                            currentX = rowEndX;
+                            currentY = yAbs;
                         }
                     }
+                    lines.push('M5');
                     resolve(lines);
                 };
                 img.onerror = reject;
-                img.src = obj.href;
+                img.src = obj.engraveMode === 'grayscale' ? (obj.grayscaleHref || obj.href) : (obj.ditheredHref || obj.href);
             });
         }
 
@@ -1664,7 +1794,8 @@
 
         objectToSVG(o) {
             if (o.type === 'image') {
-                return `<image class="cad-object" x="${fmt(o.x)}" y="${fmt(o.y)}" width="${fmt(o.width)}" height="${fmt(o.height)}" href="${o.href}" style="filter:grayscale(1)" data-id="${o.id}"/>`;
+                const imgHref = o.engraveMode === 'grayscale' ? (o.grayscaleHref || o.href) : (o.ditheredHref || o.href);
+                return `<image class="cad-object" x="${fmt(o.x)}" y="${fmt(o.y)}" width="${fmt(o.width)}" height="${fmt(o.height)}" href="${imgHref}" style="filter:grayscale(1)" data-id="${o.id}"/>`;
             }
 
             const isSel = o.id === this.selectedId;
