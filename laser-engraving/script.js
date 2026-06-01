@@ -1423,7 +1423,7 @@
             lines.push(`; Bounds: X${fmt(bounds.x1)} Y${fmt(bounds.y1)} to X${fmt(bounds.x2)} Y${fmt(bounds.y2)}`);
             lines.push('G00 G17 G40 G21 G54');
             lines.push('G90');
-            lines.push('M4 ; Dynamic Laser Power Mode (GRBL Standard)');
+            lines.push('M3 ; Constant Laser Power Mode (GRBL Standard)');
             lines.push(`; ${obj.type} @ ${fmt(obj.speed)} mm/min, ${fmt(obj.power)}% power`);
             if (obj.mode === 'engrave') lines.push('M8');
             const body = await this.generateObjectMoves(obj);
