@@ -1360,8 +1360,8 @@
                 const body = await this.objectToGC(obj);
                 gc.push(body);
             }
-            gc.push('M5 ; Laser Off');
-            gc.push('G0 X0 Y0 ; Home');
+            gc.push('M5');
+            gc.push('G0 X0 Y0');
             const gcContent = gc.join('\n');
             if (typeof window.showSaveFilePicker === 'function') {
                 try {
@@ -1423,13 +1423,15 @@
             lines.push(`; Bounds: X${fmt(bounds.x1)} Y${fmt(bounds.y1)} to X${fmt(bounds.x2)} Y${fmt(bounds.y2)}`);
             lines.push('G00 G17 G40 G21 G54');
             lines.push('G90');
-            lines.push('M3 ; Constant Laser Power Mode (GRBL Standard)');
+            lines.push('; Constant Laser Power Mode');
+            lines.push('M3');
             lines.push(`; ${obj.type} @ ${fmt(obj.speed)} mm/min, ${fmt(obj.power)}% power`);
-            lines.push('M8 ; Turn on air assist / laser power relay');
+            lines.push('; Air assist / laser power relay on');
+            lines.push('M8');
             const body = await this.generateObjectMoves(obj);
             for (const line of body) lines.push(line);
-            lines.push('M5 ; Laser off');
-            lines.push('M9 ; Coolant/Air Assist off');
+            lines.push('M5');
+            lines.push('M9');
             lines.push('G90');
             lines.push('');
             return lines.join('\n');
