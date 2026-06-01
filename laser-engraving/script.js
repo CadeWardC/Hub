@@ -1425,10 +1425,11 @@
             lines.push('G90');
             lines.push('M3 ; Constant Laser Power Mode (GRBL Standard)');
             lines.push(`; ${obj.type} @ ${fmt(obj.speed)} mm/min, ${fmt(obj.power)}% power`);
-            if (obj.mode === 'engrave') lines.push('M8');
+            lines.push('M8 ; Turn on air assist / laser power relay');
             const body = await this.generateObjectMoves(obj);
             for (const line of body) lines.push(line);
-            lines.push('M5');
+            lines.push('M5 ; Laser off');
+            lines.push('M9 ; Coolant/Air Assist off');
             lines.push('G90');
             lines.push('');
             return lines.join('\n');
