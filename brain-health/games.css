@@ -1,0 +1,146 @@
+/* ============================================================
+   games.css — shared game stage + per-game visuals
+   ============================================================ */
+
+/* ---- stage scaffolding ------------------------------------- */
+.game-host { display: flex; flex-direction: column; min-height: 420px; }
+.g-prompt { text-align: center; font-size: 0.95rem; color: var(--muted); min-height: 1.4em; margin-bottom: 0.5rem; }
+.g-progress { height: 4px; background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden; margin-bottom: 1rem; }
+.g-progress-bar { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--brand), var(--brand-2)); transition: width 0.3s; }
+.g-area { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.25rem; }
+.g-status { text-align: center; font-size: 0.78rem; color: var(--dim); min-height: 1.2em; margin-top: 0.75rem; }
+
+.g-fixation { font-size: 2.5rem; color: var(--dim); }
+
+/* countdown */
+.g-countdown { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; min-height: 420px; }
+.g-count-label { font-size: 1rem; color: var(--muted); }
+.g-count-num { font-size: 4.5rem; font-weight: 800; color: var(--brand-2); }
+.pop { animation: pop 0.3s cubic-bezier(0.23,1,0.32,1); }
+@keyframes pop { from { transform: scale(0.6); opacity: 0.3; } to { transform: scale(1); opacity: 1; } }
+
+/* flash feedback */
+.g-flash { position: absolute; inset: 0; border-radius: 16px; opacity: 0; pointer-events: none; transition: opacity 0.12s; }
+.g-flash.show { opacity: 0.16; }
+.g-flash.good { background: var(--good); }
+.g-flash.bad { background: var(--bad); }
+
+/* generic game buttons row */
+.g-btn.wide { width: 100%; }
+
+/* ---- N-Back ------------------------------------------------ */
+.nb-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  width: min(280px, 70vw); aspect-ratio: 1;
+}
+.nb-cell { background: rgba(255,255,255,0.04); border: 1px solid var(--panel-bd); border-radius: 12px; transition: background 0.1s, box-shadow 0.1s; }
+.nb-cell.active { background: var(--brand); box-shadow: 0 0 24px -2px var(--brand); border-color: var(--brand-2); }
+.nb-letter { font-size: 2rem; height: 2.2rem; color: var(--brand-2); font-weight: 700; }
+.nb-controls { display: flex; gap: 0.75rem; width: min(280px, 70vw); }
+.nb-controls .nb-btn { flex: 1; }
+.nb-btn.armed { outline: 3px solid var(--brand-2); filter: brightness(1.2); }
+
+/* ---- Digit Span -------------------------------------------- */
+.ds-display { font-size: 4rem; font-weight: 800; color: var(--brand-2); min-height: 4.5rem; min-width: 2ch; text-align: center; }
+.ds-entry { font-size: 1.6rem; letter-spacing: 0.2em; color: var(--text); min-height: 2rem; }
+.ds-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; width: min(260px, 70vw); }
+.ds-key { background: var(--panel); border: 1px solid var(--panel-bd); color: var(--text); box-shadow: none; font-size: 1.2rem; padding: 0.85rem; }
+.ds-key:hover { background: rgba(255,255,255,0.08); }
+
+/* ---- Corsi ------------------------------------------------- */
+.corsi-board { position: relative; width: min(320px, 78vw); aspect-ratio: 1; }
+.corsi-block {
+  position: absolute; width: 24%; aspect-ratio: 1; border-radius: 12px;
+  background: rgba(255,255,255,0.05); border: 1px solid var(--panel-bd);
+  transition: background 0.1s, box-shadow 0.1s, transform 0.1s;
+}
+.corsi-block.clickable { cursor: pointer; }
+.corsi-block.clickable:hover { background: rgba(255,255,255,0.1); }
+.corsi-block.lit { background: var(--brand); box-shadow: 0 0 22px -2px var(--brand); transform: scale(1.06); }
+
+/* ---- Stroop ------------------------------------------------ */
+.stroop-word { font-size: clamp(2.5rem, 9vw, 4rem); font-weight: 800; min-height: 1.2em; letter-spacing: 0.02em; }
+.stroop-btns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; width: min(320px, 78vw); }
+.stroop-key { color: #0a0a0f; font-weight: 800; text-transform: capitalize; box-shadow: none; }
+
+/* ---- Flanker ----------------------------------------------- */
+.flanker-row { font-size: clamp(2rem, 8vw, 3.2rem); letter-spacing: 0.15em; color: var(--text); min-height: 1.4em; }
+.flanker-row.conflict { color: var(--brand-2); }
+.flanker-btns, .sm-btns, .mr-btns, .ts-btns, .ms-btns { display: flex; gap: 0.75rem; width: min(320px, 78vw); }
+.flanker-btns .g-btn, .sm-btns .g-btn, .mr-btns .g-btn, .ts-btns .g-btn, .ms-btns .g-btn { flex: 1; }
+
+/* ---- Go / No-Go -------------------------------------------- */
+.gng-signal {
+  width: min(220px, 60vw); aspect-ratio: 1; border-radius: 50%;
+  border: 2px solid var(--panel-bd); background: rgba(255,255,255,0.04);
+  color: #07120c; font-size: 2rem; font-weight: 800; letter-spacing: 0.05em;
+  display: grid; place-items: center; box-shadow: none;
+}
+.gng-signal.go { background: radial-gradient(circle at 35% 30%, #5ee9a8, #16a34a); border-color: #16a34a; box-shadow: 0 0 40px -6px #22c55e; }
+.gng-signal.stop { background: radial-gradient(circle at 35% 30%, #fca5a5, #dc2626); border-color: #dc2626; color: #2a0606; box-shadow: 0 0 40px -6px #ef4444; }
+
+/* ---- Visual Search ----------------------------------------- */
+.vs-field { position: relative; width: min(440px, 86vw); height: min(360px, 60vh); background: rgba(255,255,255,0.02); border: 1px solid var(--panel-bd); border-radius: 16px; overflow: hidden; }
+.vs-item { position: absolute; width: 16px; height: 40px; border-radius: 4px; cursor: pointer; }
+.vs-item.teal { background: #2dd4bf; }
+.vs-item.orange { background: #fb923c; }
+
+/* ---- Reaction Time ----------------------------------------- */
+.rt-pad {
+  width: min(420px, 86vw); height: min(260px, 44vh); border-radius: 18px;
+  display: grid; place-items: center; font-size: 1.8rem; font-weight: 800;
+  user-select: none; cursor: pointer; transition: background 0.05s; border: 1px solid var(--panel-bd);
+}
+.rt-pad.wait { background: #3b2f1a; color: #d9b56b; }
+.rt-pad.go { background: #16a34a; color: #042310; }
+.rt-pad.hit { background: var(--brand); color: #fff; }
+.rt-pad.early { background: #b91c1c; color: #fff; }
+
+/* ---- Speed Match ------------------------------------------- */
+.sm-card {
+  width: min(180px, 50vw); aspect-ratio: 1; border-radius: 18px;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--panel-bd);
+  display: grid; place-items: center; font-size: 4.5rem; color: var(--brand-2);
+}
+
+/* ---- Trails ------------------------------------------------ */
+.trail-board { position: relative; width: min(460px, 88vw); height: min(380px, 60vh); background: rgba(255,255,255,0.02); border: 1px solid var(--panel-bd); border-radius: 16px; }
+.trail-node {
+  position: absolute; transform: translate(-50%, -50%);
+  width: 42px; height: 42px; border-radius: 50%; font-weight: 700; font-size: 1rem;
+  background: var(--panel); border: 1px solid var(--panel-bd); color: var(--text);
+  box-shadow: none; transition: background 0.15s, transform 0.1s;
+}
+.trail-node:hover { background: rgba(255,255,255,0.1); }
+.trail-node.done { background: var(--brand); color: #fff; border-color: var(--brand-2); }
+.trail-node.wrong { background: var(--bad); color: #fff; }
+
+/* ---- Task Switch ------------------------------------------- */
+.ts-panel {
+  width: min(280px, 72vw); aspect-ratio: 1.3; border-radius: 18px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;
+  border: 2px solid var(--panel-bd); transition: background 0.2s, border-color 0.2s;
+}
+.ts-panel.parity { background: rgba(96,165,250,0.12); border-color: rgba(96,165,250,0.4); }
+.ts-panel.magnitude { background: rgba(251,146,60,0.12); border-color: rgba(251,146,60,0.4); }
+.ts-rule { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.ts-num { font-size: 4rem; font-weight: 800; }
+
+/* ---- Mental Rotation --------------------------------------- */
+.mr-pair { display: flex; align-items: center; gap: 1.25rem; }
+.mr-slot { width: min(130px, 32vw); aspect-ratio: 1; display: grid; place-items: center; background: rgba(255,255,255,0.03); border: 1px solid var(--panel-bd); border-radius: 14px; }
+.mr-vs { font-size: 1.5rem; color: var(--dim); }
+.mr-shape { width: 80%; height: 80%; }
+.mr-shape rect { fill: var(--brand-2); }
+
+/* ---- Math Sprint ------------------------------------------- */
+.ms-eqn { font-size: clamp(2.2rem, 8vw, 3.4rem); font-weight: 800; min-height: 1.3em; letter-spacing: 0.02em; }
+
+/* ---- reduced motion ---------------------------------------- */
+body.reduced-motion * { animation: none !important; transition-duration: 0.001s !important; }
+body.reduced-motion .g-flash { display: none; }
+
+@media (max-width: 520px) {
+  .game-host { min-height: 380px; }
+  .g-countdown { min-height: 380px; }
+}

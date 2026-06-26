@@ -1,0 +1,145 @@
+/* ============================================================
+   components.css — buttons, game cards, overlay, results, settings
+   ============================================================ */
+
+/* ---- buttons ----------------------------------------------- */
+.g-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  background: linear-gradient(135deg, var(--brand), #6d5fd6);
+  color: #fff; font-weight: 600; font-size: 0.95rem;
+  border: none; border-radius: 12px; padding: 0.7rem 1.3rem;
+  transition: transform 0.18s, box-shadow 0.18s, filter 0.18s;
+  box-shadow: 0 6px 18px -8px rgba(139,124,246,0.7);
+}
+.g-btn:hover { transform: translateY(-2px); filter: brightness(1.07); }
+.g-btn:active { transform: translateY(0); }
+.g-btn.large { padding: 0.85rem 1.8rem; font-size: 1.05rem; border-radius: 14px; }
+.g-btn.small { padding: 0.5rem 0.95rem; font-size: 0.85rem; border-radius: 10px; }
+.g-btn.ghost {
+  background: var(--panel); border: 1px solid var(--panel-bd); color: var(--text);
+  box-shadow: none;
+}
+.g-btn.ghost:hover { background: rgba(255,255,255,0.07); }
+.g-btn.danger { color: var(--bad); border-color: rgba(248,113,113,0.3); }
+
+/* ---- game cards -------------------------------------------- */
+.game-card {
+  position: relative; overflow: hidden;
+  background: var(--panel); border: 1px solid var(--panel-bd);
+  border-radius: var(--radius); padding: 1.1rem;
+  display: flex; flex-direction: column; gap: 0.6rem; cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.23,1,0.32,1), border-color 0.3s, box-shadow 0.3s;
+}
+.game-card::before {
+  content: ''; position: absolute; inset: 0 auto 0 0; width: 3px;
+  background: var(--accent); opacity: 0.8;
+}
+.game-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 18px 36px -18px rgba(0,0,0,0.7);
+}
+.gc-head { display: flex; align-items: center; gap: 0.7rem; }
+.gc-icon {
+  width: 40px; height: 40px; flex: none; border-radius: 11px;
+  display: grid; place-items: center; font-size: 1.25rem;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+}
+.gc-name { font-size: 1rem; font-weight: 650; letter-spacing: -0.01em; }
+.gc-domain { font-size: 0.72rem; color: var(--muted); }
+.gc-level {
+  margin-left: auto; font-size: 0.72rem; font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  padding: 0.2rem 0.55rem; border-radius: 100px; white-space: nowrap;
+}
+.gc-blurb { font-size: 0.85rem; color: var(--muted); line-height: 1.45; flex: 1; }
+.gc-stats { display: flex; gap: 0.75rem; font-size: 0.74rem; color: var(--dim); }
+.gc-actions { display: flex; gap: 0.5rem; margin-top: 0.2rem; }
+.gc-actions .g-btn { flex: 1; }
+
+/* ---- overlay ----------------------------------------------- */
+.overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(6,6,10,0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  display: grid; place-items: center; padding: 1.25rem;
+  opacity: 0; transition: opacity 0.25s;
+}
+.overlay.show { opacity: 1; }
+.overlay-panel {
+  width: min(680px, 100%); max-height: 92vh; overflow-y: auto;
+  background: linear-gradient(180deg, var(--bg-soft), #0c0c12);
+  border: 1px solid var(--panel-bd); border-radius: 22px;
+  padding: 1.75rem; transform: translateY(12px) scale(0.99);
+  transition: transform 0.28s cubic-bezier(0.23,1,0.32,1);
+}
+.overlay.show .overlay-panel { transform: translateY(0) scale(1); }
+.overlay-panel.narrow { width: min(460px, 100%); }
+.overlay-panel.playing { width: min(560px, 100%); }
+
+/* ---- science block ----------------------------------------- */
+.science { margin-bottom: 1rem; }
+.science-head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.9rem; }
+.science-head h3 { font-size: 1.35rem; letter-spacing: -0.02em; }
+.sci-what { color: var(--text); margin-bottom: 0.7rem; }
+.sci-why { color: var(--muted); font-size: 0.92rem; margin-bottom: 0.7rem; }
+.sci-why strong { color: var(--brand-2); }
+.sci-cite {
+  font-size: 0.78rem; color: var(--dim); font-style: italic;
+  border-left: 2px solid var(--panel-bd); padding-left: 0.75rem; line-height: 1.5;
+}
+
+/* ---- intro ------------------------------------------------- */
+.g-intro { display: flex; flex-direction: column; gap: 0.5rem; }
+.session-pill {
+  align-self: flex-start; font-size: 0.74rem; font-weight: 600;
+  background: color-mix(in srgb, var(--brand) 18%, transparent);
+  color: var(--brand-2); padding: 0.3rem 0.8rem; border-radius: 100px;
+}
+.g-intro-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 0.3rem 0 0.6rem; font-size: 0.85rem; color: var(--muted); }
+.dom-chip {
+  font-size: 0.72rem; font-weight: 600; color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  padding: 0.25rem 0.7rem; border-radius: 100px;
+}
+.g-intro-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 0.75rem; flex-wrap: wrap; }
+.g-intro-actions .g-btn { flex: 1 1 auto; }
+
+/* ---- result ------------------------------------------------ */
+.result { text-align: center; }
+.result-emoji { font-size: 3rem; margin-bottom: 0.4rem; }
+.result h2 { font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 1rem; }
+.result-metrics { display: flex; gap: 0.75rem; justify-content: center; margin-bottom: 1rem; }
+.metric-box {
+  flex: 1; max-width: 130px; background: var(--panel); border: 1px solid var(--panel-bd);
+  border-radius: 14px; padding: 0.85rem 0.5rem; display: flex; flex-direction: column; gap: 0.2rem;
+}
+.metric-value { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+.metric-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.result-detail { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+.level-up { color: var(--good); font-weight: 600; }
+.level-down { color: var(--muted); }
+
+.summary-list { display: flex; flex-direction: column; gap: 0.4rem; margin: 1rem 0; text-align: left; }
+.summary-row { display: flex; align-items: center; gap: 0.7rem; background: var(--panel); border: 1px solid var(--panel-bd); border-radius: 12px; padding: 0.6rem 0.85rem; }
+.summary-row .gc-icon { width: 32px; height: 32px; font-size: 1rem; background: rgba(255,255,255,0.05); border-color: var(--panel-bd); }
+.summary-name { flex: 1; font-size: 0.9rem; }
+.summary-score { font-weight: 700; color: var(--brand-2); }
+
+/* ---- settings ---------------------------------------------- */
+.overlay-panel h2 { margin-bottom: 1rem; letter-spacing: -0.02em; }
+.setting-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.85rem 0; border-bottom: 1px solid var(--panel-bd);
+}
+.setting-desc { display: block; font-size: 0.78rem; color: var(--muted); }
+.switch {
+  min-width: 56px; padding: 0.4rem 0.8rem; border-radius: 100px; font-weight: 700; font-size: 0.8rem;
+  background: var(--panel); border: 1px solid var(--panel-bd); color: var(--muted);
+  transition: all 0.2s;
+}
+.switch.on { background: linear-gradient(135deg, var(--brand), #6d5fd6); color: #fff; border-color: transparent; }
+.settings-stats { font-size: 0.78rem; color: var(--dim); margin: 1rem 0; line-height: 1.5; }
