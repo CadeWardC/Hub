@@ -15,8 +15,20 @@
       bests: {},      // gameId -> best score
       streak: { count: 0, last: null }, // last = YYYY-MM-DD
       sessions: [],   // [{ t, dayKey, games: [gameId], domainScores: {} }]
+      earnings: [],   // ledger: [{ cid, game_id, game_name, domain, score, accuracy, level, payout_cents, date_created, synced, server_id }]
       settings: { sound: true, speech: true, reducedMotion: false }
     };
+  }
+
+  function uuid() {
+    try {
+      if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+    } catch (e) { /* fall through */ }
+    return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = Math.floor(Math.random() * 16);
+      const v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
   }
 
   let state = load();
@@ -147,6 +159,57 @@
 
     totalPlays() {
       return Object.values(state.history).reduce((n, arr) => n + arr.length, 0);
+    },
+
+    // ---- Earnings ledger ----
+    // Append a new earning (locally, marked unsynced). Returns the full entry.
+    addEarning(partial) {
+      const entry = Object.assign({
+        cid: uuid(),
+        date_created: new Date().toISOString(),
+        synced: false,
+        server_id: null
+      }, partial);
+      state.earnings.push(entry);
+      if (state.earnings.length > 1000) state.earnings = state.earnings.slice(-1000);
+      persist();
+      return entry;
+    },
+
+    // Most-recent-first list of earnings.
+    getEarnings() {
+      return state.earnings.slice().sort(function (a, b) {
+        return new Date(b.date_created) - new Date(a.date_created);
+      });
+    },
+
+    walletCents() {
+      return state.earnings.reduce(function (n, e) { return n + (e.payout_cents || 0); }, 0);
+    },
+
+    unsynced() {
+      return state.earnings.filter(function (e) { return !e.synced; });
+    },
+
+    markSynced(cid, serverId) {
+      const e = state.earnings.find(function (x) { return x.cid === cid; });
+      if (e) { e.synced = true; if (serverId != null) e.server_id = serverId; persist(); }
+    },
+
+    // Replace the local ledger with the authoritative server list (after a
+    // successful sync). Server rows are mapped to the local entry shape.
+    replaceEarnings(serverRows) {
+      state.earnings = serverRows.map(function (r) {
+        return {
+          cid: r.cid || ('srv-' + r.id),
+          server_id: r.id,
+          game_id: r.game_id, game_name: r.game_name, domain: r.domain,
+          score: r.score, accuracy: r.accuracy, level: r.level,
+          payout_cents: r.payout_cents, date_created: r.date_created,
+          synced: true
+        };
+      });
+      persist();
     },
 
     reset() {

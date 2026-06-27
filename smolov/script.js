@@ -1,6 +1,6 @@
 // ========================================
 // SMOLOV JR. CALCULATOR - 3 WEEK PROTOCOL
-// Connected to Directus database
+// Connected to Supabase (Postgres via PostgREST)
 // ========================================
 
 (function() {
@@ -41,8 +41,8 @@
     const customLiftWrap = document.getElementById('customLiftWrap');
     const customLiftInput = document.getElementById('customLiftInput');
 
-    // --- Directus Integration ---
-    async function loadPlanFromDirectus() {
+    // --- Supabase Integration ---
+    async function loadPlanFromDB() {
         loadingScreen?.classList.remove('hidden');
         setupScreen.classList.add('hidden');
         mainApp.classList.add('hidden');
@@ -99,7 +99,7 @@
         }
     }
 
-    async function savePlanToDirectus() {
+    async function savePlanToDB() {
         if (typeof SmolovPlansAPI === 'undefined' || isSaving) return;
         isSaving = true;
         showDbStatus('Saving...');
@@ -180,7 +180,7 @@
         renderAll();
         showUndoState();
 
-        await savePlanToDirectus();
+        await savePlanToDB();
     }
 
     async function undoLastComplete() {
@@ -191,7 +191,7 @@
         lastCompleted = undoState.prevLastCompleted;
         clearUndoState();
         renderAll();
-        await savePlanToDirectus();
+        await savePlanToDB();
     }
 
     function showUndoState() {
@@ -395,7 +395,7 @@
         streak = 0;
         lastCompleted = null;
 
-        // If replacing an existing lift, keep its planId so savePlanToDirectus updates it
+        // If replacing an existing lift, keep its planId so savePlanToDB updates it
         const existing = liftPlans[selectedLift];
         if (existing) {
             planId = existing.id;
@@ -412,8 +412,8 @@
         document.getElementById('todayTab')?.classList.add('active');
         renderAll();
         
-        // Auto-save new plan to Directus
-        await savePlanToDirectus();
+        // Auto-save new plan to Supabase
+        await savePlanToDB();
 
         // Log starting max to Lift_Maxes
         if (typeof LiftMaxesAPI !== 'undefined') {
@@ -456,7 +456,7 @@
 
     // --- Program Builder ---
     function buildProgram(max, unit, increment) {
-        // Ensure numeric types — Directus API may return strings
+        // Ensure numeric types — API may return strings
         increment = Number(increment) || 0;
         const sessions = [];
         let dayNum = 0;
@@ -947,7 +947,7 @@
 
         renderAll();
         renderLiftTabs();
-        await savePlanToDirectus();
+        await savePlanToDB();
 
         // Switch to Today tab
         tabBtns.forEach(b => b.classList.remove('active'));
@@ -1054,7 +1054,7 @@
         hideAddLift();
     });
 
-    // --- Init: Try load from Directus ---
-    loadPlanFromDirectus();
+    // --- Init: Try load from Supabase ---
+    loadPlanFromDB();
 
 })();

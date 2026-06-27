@@ -113,6 +113,24 @@
     return chosen.slice(0, n);
   }
 
+  // --- Earnings model -----------------------------------------
+  // Models a paid micro-task study. Each completed game pays a small
+  // amount in cents: a base participation rate, a quality bonus scaled
+  // by accuracy, and a small bonus for harder (higher-level) tasks.
+  // Range ≈ 5–20¢ per game (~$5–9/hr at typical ~75s/game).
+  function payoutCents(game, result) {
+    const acc = result && result.accuracy != null ? Math.max(0, Math.min(1, result.accuracy)) : 0;
+    const level = (result && result.level) || 1;
+    const base = 5;                              // participation pay
+    const quality = Math.round(acc * 10);        // 0–10¢ accuracy bonus
+    const difficulty = Math.min(5, Math.floor((level - 1) / 2)); // 0–5¢
+    return base + quality + difficulty;
+  }
+
+  function formatMoney(cents) {
+    return '$' + (Math.max(0, cents) / 100).toFixed(2);
+  }
+
   BRAIN.register = register;
   BRAIN.engine = {
     games: games,
@@ -124,6 +142,8 @@
     normalize: normalize,
     domainIndex: domainIndex,
     overallIndex: overallIndex,
-    pickDailySession: pickDailySession
+    pickDailySession: pickDailySession,
+    payoutCents: payoutCents,
+    formatMoney: formatMoney
   };
 })();

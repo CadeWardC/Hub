@@ -15,7 +15,8 @@
 Each sub-project is self-contained with its own entrypoint (`index.html`).
 
 ## Backend / APIs
-- `smolov/directus.js` uses a Directus CMS instance at `api.opcw032522.uk`. Credentials are hardcoded — do not expose or change without coordination.
+- `smolov/supabase.js` talks to Supabase PostgREST (`/rest/v1`). Config comes from `smolov/config.js` (gitignored, generated from the repo-root `.env`), which sets `window.SMOLOV_CONFIG` with the project URL and the **publishable/anon** key only. The `.env` `SUPABASE_SECRET_KEY` must never reach client code. `config.example.js` is the committed template; `supabase-schema.sql` creates the `lift_maxes` and `smolov_plans` tables plus permissive anon RLS policies (run once in the Supabase SQL editor). The client keeps the original `LiftMaxesAPI` / `SmolovPlansAPI` surface so `script.js` is unchanged.
+- `brain-health/core/cloud.js` talks to the **same** Supabase project via PostgREST for the earnings ledger only (`brain_earnings` table; see `brain-health/supabase-schema.sql`). Config is `brain-health/config.js` (gitignored, `window.BRAIN_CONFIG`, publishable key only); `config.example.js` is the committed template. Game progress (levels/streak/history) stays in localStorage; only earnings sync to the cloud. Sync is best-effort with a local fallback: each completed game appends an earning locally (with a client `cid` for idempotency) and pushes it; `reconcileEarnings()` flushes unsynced rows then pulls the server list as the source of truth.
 - `paypers/app.js` fetches from Europe PMC REST API (`www.ebi.ac.uk/europepmc/webservices/rest/search`).
 
 ## Editing conventions
@@ -25,13 +26,13 @@ Each sub-project is self-contained with its own entrypoint (`index.html`).
 - Every sub-project uses a view state machine (loading → setup → main, or welcome → tabs, or onboarding → viewer).
 - `paypers/` has two tabs: Swipe (card stack) and Saved (paper list). Double-tapping the Saved tab triggers a full state reset.
 - `laser-engraving/` has a CAD engine rendering to SVG with pan/zoom/draw/drag tools. `doggo.gc` is a sample G-code file.
-- `brain-health/` is modular: `core/` (storage, ui, engine) loads first, then each `games/*.js` file self-registers games via `BRAIN.register(spec)`, then `app.js` boots the dashboard. Script order in `index.html` matters. Each game spec exposes `play(host, {level}) → Promise<{score, accuracy, level, metric}>`; the engine runs an accuracy-based adaptive staircase between sessions. Adding a game = one `BRAIN.register({...})` call in the relevant domain file. Dual N-Back uses the Web Speech API for its audio stream (graceful visual fallback).
+- `brain-health/` is modular: `config.js` + `core/` (storage, ui, engine, cloud) load first, then each `games/*.js` file self-registers games via `BRAIN.register(spec)`, then `app.js` boots. Script order in `index.html` matters. Each game spec exposes `play(host, {level}) → Promise<{score, accuracy, level, metric}>`; the engine runs an accuracy-based adaptive staircase between sessions. Adding a game = one `BRAIN.register({...})` call in the relevant domain file. Dual N-Back uses the Web Speech API for its audio stream (graceful visual fallback). The UI is two tabs (Train / Earnings); every completed game pays a small amount via `engine.payoutCents()` (≈5–20¢, scaled by accuracy + level) recorded in the earnings ledger.
 
 ## Persistence
-- `smolov/` — Directus CMS (remote)
+- `smolov/` — Supabase (Postgres via PostgREST): `lift_maxes`, `smolov_plans`
 - `paypers/` — localStorage (`paypersState`)
 - `laser-engraving/` — localStorage (`laserEngraving_bedSize`, `laserEngraving_presets`)
-- `brain-health/` — localStorage (`brainHealth.v1`: levels, history, bests, streak, settings)
+- `brain-health/` — localStorage (`brainHealth.v1`: levels, history, bests, streak, settings, earnings cache) + Supabase `brain_earnings` ledger (authoritative for payouts)
 
 ## Artifacts to ignore
 - `.playwright-mcp/` directories are Playwright test artifacts.

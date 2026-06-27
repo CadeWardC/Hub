@@ -143,3 +143,98 @@
 }
 .switch.on { background: linear-gradient(135deg, var(--brand), #6d5fd6); color: #fff; border-color: transparent; }
 .settings-stats { font-size: 0.78rem; color: var(--dim); margin: 1rem 0; line-height: 1.5; }
+
+/* ============================================================
+   TABS · WALLET · EARNINGS  (added with the payments feature)
+   ============================================================ */
+
+/* ---- tab bar ----------------------------------------------- */
+.tabbar {
+  display: flex; gap: 0.4rem; margin-bottom: 1.75rem;
+  background: var(--panel); border: 1px solid var(--panel-bd);
+  border-radius: 14px; padding: 0.35rem; width: fit-content;
+}
+.tabbar-btn {
+  background: transparent; border: none; color: var(--muted);
+  font-weight: 600; font-size: 0.95rem; padding: 0.55rem 1.25rem;
+  border-radius: 10px; transition: background 0.2s, color 0.2s;
+}
+.tabbar-btn:hover { color: var(--text); }
+.tabbar-btn.active {
+  background: linear-gradient(135deg, var(--brand), #6d5fd6);
+  color: #fff; box-shadow: 0 6px 16px -8px rgba(139,124,246,0.7);
+}
+
+/* ---- header wallet pill ------------------------------------ */
+.wallet-pill {
+  background: none; border: none; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 0; transition: transform 0.2s;
+}
+.wallet-pill:hover { transform: translateY(-1px); }
+.wallet-amt { color: var(--good); }
+
+/* ---- wallet hero (earnings tab) ---------------------------- */
+.wallet-hero {
+  text-align: center;
+  background: linear-gradient(135deg, rgba(52,211,153,0.14), rgba(52,211,153,0.03));
+  border: 1px solid rgba(52,211,153,0.22);
+  border-radius: 22px; padding: 2.25rem 1.5rem; margin-bottom: 1.5rem;
+}
+.wallet-amount {
+  font-size: clamp(2.75rem, 9vw, 4rem); font-weight: 800; letter-spacing: -0.02em;
+  color: var(--good); line-height: 1;
+}
+.wallet-label { display: block; margin-top: 0.4rem; color: var(--muted); font-size: 0.85rem;
+  text-transform: uppercase; letter-spacing: 0.08em; }
+.wallet-note { max-width: 52ch; margin: 1rem auto 0; color: var(--muted); font-size: 0.86rem; line-height: 1.6; }
+
+/* ---- earnings stats row ------------------------------------ */
+.earn-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.75rem; }
+.earn-stat {
+  background: var(--panel); border: 1px solid var(--panel-bd); border-radius: 14px;
+  padding: 1rem 0.5rem; text-align: center; display: flex; flex-direction: column; gap: 0.25rem;
+}
+.earn-stat-val { font-size: 1.4rem; font-weight: 700; color: var(--text); }
+.earn-stat-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ---- earnings list ----------------------------------------- */
+.earn-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; }
+.earn-head h3 { font-size: 1.15rem; letter-spacing: -0.01em; }
+.earn-sync {
+  font-size: 0.72rem; font-weight: 600; color: var(--muted);
+  background: var(--panel); border: 1px solid var(--panel-bd);
+  padding: 0.25rem 0.7rem; border-radius: 100px;
+}
+.earn-sync.ok { color: var(--good); border-color: rgba(52,211,153,0.3); }
+.earn-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.earn-empty { color: var(--dim); text-align: center; padding: 2rem 0; }
+.earn-row {
+  display: flex; align-items: center; gap: 0.85rem;
+  background: var(--panel); border: 1px solid var(--panel-bd);
+  border-left: 3px solid var(--accent, var(--brand));
+  border-radius: 12px; padding: 0.7rem 0.95rem;
+}
+.earn-row-icon { font-size: 1.3rem; width: 1.6rem; text-align: center; }
+.earn-row-main { flex: 1; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.earn-row-name { font-weight: 600; font-size: 0.95rem; }
+.earn-row-sub { font-size: 0.74rem; color: var(--muted); }
+.earn-row-pay { font-weight: 800; color: var(--good); font-size: 1rem; white-space: nowrap; }
+
+/* ---- payout banner (result + session screens) -------------- */
+.payout-banner {
+  display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+  background: linear-gradient(135deg, rgba(52,211,153,0.16), rgba(52,211,153,0.04));
+  border: 1px solid rgba(52,211,153,0.28); border-radius: 16px;
+  padding: 0.85rem 1rem; margin: 0 auto 1.1rem; width: fit-content; min-width: 200px;
+  animation: payPop 0.45s cubic-bezier(0.23,1,0.32,1) both;
+}
+.payout-amt { font-size: 2rem; font-weight: 800; color: var(--good); line-height: 1; }
+.payout-sub { font-size: 0.74rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+@keyframes payPop { from { opacity: 0; transform: scale(0.8) translateY(8px); } to { opacity: 1; transform: none; } }
+body.reduced-motion .payout-banner { animation: none; }
+
+@media (max-width: 520px) {
+  .tabbar { width: 100%; }
+  .tabbar-btn { flex: 1; padding: 0.55rem 0.5rem; }
+}

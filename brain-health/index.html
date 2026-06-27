@@ -6,8 +6,8 @@
     <title>Brain Health — Adaptive Cognitive Training</title>
     <meta name="description" content="A suite of research-backed, adaptive brain-training games for working memory, attention, processing speed, and cognitive flexibility.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>🧠</text></svg>">
-    <link rel="stylesheet" href="base.css?v=1">
-    <link rel="stylesheet" href="components.css?v=1">
+    <link rel="stylesheet" href="base.css?v=2">
+    <link rel="stylesheet" href="components.css?v=2">
     <link rel="stylesheet" href="games.css?v=1">
 </head>
 <body>
@@ -27,16 +27,19 @@
         <a href="../index.html" style="color:#9b9ba6;">&larr; Back to Hub</a>
     </p>
 
-    <!-- core (order matters: storage → ui → engine) -->
-    <script src="core/storage.js?v=1"></script>
+    <!-- supabase config (publishable key only; gitignored) -->
+    <script src="config.js?v=1"></script>
+    <!-- core (order matters: storage → ui → engine → cloud) -->
+    <script src="core/storage.js?v=2"></script>
     <script src="core/ui.js?v=1"></script>
-    <script src="core/engine.js?v=1"></script>
+    <script src="core/engine.js?v=2"></script>
+    <script src="core/cloud.js?v=1"></script>
     <!-- games self-register into the engine -->
     <script src="games/working-memory.js?v=1"></script>
     <script src="games/attention.js?v=1"></script>
     <script src="games/processing-speed.js?v=1"></script>
     <script src="games/flexibility.js?v=1"></script>
     <!-- app boots last -->
-    <script src="app.js?v=1"></script>
+    <script src="app.js?v=2"></script>
 </body>
 </html>

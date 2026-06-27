@@ -10,6 +10,31 @@
   const root = document.getElementById('app');
   const headerSlot = document.getElementById('header-stats');
 
+  let currentTab = 'train'; // 'train' | 'earnings'
+
+  // ---- app shell (tab bar + active view) ----------------------
+  function renderApp() {
+    renderHeader();
+    ui.clear(root);
+    const nav = el('nav', { class: 'tabbar' }, [
+      tabBtn('train', '🏋️ Train'),
+      tabBtn('earnings', '💵 Earnings')
+    ]);
+    const view = el('div', { class: 'tab-view' });
+    root.appendChild(nav);
+    root.appendChild(view);
+    if (currentTab === 'earnings') renderEarnings(view);
+    else renderTrain(view);
+  }
+
+  function tabBtn(id, label) {
+    return el('button', {
+      class: 'tabbar-btn' + (currentTab === id ? ' active' : ''),
+      text: label,
+      onclick: function () { if (currentTab !== id) { currentTab = id; renderApp(); } }
+    });
+  }
+
   // ---- small SVG ring gauge ----------------------------------
   function ring(percent, color, size, label) {
     const ns = 'http://www.w3.org/2000/svg';
@@ -42,6 +67,11 @@
     const overall = engine.overallIndex();
     const streak = store.streak;
     const wrap = el('div', { class: 'hstats' }, [
+      el('button', { class: 'hstat wallet-pill', title: 'View earnings',
+        onclick: function () { currentTab = 'earnings'; renderApp(); } }, [
+        el('div', { class: 'hstat-big wallet-amt', text: engine.formatMoney(store.walletCents()) }),
+        el('span', { class: 'hstat-label', text: 'Earned' })
+      ]),
       el('div', { class: 'hstat' }, [
         ring(overall, '#8b7cf6', 44, overall || '–'),
         el('span', { class: 'hstat-label', text: 'Brain Index' })
@@ -86,10 +116,7 @@
     return card;
   }
 
-  function renderDashboard() {
-    renderHeader();
-    ui.clear(root);
-
+  function renderTrain(view) {
     // Daily training hero
     const trained = store.trainedToday();
     const hero = el('section', { class: 'daily-hero' }, [
@@ -108,7 +135,7 @@
         ]);
       }))
     ]);
-    root.appendChild(hero);
+    view.appendChild(hero);
 
     // Domain sections
     engine.domainList().forEach(function (d) {
@@ -121,14 +148,137 @@
       const grid = el('div', { class: 'game-grid' });
       engine.gamesIn(d.id).forEach(function (g) { grid.appendChild(gameCard(g)); });
       section.appendChild(grid);
-      root.appendChild(section);
+      view.appendChild(section);
     });
 
     // Footer note
-    root.appendChild(el('p', { class: 'science-note',
+    view.appendChild(el('p', { class: 'science-note',
       html: 'Every game implements a validated cognitive paradigm with adaptive difficulty. ' +
             'Training improves performance on trained tasks; transfer to everyday cognition is debated — ' +
             'treat this as engaging practice, not a medical intervention.' }));
+  }
+
+  // ---- earnings tab -------------------------------------------
+  function renderEarnings(view) {
+    const totalEl = el('div', { class: 'wallet-amount', text: engine.formatMoney(store.walletCents()) });
+    const syncBadge = el('span', { class: 'earn-sync',
+      text: BRAIN.cloud.configured ? 'Syncing…' : 'Local only' });
+
+    const hero = el('section', { class: 'wallet-hero' }, [
+      totalEl,
+      el('span', { class: 'wallet-label', text: 'Total earned' }),
+      el('p', { class: 'wallet-note',
+        text: 'You’re compensated as a paid research participant: a small micro-payment for each completed task, scaled by accuracy and difficulty (≈ $5–9/hour equivalent). Payouts sync to your account.' })
+    ]);
+    view.appendChild(hero);
+
+    const statsRow = el('div', { class: 'earn-stats' });
+    view.appendChild(statsRow);
+
+    const head = el('div', { class: 'earn-head' }, [ el('h3', { text: 'Payout history' }), syncBadge ]);
+    view.appendChild(head);
+    const listWrap = el('div', { class: 'earn-list' });
+    view.appendChild(listWrap);
+
+    function paint() {
+      totalEl.textContent = engine.formatMoney(store.walletCents());
+      renderEarnStats(statsRow);
+      renderEarnList(listWrap);
+    }
+    paint();
+
+    // Reconcile with Supabase, then repaint with authoritative data.
+    if (BRAIN.cloud.configured) {
+      reconcileEarnings().then(function (ok) {
+        syncBadge.textContent = ok ? 'Synced ✓' : 'Offline — saved locally';
+        syncBadge.classList.toggle('ok', ok);
+        paint();
+      });
+    } else {
+      syncBadge.textContent = 'Local only (Supabase not configured)';
+    }
+  }
+
+  function renderEarnStats(row) {
+    ui.clear(row);
+    const all = store.getEarnings();
+    const today = store.dayKey();
+    const todayCents = all.filter(function (e) {
+      return store.dayKey(new Date(e.date_created)) === today;
+    }).reduce(function (n, e) { return n + (e.payout_cents || 0); }, 0);
+    const avg = all.length ? Math.round(store.walletCents() / all.length) : 0;
+    [
+      ['Today', engine.formatMoney(todayCents)],
+      ['Tasks paid', String(all.length)],
+      ['Avg / task', engine.formatMoney(avg)]
+    ].forEach(function (s) {
+      row.appendChild(el('div', { class: 'earn-stat' }, [
+        el('span', { class: 'earn-stat-val', text: s[1] }),
+        el('span', { class: 'earn-stat-label', text: s[0] })
+      ]));
+    });
+  }
+
+  function renderEarnList(wrap) {
+    ui.clear(wrap);
+    const list = store.getEarnings();
+    if (!list.length) {
+      wrap.appendChild(el('p', { class: 'earn-empty', text: 'No payouts yet — finish a game to get paid.' }));
+      return;
+    }
+    list.slice(0, 100).forEach(function (e) {
+      const dom = engine.DOMAINS[e.domain];
+      const card = el('div', { class: 'earn-row' });
+      if (dom) card.style.setProperty('--accent', dom.color);
+      card.appendChild(el('span', { class: 'earn-row-icon', text: (engine.byId[e.game_id] && engine.byId[e.game_id].icon) || '🎮' }));
+      card.appendChild(el('div', { class: 'earn-row-main' }, [
+        el('span', { class: 'earn-row-name', text: e.game_name || e.game_id }),
+        el('span', { class: 'earn-row-sub', text: timeAgo(e.date_created) +
+          (e.accuracy != null ? ' · ' + Math.round(e.accuracy * 100) + '%' : '') +
+          ' · Lv ' + (e.level || 1) })
+      ]));
+      card.appendChild(el('span', { class: 'earn-row-pay', text: '+' + engine.formatMoney(e.payout_cents) }));
+      wrap.appendChild(card);
+    });
+  }
+
+  function timeAgo(iso) {
+    const s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+    if (s < 60) return 'just now';
+    if (s < 3600) return Math.floor(s / 60) + 'm ago';
+    if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+    return Math.floor(s / 86400) + 'd ago';
+  }
+
+  // Push any unsynced local earnings, then pull the server list as truth.
+  async function reconcileEarnings() {
+    if (!BRAIN.cloud.configured) return false;
+    const pending = store.unsynced();
+    for (let i = 0; i < pending.length; i++) {
+      const res = await BRAIN.cloud.insertEarning(pending[i]);
+      if (res && res.data) store.markSynced(pending[i].cid, res.data.id);
+      else if (res && res.status === 409) store.markSynced(pending[i].cid, null); // dup cid
+      else return false; // network/server issue — stop, stay local
+    }
+    const fetched = await BRAIN.cloud.fetchEarnings(200);
+    if (fetched && fetched.data) { store.replaceEarnings(fetched.data); return true; }
+    return false;
+  }
+
+  // Award payment for a completed game; record locally + push to Supabase.
+  async function awardEarning(game, result) {
+    const cents = engine.payoutCents(game, result);
+    const entry = store.addEarning({
+      game_id: game.id, game_name: game.name, domain: game.domain,
+      score: result.score, accuracy: result.accuracy != null ? result.accuracy : null,
+      level: store.getLevel(game.id), payout_cents: cents
+    });
+    if (BRAIN.cloud.configured) {
+      const res = await BRAIN.cloud.insertEarning(entry);
+      if (res && res.data) store.markSynced(entry.cid, res.data.id);
+      else if (res && res.status === 409) store.markSynced(entry.cid, null);
+    }
+    return cents;
   }
 
   // ---- overlay plumbing ---------------------------------------
@@ -209,12 +359,13 @@
         store.setLevel(game.id, newLevel);
         const rec = store.recordResult(game.id, result);
         store.touchStreak();
-        showResult(o, game, result, rec, newLevel - level, session, resolve);
+        const earnedCents = await awardEarning(game, result);
+        showResult(o, game, result, rec, newLevel - level, session, resolve, earnedCents);
       }
     });
   }
 
-  function showResult(o, game, result, rec, levelDelta, session, resolve) {
+  function showResult(o, game, result, rec, levelDelta, session, resolve, earnedCents) {
     ui.clear(o.panel);
     o.panel.classList.add('narrow');
     const dom = engine.DOMAINS[game.domain];
@@ -222,6 +373,10 @@
     const card = el('div', { class: 'result' }, [
       el('div', { class: 'result-emoji', text: rec.isBest ? '🏆' : (acc != null && acc >= 80 ? '🎯' : '✓') }),
       el('h2', { text: rec.isBest ? 'New best!' : 'Session complete' }),
+      earnedCents != null ? el('div', { class: 'payout-banner' }, [
+        el('span', { class: 'payout-amt', text: '+' + engine.formatMoney(earnedCents) }),
+        el('span', { class: 'payout-sub', text: 'paid · ' + engine.formatMoney(store.walletCents()) + ' total' })
+      ]) : null,
       el('div', { class: 'result-metrics' }, [
         metricBox(result.metric ? result.metric.label : 'Score', result.metric ? result.metric.value : result.score),
         metricBox('Score', String(result.score)),
@@ -241,7 +396,7 @@
         onclick: function () { o.close(); resolve(result); }
       }));
     } else {
-      actions.appendChild(el('button', { class: 'g-btn ghost', text: 'Done', onclick: function () { o.close(); resolve(result); renderDashboard(); } }));
+      actions.appendChild(el('button', { class: 'g-btn ghost', text: 'Done', onclick: function () { o.close(); resolve(result); renderApp(); } }));
       actions.appendChild(el('button', { class: 'g-btn large', text: 'Play again', onclick: function () { o.close(); resolve(result); launchGame(game); } }));
     }
     o.panel.appendChild(actions);
@@ -272,9 +427,14 @@
     const avgAcc = results.length
       ? Math.round(results.reduce(function (a, r) { return a + (r.res.accuracy || 0); }, 0) / results.length * 100)
       : 0;
+    const sessionCents = results.reduce(function (a, r) { return a + engine.payoutCents(r.game, r.res); }, 0);
     o.panel.appendChild(el('div', { class: 'result' }, [
       el('div', { class: 'result-emoji', text: '🧠' }),
       el('h2', { text: 'Daily session done' }),
+      el('div', { class: 'payout-banner' }, [
+        el('span', { class: 'payout-amt', text: '+' + engine.formatMoney(sessionCents) }),
+        el('span', { class: 'payout-sub', text: 'earned · ' + engine.formatMoney(store.walletCents()) + ' total' })
+      ]),
       el('p', { class: 'result-detail', text: results.length + ' games · ' + avgAcc + '% average accuracy · streak ' + store.streak }),
       el('div', { class: 'summary-list' }, lineup.map(function (g) {
         const r = results.find(function (x) { return x.game.id === g.id; });
@@ -285,7 +445,7 @@
         ]);
       }))
     ]));
-    o.panel.appendChild(el('button', { class: 'g-btn large', text: 'Back to dashboard', onclick: function () { o.close(); renderDashboard(); } }));
+    o.panel.appendChild(el('button', { class: 'g-btn large', text: 'Back to dashboard', onclick: function () { o.close(); renderApp(); } }));
   }
 
   // ---- settings ------------------------------------------------
@@ -312,23 +472,30 @@
     o.panel.appendChild(toggle('sound', 'Sound effects', 'Beeps and feedback tones.'));
     o.panel.appendChild(toggle('reducedMotion', 'Reduced motion', 'Minimize animations and flashes.'));
     o.panel.appendChild(el('div', { class: 'settings-stats', text:
-      store.totalPlays() + ' games played all-time · best streak data stored locally in your browser.' }));
+      store.totalPlays() + ' games played all-time · ' + engine.formatMoney(store.walletCents()) + ' earned · ' +
+      (BRAIN.cloud.configured ? 'earnings sync to Supabase' : 'earnings stored locally only') + '. ' +
+      'Progress (levels, streak) is stored locally in your browser.' }));
     o.panel.appendChild(el('div', { class: 'g-intro-actions' }, [
       el('button', {
         class: 'g-btn ghost danger', text: 'Reset all progress', onclick: function () {
           if (confirm('Erase all levels, scores, and streaks? This cannot be undone.')) {
-            store.reset(); o.close(); renderDashboard();
+            store.reset(); o.close(); renderApp();
           }
         }
       }),
-      el('button', { class: 'g-btn', text: 'Close', onclick: function () { o.close(); renderDashboard(); } })
+      el('button', { class: 'g-btn', text: 'Close', onclick: function () { o.close(); renderApp(); } })
     ]));
   }
 
   // ---- boot ----------------------------------------------------
   function boot() {
     if (store.settings.reducedMotion) document.body.classList.add('reduced-motion');
-    renderDashboard();
+    renderApp();
+    // Background: pull authoritative earnings from Supabase, then refresh the
+    // wallet figure (header + earnings tab if open).
+    if (BRAIN.cloud.configured) {
+      reconcileEarnings().then(function (ok) { if (ok) renderApp(); });
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

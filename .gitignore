@@ -1,2 +1,5 @@
 /.playwright-mcp
 pass.txt
+.env
+smolov/config.js
+brain-health/config.js
