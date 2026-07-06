@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD2PDF — Markdown to PDF</title>
+    <meta name="description" content="Write or paste Markdown, preview it live, and download it as a clean PDF. Everything runs in your browser.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#128196;</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <a href="../index.html" class="back-link" aria-label="Back to Hub">&#8592; Hub</a>
+        <div class="app-title">
+            <span class="title-mark">&#128196;</span>
+            <span>MD2PDF</span>
+        </div>
+        <div class="header-actions">
+            <label class="doc-title-field">
+                <input type="text" id="doc-title" placeholder="Untitled document" value="Untitled document" aria-label="Document title">
+            </label>
+            <button id="download-btn" class="btn btn-primary" type="button">Download PDF</button>
+        </div>
+    </header>
+
+    <!-- Shown only on narrow / portrait screens to switch the single visible pane -->
+    <div class="view-toggle" role="tablist" aria-label="Switch view">
+        <button class="view-btn is-active" data-view="editor" type="button" role="tab" aria-selected="true">&#9998; Write</button>
+        <button class="view-btn" data-view="preview" type="button" role="tab" aria-selected="false">&#9635; Preview</button>
+    </div>
+
+    <main class="workspace show-editor">
+        <section class="pane editor-pane">
+            <div class="pane-head">
+                <span class="pane-label">Markdown</span>
+                <div class="pane-tools">
+                    <button id="sample-btn" class="btn btn-ghost" type="button">Load sample</button>
+                    <button id="clear-btn" class="btn btn-ghost" type="button">Clear</button>
+                </div>
+            </div>
+            <textarea id="editor" class="editor" spellcheck="false" placeholder="# Start typing Markdown here..."></textarea>
+        </section>
+
+        <section class="pane preview-pane">
+            <div class="pane-head">
+                <span class="pane-label">Preview</span>
+                <span id="word-count" class="word-count">0 words</span>
+            </div>
+            <div class="preview-scroll">
+                <article id="preview" class="markdown-body"></article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Off-screen print surface: only this prints -->
+    <div id="print-root" class="print-root" aria-hidden="true"></div>
+
+    <script src="markdown.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

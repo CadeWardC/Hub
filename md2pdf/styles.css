@@ -1,0 +1,387 @@
+/* ============================================================
+   MD2PDF — matches the Hub's dark aesthetic
+   ============================================================ */
+:root {
+    --bg: #0a0a0f;
+    --panel: #121218;
+    --panel-2: #16161d;
+    --border: rgba(255, 255, 255, 0.07);
+    --text: #e4e4e7;
+    --muted: #a1a1aa;
+    --accent: #22c55e;
+    --accent-2: #0d9488;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1.25rem;
+    height: 60px;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+}
+
+.back-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+.back-link:hover { color: var(--text); }
+
+.app-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: #fafafa;
+}
+.title-mark { font-size: 1.2rem; }
+
+.header-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.doc-title-field input {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 0.5rem 0.75rem;
+    font-size: 0.88rem;
+    width: 220px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.doc-title-field input:focus { border-color: var(--accent); }
+
+/* ---------- Buttons ---------- */
+.btn {
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: #04160e;
+}
+.btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border-color: var(--border);
+    padding: 0.4rem 0.7rem;
+    font-weight: 500;
+}
+.btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+/* ---------- View toggle (narrow / portrait only) ---------- */
+.view-toggle {
+    display: none; /* revealed by the responsive block below */
+    gap: 0.3rem;
+    padding: 0.45rem 0.6rem;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+}
+.view-btn {
+    flex: 1 1 0;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.6rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.view-btn.is-active {
+    color: #04160e;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    border-color: transparent;
+}
+
+/* ---------- Workspace ---------- */
+.workspace {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 0;
+}
+
+.pane {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+}
+.editor-pane { border-right: 1px solid var(--border); }
+
+.pane-head {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+}
+.pane-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.pane-tools { display: flex; gap: 0.4rem; }
+.word-count { font-size: 0.78rem; color: var(--muted); }
+
+.editor {
+    flex: 1 1 auto;
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    background: var(--panel-2);
+    color: var(--text);
+    padding: 1.25rem 1.5rem;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Menlo', monospace;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    tab-size: 2;
+}
+.editor::placeholder { color: #52525b; }
+
+.preview-scroll {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    background: #1a1a22;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* The rendered document — a light "paper" surface */
+.markdown-body {
+    background: #ffffff;
+    color: #1f2328;
+    width: 100%;
+    max-width: 760px;
+    padding: 3.5rem 4rem;
+    border-radius: 6px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    line-height: 1.65;
+    font-size: 16px;
+}
+
+/* ---------- Markdown typography ---------- */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+    line-height: 1.25;
+    margin: 1.6em 0 0.6em;
+    font-weight: 700;
+    color: #111418;
+}
+.markdown-body h1:first-child,
+.markdown-body h2:first-child,
+.markdown-body h3:first-child { margin-top: 0; }
+.markdown-body h1 { font-size: 2em; border-bottom: 1px solid #e3e6ea; padding-bottom: 0.3em; }
+.markdown-body h2 { font-size: 1.5em; border-bottom: 1px solid #e3e6ea; padding-bottom: 0.25em; }
+.markdown-body h3 { font-size: 1.25em; }
+.markdown-body h4 { font-size: 1.05em; }
+.markdown-body h5 { font-size: 0.95em; }
+.markdown-body h6 { font-size: 0.88em; color: #6b7280; }
+
+.markdown-body p { margin: 0 0 1em; }
+.markdown-body a { color: #0969da; text-decoration: none; }
+.markdown-body a:hover { text-decoration: underline; }
+.markdown-body strong { font-weight: 700; }
+.markdown-body em { font-style: italic; }
+.markdown-body del { color: #6b7280; }
+
+.markdown-body ul,
+.markdown-body ol { margin: 0 0 1em; padding-left: 1.6em; }
+.markdown-body li { margin: 0.25em 0; }
+.markdown-body li > ul,
+.markdown-body li > ol { margin: 0.25em 0; }
+.markdown-body ul.task-list,
+.markdown-body .task-list { list-style: none; padding-left: 0.2em; }
+.markdown-body .task-item { display: flex; align-items: baseline; gap: 0.4em; }
+.markdown-body .task-item input { margin: 0; }
+
+.markdown-body blockquote {
+    margin: 0 0 1em;
+    padding: 0.2em 1em;
+    color: #57606a;
+    border-left: 4px solid #d0d7de;
+    background: #f6f8fa;
+    border-radius: 0 4px 4px 0;
+}
+.markdown-body blockquote p:last-child { margin-bottom: 0; }
+
+.markdown-body code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Menlo', monospace;
+    font-size: 0.88em;
+    background: rgba(175, 184, 193, 0.2);
+    padding: 0.15em 0.4em;
+    border-radius: 5px;
+}
+.markdown-body pre {
+    background: #f6f8fa;
+    border: 1px solid #e3e6ea;
+    border-radius: 8px;
+    padding: 1em 1.1em;
+    overflow-x: auto;
+    margin: 0 0 1em;
+}
+.markdown-body pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.85em;
+    line-height: 1.5;
+    color: #1f2328;
+}
+
+.markdown-body hr {
+    border: none;
+    border-top: 2px solid #e3e6ea;
+    margin: 2em 0;
+}
+
+.markdown-body img { max-width: 100%; border-radius: 6px; }
+
+.markdown-body table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 0 1em;
+    font-size: 0.85em;
+}
+.markdown-body th,
+.markdown-body td {
+    border: 1px solid #d0d7de;
+    padding: 0.4em 0.6em;
+}
+.markdown-body th { background: #f6f8fa; font-weight: 700; }
+.markdown-body tbody tr:nth-child(even) { background: #f9fafb; }
+
+/* ---------- Print / PDF surface ---------- */
+.print-root { display: none; }
+
+@media print {
+    .app-header,
+    .view-toggle,
+    .workspace { display: none !important; }
+
+    body { height: auto; overflow: visible; background: #fff; }
+
+    .print-root { display: block; }
+    .print-doc {
+        box-shadow: none;
+        border-radius: 0;
+        max-width: none;
+        width: 100%;
+        padding: 0;
+        font-size: 12pt;
+    }
+    .print-doc pre,
+    .print-doc blockquote,
+    .print-doc img { page-break-inside: avoid; }
+    .print-doc h1,
+    .print-doc h2,
+    .print-doc h3 { page-break-after: avoid; }
+    .print-doc a { color: #0969da; }
+
+    /* Tables: let a tall table span pages, but never split a single row
+       across the break. Repeat the header row on each page, and use a
+       slightly smaller font + tighter padding so wide tables fit the
+       full width between the margins. */
+    .print-doc table { font-size: 9.5pt; width: 100%; }
+    .print-doc thead { display: table-header-group; }
+    .print-doc tr {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    .print-doc th,
+    .print-doc td { padding: 0.3em 0.5em; }
+}
+
+@page {
+    margin: 18mm 16mm;
+}
+
+/* ---------- Responsive: single-pane tabbed layout on narrow / portrait ---------- */
+@media (max-width: 900px), (orientation: portrait) and (max-width: 1024px) {
+    .app-title { display: none; }
+    .doc-title-field input { width: 120px; }
+
+    .view-toggle { display: flex; }
+
+    /* Show one pane at a time, full height, chosen by the toggle */
+    .workspace {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 1fr);
+    }
+    .editor-pane { border-right: none; }
+    .workspace.show-editor .preview-pane { display: none; }
+    .workspace.show-preview .editor-pane { display: none; }
+
+    /* Let the document use more of the narrow width */
+    .preview-scroll { padding: 0.75rem; }
+    .markdown-body {
+        padding: 1.75rem 1.35rem;
+        font-size: 15px;
+        max-width: 100%;
+    }
+}
+
+/* Extra squeeze for phones */
+@media (max-width: 460px) {
+    .app-header { gap: 0.6rem; padding: 0 0.85rem; }
+    .btn-primary { padding: 0.5rem 0.7rem; }
+    .doc-title-field input { width: 92px; }
+    .markdown-body { padding: 1.4rem 1.05rem; }
+    .pane-tools .btn-ghost { padding: 0.35rem 0.55rem; font-size: 0.8rem; }
+}
