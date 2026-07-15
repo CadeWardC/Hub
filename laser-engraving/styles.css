@@ -498,6 +498,37 @@ body {
     border-color: rgba(255, 255, 255, 0.2);
 }
 
+.rot-quick {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.rot-btn {
+    flex: 1;
+    padding: 0.4rem 0.2rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: inherit;
+    color: #a1a1aa;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.rot-btn:hover {
+    color: #e4e4e7;
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(212, 168, 83, 0.4);
+}
+
+.rot-btn:active {
+    background: rgba(212, 168, 83, 0.15);
+}
+
 .prop-divider {
     height: 1px;
     background: rgba(255, 255, 255, 0.05);
@@ -552,13 +583,57 @@ body {
     padding: 1rem;
 }
 
+.presets-area-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
 .presets-area-title {
     font-size: 0.65rem;
     font-weight: 600;
     color: #52525b;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 0.75rem;
+}
+
+.presets-area-header .preset-add-btn {
+    width: 22px;
+    height: 22px;
+}
+
+.preset-dialog-row-wide {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+}
+
+.preset-bulk-textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 90px;
+    padding: 0.45rem 0.5rem;
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: #e4e4e7;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    outline: none;
+    white-space: pre;
+}
+
+.preset-bulk-textarea:focus {
+    border-color: rgba(212, 168, 83, 0.5);
+}
+
+.preset-bulk-hint {
+    font-size: 0.62rem;
+    color: #52525b;
+    margin: 0;
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
 }
 
 .mode-toggle {
@@ -614,6 +689,14 @@ body {
 
 .status-bar span {
     font-variant-numeric: tabular-nums;
+}
+
+#status-file {
+    max-width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #d4a853;
 }
 
 /* ========================================

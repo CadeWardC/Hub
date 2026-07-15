@@ -6,6 +6,159 @@
     'use strict';
 
     const STORAGE_KEY = 'laserEngraving_bedSize';
+    const DEBUG_KEY = 'laserEngraving_debug';
+
+    // Debug logging. Off by default; turn on from the console with
+    // LaserDebug.on() (persists), or load the page with ?debug=1.
+    const DEBUG = { enabled: false };
+
+    function dlog(scope, msg, data) {
+        if (!DEBUG.enabled) return;
+        const label = `%c[laser:${scope}]%c ${msg}`;
+        const tag = 'color:#d4a853;font-weight:bold';
+        if (data !== undefined) {
+            console.log(label, tag, 'color:inherit', data);
+        } else {
+            console.log(label, tag, 'color:inherit');
+        }
+    }
+
+    function dwarn(scope, msg, data) {
+        // Warnings always surface — they mean something actually went wrong.
+        if (data !== undefined) console.warn(`[laser:${scope}] ${msg}`, data);
+        else console.warn(`[laser:${scope}] ${msg}`);
+    }
+
+    window.LaserDebug = {
+        on() {
+            DEBUG.enabled = true;
+            try { localStorage.setItem(DEBUG_KEY, '1'); } catch (_e) {}
+            console.log('%c[laser] debug logging ON', 'color:#d4a853;font-weight:bold');
+            return 'debug on';
+        },
+        off() {
+            DEBUG.enabled = false;
+            try { localStorage.removeItem(DEBUG_KEY); } catch (_e) {}
+            console.log('[laser] debug logging OFF');
+            return 'debug off';
+        },
+        get enabled() { return DEBUG.enabled; },
+        // Dump the live project state for inspection / bug reports.
+        dump() {
+            const app = window.__laserApp;
+            if (!app) { console.warn('[laser] app not ready'); return null; }
+            const state = {
+                file: app.fileName || '(untitled)',
+                dirty: app.dirty,
+                hasFileHandle: !!app.fileHandle,
+                bed: app.bed,
+                mode: app.mode,
+                tool: app.tool,
+                objectCount: app.objects.length,
+                selectedId: app.selectedId,
+                undoDepth: app.undoStack.length,
+                redoDepth: app.redoStack.length,
+                objects: app.objects.map(o => ({
+                    id: o.id, name: o.name, type: o.type, mode: o.mode,
+                    x: o.x, y: o.y, w: o.width, h: o.height,
+                    rotation: o.rotation || 0,
+                    power: o.power, speed: o.speed, passes: o.passes
+                }))
+            };
+            console.table(state.objects);
+            console.log('[laser] state', state);
+            return state;
+        },
+        // The exact JSON that a save would write, without opening a file dialog.
+        projectJSON() {
+            const app = window.__laserApp;
+            if (!app) { console.warn('[laser] app not ready'); return null; }
+            return app.serializeProject();
+        }
+    };
+
+    const PROJECT_FORMAT = 'laserengraving-project';
+    const PROJECT_VERSION = 1;
+    const OBJECT_TYPES = ['rect', 'ellipse', 'image', 'text', 'polyline'];
+    const ROT_HANDLE_GAP = 24;   // screen px between the top edge and the rotate grip
+    const ROT_SNAP_DEG = 15;     // Shift-drag rotation increment
+
+    // Parses bulk-pasted preset rows, one preset per line:
+    //   | Category | Material | Thickness mm | Power % | Speed | Passes |
+    // e.g. "| Engraving | Basswood | 2 | 40 | 3000 | 1 |"
+    // Pipes at the ends are optional and tabs also work as separators (so a paste
+    // straight from a spreadsheet imports too). Markdown separator rows (|---|)
+    // and header rows (non-numeric power/speed) are skipped silently.
+    // Returns { presets: [{mode, name, power, speed, passes}], errors: [string] }.
+    function parsePresetRows(text) {
+        const presets = [];
+        const errors = [];
+        const lines = String(text || '').split(/\r?\n/);
+        for (let i = 0; i < lines.length; i++) {
+            const raw = lines[i].trim();
+            if (!raw) continue;
+            const cells = raw
+                .replace(/^\|/, '').replace(/\|$/, '')
+                .split(raw.includes('|') ? '|' : '\t')
+                .map(c => c.trim());
+            if (cells.every(c => !c || /^:?-{2,}:?$/.test(c))) continue; // |---|---| divider
+            if (cells.length < 5) {
+                errors.push(`Line ${i + 1}: expected 6 columns (category, material, mm, power, speed, passes), got ${cells.length}: "${raw}"`);
+                continue;
+            }
+            const [catRaw, material, thicknessRaw, powerRaw, speedRaw, passesRaw] = cells;
+            const power = parseFloat(powerRaw);
+            const speed = parseFloat(speedRaw);
+            // A header row ("Power", "Speed") parses as NaN — skip it without noise.
+            const looksLikeHeader = !isFinite(power) && !isFinite(speed) && /power|speed|category|material/i.test(raw);
+            if (looksLikeHeader) continue;
+
+            let mode = null;
+            if (/^engrav/i.test(catRaw)) mode = 'engrave';
+            else if (/^cut/i.test(catRaw)) mode = 'cut';
+            if (!mode) {
+                errors.push(`Line ${i + 1}: category must start with "Cutting" or "Engraving", got "${catRaw}"`);
+                continue;
+            }
+            if (!material) {
+                errors.push(`Line ${i + 1}: material name is empty`);
+                continue;
+            }
+            const thickness = parseFloat(thicknessRaw);
+            if (!isFinite(thickness) || thickness <= 0) {
+                errors.push(`Line ${i + 1}: thickness "${thicknessRaw}" is not a positive number`);
+                continue;
+            }
+            if (!isFinite(power) || power <= 0 || !isFinite(speed) || speed <= 0) {
+                errors.push(`Line ${i + 1}: power "${powerRaw}" / speed "${speedRaw}" must be positive numbers`);
+                continue;
+            }
+            let passes = parseInt(passesRaw, 10);
+            if (!isFinite(passes) || passes < 1) passes = 1;
+
+            presets.push({
+                mode,
+                name: `${material} ${fmt(thickness)}mm`,
+                power,
+                speed,
+                passes
+            });
+        }
+        return { presets, errors };
+    }
+
+    // Returns a human-readable problem string, or null when the project is loadable.
+    function validateProject(data) {
+        if (!data || typeof data !== 'object') return 'the file is empty or malformed.';
+        if (data.format !== PROJECT_FORMAT) return 'this doesn\'t look like a LaserEngraving project file.';
+        if (Number(data.version) > PROJECT_VERSION) {
+            return `it was saved by a newer version of LaserEngraving (file v${data.version}, this app reads v${PROJECT_VERSION}).`;
+        }
+        if (!Array.isArray(data.objects)) return 'it has no object list.';
+        const bad = data.objects.find(o => !o || OBJECT_TYPES.indexOf(o.type) === -1);
+        if (bad) return `it contains an unrecognised object type ("${bad && bad.type}").`;
+        return null;
+    }
 
     const views = {
         welcome: document.getElementById('onboarding-welcome'),
@@ -23,7 +176,14 @@
     let cadApp = null;
 
     function init() {
+        DEBUG.enabled = _resolveDebug();
+        if (DEBUG.enabled) {
+            console.log('%c[laser] debug logging is ON — LaserDebug.dump() for state, LaserDebug.off() to disable', 'color:#d4a853;font-weight:bold');
+        } else {
+            console.log('[laser] LaserDebug.on() enables verbose logging (save/open/export/rotate)');
+        }
         const saved = loadBedSize();
+        dlog('init', saved ? 'restored bed size from localStorage' : 'no saved bed size — showing onboarding', saved);
         if (saved) {
             showMain(saved);
         } else {
@@ -77,6 +237,7 @@
         showView('main');
         if (!cadApp) {
             cadApp = new CADApp(size);
+            window.__laserApp = cadApp; // for LaserDebug / console inspection
         } else {
             cadApp.setBedSize(size);
         }
@@ -135,11 +296,17 @@
             this.isPolylineDrawing = false;
             this.polylinePoints = [];
 
+            // Project file state
+            this.fileHandle = null;      // FileSystemFileHandle when available, for re-saving in place
+            this.fileName = null;        // null = never saved ("Untitled")
+            this.dirty = false;
+
             this.cacheDOM();
             this.initEvents();
             this.renderPresets();
             this.fitToView();
             this.render();
+            this.renderFileStatus();
         }
 
         destroy() {
@@ -162,16 +329,16 @@
                 statusPos: document.getElementById('status-pos'),
                 statusZoom: document.getElementById('status-zoom'),
                 statusBed: document.getElementById('status-bed'),
+                statusFile: document.getElementById('status-file'),
                 toolBtns: document.querySelectorAll('.tool-btn[data-tool]'),
                 imageInput: document.getElementById('image-input'),
+                projectInput: document.getElementById('project-input'),
                 presetList: document.getElementById('preset-list'),
                 presetAdd: document.getElementById('preset-add'),
                 presetDropdown: document.getElementById('preset-dropdown'),
                 presetRemove: document.getElementById('preset-remove'),
                 presetDialog: document.getElementById('preset-dialog'),
-                presetDialogName: document.getElementById('preset-dialog-name'),
-                presetDialogPower: document.getElementById('preset-dialog-power'),
-                presetDialogSpeed: document.getElementById('preset-dialog-speed'),
+                presetBulkText: document.getElementById('preset-bulk-text'),
                 presetSave: document.getElementById('preset-save'),
                 presetCancel: document.getElementById('preset-cancel')
             };
@@ -230,6 +397,18 @@
             });
             this.on(document.getElementById('tool-fit'), 'click', () => {
                 this.fitToView();
+            });
+            this.on(document.getElementById('tool-open'), 'click', () => {
+                this.openProject();
+            });
+            this.on(document.getElementById('tool-save'), 'click', () => {
+                this.saveProject(false);
+            });
+            this.on(this.dom.projectInput, 'change', (e) => this.handleProjectFile(e));
+            this.on(window, 'beforeunload', (e) => {
+                if (!this.dirty) return;
+                e.preventDefault();
+                e.returnValue = '';
             });
             this.on(document.getElementById('tool-export'), 'click', () => {
                 this.exportGC();
@@ -546,6 +725,14 @@
                 return;
             }
 
+            if (this.dragType === 'rotate' && this.dragObject) {
+                this.applyRotate(w.x, w.y, e.shiftKey);
+                this.renderObjects();
+                this.renderSelection();
+                this.updatePropInputs();
+                return;
+            }
+
             if (this.dragType === 'resize' && this.dragObject) {
                 this.applyResize(w.x, w.y, e.ctrlKey);
                 this.renderObjects();
@@ -652,10 +839,20 @@
                 }
             }
 
+            if (this.dragType === 'rotate' && this.dragObject) {
+                const obj = this.dragObject;
+                const oldVal = this.dragObjectStart.rotation;
+                if ((obj.rotation || 0) !== oldVal) {
+                    dlog('rotate', `commit "${obj.name}" ${fmt(oldVal)}° -> ${fmt(obj.rotation)}°`);
+                    this.pushUndo({ type: 'property', objId: obj.id, prop: 'rotation', oldVal, newVal: obj.rotation });
+                }
+            }
+
             this.isDragging = false;
             this.dragType = null;
             this.dragObject = null;
             this.dragObjectStart = null;
+            this.dragCenterStart = null;
             this.resizeHandle = null;
             this.drawShapeType = null;
             this.dom.canvasArea.classList.remove('is-panning');
@@ -686,12 +883,56 @@
         }
 
         startResize(handleInfo, wx, wy) {
+            if (handleInfo.handle === 'rot') {
+                this.startRotate(handleInfo.obj, wx, wy);
+                return;
+            }
             this.isDragging = true;
             this.dragType = 'resize';
             this.dragObject = handleInfo.obj;
             this.dragObjectStart = { x: handleInfo.obj.x, y: handleInfo.obj.y, w: handleInfo.obj.width, h: handleInfo.obj.height };
+            // Centre is frozen at drag start: resizing a rotated object pivots about
+            // its original transform, which is what keeps the anchor corner still.
+            this.dragCenterStart = this.objectCenter(handleInfo.obj);
             this.resizeHandle = handleInfo.handle;
             this.dragStart = { wx, wy };
+        }
+
+        startRotate(obj, wx, wy) {
+            const c = this.objectCenter(obj);
+            this.isDragging = true;
+            this.dragType = 'rotate';
+            this.dragObject = obj;
+            this.dragCenterStart = c;
+            this.dragObjectStart = { rotation: obj.rotation || 0 };
+            // Angle from centre to the grab point; we track the delta from this.
+            this.dragStart = {
+                wx, wy,
+                angle: Math.atan2(wy - c.y, wx - c.x) * 180 / Math.PI
+            };
+            dlog('rotate', `start on "${obj.name}" at ${fmt(this.dragObjectStart.rotation)}°`, { center: c });
+        }
+
+        applyRotate(wx, wy, shiftKey) {
+            const o = this.dragObject;
+            const c = this.dragCenterStart;
+            const now = Math.atan2(wy - c.y, wx - c.x) * 180 / Math.PI;
+            let deg = this.dragObjectStart.rotation + (now - this.dragStart.angle);
+            if (shiftKey) deg = Math.round(deg / ROT_SNAP_DEG) * ROT_SNAP_DEG;
+            o.rotation = normalizeAngle(deg);
+        }
+
+        // Rotate about the centre by a fixed step (used by the 90° buttons).
+        rotateSelectedBy(delta) {
+            const obj = this.objects.find(o => o.id === this.selectedId);
+            if (!obj) return;
+            const oldVal = obj.rotation || 0;
+            obj.rotation = normalizeAngle(oldVal + delta);
+            dlog('rotate', `"${obj.name}" ${fmt(oldVal)}° -> ${fmt(obj.rotation)}° (step ${delta}°)`);
+            this.pushUndo({ type: 'property', objId: obj.id, prop: 'rotation', oldVal, newVal: obj.rotation });
+            this.renderObjects();
+            this.renderSelection();
+            this.updatePropInputs();
         }
 
         startDraw(wx, wy) {
@@ -701,14 +942,69 @@
             this.drawShapeType = this.tool === 'circle' ? 'ellipse' : 'rect';
         }
 
+        // ---------- ROTATION HELPERS ----------
+
+        // Every object rotates about the centre of its unrotated bounding box.
+        objectCenter(obj) {
+            if (obj.type === 'polyline') {
+                const bb = this.polylineBBox(obj);
+                return { x: bb.x + bb.w / 2, y: bb.y + bb.h / 2 };
+            }
+            return { x: obj.x + obj.width / 2, y: obj.y + obj.height / 2 };
+        }
+
+        // World point -> the object's unrotated local frame, so all the existing
+        // axis-aligned maths (hit tests, resize) keeps working unchanged.
+        toLocal(obj, wx, wy) {
+            const rot = obj.rotation || 0;
+            if (!rot) return { x: wx, y: wy };
+            const c = this.objectCenter(obj);
+            return rotatePoint(wx, wy, c.x, c.y, -rot);
+        }
+
+        // Local (design-space) point -> world.
+        toWorld(obj, lx, ly) {
+            const rot = obj.rotation || 0;
+            if (!rot) return { x: lx, y: ly };
+            const c = this.objectCenter(obj);
+            return rotatePoint(lx, ly, c.x, c.y, rot);
+        }
+
+        // Axis-aligned box around the object's ROTATED footprint, in design space.
+        // Anything reasoning about where a shape visually sits (aligning, snapping)
+        // must use this rather than x/y/width/height, which ignore the angle.
+        // For an unrotated object this returns exactly x/y/width/height.
+        rotatedBBox(obj) {
+            let pts;
+            if (obj.type === 'polyline') {
+                const src = obj.points || [];
+                if (!src.length) return { x: 0, y: 0, w: 0, h: 0 };
+                pts = src.map(p => this.toWorld(obj, p.x, p.y));
+            } else {
+                pts = [
+                    this.toWorld(obj, obj.x, obj.y),
+                    this.toWorld(obj, obj.x + obj.width, obj.y),
+                    this.toWorld(obj, obj.x + obj.width, obj.y + obj.height),
+                    this.toWorld(obj, obj.x, obj.y + obj.height)
+                ];
+            }
+            const xs = pts.map(p => p.x);
+            const ys = pts.map(p => p.y);
+            const x = Math.min(...xs);
+            const y = Math.min(...ys);
+            return { x, y, w: Math.max(...xs) - x, h: Math.max(...ys) - y };
+        }
+
         // ---------- HIT TESTING ----------
 
         hitObject(wx, wy) {
             for (let i = this.objects.length - 1; i >= 0; i--) {
                 const o = this.objects[i];
                 if (o.visible === false) continue;
+                // Test in the object's local frame so rotated shapes hit accurately.
+                const p = this.toLocal(o, wx, wy);
                 if (o.type === 'rect' || o.type === 'image' || o.type === 'text') {
-                    if (wx >= o.x && wx <= o.x + o.width && wy >= o.y && wy <= o.y + o.height) {
+                    if (p.x >= o.x && p.x <= o.x + o.width && p.y >= o.y && p.y <= o.y + o.height) {
                         return o;
                     }
                 } else if (o.type === 'ellipse') {
@@ -717,13 +1013,13 @@
                     const rx = o.width / 2;
                     const ry = o.height / 2;
                     if (rx <= 0 || ry <= 0) continue;
-                    const dx = wx - cx;
-                    const dy = wy - cy;
+                    const dx = p.x - cx;
+                    const dy = p.y - cy;
                     if ((dx * dx) / (rx * rx) + (dy * dy) / (ry * ry) <= 1) {
                         return o;
                     }
                 } else if (o.type === 'polyline') {
-                    if (this.hitPolyline(o, wx, wy)) return o;
+                    if (this.hitPolyline(o, p.x, p.y)) return o;
                 }
             }
             return null;
@@ -776,34 +1072,38 @@
             return null;
         }
 
-        getHandles(obj) {
+        // Handle positions in the object's LOCAL (unrotated) frame.
+        getLocalHandles(obj) {
+            let bx, by, bw, bh;
             if (obj.type === 'polyline') {
                 const bb = this.polylineBBox(obj);
-                const cx = bb.x + bb.w / 2;
-                const cy = bb.y + bb.h / 2;
-                return [
-                    { name: 'tl', x: bb.x, y: bb.y },
-                    { name: 'tm', x: cx, y: bb.y },
-                    { name: 'tr', x: bb.x + bb.w, y: bb.y },
-                    { name: 'ml', x: bb.x, y: cy },
-                    { name: 'mr', x: bb.x + bb.w, y: cy },
-                    { name: 'bl', x: bb.x, y: bb.y + bb.h },
-                    { name: 'bm', x: cx, y: bb.y + bb.h },
-                    { name: 'br', x: bb.x + bb.w, y: bb.y + bb.h },
-                ];
+                bx = bb.x; by = bb.y; bw = bb.w; bh = bb.h;
+            } else {
+                bx = obj.x; by = obj.y; bw = obj.width; bh = obj.height;
             }
-            const cx = obj.x + obj.width / 2;
-            const cy = obj.y + obj.height / 2;
-            return [
-                { name: 'tl', x: obj.x, y: obj.y },
-                { name: 'tm', x: cx, y: obj.y },
-                { name: 'tr', x: obj.x + obj.width, y: obj.y },
-                { name: 'ml', x: obj.x, y: cy },
-                { name: 'mr', x: obj.x + obj.width, y: cy },
-                { name: 'bl', x: obj.x, y: obj.y + obj.height },
-                { name: 'bm', x: cx, y: obj.y + obj.height },
-                { name: 'br', x: obj.x + obj.width, y: obj.y + obj.height },
+            const cx = bx + bw / 2;
+            const cy = by + bh / 2;
+            const handles = [
+                { name: 'tl', x: bx, y: by },
+                { name: 'tm', x: cx, y: by },
+                { name: 'tr', x: bx + bw, y: by },
+                { name: 'ml', x: bx, y: cy },
+                { name: 'mr', x: bx + bw, y: cy },
+                { name: 'bl', x: bx, y: by + bh },
+                { name: 'bm', x: cx, y: by + bh },
+                { name: 'br', x: bx + bw, y: by + bh },
             ];
+            // Rotation grip, floating above the top edge at a zoom-independent gap.
+            handles.push({ name: 'rot', x: cx, y: by - ROT_HANDLE_GAP / this.scale });
+            return handles;
+        }
+
+        // Handle positions in WORLD space (local frame put through the rotation).
+        getHandles(obj) {
+            return this.getLocalHandles(obj).map(h => {
+                const p = this.toWorld(obj, h.x, h.y);
+                return { name: h.name, x: p.x, y: p.y };
+            });
         }
 
         polylineBBox(o) {
@@ -820,6 +1120,7 @@
         }
 
         handleCursor(name) {
+            if (name === 'rot') return 'grab';
             const map = { tl: 'nwse-resize', tm: 'ns-resize', tr: 'nesw-resize', ml: 'ew-resize', mr: 'ew-resize', bl: 'nesw-resize', bm: 'ns-resize', br: 'nwse-resize' };
             return map[name] || 'default';
         }
@@ -830,6 +1131,19 @@
             const s = this.dragObjectStart;
             const o = this.dragObject;
             const h = this.resizeHandle;
+            const rot = o.rotation || 0;
+
+            // Work entirely in the object's unrotated frame: pull the pointer back
+            // through the rotation, run the original axis-aligned maths, then push
+            // the resulting centre forward again. The dragged handle follows the
+            // cursor and the opposite corner stays put, at any angle.
+            if (rot) {
+                const c = this.dragCenterStart;
+                const p = rotatePoint(wx, wy, c.x, c.y, -rot);
+                wx = p.x;
+                wy = p.y;
+            }
+
             let nx = s.x, ny = s.y, nw = s.w, nh = s.h;
 
             if (h.includes('r')) nw = Math.max(1, wx - s.x);
@@ -886,6 +1200,15 @@
                 }
             }
 
+            if (rot) {
+                // The local-frame centre moved; map it back through the original
+                // transform so the untouched edges don't drift.
+                const c = this.dragCenterStart;
+                const wc = rotatePoint(nx + nw / 2, ny + nh / 2, c.x, c.y, rot);
+                nx = wc.x - nw / 2;
+                ny = wc.y - nh / 2;
+            }
+
             o.x = nx;
             o.y = ny;
             o.width = nw;
@@ -899,7 +1222,7 @@
             const base = typeLabel[props.type] || 'Object';
             let count = 1;
             while (this.objects.some(o => o.name === base + ' ' + count)) count++;
-            const obj = { ...props, id: this.nextId++, mode: props.mode || this.mode, name: base + ' ' + count, visible: true, passes: props.passes || 1, presetName: props.presetName || '' };
+            const obj = { ...props, id: this.nextId++, mode: props.mode || this.mode, name: base + ' ' + count, visible: true, passes: props.passes || 1, presetName: props.presetName || '', rotation: normalizeAngle(props.rotation || 0) };
             if (props.type === 'text') {
                 this.measureTextObject(obj);
             }
@@ -940,6 +1263,20 @@
                 this.keys.space = true;
                 if (!this.isDragging) this.dom.canvasArea.style.cursor = 'grab';
             }
+
+            // Handled before the INPUT guard so they always beat the browser defaults
+            // (Ctrl+S "save page", Ctrl+O "open file"), even while a field has focus.
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                this.saveProject(e.shiftKey);
+                return;
+            }
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'o' || e.key === 'O')) {
+                e.preventDefault();
+                this.openProject();
+                return;
+            }
+
             if (e.target.tagName === 'INPUT') return;
 
             if (e.key === 'v' || e.key === 'V' || e.key === 'Escape') {
@@ -1025,6 +1362,21 @@
                         <input type="number" id="prop-fontsize" step="0.5" value="${fmt(obj.fontSize || 10)}">
                     </div>`;
             }
+            // Rotation applies to every object type, polylines included.
+            const rotField = `
+                    <div class="prop-row">
+                        <label>Rotation</label>
+                        <input type="number" id="prop-rotation" step="1" value="${fmt(normalizeAngle(obj.rotation || 0))}">
+                    </div>
+                    <div class="prop-row">
+                        <label></label>
+                        <div class="rot-quick">
+                            <button class="rot-btn" data-rotate="-90" title="Rotate 90° left">↺ 90°</button>
+                            <button class="rot-btn" data-rotate="90" title="Rotate 90° right">↻ 90°</button>
+                            <button class="rot-btn" data-rotate-reset="1" title="Reset rotation to 0°">Reset</button>
+                        </div>
+                    </div>`;
+
             let posFields = '';
             if (obj.type === 'polyline') {
                 const ptCount = obj.points ? obj.points.length : 0;
@@ -1032,7 +1384,8 @@
                     <div class="prop-row">
                         <label>Points</label>
                         <input type="text" value="${ptCount}" disabled>
-                    </div>`;
+                    </div>
+                    ${rotField}`;
             } else {
                 posFields = `
                     <div class="prop-row">
@@ -1050,7 +1403,8 @@
                     <div class="prop-row">
                         <label>Height</label>
                         <input type="number" id="prop-h" step="0.1" value="${fmt(obj.height)}"${obj.type === 'text' ? ' disabled' : ''}>
-                    </div>`;
+                    </div>
+                    ${rotField}`;
             }
             this.dom.panelBody.innerHTML = `
                 <div class="prop-section">
@@ -1144,6 +1498,11 @@
             if (passes) passes.value = obj.passes || 1;
             if (text) text.value = obj.text || '';
             if (fontSize) fontSize.value = fmt(obj.fontSize || 10);
+            const rotation = document.getElementById('prop-rotation');
+            // Don't fight the user while they're typing in the field.
+            if (rotation && document.activeElement !== rotation) {
+                rotation.value = fmt(normalizeAngle(obj.rotation || 0));
+            }
         }
 
         onPropInput(e) {
@@ -1164,6 +1523,7 @@
                 const oldPower = obj.power;
                 const oldSpeed = obj.speed;
                 const oldMode = obj.mode;
+                const oldPasses = obj.passes;
                 if (val) {
                     const [mode, idxStr] = val.split(':');
                     const idx = parseInt(idxStr, 10);
@@ -1172,12 +1532,13 @@
                         obj.presetName = preset.name;
                         obj.power = preset.power;
                         obj.speed = preset.speed;
+                        if (preset.passes) obj.passes = preset.passes;
                         if (obj.type !== 'image') obj.mode = mode;
                     }
                 } else {
                     obj.presetName = '';
                 }
-                this.pushUndo({ type: 'preset', objId: obj.id, oldPreset, oldPower, oldSpeed, oldMode, newPreset: obj.presetName, newPower: obj.power, newSpeed: obj.speed, newMode: obj.mode });
+                this.pushUndo({ type: 'preset', objId: obj.id, oldPreset, oldPower, oldSpeed, oldMode, oldPasses, newPreset: obj.presetName, newPower: obj.power, newSpeed: obj.speed, newMode: obj.mode, newPasses: obj.passes });
                 this.updatePropertiesPanel();
                 this.renderObjects();
                 this.renderLayersPanel();
@@ -1204,6 +1565,17 @@
                 this.renderSelection();
                 return;
             }
+            if (id === 'prop-rotation') {
+                const val = parseFloat(e.target.value);
+                if (!isFinite(val)) return;
+                const oldVal = obj.rotation || 0;
+                obj.rotation = normalizeAngle(val);
+                dlog('rotate', `"${obj.name}" set to ${fmt(obj.rotation)}° via panel`);
+                this.pushUndo({ type: 'property', objId: obj.id, prop: 'rotation', oldVal, newVal: obj.rotation });
+                this.renderObjects();
+                this.renderSelection();
+                return;
+            }
             const val = parseFloat(e.target.value);
             if (!isFinite(val)) return;
             const propMap = { 'prop-x': 'x', 'prop-y': 'y', 'prop-w': 'width', 'prop-h': 'height', 'prop-power': 'power', 'prop-speed': 'speed', 'prop-passes': 'passes' };
@@ -1224,6 +1596,24 @@
         onPropChange(e) {
             if (e.target.id === 'btn-delete') {
                 this.deleteSelected();
+                return;
+            }
+            const rotBtn = e.target.closest ? e.target.closest('.rot-btn') : null;
+            if (rotBtn) {
+                if (rotBtn.dataset.rotateReset) {
+                    const obj = this.objects.find(o => o.id === this.selectedId);
+                    if (obj && (obj.rotation || 0) !== 0) {
+                        const oldVal = obj.rotation || 0;
+                        obj.rotation = 0;
+                        dlog('rotate', `"${obj.name}" reset ${fmt(oldVal)}° -> 0°`);
+                        this.pushUndo({ type: 'property', objId: obj.id, prop: 'rotation', oldVal, newVal: 0 });
+                        this.renderObjects();
+                        this.renderSelection();
+                        this.updatePropInputs();
+                    }
+                } else {
+                    this.rotateSelectedBy(parseFloat(rotBtn.dataset.rotate));
+                }
                 return;
             }
             if (e.target.classList.contains('prop-mode-btn')) {
@@ -1279,7 +1669,7 @@
             let html = '<option value="">Select a preset...</option>';
             for (let i = 0; i < list.length; i++) {
                 const p = list[i];
-                const label = `${escapeHtml(p.name || 'Unnamed')} LP:${fmt(p.power || 0)} LS:${fmt(p.speed || 0)}`;
+                const label = `${escapeHtml(p.name || 'Unnamed')} LP:${fmt(p.power || 0)} LS:${fmt(p.speed || 0)}${(p.passes || 1) > 1 ? ` ×${p.passes}` : ''}`;
                 html += `<option value="${i}">${label}</option>`;
             }
             this.dom.presetDropdown.innerHTML = html;
@@ -1291,10 +1681,10 @@
         showPresetDialog() {
             if (!this.dom.presetDialog) return;
             this.dom.presetDialog.classList.remove('hidden');
-            if (this.dom.presetDialogName) this.dom.presetDialogName.value = '';
-            if (this.dom.presetDialogPower) this.dom.presetDialogPower.value = '';
-            if (this.dom.presetDialogSpeed) this.dom.presetDialogSpeed.value = '';
-            if (this.dom.presetDialogName) this.dom.presetDialogName.focus();
+            if (this.dom.presetBulkText) {
+                this.dom.presetBulkText.value = '';
+                this.dom.presetBulkText.focus();
+            }
         }
 
         cancelPresetDialog() {
@@ -1303,14 +1693,39 @@
         }
 
         savePresetFromDialog() {
-            const name = this.dom.presetDialogName ? this.dom.presetDialogName.value.trim() : '';
-            const power = parseFloat(this.dom.presetDialogPower ? this.dom.presetDialogPower.value : 0) || 0;
-            const speed = parseFloat(this.dom.presetDialogSpeed ? this.dom.presetDialogSpeed.value : 0) || 0;
-            if (!name) return;
-            this.presets[this.mode].push({ name, power, speed });
+            const text = this.dom.presetBulkText ? this.dom.presetBulkText.value : '';
+            const { presets, errors } = parsePresetRows(text);
+            dlog('presets', `bulk import parsed ${presets.length} preset(s), ${errors.length} error(s)`, { presets, errors });
+
+            if (presets.length === 0) {
+                alert(errors.length
+                    ? 'No presets imported:\n\n' + errors.join('\n')
+                    : 'Nothing to import. Paste rows like:\n| Engraving | Basswood | 2 | 40 | 3000 | 1 |');
+                return;
+            }
+
+            // Upsert by name within each category, so re-pasting a tweaked table
+            // updates presets in place instead of stacking duplicates.
+            let added = 0;
+            let updated = 0;
+            for (const p of presets) {
+                const list = this.presets[p.mode];
+                const entry = { name: p.name, power: p.power, speed: p.speed, passes: p.passes };
+                const existing = list.findIndex(x => x.name === p.name);
+                if (existing >= 0) { list[existing] = entry; updated++; }
+                else { list.push(entry); added++; }
+            }
             this.savePresets();
             this.renderPresets();
             this.cancelPresetDialog();
+
+            const cut = presets.filter(p => p.mode === 'cut').length;
+            const eng = presets.length - cut;
+            dlog('presets', `imported: ${added} new, ${updated} updated (${cut} cut, ${eng} engrave)`);
+            let msg = `Imported ${presets.length} preset${presets.length === 1 ? '' : 's'} (${cut} cut, ${eng} engrave)`;
+            if (updated) msg += `, ${updated} updated existing`;
+            if (errors.length) msg += `.\n\nSkipped ${errors.length} line(s):\n` + errors.join('\n');
+            alert(msg);
         }
 
         removeSelectedPreset() {
@@ -1331,19 +1746,255 @@
                 obj.presetName = preset.name;
                 obj.power = preset.power;
                 obj.speed = preset.speed;
+                if (preset.passes) obj.passes = preset.passes;
                 if (obj.type !== 'image') {
                     obj.mode = this.mode;
                 }
+                dlog('presets', `applied "${preset.name}" to "${obj.name}"`, { power: preset.power, speed: preset.speed, passes: preset.passes });
                 this.updatePropertiesPanel();
                 this.renderObjects();
             }
+        }
+
+        // ---------- PROJECT SAVE / OPEN ----------
+
+        serializeProject() {
+            return JSON.stringify({
+                format: PROJECT_FORMAT,
+                version: PROJECT_VERSION,
+                savedAt: new Date().toISOString(),
+                bed: { x: this.bed.x, y: this.bed.y },
+                mode: this.mode,
+                view: { scale: this.scale, offset: { x: this.offset.x, y: this.offset.y } },
+                nextId: this.nextId,
+                objects: this.objects.map(o => this.snapshotObject(o))
+            }, null, 2);
+        }
+
+        // saveAs=true always prompts for a new location; otherwise we write straight
+        // back to the handle we opened/saved with, so Ctrl+S is a true in-place save.
+        async saveProject(saveAs) {
+            const content = this.serializeProject();
+            const suggested = this.fileName || 'project.laser';
+            dlog('save', `saveProject(saveAs=${!!saveAs}) — ${this.objects.length} objects, ${content.length} bytes`, {
+                currentFile: this.fileName,
+                reusingHandle: !saveAs && !!this.fileHandle,
+                filePickerAvailable: typeof window.showSaveFilePicker === 'function'
+            });
+
+            if (typeof window.showSaveFilePicker === 'function') {
+                try {
+                    let handle = saveAs ? null : this.fileHandle;
+                    if (!handle) {
+                        dlog('save', 'prompting for a save location…');
+                        handle = await window.showSaveFilePicker({
+                            suggestedName: suggested,
+                            types: [{ description: 'LaserEngraving project', accept: { 'application/json': ['.laser', '.json'] } }]
+                        });
+                    } else {
+                        dlog('save', `writing in place to "${handle.name}"`);
+                    }
+                    const writable = await handle.createWritable();
+                    await writable.write(content);
+                    await writable.close();
+                    this.fileHandle = handle;
+                    this.setFileName(handle.name);
+                    this.markClean();
+                    dlog('save', `saved OK -> "${handle.name}"`);
+                    return;
+                } catch (err) {
+                    if (err.name === 'AbortError') {
+                        dlog('save', 'cancelled by user');
+                        return;
+                    }
+                    dwarn('save', 'file picker failed, falling back to download', err);
+                }
+            }
+
+            dlog('save', `downloading as "${suggested}" (no File System Access API)`);
+            this.downloadProject(content, suggested);
+            this.setFileName(suggested);
+            this.markClean();
+        }
+
+        downloadProject(content, name) {
+            const blob = new Blob([content], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        async openProject() {
+            dlog('open', 'openProject()', { dirty: this.dirty });
+            if (!this.confirmDiscard()) {
+                dlog('open', 'cancelled — user kept unsaved changes');
+                return;
+            }
+
+            if (typeof window.showOpenFilePicker === 'function') {
+                try {
+                    const [handle] = await window.showOpenFilePicker({
+                        types: [{ description: 'LaserEngraving project', accept: { 'application/json': ['.laser', '.json'] } }],
+                        multiple: false
+                    });
+                    const file = await handle.getFile();
+                    const text = await file.text();
+                    dlog('open', `read "${file.name}" (${text.length} bytes)`);
+                    if (this.loadProjectText(text, file.name)) {
+                        this.fileHandle = handle;
+                        dlog('open', 'handle kept — Ctrl+S will save in place');
+                    }
+                    return;
+                } catch (err) {
+                    if (err.name === 'AbortError') {
+                        dlog('open', 'cancelled by user');
+                        return;
+                    }
+                    dwarn('open', 'file picker failed, falling back to file input', err);
+                }
+            }
+
+            dlog('open', 'using <input type=file> fallback');
+            this.dom.projectInput.click();
+        }
+
+        handleProjectFile(e) {
+            const file = e.target.files && e.target.files[0];
+            this.dom.projectInput.value = '';
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                if (this.loadProjectText(ev.target.result, file.name)) {
+                    // No handle via <input>, so Ctrl+S must prompt for a location.
+                    this.fileHandle = null;
+                }
+            };
+            reader.onerror = () => alert('Could not read that file.');
+            reader.readAsText(file);
+        }
+
+        loadProjectText(text, name) {
+            let data;
+            try {
+                data = JSON.parse(text);
+            } catch (err) {
+                dwarn('open', `"${name}" is not parseable JSON`, err);
+                alert('That file isn\'t a valid LaserEngraving project (unreadable JSON).');
+                return false;
+            }
+            const problem = validateProject(data);
+            if (problem) {
+                dwarn('open', `rejected "${name}": ${problem}`, data);
+                alert('Could not open project: ' + problem);
+                return false;
+            }
+            dlog('open', `loading "${name}" — v${data.version}, ${data.objects.length} objects, saved ${data.savedAt || 'unknown'}`);
+            this.applyProject(data);
+            this.setFileName(name);
+            this.markClean();
+            dlog('open', `opened "${name}" OK`);
+            return true;
+        }
+
+        applyProject(data) {
+            // Bed size first: it drives fitToView and is persisted for onboarding.
+            const bed = data.bed;
+            if (bed && isFinite(bed.x) && isFinite(bed.y) && bed.x > 0 && bed.y > 0) {
+                if (bed.x !== this.bed.x || bed.y !== this.bed.y) {
+                    dlog('open', `bed size changing ${this.bed.x}x${this.bed.y} -> ${bed.x}x${bed.y}`);
+                }
+                saveBedSize({ x: bed.x, y: bed.y });
+                this.setBedSize({ x: bed.x, y: bed.y });
+            } else {
+                dwarn('open', 'project has no valid bed size — keeping the current one', bed);
+            }
+
+            // Restore objects verbatim — addObject() would renumber ids and rename layers.
+            this.objects = data.objects.map(o => JSON.parse(JSON.stringify(o)));
+            this.objects.forEach(o => {
+                if (o.visible === undefined) o.visible = true;
+                if (o.passes === undefined) o.passes = 1;
+                if (o.presetName === undefined) o.presetName = '';
+                // Files saved before rotation existed simply have no angle.
+                o.rotation = normalizeAngle(o.rotation || 0);
+                // Fonts may render differently here than where the file was saved.
+                if (o.type === 'text') this.measureTextObject(o);
+            });
+
+            const maxId = this.objects.reduce((m, o) => Math.max(m, Number(o.id) || 0), 0);
+            this.nextId = Math.max(Number(data.nextId) || 0, maxId + 1);
+
+            this.selectedId = null;
+            this.undoStack = [];
+            this.redoStack = [];
+            this.tempObject = null;
+            this.dragObject = null;
+            this.isDragging = false;
+            this.cancelPolyline();
+
+            if (data.mode === 'cut' || data.mode === 'engrave') {
+                this.mode = data.mode;
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === this.mode));
+                this.renderPresets();
+            }
+
+            const view = data.view;
+            if (view && isFinite(view.scale) && view.scale > 0 && view.offset && isFinite(view.offset.x) && isFinite(view.offset.y)) {
+                this.scale = view.scale;
+                this.offset = { x: view.offset.x, y: view.offset.y };
+            } else {
+                this.fitToView();
+            }
+
+            this.setTool('select');
+            this.selectObject(null);
+            this.render();
+            dlog('open', `applied: ${this.objects.length} objects, nextId=${this.nextId}, bed ${this.bed.x}x${this.bed.y}`,
+                this.objects.map(o => `${o.id}:${o.type}${o.rotation ? '@' + fmt(o.rotation) + '°' : ''}`));
+        }
+
+        markDirty() {
+            this.dirty = true;
+            this.renderFileStatus();
+        }
+
+        markClean() {
+            this.dirty = false;
+            this.renderFileStatus();
+        }
+
+        setFileName(name) {
+            this.fileName = name || null;
+            this.renderFileStatus();
+        }
+
+        renderFileStatus() {
+            if (!this.dom.statusFile) return;
+            this.dom.statusFile.textContent = (this.fileName || 'Untitled') + (this.dirty ? ' •' : '');
+            this.dom.statusFile.title = this.dirty ? 'Unsaved changes' : 'Saved';
+        }
+
+        confirmDiscard() {
+            if (!this.dirty) return true;
+            return confirm('You have unsaved changes that will be lost. Open another project anyway?');
         }
 
         // ---------- G-CODE EXPORT ----------
 
         async exportGC() {
             const validObjects = this.objects.filter(o => o.visible !== false && typeof o.power === 'number' && typeof o.speed === 'number' && o.power > 0 && o.speed > 0);
+            dlog('export', `${validObjects.length} of ${this.objects.length} objects are exportable`,
+                this.objects.map(o => ({
+                    name: o.name, type: o.type, mode: o.mode,
+                    rotation: fmt(o.rotation || 0),
+                    power: o.power, speed: o.speed, visible: o.visible !== false,
+                    skipped: !(o.visible !== false && o.power > 0 && o.speed > 0)
+                })));
             if (validObjects.length === 0) {
+                dwarn('export', 'nothing to export — objects need power > 0 and speed > 0');
                 alert('No objects with power and speed settings to export.');
                 return;
             }
@@ -1358,11 +2009,19 @@
             gc.push('');
             for (const obj of validObjects) {
                 const body = await this.objectToGC(obj);
+                const b = this.getBounds(obj);
+                dlog('export', `"${obj.name}" (${obj.type}, ${obj.mode}, ${fmt(obj.rotation || 0)}°) -> ${body.split('\n').length} lines`,
+                    { machineBounds: `X${fmt(b.x1)}..${fmt(b.x2)} Y${fmt(b.y1)}..${fmt(b.y2)}` });
+                if (b.x1 < -0.001 || b.y1 < -0.001 || b.x2 > this.bed.x + 0.001 || b.y2 > this.bed.y + 0.001) {
+                    dwarn('export', `"${obj.name}" extends outside the ${this.bed.x}x${this.bed.y}mm bed`,
+                        { x1: fmt(b.x1), y1: fmt(b.y1), x2: fmt(b.x2), y2: fmt(b.y2) });
+                }
                 gc.push(body);
             }
             gc.push('M5');
             gc.push('G0 X0 Y0');
             const gcContent = gc.join('\n');
+            dlog('export', `G-code ready: ${gc.length} blocks, ${gcContent.length} bytes`);
             if (typeof window.showSaveFilePicker === 'function') {
                 try {
                     const handle = await window.showSaveFilePicker({
@@ -1372,10 +2031,13 @@
                     const writable = await handle.createWritable();
                     await writable.write(gcContent);
                     await writable.close();
+                    dlog('export', `wrote "${handle.name}"`);
                 } catch (err) {
                     if (err.name !== 'AbortError') {
-                        console.error(err);
+                        dwarn('export', 'file picker failed, downloading instead', err);
                         this.downloadGC(gcContent);
+                    } else {
+                        dlog('export', 'cancelled by user');
                     }
                 }
             } else {
@@ -1393,21 +2055,29 @@
             URL.revokeObjectURL(url);
         }
 
+        // Machine-space extents of an object, accounting for rotation. Reported in
+        // the G-code header, so it has to follow the shape's real rotated footprint.
         getBounds(obj) {
+            let pts;
             if (obj.type === 'polyline') {
-                const bb = this.polylineBBox(obj);
-                return {
-                    x1: bb.x,
-                    y1: this.bed.y - bb.y - bb.h,
-                    x2: bb.x + bb.w,
-                    y2: this.bed.y - bb.y
-                };
+                const src = obj.points || [];
+                pts = src.map(p => this.mp(obj, p.x, p.y));
+                if (!pts.length) return { x1: 0, y1: 0, x2: 0, y2: 0 };
+            } else {
+                pts = [
+                    this.mp(obj, obj.x, obj.y),
+                    this.mp(obj, obj.x + obj.width, obj.y),
+                    this.mp(obj, obj.x + obj.width, obj.y + obj.height),
+                    this.mp(obj, obj.x, obj.y + obj.height)
+                ];
             }
+            const xs = pts.map(p => p.x);
+            const ys = pts.map(p => p.y);
             return {
-                x1: obj.x,
-                y1: this.bed.y - obj.y - obj.height,
-                x2: obj.x + obj.width,
-                y2: this.bed.y - obj.y
+                x1: Math.min(...xs),
+                y1: Math.min(...ys),
+                x2: Math.max(...xs),
+                y2: Math.max(...ys)
             };
         }
 
@@ -1446,6 +2116,14 @@
             return [];
         }
 
+        // Design-space point -> machine coordinates: apply the object's rotation
+        // about its centre, then flip Y (design Y grows down, machine Y grows up).
+        // Every generator emits through this so rotation lands in the real toolpath.
+        mp(obj, x, y) {
+            const p = this.toWorld(obj, x, y);
+            return { x: p.x, y: this.bed.y - p.y };
+        }
+
         generateTextMoves(obj) {
             const lines = [];
             const pwrOn = Math.round(obj.power * 10);
@@ -1474,25 +2152,34 @@
             const stepX = obj.width / cols;
             const stepY = obj.height / rows;
             
+            // Same local-frame scan as images: rows follow the text's own baseline
+            // direction, so rotated text engraves along its own angle.
+            const rotated = !!normalizeAngle(obj.rotation || 0);
+            const emit = (cmd, lx, ly, suffix) => {
+                const p = this.mp(obj, lx, ly);
+                if (!rotated && cmd === 'G1') return `G1 X${fmt(p.x)}${suffix}`;
+                return `${cmd} X${fmt(p.x)} Y${fmt(p.y)}${suffix}`;
+            };
+
             const startX = obj.x;
-            const startY = this.bed.y - obj.y;
-            
+            const startLY = obj.y;
+
             lines.push('G90'); // Absolute mode
-            
+
             let currentX = startX;
-            let currentY = startY;
-            
+            let currentY = startLY;
+
             for (let pass = 0; pass < passes; pass++) {
                 if (pass > 0) {
-                    lines.push(`G0 X${fmt(startX)} Y${fmt(startY)}`);
+                    lines.push(emit('G0', startX, startLY, ''));
                     currentX = startX;
-                    currentY = startY;
+                    currentY = startLY;
                 }
-                
+
                 let isFirstMove = true;
                 for (let r = 0; r < rows; r++) {
-                    const yAbs = startY - r * stepY;
-                    
+                    const lyRow = obj.y + r * stepY;
+
                     // Build pixels array (true if pixel is white, i.e. text foreground)
                     const rowPixels = [];
                     for (let c = 0; c < cols; c++) {
@@ -1517,26 +2204,26 @@
                     }
                     
                     // Move to start of the row
-                    if (Math.abs(currentX - startX) > 0.01 || Math.abs(currentY - yAbs) > 0.01) {
-                        lines.push(`G0 X${fmt(startX)} Y${fmt(yAbs)}`);
+                    if (Math.abs(currentX - startX) > 0.01 || Math.abs(currentY - lyRow) > 0.01) {
+                        lines.push(emit('G0', startX, lyRow, ''));
                         currentX = startX;
-                        currentY = yAbs;
+                        currentY = lyRow;
                     }
-                    
+
                     let accumX = startX;
                     for (const g of groups) {
                         const dx = g.count * stepX;
                         accumX += dx;
                         const s = g.on ? pwrOn : 0;
                         if (isFirstMove) {
-                            lines.push(`G1 X${fmt(accumX)} S${s} F${f}`);
+                            lines.push(emit('G1', accumX, lyRow, ` S${s} F${f}`));
                             isFirstMove = false;
                         } else {
-                            lines.push(`G1 X${fmt(accumX)} S${s}`);
+                            lines.push(emit('G1', accumX, lyRow, ` S${s}`));
                         }
                     }
                     currentX = accumX;
-                    currentY = yAbs;
+                    currentY = lyRow;
                 }
             }
             
@@ -1551,10 +2238,11 @@
             const passes = obj.passes || 1;
             const pts = obj.points;
             if (!pts || pts.length < 2) return lines;
+            const mpts = pts.map(p => this.mp(obj, p.x, p.y));
             for (let pass = 0; pass < passes; pass++) {
-                lines.push(`G0 X${fmt(pts[0].x)} Y${fmt(this.bed.y - pts[0].y)}`);
-                for (let i = 1; i < pts.length; i++) {
-                    lines.push(`G1 X${fmt(pts[i].x)} Y${fmt(this.bed.y - pts[i].y)} S${pwrOn} F${f}`);
+                lines.push(`G0 X${fmt(mpts[0].x)} Y${fmt(mpts[0].y)}`);
+                for (let i = 1; i < mpts.length; i++) {
+                    lines.push(`G1 X${fmt(mpts[i].x)} Y${fmt(mpts[i].y)} S${pwrOn} F${f}`);
                 }
             }
             return lines;
@@ -1565,29 +2253,37 @@
             const pwrOn = Math.round(obj.power * 10);
             const f = fmt(obj.speed);
             const passes = obj.passes || 1;
-            const x1 = obj.x;
-            const y1 = this.bed.y - obj.y;
-            const x2 = obj.x + obj.width;
-            const y2 = this.bed.y - (obj.y + obj.height);
+            // Corners in design space; mp() rotates them and flips to machine coords.
+            const lx1 = obj.x;
+            const ly1 = obj.y;
+            const lx2 = obj.x + obj.width;
+            const ly2 = obj.y + obj.height;
             for (let pass = 0; pass < passes; pass++) {
                 if (obj.mode === 'cut') {
-                    lines.push(`G0 X${fmt(x1)} Y${fmt(y1)}`);
-                    lines.push(`G1 X${fmt(x2)} Y${fmt(y1)} S${pwrOn} F${f}`);
-                    lines.push(`G1 X${fmt(x2)} Y${fmt(y2)} S${pwrOn} F${f}`);
-                    lines.push(`G1 X${fmt(x1)} Y${fmt(y2)} S${pwrOn} F${f}`);
-                    lines.push(`G1 X${fmt(x1)} Y${fmt(y1)} S${pwrOn} F${f}`);
+                    const c = [
+                        this.mp(obj, lx1, ly1),
+                        this.mp(obj, lx2, ly1),
+                        this.mp(obj, lx2, ly2),
+                        this.mp(obj, lx1, ly2)
+                    ];
+                    lines.push(`G0 X${fmt(c[0].x)} Y${fmt(c[0].y)}`);
+                    for (let i = 1; i < 4; i++) {
+                        lines.push(`G1 X${fmt(c[i].x)} Y${fmt(c[i].y)} S${pwrOn} F${f}`);
+                    }
+                    lines.push(`G1 X${fmt(c[0].x)} Y${fmt(c[0].y)} S${pwrOn} F${f}`);
                 } else {
+                    // Scan rows stay horizontal in the object's own frame, so a rotated
+                    // rect gets rotated fill lines that still cover it exactly.
                     const step = 0.1;
                     const numRows = Math.max(1, Math.floor(obj.height / step));
                     for (let row = 0; row < numRows; row++) {
-                        const gy = this.bed.y - (obj.y + row * step);
-                        if (row % 2 === 0) {
-                            lines.push(`G0 X${fmt(x1)} Y${fmt(gy)}`);
-                            lines.push(`G1 X${fmt(x2)} Y${fmt(gy)} S${pwrOn} F${f}`);
-                        } else {
-                            lines.push(`G0 X${fmt(x2)} Y${fmt(gy)}`);
-                            lines.push(`G1 X${fmt(x1)} Y${fmt(gy)} S${pwrOn} F${f}`);
-                        }
+                        const ly = obj.y + row * step;
+                        const a = this.mp(obj, lx1, ly);
+                        const b = this.mp(obj, lx2, ly);
+                        const from = row % 2 === 0 ? a : b;
+                        const to = row % 2 === 0 ? b : a;
+                        lines.push(`G0 X${fmt(from.x)} Y${fmt(from.y)}`);
+                        lines.push(`G1 X${fmt(to.x)} Y${fmt(to.y)} S${pwrOn} F${f}`);
                     }
                 }
             }
@@ -1607,6 +2303,8 @@
             for (let pass = 0; pass < passes; pass++) {
                 if (obj.mode === 'cut') {
                     if (isCircle) {
+                        // A circle rotated about its own centre is the same circle,
+                        // so the arc needs no rotation maths — emit it as-is.
                         const r = rx;
                         const sx = cx + r;
                         const sy = this.bed.y - cy;
@@ -1616,12 +2314,11 @@
                         const segments = 64;
                         for (let i = 0; i <= segments; i++) {
                             const angle = (i / segments) * Math.PI * 2;
-                            const px = cx + rx * Math.cos(angle);
-                            const py = this.bed.y - (cy + ry * Math.sin(angle));
+                            const p = this.mp(obj, cx + rx * Math.cos(angle), cy + ry * Math.sin(angle));
                             const cmd = i === 0 ? 'G0' : 'G1';
                             const s = i === 0 ? '' : ` S${pwrOn}`;
                             const feed = i === 0 ? '' : ` F${f}`;
-                            lines.push(`${cmd} X${fmt(px)} Y${fmt(py)}${s}${feed}`);
+                            lines.push(`${cmd} X${fmt(p.x)} Y${fmt(p.y)}${s}${feed}`);
                         }
                     }
                 } else {
@@ -1631,16 +2328,12 @@
                         const localY = -ry + row * step;
                         if (Math.abs(localY) > ry) continue;
                         const halfWidth = rx * Math.sqrt(Math.max(0, 1 - (localY * localY) / (ry * ry)));
-                        const leftX = cx - halfWidth;
-                        const rightX = cx + halfWidth;
-                        const gy = this.bed.y - (cy + localY);
-                        if (row % 2 === 0) {
-                            lines.push(`G0 X${fmt(leftX)} Y${fmt(gy)}`);
-                            lines.push(`G1 X${fmt(rightX)} Y${fmt(gy)} S${pwrOn} F${f}`);
-                        } else {
-                            lines.push(`G0 X${fmt(rightX)} Y${fmt(gy)}`);
-                            lines.push(`G1 X${fmt(leftX)} Y${fmt(gy)} S${pwrOn} F${f}`);
-                        }
+                        const a = this.mp(obj, cx - halfWidth, cy + localY);
+                        const b = this.mp(obj, cx + halfWidth, cy + localY);
+                        const from = row % 2 === 0 ? a : b;
+                        const to = row % 2 === 0 ? b : a;
+                        lines.push(`G0 X${fmt(from.x)} Y${fmt(from.y)}`);
+                        lines.push(`G1 X${fmt(to.x)} Y${fmt(to.y)} S${pwrOn} F${f}`);
                     }
                 }
             }
@@ -1668,24 +2361,36 @@
                     const f = fmt(obj.speed);
                     const passes = obj.passes || 1;
                     
-                    const startX = obj.x;
-                    const startY = this.bed.y - obj.y;
-                    
+                    // Scan in the image's own frame and map each point out through mp().
+                    // Rows stay parallel to the image's edges, so a rotated engrave
+                    // sweeps at the same angle instead of skewing off the artwork.
+                    const rotated = !!normalizeAngle(obj.rotation || 0);
+                    const emit = (cmd, lx, ly, suffix) => {
+                        const p = this.mp(obj, lx, ly);
+                        // Unrotated rows share a constant Y, so keep the original
+                        // X-only moves and leave existing G-code byte-for-byte the same.
+                        if (!rotated && cmd === 'G1') return `G1 X${fmt(p.x)}${suffix}`;
+                        return `${cmd} X${fmt(p.x)} Y${fmt(p.y)}${suffix}`;
+                    };
+
+                    const startLX = obj.x;
+                    const startLY = obj.y;
+
                     lines.push('G90'); // Absolute mode
-                    
-                    let currentX = startX;
-                    let currentY = startY;
-                    
+
+                    let currentX = startLX;
+                    let currentY = startLY;
+
                     for (let pass = 0; pass < passes; pass++) {
                         if (pass > 0) {
-                            lines.push(`G0 X${fmt(startX)} Y${fmt(startY)}`);
-                            currentX = startX;
-                            currentY = startY;
+                            lines.push(emit('G0', startLX, startLY, ''));
+                            currentX = startLX;
+                            currentY = startLY;
                         }
-                        
+
                         let isFirstMove = true;
                         for (let r = 0; r < rows; r++) {
-                            const yAbs = startY - r * step;
+                            const lyRow = obj.y + r * step;
                             const isEven = r % 2 === 0;
                             
                             const rowPowers = [];
@@ -1730,33 +2435,33 @@
                             const allOff = groups.length === 1 && groups[0].power === 0;
                             const rowStartX = isEven ? obj.x : obj.x + obj.width;
                             const rowEndX = isEven ? obj.x + obj.width : obj.x;
-                            
+
                             if (allOff) {
-                                lines.push(`G0 X${fmt(rowEndX)} Y${fmt(yAbs)}`);
+                                lines.push(emit('G0', rowEndX, lyRow, ''));
                                 currentX = rowEndX;
-                                currentY = yAbs;
+                                currentY = lyRow;
                                 continue;
                             }
-                            
-                            if (Math.abs(currentX - rowStartX) > 0.01 || Math.abs(currentY - yAbs) > 0.01) {
-                                lines.push(`G0 X${fmt(rowStartX)} Y${fmt(yAbs)}`);
+
+                            if (Math.abs(currentX - rowStartX) > 0.01 || Math.abs(currentY - lyRow) > 0.01) {
+                                lines.push(emit('G0', rowStartX, lyRow, ''));
                                 currentX = rowStartX;
-                                currentY = yAbs;
+                                currentY = lyRow;
                             }
-                            
+
                             let accumX = rowStartX;
                             for (const g of groups) {
                                 const dx = g.count * step;
                                 accumX = isEven ? (accumX + dx) : (accumX - dx);
                                 if (isFirstMove) {
-                                    lines.push(`G1 X${fmt(accumX)} S${g.power} F${f}`);
+                                    lines.push(emit('G1', accumX, lyRow, ` S${g.power} F${f}`));
                                     isFirstMove = false;
                                 } else {
-                                    lines.push(`G1 X${fmt(accumX)} S${g.power}`);
+                                    lines.push(emit('G1', accumX, lyRow, ` S${g.power}`));
                                 }
                             }
                             currentX = rowEndX;
-                            currentY = yAbs;
+                            currentY = lyRow;
                         }
                     }
                     lines.push('M5');
@@ -1795,10 +2500,20 @@
             this.dom.objectsLayer.innerHTML = svg;
         }
 
+        // SVG transform attribute for an object's rotation (empty when unrotated).
+        rotAttr(o) {
+            const rot = normalizeAngle(o.rotation || 0);
+            if (!rot) return '';
+            const c = this.objectCenter(o);
+            return ` transform="rotate(${fmt(rot)} ${fmt(c.x)} ${fmt(c.y)})"`;
+        }
+
         objectToSVG(o) {
+            const rt = this.rotAttr(o);
+
             if (o.type === 'image') {
                 const imgHref = o.engraveMode === 'grayscale' ? (o.grayscaleHref || o.href) : (o.ditheredHref || o.href);
-                return `<image class="cad-object" x="${fmt(o.x)}" y="${fmt(o.y)}" width="${fmt(o.width)}" height="${fmt(o.height)}" href="${imgHref}" style="filter:grayscale(1)" data-id="${o.id}"/>`;
+                return `<image class="cad-object" x="${fmt(o.x)}" y="${fmt(o.y)}" width="${fmt(o.width)}" height="${fmt(o.height)}" href="${imgHref}" style="filter:grayscale(1)"${rt} data-id="${o.id}"/>`;
             }
 
             const isSel = o.id === this.selectedId;
@@ -1808,18 +2523,17 @@
             const dash = o.mode === 'engrave' ? `stroke-dasharray="${fmt(4 / this.scale)} ${fmt(4 / this.scale)}"` : '';
 
             if (o.type === 'rect') {
-                return `<rect class="cad-object" x="${fmt(o.x)}" y="${fmt(o.y)}" width="${fmt(o.width)}" height="${fmt(o.height)}" fill="${fill}" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" rx="${fmt(2 / this.scale)}" ${dash} data-id="${o.id}"/>`;
+                return `<rect class="cad-object" x="${fmt(o.x)}" y="${fmt(o.y)}" width="${fmt(o.width)}" height="${fmt(o.height)}" fill="${fill}" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" rx="${fmt(2 / this.scale)}" ${dash}${rt} data-id="${o.id}"/>`;
             }
             if (o.type === 'ellipse') {
                 const cx = o.x + o.width / 2;
                 const cy = o.y + o.height / 2;
                 const rx = o.width / 2;
                 const ry = o.height / 2;
-                return `<ellipse class="cad-object" cx="${fmt(cx)}" cy="${fmt(cy)}" rx="${fmt(rx)}" ry="${fmt(ry)}" fill="${fill}" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" ${dash} data-id="${o.id}"/>`;
+                return `<ellipse class="cad-object" cx="${fmt(cx)}" cy="${fmt(cy)}" rx="${fmt(rx)}" ry="${fmt(ry)}" fill="${fill}" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" ${dash}${rt} data-id="${o.id}"/>`;
             }
             if (o.type === 'text') {
-                const fontPx = Math.max(1, o.fontSize * this.scale);
-                return `<text class="cad-object" x="${fmt(o.x)}" y="${fmt(o.y + o.fontSize)}" font-family="sans-serif" font-size="${fmt(o.fontSize)}" fill="${o.mode === 'engrave' ? 'rgba(255,255,255,0.25)' : fill}" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" ${dash} data-id="${o.id}">${escapeHtml(o.text || '')}</text>`;
+                return `<text class="cad-object" x="${fmt(o.x)}" y="${fmt(o.y + o.fontSize)}" font-family="sans-serif" font-size="${fmt(o.fontSize)}" fill="${o.mode === 'engrave' ? 'rgba(255,255,255,0.25)' : fill}" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" ${dash}${rt} data-id="${o.id}">${escapeHtml(o.text || '')}</text>`;
             }
             if (o.type === 'polyline') {
                 const pts = o.points;
@@ -1827,9 +2541,9 @@
                 const pointsStr = pts.map(p => `${fmt(p.x)},${fmt(p.y)}`).join(' ');
                 const isClosed = pts.length > 2 && pts[0].x === pts[pts.length - 1].x && pts[0].y === pts[pts.length - 1].y;
                 if (isClosed) {
-                    return `<polygon class="cad-object" points="${pointsStr}" fill="${o.mode === 'engrave' ? 'rgba(255,255,255,0.15)' : fill}" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" ${dash} data-id="${o.id}"/>`;
+                    return `<polygon class="cad-object" points="${pointsStr}" fill="${o.mode === 'engrave' ? 'rgba(255,255,255,0.15)' : fill}" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" ${dash}${rt} data-id="${o.id}"/>`;
                 }
-                return `<polyline class="cad-object" points="${pointsStr}" fill="none" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" ${dash} data-id="${o.id}"/>`;
+                return `<polyline class="cad-object" points="${pointsStr}" fill="none" stroke="${stroke}" stroke-width="${fmt(sw / this.scale)}" ${dash}${rt} data-id="${o.id}"/>`;
             }
             return '';
         }
@@ -1844,7 +2558,6 @@
                 this.dom.selectionLayer.innerHTML = '';
                 return;
             }
-            const hs = this.getHandles(obj);
             const s = 6 / this.scale;
             const hs2 = s / 2;
             let bx, by, bw, bh;
@@ -1854,10 +2567,25 @@
             } else {
                 bx = obj.x; by = obj.y; bw = obj.width; bh = obj.height;
             }
-            let svg = `<rect x="${fmt(bx)}" y="${fmt(by)}" width="${fmt(bw)}" height="${fmt(bh)}" fill="none" stroke="#ffffff" stroke-width="${fmt(1.5 / this.scale)}" stroke-dasharray="${fmt(6 / this.scale)} ${fmt(4 / this.scale)}" pointer-events="none"/>`;
-            for (const h of hs) {
-                svg += `<rect x="${fmt(h.x - hs2)}" y="${fmt(h.y - hs2)}" width="${fmt(s)}" height="${fmt(s)}" fill="#ffffff" stroke="#0a0a0f" stroke-width="${fmt(1 / this.scale)}" rx="${fmt(1 / this.scale)}" data-handle="${h.name}" pointer-events="none"/>`;
+
+            // Draw the overlay in local coordinates and rotate the whole group, so
+            // the box hugs the shape instead of ballooning into an outer bbox.
+            const rt = this.rotAttr(obj);
+            const local = this.getLocalHandles(obj);
+            const stemTop = by - ROT_HANDLE_GAP / this.scale;
+
+            let svg = `<g${rt} pointer-events="none">`;
+            svg += `<rect x="${fmt(bx)}" y="${fmt(by)}" width="${fmt(bw)}" height="${fmt(bh)}" fill="none" stroke="#ffffff" stroke-width="${fmt(1.5 / this.scale)}" stroke-dasharray="${fmt(6 / this.scale)} ${fmt(4 / this.scale)}"/>`;
+            // Stem connecting the shape to its rotate grip.
+            svg += `<line x1="${fmt(bx + bw / 2)}" y1="${fmt(by)}" x2="${fmt(bx + bw / 2)}" y2="${fmt(stemTop)}" stroke="#d4a853" stroke-width="${fmt(1 / this.scale)}"/>`;
+            for (const h of local) {
+                if (h.name === 'rot') {
+                    svg += `<circle cx="${fmt(h.x)}" cy="${fmt(h.y)}" r="${fmt(4.5 / this.scale)}" fill="#d4a853" stroke="#0a0a0f" stroke-width="${fmt(1 / this.scale)}" data-handle="rot"/>`;
+                } else {
+                    svg += `<rect x="${fmt(h.x - hs2)}" y="${fmt(h.y - hs2)}" width="${fmt(s)}" height="${fmt(s)}" fill="#ffffff" stroke="#0a0a0f" stroke-width="${fmt(1 / this.scale)}" rx="${fmt(1 / this.scale)}" data-handle="${h.name}"/>`;
+                }
             }
+            svg += '</g>';
             this.dom.selectionLayer.innerHTML = svg;
         }
 
@@ -2010,6 +2738,7 @@
             this.undoStack.push(cmd);
             if (this.undoStack.length > 100) this.undoStack.shift();
             this.redoStack = [];
+            this.markDirty();
             this.updateUndoRedoButtons();
         }
 
@@ -2018,6 +2747,7 @@
             const cmd = this.undoStack.pop();
             this.applyCommand(cmd, true);
             this.redoStack.push(cmd);
+            this.markDirty();
             this.updateUndoRedoButtons();
         }
 
@@ -2026,6 +2756,7 @@
             const cmd = this.redoStack.pop();
             this.applyCommand(cmd, false);
             this.undoStack.push(cmd);
+            this.markDirty();
             this.updateUndoRedoButtons();
         }
 
@@ -2064,10 +2795,16 @@
                 }
             } else if (type === 'preset') {
                 const obj = this.objects.find(o => o.id === cmd.objId);
-                if (obj) { obj.presetName = cmd.oldPreset; obj.power = cmd.oldPower; obj.speed = cmd.oldSpeed; obj.mode = cmd.oldMode; }
+                if (obj) {
+                    obj.presetName = cmd.oldPreset; obj.power = cmd.oldPower; obj.speed = cmd.oldSpeed; obj.mode = cmd.oldMode;
+                    if (cmd.oldPasses !== undefined) obj.passes = cmd.oldPasses;
+                }
             } else if (type === 'unpreset') {
                 const obj = this.objects.find(o => o.id === cmd.objId);
-                if (obj) { obj.presetName = cmd.newPreset; obj.power = cmd.newPower; obj.speed = cmd.newSpeed; obj.mode = cmd.newMode; }
+                if (obj) {
+                    obj.presetName = cmd.newPreset; obj.power = cmd.newPower; obj.speed = cmd.newSpeed; obj.mode = cmd.newMode;
+                    if (cmd.newPasses !== undefined) obj.passes = cmd.newPasses;
+                }
             }
             this.renderObjects();
             this.renderSelection();
@@ -2138,31 +2875,35 @@
         renderGuides(obj) {
             const guides = [];
             const threshold = 2;
-            const centerX = obj.x + obj.width / 2;
-            const centerY = obj.y + obj.height / 2;
-            const rightX = obj.x + obj.width;
-            const bottomY = obj.y + obj.height;
+            // Guides track the rotated footprint, so they line up with the edges the
+            // user can actually see rather than the shape's unrotated box.
+            const bb = this.rotatedBBox(obj);
+            const centerX = bb.x + bb.w / 2;
+            const centerY = bb.y + bb.h / 2;
+            const rightX = bb.x + bb.w;
+            const bottomY = bb.y + bb.h;
 
             const checks = [
-                { val: obj.x, target: 0, label: 'bed-left' },
+                { val: bb.x, target: 0, label: 'bed-left' },
                 { val: centerX, target: this.bed.x / 2, label: 'bed-hcenter' },
                 { val: rightX, target: this.bed.x, label: 'bed-right' },
-                { val: obj.y, target: 0, label: 'bed-top' },
+                { val: bb.y, target: 0, label: 'bed-top' },
                 { val: centerY, target: this.bed.y / 2, label: 'bed-vcenter' },
                 { val: bottomY, target: this.bed.y, label: 'bed-bottom' }
             ];
 
             for (const other of this.objects) {
                 if (other.id === obj.id) continue;
-                const ocx = other.x + other.width / 2;
-                const ocy = other.y + other.height / 2;
-                const orx = other.x + other.width;
-                const oby = other.y + other.height;
+                const ob = this.rotatedBBox(other);
+                const ocx = ob.x + ob.w / 2;
+                const ocy = ob.y + ob.h / 2;
+                const orx = ob.x + ob.w;
+                const oby = ob.y + ob.h;
                 checks.push(
-                    { val: obj.x, target: other.x, label: 'obj-left' },
+                    { val: bb.x, target: ob.x, label: 'obj-left' },
                     { val: centerX, target: ocx, label: 'obj-hcenter' },
                     { val: rightX, target: orx, label: 'obj-right' },
-                    { val: obj.y, target: other.y, label: 'obj-top' },
+                    { val: bb.y, target: ob.y, label: 'obj-top' },
                     { val: centerY, target: ocy, label: 'obj-vcenter' },
                     { val: bottomY, target: oby, label: 'obj-bottom' }
                 );
@@ -2205,12 +2946,24 @@
             if (!obj) return;
             const oldX = obj.x;
             const oldY = obj.y;
-            if (align === 'left') obj.x = 0;
-            if (align === 'hcenter') obj.x = (this.bed.x - obj.width) / 2;
-            if (align === 'right') obj.x = this.bed.x - obj.width;
-            if (align === 'top') obj.y = 0;
-            if (align === 'vcenter') obj.y = (this.bed.y - obj.height) / 2;
-            if (align === 'bottom') obj.y = this.bed.y - obj.height;
+
+            // Align the rotated footprint (what the user actually sees) by shifting
+            // the object, instead of assigning the unrotated box straight to x/y —
+            // a rotated shape would otherwise hang off the bed edge.
+            const bb = this.rotatedBBox(obj);
+            let dx = 0;
+            let dy = 0;
+            if (align === 'left') dx = 0 - bb.x;
+            if (align === 'hcenter') dx = (this.bed.x - bb.w) / 2 - bb.x;
+            if (align === 'right') dx = (this.bed.x - bb.w) - bb.x;
+            if (align === 'top') dy = 0 - bb.y;
+            if (align === 'vcenter') dy = (this.bed.y - bb.h) / 2 - bb.y;
+            if (align === 'bottom') dy = (this.bed.y - bb.h) - bb.y;
+            if (!isFinite(dx) || !isFinite(dy)) return;
+
+            obj.x = oldX + dx;
+            obj.y = oldY + dy;
+            dlog('align', `"${obj.name}" ${align} (rot ${fmt(obj.rotation || 0)}°) moved by ${fmt(dx)},${fmt(dy)}`);
             this.pushUndo({ type: 'move', objId: obj.id, oldX, oldY, newX: obj.x, newY: obj.y });
             this.renderObjects();
             this.renderSelection();
@@ -2222,8 +2975,42 @@
         return Number(n.toFixed(3));
     }
 
+    // ---------- ROTATION GEOMETRY ----------
+    // Rotation is stored per-object in degrees, clockwise on screen, about the
+    // object's own bounding-box centre. Screen Y grows downward, so a positive
+    // angle looks clockwise to the user with the standard rotation matrix.
+
+    function normalizeAngle(deg) {
+        let a = Number(deg) || 0;
+        a = a % 360;
+        if (a < 0) a += 360;
+        return a;
+    }
+
+    // Rotate (px,py) by `deg` about (cx,cy).
+    function rotatePoint(px, py, cx, cy, deg) {
+        const a = normalizeAngle(deg);
+        if (a === 0) return { x: px, y: py };
+        const r = a * Math.PI / 180;
+        const cos = Math.cos(r);
+        const sin = Math.sin(r);
+        const dx = px - cx;
+        const dy = py - cy;
+        return {
+            x: cx + dx * cos - dy * sin,
+            y: cy + dx * sin + dy * cos
+        };
+    }
+
     function escapeHtml(str) {
         return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function _resolveDebug() {
+        try {
+            if (localStorage.getItem(DEBUG_KEY) === '1') return true;
+        } catch (_e) {}
+        return /[?&]debug=1/.test(location.search);
     }
 
     function ditherImageData(imageData) {

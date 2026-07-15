@@ -129,6 +129,19 @@
                         </svg>
                     </button>
                     <div class="toolbar-divider"></div>
+                    <button class="tool-btn" id="tool-open" title="Open project (Ctrl+O)">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" id="tool-save" title="Save project (Ctrl+S)">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                            <polyline points="17 21 17 13 7 13 7 21"/>
+                            <polyline points="7 3 7 8 15 8"/>
+                        </svg>
+                    </button>
+                    <div class="toolbar-divider"></div>
                     <button class="tool-btn" id="tool-export" title="Export G-code">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -174,7 +187,10 @@
                         <p class="panel-hint">Select an object to edit its properties.</p>
                     </div>
                     <div class="presets-area">
-                        <div class="presets-area-title">Preset Library</div>
+                        <div class="presets-area-header">
+                            <div class="presets-area-title">Preset Library</div>
+                            <button class="preset-add-btn" id="preset-add" title="Add presets (paste one or more rows)">+</button>
+                        </div>
                         <div class="mode-toggle">
                             <button class="mode-btn active" data-mode="cut">Cut</button>
                             <button class="mode-btn" data-mode="engrave">Engrave</button>
@@ -182,7 +198,6 @@
                         <div class="preset-section">
                             <div class="preset-header">
                                 <span class="preset-title">Presets</span>
-                                <button class="preset-add-btn" id="preset-add" title="Add preset">+</button>
                             </div>
                             <div class="preset-dropdown-wrap">
                                 <select class="preset-dropdown" id="preset-dropdown">
@@ -191,20 +206,13 @@
                                 <button class="preset-remove-btn hidden" id="preset-remove" title="Remove preset">×</button>
                             </div>
                             <div class="preset-dialog hidden" id="preset-dialog">
-                                <div class="preset-dialog-row">
-                                    <label>Name</label>
-                                    <input type="text" id="preset-dialog-name" placeholder="e.g. Acrylic Cut">
+                                <div class="preset-dialog-row preset-dialog-row-wide">
+                                    <label>Paste preset rows</label>
+                                    <textarea id="preset-bulk-text" class="preset-bulk-textarea" rows="7" placeholder="| Engraving | Basswood | 2 | 40 | 3000 | 1 |&#10;| Cutting | Basswood | 4 | 100 | 200 | 1 |&#10;&#10;Category | Material | Thickness (mm) | Power | Speed | Passes"></textarea>
                                 </div>
-                                <div class="preset-dialog-row">
-                                    <label>Power</label>
-                                    <input type="number" id="preset-dialog-power" step="0.1" placeholder="%">
-                                </div>
-                                <div class="preset-dialog-row">
-                                    <label>Speed</label>
-                                    <input type="number" id="preset-dialog-speed" step="0.1" placeholder="mm/min">
-                                </div>
+                                <p class="preset-bulk-hint">Category | Material | mm | Power % | Speed | Passes</p>
                                 <div class="preset-dialog-actions">
-                                    <button class="preset-save-btn" id="preset-save" title="Save preset">✓</button>
+                                    <button class="preset-save-btn" id="preset-save" title="Import presets">✓</button>
                                     <button class="preset-cancel-btn" id="preset-cancel" title="Cancel">×</button>
                                 </div>
                             </div>
@@ -218,12 +226,14 @@
                 <span id="status-pos">0, 0 mm</span>
                 <span id="status-zoom">100%</span>
                 <span id="status-bed">400 × 400 mm</span>
+                <span id="status-file">Untitled</span>
             </div>
 
             <input type="file" id="image-input" accept="image/*" hidden>
+            <input type="file" id="project-input" accept=".laser,.json,application/json" hidden>
         </div>
     </div>
 
-    <script src="script.js?v=3"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>
