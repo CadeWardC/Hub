@@ -498,6 +498,108 @@ body {
     border-color: rgba(255, 255, 255, 0.2);
 }
 
+.prop-tabs {
+    display: flex;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.prop-tab-btn {
+    flex: 1;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: inherit;
+    color: #a1a1aa;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
+}
+
+.prop-tab-btn:hover {
+    color: #e4e4e7;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.prop-tab-btn.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+   OBJECT INFO MODAL
+   ======================================== */
+.obj-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.obj-modal {
+    width: 320px;
+    max-width: calc(100vw - 2rem);
+    background: #16161e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.obj-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.obj-modal-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #a1a1aa;
+}
+
+.obj-modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    font-size: 1.1rem;
+    line-height: 1;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #a1a1aa;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.obj-modal-close:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #e4e4e7;
+}
+
+.obj-modal-body {
+    padding: 1rem;
+}
+
+.obj-modal-body .prop-row:last-child {
+    margin-bottom: 0;
+}
+
 .rot-quick {
     display: flex;
     gap: 0.35rem;

@@ -276,6 +276,8 @@
             this.objects = [];
             this.selectedId = null;
             this.nextId = 1;
+            this.propTab = 'dimensions';
+            this.objModalId = null;
 
             this.isDragging = false;
             this.dragType = null;
@@ -328,6 +330,11 @@
                 layersList: document.getElementById('layers-list'),
                 layersPanel: document.getElementById('layers-panel'),
                 layersToggle: document.getElementById('layers-toggle'),
+                presetsArea: document.querySelector('.presets-area'),
+                objModal: document.getElementById('obj-modal'),
+                objModalName: document.getElementById('obj-modal-name'),
+                objModalType: document.getElementById('obj-modal-type'),
+                objModalClose: document.getElementById('obj-modal-close'),
                 statusPos: document.getElementById('status-pos'),
                 statusZoom: document.getElementById('status-zoom'),
                 statusBed: document.getElementById('status-bed'),
@@ -430,6 +437,7 @@
 
             // Canvas mouse
             this.on(this.dom.canvasArea, 'mousedown', (e) => this.onMouseDown(e));
+            this.on(this.dom.canvasArea, 'dblclick', (e) => this.onCanvasDblClick(e));
             this.on(window, 'mousemove', (e) => this.onMouseMove(e));
             this.on(window, 'mouseup', (e) => this.onMouseUp(e));
             this.on(this.dom.canvasArea, 'wheel', (e) => this.onWheel(e), { passive: false });
@@ -449,6 +457,26 @@
             this.on(this.dom.layersToggle, 'click', () => {
                 const collapsed = this.dom.layersPanel.classList.toggle('collapsed');
                 this.dom.layersToggle.title = collapsed ? 'Show layers panel' : 'Hide layers panel';
+            });
+
+            // Object info modal
+            this.on(this.dom.objModalClose, 'click', () => this.closeObjModal());
+            this.on(this.dom.objModal, 'mousedown', (e) => {
+                if (e.target === this.dom.objModal) this.closeObjModal();
+            });
+            this.on(window, 'keydown', (e) => {
+                if (e.key === 'Escape' && !this.dom.objModal.classList.contains('hidden')) {
+                    this.closeObjModal();
+                }
+            });
+            this.on(this.dom.objModalName, 'input', (e) => {
+                if (this.objModalId == null) return;
+                const obj = this.objects.find(o => o.id === this.objModalId);
+                if (!obj) return;
+                const oldName = obj.name;
+                obj.name = e.target.value;
+                this.pushUndo({ type: 'property', objId: obj.id, prop: 'name', oldVal: oldName, newVal: obj.name });
+                this.renderLayersPanel();
             });
 
             // Mode toggle
@@ -1334,16 +1362,46 @@
             }
         }
 
+        // ---------- OBJECT INFO MODAL ----------
+
+        objTypeLabel(obj) {
+            const typeLabels = { image: 'Image', ellipse: 'Circle', rect: 'Rectangle', text: 'Text', polyline: 'Polyline' };
+            return typeLabels[obj.type] || 'Object';
+        }
+
+        onCanvasDblClick(e) {
+            if (this.tool !== 'select') return;
+            const w = this.screenToWorld(e.clientX, e.clientY);
+            const obj = this.hitObject(w.x, w.y);
+            if (!obj) return;
+            this.selectObject(obj.id);
+            this.openObjModal(obj);
+            e.preventDefault();
+        }
+
+        openObjModal(obj) {
+            this.objModalId = obj.id;
+            this.dom.objModalName.value = obj.name || '';
+            this.dom.objModalType.value = this.objTypeLabel(obj);
+            this.dom.objModal.classList.remove('hidden');
+            this.dom.objModalName.focus();
+            this.dom.objModalName.select();
+        }
+
+        closeObjModal() {
+            this.objModalId = null;
+            this.dom.objModal.classList.add('hidden');
+        }
+
         // ---------- PROPERTIES PANEL ----------
 
         updatePropertiesPanel() {
             const obj = this.objects.find(o => o.id === this.selectedId);
             if (!obj) {
                 this.dom.panelBody.innerHTML = '<p class="panel-hint">Select an object to edit its properties.</p>';
+                if (this.dom.presetsArea) this.dom.presetsArea.classList.remove('hidden');
                 return;
             }
-            const typeLabels = { image: 'Image', ellipse: 'Circle', rect: 'Rectangle', text: 'Text', polyline: 'Polyline' };
-            const typeLabel = typeLabels[obj.type] || 'Object';
             let presetOptions = '<option value="">Custom</option>';
             ['cut', 'engrave'].forEach(m => {
                 const list = this.presets[m] || [];
@@ -1383,17 +1441,25 @@
                         </div>
                     </div>`;
 
-            let posFields = '';
+            let dimFields = '';
             if (obj.type === 'polyline') {
                 const ptCount = obj.points ? obj.points.length : 0;
-                posFields = `
+                dimFields = `
                     <div class="prop-row">
                         <label>Points</label>
                         <input type="text" value="${ptCount}" disabled>
                     </div>
                     ${rotField}`;
             } else {
-                posFields = `
+                dimFields = `
+                    <div class="prop-row">
+                        <label>Width</label>
+                        <input type="number" id="prop-w" step="0.1" value="${fmt(obj.width)}"${obj.type === 'text' ? ' disabled' : ''}>
+                    </div>
+                    <div class="prop-row">
+                        <label>Length</label>
+                        <input type="number" id="prop-h" step="0.1" value="${fmt(obj.height)}"${obj.type === 'text' ? ' disabled' : ''}>
+                    </div>
                     <div class="prop-row">
                         <label>X</label>
                         <input type="number" id="prop-x" step="0.1" value="${fmt(obj.x)}">
@@ -1402,28 +1468,31 @@
                         <label>Y</label>
                         <input type="number" id="prop-y" step="0.1" value="${fmt(obj.y)}">
                     </div>
-                    <div class="prop-row">
-                        <label>Width</label>
-                        <input type="number" id="prop-w" step="0.1" value="${fmt(obj.width)}"${obj.type === 'text' ? ' disabled' : ''}>
-                    </div>
-                    <div class="prop-row">
-                        <label>Height</label>
-                        <input type="number" id="prop-h" step="0.1" value="${fmt(obj.height)}"${obj.type === 'text' ? ' disabled' : ''}>
-                    </div>
                     ${rotField}`;
             }
-            this.dom.panelBody.innerHTML = `
+
+            const tab = this.propTab || 'dimensions';
+            let tabContent = '';
+            if (tab === 'dimensions') {
+                tabContent = `
                 <div class="prop-section">
-                    <div class="prop-section-title">Object</div>
-                    <div class="prop-row">
-                        <label>Name</label>
-                        <input type="text" id="prop-name" value="${escapeHtml(obj.name || '')}">
-                    </div>
-                    <div class="prop-row">
-                        <label>Type</label>
-                        <input type="text" value="${typeLabel}" disabled>
-                    </div>
+                    <div class="prop-section-title">Dimensions</div>
+                    ${textFields}
+                    ${dimFields}
                 </div>
+                <div class="prop-section">
+                    <div class="prop-section-title">Align to Bed</div>
+                    <div class="align-grid">
+                        <button class="align-btn" data-align="left" title="Align left">←</button>
+                        <button class="align-btn" data-align="hcenter" title="Center horizontally">↔</button>
+                        <button class="align-btn" data-align="right" title="Align right">→</button>
+                        <button class="align-btn" data-align="top" title="Align top">↑</button>
+                        <button class="align-btn" data-align="vcenter" title="Center vertically">↕</button>
+                        <button class="align-btn" data-align="bottom" title="Align bottom">↓</button>
+                    </div>
+                </div>`;
+            } else {
+                tabContent = `
                 <div class="prop-section">
                     <div class="prop-section-title">Laser Settings</div>
                     ${obj.type === 'image' ? `
@@ -1447,7 +1516,6 @@
                         <label>Preset</label>
                         <select id="prop-preset">${presetOptions}</select>
                     </div>
-                    ${textFields}
                     <div class="prop-row">
                         <label>Power (%)</label>
                         <input type="number" id="prop-power" step="0.1" value="${fmt(typeof obj.power === 'number' ? obj.power : 0)}">
@@ -1460,25 +1528,19 @@
                         <label>Passes</label>
                         <input type="number" id="prop-passes" min="1" step="1" value="${obj.passes || 1}">
                     </div>
+                </div>`;
+            }
+
+            this.dom.panelBody.innerHTML = `
+                <div class="prop-tabs">
+                    <button class="prop-tab-btn${tab === 'dimensions' ? ' active' : ''}" data-prop-tab="dimensions">Dimensions</button>
+                    <button class="prop-tab-btn${tab === 'laser' ? ' active' : ''}" data-prop-tab="laser">Laser Settings</button>
                 </div>
-                <div class="prop-section">
-                    <div class="prop-section-title">Position</div>
-                    ${posFields}
-                </div>
-                <div class="prop-section">
-                    <div class="prop-section-title">Align to Bed</div>
-                    <div class="align-grid">
-                        <button class="align-btn" data-align="left" title="Align left">←</button>
-                        <button class="align-btn" data-align="hcenter" title="Center horizontally">↔</button>
-                        <button class="align-btn" data-align="right" title="Align right">→</button>
-                        <button class="align-btn" data-align="top" title="Align top">↑</button>
-                        <button class="align-btn" data-align="vcenter" title="Center vertically">↕</button>
-                        <button class="align-btn" data-align="bottom" title="Align bottom">↓</button>
-                    </div>
-                </div>
+                ${tabContent}
                 <div class="prop-divider"></div>
                 <button class="btn-danger" id="btn-delete">Delete Object</button>
             `;
+            if (this.dom.presetsArea) this.dom.presetsArea.classList.toggle('hidden', tab !== 'laser');
         }
 
         updatePropInputs() {
@@ -1602,6 +1664,12 @@
         onPropChange(e) {
             if (e.target.id === 'btn-delete') {
                 this.deleteSelected();
+                return;
+            }
+            const tabBtn = e.target.closest ? e.target.closest('.prop-tab-btn') : null;
+            if (tabBtn) {
+                this.propTab = tabBtn.dataset.propTab;
+                this.updatePropertiesPanel();
                 return;
             }
             const rotBtn = e.target.closest ? e.target.closest('.rot-btn') : null;
