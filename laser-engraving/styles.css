@@ -498,6 +498,50 @@ body {
     border-color: rgba(255, 255, 255, 0.2);
 }
 
+.prop-collapse {
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.prop-collapse-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+    font-family: inherit;
+    color: #a1a1aa;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    background: rgba(255, 255, 255, 0.03);
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.prop-collapse-toggle:hover {
+    color: #e4e4e7;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.prop-collapse-toggle svg {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.prop-collapse.open .prop-collapse-toggle svg {
+    transform: rotate(180deg);
+}
+
+.prop-collapse-body {
+    padding: 0.6rem 0.6rem 0.1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 .properties-tabs {
     display: flex;
     flex-direction: row;

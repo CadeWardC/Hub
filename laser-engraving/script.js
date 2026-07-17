@@ -277,6 +277,7 @@
             this.selectedId = null;
             this.nextId = 1;
             this.propTab = 'dimensions';
+            this.posOpen = false;
             this.objModalId = null;
             this.presetDialogTab = 'single';
             this.presetDialogMode = 'cut';
@@ -1518,6 +1519,7 @@
                     </div>`;
             }
             let dimFields = '';
+            let posCollapse = '';
             if (obj.type === 'polyline') {
                 const ptCount = obj.points ? obj.points.length : 0;
                 dimFields = `
@@ -1534,24 +1536,50 @@
                     <div class="prop-row">
                         <label>Length</label>
                         <input type="number" id="prop-h" step="0.1" value="${fmt(obj.height)}"${obj.type === 'text' ? ' disabled' : ''}>
-                    </div>
-                    <div class="prop-row">
-                        <label>X</label>
-                        <input type="number" id="prop-x" step="0.1" value="${fmt(obj.x)}">
-                    </div>
-                    <div class="prop-row">
-                        <label>Y</label>
-                        <input type="number" id="prop-y" step="0.1" value="${fmt(obj.y)}">
+                    </div>`;
+                posCollapse = `
+                    <div class="prop-collapse${this.posOpen ? ' open' : ''}">
+                        <button class="prop-collapse-toggle" data-toggle-pos>
+                            <span>Position (X, Y)</span>
+                            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </button>
+                        ${this.posOpen ? `
+                        <div class="prop-collapse-body">
+                            <div class="prop-row">
+                                <label>X</label>
+                                <input type="number" id="prop-x" step="0.1" value="${fmt(obj.x)}">
+                            </div>
+                            <div class="prop-row">
+                                <label>Y</label>
+                                <input type="number" id="prop-y" step="0.1" value="${fmt(obj.y)}">
+                            </div>
+                        </div>` : ''}
                     </div>`;
             }
+
+            const modeAndPreset = `
+                    ${obj.type === 'image' ? '' : `
+                    <div class="prop-row">
+                        <div class="prop-mode-toggle">
+                            <button class="prop-mode-btn${obj.mode === 'cut' ? ' active' : ''}" data-set-mode="cut">Cut</button>
+                            <button class="prop-mode-btn${obj.mode === 'engrave' ? ' active' : ''}" data-set-mode="engrave">Engrave</button>
+                        </div>
+                    </div>`}
+                    <div class="prop-row">
+                        <select id="prop-preset">${presetOptions}</select>
+                    </div>`;
 
             const tab = this.propTab || 'dimensions';
             let tabContent = '';
             if (tab === 'dimensions') {
                 tabContent = `
                 <div class="prop-section">
+                    ${modeAndPreset}
                     ${textFields}
                     ${dimFields}
+                    ${posCollapse}
                 </div>`;
             } else {
                 tabContent = `
@@ -1733,6 +1761,11 @@
             const tabBtn = e.target.closest ? e.target.closest('.prop-tab-btn') : null;
             if (tabBtn) {
                 this.propTab = tabBtn.dataset.propTab;
+                this.updatePropertiesPanel();
+                return;
+            }
+            if (e.target.closest && e.target.closest('[data-toggle-pos]')) {
+                this.posOpen = !this.posOpen;
                 this.updatePropertiesPanel();
                 return;
             }
