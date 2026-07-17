@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaserEngraving</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>✦</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
     <div id="app">
@@ -214,7 +214,10 @@
                     <div class="presets-area">
                         <div class="presets-area-header">
                             <div class="presets-area-title">Preset Library</div>
-                            <button class="preset-add-btn" id="preset-add" title="Add presets (paste one or more rows)">+</button>
+                            <div class="presets-area-actions">
+                                <button class="preset-add-btn" id="preset-manage" title="Edit presets">✎</button>
+                                <button class="preset-add-btn" id="preset-add" title="Add presets">+</button>
+                            </div>
                         </div>
                         <div class="mode-toggle">
                             <button class="mode-btn active" data-mode="cut">Cut</button>
@@ -273,6 +276,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="preset-manage-list" id="preset-manage-list"></div>
                     </div>
                 </aside>
             </div>
@@ -335,6 +339,6 @@
         </div>
     </div>
 
-    <script src="script.js?v=8"></script>
+    <script src="script.js?v=9"></script>
 </body>
 </html>

@@ -735,6 +735,110 @@ body {
     height: 22px;
 }
 
+.presets-area-actions {
+    display: flex;
+    gap: 0.3rem;
+}
+
+#preset-manage.active {
+    background: rgba(212, 168, 83, 0.15);
+    border-color: rgba(212, 168, 83, 0.4);
+    color: #d4a853;
+}
+
+.presets-area.managing .mode-toggle,
+.presets-area.managing .preset-header,
+.presets-area.managing .preset-dropdown-wrap {
+    display: none;
+}
+
+.preset-manage-list {
+    display: none;
+    flex-direction: column;
+    gap: 0.3rem;
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.presets-area.managing .preset-manage-list {
+    display: flex;
+}
+
+.preset-manage-group {
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: #52525b;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.35rem;
+}
+
+.preset-manage-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.45rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+}
+
+.preset-manage-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.preset-manage-name {
+    font-size: 0.75rem;
+    color: #e4e4e7;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.preset-manage-vals {
+    font-size: 0.62rem;
+    color: #71717a;
+}
+
+.preset-manage-edit,
+.preset-manage-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    padding: 0;
+    font-size: 0.75rem;
+    line-height: 1;
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    color: #71717a;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.preset-manage-edit:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #e4e4e7;
+}
+
+.preset-manage-delete:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.preset-clear-btn {
+    margin-top: 0.5rem;
+    padding: 0.4rem;
+    font-size: 0.7rem;
+}
+
 .preset-dialog-row-wide {
     flex-direction: column;
     align-items: stretch;

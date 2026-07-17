@@ -280,6 +280,8 @@
             this.objModalId = null;
             this.presetDialogTab = 'single';
             this.presetDialogMode = 'cut';
+            this.presetManageMode = false;
+            this.presetEditing = null;   // {mode, name} of the preset being edited
 
             this.isDragging = false;
             this.dragType = null;
@@ -362,6 +364,8 @@
                 presetSinglePower: document.getElementById('preset-single-power'),
                 presetSingleSpeed: document.getElementById('preset-single-speed'),
                 presetSinglePasses: document.getElementById('preset-single-passes'),
+                presetManage: document.getElementById('preset-manage'),
+                presetManageList: document.getElementById('preset-manage-list'),
                 presetSave: document.getElementById('preset-save'),
                 presetCancel: document.getElementById('preset-cancel')
             };
@@ -536,6 +540,12 @@
             document.querySelectorAll('.preset-dialog-tab').forEach(btn => {
                 this.on(btn, 'click', () => this.setPresetDialogTab(btn.dataset.presetTab));
             });
+            if (this.dom.presetManage) {
+                this.on(this.dom.presetManage, 'click', () => this.togglePresetManage());
+            }
+            if (this.dom.presetManageList) {
+                this.on(this.dom.presetManageList, 'click', (e) => this.onPresetManageClick(e));
+            }
             document.querySelectorAll('[data-preset-mode]').forEach(btn => {
                 this.on(btn, 'click', () => {
                     this.presetDialogMode = btn.dataset.presetMode;
@@ -1469,7 +1479,9 @@
                 return;
             }
             let presetOptions = '<option value="">Custom</option>';
-            ['cut', 'engrave'].forEach(m => {
+            // Only offer presets matching the object's current mode (images always engrave).
+            const presetModes = obj.type === 'image' ? ['engrave'] : [obj.mode === 'engrave' ? 'engrave' : 'cut'];
+            presetModes.forEach(m => {
                 const list = this.presets[m] || [];
                 if (list.length) {
                     presetOptions += `<optgroup label="${m.charAt(0).toUpperCase() + m.slice(1)}">`;
@@ -1789,10 +1801,12 @@
             if (this.dom.presetRemove) {
                 this.dom.presetRemove.classList.toggle('hidden', list.length === 0);
             }
+            if (this.presetManageMode) this.renderPresetManageList();
         }
 
         showPresetDialog() {
             if (!this.dom.presetDialog) return;
+            this.presetEditing = null;
             this.dom.presetDialog.classList.remove('hidden');
             if (this.dom.presetBulkText) this.dom.presetBulkText.value = '';
             this.dom.presetSingleName.value = '';
@@ -1802,8 +1816,88 @@
             this.setPresetDialogTab(this.presetDialogTab || 'single');
         }
 
+        // ---------- PRESET MANAGEMENT ----------
+
+        togglePresetManage() {
+            this.presetManageMode = !this.presetManageMode;
+            if (this.dom.presetsArea) this.dom.presetsArea.classList.toggle('managing', this.presetManageMode);
+            this.dom.presetManage.classList.toggle('active', this.presetManageMode);
+            this.dom.presetManage.title = this.presetManageMode ? 'Done editing' : 'Edit presets';
+            if (this.presetManageMode) this.renderPresetManageList();
+        }
+
+        renderPresetManageList() {
+            if (!this.dom.presetManageList) return;
+            let html = '';
+            for (const mode of ['cut', 'engrave']) {
+                const list = this.presets[mode] || [];
+                if (!list.length) continue;
+                html += `<div class="preset-manage-group">${mode === 'cut' ? 'Cut' : 'Engrave'}</div>`;
+                list.forEach((p, i) => {
+                    html += `
+                    <div class="preset-manage-item" data-mode="${mode}" data-index="${i}">
+                        <div class="preset-manage-info">
+                            <span class="preset-manage-name">${escapeHtml(p.name || 'Unnamed')}</span>
+                            <span class="preset-manage-vals">${fmt(p.power || 0)}% · ${fmt(p.speed || 0)} mm/min${(p.passes || 1) > 1 ? ` · ×${p.passes}` : ''}</span>
+                        </div>
+                        <button class="preset-manage-edit" title="Edit">✎</button>
+                        <button class="preset-manage-delete" title="Delete">×</button>
+                    </div>`;
+                });
+            }
+            if (!html) {
+                html = '<p class="panel-hint">No presets yet. Use + to add one.</p>';
+            } else {
+                html += '<button class="btn-danger preset-clear-btn" id="preset-clear">Clear All Presets</button>';
+            }
+            this.dom.presetManageList.innerHTML = html;
+        }
+
+        onPresetManageClick(e) {
+            if (e.target.id === 'preset-clear') {
+                const total = (this.presets.cut || []).length + (this.presets.engrave || []).length;
+                if (!confirm(`Delete all ${total} presets? This cannot be undone.`)) return;
+                this.presets.cut = [];
+                this.presets.engrave = [];
+                this.savePresets();
+                this.renderPresets();
+                this.renderPresetManageList();
+                return;
+            }
+            const item = e.target.closest('.preset-manage-item');
+            if (!item) return;
+            const mode = item.dataset.mode;
+            const index = parseInt(item.dataset.index, 10);
+            const preset = (this.presets[mode] || [])[index];
+            if (!preset) return;
+
+            if (e.target.closest('.preset-manage-delete')) {
+                this.presets[mode].splice(index, 1);
+                this.savePresets();
+                this.renderPresets();
+                this.renderPresetManageList();
+                return;
+            }
+            if (e.target.closest('.preset-manage-edit')) {
+                this.openPresetEditor(mode, preset);
+            }
+        }
+
+        openPresetEditor(mode, preset) {
+            this.showPresetDialog();
+            this.presetEditing = { mode, name: preset.name };
+            this.presetDialogMode = mode;
+            document.querySelectorAll('[data-preset-mode]').forEach(b => b.classList.toggle('active', b.dataset.presetMode === mode));
+            this.dom.presetSingleName.value = preset.name || '';
+            this.dom.presetSinglePower.value = fmt(preset.power || 0);
+            this.dom.presetSingleSpeed.value = fmt(preset.speed || 0);
+            this.dom.presetSinglePasses.value = String(preset.passes || 1);
+            this.setPresetDialogTab('single');
+        }
+
         cancelPresetDialog() {
             if (!this.dom.presetDialog) return;
+            this.presetEditing = null;
             this.dom.presetDialog.classList.add('hidden');
         }
 
@@ -1821,6 +1915,14 @@
                 return;
             }
             const mode = this.presetDialogMode || 'cut';
+            // When editing, pull the original entry first so a rename or mode
+            // change replaces it instead of leaving the old one behind.
+            if (this.presetEditing) {
+                const src = this.presets[this.presetEditing.mode] || [];
+                const idx = src.findIndex(x => x.name === this.presetEditing.name);
+                if (idx >= 0) src.splice(idx, 1);
+                this.presetEditing = null;
+            }
             const list = this.presets[mode];
             const entry = { name, power, speed, passes };
             const existing = list.findIndex(x => x.name === name);
