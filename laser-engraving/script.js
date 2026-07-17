@@ -278,6 +278,8 @@
             this.nextId = 1;
             this.propTab = 'dimensions';
             this.objModalId = null;
+            this.presetDialogTab = 'single';
+            this.presetDialogMode = 'cut';
 
             this.isDragging = false;
             this.dragType = null;
@@ -354,6 +356,12 @@
                 presetRemove: document.getElementById('preset-remove'),
                 presetDialog: document.getElementById('preset-dialog'),
                 presetBulkText: document.getElementById('preset-bulk-text'),
+                presetSingleForm: document.getElementById('preset-single-form'),
+                presetBulkForm: document.getElementById('preset-bulk-form'),
+                presetSingleName: document.getElementById('preset-single-name'),
+                presetSinglePower: document.getElementById('preset-single-power'),
+                presetSingleSpeed: document.getElementById('preset-single-speed'),
+                presetSinglePasses: document.getElementById('preset-single-passes'),
                 presetSave: document.getElementById('preset-save'),
                 presetCancel: document.getElementById('preset-cancel')
             };
@@ -525,6 +533,24 @@
             if (this.dom.presetDropdown) {
                 this.on(this.dom.presetDropdown, 'change', (e) => this.applyPreset(e.target.value));
             }
+            document.querySelectorAll('.preset-dialog-tab').forEach(btn => {
+                this.on(btn, 'click', () => this.setPresetDialogTab(btn.dataset.presetTab));
+            });
+            document.querySelectorAll('[data-preset-mode]').forEach(btn => {
+                this.on(btn, 'click', () => {
+                    this.presetDialogMode = btn.dataset.presetMode;
+                    document.querySelectorAll('[data-preset-mode]').forEach(b => b.classList.toggle('active', b.dataset.presetMode === this.presetDialogMode));
+                });
+            });
+        }
+
+        setPresetDialogTab(tab) {
+            this.presetDialogTab = tab;
+            document.querySelectorAll('.preset-dialog-tab').forEach(b => b.classList.toggle('active', b.dataset.presetTab === tab));
+            this.dom.presetSingleForm.classList.toggle('hidden', tab !== 'single');
+            this.dom.presetBulkForm.classList.toggle('hidden', tab !== 'bulk');
+            if (tab === 'single') this.dom.presetSingleName.focus();
+            else if (this.dom.presetBulkText) this.dom.presetBulkText.focus();
         }
 
         setTool(name) {
@@ -1768,10 +1794,12 @@
         showPresetDialog() {
             if (!this.dom.presetDialog) return;
             this.dom.presetDialog.classList.remove('hidden');
-            if (this.dom.presetBulkText) {
-                this.dom.presetBulkText.value = '';
-                this.dom.presetBulkText.focus();
-            }
+            if (this.dom.presetBulkText) this.dom.presetBulkText.value = '';
+            this.dom.presetSingleName.value = '';
+            this.dom.presetSinglePower.value = '';
+            this.dom.presetSingleSpeed.value = '';
+            this.dom.presetSinglePasses.value = '1';
+            this.setPresetDialogTab(this.presetDialogTab || 'single');
         }
 
         cancelPresetDialog() {
@@ -1779,7 +1807,36 @@
             this.dom.presetDialog.classList.add('hidden');
         }
 
+        saveSinglePreset() {
+            const name = this.dom.presetSingleName.value.trim();
+            const power = parseFloat(this.dom.presetSinglePower.value);
+            const speed = parseFloat(this.dom.presetSingleSpeed.value);
+            const passes = Math.max(1, parseInt(this.dom.presetSinglePasses.value, 10) || 1);
+            const problems = [];
+            if (!name) problems.push('Name is required.');
+            if (!isFinite(power) || power < 0 || power > 100) problems.push('Power must be between 0 and 100.');
+            if (!isFinite(speed) || speed <= 0) problems.push('Speed must be a positive number.');
+            if (problems.length) {
+                alert(problems.join('\n'));
+                return;
+            }
+            const mode = this.presetDialogMode || 'cut';
+            const list = this.presets[mode];
+            const entry = { name, power, speed, passes };
+            const existing = list.findIndex(x => x.name === name);
+            if (existing >= 0) list[existing] = entry;
+            else list.push(entry);
+            dlog('presets', `single preset ${existing >= 0 ? 'updated' : 'added'}: ${mode} "${name}" LP:${power} LS:${speed} ×${passes}`);
+            this.savePresets();
+            this.renderPresets();
+            this.cancelPresetDialog();
+        }
+
         savePresetFromDialog() {
+            if (this.presetDialogTab === 'single') {
+                this.saveSinglePreset();
+                return;
+            }
             const text = this.dom.presetBulkText ? this.dom.presetBulkText.value : '';
             const { presets, errors } = parsePresetRows(text);
             dlog('presets', `bulk import parsed ${presets.length} preset(s), ${errors.length} error(s)`, { presets, errors });
