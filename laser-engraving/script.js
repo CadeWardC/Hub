@@ -306,6 +306,7 @@
             this.cacheDOM();
             this.initEvents();
             this.renderPresets();
+            this.updatePropertiesPanel();
             this.fitToView();
             this.render();
             this.renderFileStatus();
@@ -1430,10 +1431,15 @@
         // ---------- PROPERTIES PANEL ----------
 
         updatePropertiesPanel() {
+            const activeTab = this.propTab || 'dimensions';
+            this.syncPropTabs();
+            if (this.dom.presetsArea) this.dom.presetsArea.classList.toggle('hidden', activeTab !== 'presets');
+            this.dom.panelBody.classList.toggle('hidden', activeTab === 'presets');
+            if (activeTab === 'presets') return;
+
             const obj = this.objects.find(o => o.id === this.selectedId);
             if (!obj) {
                 this.dom.panelBody.innerHTML = '<p class="panel-hint">Select an object to edit its properties.</p>';
-                if (this.dom.presetsArea) this.dom.presetsArea.classList.remove('hidden');
                 return;
             }
             let presetOptions = '<option value="">Custom</option>';
@@ -1540,8 +1546,6 @@
                 <div class="prop-divider"></div>
                 <button class="btn-danger" id="btn-delete">Delete Object</button>
             `;
-            this.syncPropTabs();
-            if (this.dom.presetsArea) this.dom.presetsArea.classList.toggle('hidden', tab !== 'laser');
         }
 
         syncPropTabs() {

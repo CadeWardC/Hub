@@ -377,7 +377,7 @@ body {
    PROPERTIES PANEL
    ======================================== */
 .properties-panel {
-    width: 220px;
+    width: 260px;
     background: rgba(255, 255, 255, 0.015);
     border-left: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
@@ -500,14 +500,16 @@ body {
 
 .properties-tabs {
     display: flex;
-    gap: 0.3rem;
+    flex-direction: row;
+    gap: 0.25rem;
     align-items: center;
+    padding: 0.6rem 0.6rem;
 }
 
 .prop-tab-btn {
     flex: 1;
-    padding: 0.3rem 0.4rem;
-    font-size: 0.7rem;
+    padding: 0.3rem 0.25rem;
+    font-size: 0.65rem;
     font-weight: 500;
     font-family: inherit;
     color: #a1a1aa;
