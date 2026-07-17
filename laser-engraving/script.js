@@ -331,6 +331,11 @@
                 layersPanel: document.getElementById('layers-panel'),
                 layersToggle: document.getElementById('layers-toggle'),
                 presetsArea: document.querySelector('.presets-area'),
+                propertiesTabs: document.getElementById('properties-tabs'),
+                toolRotate: document.getElementById('tool-rotate'),
+                toolAlign: document.getElementById('tool-align'),
+                rotateFlyout: document.getElementById('rotate-flyout'),
+                alignFlyout: document.getElementById('align-flyout'),
                 objModal: document.getElementById('obj-modal'),
                 objModalName: document.getElementById('obj-modal-name'),
                 objModalType: document.getElementById('obj-modal-type'),
@@ -450,6 +455,21 @@
             // Properties panel (delegated)
             this.on(this.dom.panelBody, 'input', (e) => this.onPropInput(e));
             this.on(this.dom.panelBody, 'click', (e) => this.onPropChange(e));
+            this.on(this.dom.propertiesTabs, 'click', (e) => this.onPropChange(e));
+
+            // Rotate / align toolbar flyouts
+            this.on(this.dom.toolRotate, 'click', () => this.toggleFlyout(this.dom.rotateFlyout, this.dom.toolRotate));
+            this.on(this.dom.toolAlign, 'click', () => this.toggleFlyout(this.dom.alignFlyout, this.dom.toolAlign));
+            this.on(this.dom.rotateFlyout, 'click', (e) => this.onPropChange(e));
+            this.on(this.dom.rotateFlyout, 'input', (e) => this.onPropInput(e));
+            this.on(this.dom.alignFlyout, 'click', (e) => this.onPropChange(e));
+            this.on(window, 'mousedown', (e) => {
+                for (const [flyout, btn] of [[this.dom.rotateFlyout, this.dom.toolRotate], [this.dom.alignFlyout, this.dom.toolAlign]]) {
+                    if (!flyout.classList.contains('hidden') && !flyout.contains(e.target) && !btn.contains(e.target)) {
+                        flyout.classList.add('hidden');
+                    }
+                }
+            });
 
             // Layers panel (delegated)
             this.on(this.dom.layersList, 'click', (e) => this.onLayerClick(e));
@@ -1393,6 +1413,20 @@
             this.dom.objModal.classList.add('hidden');
         }
 
+        // ---------- TOOLBAR FLYOUTS ----------
+
+        toggleFlyout(flyout, btn) {
+            const wasHidden = flyout.classList.contains('hidden');
+            this.dom.rotateFlyout.classList.add('hidden');
+            this.dom.alignFlyout.classList.add('hidden');
+            if (!wasHidden) return;
+            const rect = btn.getBoundingClientRect();
+            flyout.style.left = `${rect.right + 8}px`;
+            flyout.style.top = `${rect.top}px`;
+            flyout.classList.remove('hidden');
+            if (flyout === this.dom.rotateFlyout) this.updatePropInputs();
+        }
+
         // ---------- PROPERTIES PANEL ----------
 
         updatePropertiesPanel() {
@@ -1426,21 +1460,6 @@
                         <input type="number" id="prop-fontsize" step="0.5" value="${fmt(obj.fontSize || 10)}">
                     </div>`;
             }
-            // Rotation applies to every object type, polylines included.
-            const rotField = `
-                    <div class="prop-row">
-                        <label>Rotation</label>
-                        <input type="number" id="prop-rotation" step="1" value="${fmt(normalizeAngle(obj.rotation || 0))}">
-                    </div>
-                    <div class="prop-row">
-                        <label></label>
-                        <div class="rot-quick">
-                            <button class="rot-btn" data-rotate="-90" title="Rotate 90° left">↺ 90°</button>
-                            <button class="rot-btn" data-rotate="90" title="Rotate 90° right">↻ 90°</button>
-                            <button class="rot-btn" data-rotate-reset="1" title="Reset rotation to 0°">Reset</button>
-                        </div>
-                    </div>`;
-
             let dimFields = '';
             if (obj.type === 'polyline') {
                 const ptCount = obj.points ? obj.points.length : 0;
@@ -1448,8 +1467,7 @@
                     <div class="prop-row">
                         <label>Points</label>
                         <input type="text" value="${ptCount}" disabled>
-                    </div>
-                    ${rotField}`;
+                    </div>`;
             } else {
                 dimFields = `
                     <div class="prop-row">
@@ -1467,8 +1485,7 @@
                     <div class="prop-row">
                         <label>Y</label>
                         <input type="number" id="prop-y" step="0.1" value="${fmt(obj.y)}">
-                    </div>
-                    ${rotField}`;
+                    </div>`;
             }
 
             const tab = this.propTab || 'dimensions';
@@ -1476,25 +1493,12 @@
             if (tab === 'dimensions') {
                 tabContent = `
                 <div class="prop-section">
-                    <div class="prop-section-title">Dimensions</div>
                     ${textFields}
                     ${dimFields}
-                </div>
-                <div class="prop-section">
-                    <div class="prop-section-title">Align to Bed</div>
-                    <div class="align-grid">
-                        <button class="align-btn" data-align="left" title="Align left">←</button>
-                        <button class="align-btn" data-align="hcenter" title="Center horizontally">↔</button>
-                        <button class="align-btn" data-align="right" title="Align right">→</button>
-                        <button class="align-btn" data-align="top" title="Align top">↑</button>
-                        <button class="align-btn" data-align="vcenter" title="Center vertically">↕</button>
-                        <button class="align-btn" data-align="bottom" title="Align bottom">↓</button>
-                    </div>
                 </div>`;
             } else {
                 tabContent = `
                 <div class="prop-section">
-                    <div class="prop-section-title">Laser Settings</div>
                     ${obj.type === 'image' ? `
                     <div class="prop-row">
                         <label>Engrave Style</label>
@@ -1532,15 +1536,20 @@
             }
 
             this.dom.panelBody.innerHTML = `
-                <div class="prop-tabs">
-                    <button class="prop-tab-btn${tab === 'dimensions' ? ' active' : ''}" data-prop-tab="dimensions">Dimensions</button>
-                    <button class="prop-tab-btn${tab === 'laser' ? ' active' : ''}" data-prop-tab="laser">Laser Settings</button>
-                </div>
                 ${tabContent}
                 <div class="prop-divider"></div>
                 <button class="btn-danger" id="btn-delete">Delete Object</button>
             `;
+            this.syncPropTabs();
             if (this.dom.presetsArea) this.dom.presetsArea.classList.toggle('hidden', tab !== 'laser');
+        }
+
+        syncPropTabs() {
+            const tab = this.propTab || 'dimensions';
+            if (!this.dom.propertiesTabs) return;
+            this.dom.propertiesTabs.querySelectorAll('.prop-tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.propTab === tab);
+            });
         }
 
         updatePropInputs() {
@@ -2674,6 +2683,18 @@
 
         // ---------- LAYERS PANEL ----------
 
+        layerTypeIcon(obj) {
+            const attrs = 'viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+            switch (obj.type) {
+                case 'rect': return `<svg ${attrs}><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`;
+                case 'ellipse': return `<svg ${attrs}><circle cx="12" cy="12" r="10"/></svg>`;
+                case 'text': return `<svg ${attrs}><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>`;
+                case 'polyline': return `<svg ${attrs}><polyline points="3 21 9 3 15 21 21 9"/></svg>`;
+                case 'image': return `<svg ${attrs}><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+                default: return `<svg ${attrs}><circle cx="12" cy="12" r="3"/></svg>`;
+            }
+        }
+
         renderLayersPanel() {
             if (!this.dom.layersList) return;
             const list = this.objects.slice().reverse();
@@ -2684,7 +2705,8 @@
                     ? '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
                     : '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
                 html += `
-                <div class="layer-item${isSel ? ' selected' : ''}" data-id="${o.id}">
+                <div class="layer-item${isSel ? ' selected' : ''}" data-id="${o.id}" title="${escapeHtml(o.name || 'Layer')}">
+                    <span class="layer-type-icon">${this.layerTypeIcon(o)}</span>
                     <button class="layer-visibility${o.visible !== false ? ' active' : ''}" title="Toggle visibility">${eyeSvg}</button>
                     <span class="layer-name">${escapeHtml(o.name || 'Layer')}</span>
                     <div class="layer-actions">
@@ -2723,6 +2745,15 @@
         }
 
         onLayerDblClick(e) {
+            if (this.dom.layersPanel && this.dom.layersPanel.classList.contains('collapsed')) {
+                const item = e.target.closest('.layer-item');
+                if (!item) return;
+                const obj = this.objects.find(o => o.id === parseInt(item.dataset.id, 10));
+                if (!obj) return;
+                this.selectObject(obj.id);
+                this.openObjModal(obj);
+                return;
+            }
             const nameEl = e.target.closest('.layer-name');
             if (!nameEl) return;
             const item = nameEl.closest('.layer-item');

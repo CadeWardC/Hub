@@ -92,6 +92,20 @@
                         </svg>
                     </button>
                     <div class="toolbar-divider"></div>
+                    <button class="tool-btn" id="tool-rotate" title="Rotate object">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 4 23 10 17 10"/>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                            <circle cx="12" cy="12" r="1"/>
+                        </svg>
+                    </button>
+                    <button class="tool-btn" id="tool-align" title="Align to bed">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="3" x2="12" y2="21"/>
+                            <rect x="4" y="8" width="16" height="8" rx="1"/>
+                        </svg>
+                    </button>
+                    <div class="toolbar-divider"></div>
                     <button class="tool-btn" id="tool-upload" title="Upload image">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -189,7 +203,10 @@
 
                 <!-- Properties Panel -->
                 <aside class="properties-panel">
-                    <div class="panel-header">Properties</div>
+                    <div class="panel-header properties-tabs" id="properties-tabs">
+                        <button class="prop-tab-btn active" data-prop-tab="dimensions">Dimensions</button>
+                        <button class="prop-tab-btn" data-prop-tab="laser">Laser Settings</button>
+                    </div>
                     <div class="panel-body" id="panel-body">
                         <p class="panel-hint">Select an object to edit its properties.</p>
                     </div>
@@ -241,6 +258,31 @@
         </div>
     </div>
 
+    <!-- Toolbar Flyouts -->
+    <div class="tool-flyout hidden" id="rotate-flyout">
+        <div class="flyout-title">Rotate</div>
+        <div class="prop-row">
+            <label>Rotation</label>
+            <input type="number" id="prop-rotation" step="1" value="0">
+        </div>
+        <div class="rot-quick">
+            <button class="rot-btn" data-rotate="-90" title="Rotate 90° left">↺ 90°</button>
+            <button class="rot-btn" data-rotate="90" title="Rotate 90° right">↻ 90°</button>
+            <button class="rot-btn" data-rotate-reset="1" title="Reset rotation to 0°">Reset</button>
+        </div>
+    </div>
+    <div class="tool-flyout hidden" id="align-flyout">
+        <div class="flyout-title">Align to Bed</div>
+        <div class="align-grid">
+            <button class="align-btn" data-align="left" title="Align left">←</button>
+            <button class="align-btn" data-align="hcenter" title="Center horizontally">↔</button>
+            <button class="align-btn" data-align="right" title="Align right">→</button>
+            <button class="align-btn" data-align="top" title="Align top">↑</button>
+            <button class="align-btn" data-align="vcenter" title="Center vertically">↕</button>
+            <button class="align-btn" data-align="bottom" title="Align bottom">↓</button>
+        </div>
+    </div>
+
     <!-- Object Info Modal -->
     <div class="obj-modal-overlay hidden" id="obj-modal">
         <div class="obj-modal">
@@ -261,6 +303,6 @@
         </div>
     </div>
 
-    <script src="script.js?v=5"></script>
+    <script src="script.js?v=6"></script>
 </body>
 </html>
