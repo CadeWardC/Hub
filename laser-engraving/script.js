@@ -366,6 +366,7 @@
                 presetSinglePasses: document.getElementById('preset-single-passes'),
                 presetManage: document.getElementById('preset-manage'),
                 presetManageList: document.getElementById('preset-manage-list'),
+                layerContextMenu: document.getElementById('layer-context-menu'),
                 presetSave: document.getElementById('preset-save'),
                 presetCancel: document.getElementById('preset-cancel')
             };
@@ -487,6 +488,18 @@
             // Layers panel (delegated)
             this.on(this.dom.layersList, 'click', (e) => this.onLayerClick(e));
             this.on(this.dom.layersList, 'dblclick', (e) => this.onLayerDblClick(e));
+            this.on(this.dom.layersList, 'contextmenu', (e) => this.onLayerContextMenu(e));
+            this.on(this.dom.layerContextMenu, 'click', (e) => this.onLayerContextAction(e));
+            this.on(window, 'mousedown', (e) => {
+                if (!this.dom.layerContextMenu.classList.contains('hidden') && !this.dom.layerContextMenu.contains(e.target)) {
+                    this.hideLayerContextMenu();
+                }
+            });
+            this.on(window, 'keydown', (e) => {
+                if (e.key === 'Escape' && !this.dom.layerContextMenu.classList.contains('hidden')) {
+                    this.hideLayerContextMenu();
+                }
+            });
             this.on(this.dom.layersToggle, 'click', () => {
                 const collapsed = this.dom.layersPanel.classList.toggle('collapsed');
                 this.dom.layersToggle.title = collapsed ? 'Show layers panel' : 'Hide layers panel';
@@ -2921,9 +2934,21 @@
             if (!nameEl) return;
             const item = nameEl.closest('.layer-item');
             if (!item) return;
-            const id = parseInt(item.dataset.id, 10);
+            this.startLayerRename(parseInt(item.dataset.id, 10));
+        }
+
+        startLayerRename(id) {
             const obj = this.objects.find(o => o.id === id);
             if (!obj) return;
+            // Collapsed strip has no visible name; rename through the object modal instead.
+            if (this.dom.layersPanel && this.dom.layersPanel.classList.contains('collapsed')) {
+                this.selectObject(id);
+                this.openObjModal(obj);
+                return;
+            }
+            const item = this.dom.layersList.querySelector(`.layer-item[data-id="${id}"]`);
+            const nameEl = item ? item.querySelector('.layer-name') : null;
+            if (!nameEl) return;
 
             const input = document.createElement('input');
             input.type = 'text';
@@ -2944,6 +2969,64 @@
                 if (ev.key === 'Enter') { ev.preventDefault(); input.blur(); }
                 if (ev.key === 'Escape') { input.value = obj.name || ''; input.blur(); }
             });
+        }
+
+        onLayerContextMenu(e) {
+            const item = e.target.closest('.layer-item');
+            if (!item) return;
+            e.preventDefault();
+            const id = parseInt(item.dataset.id, 10);
+            this.ctxLayerId = id;
+            this.selectObject(id);
+            const menu = this.dom.layerContextMenu;
+            menu.classList.remove('hidden');
+            // Keep the menu on-screen when opened near the bottom edge.
+            const rect = menu.getBoundingClientRect();
+            menu.style.left = `${Math.min(e.clientX, window.innerWidth - rect.width - 4)}px`;
+            menu.style.top = `${Math.min(e.clientY, window.innerHeight - rect.height - 4)}px`;
+        }
+
+        hideLayerContextMenu() {
+            this.ctxLayerId = null;
+            this.dom.layerContextMenu.classList.add('hidden');
+        }
+
+        onLayerContextAction(e) {
+            const btn = e.target.closest('.context-menu-item');
+            if (!btn) return;
+            const id = this.ctxLayerId;
+            this.hideLayerContextMenu();
+            if (id == null) return;
+            if (btn.dataset.ctx === 'rename') this.startLayerRename(id);
+            else if (btn.dataset.ctx === 'duplicate') this.duplicateLayer(id);
+            else if (btn.dataset.ctx === 'delete') this.deleteLayer(id);
+        }
+
+        duplicateLayer(id) {
+            const src = this.objects.find(o => o.id === id);
+            if (!src) return;
+            const copy = this.snapshotObject(src);
+            copy.id = this.nextId++;
+            // Nudge the copy so it doesn't sit invisibly on top of the original.
+            const OFFSET = 5;
+            if (copy.type === 'polyline' && copy.points) {
+                copy.points = copy.points.map(p => ({ x: p.x + OFFSET, y: p.y + OFFSET }));
+            } else {
+                copy.x = (copy.x || 0) + OFFSET;
+                copy.y = (copy.y || 0) + OFFSET;
+            }
+            const base = `${src.name || 'Layer'} copy`;
+            let name = base;
+            let n = 2;
+            while (this.objects.some(o => o.name === name)) name = `${base} ${n++}`;
+            copy.name = name;
+            const idx = this.objects.findIndex(o => o.id === id);
+            this.objects.splice(idx + 1, 0, copy);
+            this.pushUndo({ type: 'add', obj: this.snapshotObject(copy) });
+            this.selectObject(copy.id);
+            this.renderObjects();
+            this.renderSelection();
+            this.renderLayersPanel();
         }
 
         toggleLayerVisibility(id) {

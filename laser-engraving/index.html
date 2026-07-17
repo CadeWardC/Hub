@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaserEngraving</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>✦</text></svg>">
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
     <div id="app">
@@ -319,6 +319,13 @@
         </div>
     </div>
 
+    <!-- Layer Context Menu -->
+    <div class="context-menu hidden" id="layer-context-menu">
+        <button class="context-menu-item" data-ctx="rename">Rename</button>
+        <button class="context-menu-item" data-ctx="duplicate">Duplicate</button>
+        <button class="context-menu-item context-menu-danger" data-ctx="delete">Delete</button>
+    </div>
+
     <!-- Object Info Modal -->
     <div class="obj-modal-overlay hidden" id="obj-modal">
         <div class="obj-modal">
@@ -339,6 +346,6 @@
         </div>
     </div>
 
-    <script src="script.js?v=9"></script>
+    <script src="script.js?v=10"></script>
 </body>
 </html>

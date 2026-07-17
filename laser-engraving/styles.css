@@ -563,6 +563,47 @@ body {
 }
 
 /* ========================================
+   CONTEXT MENU
+   ======================================== */
+.context-menu {
+    position: fixed;
+    min-width: 140px;
+    padding: 0.25rem;
+    background: #16161e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    z-index: 110;
+    display: flex;
+    flex-direction: column;
+}
+
+.context-menu-item {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    font-family: inherit;
+    text-align: left;
+    color: #e4e4e7;
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.12s ease;
+}
+
+.context-menu-item:hover {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.context-menu-danger {
+    color: #ef4444;
+}
+
+.context-menu-danger:hover {
+    background: rgba(239, 68, 68, 0.12);
+}
+
+/* ========================================
    OBJECT INFO MODAL
    ======================================== */
 .obj-modal-overlay {
