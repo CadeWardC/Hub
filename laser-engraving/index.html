@@ -154,8 +154,15 @@
                 </aside>
 
                 <!-- Layers Panel -->
-                <aside class="layers-panel">
-                    <div class="panel-header">Layers</div>
+                <aside class="layers-panel" id="layers-panel">
+                    <div class="panel-header layers-panel-header">
+                        <span class="layers-panel-title">Layers</span>
+                        <button class="layers-toggle-btn" id="layers-toggle" title="Hide layers panel">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                        </button>
+                    </div>
                     <div class="layers-list" id="layers-list"></div>
                 </aside>
 

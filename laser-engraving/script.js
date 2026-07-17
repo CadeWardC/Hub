@@ -326,6 +326,8 @@
                 canvasArea: document.getElementById('canvas-area'),
                 panelBody: document.getElementById('panel-body'),
                 layersList: document.getElementById('layers-list'),
+                layersPanel: document.getElementById('layers-panel'),
+                layersToggle: document.getElementById('layers-toggle'),
                 statusPos: document.getElementById('status-pos'),
                 statusZoom: document.getElementById('status-zoom'),
                 statusBed: document.getElementById('status-bed'),
@@ -444,6 +446,10 @@
             // Layers panel (delegated)
             this.on(this.dom.layersList, 'click', (e) => this.onLayerClick(e));
             this.on(this.dom.layersList, 'dblclick', (e) => this.onLayerDblClick(e));
+            this.on(this.dom.layersToggle, 'click', () => {
+                const collapsed = this.dom.layersPanel.classList.toggle('collapsed');
+                this.dom.layersToggle.title = collapsed ? 'Show layers panel' : 'Hide layers panel';
+            });
 
             // Mode toggle
             document.querySelectorAll('.mode-btn').forEach(btn => {
