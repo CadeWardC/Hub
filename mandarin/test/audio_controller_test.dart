@@ -28,5 +28,13 @@ void main() {
     blocks.add({...blocks.first as Map<String, dynamic>, 'id': 'b002'});
     final twoBlockStory = StoryDocument.fromJson(json);
     expect(ReaderAudioController.audioSequenceFor(twoBlockStory), hasLength(3));
+    expect(
+      ReaderAudioController.audioSequenceFor(twoBlockStory, pace: .5),
+      hasLength(6),
+    );
+    expect(ReaderAudioController.gapCountForPace(.5), 4);
+    expect(ReaderAudioController.speechSpeedForPace(.5), .88);
+    expect(ReaderAudioController.sequenceIndexForBlock(1, .5), 5);
+    expect(ReaderAudioController.blockIndexForSequenceIndex(9, .5), 1);
   });
 }

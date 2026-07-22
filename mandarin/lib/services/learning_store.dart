@@ -35,7 +35,7 @@ class LearningState {
 
   factory LearningState.defaults() => const LearningState(
     pinyinMode: PinyinMode.all,
-    showTranslations: false,
+    showTranslations: true,
     playbackSpeed: 1,
     selectedLevel: null,
     progress: {},

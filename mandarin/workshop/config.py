@@ -43,6 +43,15 @@ LEVELS = {
         "sections": (3, 4),
         "max_unique_words": 38,
         "max_new_words": 6,
+        "target_unique_words": 24,
+        "target_new_words": 3,
+        "target_sentence_hanzi": (3, 10),
+        "pedagogy": (
+            "Build the whole story around one useful sentence pattern. Use "
+            "only one or two people, ordinary HSK 1 words, playful repetition, "
+            "and an easy concrete problem. Repeat the same nouns and verbs in "
+            "every section. Avoid synonyms, description, backstory, and side plots."
+        ),
         "min_coverage": 0.95,
         "min_repetition": 1.7,
         "max_block_hanzi": 18,
@@ -56,6 +65,15 @@ LEVELS = {
         "sections": (3, 5),
         "max_unique_words": 78,
         "max_new_words": 10,
+        "target_unique_words": 45,
+        "target_new_words": 5,
+        "target_sentence_hanzi": (5, 16),
+        "pedagogy": (
+            "Teach one practical contrast or grammar pattern through a short "
+            "three-part situation. Keep the cast small, reuse the same core "
+            "words heavily, and prefer direct dialogue over description. Avoid "
+            "unnecessary synonyms, literary phrasing, and secondary plot lines."
+        ),
         "min_coverage": 0.94,
         "min_repetition": 1.6,
         "max_block_hanzi": 26,

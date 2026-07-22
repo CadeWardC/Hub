@@ -60,7 +60,7 @@ class SettingsScreen extends ConsumerWidget {
                 _SettingCard(
                   title: 'English translations',
                   description:
-                      'Open each story on its English section tab. You can switch back to Chinese at any time.',
+                      'Open the meaning panel in English while the flowing Chinese lesson stays visible below.',
                   child: Switch(
                     value: learning.showTranslations,
                     onChanged: controller.setTranslations,
@@ -70,7 +70,7 @@ class SettingsScreen extends ConsumerWidget {
                 _SettingCard(
                   title: 'Playback speed',
                   description:
-                      'Pace changes both spoken phrases and the pauses between sentences.',
+                      'Study modes preserve a natural voice and create more thinking time with longer pauses.',
                   child: Wrap(
                     spacing: 8,
                     children: [.5, .75, 1.0, 1.25, 1.5]

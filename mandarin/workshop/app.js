@@ -67,7 +67,8 @@
     $('#level-guide').innerHTML = [
       [`${level.chars[0]}–${level.chars[1]}`, 'Chinese characters'],
       [`${level.sections[0]}–${level.sections[1]}`, 'reader sections'],
-      [`≤ ${level.max_new_words}`, 'above-level words'],
+      [`≤ ${level.target_unique_words || level.max_unique_words}`, 'preferred distinct words'],
+      [`≤ ${level.target_new_words || level.max_new_words}`, 'preferred taught words'],
       [`≥ ${Math.round(level.min_coverage * 100)}%`, 'known-word coverage'],
     ].map(([value, label]) => `<span><strong>${value}</strong>${label}</span>`).join('');
   }

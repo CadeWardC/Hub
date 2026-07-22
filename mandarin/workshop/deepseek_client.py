@@ -138,6 +138,9 @@ Target Chinese length: {level['chars'][0]}–{level['chars'][1]} Han characters
 Target sections: {level['sections'][0]}–{level['sections'][1]}
 Maximum distinct lexical words: {level['max_unique_words']}
 Maximum words outside the classic cumulative HSK {level['rank']} list: {level['max_new_words']}
+Preferred distinct lexical words for this lesson: no more than {level.get('target_unique_words', level['max_unique_words'])}
+Preferred intentionally taught words: no more than {level.get('target_new_words', level['max_new_words'])}
+Ideal sentence length: {level.get('target_sentence_hanzi', (4, level['max_block_hanzi']))[0]}â€“{level.get('target_sentence_hanzi', (4, level['max_block_hanzi']))[1]} Han characters
 Minimum known-word coverage: {level['min_coverage']:.0%}
 Minimum vocabulary repetition: {level['min_repetition']:.2f} uses per distinct word
 Maximum Chinese characters in one sentence/dialogue block: {level['max_block_hanzi']}
@@ -146,9 +149,10 @@ English title hint: {spec.get('englishTitle', '')}
 Genre/tone: {spec.get('genre', 'everyday life with light fiction')}
 Special vocabulary or plot notes: {spec.get('notes', '')}
 Requested learning words (use only when natural, and include them in learningWords): {', '.join(spec.get('requestedWords') or [])}
+Learning design: {level.get('pedagogy', 'Use one clear theme, repeat core vocabulary, and keep each section focused.')}
 Fixed cumulative vocabulary for this level (write with these terms plus only the explicitly planned learningWords): {fixed_vocabulary}
 
-Use simplified Chinese. Stay inside the fixed vocabulary above; do not assume a word is on the list. Write one connected story, divided into meaningful numbered sections. Internally split each section into complete short sentences or dialogue turns for synchronized audio, but make the sentences flow as a paragraph. Deliberately repeat the core vocabulary. Put every intentionally introduced above-level term in learningWords and use no other above-level terms. Include a narrator and at most three dialogue characters. Use natural, level-appropriate Mandarin, a satisfying ending, and fully contextual English translations. Do not adapt copyrighted stories. Output JSON only.
+Use simplified Chinese. Stay inside the fixed vocabulary above; do not assume a word is on the list. Write one connected story, divided into meaningful numbered sections. Each section must work as one readable lesson page with a clear mini-purpose, not as disconnected example sentences. Internally split the page into complete short sentences or dialogue turns only for synchronized audio; when joined, they must form one flowing paragraph. Deliberately repeat the same core words and sentence frames. Introduce a word only when the story truly needs it. Put every intentionally introduced above-level term in learningWords and use no other above-level terms. Include a narrator and at most three dialogue characters. Use natural, level-appropriate Mandarin, a satisfying ending, and fully contextual English translations. For Newbie and Elementary, prefer exactly three sections, one simple teaching idea, and a tiny cast. Do not adapt copyrighted stories. Output JSON only.
 """.strip()
         last_error = ""
         previous_draft: dict[str, Any] | None = None

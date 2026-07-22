@@ -3,6 +3,7 @@ from __future__ import annotations
 import unittest
 
 from workshop.build_launch_set import _normalize, _specs
+from workshop.config import LEVELS
 from workshop.tests.fixtures import valid_story
 
 
@@ -31,6 +32,12 @@ class LaunchSetTests(unittest.TestCase):
         self.assertEqual(normalized["englishTitle"], "Breakfast for Two")
         self.assertEqual(normalized["minutes"], 2)
         self.assertEqual(normalized["gradingProfile"], "hsk2-v1")
+
+    def test_beginner_generation_targets_prioritize_repetition(self) -> None:
+        self.assertLessEqual(LEVELS["newbie"]["target_new_words"], 3)
+        self.assertLessEqual(LEVELS["newbie"]["target_unique_words"], 24)
+        self.assertLessEqual(LEVELS["elementary"]["target_new_words"], 5)
+        self.assertIn("repeat", LEVELS["newbie"]["pedagogy"].lower())
 
 
 if __name__ == "__main__":

@@ -129,6 +129,12 @@ class _LibraryBody extends ConsumerWidget {
                             child: ChoiceChip(
                               label: const Text('All stories'),
                               selected: learning.selectedLevel == null,
+                              selectedColor: cinnabar.withValues(alpha: .14),
+                              side: BorderSide(
+                                color: learning.selectedLevel == null
+                                    ? cinnabar
+                                    : ink.withValues(alpha: .15),
+                              ),
                               onSelected: (_) => ref
                                   .read(learningProvider.notifier)
                                   .setSelectedLevel(null),
@@ -140,6 +146,16 @@ class _LibraryBody extends ConsumerWidget {
                               child: ChoiceChip(
                                 label: Text(level.label),
                                 selected: learning.selectedLevel == level.id,
+                                avatar: CircleAvatar(
+                                  radius: 5,
+                                  backgroundColor: levelPalette(level).primary,
+                                ),
+                                selectedColor: levelPalette(level).soft,
+                                side: BorderSide(
+                                  color: learning.selectedLevel == level.id
+                                      ? levelPalette(level).primary
+                                      : ink.withValues(alpha: .15),
+                                ),
                                 onSelected: (_) => ref
                                     .read(learningProvider.notifier)
                                     .setSelectedLevel(level.id),
@@ -303,8 +319,9 @@ class _ContinueCard extends StatelessWidget {
     final fraction = story.blockCount == 0
         ? 0.0
         : (progress.blockIndex + 1) / story.blockCount;
+    final palette = levelPalette(story.level);
     return Card(
-      color: ink,
+      color: palette.deep,
       child: InkWell(
         borderRadius: BorderRadius.circular(24),
         onTap: () => context.go('/story/${story.id}'),
@@ -317,7 +334,7 @@ class _ContinueCard extends StatelessWidget {
                 height: 62,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: gold,
+                  color: palette.highlight,
                   borderRadius: BorderRadius.circular(18),
                 ),
                 child: Text(
@@ -330,10 +347,10 @@ class _ContinueCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'CONTINUE READING',
                       style: TextStyle(
-                        color: gold,
+                        color: palette.highlight,
                         letterSpacing: 1.4,
                         fontSize: 11,
                         fontWeight: FontWeight.w800,
@@ -351,7 +368,7 @@ class _ContinueCard extends StatelessWidget {
                     const SizedBox(height: 12),
                     LinearProgressIndicator(
                       value: fraction.clamp(0, 1),
-                      color: gold,
+                      color: palette.highlight,
                       backgroundColor: Colors.white12,
                     ),
                   ],
@@ -372,11 +389,9 @@ class StoryCard extends StatelessWidget {
   final StoryCatalogEntry story;
   final StoryProgress? progress;
 
-  Color _color(String hex) =>
-      Color(int.parse(hex.substring(1), radix: 16) + 0xFF000000);
-
   @override
   Widget build(BuildContext context) {
+    final palette = levelPalette(story.level);
     final fraction = story.blockCount == 0 || progress == null
         ? 0.0
         : progress!.completed
@@ -392,11 +407,7 @@ class StoryCard extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(22),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: story.colors.map(_color).toList(),
-                  ),
-                ),
+                decoration: BoxDecoration(gradient: palette.gradient),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -438,8 +449,8 @@ class StoryCard extends StatelessWidget {
                 children: [
                   Text(
                     story.topic.toUpperCase(),
-                    style: const TextStyle(
-                      color: jade,
+                    style: TextStyle(
+                      color: palette.primary,
                       fontSize: 10,
                       letterSpacing: 1.3,
                       fontWeight: FontWeight.w800,
@@ -463,6 +474,7 @@ class StoryCard extends StatelessWidget {
                       value: fraction.clamp(0, 1),
                       minHeight: 4,
                       borderRadius: BorderRadius.circular(8),
+                      color: palette.primary,
                     ),
                   ],
                 ],
