@@ -1,0 +1,3860 @@
+{
+  "schemaVersion": 1,
+  "id": "clockmakers-letter",
+  "title": "钟表匠的信",
+  "pinyinTitle": "Zhōngbiǎojiàng de Xìn",
+  "englishTitle": "The Clockmaker's Letter",
+  "summary": "A clock repairer discovers a decades-old letter hidden inside a clock and must decide whether to deliver it, risking upheaval in a family.",
+  "level": "master",
+  "topic": "A letter hidden inside a repaired clock",
+  "minutes": 6,
+  "glyph": "钟",
+  "colors": [
+    "#A0522D",
+    "#4A2C17"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "laochen",
+      "name": "老陈",
+      "speaker": "Dylan"
+    },
+    {
+      "id": "xiaowang",
+      "name": "小王",
+      "speaker": "Eric"
+    },
+    {
+      "id": "linai",
+      "name": "李奶奶",
+      "speaker": "Serena"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "老陈经营一家钟表修理店已有四十年。他的手艺精湛，尤其擅长修复那些被遗忘的古董钟。",
+      "traditional": null,
+      "translation": "Old Chen has been running a clock and watch repair shop for forty years. His craftsmanship is exquisite, and he is especially good at restoring those forgotten antique clocks.",
+      "pinyin": "Lǎo Chén jīngyíng yī jiā zhōngbiǎo xiūlǐ diàn yǐ yǒu sìshí nián. Tā de shǒuyì jīngzhàn, yóuqí shàncháng xiūfù nàxiē bèi yíwàng de gǔdǒng zhōng.",
+      "tokens": [
+        {
+          "text": "老陈",
+          "pinyin": "Lǎochén",
+          "gloss": "Old Chen (a person's nickname)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "经营",
+          "pinyin": "jīngyíng",
+          "gloss": "operate",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "measure word for shops/families",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "钟表",
+          "pinyin": "zhōngbiǎo",
+          "gloss": "clocks and watches",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "修理",
+          "pinyin": "xiūlǐ",
+          "gloss": "repair",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "店",
+          "pinyin": "diàn",
+          "gloss": "shop",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "已",
+          "pinyin": "yǐ",
+          "gloss": "already",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "四十年",
+          "pinyin": "sìshí nián",
+          "gloss": "forty years",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "手艺",
+          "pinyin": "shǒuyì",
+          "gloss": "craftsmanship",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "精湛",
+          "pinyin": "jīngzhàn",
+          "gloss": "exquisite",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "尤其",
+          "pinyin": "yóuqí",
+          "gloss": "especially",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "擅长",
+          "pinyin": "shàncháng",
+          "gloss": "be good at",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "修复",
+          "pinyin": "xiūfù",
+          "gloss": "restore",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "那些",
+          "pinyin": "nàxiē",
+          "gloss": "those",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "被",
+          "pinyin": "bèi",
+          "gloss": "by (passive marker)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "遗忘",
+          "pinyin": "yíwàng",
+          "gloss": "forgotten",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "古董钟",
+          "pinyin": "gǔdǒng zhōng",
+          "gloss": "antique clock",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 8400
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "dialogue",
+      "speakerId": "xiaowang",
+      "hanzi": "师傅，这个老座钟是我爷爷留下的。它停了二十年，您看还能修好吗？",
+      "traditional": null,
+      "translation": "Master, this old pendulum clock was left by my grandfather. It has stopped for twenty years, do you think it can still be repaired?",
+      "pinyin": "shīfu, zhège lǎo zuòzhōng shì wǒ yéye liúxià de. tā tíng le èrshí nián, nín kàn hái néng xiūhǎo ma?",
+      "tokens": [
+        {
+          "text": "师傅",
+          "pinyin": "shīfu",
+          "gloss": "master",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "座钟",
+          "pinyin": "zuòzhōng",
+          "gloss": "pendulum clock",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "爷爷",
+          "pinyin": "yéye",
+          "gloss": "grandfather",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "留下",
+          "pinyin": "liúxià",
+          "gloss": "leave behind",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "停",
+          "pinyin": "tíng",
+          "gloss": "stop",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "二十",
+          "pinyin": "èrshí",
+          "gloss": "twenty",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年",
+          "pinyin": "nián",
+          "gloss": "year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "think/see",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "还",
+          "pinyin": "hái",
+          "gloss": "still",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "能",
+          "pinyin": "néng",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "修好",
+          "pinyin": "xiūhǎo",
+          "gloss": "repair successfully",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 7680
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "laochen",
+      "hanzi": "我试试。这种德国制的老钟，零件不好找，但并非不可能。",
+      "traditional": null,
+      "translation": "I'll give it a try. This old German-made clock, spare parts are hard to find, but not impossible.",
+      "pinyin": "wǒ shì shì. zhè zhǒng dé guó zhì de lǎo zhōng, líng jiàn bù hǎo zhǎo, dàn bìng fēi bù kě néng.",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "试",
+          "pinyin": "shì",
+          "gloss": "try",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "试",
+          "pinyin": "shì",
+          "gloss": "try",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "种",
+          "pinyin": "zhǒng",
+          "gloss": "kind",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "德",
+          "pinyin": "dé",
+          "gloss": "German",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "国",
+          "pinyin": "guó",
+          "gloss": "country",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "制",
+          "pinyin": "zhì",
+          "gloss": "made",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "钟",
+          "pinyin": "zhōng",
+          "gloss": "clock",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "零",
+          "pinyin": "líng",
+          "gloss": "spare",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "件",
+          "pinyin": "jiàn",
+          "gloss": "part",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "easy",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "find",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "并",
+          "pinyin": "bìng",
+          "gloss": "emphatic",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "非",
+          "pinyin": "fēi",
+          "gloss": "not",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "可",
+          "pinyin": "kě",
+          "gloss": "able",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "能",
+          "pinyin": "néng",
+          "gloss": "can",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 5280
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "顾客走后，老陈打开钟的后盖，准备清理机芯。忽然，他指尖触到一张泛黄的纸片。",
+      "traditional": null,
+      "translation": "After the customer left, Old Chen opened the back cover of the clock and prepared to clean the movement. Suddenly, his fingertip touched a yellowed piece of paper.",
+      "pinyin": "gù kè zǒu hòu, lǎo chén dǎ kāi zhōng de hòu gài, zhǔn bèi qīng lǐ jī xīn. hū rán, tā zhǐ jiān chù dào yī zhāng fàn huáng de zhǐ piàn.",
+      "tokens": [
+        {
+          "text": "顾客",
+          "pinyin": "gù kè",
+          "gloss": "customer",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "left",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "老陈",
+          "pinyin": "lǎo chén",
+          "gloss": "Old Chen",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "打开",
+          "pinyin": "dǎ kāi",
+          "gloss": "opened",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "钟",
+          "pinyin": "zhōng",
+          "gloss": "clock",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "后盖",
+          "pinyin": "hòu gài",
+          "gloss": "back cover",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "准备",
+          "pinyin": "zhǔn bèi",
+          "gloss": "prepared",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "清理",
+          "pinyin": "qīng lǐ",
+          "gloss": "to clean",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "机芯",
+          "pinyin": "jī xīn",
+          "gloss": "movement",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "忽然",
+          "pinyin": "hū rán",
+          "gloss": "suddenly",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "指尖",
+          "pinyin": "zhǐ jiān",
+          "gloss": "fingertip",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "触到",
+          "pinyin": "chù dào",
+          "gloss": "touched",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "一张",
+          "pinyin": "yī zhāng",
+          "gloss": "a (piece of)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "泛黄",
+          "pinyin": "fàn huáng",
+          "gloss": "yellowed",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(attribute)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "纸片",
+          "pinyin": "zhǐ piàn",
+          "gloss": "piece of paper",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 8720
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "他小心翼翼地取出纸片，发现是一封信，字迹工整，但墨水已经褪色。",
+      "traditional": null,
+      "translation": "He carefully took out a piece of paper and found it was a letter. The handwriting was neat, but the ink had faded.",
+      "pinyin": "tā xiǎoxīnyìyì de qǔchū zhǐpiàn, fāxiàn shì yīfēng xìn, zìjì gōngzhěng, dàn mòshuǐ yǐjīng tuìsè",
+      "tokens": [
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小心翼翼",
+          "pinyin": "xiǎoxīnyìyì",
+          "gloss": "cautiously",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "(adverbial particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "取出",
+          "pinyin": "qǔchū",
+          "gloss": "take out",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "纸片",
+          "pinyin": "zhǐpiàn",
+          "gloss": "piece of paper",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "discover",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一封",
+          "pinyin": "yīfēng",
+          "gloss": "a (measure word for letters)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "字迹",
+          "pinyin": "zìjì",
+          "gloss": "handwriting",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "工整",
+          "pinyin": "gōngzhěng",
+          "gloss": "neat",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "墨水",
+          "pinyin": "mòshuǐ",
+          "gloss": "ink",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "已经",
+          "pinyin": "yǐjīng",
+          "gloss": "already",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "褪色",
+          "pinyin": "tuìsè",
+          "gloss": "fade",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 6960
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "dialogue",
+      "speakerId": "laochen",
+      "hanzi": "这信……藏在钟里几十年了吧。",
+      "traditional": null,
+      "translation": "This letter... has been hidden in the clock for decades, hasn't it?",
+      "pinyin": "zhè xìn ... cáng zài zhōng lǐ jǐ shí nián le ba.",
+      "tokens": [
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "…",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "…",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "藏",
+          "pinyin": "cáng",
+          "gloss": "hide",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "钟",
+          "pinyin": "zhōng",
+          "gloss": "clock",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "几",
+          "pinyin": "jǐ",
+          "gloss": "several",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "十",
+          "pinyin": "shí",
+          "gloss": "ten",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年",
+          "pinyin": "nián",
+          "gloss": "year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(change of state)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "(supposition)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 2560
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "信上写着：“致我儿：当你读到这封信时，我已不在人世。请原谅我的不辞而别，我从未停止爱你。”落款日期是一九七五年。",
+      "traditional": null,
+      "translation": "The letter says: “To my son: When you read this letter, I am no longer in this world. Please forgive me for leaving without saying goodbye; I have never stopped loving you.” The signature is dated 1975.",
+      "pinyin": "Xìn shàng xiě zhe: “Zhì wǒ ér: Dāng nǐ dú dào zhè fēng xìn shí, wǒ yǐ bù zài rénshì. Qǐng yuánliàng wǒ de bùcí'érbié, wǒ cóngwèi tíngzhǐ ài nǐ.” Luòkuǎn rìqī shì yī jiǔ qī wǔ nián.",
+      "tokens": [
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on (in letter)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "progressive aspect",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "致",
+          "pinyin": "zhì",
+          "gloss": "to (address)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "儿",
+          "pinyin": "ér",
+          "gloss": "son",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "当",
+          "pinyin": "dāng",
+          "gloss": "when",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "读",
+          "pinyin": "dú",
+          "gloss": "read",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrive (reach)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "封",
+          "pinyin": "fēng",
+          "gloss": "measure word for letters",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "time (when)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "已",
+          "pinyin": "yǐ",
+          "gloss": "already",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "be in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "世",
+          "pinyin": "shì",
+          "gloss": "world",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "请",
+          "pinyin": "qǐng",
+          "gloss": "please",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "原",
+          "pinyin": "yuán",
+          "gloss": "original (forgive)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "谅",
+          "pinyin": "liàng",
+          "gloss": "forgive",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "辞",
+          "pinyin": "cí",
+          "gloss": "take leave",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "而",
+          "pinyin": "ér",
+          "gloss": "and (conjunction)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "别",
+          "pinyin": "bié",
+          "gloss": "leave",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "从",
+          "pinyin": "cóng",
+          "gloss": "from (never)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "未",
+          "pinyin": "wèi",
+          "gloss": "not yet",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "停",
+          "pinyin": "tíng",
+          "gloss": "stop",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "止",
+          "pinyin": "zhǐ",
+          "gloss": "stop",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "爱",
+          "pinyin": "ài",
+          "gloss": "love",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "落",
+          "pinyin": "luò",
+          "gloss": "put down (sign)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "款",
+          "pinyin": "kuǎn",
+          "gloss": "signature",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "日",
+          "pinyin": "rì",
+          "gloss": "day",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "期",
+          "pinyin": "qī",
+          "gloss": "period (date)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "九",
+          "pinyin": "jiǔ",
+          "gloss": "nine",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "七",
+          "pinyin": "qī",
+          "gloss": "seven",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "五",
+          "pinyin": "wǔ",
+          "gloss": "five",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年",
+          "pinyin": "nián",
+          "gloss": "year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 18800
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "老陈沉思良久。这显然是那位顾客的爷爷留下的信，但信中提到的是“我儿”，看来这位爷爷当年抛下了自己的孩子。",
+      "traditional": null,
+      "translation": "Old Chen pondered for a long time. This was clearly the letter left by that customer's grandfather, but in the letter it mentioned 'my child'; it seems that this grandfather had abandoned his own child back then.",
+      "pinyin": "Lǎo Chén chénsī liángjiǔ. Zhè xiǎnrán shì nà wèi gùkè de yéye liúxià de xìn, dàn xìn zhōng tídào de shì “wǒ ér”, kànlái zhè wèi yéye dāngnián pāoxià le zìjǐ de háizi.",
+      "tokens": [
+        {
+          "text": "老陈",
+          "pinyin": "lǎo chén",
+          "gloss": "Old Chen (surname)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "沉思",
+          "pinyin": "chén sī",
+          "gloss": "ponder",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "良久",
+          "pinyin": "liáng jiǔ",
+          "gloss": "a long time",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "显然",
+          "pinyin": "xiǎn rán",
+          "gloss": "clearly",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "位",
+          "pinyin": "wèi",
+          "gloss": "measure word for person",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "顾客",
+          "pinyin": "gù kè",
+          "gloss": "customer",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "爷爷",
+          "pinyin": "yé ye",
+          "gloss": "grandfather",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "留下",
+          "pinyin": "liú xià",
+          "gloss": "leave behind",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "中",
+          "pinyin": "zhōng",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "提到",
+          "pinyin": "tí dào",
+          "gloss": "mention",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I/me/my",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "儿",
+          "pinyin": "ér",
+          "gloss": "child",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "看来",
+          "pinyin": "kàn lái",
+          "gloss": "it seems",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "位",
+          "pinyin": "wèi",
+          "gloss": "measure word",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "爷爷",
+          "pinyin": "yé ye",
+          "gloss": "grandfather",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "当年",
+          "pinyin": "dāng nián",
+          "gloss": "back then",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "抛下",
+          "pinyin": "pāo xià",
+          "gloss": "abandon",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle (completed action)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "自己",
+          "pinyin": "zì jǐ",
+          "gloss": "oneself",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "孩子",
+          "pinyin": "hái zi",
+          "gloss": "child",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 12400
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "dialogue",
+      "speakerId": "laochen",
+      "hanzi": "若把信交给小王，他父亲会怎么想？或许这会揭开旧伤疤。",
+      "traditional": null,
+      "translation": "If we give the letter to Xiao Wang, what would his father think? Perhaps this will reopen old wounds.",
+      "pinyin": "ruò bǎ xìn jiāogěi xiǎowáng, tā fùqīn huì zěnme xiǎng? huòxǔ zhè huì jiēkāi jiù shāngbā.",
+      "tokens": [
+        {
+          "text": "若",
+          "pinyin": "ruò",
+          "gloss": "if",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "gloss": "BA (object marker)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "交给",
+          "pinyin": "jiāogěi",
+          "gloss": "give to",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "小王",
+          "pinyin": "xiǎowáng",
+          "gloss": "Xiao Wang (name)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he/his",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "父亲",
+          "pinyin": "fùqīn",
+          "gloss": "father",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "会",
+          "pinyin": "huì",
+          "gloss": "will",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "怎么",
+          "pinyin": "zěnme",
+          "gloss": "how",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "think",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "或许",
+          "pinyin": "huòxǔ",
+          "gloss": "perhaps",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "会",
+          "pinyin": "huì",
+          "gloss": "will",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "揭开",
+          "pinyin": "jiēkāi",
+          "gloss": "uncover",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "旧",
+          "pinyin": "jiù",
+          "gloss": "old",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "伤疤",
+          "pinyin": "shāngbā",
+          "gloss": "scar",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 5680
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "老陈辗转难眠。第二天，他决定先联系小王的父亲——也就是那位被父亲抛弃的儿子。",
+      "traditional": null,
+      "translation": "Old Chen tossed and turned, unable to sleep. The next day, he decided to first contact Xiao Wang's father—that is, the son who was abandoned by his father.",
+      "pinyin": "Lǎo Chén zhǎnzhuǎn nánmián. Dì'èr tiān, tā juédìng xiān liánxì Xiǎo Wáng de fùqīn——yě jiùshì nà wèi bèi fùqīn pāoqì de érzi.",
+      "tokens": [
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old (prefix)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "陈",
+          "pinyin": "chén",
+          "gloss": "Chen (surname)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "辗",
+          "pinyin": "zhǎn",
+          "gloss": "toss",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "转",
+          "pinyin": "zhuǎn",
+          "gloss": "turn",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "难",
+          "pinyin": "nán",
+          "gloss": "hard",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "眠",
+          "pinyin": "mián",
+          "gloss": "sleep",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "第",
+          "pinyin": "dì",
+          "gloss": "ordinal prefix",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "二",
+          "pinyin": "èr",
+          "gloss": "two",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "天",
+          "pinyin": "tiān",
+          "gloss": "day",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "决",
+          "pinyin": "jué",
+          "gloss": "decide",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "定",
+          "pinyin": "dìng",
+          "gloss": "decide",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "先",
+          "pinyin": "xiān",
+          "gloss": "first",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "联",
+          "pinyin": "lián",
+          "gloss": "connect",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "系",
+          "pinyin": "xì",
+          "gloss": "relation",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small (prefix)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "王",
+          "pinyin": "wáng",
+          "gloss": "Wang (surname)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "父",
+          "pinyin": "fù",
+          "gloss": "father",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "亲",
+          "pinyin": "qīn",
+          "gloss": "parent",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "—",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "—",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "就",
+          "pinyin": "jiù",
+          "gloss": "then",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "位",
+          "pinyin": "wèi",
+          "gloss": "measure word for people",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "被",
+          "pinyin": "bèi",
+          "gloss": "by (passive)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "父",
+          "pinyin": "fù",
+          "gloss": "father",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "亲",
+          "pinyin": "qīn",
+          "gloss": "parent",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "抛",
+          "pinyin": "pāo",
+          "gloss": "throw",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "弃",
+          "pinyin": "qì",
+          "gloss": "abandon",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "儿",
+          "pinyin": "ér",
+          "gloss": "child",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "子",
+          "pinyin": "zǐ",
+          "gloss": "son",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 10000
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "dialogue",
+      "speakerId": "laochen",
+      "hanzi": "喂，请问是王先生吗？我是修钟表的老陈。您儿子拿来的老钟里，我找到了一封信。",
+      "traditional": null,
+      "translation": "Hello, is this Mr. Wang? I'm Old Chen, the clock repairman. In the old clock your son brought, I found a letter.",
+      "pinyin": "wèi, qǐngwèn shì Wáng xiānsheng ma? Wǒ shì xiū zhōngbiǎo de lǎo Chén. Nín érzi nálái de lǎo zhōng lǐ, wǒ zhǎodào le yī fēng xìn.",
+      "tokens": [
+        {
+          "text": "喂",
+          "pinyin": "wèi",
+          "gloss": "hello (on phone)",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "请问",
+          "pinyin": "qǐngwèn",
+          "gloss": "excuse me, may I ask",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "王先生",
+          "pinyin": "Wáng xiānsheng",
+          "gloss": "Mr. Wang",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "am",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "修",
+          "pinyin": "xiū",
+          "gloss": "repair",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "钟表",
+          "pinyin": "zhōngbiǎo",
+          "gloss": "clocks and watches",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "老陈",
+          "pinyin": "lǎo Chén",
+          "gloss": "Old Chen",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "儿子",
+          "pinyin": "érzi",
+          "gloss": "son",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "拿来",
+          "pinyin": "nálái",
+          "gloss": "bring over",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "老钟",
+          "pinyin": "lǎo zhōng",
+          "gloss": "old clock",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎodào",
+          "gloss": "found",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "completed action marker",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "封",
+          "pinyin": "fēng",
+          "gloss": "(classifier for letters)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 8320
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "linai",
+      "hanzi": "哦？什么信？我是他母亲，他父亲已经去世多年了。",
+      "traditional": null,
+      "translation": "Oh? What letter? I am his mother, and his father passed away many years ago.",
+      "pinyin": "ò？shénme xìn？wǒ shì tā mǔqīn，tā fùqīn yǐjīng qùshì duōnián le。",
+      "tokens": [
+        {
+          "text": "哦",
+          "pinyin": "ò",
+          "gloss": "oh",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shénme",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "his",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "母亲",
+          "pinyin": "mǔqīn",
+          "gloss": "mother",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "his",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "父亲",
+          "pinyin": "fùqīn",
+          "gloss": "father",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "已经",
+          "pinyin": "yǐjīng",
+          "gloss": "already",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "去世",
+          "pinyin": "qùshì",
+          "gloss": "pass away",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "多年",
+          "pinyin": "duōnián",
+          "gloss": "many years",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "aspect particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 5440
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "老陈愣住了。接电话的竟是小王的奶奶。他意识到，这封信或许正是她丈夫留下的。",
+      "traditional": null,
+      "translation": "Old Chen was stunned. The person who answered the phone turned out to be Xiao Wang's grandmother. He realized that this letter might have been left behind by her husband.",
+      "pinyin": "lǎo chén lèng zhù le. jiē diàn huà de jìng shì xiǎo wáng de nǎi nai. tā yì shí dào, zhè fēng xìn huò xǔ zhèng shì tā zhàng fu liú xià de.",
+      "tokens": [
+        {
+          "text": "老陈",
+          "pinyin": "lǎo chén",
+          "gloss": "Old Chen",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "愣住",
+          "pinyin": "lèng zhù",
+          "gloss": "stunned",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "接",
+          "pinyin": "jiē",
+          "gloss": "receive",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "电话",
+          "pinyin": "diàn huà",
+          "gloss": "phone",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "竟是",
+          "pinyin": "jìng shì",
+          "gloss": "unexpectedly was",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "小王",
+          "pinyin": "xiǎo wáng",
+          "gloss": "Xiao Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "奶奶",
+          "pinyin": "nǎi nai",
+          "gloss": "grandmother",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "意识到",
+          "pinyin": "yì shí dào",
+          "gloss": "realized",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "封",
+          "pinyin": "fēng",
+          "gloss": "(measure word for letters)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "或许",
+          "pinyin": "huò xǔ",
+          "gloss": "perhaps",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "正是",
+          "pinyin": "zhèng shì",
+          "gloss": "exactly is",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "her",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "丈夫",
+          "pinyin": "zhàng fu",
+          "gloss": "husband",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "留下",
+          "pinyin": "liú xià",
+          "gloss": "left behind",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(nominalization particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 9040
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "dialogue",
+      "speakerId": "laochen",
+      "hanzi": "李奶奶，这封信是您丈夫写的，藏在一个老钟里。信上说，他很后悔离开你们。",
+      "traditional": null,
+      "translation": "Grandma Li, this letter was written by your husband, hidden inside an old clock. The letter says that he very much regrets leaving you.",
+      "pinyin": "Lǐ nǎi nai, zhè fēng xìn shì nín zhàngfu xiě de, cáng zài yī gè lǎo zhōng lǐ. Xìn shàng shuō, tā hěn hòuhuǐ líkāi nǐmen.",
+      "tokens": [
+        {
+          "text": "李奶奶",
+          "pinyin": "Lǐ nǎi nai",
+          "gloss": "Grandma Li",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "封",
+          "pinyin": "fēng",
+          "gloss": "measure word for letters",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "丈夫",
+          "pinyin": "zhàngfu",
+          "gloss": "husband",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "藏",
+          "pinyin": "cáng",
+          "gloss": "hide",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in/at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "general measure word",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "钟",
+          "pinyin": "zhōng",
+          "gloss": "clock",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "后悔",
+          "pinyin": "hòuhuǐ",
+          "gloss": "regret",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "离开",
+          "pinyin": "líkāi",
+          "gloss": "leave",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "你们",
+          "pinyin": "nǐmen",
+          "gloss": "you (plural)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 7280
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "dialogue",
+      "speakerId": "linai",
+      "hanzi": "（沉默片刻）他走了四十年，我一直以为他有了新家。原来……他心里还有我们。",
+      "traditional": null,
+      "translation": "(After a moment of silence) He left forty years ago. I always thought he had a new family. It turns out... he still has us in his heart.",
+      "pinyin": "(chénmò piànkè) tā zǒu le sìshí nián, wǒ yīzhí yǐwéi tā yǒu le xīn jiā. yuánlái…… tā xīnlǐ hái yǒu wǒmen.",
+      "tokens": [
+        {
+          "text": "（",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "沉默",
+          "pinyin": "chénmò",
+          "gloss": "silent",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "片刻",
+          "pinyin": "piànkè",
+          "gloss": "moment",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "）",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "leave",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "aspect particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "四十年",
+          "pinyin": "sìshí nián",
+          "gloss": "forty years",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一直",
+          "pinyin": "yīzhí",
+          "gloss": "always",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "以为",
+          "pinyin": "yǐwéi",
+          "gloss": "thought",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "aspect particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "新",
+          "pinyin": "xīn",
+          "gloss": "new",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "原来",
+          "pinyin": "yuánlái",
+          "gloss": "it turns out",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "…",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "…",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "心里",
+          "pinyin": "xīnlǐ",
+          "gloss": "in the heart",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "还有",
+          "pinyin": "háiyǒu",
+          "gloss": "still have",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "us",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 6800
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "老陈将信亲自送到李奶奶手中。她读完后泪流满面，却露出释然的微笑。",
+      "traditional": null,
+      "translation": "Old Chen delivered the letter to Grandma Li in person. After reading it, she burst into tears, yet smiled with relief.",
+      "pinyin": "Lǎo Chén jiāng xìn qīnzì sòngdào Lǐ nǎinai shǒuzhōng. Tā dú wán hòu lèiliúmǎnmiàn, què lùchū shìrán de wéixiào.",
+      "tokens": [
+        {
+          "text": "老陈",
+          "pinyin": "lǎo chén",
+          "gloss": "Old Chen",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "将",
+          "pinyin": "jiāng",
+          "gloss": "to take (formal)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "亲自",
+          "pinyin": "qīnzì",
+          "gloss": "personally",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "送到",
+          "pinyin": "sòngdào",
+          "gloss": "deliver to",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "李奶奶",
+          "pinyin": "lǐ nǎinai",
+          "gloss": "Grandma Li",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "手中",
+          "pinyin": "shǒuzhōng",
+          "gloss": "in hand",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "读",
+          "pinyin": "dú",
+          "gloss": "read",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "完",
+          "pinyin": "wán",
+          "gloss": "finish",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "泪流满面",
+          "pinyin": "lèiliúmǎnmiàn",
+          "gloss": "tears streaming down one's face",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "却",
+          "pinyin": "què",
+          "gloss": "but",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "露出",
+          "pinyin": "lùchū",
+          "gloss": "reveal",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "释然",
+          "pinyin": "shìrán",
+          "gloss": "relieved",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "微笑",
+          "pinyin": "wéixiào",
+          "gloss": "smile",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 7760
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "dialogue",
+      "speakerId": "linai",
+      "hanzi": "谢谢你，老陈。这封信虽然迟了这么多年，但它让我们知道，他从未真正离开。",
+      "traditional": null,
+      "translation": "Thank you, Lao Chen. This letter, though many years late, lets us know that he never truly left.",
+      "pinyin": "xiè xie nǐ, lǎo chén. zhè fēng xìn suī rán chí le zhè me duō nián, dàn tā ràng wǒ men zhī dào, tā cóng wèi zhēn zhèng lí kāi.",
+      "tokens": [
+        {
+          "text": "谢谢",
+          "pinyin": "xiè xie",
+          "gloss": "thank",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "老陈",
+          "pinyin": "lǎo chén",
+          "gloss": "Lao Chen (name)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这封信",
+          "pinyin": "zhè fēng xìn",
+          "gloss": "this letter",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "虽然",
+          "pinyin": "suī rán",
+          "gloss": "although",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "迟",
+          "pinyin": "chí",
+          "gloss": "late",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "already (particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这么",
+          "pinyin": "zhè me",
+          "gloss": "so (much)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "多",
+          "pinyin": "duō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年",
+          "pinyin": "nián",
+          "gloss": "year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "让",
+          "pinyin": "ràng",
+          "gloss": "let",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒ men",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "知道",
+          "pinyin": "zhī dào",
+          "gloss": "know",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "从未",
+          "pinyin": "cóng wèi",
+          "gloss": "never",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "真正",
+          "pinyin": "zhēn zhèng",
+          "gloss": "truly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "离开",
+          "pinyin": "lí kāi",
+          "gloss": "leave",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 7840
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "那天晚上，老陈坐在店里，看着墙上滴答作响的钟表。他明白，有些秘密虽然尘封已久，但揭开时，也能带来温暖。",
+      "traditional": null,
+      "translation": "That evening, Old Chen sat in the shop, looking at the ticking clock on the wall. He understood that although some secrets had been dust-covered for a long time, when revealed, they could also bring warmth.",
+      "pinyin": "Nà tiān wǎnshàng, Lǎo Chén zuò zài diàn lǐ, kànzhe qiáng shàng dīdā zuòxiǎng de zhōngbiǎo. Tā míngbai, yǒuxiē mìmì suīrán chénfēng yǐjiǔ, dàn jiēkāi shí, yě néng dàilái wēnnuǎn.",
+      "tokens": [
+        {
+          "text": "那天",
+          "pinyin": "nà tiān",
+          "gloss": "that day",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "晚上",
+          "pinyin": "wǎn shàng",
+          "gloss": "evening",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "老陈",
+          "pinyin": "Lǎo Chén",
+          "gloss": "Old Chen",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "坐",
+          "pinyin": "zuò",
+          "gloss": "sit",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in/at",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "店里",
+          "pinyin": "diàn lǐ",
+          "gloss": "in the shop",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "看着",
+          "pinyin": "kàn zhe",
+          "gloss": "looking at",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "墙上",
+          "pinyin": "qiáng shàng",
+          "gloss": "on the wall",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "滴答作响",
+          "pinyin": "dī dā zuò xiǎng",
+          "gloss": "ticking",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "钟表",
+          "pinyin": "zhōng biǎo",
+          "gloss": "clock",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "明白",
+          "pinyin": "míng bai",
+          "gloss": "understand",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "有些",
+          "pinyin": "yǒu xiē",
+          "gloss": "some",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "秘密",
+          "pinyin": "mì mì",
+          "gloss": "secret",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "虽然",
+          "pinyin": "suī rán",
+          "gloss": "although",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "尘封",
+          "pinyin": "chén fēng",
+          "gloss": "dust-covered",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "已久",
+          "pinyin": "yǐ jiǔ",
+          "gloss": "for a long time",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "揭开",
+          "pinyin": "jiē kāi",
+          "gloss": "reveal",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "time",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "能",
+          "pinyin": "néng",
+          "gloss": "can",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "带来",
+          "pinyin": "dài lái",
+          "gloss": "bring",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "温暖",
+          "pinyin": "wēn nuǎn",
+          "gloss": "warmth",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 14880
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "他继续修理着那只老钟，仿佛时间在它身上留下了最珍贵的痕迹。",
+      "traditional": null,
+      "translation": "He continued repairing the old clock, as though time had left its most precious traces upon it.",
+      "pinyin": "tā jìxù xiūlǐ zhe nà zhī lǎo zhōng ， fǎngfú shíjiān zài tā shēnshang liúxià le zuì zhēnguì de hénjì 。",
+      "tokens": [
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "继续",
+          "pinyin": "jìxù",
+          "gloss": "continue",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "修理",
+          "pinyin": "xiūlǐ",
+          "gloss": "repair",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "(progressive)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "只",
+          "pinyin": "zhī",
+          "gloss": "CL (for clocks)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "钟",
+          "pinyin": "zhōng",
+          "gloss": "clock",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "仿佛",
+          "pinyin": "fǎngfú",
+          "gloss": "as if",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "时间",
+          "pinyin": "shíjiān",
+          "gloss": "time",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "身上",
+          "pinyin": "shēnshang",
+          "gloss": "on (itself)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "留下",
+          "pinyin": "liúxià",
+          "gloss": "leave behind",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(completed)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "最",
+          "pinyin": "zuì",
+          "gloss": "most",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "珍贵",
+          "pinyin": "zhēnguì",
+          "gloss": "precious",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(attribute)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "痕迹",
+          "pinyin": "hénjì",
+          "gloss": "traces",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 6240
+      }
+    }
+  ]
+}

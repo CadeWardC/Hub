@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-22T00:34:41.140317+00:00",
+  "stories": [
+    {
+      "id": "breakfast-for-two",
+      "title": "两个人的早餐",
+      "englishTitle": "Breakfast for Two",
+      "summary": "A learner orders soy milk and buns and shares a table with a neighbor. Practice numbers, food, and politeness.",
+      "level": "newbie",
+      "topic": "Daily Life",
+      "minutes": 4,
+      "blockCount": 20,
+      "path": "assets/content/stories/breakfast-for-two/story.json",
+      "glyph": "早",
+      "colors": [
+        "#FFD700",
+        "#FF8C00"
+      ]
+    },
+    {
+      "id": "red-umbrella",
+      "title": "红色的伞",
+      "englishTitle": "The Red Umbrella",
+      "summary": "Two friends find a red umbrella and look for the owner.",
+      "level": "newbie",
+      "topic": "A rainy-day lost-and-found",
+      "minutes": 4,
+      "blockCount": 17,
+      "path": "assets/content/stories/red-umbrella/story.json",
+      "glyph": "伞",
+      "colors": [
+        "#D7482F",
+        "#8E2F21"
+      ]
+    },
+    {
+      "id": "last-bus",
+      "title": "最后一班车",
+      "englishTitle": "The Last Bus",
+      "summary": "Two classmates miss the last bus after class and figure out a way to get home.",
+      "level": "elementary",
+      "topic": "Getting home after an evening class",
+      "minutes": 4,
+      "blockCount": 14,
+      "path": "assets/content/stories/last-bus/story.json",
+      "glyph": "车",
+      "colors": [
+        "#2E86AB",
+        "#A23B72"
+      ]
+    },
+    {
+      "id": "new-neighbor",
+      "title": "新邻居",
+      "englishTitle": "The New Neighbor",
+      "summary": "Xiao Ming helps a new neighbor carry a plant upstairs and they become friends.",
+      "level": "elementary",
+      "topic": "Meeting a neighbor",
+      "minutes": 4,
+      "blockCount": 9,
+      "path": "assets/content/stories/new-neighbor/story.json",
+      "glyph": "邻",
+      "colors": [
+        "#4A90D9",
+        "#2C5F8A"
+      ]
+    },
+    {
+      "id": "weekend-in-suzhou",
+      "title": "苏州周末",
+      "englishTitle": "A Weekend in Suzhou",
+      "summary": "Two friends explore Suzhou's gardens and canals, encounter rain, and resolve a small misunderstanding over food.",
+      "level": "intermediate",
+      "topic": "A short trip to Suzhou",
+      "minutes": 4,
+      "blockCount": 22,
+      "path": "assets/content/stories/weekend-in-suzhou/story.json",
+      "glyph": "苏",
+      "colors": [
+        "#4A7C59",
+        "#2E4A3C"
+      ]
+    },
+    {
+      "id": "cat-in-the-bookshop",
+      "title": "书店里的猫",
+      "englishTitle": "The Cat in the Bookshop",
+      "summary": "A frequent visitor and the bookshop owner follow a missing cat and discover an old note that leads to a treasured secret.",
+      "level": "intermediate",
+      "topic": "A bookshop cat leads to a discovery",
+      "minutes": 4,
+      "blockCount": 20,
+      "path": "assets/content/stories/cat-in-the-bookshop/story.json",
+      "glyph": "书",
+      "colors": [
+        "#C4956A",
+        "#8B5A2B"
+      ]
+    },
+    {
+      "id": "nameless-lantern",
+      "title": "无名的灯笼",
+      "englishTitle": "The Nameless Lantern",
+      "summary": "At a community lantern festival, two students discover a lantern with an unfinished poem and help its elderly maker complete it, revealing a story of love and memory.",
+      "level": "upper-intermediate",
+      "topic": "A lantern with an unfinished inscription",
+      "minutes": 4,
+      "blockCount": 21,
+      "path": "assets/content/stories/nameless-lantern/story.json",
+      "glyph": "灯",
+      "colors": [
+        "#D7482F",
+        "#8E2F21"
+      ]
+    },
+    {
+      "id": "wrong-delivery",
+      "title": "送错的包裹",
+      "englishTitle": "The Wrong Delivery",
+      "summary": "A mistaken package leads to a heartfelt surprise among three neighbors.",
+      "level": "upper-intermediate",
+      "topic": "A parcel delivered to the wrong apartment",
+      "minutes": 4,
+      "blockCount": 22,
+      "path": "assets/content/stories/wrong-delivery/story.json",
+      "glyph": "包",
+      "colors": [
+        "#4A90D9",
+        "#2C5F8A"
+      ]
+    },
+    {
+      "id": "photograph-by-the-river",
+      "title": "河边的照片",
+      "englishTitle": "The Photograph by the River",
+      "summary": "A photographer returns to her hometown to match an old photo with the modern city, uncovering a forgotten story of love and change.",
+      "level": "advanced",
+      "topic": "An old photograph and a changed riverfront",
+      "minutes": 5,
+      "blockCount": 23,
+      "path": "assets/content/stories/photograph-by-the-river/story.json",
+      "glyph": "影",
+      "colors": [
+        "#4A7C59",
+        "#2B4F3A"
+      ]
+    },
+    {
+      "id": "teahouse-debate",
+      "title": "茶馆的争议",
+      "englishTitle": "The Teahouse Debate",
+      "summary": "An old teahouse faces demolition; three generations argue over its future until a creative solution emerges.",
+      "level": "advanced",
+      "topic": "A disagreement about preserving a neighborhood teahouse",
+      "minutes": 6,
+      "blockCount": 14,
+      "path": "assets/content/stories/teahouse-debate/story.json",
+      "glyph": "茶",
+      "colors": [
+        "#8B4513",
+        "#A0522D"
+      ]
+    },
+    {
+      "id": "clockmakers-letter",
+      "title": "钟表匠的信",
+      "englishTitle": "The Clockmaker's Letter",
+      "summary": "A clock repairer discovers a decades-old letter hidden inside a clock and must decide whether to deliver it, risking upheaval in a family.",
+      "level": "master",
+      "topic": "A letter hidden inside a repaired clock",
+      "minutes": 6,
+      "blockCount": 19,
+      "path": "assets/content/stories/clockmakers-letter/story.json",
+      "glyph": "钟",
+      "colors": [
+        "#A0522D",
+        "#4A2C17"
+      ]
+    },
+    {
+      "id": "map-beneath-the-courtyard",
+      "title": "庭院之下的地图",
+      "englishTitle": "The Map Beneath the Courtyard",
+      "summary": "A hand-drawn map found during courtyard repairs leads residents on a journey to uncover their neighborhood's shared history and ignite communal renewal.",
+      "level": "master",
+      "topic": "A hand-drawn map found during courtyard repairs",
+      "minutes": 6,
+      "blockCount": 16,
+      "path": "assets/content/stories/map-beneath-the-courtyard/story.json",
+      "glyph": "图",
+      "colors": [
+        "#3A6B8C",
+        "#1F4A5F"
+      ]
+    }
+  ]
+}

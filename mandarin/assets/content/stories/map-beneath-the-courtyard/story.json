@@ -1,0 +1,3362 @@
+{
+  "schemaVersion": 1,
+  "id": "map-beneath-the-courtyard",
+  "title": "庭院之下的地图",
+  "pinyinTitle": "Tíngyuàn zhī xià de dìtú",
+  "englishTitle": "The Map Beneath the Courtyard",
+  "summary": "A hand-drawn map found during courtyard repairs leads residents on a journey to uncover their neighborhood's shared history and ignite communal renewal.",
+  "level": "master",
+  "topic": "A hand-drawn map found during courtyard repairs",
+  "minutes": 6,
+  "glyph": "图",
+  "colors": [
+    "#3A6B8C",
+    "#1F4A5F"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "liwe",
+      "name": "李伟",
+      "speaker": "Dylan"
+    },
+    {
+      "id": "chennai",
+      "name": "陈奶奶",
+      "speaker": "Serena"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "老城区的一座院落年久失修，居民们决定集资翻新。施工队挖开青砖地面时，发现了一个锈迹斑斑的铁盒。",
+      "translation": "An old compound in the old city district had been dilapidated for years, so the residents decided to pool money to renovate it. When the construction team dug up the blue brick ground, they found a rusty iron box.",
+      "traditional": null,
+      "pinyin": "Lǎo chéng qū de yī zuò yuàn luò nián jiǔ shī xiū, jū mín men jué dìng jí zī fān xīn. Shī gōng duì wā kāi qīng zhuān dì miàn shí, fā xiàn le yī gè xiù jì bān bān de tiě hé.",
+      "tokens": [
+        {
+          "text": "老城区",
+          "pinyin": "lǎochéngqū",
+          "gloss": "old city district",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一座",
+          "pinyin": "yīzuò",
+          "gloss": "a (measure word for buildings)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "院落",
+          "pinyin": "yuànluò",
+          "gloss": "courtyard, compound",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "年久失修",
+          "pinyin": "niánjiǔshīxiū",
+          "gloss": "dilapidated",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "居民们",
+          "pinyin": "jūmínmen",
+          "gloss": "residents",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "决定",
+          "pinyin": "juédìng",
+          "gloss": "decide",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "集资",
+          "pinyin": "jízī",
+          "gloss": "pool money",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "翻新",
+          "pinyin": "fānxīn",
+          "gloss": "renovate",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "施工队",
+          "pinyin": "shīgōngduì",
+          "gloss": "construction team",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "挖开",
+          "pinyin": "wākāi",
+          "gloss": "dig up",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "青砖",
+          "pinyin": "qīngzhuān",
+          "gloss": "blue brick",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "地面",
+          "pinyin": "dìmiàn",
+          "gloss": "ground",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "when",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "discover",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle indicating completion",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "锈迹斑斑",
+          "pinyin": "xiùjìbānbān",
+          "gloss": "rusty",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "attributive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "铁盒",
+          "pinyin": "tiěhé",
+          "gloss": "iron box",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 11200
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "盒子里是一张泛黄的油纸，上面用炭笔勾勒着复杂的线条，标注着一些已经消失的地名。",
+      "translation": "Inside was a yellowed sheet of oiled paper, with complex lines sketched in charcoal and labels for places that no longer existed.",
+      "traditional": null,
+      "pinyin": "hé zi lǐ shì yī zhāng fàn huáng de yóu zhǐ ， shàng miàn yòng tàn bǐ gōu lè zhe fù zá de xiàn tiáo ， biāo zhù zhe yī xiē yǐ jīng xiāo shī de dì míng 。",
+      "tokens": [
+        {
+          "text": "盒子",
+          "pinyin": "hé zi",
+          "gloss": "box",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一张",
+          "pinyin": "yī zhāng",
+          "gloss": "a piece of",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "泛黄",
+          "pinyin": "fàn huáng",
+          "gloss": "yellowed",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(attributive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "油纸",
+          "pinyin": "yóu zhǐ",
+          "gloss": "oil paper",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "上面",
+          "pinyin": "shàng miàn",
+          "gloss": "on top",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "用",
+          "pinyin": "yòng",
+          "gloss": "using",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "炭笔",
+          "pinyin": "tàn bǐ",
+          "gloss": "charcoal pencil",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "勾勒",
+          "pinyin": "gōu lè",
+          "gloss": "sketch",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "(progressive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "复杂",
+          "pinyin": "fù zá",
+          "gloss": "complex",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(attributive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "线条",
+          "pinyin": "xiàn tiáo",
+          "gloss": "lines",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "标注",
+          "pinyin": "biāo zhù",
+          "gloss": "mark",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "(progressive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一些",
+          "pinyin": "yī xiē",
+          "gloss": "some",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "已经",
+          "pinyin": "yǐ jīng",
+          "gloss": "already",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "消失",
+          "pinyin": "xiāo shī",
+          "gloss": "disappear",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(attributive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地名",
+          "pinyin": "dì míng",
+          "gloss": "place name",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 9280
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "liwe",
+      "hanzi": "这难道是一张藏宝图？",
+      "translation": "Could this be a treasure map?",
+      "traditional": null,
+      "pinyin": "zhè nán dào shì yī zhāng cáng bǎo tú?",
+      "tokens": [
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "难道",
+          "pinyin": "nán dào",
+          "gloss": "could it be that",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "gloss": "measure word for flat objects",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "藏宝图",
+          "pinyin": "cáng bǎo tú",
+          "gloss": "treasure map",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 2080
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "chennai",
+      "hanzi": "哪里有什么宝藏，我小时候听老人说，这院子底下埋着一段往事。",
+      "translation": "Treasure? No such thing. When I was young, I heard the elders say that a piece of history lay buried beneath this courtyard.",
+      "traditional": null,
+      "pinyin": "nǎ lǐ yǒu shén me bǎo zàng, wǒ xiǎo shí hou tīng lǎo rén shuō, zhè yuàn zi dǐ xià mái zhe yī duàn wǎng shì.",
+      "tokens": [
+        {
+          "text": "哪里",
+          "pinyin": "nǎ lǐ",
+          "gloss": "where",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shén me",
+          "gloss": "what",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "宝藏",
+          "pinyin": "bǎo zàng",
+          "gloss": "treasure",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小时候",
+          "pinyin": "xiǎo shí hou",
+          "gloss": "when young",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "听",
+          "pinyin": "tīng",
+          "gloss": "hear",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "老人",
+          "pinyin": "lǎo rén",
+          "gloss": "old person",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuàn zi",
+          "gloss": "courtyard",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "底下",
+          "pinyin": "dǐ xià",
+          "gloss": "underneath",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "埋着",
+          "pinyin": "mái zhe",
+          "gloss": "buried",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "一段",
+          "pinyin": "yī duàn",
+          "gloss": "a period of",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "往事",
+          "pinyin": "wǎng shì",
+          "gloss": "past events",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 8080
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "李伟是社区里最热心的年轻人，他提议按图索骥，寻找线索。陈奶奶颤巍巍地指着地图上一个圆圈标记。",
+      "translation": "Li Wei was the community's most enthusiastic young resident. He suggested following the map in search of clues. Grandma Chen pointed with a trembling hand to a circle marked on it.",
+      "traditional": null,
+      "pinyin": "Lǐ Wěi shì shèqū lǐ zuì rèxīn de niánqīngrén, tā tíyì àntúsuǒjì, xúnzhǎo xiànsuǒ. Chén nǎinai chànwēiwēi de zhǐzhe dìtú shàng yīgè yuánquān biāojì.",
+      "tokens": [
+        {
+          "text": "李伟",
+          "pinyin": "Lǐ Wěi",
+          "gloss": "Li Wei (name)",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "社区",
+          "pinyin": "shèqū",
+          "gloss": "community",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "in",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "最",
+          "pinyin": "zuì",
+          "gloss": "most",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "热心",
+          "pinyin": "rèxīn",
+          "gloss": "enthusiastic",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(attributive particle)",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "年轻人",
+          "pinyin": "niánqīngrén",
+          "gloss": "young person",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "提议",
+          "pinyin": "tíyì",
+          "gloss": "proposed",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "按图索骥",
+          "pinyin": "àntúsuǒjì",
+          "gloss": "follow the map to find the horse (idiom: look for clues systematically)",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "寻找",
+          "pinyin": "xúnzhǎo",
+          "gloss": "search for",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "线索",
+          "pinyin": "xiànsuǒ",
+          "gloss": "clues",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "陈奶奶",
+          "pinyin": "Chén nǎinai",
+          "gloss": "Grandma Chen",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "颤巍巍",
+          "pinyin": "chànwēiwēi",
+          "gloss": "tremblingly",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "(adverbial particle)",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "指着",
+          "pinyin": "zhǐzhe",
+          "gloss": "pointed at",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "圆圈",
+          "pinyin": "yuánquān",
+          "gloss": "circle",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "标记",
+          "pinyin": "biāojì",
+          "gloss": "mark",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 11520
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "dialogue",
+      "speakerId": "chennai",
+      "hanzi": "这个圈是古井的位置，我小时候井还在，后来填平了。",
+      "translation": "This circle is the location of the ancient well. When I was a child, the well was still there, and later it was filled in.",
+      "traditional": null,
+      "pinyin": "zhè ge quān shì gǔ jǐng de wèi zhì, wǒ xiǎo shí hou jǐng hái zài, hòu lái tián píng le.",
+      "tokens": [
+        {
+          "text": "这个",
+          "pinyin": "zhè ge",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "圈",
+          "pinyin": "quān",
+          "gloss": "circle",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "古井",
+          "pinyin": "gǔ jǐng",
+          "gloss": "ancient well",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "位置",
+          "pinyin": "wèi zhì",
+          "gloss": "location",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小时候",
+          "pinyin": "xiǎo shí hou",
+          "gloss": "when young",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "井",
+          "pinyin": "jǐng",
+          "gloss": "well",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "还在",
+          "pinyin": "hái zài",
+          "gloss": "still exist",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "后来",
+          "pinyin": "hòu lái",
+          "gloss": "later",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "填平",
+          "pinyin": "tián píng",
+          "gloss": "fill level",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 5360
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "居民们合力挖开古井的位置，泥土下露出一个陶罐，里面装着褪色的照片和泛黄的信件。",
+      "translation": "The residents worked together to excavate the old well site. Beneath the soil they uncovered a clay jar containing faded photographs and yellowed letters.",
+      "traditional": null,
+      "pinyin": "jū mín men hé lì wā kāi gǔ jǐng de wèi zhì, ní tǔ xià lù chū yī gè táo guàn, lǐ miàn zhuāng zhe tuì sè de zhào piàn hé fàn huáng de xìn jiàn.",
+      "tokens": [
+        {
+          "text": "居民们",
+          "pinyin": "jū mín men",
+          "gloss": "residents",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "合力",
+          "pinyin": "hé lì",
+          "gloss": "joint effort",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "挖开",
+          "pinyin": "wā kāi",
+          "gloss": "dig open",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "古井",
+          "pinyin": "gǔ jǐng",
+          "gloss": "ancient well",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "位置",
+          "pinyin": "wèi zhì",
+          "gloss": "location",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "泥土",
+          "pinyin": "ní tǔ",
+          "gloss": "soil",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "下",
+          "pinyin": "xià",
+          "gloss": "below",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "露出",
+          "pinyin": "lù chū",
+          "gloss": "reveal",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yī gè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "陶罐",
+          "pinyin": "táo guàn",
+          "gloss": "pottery jar",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "里面",
+          "pinyin": "lǐ miàn",
+          "gloss": "inside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "装着",
+          "pinyin": "zhuāng zhe",
+          "gloss": "contains",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "褪色",
+          "pinyin": "tuì sè",
+          "gloss": "faded",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "照片",
+          "pinyin": "zhào piàn",
+          "gloss": "photo",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "泛黄",
+          "pinyin": "fàn huáng",
+          "gloss": "yellowed",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "信件",
+          "pinyin": "xìn jiàn",
+          "gloss": "letter",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 7840
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "照片上是一群衣着朴素的年轻人，站在院落里微笑，后面挂着一条横幅，写着“第一建筑队留念”。",
+      "translation": "The photograph showed a group of plainly dressed young people smiling in the courtyard. Behind them hung a banner reading, 'First Construction Team—In Commemoration.'",
+      "traditional": null,
+      "pinyin": "zhào piàn shàng shì yī qún yī zhuó pǔ sù de nián qīng rén ， zhàn zài yuàn luò lǐ wēi xiào ， hòu miàn guà zhe yī tiáo héng fú ， xiě zhe “ dì yī jiàn zhù duì liú niàn ” 。",
+      "tokens": [
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "photo",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "片",
+          "pinyin": "piàn",
+          "gloss": "piece",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "群",
+          "pinyin": "qún",
+          "gloss": "group",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "衣",
+          "pinyin": "yī",
+          "gloss": "clothing",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhuó",
+          "gloss": "wear",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "朴",
+          "pinyin": "pǔ",
+          "gloss": "plain",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "素",
+          "pinyin": "sù",
+          "gloss": "simple",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "attribute marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年",
+          "pinyin": "nián",
+          "gloss": "year",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "轻",
+          "pinyin": "qīng",
+          "gloss": "light; young",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "站",
+          "pinyin": "zhàn",
+          "gloss": "stand",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "院",
+          "pinyin": "yuàn",
+          "gloss": "courtyard",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "落",
+          "pinyin": "luò",
+          "gloss": "place",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "微",
+          "pinyin": "wēi",
+          "gloss": "smile",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "笑",
+          "pinyin": "xiào",
+          "gloss": "laugh; smile",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "behind",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "面",
+          "pinyin": "miàn",
+          "gloss": "back",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "挂",
+          "pinyin": "guà",
+          "gloss": "hang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "particle",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "条",
+          "pinyin": "tiáo",
+          "gloss": "strip",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "横",
+          "pinyin": "héng",
+          "gloss": "horizontal",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "幅",
+          "pinyin": "fú",
+          "gloss": "width; banner",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "particle",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "第",
+          "pinyin": "dì",
+          "gloss": "ordinal prefix",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "建",
+          "pinyin": "jiàn",
+          "gloss": "build",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "筑",
+          "pinyin": "zhù",
+          "gloss": "construct",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "队",
+          "pinyin": "duì",
+          "gloss": "team",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "留",
+          "pinyin": "liú",
+          "gloss": "souvenir",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "念",
+          "pinyin": "niàn",
+          "gloss": "commemorate",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 10480
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "dialogue",
+      "speakerId": "chennai",
+      "hanzi": "我认得！这是我父亲那辈人，他们从各地来，一起建起了这片街区。",
+      "translation": "I recognize them! They're from my father's generation. They came from all over and built this neighborhood together.",
+      "traditional": null,
+      "pinyin": "wǒ rèn de! zhè shì wǒ fù qīn nà bèi rén, tā men cóng gè dì lái, yī qǐ jiàn qǐ le zhè piàn jiē qū.",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "认得",
+          "pinyin": "rèn de",
+          "gloss": "recognize",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "my",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "父亲",
+          "pinyin": "fù qīn",
+          "gloss": "father",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "辈",
+          "pinyin": "bèi",
+          "gloss": "generation",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "people",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tā men",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "从",
+          "pinyin": "cóng",
+          "gloss": "from",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "各地",
+          "pinyin": "gè dì",
+          "gloss": "various places",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "来",
+          "pinyin": "lái",
+          "gloss": "come",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yī qǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "建起",
+          "pinyin": "jiàn qǐ",
+          "gloss": "build up",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "片",
+          "pinyin": "piàn",
+          "gloss": "piece/slice (measure)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "街区",
+          "pinyin": "jiē qū",
+          "gloss": "neighborhood",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 5840
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "信件里记录着他们的辛酸与希望，其中一封信写道：“咱们的院子就是家，哪天要是拆了，就把这些埋在地下，让后人记住。”",
+      "translation": "The letters record their bitterness and hope. One of the letters reads: \"Our yard is home. If one day it is demolished, bury these underground so that future generations remember.\"",
+      "traditional": null,
+      "pinyin": "xìnjiàn lǐ jìlù zhe tāmen de xīnsuān yǔ xīwàng ， qízhōng yī fēng xìn xiědào ： “ zánmen de yuànzi jiùshì jiā ， nǎtiān yàoshì chāi le ， jiù bǎ zhèxiē mái zài dìxià ， ràng hòurén jìzhù 。 ”",
+      "tokens": [
+        {
+          "text": "信件",
+          "pinyin": "xìnjiàn",
+          "gloss": "letter",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "记录",
+          "pinyin": "jìlù",
+          "gloss": "record",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "progressive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "辛酸",
+          "pinyin": "xīnsuān",
+          "gloss": "bitterness",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "与",
+          "pinyin": "yǔ",
+          "gloss": "and",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "希望",
+          "pinyin": "xīwàng",
+          "gloss": "hope",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "其中",
+          "pinyin": "qízhōng",
+          "gloss": "among them",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "封",
+          "pinyin": "fēng",
+          "gloss": "measure word for letters",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "信",
+          "pinyin": "xìn",
+          "gloss": "letter",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写道",
+          "pinyin": "xiědào",
+          "gloss": "writes",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "咱们",
+          "pinyin": "zánmen",
+          "gloss": "we (inclusive)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "yard",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "就是",
+          "pinyin": "jiùshì",
+          "gloss": "is exactly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "哪天",
+          "pinyin": "nǎtiān",
+          "gloss": "if one day",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "要是",
+          "pinyin": "yàoshì",
+          "gloss": "if",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "拆",
+          "pinyin": "chāi",
+          "gloss": "demolish",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "就",
+          "pinyin": "jiù",
+          "gloss": "then",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "gloss": "object marker",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "埋",
+          "pinyin": "mái",
+          "gloss": "bury",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地下",
+          "pinyin": "dìxià",
+          "gloss": "underground",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "让",
+          "pinyin": "ràng",
+          "gloss": "let",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "后人",
+          "pinyin": "hòurén",
+          "gloss": "future generations",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "记住",
+          "pinyin": "jìzhù",
+          "gloss": "remember",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 11680
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "李伟深受触动，他召集居民开会，大家一致决定不找什么宝藏，而是修复院落，将这段历史展示出来。",
+      "translation": "Li Wei was deeply moved. He called a meeting of the residents, and everyone unanimously decided not to look for any treasure, but to restore the courtyard and display this history.",
+      "traditional": null,
+      "pinyin": "Lǐ Wěi shēn shòu chù dòng, tā zhào jí jū mín kāi huì, dà jiā yī zhì jué dìng bù zhǎo shén me bǎo zàng, ér shì xiū fù yuàn luò, jiāng zhè duàn lì shǐ zhǎn shì chū lái.",
+      "tokens": [
+        {
+          "text": "李伟",
+          "pinyin": "Lǐ Wěi",
+          "gloss": "Li Wei (name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "深受",
+          "pinyin": "shēn shòu",
+          "gloss": "deeply",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "触动",
+          "pinyin": "chù dòng",
+          "gloss": "moved",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "召集",
+          "pinyin": "zhào jí",
+          "gloss": "convene",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "居民",
+          "pinyin": "jū mín",
+          "gloss": "residents",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "开会",
+          "pinyin": "kāi huì",
+          "gloss": "hold a meeting",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "大家",
+          "pinyin": "dà jiā",
+          "gloss": "everyone",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一致",
+          "pinyin": "yī zhì",
+          "gloss": "unanimously",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "决定",
+          "pinyin": "jué dìng",
+          "gloss": "decided",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "look for",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shén me",
+          "gloss": "any",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "宝藏",
+          "pinyin": "bǎo zàng",
+          "gloss": "treasure",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "而是",
+          "pinyin": "ér shì",
+          "gloss": "but rather",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "修复",
+          "pinyin": "xiū fù",
+          "gloss": "restore",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "院落",
+          "pinyin": "yuàn luò",
+          "gloss": "courtyard",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "将",
+          "pinyin": "jiāng",
+          "gloss": "to (object marker)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "段",
+          "pinyin": "duàn",
+          "gloss": "piece",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "历史",
+          "pinyin": "lì shǐ",
+          "gloss": "history",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "展示",
+          "pinyin": "zhǎn shì",
+          "gloss": "display",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "出来",
+          "pinyin": "chū lái",
+          "gloss": "out (completion)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 9520
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "liwe",
+      "hanzi": "这比任何金银财宝都珍贵。我们把这院子改成社区纪念馆，让邻里都知道我们脚下的土地曾经是什么。",
+      "translation": "This is more precious than any gold or silver. Let's turn the courtyard into a community museum so everyone in the neighborhood can learn what the ground beneath our feet once held.",
+      "traditional": null,
+      "pinyin": "Zhè bǐ rènhé jīnyín cáibǎo dōu zhēnguì. Wǒmen bǎ zhè yuànzi gǎichéng shèqū jìniànguǎn, ràng línlǐ dōu zhīdào wǒmen jiǎoxià de tǔdì céngjīng shì shénme.",
+      "tokens": [
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "比",
+          "pinyin": "bǐ",
+          "gloss": "than",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "任何",
+          "pinyin": "rènhé",
+          "gloss": "any",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "金银财宝",
+          "pinyin": "jīnyín cáibǎo",
+          "gloss": "gold, silver, and treasures",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "珍贵",
+          "pinyin": "zhēnguì",
+          "gloss": "precious",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "gloss": " (disposal marker)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "courtyard",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "改成",
+          "pinyin": "gǎichéng",
+          "gloss": "change into",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "社区",
+          "pinyin": "shèqū",
+          "gloss": "community",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "纪念馆",
+          "pinyin": "jìniànguǎn",
+          "gloss": "memorial hall",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "让",
+          "pinyin": "ràng",
+          "gloss": "let",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "邻里",
+          "pinyin": "línlǐ",
+          "gloss": "neighbors",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "知道",
+          "pinyin": "zhīdào",
+          "gloss": "know",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "脚下",
+          "pinyin": "jiǎoxià",
+          "gloss": "underfoot",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "土地",
+          "pinyin": "tǔdì",
+          "gloss": "land",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "曾经",
+          "pinyin": "céngjīng",
+          "gloss": "once",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "was",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shénme",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 9360
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "三个月后，院落焕然一新。青砖墙上嵌着玻璃展柜，陈列着陶罐里的照片和信件。古井原址上立了一块石碑，镌刻着所有建设者的名字。",
+      "translation": "Three months later, the courtyard had been transformed. Glass cases set into the blue-brick walls displayed the photographs and letters from the clay jar. A stone monument stood on the old well site, engraved with the builders' names.",
+      "traditional": null,
+      "pinyin": "sān gè yuè hòu, yuàn luò huàn rán yī xīn. qīng zhuān qiáng shàng qiàn zhe bō li zhǎn guì, chén liè zhe táo guàn lǐ de zhào piàn hé xìn jiàn. gǔ jǐng yuán zhǐ shàng lì le yī kuài shí bēi, juān kè zhe suǒ yǒu jiàn shè zhě de míng zì.",
+      "tokens": [
+        {
+          "text": "三",
+          "pinyin": "sān",
+          "gloss": "three",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "measure word",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "月",
+          "pinyin": "yuè",
+          "gloss": "month",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "院落",
+          "pinyin": "yuàn luò",
+          "gloss": "courtyard",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "焕然一新",
+          "pinyin": "huàn rán yī xīn",
+          "gloss": "take on an entirely new look",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "青砖",
+          "pinyin": "qīng zhuān",
+          "gloss": "blue brick",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "墙",
+          "pinyin": "qiáng",
+          "gloss": "wall",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "嵌",
+          "pinyin": "qiàn",
+          "gloss": "inlay",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "indicating continuous aspect",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "玻璃",
+          "pinyin": "bō li",
+          "gloss": "glass",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "展柜",
+          "pinyin": "zhǎn guì",
+          "gloss": "display cabinet",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "陈列",
+          "pinyin": "chén liè",
+          "gloss": "display",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "indicating continuous aspect",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "陶罐",
+          "pinyin": "táo guàn",
+          "gloss": "pottery jar",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "照片",
+          "pinyin": "zhào piàn",
+          "gloss": "photo",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "信件",
+          "pinyin": "xìn jiàn",
+          "gloss": "letter",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "古井",
+          "pinyin": "gǔ jǐng",
+          "gloss": "ancient well",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "原址",
+          "pinyin": "yuán zhǐ",
+          "gloss": "original site",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "立",
+          "pinyin": "lì",
+          "gloss": "stand",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective aspect marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "块",
+          "pinyin": "kuài",
+          "gloss": "piece",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "石碑",
+          "pinyin": "shí bēi",
+          "gloss": "stone tablet",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "镌刻",
+          "pinyin": "juān kè",
+          "gloss": "engrave",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "indicating continuous aspect",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "所有",
+          "pinyin": "suǒ yǒu",
+          "gloss": "all",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "建设者",
+          "pinyin": "jiàn shè zhě",
+          "gloss": "builder",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名字",
+          "pinyin": "míng zì",
+          "gloss": "name",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 15920
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "居民们经常在院子里聚会，孩子们在石碑旁玩耍。那张古老的地图被装裱起来，挂在入口处，提醒着每一个人：这里埋藏的，从来不是金银，而是比金银更重的记忆与归属。",
+      "translation": "The residents often gathered in the courtyard while children played beside the monument. The old map was framed and hung at the entrance, reminding everyone that what lay buried there was never gold or silver, but the far weightier treasures of memory and belonging.",
+      "traditional": null,
+      "pinyin": "jūmínmen jīngcháng zài yuànzi lǐ jùhuì, háizimen zài shíbēi páng wánshuǎ. nà zhāng gǔlǎo de dìtú bèi zhuāngbiǎo qǐlái, guà zài rùkǒu chù, tíxǐng zhe měi yī gè rén: zhèlǐ máicáng de, cónglái búshì jīnyín, érshì bǐ jīnyín gèng zhòng de jìyì yǔ guīshǔ.",
+      "tokens": [
+        {
+          "text": "居民们",
+          "pinyin": "jūmínmen",
+          "gloss": "residents",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "经常",
+          "pinyin": "jīngcháng",
+          "gloss": "often",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "courtyard",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "聚会",
+          "pinyin": "jùhuì",
+          "gloss": "gather",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "孩子们",
+          "pinyin": "háizimen",
+          "gloss": "children",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "石碑",
+          "pinyin": "shíbēi",
+          "gloss": "stone tablet",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "旁",
+          "pinyin": "páng",
+          "gloss": "beside",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "玩耍",
+          "pinyin": "wánshuǎ",
+          "gloss": "play",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "gloss": "measure word for flat objects",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "古老",
+          "pinyin": "gǔlǎo",
+          "gloss": "ancient",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "被",
+          "pinyin": "bèi",
+          "gloss": "passive marker",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "装裱",
+          "pinyin": "zhuāngbiǎo",
+          "gloss": "mount (as in framing)",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "起来",
+          "pinyin": "qǐlái",
+          "gloss": "up (directional complement)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "挂",
+          "pinyin": "guà",
+          "gloss": "hang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "入口",
+          "pinyin": "rùkǒu",
+          "gloss": "entrance",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "处",
+          "pinyin": "chù",
+          "gloss": "place",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "提醒",
+          "pinyin": "tíxǐng",
+          "gloss": "remind",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "progressive marker",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "每",
+          "pinyin": "měi",
+          "gloss": "every",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "measure word",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "gloss": "here",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "埋藏",
+          "pinyin": "máicáng",
+          "gloss": "bury",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "从来",
+          "pinyin": "cónglái",
+          "gloss": "always (in negative)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "不是",
+          "pinyin": "búshì",
+          "gloss": "is not",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "金银",
+          "pinyin": "jīnyín",
+          "gloss": "gold and silver",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "而是",
+          "pinyin": "érshì",
+          "gloss": "but rather",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "比",
+          "pinyin": "bǐ",
+          "gloss": "than",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "金银",
+          "pinyin": "jīnyín",
+          "gloss": "gold and silver",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "更",
+          "pinyin": "gèng",
+          "gloss": "more",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "重",
+          "pinyin": "zhòng",
+          "gloss": "heavy; important",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "记忆",
+          "pinyin": "jìyì",
+          "gloss": "memory",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "与",
+          "pinyin": "yǔ",
+          "gloss": "and",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "归属",
+          "pinyin": "guīshǔ",
+          "gloss": "belonging",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 19360
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "dialogue",
+      "speakerId": "chennai",
+      "hanzi": "这下好了，院子活了，人也亲了。",
+      "translation": "Now that's better—the courtyard has come back to life, and the neighbors have grown closer.",
+      "traditional": null,
+      "pinyin": "zhè xià hǎo le, yuànzi huó le, rén yě qīn le.",
+      "tokens": [
+        {
+          "text": "这下",
+          "pinyin": "zhè xià",
+          "gloss": "now",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(particle indicating change)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "yard",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "活",
+          "pinyin": "huó",
+          "gloss": "to live; to come alive",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(particle indicating change)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "people",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "亲",
+          "pinyin": "qīn",
+          "gloss": "close; intimate",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(particle indicating change)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 2560
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "李伟站在院子里，望着熙攘的人群，感到一种从未有过的踏实。他知道，这张地图指引他们找到的，是根。",
+      "translation": "Li Wei stood in the courtyard, watching the bustling crowd, feeling a kind of peace he had never felt before. He knew that what this map guided them to find was their roots.",
+      "traditional": null,
+      "pinyin": "Lǐ Wěi zhàn zài yuànzi lǐ, wàng zhe xīrǎng de rénqún, gǎndào yī zhǒng cóngwèi yǒu guò de tāshí. Tā zhīdào, zhè zhāng dìtú zhǐyǐn tāmen zhǎodào de, shì gēn.",
+      "tokens": [
+        {
+          "text": "李伟",
+          "pinyin": "Lǐ Wěi",
+          "gloss": "Li Wei",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "站",
+          "pinyin": "zhàn",
+          "gloss": "stand",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in/at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "courtyard",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "望",
+          "pinyin": "wàng",
+          "gloss": "gaze",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "-ing (particle)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "熙攘",
+          "pinyin": "xīrǎng",
+          "gloss": "bustling",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(adj suffix)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人群",
+          "pinyin": "rénqún",
+          "gloss": "crowd",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "感到",
+          "pinyin": "gǎndào",
+          "gloss": "feel",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "一种",
+          "pinyin": "yī zhǒng",
+          "gloss": "a kind of",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "从未",
+          "pinyin": "cóngwèi",
+          "gloss": "never (before)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "过",
+          "pinyin": "guò",
+          "gloss": "(experience particle)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(nominalizer)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "踏实",
+          "pinyin": "tāshí",
+          "gloss": "peace of mind/steady",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "知道",
+          "pinyin": "zhīdào",
+          "gloss": "know",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "gloss": "(measure word for map)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "指引",
+          "pinyin": "zhǐyǐn",
+          "gloss": "guide/lead",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎodào",
+          "gloss": "find",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(nominalizer)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "根",
+          "pinyin": "gēn",
+          "gloss": "root/origin",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 13600
+      }
+    }
+  ]
+}

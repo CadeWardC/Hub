@@ -1,0 +1,2130 @@
+{
+  "schemaVersion": 1,
+  "id": "new-neighbor",
+  "title": "新邻居",
+  "pinyinTitle": "xīn línjū",
+  "englishTitle": "The New Neighbor",
+  "summary": "Xiao Ming helps a new neighbor carry a plant upstairs and they become friends.",
+  "level": "elementary",
+  "topic": "Meeting a neighbor",
+  "minutes": 4,
+  "glyph": "邻",
+  "colors": [
+    "#4A90D9",
+    "#2C5F8A"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "male",
+      "name": "Xiao Ming",
+      "speaker": "Dylan"
+    },
+    {
+      "id": "female",
+      "name": "Li Hua",
+      "speaker": "Serena"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "小明今年十岁，住在一栋大楼里。他是个善良的孩子。一天下午，他在楼下玩。这时，他看见一个新邻居在搬一盆大的植物。那盆植物很重，是一棵发财树，叶子很绿。新邻居搬得很辛苦。",
+      "traditional": null,
+      "pinyin": "Xiǎo Míng jīnnián shí suì, zhù zài yī dòng dàlóu lǐ. Tā shì gè shànliáng de háizi. Yītiān xiàwǔ, tā zài lóu xià wán. Zhèshí, tā kànjiàn yī gè xīn línjū zài bān yī pén dà de zhíwù. Nà pén zhíwù hěn zhòng, shì yī kē fācái shù, yèzi hěn lǜ. Xīn línjū bān de hěn xīnkǔ.",
+      "translation": "Xiao Ming is ten years old and lives in a big apartment building. He is a kind child. One afternoon, he was playing downstairs. At that moment, he saw a new neighbor carrying a large plant. The plant was very heavy—it was a money tree with very green leaves. The new neighbor was struggling with it.",
+      "tokens": [
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "今年",
+          "pinyin": "jīnnián",
+          "gloss": "this year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "十岁",
+          "pinyin": "shí suì",
+          "gloss": "ten years old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "住",
+          "pinyin": "zhù",
+          "gloss": "live",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一栋",
+          "pinyin": "yī dòng",
+          "gloss": "a (building)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大楼",
+          "pinyin": "dàlóu",
+          "gloss": "big building",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "(measure word)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "善良",
+          "pinyin": "shànliáng",
+          "gloss": "kind",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "孩子",
+          "pinyin": "háizi",
+          "gloss": "child",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "一天",
+          "pinyin": "yī tiān",
+          "gloss": "one day",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "下午",
+          "pinyin": "xiàwǔ",
+          "gloss": "afternoon",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "楼下",
+          "pinyin": "lóu xià",
+          "gloss": "downstairs",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "玩",
+          "pinyin": "wán",
+          "gloss": "play",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这时",
+          "pinyin": "zhè shí",
+          "gloss": "at this time",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看见",
+          "pinyin": "kànjiàn",
+          "gloss": "see",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yī gè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "新邻居",
+          "pinyin": "xīn línjū",
+          "gloss": "new neighbor",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in the process of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "搬",
+          "pinyin": "bān",
+          "gloss": "carry",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一盆",
+          "pinyin": "yī pén",
+          "gloss": "a pot of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大的",
+          "pinyin": "dà de",
+          "gloss": "big",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "植物",
+          "pinyin": "zhíwù",
+          "gloss": "plant",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "那盆",
+          "pinyin": "nà pén",
+          "gloss": "that pot",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "植物",
+          "pinyin": "zhíwù",
+          "gloss": "plant",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "很重",
+          "pinyin": "hěn zhòng",
+          "gloss": "very heavy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一棵",
+          "pinyin": "yī kē",
+          "gloss": "a (tree)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "发财树",
+          "pinyin": "fācái shù",
+          "gloss": "money tree",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "叶子",
+          "pinyin": "yèzi",
+          "gloss": "leaves",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很绿",
+          "pinyin": "hěn lǜ",
+          "gloss": "very green",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "新邻居",
+          "pinyin": "xīn línjū",
+          "gloss": "new neighbor",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "搬得",
+          "pinyin": "bān de",
+          "gloss": "carry (with complement)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很辛苦",
+          "pinyin": "hěn xīnkǔ",
+          "gloss": "very hard/tired",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 22400
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "dialogue",
+      "speakerId": "male",
+      "hanzi": "小明走过去说：“你好！你需要帮助吗？”",
+      "traditional": null,
+      "pinyin": "Xiǎo Míng zǒu guòqù shuō: “Nǐ hǎo! Nǐ xūyào bāngzhù ma?”",
+      "translation": "Xiao Ming walked over and said, “Hello! Do you need help?”",
+      "tokens": [
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "走过去",
+          "pinyin": "zǒu guòqù",
+          "gloss": "walk over",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "：",
+          "gloss": ":",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "“",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你好",
+          "pinyin": "nǐ hǎo",
+          "gloss": "hello",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "!",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "需要",
+          "pinyin": "xūyào",
+          "gloss": "need",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "帮助",
+          "pinyin": "bāngzhù",
+          "gloss": "help",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "(question particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "？",
+          "gloss": "?",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "”",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 3760
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "female",
+      "hanzi": "新邻居笑着说：“谢谢你！这盆植物太重了，我自己搬不上去。你叫什么名字？”",
+      "traditional": null,
+      "pinyin": "Xīn línjū xiào zhe shuō: “Xièxiè nǐ! Zhè pén zhíwù tài zhòng le, wǒ zìjǐ bān bù shàngqù. Nǐ jiào shénme míngzì?”",
+      "translation": "The new neighbor smiled and said, “Thank you! This plant is too heavy; I can't carry it up by myself. What's your name?”",
+      "tokens": [
+        {
+          "text": "新邻居",
+          "pinyin": "xīn línjū",
+          "gloss": "new neighbor",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "笑着",
+          "pinyin": "xiào zhe",
+          "gloss": "smiling",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "：",
+          "gloss": ":",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "“",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "谢谢",
+          "pinyin": "xièxiè",
+          "gloss": "thank you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "!",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这盆",
+          "pinyin": "zhè pén",
+          "gloss": "this pot",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "植物",
+          "pinyin": "zhíwù",
+          "gloss": "plant",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "太重了",
+          "pinyin": "tài zhòng le",
+          "gloss": "too heavy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "自己",
+          "pinyin": "zìjǐ",
+          "gloss": "myself",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "搬不上去",
+          "pinyin": "bān bù shàngqù",
+          "gloss": "cannot carry up",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "gloss": "called",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shénme",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名字",
+          "pinyin": "míngzì",
+          "gloss": "name",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "？",
+          "gloss": "?",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "”",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 8640
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "male",
+      "hanzi": "小明说：“我叫小明。我帮你一起搬吧！我们走楼梯上去。你家在几楼？”",
+      "traditional": null,
+      "pinyin": "Xiǎo Míng shuō: “Wǒ jiào Xiǎo Míng. Wǒ bāng nǐ yīqǐ bān ba! Wǒmen zǒu lóutī shàngqù. Nǐ jiā zài jǐ lóu?”",
+      "translation": "Xiao Ming said, “I'm Xiao Ming. Let me help you carry it together! We'll take the stairs up. What floor is your apartment on?”",
+      "tokens": [
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "：",
+          "gloss": ":",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "“",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "gloss": "called",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "帮",
+          "pinyin": "bāng",
+          "gloss": "help",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yīqǐ",
+          "gloss": "together",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "搬",
+          "pinyin": "bān",
+          "gloss": "carry",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "(suggestion particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "!",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "take",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "楼梯",
+          "pinyin": "lóutī",
+          "gloss": "stairs",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "上去",
+          "pinyin": "shàngqù",
+          "gloss": "go up",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你家",
+          "pinyin": "nǐ jiā",
+          "gloss": "your home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "几楼",
+          "pinyin": "jǐ lóu",
+          "gloss": "which floor",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "？",
+          "gloss": "?",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "”",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 6800
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "dialogue",
+      "speakerId": "female",
+      "hanzi": "新邻居说：“我叫李华。我家在五楼。太好了，有你帮忙！”",
+      "traditional": null,
+      "pinyin": "Xīn línjū shuō: “Wǒ jiào Lǐ Huá. Wǒ jiā zài wǔ lóu. Tài hǎo le, yǒu nǐ bāngmáng!”",
+      "translation": "The new neighbor said, “I'm Li Hua. My apartment is on the fifth floor. Great, with your help!”",
+      "tokens": [
+        {
+          "text": "新邻居",
+          "pinyin": "xīn línjū",
+          "gloss": "new neighbor",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "：",
+          "gloss": ":",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "“",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "gloss": "called",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "李华",
+          "pinyin": "Lǐ Huá",
+          "gloss": "Li Hua",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "my",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "五楼",
+          "pinyin": "wǔ lóu",
+          "gloss": "fifth floor",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "太好了",
+          "pinyin": "tài hǎo le",
+          "gloss": "great",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "帮忙",
+          "pinyin": "bāngmáng",
+          "gloss": "help",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "!",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "”",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 6160
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "小明和李华一起慢慢地搬那盆植物上楼梯。他们搬得很小心，因为植物很大。到了五楼，李华打开门，说：“请进来坐一会儿吧。”",
+      "traditional": null,
+      "pinyin": "Xiǎo Míng hé Lǐ Huá yīqǐ mànmàn de bān nà pén zhíwù shàng lóutī. Tāmen bān de hěn xiǎoxīn, yīnwèi zhíwù hěn dà. Dào le wǔ lóu, Lǐ Huá dǎkāi mén, shuō: “Qǐng jìnlái zuò yīhuìr ba.”",
+      "translation": "Xiao Ming and Li Hua slowly carried the plant up the stairs together. They were very careful because the plant was big. When they reached the fifth floor, Li Hua opened the door and said, “Please come in and sit for a while.”",
+      "tokens": [
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "李华",
+          "pinyin": "Lǐ Huá",
+          "gloss": "Li Hua",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yīqǐ",
+          "gloss": "together",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "慢慢地",
+          "pinyin": "mànmàn de",
+          "gloss": "slowly",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "搬",
+          "pinyin": "bān",
+          "gloss": "carried",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "那盆",
+          "pinyin": "nà pén",
+          "gloss": "that pot",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "植物",
+          "pinyin": "zhíwù",
+          "gloss": "plant",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "up",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "楼梯",
+          "pinyin": "lóutī",
+          "gloss": "stairs",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "搬得",
+          "pinyin": "bān de",
+          "gloss": "carried (complement)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很小心",
+          "pinyin": "hěn xiǎoxīn",
+          "gloss": "very careful",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "因为",
+          "pinyin": "yīnwèi",
+          "gloss": "because",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "植物",
+          "pinyin": "zhíwù",
+          "gloss": "plant",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "很大",
+          "pinyin": "hěn dà",
+          "gloss": "very big",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "到了",
+          "pinyin": "dào le",
+          "gloss": "arrived at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "五楼",
+          "pinyin": "wǔ lóu",
+          "gloss": "fifth floor",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "李华",
+          "pinyin": "Lǐ Huá",
+          "gloss": "Li Hua",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "打开",
+          "pinyin": "dǎkāi",
+          "gloss": "opened",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "门",
+          "pinyin": "mén",
+          "gloss": "door",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "：",
+          "gloss": ":",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "“",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "请",
+          "pinyin": "qǐng",
+          "gloss": "please",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "进来",
+          "pinyin": "jìnlái",
+          "gloss": "come in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "坐",
+          "pinyin": "zuò",
+          "gloss": "sit",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一会儿",
+          "pinyin": "yīhuìr",
+          "gloss": "a while",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "(suggestion particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "”",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 15200
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "小明走进李华的家。她的家很漂亮，客厅里有一个大窗户。小明看到窗外有绿树，他觉得很开心。李华给他一杯水，说：“谢谢你帮我。我们是邻居了，以后可以常来玩。”",
+      "traditional": null,
+      "pinyin": "Xiǎo Míng zǒu jìn Lǐ Huá de jiā. Tā de jiā hěn piàoliang, kètīng lǐ yǒu yī gè dà chuānghu. Xiǎo Míng kàndào chuāng wài yǒu lǜ shù, tā juéde hěn kāixīn. Lǐ Huá gěi tā yī bēi shuǐ, shuō: “Xièxiè nǐ bāng wǒ. Wǒmen shì línjū le, yǐhòu kěyǐ cháng lái wán.”",
+      "translation": "Xiao Ming walked into Li Hua's home. Her home was very beautiful, with a big window in the living room. Xiao Ming saw green trees outside the window and felt very happy. Li Hua gave him a glass of water and said, “Thank you for helping me. We are neighbors now; you can come and play often in the future.”",
+      "tokens": [
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "走进",
+          "pinyin": "zǒu jìn",
+          "gloss": "walked into",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "李华",
+          "pinyin": "Lǐ Huá",
+          "gloss": "Li Hua",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她的",
+          "pinyin": "tā de",
+          "gloss": "her",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很漂亮",
+          "pinyin": "hěn piàoliang",
+          "gloss": "very beautiful",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "客厅",
+          "pinyin": "kètīng",
+          "gloss": "living room",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "there is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yī gè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大窗户",
+          "pinyin": "dà chuānghu",
+          "gloss": "big window",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看到",
+          "pinyin": "kàndào",
+          "gloss": "saw",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "窗外",
+          "pinyin": "chuāng wài",
+          "gloss": "outside the window",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "there are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "绿树",
+          "pinyin": "lǜ shù",
+          "gloss": "green trees",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "觉得",
+          "pinyin": "juéde",
+          "gloss": "felt",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很开心",
+          "pinyin": "hěn kāixīn",
+          "gloss": "very happy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "李华",
+          "pinyin": "Lǐ Huá",
+          "gloss": "Li Hua",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "给",
+          "pinyin": "gěi",
+          "gloss": "gave",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "him",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一杯",
+          "pinyin": "yī bēi",
+          "gloss": "a glass of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "水",
+          "pinyin": "shuǐ",
+          "gloss": "water",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "：",
+          "gloss": ":",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "“",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "谢谢",
+          "pinyin": "xièxiè",
+          "gloss": "thank you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "帮",
+          "pinyin": "bāng",
+          "gloss": "help",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "me",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "邻居",
+          "pinyin": "línjū",
+          "gloss": "neighbors",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(change of state)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "以后",
+          "pinyin": "yǐhòu",
+          "gloss": "in the future",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "可以",
+          "pinyin": "kěyǐ",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "常来",
+          "pinyin": "cháng lái",
+          "gloss": "often come",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "玩",
+          "pinyin": "wán",
+          "gloss": "play",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "”",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 24000
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "dialogue",
+      "speakerId": "male",
+      "hanzi": "小明笑着说：“太好了！我也住在五楼，就在你隔壁。以后我们可以一起玩！”",
+      "traditional": null,
+      "pinyin": "Xiǎo Míng xiào zhe shuō: “Tài hǎo le! Wǒ yě zhù zài wǔ lóu, jiù zài nǐ gébì. Yǐhòu wǒmen kěyǐ yīqǐ wán!”",
+      "translation": "Xiao Ming smiled and said, “Great! I also live on the fifth floor, right next door to you. In the future we can play together!”",
+      "tokens": [
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "笑着",
+          "pinyin": "xiào zhe",
+          "gloss": "smiling",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "：",
+          "gloss": ":",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "“",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "太好了",
+          "pinyin": "tài hǎo le",
+          "gloss": "great",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "!",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "住",
+          "pinyin": "zhù",
+          "gloss": "live",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "五楼",
+          "pinyin": "wǔ lóu",
+          "gloss": "fifth floor",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "就在",
+          "pinyin": "jiù zài",
+          "gloss": "exactly at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "your",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "隔壁",
+          "pinyin": "gébì",
+          "gloss": "next door",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "以后",
+          "pinyin": "yǐhòu",
+          "gloss": "in the future",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "可以",
+          "pinyin": "kěyǐ",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yīqǐ",
+          "gloss": "together",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "玩",
+          "pinyin": "wán",
+          "gloss": "play",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "!",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "”",
+          "gloss": "\"",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 8800
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "就这样，小明认识了新邻居李华。他们成了好朋友。以后，小明常常去李华家玩，有时候也帮她搬东西。李华也经常给小明做好吃的点心。",
+      "traditional": null,
+      "pinyin": "Jiù zhèyàng, Xiǎo Míng rènshi le xīn línjū Lǐ Huá. Tāmen chéng le hǎo péngyou. Yǐhòu, Xiǎo Míng chángcháng qù Lǐ Huá jiā wán, yǒu shíhou yě bāng tā bān dōngxi. Lǐ Huá yě jīngcháng gěi Xiǎo Míng zuò hǎo chī de diǎnxīn.",
+      "translation": "And so, Xiao Ming got to know his new neighbor Li Hua. They became good friends. Afterwards, Xiao Ming often went to Li Hua's house to play, and sometimes helped her carry things. Li Hua also often made delicious snacks for Xiao Ming.",
+      "tokens": [
+        {
+          "text": "就这样",
+          "pinyin": "jiù zhèyàng",
+          "gloss": "and so",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "认识",
+          "pinyin": "rènshi",
+          "gloss": "got to know",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(past)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "新邻居",
+          "pinyin": "xīn línjū",
+          "gloss": "new neighbor",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "李华",
+          "pinyin": "Lǐ Huá",
+          "gloss": "Li Hua",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "成了",
+          "pinyin": "chéng le",
+          "gloss": "became",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好朋友",
+          "pinyin": "hǎo péngyou",
+          "gloss": "good friends",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "以后",
+          "pinyin": "yǐhòu",
+          "gloss": "afterwards",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "常常",
+          "pinyin": "chángcháng",
+          "gloss": "often",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "李华",
+          "pinyin": "Lǐ Huá",
+          "gloss": "Li Hua",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "玩",
+          "pinyin": "wán",
+          "gloss": "play",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": ",",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "有时候",
+          "pinyin": "yǒu shíhou",
+          "gloss": "sometimes",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "帮",
+          "pinyin": "bāng",
+          "gloss": "help",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "her",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "搬",
+          "pinyin": "bān",
+          "gloss": "carry",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "东西",
+          "pinyin": "dōngxi",
+          "gloss": "things",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "李华",
+          "pinyin": "Lǐ Huá",
+          "gloss": "Li Hua",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "经常",
+          "pinyin": "jīngcháng",
+          "gloss": "often",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "给",
+          "pinyin": "gěi",
+          "gloss": "for",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "做",
+          "pinyin": "zuò",
+          "gloss": "make",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好吃的",
+          "pinyin": "hǎo chī de",
+          "gloss": "delicious",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "点心",
+          "pinyin": "diǎnxīn",
+          "gloss": "snacks",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": ".",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 15840
+      }
+    }
+  ]
+}

@@ -1,0 +1,2507 @@
+{
+  "schemaVersion": 1,
+  "id": "weekend-in-suzhou",
+  "title": "苏州周末",
+  "pinyinTitle": "Sūzhōu Zhōumò",
+  "englishTitle": "A Weekend in Suzhou",
+  "summary": "Two friends explore Suzhou's gardens and canals, encounter rain, and resolve a small misunderstanding over food.",
+  "level": "intermediate",
+  "topic": "A short trip to Suzhou",
+  "minutes": 4,
+  "glyph": "苏",
+  "colors": [
+    "#4A7C59",
+    "#2E4A3C"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "xiaoli",
+      "name": "小丽",
+      "speaker": "Serena"
+    },
+    {
+      "id": "daming",
+      "name": "小明",
+      "speaker": "Dylan"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "小明和小丽都是大学生，他们决定一起去苏州过周末。",
+      "traditional": null,
+      "translation": "Xiaoming and Xiaoli are both college students, and they decided to go to Suzhou together for the weekend.",
+      "pinyin": "Xiǎo Míng hé Xiǎo Lì dōu shì dàxuéshēng, tāmen juédìng yīqǐ qù Sūzhōu guò zhōumò.",
+      "tokens": [
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming (name)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小丽",
+          "pinyin": "Xiǎo Lì",
+          "gloss": "Xiaoli (name)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "both",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大学生",
+          "pinyin": "dàxuéshēng",
+          "gloss": "college student",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "决定",
+          "pinyin": "juédìng",
+          "gloss": "decide",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "一起",
+          "pinyin": "yīqǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou (city)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "过",
+          "pinyin": "guò",
+          "gloss": "spend (time)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "周末",
+          "pinyin": "zhōumò",
+          "gloss": "weekend",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 4640
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "dialogue",
+      "speakerId": "xiaoli",
+      "hanzi": "苏州的园林很有名，我们一定要去拙政园看看。",
+      "traditional": null,
+      "translation": "The gardens of Suzhou are very famous; we must go and see the Humble Administrator's Garden.",
+      "pinyin": "Sūzhōu de yuánlín hěn yǒumíng, wǒmen yīdìng yào qù Zhuōzhèng Yuán kànkan.",
+      "tokens": [
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou (city)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "园林",
+          "pinyin": "yuánlín",
+          "gloss": "gardens",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有名",
+          "pinyin": "yǒumíng",
+          "gloss": "famous",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一定",
+          "pinyin": "yīdìng",
+          "gloss": "must",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "要",
+          "pinyin": "yào",
+          "gloss": "want to",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "拙政园",
+          "pinyin": "Zhuōzhèng Yuán",
+          "gloss": "Humble Administrator's Garden",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "看看",
+          "pinyin": "kànkan",
+          "gloss": "have a look",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 3920
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "hanzi": "好啊，我还想坐船游运河。",
+      "traditional": null,
+      "translation": "Okay, I still want to take a boat to tour the canal.",
+      "pinyin": "hǎo a ， wǒ hái xiǎng zuò chuán yóu yùnhé 。",
+      "tokens": [
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "啊",
+          "pinyin": "a",
+          "gloss": "ah",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "还",
+          "pinyin": "hái",
+          "gloss": "still",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "坐",
+          "pinyin": "zuò",
+          "gloss": "take",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "船",
+          "pinyin": "chuán",
+          "gloss": "boat",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "游",
+          "pinyin": "yóu",
+          "gloss": "tour",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "运河",
+          "pinyin": "yùnhé",
+          "gloss": "canal",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 2000
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "星期六早上，他们到了苏州。天气有点阴，但他们还是很开心。",
+      "traditional": null,
+      "translation": "On Saturday morning, they arrived in Suzhou. The weather was a bit overcast, but they were still very happy.",
+      "pinyin": "xīngqīliù zǎoshang, tāmen dào le sūzhōu. tiānqì yǒudiǎn yīn, dàn tāmen háishì hěn kāixīn.",
+      "tokens": [
+        {
+          "text": "星期六",
+          "pinyin": "xīngqīliù",
+          "gloss": "Saturday",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "早上",
+          "pinyin": "zǎoshang",
+          "gloss": "morning",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrive",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective participle)",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "苏州",
+          "pinyin": "sūzhōu",
+          "gloss": "Suzhou (city)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "天气",
+          "pinyin": "tiānqì",
+          "gloss": "weather",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "有点",
+          "pinyin": "yǒudiǎn",
+          "gloss": "a bit",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "阴",
+          "pinyin": "yīn",
+          "gloss": "overcast",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "还是",
+          "pinyin": "háishì",
+          "gloss": "still",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "开心",
+          "pinyin": "kāixīn",
+          "gloss": "happy",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 6960
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "他们先去了拙政园。园子里有很多假山、池塘和亭子。",
+      "traditional": null,
+      "translation": "They first went to the Humble Administrator's Garden. The garden has many rockeries, ponds, and pavilions.",
+      "pinyin": "Tāmen xiān qù le Zhuōzhèng Yuán. Yuánzi lǐ yǒu hěnduō jiǎshān, chítáng hé tíngzi.",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "先",
+          "pinyin": "xiān",
+          "gloss": "first",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "拙政园",
+          "pinyin": "Zhuōzhèng Yuán",
+          "gloss": "Humble Administrator's Garden",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "园子",
+          "pinyin": "yuánzi",
+          "gloss": "garden",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěnduō",
+          "gloss": "many",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "假山",
+          "pinyin": "jiǎshān",
+          "gloss": "rockery",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "、",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "池塘",
+          "pinyin": "chítáng",
+          "gloss": "pond",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "亭子",
+          "pinyin": "tíngzi",
+          "gloss": "pavilion",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 5600
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "dialogue",
+      "speakerId": "xiaoli",
+      "hanzi": "比我想象得还要漂亮！",
+      "traditional": null,
+      "translation": "Even more beautiful than I imagined!",
+      "pinyin": "bǐ wǒ xiǎngxiàng de háiyào piàoliang!",
+      "tokens": [
+        {
+          "text": "比",
+          "pinyin": "bǐ",
+          "gloss": "than",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "想象",
+          "pinyin": "xiǎngxiàng",
+          "gloss": "imagine",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "得",
+          "pinyin": "de",
+          "gloss": "degree particle",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "还要",
+          "pinyin": "háiyào",
+          "gloss": "even more",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "漂亮",
+          "pinyin": "piàoliang",
+          "gloss": "beautiful",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 1600
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "hanzi": "是呀，这里的景色像画一样。",
+      "traditional": null,
+      "translation": "Yes, the scenery here is like a painting.",
+      "pinyin": "shì yā, zhèlǐ de jǐngsè xiàng huà yīyàng.",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "yes",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "呀",
+          "pinyin": "yā",
+          "gloss": "ah",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "gloss": "here",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "景色",
+          "pinyin": "jǐngsè",
+          "gloss": "scenery",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "像",
+          "pinyin": "xiàng",
+          "gloss": "like",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "画",
+          "pinyin": "huà",
+          "gloss": "painting",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一样",
+          "pinyin": "yīyàng",
+          "gloss": "as",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 2320
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "从园林出来，他们沿着运河散步。岸边有很多老房子和柳树。",
+      "traditional": null,
+      "translation": "After coming out of the garden, they took a walk along the canal. There were many old houses and willow trees on the shore.",
+      "pinyin": "cóng yuánlín chūlái, tāmen yánzhe yùnhé sànbù. ànbiān yǒu hěnduō lǎofángzi hé liǔshù.",
+      "tokens": [
+        {
+          "text": "从",
+          "pinyin": "cóng",
+          "gloss": "from",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "园林",
+          "pinyin": "yuánlín",
+          "gloss": "garden",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "出来",
+          "pinyin": "chūlái",
+          "gloss": "come out",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "沿着",
+          "pinyin": "yánzhe",
+          "gloss": "along",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "运河",
+          "pinyin": "yùnhé",
+          "gloss": "canal",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "散步",
+          "pinyin": "sànbù",
+          "gloss": "take a walk",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "岸边",
+          "pinyin": "ànbiān",
+          "gloss": "shore",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have/there is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěnduō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "老房子",
+          "pinyin": "lǎofángzi",
+          "gloss": "old house",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "柳树",
+          "pinyin": "liǔshù",
+          "gloss": "willow tree",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 7520
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "突然，下起了小雨。他们赶紧找地方躲雨。",
+      "traditional": null,
+      "translation": "Suddenly, it started to drizzle. They quickly looked for a place to take shelter from the rain.",
+      "pinyin": "tūrán, xià qǐ le xiǎoyǔ. tāmen gǎnjǐn zhǎo dìfang duǒyǔ.",
+      "tokens": [
+        {
+          "text": "突然",
+          "pinyin": "tūrán",
+          "gloss": "suddenly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "下",
+          "pinyin": "xià",
+          "gloss": "to fall (rain)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "起",
+          "pinyin": "qǐ",
+          "gloss": "to start (complement)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle indicating change",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "xiǎoyǔ",
+          "gloss": "drizzle",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "赶紧",
+          "pinyin": "gǎnjǐn",
+          "gloss": "quickly",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "to look for",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地方",
+          "pinyin": "dìfang",
+          "gloss": "place",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "躲雨",
+          "pinyin": "duǒyǔ",
+          "gloss": "to shelter from rain",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 3760
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "dialogue",
+      "speakerId": "xiaoli",
+      "hanzi": "我饿了，我们去吃午饭吧。",
+      "traditional": null,
+      "translation": "I'm hungry, let's go eat lunch.",
+      "pinyin": "wǒ è le wǒmen qù chī wǔfàn ba",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "饿",
+          "pinyin": "è",
+          "gloss": "hungry",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "already",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "午饭",
+          "pinyin": "wǔfàn",
+          "gloss": "lunch",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "let's",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 2240
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "hanzi": "我想尝尝街边的小吃，比如生煎包和糖粥。",
+      "traditional": null,
+      "translation": "I want to try the street food, like pan-fried buns and sweet porridge.",
+      "pinyin": "wǒ xiǎng chángchang jiēbiān de xiǎochī, bǐrú shēngjiānbāo hé tángzhōu.",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want to",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "尝尝",
+          "pinyin": "chángchang",
+          "gloss": "try",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "街边",
+          "pinyin": "jiēbiān",
+          "gloss": "street side",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小吃",
+          "pinyin": "xiǎochī",
+          "gloss": "snacks",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "比如",
+          "pinyin": "bǐrú",
+          "gloss": "such as",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "生煎包",
+          "pinyin": "shēngjiānbāo",
+          "gloss": "pan-fried buns",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "糖粥",
+          "pinyin": "tángzhōu",
+          "gloss": "sweet porridge",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 3600
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "xiaoli",
+      "hanzi": "小吃不干净，我要去正式的餐厅吃饭。",
+      "traditional": null,
+      "translation": "Snacks are not clean, I want to go to a formal restaurant to eat.",
+      "pinyin": "xiǎochī bù gānjìng, wǒ yào qù zhèngshì de cāntīng chīfàn.",
+      "tokens": [
+        {
+          "text": "小吃",
+          "pinyin": "xiǎochī",
+          "gloss": "snack",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "干净",
+          "pinyin": "gānjìng",
+          "gloss": "clean",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "要",
+          "pinyin": "yào",
+          "gloss": "want",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "正式",
+          "pinyin": "zhèngshì",
+          "gloss": "formal",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "餐厅",
+          "pinyin": "cāntīng",
+          "gloss": "restaurant",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "吃饭",
+          "pinyin": "chīfàn",
+          "gloss": "eat meal",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 3040
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "hanzi": "出来旅游就要体验当地特色嘛。",
+      "traditional": null,
+      "translation": "When traveling, you should experience the local characteristics.",
+      "pinyin": "chūlái lǚyóu jiù yào tǐyàn dāngdì tèsè ma .",
+      "tokens": [
+        {
+          "text": "出来",
+          "pinyin": "chūlái",
+          "gloss": "go out (traveling)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "旅游",
+          "pinyin": "lǚyóu",
+          "gloss": "travel",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "就",
+          "pinyin": "jiù",
+          "gloss": "then",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "要",
+          "pinyin": "yào",
+          "gloss": "need",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "体验",
+          "pinyin": "tǐyàn",
+          "gloss": "experience",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "当地",
+          "pinyin": "dāngdì",
+          "gloss": "local",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "特色",
+          "pinyin": "tèsè",
+          "gloss": "characteristic",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "嘛",
+          "pinyin": "ma",
+          "gloss": "(particle)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 2400
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "两个人站在屋檐下，谁也不说话。过了一会儿，小丽轻声说：",
+      "traditional": null,
+      "translation": "Two people stood under the eaves, neither spoke. After a while, Xiaoli said softly:",
+      "pinyin": "Liǎng gè rén zhàn zài wūyán xià, shuí yě bù shuōhuà. Guòle yīhuìr, Xiǎo Lì qīngshēng shuō:",
+      "tokens": [
+        {
+          "text": "两",
+          "pinyin": "liǎng",
+          "gloss": "two",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "measure word for people",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "站",
+          "pinyin": "zhàn",
+          "gloss": "stand",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "屋檐",
+          "pinyin": "wūyán",
+          "gloss": "eaves",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "下",
+          "pinyin": "xià",
+          "gloss": "under",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "谁",
+          "pinyin": "shuí",
+          "gloss": "who",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "说话",
+          "pinyin": "shuōhuà",
+          "gloss": "speak",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "过",
+          "pinyin": "guò",
+          "gloss": "pass",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一会儿",
+          "pinyin": "yīhuìr",
+          "gloss": "a while",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小丽",
+          "pinyin": "Xiǎo Lì",
+          "gloss": "Xiaoli (name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "轻声",
+          "pinyin": "qīngshēng",
+          "gloss": "softly",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 5280
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "dialogue",
+      "speakerId": "xiaoli",
+      "hanzi": "对不起，我刚才太固执了。",
+      "traditional": null,
+      "translation": "I'm sorry, I was too stubborn just now.",
+      "pinyin": "duìbuqǐ, wǒ gāngcái tài gùzhí le.",
+      "tokens": [
+        {
+          "text": "对不起",
+          "pinyin": "duìbuqǐ",
+          "gloss": "sorry",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "刚才",
+          "pinyin": "gāngcái",
+          "gloss": "just now",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "太",
+          "pinyin": "tài",
+          "gloss": "too",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "固执",
+          "pinyin": "gùzhí",
+          "gloss": "stubborn",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 2240
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "hanzi": "我也不该生气。我们可以先吃一点小吃，再去餐厅点菜。",
+      "traditional": null,
+      "translation": "I shouldn't be angry either. We can first have some snacks, then go to the restaurant to order.",
+      "pinyin": "wǒ yě bù gāi shēngqì. wǒmen kěyǐ xiān chī yìdiǎn xiǎochī, zài qù cāntīng diǎncài.",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "该",
+          "pinyin": "gāi",
+          "gloss": "should",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "生气",
+          "pinyin": "shēngqì",
+          "gloss": "angry",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "可以",
+          "pinyin": "kěyǐ",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "先",
+          "pinyin": "xiān",
+          "gloss": "first",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一点",
+          "pinyin": "yìdiǎn",
+          "gloss": "a little",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "小吃",
+          "pinyin": "xiǎochī",
+          "gloss": "snack",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "再",
+          "pinyin": "zài",
+          "gloss": "then",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "餐厅",
+          "pinyin": "cāntīng",
+          "gloss": "restaurant",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "点菜",
+          "pinyin": "diǎncài",
+          "gloss": "order dishes",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 4080
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "他们找到一家有名的生煎包店，买了四个包子。包子皮薄馅多，非常好吃。",
+      "traditional": null,
+      "translation": "They found a famous shengjianbao shop and bought four buns. The buns had thin skin and plenty of filling, and were very delicious.",
+      "pinyin": "tā men zhǎo dào yī jiā yǒu míng de shēng jiān bāo diàn ， mǎi le sì gè bāo zi 。 bāo zi pí báo xiàn duō ， fēi cháng hǎo chī 。",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tā men",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎo dào",
+          "gloss": "found",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一家",
+          "pinyin": "yī jiā",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有名的",
+          "pinyin": "yǒu míng de",
+          "gloss": "famous",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "生煎包店",
+          "pinyin": "shēng jiān bāo diàn",
+          "gloss": "shengjianbao shop",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "买了",
+          "pinyin": "mǎi le",
+          "gloss": "bought",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "四个",
+          "pinyin": "sì gè",
+          "gloss": "four",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包子",
+          "pinyin": "bāo zi",
+          "gloss": "buns",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "包子",
+          "pinyin": "bāo zi",
+          "gloss": "buns",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "皮薄馅多",
+          "pinyin": "pí báo xiàn duō",
+          "gloss": "thin skin and plenty filling",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "非常",
+          "pinyin": "fēi cháng",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好吃",
+          "pinyin": "hǎo chī",
+          "gloss": "delicious",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 7040
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "然后他们去了一家小餐馆，点了松鼠桂鱼和莼菜汤。吃完饭后，雨也停了。",
+      "traditional": null,
+      "translation": "Then they went to a small restaurant and ordered squirrel-shaped mandarin fish and water shield soup. After finishing the meal, the rain also stopped.",
+      "pinyin": "rán hòu tā men qù le yī jiā xiǎo cān guǎn, diǎn le sōng shǔ guì yú hé chún cài tāng. chī wán fàn hòu, yǔ yě tíng le.",
+      "tokens": [
+        {
+          "text": "然",
+          "pinyin": "rán",
+          "gloss": "then (as in 然后)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "们",
+          "pinyin": "men",
+          "gloss": "plural suffix",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "past particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "house",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "餐",
+          "pinyin": "cān",
+          "gloss": "meal",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "馆",
+          "pinyin": "guǎn",
+          "gloss": "establishment",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "点",
+          "pinyin": "diǎn",
+          "gloss": "order",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "past particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "松",
+          "pinyin": "sōng",
+          "gloss": "pine",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "鼠",
+          "pinyin": "shǔ",
+          "gloss": "mouse",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "桂",
+          "pinyin": "guì",
+          "gloss": "cassia",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "鱼",
+          "pinyin": "yú",
+          "gloss": "fish",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "莼",
+          "pinyin": "chún",
+          "gloss": "water shield",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "菜",
+          "pinyin": "cài",
+          "gloss": "vegetable",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "汤",
+          "pinyin": "tāng",
+          "gloss": "soup",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "完",
+          "pinyin": "wán",
+          "gloss": "finish",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "饭",
+          "pinyin": "fàn",
+          "gloss": "meal",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "雨",
+          "pinyin": "yǔ",
+          "gloss": "rain",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "停",
+          "pinyin": "tíng",
+          "gloss": "stop",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "past particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 7920
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "他们又去了博物馆，晚上看了运河的夜景。",
+      "traditional": null,
+      "translation": "They went to the museum again, and in the evening they watched the night scene of the canal.",
+      "pinyin": "tāmen yòu qù le bówùguǎn, wǎnshang kàn le yùnhé de yèjǐng.",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "又",
+          "pinyin": "yòu",
+          "gloss": "again",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PFV (perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "博物馆",
+          "pinyin": "bówùguǎn",
+          "gloss": "museum",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "晚上",
+          "pinyin": "wǎnshang",
+          "gloss": "evening",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PFV (perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "运河",
+          "pinyin": "yùnhé",
+          "gloss": "canal",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "genitive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "夜景",
+          "pinyin": "yèjǐng",
+          "gloss": "night scenery",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 3920
+      }
+    },
+    {
+      "id": "b020",
+      "kind": "dialogue",
+      "speakerId": "xiaoli",
+      "hanzi": "今天真好，虽然有小矛盾，但最后都解决了。",
+      "traditional": null,
+      "translation": "Today is really good, although there were small conflicts, but in the end everything was resolved.",
+      "pinyin": "jīn tiān zhēn hǎo, suī rán yǒu xiǎo máo dùn, dàn zuì hòu dōu jiě jué le.",
+      "tokens": [
+        {
+          "text": "今天",
+          "pinyin": "jīn tiān",
+          "gloss": "today",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "真",
+          "pinyin": "zhēn",
+          "gloss": "really",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "虽然",
+          "pinyin": "suī rán",
+          "gloss": "although",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "there are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "矛盾",
+          "pinyin": "máo dùn",
+          "gloss": "conflict",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "最后",
+          "pinyin": "zuì hòu",
+          "gloss": "finally",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "解决",
+          "pinyin": "jiě jué",
+          "gloss": "resolve",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "completed action marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b020.mp3",
+        "durationMs": 4000
+      }
+    },
+    {
+      "id": "b021",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "hanzi": "是啊，旅行中互相理解最重要。",
+      "traditional": null,
+      "translation": "Yes, mutual understanding is most important during travel.",
+      "pinyin": "shì a, lǚxíng zhōng hùxiāng lǐjiě zuì zhòngyào.",
+      "tokens": [
+        {
+          "text": "是啊",
+          "pinyin": "shì a",
+          "gloss": "yes, that's right",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "旅行中",
+          "pinyin": "lǚxíng zhōng",
+          "gloss": "during the trip",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "互相",
+          "pinyin": "hùxiāng",
+          "gloss": "mutually",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "理解",
+          "pinyin": "lǐjiě",
+          "gloss": "understand",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "最",
+          "pinyin": "zuì",
+          "gloss": "most",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "重要",
+          "pinyin": "zhòngyào",
+          "gloss": "important",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b021.mp3",
+        "durationMs": 2720
+      }
+    },
+    {
+      "id": "b022",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "第二天，他们高高兴兴地回了学校。",
+      "traditional": null,
+      "translation": "The next day, they happily returned to school.",
+      "pinyin": "dì èr tiān, tā men gāogāoxìngxìng de huí le xuéxiào.",
+      "tokens": [
+        {
+          "text": "第",
+          "pinyin": "dì",
+          "gloss": "prefix for ordinal numbers",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "二",
+          "pinyin": "èr",
+          "gloss": "two",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "天",
+          "pinyin": "tiān",
+          "gloss": "day",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "们",
+          "pinyin": "men",
+          "gloss": "plural marker for pronouns",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "高高兴兴",
+          "pinyin": "gāogāoxìngxìng",
+          "gloss": "happy and cheerful",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "adverbial marker",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "回",
+          "pinyin": "huí",
+          "gloss": "return",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "past tense marker",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "学校",
+          "pinyin": "xuéxiào",
+          "gloss": "school",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b022.mp3",
+        "durationMs": 3360
+      }
+    }
+  ]
+}

@@ -25,12 +25,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'stroop',
-    name: 'Stroop',
+    name: 'Color Clash',
     domain: 'attention',
     icon: '🎨',
     minLevel: 1, maxLevel: 10,
     scoreTarget: 180,
-    blurb: 'Name the INK color, not the word. Resist reading the text when the two conflict.',
+    blurb: 'Choose the ink, ignore the word. The conflict gets faster as your control improves.',
     science: {
       what: 'You respond to the ink color of a color-word. On incongruent trials (the word "RED" in blue ink) the automatic reading response competes with the correct answer.',
       why: 'The Stroop interference effect is the canonical measure of inhibitory control — the executive ability to suppress a prepotent, automatic response.',
@@ -92,12 +92,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'flanker',
-    name: 'Flanker',
+    name: 'Centerline',
     domain: 'attention',
     icon: '⇄',
     minLevel: 1, maxLevel: 10,
     scoreTarget: 190,
-    blurb: 'Report the direction of the CENTER arrow while flanking arrows try to pull you the other way.',
+    blurb: 'Follow only the center arrow while its noisy neighbors try to pull your answer off course.',
     science: {
       what: 'Five arrows appear; you respond to the middle one. Flankers are congruent (» » » » ») or incongruent (» » « » »), creating response conflict.',
       why: 'The Eriksen flanker task isolates selective attention and the ability to filter distracting information — a core component of executive attention networks.',
@@ -152,12 +152,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'go-no-go',
-    name: 'Go / No-Go',
+    name: 'Greenlight',
     domain: 'attention',
     icon: '🚦',
     minLevel: 1, maxLevel: 10,
     scoreTarget: 170,
-    blurb: 'Tap fast on GO signals, but freeze on the rarer STOP signal. Don’t let momentum carry you.',
+    blurb: 'Build a rhythm on green, then stop it cold on red. Speed matters, but restraint wins.',
     science: {
       what: 'A frequent "go" stimulus builds a habit of responding; an occasional "no-go" requires you to cancel that response in flight.',
       why: 'Commission errors (responding on no-go trials) are the standard index of response inhibition, central to impulse control and sustained attention.',
@@ -211,12 +211,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'visual-search',
-    name: 'Visual Search',
+    name: 'Pattern Hunt',
     domain: 'attention',
     icon: '🔍',
     minLevel: 1, maxLevel: 10,
     scoreTarget: 210,
-    blurb: 'Find the single target hiding among look-alike distractors. The set grows and gets trickier.',
+    blurb: 'Find one tilted teal mark in a shifting field of convincing look-alikes.',
     science: {
       what: 'A conjunction search: the target (e.g. a tilted teal bar) shares features with the distractors, so it cannot "pop out" — you must scan and bind features.',
       why: 'Conjunction search recruits serial, attention-demanding processing. Search slope vs. set size is a classic index of attentional efficiency.',

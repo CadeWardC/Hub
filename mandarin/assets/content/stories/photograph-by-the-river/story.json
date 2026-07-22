@@ -1,0 +1,3257 @@
+{
+  "schemaVersion": 1,
+  "id": "photograph-by-the-river",
+  "title": "河边的照片",
+  "pinyinTitle": "Hébiān de Zhàopiàn",
+  "englishTitle": "The Photograph by the River",
+  "summary": "A photographer returns to her hometown to match an old photo with the modern city, uncovering a forgotten story of love and change.",
+  "level": "advanced",
+  "topic": "An old photograph and a changed riverfront",
+  "minutes": 5,
+  "glyph": "影",
+  "colors": [
+    "#4A7C59",
+    "#2B4F3A"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "lin",
+      "name": "林薇",
+      "speaker": "Serena"
+    },
+    {
+      "id": "lao_zhang",
+      "name": "老张",
+      "speaker": "Uncle_Fu"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "林薇是一名摄影师，她从小在河边长大。十年后，她带着一张老照片回到了故乡。",
+      "traditional": null,
+      "translation": "Lin Wei was a photographer who had grown up beside the river. Ten years later, she returned to her hometown carrying an old photograph.",
+      "pinyin": "Lín Wēi shì yī míng shèyǐngshī, tā cóng xiǎo zài hé biān zhǎng dà. Shí nián hòu, tā dài zhe yī zhāng lǎo zhàopiàn huí dào le gùxiāng.",
+      "tokens": [
+        {
+          "text": "林",
+          "pinyin": "Lín",
+          "gloss": "Lin (surname)",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "薇",
+          "pinyin": "Wēi",
+          "gloss": "Wei (given name)",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名",
+          "pinyin": "míng",
+          "gloss": "measure word for people",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "摄",
+          "pinyin": "shè",
+          "gloss": "photography",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "影",
+          "pinyin": "yǐng",
+          "gloss": "shadow; image",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "师",
+          "pinyin": "shī",
+          "gloss": "master; -er",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "从",
+          "pinyin": "cóng",
+          "gloss": "from",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small; young",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at; in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "河",
+          "pinyin": "hé",
+          "gloss": "river",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "边",
+          "pinyin": "biān",
+          "gloss": "side",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "长",
+          "pinyin": "zhǎng",
+          "gloss": "grow",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "大",
+          "pinyin": "dà",
+          "gloss": "big; adult",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "十",
+          "pinyin": "shí",
+          "gloss": "ten",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年",
+          "pinyin": "nián",
+          "gloss": "year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "带",
+          "pinyin": "dài",
+          "gloss": "bring; carry",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "particle indicating ongoing action",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "gloss": "measure word for flat objects",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "shine; photo",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "片",
+          "pinyin": "piàn",
+          "gloss": "piece; slice",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "回",
+          "pinyin": "huí",
+          "gloss": "return",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "to; arrive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle indicating completion",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "故",
+          "pinyin": "gù",
+          "gloss": "old; hometown",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "乡",
+          "pinyin": "xiāng",
+          "gloss": "village; hometown",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 10800
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "照片里，河水清澈，岸边有一棵老柳树，树下站着一个模糊的人影。",
+      "traditional": null,
+      "translation": "In the photograph, the river was clear. An old willow tree stood on the bank, with a blurred figure beneath it.",
+      "pinyin": "zhào piān lǐ ， hé shuǐ qīng chè ， àn biān yǒu yī kē lǎo liǔ shù ， shù xià zhàn zhe yī gè mó hu de rén yǐng 。",
+      "tokens": [
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "photo",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "片",
+          "pinyin": "piān",
+          "gloss": "photo",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "河",
+          "pinyin": "hé",
+          "gloss": "river",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "水",
+          "pinyin": "shuǐ",
+          "gloss": "water",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "清",
+          "pinyin": "qīng",
+          "gloss": "clear",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "澈",
+          "pinyin": "chè",
+          "gloss": "clear",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "岸",
+          "pinyin": "àn",
+          "gloss": "bank",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "边",
+          "pinyin": "biān",
+          "gloss": "side",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "there is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "棵",
+          "pinyin": "kē",
+          "gloss": "tree classifier",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "柳",
+          "pinyin": "liǔ",
+          "gloss": "willow",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "树",
+          "pinyin": "shù",
+          "gloss": "tree",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "树",
+          "pinyin": "shù",
+          "gloss": "tree",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "下",
+          "pinyin": "xià",
+          "gloss": "under",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "站",
+          "pinyin": "zhàn",
+          "gloss": "stand",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "-ing",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "generic classifier",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "模",
+          "pinyin": "mó",
+          "gloss": "blurry",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "糊",
+          "pinyin": "hu",
+          "gloss": "blurry",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/adj suffix",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "影",
+          "pinyin": "yǐng",
+          "gloss": "shadow/figure",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 8480
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "她记得，这张照片是她小时候在河边捡到的，一直不知道是谁拍的。",
+      "traditional": null,
+      "translation": "She had found the photograph by the river as a child and had never known who took it.",
+      "pinyin": "tā jì de, zhè zhāng zhào piàn shì tā xiǎo shí hòu zài hé biān jiǎn dào de, yī zhí bù zhī dào shì shuí pāi de.",
+      "tokens": [
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "记",
+          "pinyin": "jì",
+          "gloss": "remember",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "得",
+          "pinyin": "de",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "gloss": "measure word for flat objects",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "photo (part of compound)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "片",
+          "pinyin": "piàn",
+          "gloss": "photo (part of compound)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "time",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "候",
+          "pinyin": "hòu",
+          "gloss": "period",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "河",
+          "pinyin": "hé",
+          "gloss": "river",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "边",
+          "pinyin": "biān",
+          "gloss": "side",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "捡",
+          "pinyin": "jiǎn",
+          "gloss": "pick up",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrive (resultative)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "直",
+          "pinyin": "zhí",
+          "gloss": "straight; continuously",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "知",
+          "pinyin": "zhī",
+          "gloss": "know",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "道",
+          "pinyin": "dào",
+          "gloss": "way; know",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "谁",
+          "pinyin": "shuí",
+          "gloss": "who",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "拍",
+          "pinyin": "pāi",
+          "gloss": "take (photo)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 7520
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "lin",
+      "hanzi": "现在河岸变了，高楼代替了柳树，但河水还在流。",
+      "traditional": null,
+      "translation": "Now the riverbank has changed, high-rise buildings have replaced the willow trees, but the river water still flows.",
+      "pinyin": "xiànzài hé'àn biàn le, gāolóu dàitì le liǔshù, dàn héshuǐ hái zài liú.",
+      "tokens": [
+        {
+          "text": "现在",
+          "pinyin": "xiànzài",
+          "gloss": "now",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "河岸",
+          "pinyin": "hé'àn",
+          "gloss": "riverbank",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "变",
+          "pinyin": "biàn",
+          "gloss": "change",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "高楼",
+          "pinyin": "gāolóu",
+          "gloss": "high-rise building",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "代替",
+          "pinyin": "dàitì",
+          "gloss": "replace",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "柳树",
+          "pinyin": "liǔshù",
+          "gloss": "willow tree",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "河水",
+          "pinyin": "héshuǐ",
+          "gloss": "river water",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "还",
+          "pinyin": "hái",
+          "gloss": "still",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "PROG",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "流",
+          "pinyin": "liú",
+          "gloss": "flow",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 5920
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "她沿着河边走，想找到照片里的位置。",
+      "traditional": null,
+      "translation": "She walked along the riverbank, wanting to find the location in the photo.",
+      "pinyin": "tā yán zhe hé biān zǒu, xiǎng zhǎo dào zhào piàn lǐ de wèi zhì.",
+      "tokens": [
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "沿",
+          "pinyin": "yán",
+          "gloss": "along",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "progressive",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "河",
+          "pinyin": "hé",
+          "gloss": "river",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "边",
+          "pinyin": "biān",
+          "gloss": "side",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "walk",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want to",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "find",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrive/reach",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "photo",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "片",
+          "pinyin": "piàn",
+          "gloss": "piece",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "位",
+          "pinyin": "wèi",
+          "gloss": "location",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "置",
+          "pinyin": "zhì",
+          "gloss": "position",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 3680
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "一位老人坐在长椅上，看着河水发呆。",
+      "traditional": null,
+      "translation": "An old man sat on a bench, staring blankly at the river.",
+      "pinyin": "yí wèi lǎo rén zuò zài cháng yǐ shàng, kàn zhe hé shuǐ fā dāi.",
+      "tokens": [
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "位",
+          "pinyin": "wèi",
+          "gloss": "measure word for people",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "坐",
+          "pinyin": "zuò",
+          "gloss": "sit",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "长",
+          "pinyin": "cháng",
+          "gloss": "long",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "椅",
+          "pinyin": "yǐ",
+          "gloss": "chair",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "progressive aspect marker",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "河",
+          "pinyin": "hé",
+          "gloss": "river",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "水",
+          "pinyin": "shuǐ",
+          "gloss": "water",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "发",
+          "pinyin": "fā",
+          "gloss": "emit",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "呆",
+          "pinyin": "dāi",
+          "gloss": "daze",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 4080
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "dialogue",
+      "speakerId": "lin",
+      "hanzi": "您好，请问您知道这棵老柳树以前在哪里吗？",
+      "traditional": null,
+      "translation": "Hello, may I ask if you know where this old willow tree used to be?",
+      "pinyin": "nín hǎo, qǐng wèn nín zhī dào zhè kē lǎo liǔ shù yǐ qián zài nǎ lǐ ma?",
+      "tokens": [
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "请",
+          "pinyin": "qǐng",
+          "gloss": "please",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "问",
+          "pinyin": "wèn",
+          "gloss": "ask",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "知道",
+          "pinyin": "zhī dào",
+          "gloss": "know",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "棵",
+          "pinyin": "kē",
+          "gloss": "measure word for trees",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "柳树",
+          "pinyin": "liǔ shù",
+          "gloss": "willow tree",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "以前",
+          "pinyin": "yǐ qián",
+          "gloss": "before",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "哪里",
+          "pinyin": "nǎ lǐ",
+          "gloss": "where",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 3760
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "dialogue",
+      "speakerId": "lao_zhang",
+      "hanzi": "哦，这棵树啊，我年轻时经常在那里等人。",
+      "traditional": null,
+      "translation": "Oh, that tree. When I was young, I often waited for someone there.",
+      "pinyin": "ò, zhè kē shù a, wǒ niánqīng shí jīngcháng zài nàlǐ děng rén.",
+      "tokens": [
+        {
+          "text": "哦",
+          "pinyin": "ò",
+          "gloss": "oh",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "棵",
+          "pinyin": "kē",
+          "gloss": "[tree classifier]",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "树",
+          "pinyin": "shù",
+          "gloss": "tree",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "啊",
+          "pinyin": "a",
+          "gloss": "[particle]",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年",
+          "pinyin": "nián",
+          "gloss": "year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "轻",
+          "pinyin": "qīng",
+          "gloss": "light; young",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "time",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "经",
+          "pinyin": "jīng",
+          "gloss": "pass through",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "常",
+          "pinyin": "cháng",
+          "gloss": "often",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "等",
+          "pinyin": "děng",
+          "gloss": "wait",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 5520
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "老人接过照片，手微微颤抖。",
+      "traditional": null,
+      "translation": "The old man took the photo, his hands trembling slightly.",
+      "pinyin": "lǎo rén jiē guò zhào piàn ， shǒu wēi wēi chàn dǒu 。",
+      "tokens": [
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "接",
+          "pinyin": "jiē",
+          "gloss": "receive",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "过",
+          "pinyin": "guò",
+          "gloss": "over",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "photo",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "片",
+          "pinyin": "piàn",
+          "gloss": "piece",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "手",
+          "pinyin": "shǒu",
+          "gloss": "hand",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "微",
+          "pinyin": "wēi",
+          "gloss": "slight",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "微",
+          "pinyin": "wēi",
+          "gloss": "slight",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "颤",
+          "pinyin": "chàn",
+          "gloss": "tremble",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "抖",
+          "pinyin": "dǒu",
+          "gloss": "shake",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 3280
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "dialogue",
+      "speakerId": "lao_zhang",
+      "hanzi": "这是我拍的。",
+      "traditional": null,
+      "translation": "I took this photograph.",
+      "pinyin": "zhè shì wǒ pāi de.",
+      "tokens": [
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I/me",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "拍",
+          "pinyin": "pāi",
+          "gloss": "take (photo)",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "particle (nominalizer)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 1200
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "林薇惊讶地看着他。",
+      "traditional": null,
+      "translation": "Lin Wei looked at him in surprise.",
+      "pinyin": "Lín Wēi jīngyà de kànzhe tā.",
+      "tokens": [
+        {
+          "text": "林",
+          "pinyin": "Lín",
+          "gloss": "Lin (surname)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "薇",
+          "pinyin": "Wēi",
+          "gloss": "Wei (given name)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "惊讶",
+          "pinyin": "jīngyà",
+          "gloss": "surprised",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "adverbial particle",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "看着",
+          "pinyin": "kànzhe",
+          "gloss": "looking at",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "him",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 1760
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "lao_zhang",
+      "hanzi": "那时候我是一名记者，在这里拍到了一个人。后来我一直在找她，但没找到。",
+      "traditional": null,
+      "translation": "I was a reporter then, and I photographed someone here. I kept searching for her afterward, but I never found her.",
+      "pinyin": "nà shí hòu wǒ shì yī míng jì zhě ， zài zhè lǐ pāi dào le yī gè rén 。 hòu lái wǒ yī zhí zài zhǎo tā ， dàn méi zhǎo dào 。",
+      "tokens": [
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "time",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "候",
+          "pinyin": "hòu",
+          "gloss": "moment",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "am",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名",
+          "pinyin": "míng",
+          "gloss": "classifier for people",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "记",
+          "pinyin": "jì",
+          "gloss": "record",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "者",
+          "pinyin": "zhě",
+          "gloss": "-er (person)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "拍",
+          "pinyin": "pāi",
+          "gloss": "take (photo)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrive (resultative)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "classifier",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "来",
+          "pinyin": "lái",
+          "gloss": "come (suffix)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "直",
+          "pinyin": "zhí",
+          "gloss": "straight; continuously",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in progress",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "look for",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "her",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "find",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrive (resultative)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 8080
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "dialogue",
+      "speakerId": "lin",
+      "hanzi": "那个人是谁？",
+      "traditional": null,
+      "translation": "Who is that person?",
+      "pinyin": "nèi ge rén shì shéi",
+      "tokens": [
+        {
+          "text": "那",
+          "pinyin": "nèi",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "gloss": "measure word",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "谁",
+          "pinyin": "shéi",
+          "gloss": "who",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 2160
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "dialogue",
+      "speakerId": "lao_zhang",
+      "hanzi": "是一个女孩，她总是站在柳树下看河。我拍完照片，她就走了，再也没出现。",
+      "traditional": null,
+      "translation": "A girl. She always stood beneath the willow tree watching the river. After I took the photograph, she left and never appeared again.",
+      "pinyin": "shì yī gè nǚhái, tā zǒngshì zhàn zài liǔshù xià kàn hé. wǒ pāi wán zhàopiàn, tā jiù zǒu le, zài yě méi chūxiàn.",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "(measure word)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "女孩",
+          "pinyin": "nǚhái",
+          "gloss": "girl",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "总是",
+          "pinyin": "zǒngshì",
+          "gloss": "always",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "站",
+          "pinyin": "zhàn",
+          "gloss": "stand",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "柳树",
+          "pinyin": "liǔshù",
+          "gloss": "willow tree",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "下",
+          "pinyin": "xià",
+          "gloss": "under",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "watch",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "河",
+          "pinyin": "hé",
+          "gloss": "river",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "拍",
+          "pinyin": "pāi",
+          "gloss": "take (photo)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "完",
+          "pinyin": "wán",
+          "gloss": "finish",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "照片",
+          "pinyin": "zhàopiàn",
+          "gloss": "photo",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "就",
+          "pinyin": "jiù",
+          "gloss": "then",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "leave",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "再",
+          "pinyin": "zài",
+          "gloss": "again",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "did not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "出现",
+          "pinyin": "chūxiàn",
+          "gloss": "appear",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 7920
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "林薇突然想起，母亲曾说过，她年轻时也爱在河边散步。",
+      "traditional": null,
+      "translation": "Lin Wei suddenly remembered that her mother once said that she also loved to walk by the river when she was young.",
+      "pinyin": "Lín Wēi túrán xiǎng qǐ, mǔqīn céng shuō guò, tā niánqīng shí yě ài zài hé biān sànbù.",
+      "tokens": [
+        {
+          "text": "林",
+          "pinyin": "Lín",
+          "gloss": "Lin (surname)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "薇",
+          "pinyin": "Wēi",
+          "gloss": "Wei (given name)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "突然",
+          "pinyin": "túrán",
+          "gloss": "suddenly",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "想起",
+          "pinyin": "xiǎng qǐ",
+          "gloss": "recall",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "母亲",
+          "pinyin": "mǔqīn",
+          "gloss": "mother",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "曾",
+          "pinyin": "céng",
+          "gloss": "once (past)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "过",
+          "pinyin": "guò",
+          "gloss": "experience marker",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年轻",
+          "pinyin": "niánqīng",
+          "gloss": "young",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "when",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "爱",
+          "pinyin": "ài",
+          "gloss": "love (to)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "河边",
+          "pinyin": "hé biān",
+          "gloss": "riverside",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "散步",
+          "pinyin": "sànbù",
+          "gloss": "take a walk",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 7040
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "dialogue",
+      "speakerId": "lin",
+      "hanzi": "您还记得那个女孩长什么样吗？",
+      "traditional": null,
+      "translation": "Do you still remember what that girl looked like?",
+      "pinyin": "nín hái jì de nà ge nǚ hái zhǎng shén me yàng ma？",
+      "tokens": [
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "还",
+          "pinyin": "hái",
+          "gloss": "still",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "记得",
+          "pinyin": "jì de",
+          "gloss": "remember",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "那个",
+          "pinyin": "nà ge",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "女孩",
+          "pinyin": "nǚ hái",
+          "gloss": "girl",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "长",
+          "pinyin": "zhǎng",
+          "gloss": "look",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shén me",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "样",
+          "pinyin": "yàng",
+          "gloss": "appearance",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 2160
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "dialogue",
+      "speakerId": "lao_zhang",
+      "hanzi": "记得，她扎着马尾辫，笑起来有两个酒窝。",
+      "traditional": null,
+      "translation": "I remember, she had a ponytail and had two dimples when she smiled.",
+      "pinyin": "jìde, tā zhāzhe mǎwěibiàn, xiào qǐlái yǒu liǎng ge jiǔwō.",
+      "tokens": [
+        {
+          "text": "记",
+          "pinyin": "jì",
+          "gloss": "remember",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "得",
+          "pinyin": "de",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "扎",
+          "pinyin": "zhā",
+          "gloss": "tie",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "progressive",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "马",
+          "pinyin": "mǎ",
+          "gloss": "horse",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "尾",
+          "pinyin": "wěi",
+          "gloss": "tail",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "辫",
+          "pinyin": "biàn",
+          "gloss": "braid",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "笑",
+          "pinyin": "xiào",
+          "gloss": "smile",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "起",
+          "pinyin": "qǐ",
+          "gloss": "start",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "来",
+          "pinyin": "lái",
+          "gloss": "come",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "两",
+          "pinyin": "liǎng",
+          "gloss": "two",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "gloss": "measure word",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "酒",
+          "pinyin": "jiǔ",
+          "gloss": "wine",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "窝",
+          "pinyin": "wō",
+          "gloss": "nest",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 4880
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "林薇愣住了，那正是母亲年轻时的样子。",
+      "traditional": null,
+      "translation": "Lin Wei was stunned; that was exactly what her mother looked like when she was young.",
+      "pinyin": "Lín Wēi lèngzhù le, nà zhèng shì mǔqīn niánqīng shí de yàngzi.",
+      "tokens": [
+        {
+          "text": "林",
+          "pinyin": "Lín",
+          "gloss": "Lin (surname)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "薇",
+          "pinyin": "Wēi",
+          "gloss": "Wei (given name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "愣",
+          "pinyin": "lèng",
+          "gloss": "stunned",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "住",
+          "pinyin": "zhù",
+          "gloss": "suffix indicating action completion",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle indicating change or completion",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "正",
+          "pinyin": "zhèng",
+          "gloss": "exactly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "母亲",
+          "pinyin": "mǔqīn",
+          "gloss": "mother",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "年轻",
+          "pinyin": "niánqīng",
+          "gloss": "young",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "time",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "样子",
+          "pinyin": "yàngzi",
+          "gloss": "appearance",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 4240
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "dialogue",
+      "speakerId": "lin",
+      "hanzi": "那是我母亲。她已经去世三年了。",
+      "traditional": null,
+      "translation": "That was my mother. She died three years ago.",
+      "pinyin": "nà shì wǒ mǔ qīn 。 tā yǐ jīng qù shì sān nián le 。",
+      "tokens": [
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "my",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "母亲",
+          "pinyin": "mǔ qīn",
+          "gloss": "mother",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "已经",
+          "pinyin": "yǐ jīng",
+          "gloss": "already",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "去世",
+          "pinyin": "qù shì",
+          "gloss": "die",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "三",
+          "pinyin": "sān",
+          "gloss": "three",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年",
+          "pinyin": "nián",
+          "gloss": "year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 3120
+      }
+    },
+    {
+      "id": "b020",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "老人沉默了很久，然后轻轻说：",
+      "traditional": null,
+      "translation": "The old man was silent for a long time, then softly said:",
+      "pinyin": "lǎo rén chén mò le hěn jiǔ , rán hòu qīng qīng shuō ：",
+      "tokens": [
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "沉",
+          "pinyin": "chén",
+          "gloss": "sink",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "默",
+          "pinyin": "mò",
+          "gloss": "silent",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "久",
+          "pinyin": "jiǔ",
+          "gloss": "long time",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "然",
+          "pinyin": "rán",
+          "gloss": "then",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "轻",
+          "pinyin": "qīng",
+          "gloss": "light",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "轻",
+          "pinyin": "qīng",
+          "gloss": "light",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b020.mp3",
+        "durationMs": 3440
+      }
+    },
+    {
+      "id": "b021",
+      "kind": "dialogue",
+      "speakerId": "lao_zhang",
+      "hanzi": "原来是她。这张照片，你留着吧。",
+      "traditional": null,
+      "translation": "So it was her. You should keep this photograph.",
+      "pinyin": "Yuánlái shì tā. Zhè zhāng zhàopiàn, nǐ liúzhe ba.",
+      "tokens": [
+        {
+          "text": "原",
+          "pinyin": "yuán",
+          "gloss": "original",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "来",
+          "pinyin": "lái",
+          "gloss": "come",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "gloss": "measure word for flat objects",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "photo",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "片",
+          "pinyin": "piàn",
+          "gloss": "piece",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "留",
+          "pinyin": "liú",
+          "gloss": "keep",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "particle indicating continuous state",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "suggestion particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b021.mp3",
+        "durationMs": 3440
+      }
+    },
+    {
+      "id": "b022",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "林薇把照片贴在胸前，河水在夕阳下闪闪发光。",
+      "traditional": null,
+      "translation": "Lin Wei pressed the photo against her chest, the river sparkling under the setting sun.",
+      "pinyin": "Lín Wēi bǎ zhàopiàn tiē zài xiōngqián, héshuǐ zài xīyáng xià shǎnshǎn fāguāng.",
+      "tokens": [
+        {
+          "text": "林",
+          "pinyin": "Lín",
+          "gloss": "Lin (surname)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "薇",
+          "pinyin": "Wēi",
+          "gloss": "Wei (given name)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "gloss": "BA (disposal marker)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "照片",
+          "pinyin": "zhàopiàn",
+          "gloss": "photo",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "贴",
+          "pinyin": "tiē",
+          "gloss": "press",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "胸前",
+          "pinyin": "xiōngqián",
+          "gloss": "chest",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "河水",
+          "pinyin": "héshuǐ",
+          "gloss": "river water",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "under",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "夕阳",
+          "pinyin": "xīyáng",
+          "gloss": "setting sun",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "下",
+          "pinyin": "xià",
+          "gloss": "below",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "闪闪发光",
+          "pinyin": "shǎnshǎn fāguāng",
+          "gloss": "sparkle",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b022.mp3",
+        "durationMs": 5520
+      }
+    },
+    {
+      "id": "b023",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "她终于明白，有些记忆不会消失，它们只是静静地等待被发现。",
+      "traditional": null,
+      "translation": "She finally understood that some memories do not disappear, they just quietly wait to be discovered.",
+      "pinyin": "tā zhōngyú míngbái, yǒuxiē jìyì bùhuì xiāoshī, tāmen zhǐshì jìngjìng de děngdài bèi fāxiàn.",
+      "tokens": [
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "终于",
+          "pinyin": "zhōngyú",
+          "gloss": "finally",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "明白",
+          "pinyin": "míngbái",
+          "gloss": "understand",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "有些",
+          "pinyin": "yǒuxiē",
+          "gloss": "some",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "记忆",
+          "pinyin": "jìyì",
+          "gloss": "memory",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "不会",
+          "pinyin": "bùhuì",
+          "gloss": "will not",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "消失",
+          "pinyin": "xiāoshī",
+          "gloss": "disappear",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "它们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "只是",
+          "pinyin": "zhǐshì",
+          "gloss": "just",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "静静",
+          "pinyin": "jìngjìng",
+          "gloss": "quietly",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "(adverbial suffix)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "等待",
+          "pinyin": "děngdài",
+          "gloss": "wait",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "被",
+          "pinyin": "bèi",
+          "gloss": "by (passive)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "discover",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b023.mp3",
+        "durationMs": 7760
+      }
+    }
+  ]
+}

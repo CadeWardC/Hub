@@ -1,0 +1,1673 @@
+{
+  "schemaVersion": 1,
+  "id": "last-bus",
+  "title": "最后一班车",
+  "pinyinTitle": "zuìhòu yī bān chē",
+  "englishTitle": "The Last Bus",
+  "summary": "Two classmates miss the last bus after class and figure out a way to get home.",
+  "level": "elementary",
+  "topic": "Getting home after an evening class",
+  "minutes": 4,
+  "glyph": "车",
+  "colors": [
+    "#2E86AB",
+    "#A23B72"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "female",
+      "name": "Xiaohong",
+      "speaker": "Serena"
+    },
+    {
+      "id": "male",
+      "name": "Xiaoming",
+      "speaker": "Dylan"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "晚上九点半，中文课结束了。小明和小红一起走出教室。",
+      "traditional": null,
+      "pinyin": "wǎnshàng jiǔ diǎn bàn, zhōngwén kè jiéshù le. Xiǎo Míng hé Xiǎo Hóng yìqǐ zǒu chū jiàoshì.",
+      "translation": "At 9:30 PM, Chinese class ended. Xiaoming and Xiaohong walked out of the classroom together.",
+      "tokens": [
+        {
+          "text": "晚上",
+          "pinyin": "wǎnshàng",
+          "gloss": "evening",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "九点",
+          "pinyin": "jiǔ diǎn",
+          "gloss": "nine o'clock",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "半",
+          "pinyin": "bàn",
+          "gloss": "half",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "中文课",
+          "pinyin": "zhōngwén kè",
+          "gloss": "Chinese class",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "结束",
+          "pinyin": "jiéshù",
+          "gloss": "ended",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小红",
+          "pinyin": "Xiǎo Hóng",
+          "gloss": "Xiaohong",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "走出",
+          "pinyin": "zǒu chū",
+          "gloss": "walked out",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "教室",
+          "pinyin": "jiàoshì",
+          "gloss": "classroom",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 9440
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "dialogue",
+      "speakerId": "male",
+      "hanzi": "小红，几点了？",
+      "traditional": null,
+      "pinyin": "Xiǎo Hóng, jǐ diǎn le?",
+      "translation": "Xiaohong, what time is it?",
+      "tokens": [
+        {
+          "text": "小红",
+          "pinyin": "Xiǎo Hóng",
+          "gloss": "Xiaohong",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "几",
+          "pinyin": "jǐ",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "点",
+          "pinyin": "diǎn",
+          "gloss": "o'clock",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "？",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 1360
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "female",
+      "hanzi": "九点四十分了。我们得快点儿！最后一班公交车是十点。",
+      "traditional": null,
+      "pinyin": "jiǔ diǎn sìshí fēn le. Wǒmen děi kuài diǎnr! Zuìhòu yī bān gōngjiāo chē shì shí diǎn.",
+      "translation": "It's 9:40. We need to hurry! The last bus is at ten o'clock.",
+      "tokens": [
+        {
+          "text": "九点",
+          "pinyin": "jiǔ diǎn",
+          "gloss": "nine o'clock",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "四十",
+          "pinyin": "sìshí",
+          "gloss": "forty",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "分",
+          "pinyin": "fēn",
+          "gloss": "minutes",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "得",
+          "pinyin": "děi",
+          "gloss": "must",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "快",
+          "pinyin": "kuài",
+          "gloss": "fast",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "点儿",
+          "pinyin": "diǎnr",
+          "gloss": "a bit",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "最后",
+          "pinyin": "zuìhòu",
+          "gloss": "last",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "班",
+          "pinyin": "bān",
+          "gloss": "number of bus",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "公交车",
+          "pinyin": "gōngjiāo chē",
+          "gloss": "bus",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "十点",
+          "pinyin": "shí diǎn",
+          "gloss": "ten o'clock",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 6000
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "小明和小红快步走到公交站。可是，他们看到公交车刚刚开走了。",
+      "traditional": null,
+      "pinyin": "Xiǎo Míng hé Xiǎo Hóng kuài bù zǒu dào gōngjiāo zhàn. Kěshì, tāmen kàn dào gōngjiāo chē gānggāng kāi zǒu le.",
+      "translation": "Xiaoming and Xiaohong walked quickly to the bus stop. But they saw the bus had just left.",
+      "tokens": [
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小红",
+          "pinyin": "Xiǎo Hóng",
+          "gloss": "Xiaohong",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "快步",
+          "pinyin": "kuài bù",
+          "gloss": "quick steps",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "走到",
+          "pinyin": "zǒu dào",
+          "gloss": "walked to",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "公交站",
+          "pinyin": "gōngjiāo zhàn",
+          "gloss": "bus stop",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "可是",
+          "pinyin": "kěshì",
+          "gloss": "but",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看到",
+          "pinyin": "kàn dào",
+          "gloss": "saw",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "公交车",
+          "pinyin": "gōngjiāo chē",
+          "gloss": "bus",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "刚刚",
+          "pinyin": "gānggāng",
+          "gloss": "just",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "开走",
+          "pinyin": "kāi zǒu",
+          "gloss": "drove away",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 13360
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "dialogue",
+      "speakerId": "female",
+      "hanzi": "啊！车走了！我们没赶上最后一班车。怎么办？",
+      "traditional": null,
+      "pinyin": "A! Chē zǒu le! Wǒmen méi gǎn shàng zuìhòu yī bān chē. Zěnme bàn?",
+      "translation": "Ah! The bus left! We missed the last bus. What should we do?",
+      "tokens": [
+        {
+          "text": "啊",
+          "pinyin": "ā",
+          "gloss": "ah",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "车",
+          "pinyin": "chē",
+          "gloss": "bus",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "left",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "didn't",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "赶上",
+          "pinyin": "gǎn shàng",
+          "gloss": "catch (bus)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "最后",
+          "pinyin": "zuìhòu",
+          "gloss": "last",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "班",
+          "pinyin": "bān",
+          "gloss": "number of bus",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "车",
+          "pinyin": "chē",
+          "gloss": "bus",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "怎么",
+          "pinyin": "zěnme",
+          "gloss": "how",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "办",
+          "pinyin": "bàn",
+          "gloss": "handle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "？",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 4000
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "dialogue",
+      "speakerId": "male",
+      "hanzi": "别担心，小红。我们可以叫出租车，或者打车。",
+      "traditional": null,
+      "pinyin": "Bié dānxīn, Xiǎo Hóng. Wǒmen kěyǐ jiào chūzū chē, huòzhě dǎ chē.",
+      "translation": "Don't worry, Xiaohong. We can call a taxi, or take a ride-hailing car.",
+      "tokens": [
+        {
+          "text": "别",
+          "pinyin": "bié",
+          "gloss": "don't",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "担心",
+          "pinyin": "dānxīn",
+          "gloss": "worry",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小红",
+          "pinyin": "Xiǎo Hóng",
+          "gloss": "Xiaohong",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "可以",
+          "pinyin": "kěyǐ",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "gloss": "call",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "出租车",
+          "pinyin": "chūzū chē",
+          "gloss": "taxi",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "或者",
+          "pinyin": "huòzhě",
+          "gloss": "or",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "打车",
+          "pinyin": "dǎ chē",
+          "gloss": "take a ride-hailing car",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 4080
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "dialogue",
+      "speakerId": "female",
+      "hanzi": "打车很贵吧？我带的钱不多。",
+      "traditional": null,
+      "pinyin": "Dǎ chē hěn guì ba? Wǒ dài de qián bù duō.",
+      "translation": "Is taking a ride-hailing car expensive? I didn't bring much money.",
+      "tokens": [
+        {
+          "text": "打车",
+          "pinyin": "dǎ chē",
+          "gloss": "take a ride-hailing car",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "贵",
+          "pinyin": "guì",
+          "gloss": "expensive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "suggestion/guess",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "？",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "带",
+          "pinyin": "dài",
+          "gloss": "brought",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "POSS",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "钱",
+          "pinyin": "qián",
+          "gloss": "money",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "多",
+          "pinyin": "duō",
+          "gloss": "much",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 3040
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "dialogue",
+      "speakerId": "male",
+      "hanzi": "没关系。我今天带了手机，可以用手机付钱。我们一起付，不贵。",
+      "traditional": null,
+      "pinyin": "Méi guānxi. Wǒ jīntiān dài le shǒujī, kěyǐ yòng shǒujī fù qián. Wǒmen yìqǐ fù, bù guì.",
+      "translation": "It's okay. I brought my phone today, I can pay with my phone. We'll pay together, it's not expensive.",
+      "tokens": [
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "关系",
+          "pinyin": "guānxi",
+          "gloss": "matter",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "今天",
+          "pinyin": "jīntiān",
+          "gloss": "today",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "带",
+          "pinyin": "dài",
+          "gloss": "brought",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "手机",
+          "pinyin": "shǒujī",
+          "gloss": "cell phone",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "可以",
+          "pinyin": "kěyǐ",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "用",
+          "pinyin": "yòng",
+          "gloss": "use",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "手机",
+          "pinyin": "shǒujī",
+          "gloss": "cell phone",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "付钱",
+          "pinyin": "fù qián",
+          "gloss": "pay",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "付",
+          "pinyin": "fù",
+          "gloss": "pay",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "贵",
+          "pinyin": "guì",
+          "gloss": "expensive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 6960
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "dialogue",
+      "speakerId": "female",
+      "hanzi": "好吧。那我们快叫一辆车吧。",
+      "traditional": null,
+      "pinyin": "Hǎo ba. Nà wǒmen kuài jiào yī liàng chē ba.",
+      "translation": "Alright then. Let's quickly call a car.",
+      "tokens": [
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "suggestion",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "then",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "快",
+          "pinyin": "kuài",
+          "gloss": "quickly",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "gloss": "call",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "辆",
+          "pinyin": "liàng",
+          "gloss": "measure word for vehicle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "车",
+          "pinyin": "chē",
+          "gloss": "car",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "suggestion",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 17360
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "小明用手机叫了一辆车。三分钟后，车来了。",
+      "traditional": null,
+      "pinyin": "Xiǎo Míng yòng shǒujī jiào le yī liàng chē. Sān fēnzhōng hòu, chē lái le.",
+      "translation": "Xiaoming used his phone to call a car. After three minutes, the car arrived.",
+      "tokens": [
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "用",
+          "pinyin": "yòng",
+          "gloss": "use",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "手机",
+          "pinyin": "shǒujī",
+          "gloss": "cell phone",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "gloss": "called",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "辆",
+          "pinyin": "liàng",
+          "gloss": "measure word for vehicle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "车",
+          "pinyin": "chē",
+          "gloss": "car",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "三分钟",
+          "pinyin": "sān fēnzhōng",
+          "gloss": "three minutes",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "later",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "车",
+          "pinyin": "chē",
+          "gloss": "car",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "来",
+          "pinyin": "lái",
+          "gloss": "came",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 6880
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "dialogue",
+      "speakerId": "female",
+      "hanzi": "太好了！谢谢你，小明。",
+      "traditional": null,
+      "pinyin": "Tài hǎo le! Xièxie nǐ, Xiǎo Míng.",
+      "translation": "Great! Thank you, Xiaoming.",
+      "tokens": [
+        {
+          "text": "太",
+          "pinyin": "tài",
+          "gloss": "too",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "！",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "谢谢",
+          "pinyin": "xièxie",
+          "gloss": "thank",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 2000
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "male",
+      "hanzi": "不客气。上车吧。",
+      "traditional": null,
+      "pinyin": "Bú kèqi. Shàng chē ba.",
+      "translation": "You're welcome. Get in the car.",
+      "tokens": [
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "客气",
+          "pinyin": "kèqi",
+          "gloss": "polite",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "get on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "车",
+          "pinyin": "chē",
+          "gloss": "car",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "suggestion",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 1600
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "他们上了车。小明告诉了司机地址。二十分钟后，小红先到家，然后小明也到家了。",
+      "traditional": null,
+      "pinyin": "Tāmen shàng le chē. Xiǎo Míng gàosu le sījī dìzhǐ. Èrshí fēnzhōng hòu, Xiǎo Hóng xiān dào jiā, ránhòu Xiǎo Míng yě dào jiā le.",
+      "translation": "They got in the car. Xiaoming told the driver the address. Twenty minutes later, Xiaohong arrived home first, then Xiaoming also got home.",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "got on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "车",
+          "pinyin": "chē",
+          "gloss": "car",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "告诉",
+          "pinyin": "gàosu",
+          "gloss": "told",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "司机",
+          "pinyin": "sījī",
+          "gloss": "driver",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地址",
+          "pinyin": "dìzhǐ",
+          "gloss": "address",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "二十分钟",
+          "pinyin": "èrshí fēnzhōng",
+          "gloss": "twenty minutes",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "later",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小红",
+          "pinyin": "Xiǎo Hóng",
+          "gloss": "Xiaohong",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "先",
+          "pinyin": "xiān",
+          "gloss": "first",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "到家",
+          "pinyin": "dào jiā",
+          "gloss": "arrived home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "然后",
+          "pinyin": "ránhòu",
+          "gloss": "then",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrived",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 12000
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "虽然没赶上最后一班公交车，但是他们一起打车回家，都很开心。",
+      "traditional": null,
+      "pinyin": "Suīrán méi gǎn shàng zuìhòu yī bān gōngjiāo chē, dànshì tāmen yìqǐ dǎ chē huí jiā, dōu hěn kāixīn.",
+      "translation": "Although they missed the last bus, they took a ride-hailing car home together and were both very happy.",
+      "tokens": [
+        {
+          "text": "虽然",
+          "pinyin": "suīrán",
+          "gloss": "although",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "didn't",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "赶上",
+          "pinyin": "gǎn shàng",
+          "gloss": "catch",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "最后",
+          "pinyin": "zuìhòu",
+          "gloss": "last",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "班",
+          "pinyin": "bān",
+          "gloss": "number of bus",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "公交车",
+          "pinyin": "gōngjiāo chē",
+          "gloss": "bus",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "但是",
+          "pinyin": "dànshì",
+          "gloss": "but",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "打车",
+          "pinyin": "dǎ chē",
+          "gloss": "took a ride-hailing car",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "回家",
+          "pinyin": "huí jiā",
+          "gloss": "go home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "，",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "both",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "开心",
+          "pinyin": "kāixīn",
+          "gloss": "happy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "。",
+          "gloss": "",
+          "difficulty": 1,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 5600
+      }
+    }
+  ]
+}

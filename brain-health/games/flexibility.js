@@ -19,12 +19,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'task-switch',
-    name: 'Task Switch',
+    name: 'Rule Shift',
     domain: 'flexibility',
     icon: '⇆',
     minLevel: 1, maxLevel: 10,
     scoreTarget: 175,
-    blurb: 'The rule keeps changing: sometimes judge if a number is odd/even, sometimes high/low. Stay flexible.',
+    blurb: 'The card changes the rule: odd or even, high or low. Read the context before the number.',
     science: {
       what: 'Each trial shows a colored number. A blue background means judge odd/even; an orange background means judge less/greater than 5. The rule switches unpredictably.',
       why: 'The cost of reconfiguring from one rule to another ("switch cost") is a direct measure of cognitive flexibility, a frontal-lobe executive function.',
@@ -86,12 +86,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'mental-rotation',
-    name: 'Mental Rotation',
+    name: 'Mirror Mind',
     domain: 'flexibility',
     icon: '🧭',
     minLevel: 1, maxLevel: 10,
     scoreTarget: 185,
-    blurb: 'Two shapes, one rotated. Decide if they’re the same shape or a mirror image — rotate them in your head.',
+    blurb: 'Turn the shape in your mind and decide whether its partner is rotated or secretly mirrored.',
     science: {
       what: 'A reference shape and a probe rotated by some angle. You judge whether the probe is the same object rotated, or its mirror reflection.',
       why: 'Mental rotation is the benchmark task for spatial visualization; response time scales linearly with rotation angle, revealing an analog mental transformation.',
@@ -167,12 +167,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'math-sprint',
-    name: 'Math Sprint',
+    name: 'Equation Rush',
     domain: 'flexibility',
     icon: '∑',
     minLevel: 1, maxLevel: 10,
     scoreTarget: 200,
-    blurb: 'Rapid-fire arithmetic. Verify each equation true or false before the timer runs out.',
+    blurb: 'Verify rapid-fire equations while operations and number size climb with your level.',
     science: {
       what: 'You verify arithmetic equations (e.g. 7 × 6 = 42) under time pressure. Operand size and operation complexity grow with level.',
       why: 'Arithmetic verification taxes quantitative reasoning and working memory simultaneously, and trains fluent retrieval and manipulation of number facts.',

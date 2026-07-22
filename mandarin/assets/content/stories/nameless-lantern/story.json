@@ -1,0 +1,5304 @@
+{
+  "schemaVersion": 1,
+  "id": "nameless-lantern",
+  "title": "无名的灯笼",
+  "pinyinTitle": "Wú Míng De Dēnglóng",
+  "englishTitle": "The Nameless Lantern",
+  "summary": "At a community lantern festival, two students discover a lantern with an unfinished poem and help its elderly maker complete it, revealing a story of love and memory.",
+  "level": "upper-intermediate",
+  "topic": "A lantern with an unfinished inscription",
+  "minutes": 4,
+  "glyph": "灯",
+  "colors": [
+    "#D7482F",
+    "#8E2F21"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "xiaoyu",
+      "name": "小雨",
+      "speaker": "Serena"
+    },
+    {
+      "id": "daming",
+      "name": "大明",
+      "speaker": "Dylan"
+    },
+    {
+      "id": "zhangyeye",
+      "name": "张爷爷",
+      "speaker": "Uncle_Fu"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "一年一度的元宵灯笼展又到了。这次展览在社区广场上举行，广场上挂满了五颜六色的灯笼。小雨和大明作为志愿者，帮忙布置灯笼。他们看到很多精美的灯笼，上面都写着主人的名字和心愿。",
+      "traditional": null,
+      "translation": "The annual Lantern Festival lantern exhibition has arrived again. This exhibition is held in the community square, which is full of colorful lanterns. Xiao Yu and Da Ming, as volunteers, help arrange the lanterns. They see many exquisite lanterns, on which are written the owners' names and wishes.",
+      "pinyin": "yīniányīdù de yuánxiāo dēnglóng zhǎn yòu dàole. zhècì zhǎnlǎn zài shèqū guǎngchǎng shàng jǔxíng, guǎngchǎng shàng guàmǎn le wǔyánliùsè de dēnglóng. Xiǎo Yǔ hé Dà Míng zuòwéi zhìyuànzhě, bāngmáng bùzhì dēnglóng. tāmen kàndào hěnduō jīngměi de dēnglóng, shàngmiàn dōu xiězhe zhǔrén de míngzì hé xīnyuàn.",
+      "tokens": [
+        {
+          "text": "一年一度",
+          "pinyin": "yīniányīdù",
+          "gloss": "annual",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possession)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "元宵",
+          "pinyin": "yuánxiāo",
+          "gloss": "Lantern Festival",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "展",
+          "pinyin": "zhǎn",
+          "gloss": "exhibition",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "又",
+          "pinyin": "yòu",
+          "gloss": "again",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这次",
+          "pinyin": "zhècì",
+          "gloss": "this time",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "展览",
+          "pinyin": "zhǎnlǎn",
+          "gloss": "exhibition",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "社区",
+          "pinyin": "shèqū",
+          "gloss": "community",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "广场",
+          "pinyin": "guǎngchǎng",
+          "gloss": "square",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "举行",
+          "pinyin": "jǔxíng",
+          "gloss": "hold",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "广场",
+          "pinyin": "guǎngchǎng",
+          "gloss": "square",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "挂满",
+          "pinyin": "guàmǎn",
+          "gloss": "be full of (hanging)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "五颜六色",
+          "pinyin": "wǔyánliùsè",
+          "gloss": "colorful",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(adj suffix)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiao Yu (name)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dà Míng",
+          "gloss": "Da Ming (name)",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "作为",
+          "pinyin": "zuòwéi",
+          "gloss": "as",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "志愿者",
+          "pinyin": "zhìyuànzhě",
+          "gloss": "volunteer",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "帮忙",
+          "pinyin": "bāngmáng",
+          "gloss": "help",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "布置",
+          "pinyin": "bùzhì",
+          "gloss": "arrange",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看到",
+          "pinyin": "kàndào",
+          "gloss": "see",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěnduō",
+          "gloss": "many",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "精美",
+          "pinyin": "jīngměi",
+          "gloss": "exquisite",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(adj suffix)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "上面",
+          "pinyin": "shàngmiàn",
+          "gloss": "on top/above",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写着",
+          "pinyin": "xiězhe",
+          "gloss": "written (with -zhe)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "主人",
+          "pinyin": "zhǔrén",
+          "gloss": "owner",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possession)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名字",
+          "pinyin": "míngzì",
+          "gloss": "name",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "心愿",
+          "pinyin": "xīnyuàn",
+          "gloss": "wish",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 18000
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "突然，一个红色的灯笼吸引了他们的注意。这个灯笼很漂亮，上面画着几朵梅花，但奇怪的是，它没有写名字，只有一句没有写完的诗：“月光照在...”",
+      "traditional": null,
+      "translation": "Suddenly, a red lantern caught their attention. This lantern was very beautiful, with several plum blossoms painted on it, but strangely, it had no name written, only an unfinished poem: 'Moonlight shining on...'",
+      "pinyin": "tūrán, yīgè hóngsè de dēnglóng xīyǐn le tāmen de zhùyì. zhège dēnglóng hěn piàoliang, shàngmiàn huàzhe jǐduǒ méihuā, dàn qíguài de shì, tā méiyǒu xiě míngzì, zhǐyǒu yījù méiyǒu xiěwán de shī: “yuèguāng zhào zài...”",
+      "tokens": [
+        {
+          "text": "突然",
+          "pinyin": "tūrán",
+          "gloss": "suddenly",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "one/a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "红色",
+          "pinyin": "hóngsè",
+          "gloss": "red",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive/attribute particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "吸引",
+          "pinyin": "xīyǐn",
+          "gloss": "attract",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(aspect particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they/them",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "注意",
+          "pinyin": "zhùyì",
+          "gloss": "attention",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "漂亮",
+          "pinyin": "piàoliang",
+          "gloss": "beautiful",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "上面",
+          "pinyin": "shàngmiàn",
+          "gloss": "on top/above",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "画着",
+          "pinyin": "huàzhe",
+          "gloss": "is painted with",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "几朵",
+          "pinyin": "jǐduǒ",
+          "gloss": "several",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "梅花",
+          "pinyin": "méihuā",
+          "gloss": "plum blossom",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "奇怪",
+          "pinyin": "qíguài",
+          "gloss": "strange",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is/are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "does not have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名字",
+          "pinyin": "míngzì",
+          "gloss": "name",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "只有",
+          "pinyin": "zhǐyǒu",
+          "gloss": "only have",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一句",
+          "pinyin": "yījù",
+          "gloss": "one sentence",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "did not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写完",
+          "pinyin": "xiěwán",
+          "gloss": "finish writing",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "诗",
+          "pinyin": "shī",
+          "gloss": "poem",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "月光",
+          "pinyin": "yuèguāng",
+          "gloss": "moonlight",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "shine",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at/on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "...",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 17360
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "hanzi": "小雨指着灯笼说：“大明，你看，这个灯笼好特别，没写名字，诗也没写完。”",
+      "traditional": null,
+      "translation": "Xiao Yu pointed at the lantern and said, 'Daming, look, this lantern is very special, it has no name written, and the poem is not finished either.'",
+      "pinyin": "xiǎo yǔ zhǐ zhe dēng lóng shuō: “dà míng, nǐ kàn, zhè ge dēng lóng hǎo tè bié, méi xiě míng zì, shī yě méi xiě wán.”",
+      "tokens": [
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "雨",
+          "pinyin": "yǔ",
+          "gloss": "rain",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "指",
+          "pinyin": "zhǐ",
+          "gloss": "point",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "indicating ongoing action",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "灯",
+          "pinyin": "dēng",
+          "gloss": "lamp",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "笼",
+          "pinyin": "lóng",
+          "gloss": "cage; basket",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "大",
+          "pinyin": "dà",
+          "gloss": "big",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "明",
+          "pinyin": "míng",
+          "gloss": "bright",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "gloss": "measure word",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯",
+          "pinyin": "dēng",
+          "gloss": "lamp",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "笼",
+          "pinyin": "lóng",
+          "gloss": "cage; basket",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "特",
+          "pinyin": "tè",
+          "gloss": "special",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "别",
+          "pinyin": "bié",
+          "gloss": "other; different",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名",
+          "pinyin": "míng",
+          "gloss": "name",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "字",
+          "pinyin": "zì",
+          "gloss": "character",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "诗",
+          "pinyin": "shī",
+          "gloss": "poem",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "完",
+          "pinyin": "wán",
+          "gloss": "finish",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 8000
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "hanzi": "大明仔细看了看，说：“是啊，好像有什么故事。我们应该找到它的主人。”",
+      "traditional": null,
+      "translation": "Daming looked carefully and said, \"Yes, it seems there is some story. We should find its owner.\"",
+      "pinyin": "Dàmíng zǐxì kànlekàn, shuō: “shì a, hǎoxiàng yǒu shénme gùshì. Wǒmen yīnggāi zhǎodào tā de zhǔrén.”",
+      "tokens": [
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "仔细",
+          "pinyin": "zǐxì",
+          "gloss": "carefully",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "看了看",
+          "pinyin": "kànlekàn",
+          "gloss": "took a look",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "啊",
+          "pinyin": "a",
+          "gloss": "ah",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "好像",
+          "pinyin": "hǎoxiàng",
+          "gloss": "seem",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shénme",
+          "gloss": "what",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "故事",
+          "pinyin": "gùshì",
+          "gloss": "story",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "应该",
+          "pinyin": "yīnggāi",
+          "gloss": "should",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎodào",
+          "gloss": "find",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "主人",
+          "pinyin": "zhǔrén",
+          "gloss": "owner",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 7120
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "他们问了很多邻居，但大家都不知道是谁做的。最后，一位老奶奶告诉他们，这个灯笼可能是张爷爷家的。",
+      "traditional": null,
+      "translation": "They asked many neighbors, but everyone didn't know who did it. Finally, an old lady told them that this lantern might be from Grandpa Zhang's.",
+      "pinyin": "tā men wèn le hěn duō lín jū, dàn dà jiā dōu bù zhī dào shì shuí zuò de. zuì hòu, yī wèi lǎo nǎi nai gào sù tā men, zhè ge dēng lóng kě néng shì zhāng yé ye jiā de.",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tā men",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "问",
+          "pinyin": "wèn",
+          "gloss": "ask",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PFV",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěn duō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "邻居",
+          "pinyin": "lín jū",
+          "gloss": "neighbor",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "大家",
+          "pinyin": "dà jiā",
+          "gloss": "everyone",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "知道",
+          "pinyin": "zhī dào",
+          "gloss": "know",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "谁",
+          "pinyin": "shuí",
+          "gloss": "who",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "做",
+          "pinyin": "zuò",
+          "gloss": "do",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "NMLZ",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "最后",
+          "pinyin": "zuì hòu",
+          "gloss": "finally",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "位",
+          "pinyin": "wèi",
+          "gloss": "CL",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "老奶奶",
+          "pinyin": "lǎo nǎi nai",
+          "gloss": "old lady",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "告诉",
+          "pinyin": "gào sù",
+          "gloss": "tell",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tā men",
+          "gloss": "they",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhè ge",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng lóng",
+          "gloss": "lantern",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "可能",
+          "pinyin": "kě néng",
+          "gloss": "maybe",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "张爷爷",
+          "pinyin": "Zhāng yé ye",
+          "gloss": "Grandpa Zhang",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "POSS",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 9360
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "张爷爷住在社区的一角，平时很少出门。小雨和大明敲开了他家的门。开门的是一个慈祥的老爷爷。",
+      "traditional": null,
+      "translation": "Grandpa Zhang lived in a quiet corner of the community and rarely went out. Xiao Yu and Da Ming knocked on his door, and a kind old man answered it.",
+      "pinyin": "Zhāng yéye zhù zài shèqū de yī jiǎo, píngshí hěnshǎo chūmén. Xiǎo Yǔ hé Dà Míng qiāokāi le tā jiā de mén. Kāi mén de shì yīgè cíxiáng de lǎoyéye.",
+      "tokens": [
+        {
+          "text": "张",
+          "pinyin": "Zhāng",
+          "gloss": "Zhang (surname)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "爷爷",
+          "pinyin": "yéye",
+          "gloss": "grandfather",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "住",
+          "pinyin": "zhù",
+          "gloss": "live",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "社区",
+          "pinyin": "shèqū",
+          "gloss": "community",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(genitive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "角",
+          "pinyin": "jiǎo",
+          "gloss": "corner",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "平时",
+          "pinyin": "píngshí",
+          "gloss": "usually",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "很少",
+          "pinyin": "hěnshǎo",
+          "gloss": "rarely",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "出门",
+          "pinyin": "chūmén",
+          "gloss": "go out",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiao Yu (name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dà Míng",
+          "gloss": "Da Ming (name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "敲开",
+          "pinyin": "qiāokāi",
+          "gloss": "knock open",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(past)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he/him",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(genitive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "门",
+          "pinyin": "mén",
+          "gloss": "door",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "开",
+          "pinyin": "kāi",
+          "gloss": "open",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "门",
+          "pinyin": "mén",
+          "gloss": "door",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(nominalizer)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "慈祥",
+          "pinyin": "cíxiáng",
+          "gloss": "kind",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(adjective suffix)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "老爷爷",
+          "pinyin": "lǎoyéye",
+          "gloss": "old grandfather",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 8800
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "hanzi": "大明问：“张爷爷，广场上的那个红色灯笼是您做的吗？为什么没有名字呀？”",
+      "traditional": null,
+      "translation": "Daming asked: 'Grandpa Zhang, is that red lantern in the square made by you? Why doesn't it have a name?'",
+      "pinyin": "Dàmíng wèn: “Zhāng yéye, guǎngchǎng shàng de nà gè hóngsè dēnglóng shì nín zuò de ma? Wèishénme méiyǒu míngzì ya？”",
+      "tokens": [
+        {
+          "text": "大",
+          "pinyin": "dà",
+          "gloss": "big (in name)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "明",
+          "pinyin": "míng",
+          "gloss": "bright (in name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "问",
+          "pinyin": "wèn",
+          "gloss": "ask",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "gloss": "Zhang (surname)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "爷",
+          "pinyin": "yé",
+          "gloss": "grandfather",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "爷",
+          "pinyin": "yé",
+          "gloss": "grandfather",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "广",
+          "pinyin": "guǎng",
+          "gloss": "wide (square)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "场",
+          "pinyin": "chǎng",
+          "gloss": "field (square)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "measure word",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "红",
+          "pinyin": "hóng",
+          "gloss": "red",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "色",
+          "pinyin": "sè",
+          "gloss": "color",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "灯",
+          "pinyin": "dēng",
+          "gloss": "lamp",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "笼",
+          "pinyin": "lóng",
+          "gloss": "cage (lantern)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "做",
+          "pinyin": "zuò",
+          "gloss": "make",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "particle (nominalizer)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "为",
+          "pinyin": "wèi",
+          "gloss": "for (in 为什么)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "什",
+          "pinyin": "shén",
+          "gloss": "what (in 什么)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "么",
+          "pinyin": "me",
+          "gloss": "particle (in 什么)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "not (have)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名",
+          "pinyin": "míng",
+          "gloss": "name",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "字",
+          "pinyin": "zì",
+          "gloss": "character (name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "呀",
+          "pinyin": "ya",
+          "gloss": "exclamation particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 5920
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "dialogue",
+      "speakerId": "zhangyeye",
+      "hanzi": "张爷爷请他们进屋，慢慢地说：“那个灯笼是我做的，但它还没有完成。”",
+      "traditional": null,
+      "translation": "Grandpa Zhang invited them into the house and said slowly, “That lantern was made by me, but it hasn't been completed yet.”",
+      "pinyin": "Zhāng yéye qǐng tāmen jìn wū, màn màn de shuō: “Nà gè dēng lóng shì wǒ zuò de, dàn tā hái méi yǒu wán chéng.”",
+      "tokens": [
+        {
+          "text": "张爷爷",
+          "pinyin": "Zhāng yéye",
+          "gloss": "Grandpa Zhang",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "请",
+          "pinyin": "qǐng",
+          "gloss": "invite",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "them",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "进",
+          "pinyin": "jìn",
+          "gloss": "enter",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "屋",
+          "pinyin": "wū",
+          "gloss": "house",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "慢慢",
+          "pinyin": "màn màn",
+          "gloss": "slowly",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "(adverb particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "那个",
+          "pinyin": "nà gè",
+          "gloss": "that",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng lóng",
+          "gloss": "lantern",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "做",
+          "pinyin": "zuò",
+          "gloss": "make",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "还",
+          "pinyin": "hái",
+          "gloss": "still",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "没有",
+          "pinyin": "méi yǒu",
+          "gloss": "have not",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "完成",
+          "pinyin": "wán chéng",
+          "gloss": "complete",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 9760
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "hanzi": "小雨好奇地问：“为什么没完成呢？”",
+      "traditional": null,
+      "translation": "Xiao Yu asked curiously: 'Why isn't it done?'",
+      "pinyin": "Xiǎo Yǔ hàoqí de wèn: “Wèishénme méi wánchéng ne?”",
+      "tokens": [
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small (in name)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "雨",
+          "pinyin": "Yǔ",
+          "gloss": "rain (in name)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hào",
+          "gloss": "fond of (in 好奇)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "奇",
+          "pinyin": "qí",
+          "gloss": "strange",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "adverbial particle",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "问",
+          "pinyin": "wèn",
+          "gloss": "ask",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "为",
+          "pinyin": "wèi",
+          "gloss": "for (in 为什么)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "什",
+          "pinyin": "shén",
+          "gloss": "what (in 什么)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "么",
+          "pinyin": "me",
+          "gloss": "suffix (in 什么)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "not (have)",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "完",
+          "pinyin": "wán",
+          "gloss": "finish",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "成",
+          "pinyin": "chéng",
+          "gloss": "complete",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "呢",
+          "pinyin": "ne",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 2880
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "dialogue",
+      "speakerId": "zhangyeye",
+      "hanzi": "张爷爷叹了一口气，说：“那首诗是我想写给已故的老伴的。我们在一起五十年，她特别喜欢灯笼。去年她走了，我想做个灯笼纪念她。可是，我只记得‘月光照在’这四个字，后面的诗句怎么也想不起来了。”",
+      "traditional": null,
+      "translation": "Grandpa Zhang sighed and said, 'That poem was meant for my deceased wife. We were together for fifty years, and she especially loved lanterns. Last year she passed away, and I wanted to make a lantern to commemorate her. But I only remember the four words \"moonlight shines on,\" and I can't recall the rest of the verse.'",
+      "pinyin": "Zhāng yéye tàn le yī kǒu qì, shuō: “Nà shǒu shī shì wǒ xiǎng xiě gěi yǐ gù de lǎo bàn de. Wǒmen zài yīqǐ wǔ shí nián, tā tèbié xǐhuān dēnglong. Qùnián tā zǒu le, wǒ xiǎng zuò gè dēnglong jìniàn tā. Kěshì, wǒ zhǐ jìde ‘yuè guāng zhào zài’ zhè sì gè zì, hòumiàn de shījù zěnme yě xiǎng bù qǐlái le.”",
+      "tokens": [
+        {
+          "text": "张爷爷",
+          "pinyin": "zhāng yéye",
+          "gloss": "Grandpa Zhang",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "叹",
+          "pinyin": "tàn",
+          "gloss": "sigh",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "口",
+          "pinyin": "kǒu",
+          "gloss": "mouth (measure)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "气",
+          "pinyin": "qì",
+          "gloss": "breath",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "首",
+          "pinyin": "shǒu",
+          "gloss": "measure for poem",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "诗",
+          "pinyin": "shī",
+          "gloss": "poem",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want to",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "给",
+          "pinyin": "gěi",
+          "gloss": "to (for)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "已故",
+          "pinyin": "yǐgù",
+          "gloss": "deceased",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "POSS",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "老伴",
+          "pinyin": "lǎobàn",
+          "gloss": "spouse",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "NOM",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in/at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yīqǐ",
+          "gloss": "together",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "五",
+          "pinyin": "wǔ",
+          "gloss": "five",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "十",
+          "pinyin": "shí",
+          "gloss": "ten",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "年",
+          "pinyin": "nián",
+          "gloss": "year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "特别",
+          "pinyin": "tèbié",
+          "gloss": "especially",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "喜欢",
+          "pinyin": "xǐhuān",
+          "gloss": "like",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglong",
+          "gloss": "lantern",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "去年",
+          "pinyin": "qùnián",
+          "gloss": "last year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "pass away",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "做",
+          "pinyin": "zuò",
+          "gloss": "make",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "measure (general)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglong",
+          "gloss": "lantern",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "纪念",
+          "pinyin": "jìniàn",
+          "gloss": "commemorate",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "her",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "可是",
+          "pinyin": "kěshì",
+          "gloss": "but",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "只",
+          "pinyin": "zhǐ",
+          "gloss": "only",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "记得",
+          "pinyin": "jìde",
+          "gloss": "remember",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "‘",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "月光照在",
+          "pinyin": "yuè guāng zhào zài",
+          "gloss": "moonlight shines on",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "’",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "四",
+          "pinyin": "sì",
+          "gloss": "four",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "个",
+          "pinyin": "gè",
+          "gloss": "measure",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "字",
+          "pinyin": "zì",
+          "gloss": "character",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "后面",
+          "pinyin": "hòumiàn",
+          "gloss": "behind/later",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "POSS",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "诗句",
+          "pinyin": "shījù",
+          "gloss": "verse line",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "怎么",
+          "pinyin": "zěnme",
+          "gloss": "how",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also (even)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "think",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "起来",
+          "pinyin": "qǐlái",
+          "gloss": "up (complement)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "CRS",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 53920
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "小雨和大明对视了一眼。小雨说：“爷爷，您别急，我们帮您一起想。”",
+      "traditional": null,
+      "translation": "Xiao Yu and Da Ming exchanged a glance. Xiao Yu said, 'Grandpa, don't worry, we'll help you think together.'",
+      "pinyin": "Xiǎo Yǔ hé Dà Míng duì shì le yì yǎn. Xiǎo Yǔ shuō: “Yé ye, nín bié jí, wǒ men bāng nín yì qǐ xiǎng.”",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "xiǎo yǔ",
+          "gloss": "Xiao Yu (name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "dà míng",
+          "gloss": "Da Ming (name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "对视",
+          "pinyin": "duì shì",
+          "gloss": "exchange glances",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yì",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "眼",
+          "pinyin": "yǎn",
+          "gloss": "eye (measure: glance)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "xiǎo yǔ",
+          "gloss": "Xiao Yu",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "爷爷",
+          "pinyin": "yé ye",
+          "gloss": "grandpa",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "别",
+          "pinyin": "bié",
+          "gloss": "don't",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "急",
+          "pinyin": "jí",
+          "gloss": "worried",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒ men",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "帮",
+          "pinyin": "bāng",
+          "gloss": "help",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yì qǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "think",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 7120
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "zhangyeye",
+      "hanzi": "张爷爷笑了笑：“你们这些小娃娃会写诗吗？”",
+      "traditional": null,
+      "translation": "Grandpa Zhang smiled and said: 'Can you little kids write poetry?'",
+      "pinyin": "Zhāng yéye xiào le xiào: “Nǐmen zhèxiē xiǎo wáwa huì xiě shī ma?”",
+      "tokens": [
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "gloss": "Zhang (surname)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "爷爷",
+          "pinyin": "yéye",
+          "gloss": "grandpa",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "笑",
+          "pinyin": "xiào",
+          "gloss": "smile",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "past particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "笑",
+          "pinyin": "xiào",
+          "gloss": "smile",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你们",
+          "pinyin": "nǐmen",
+          "gloss": "you (plural)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "娃娃",
+          "pinyin": "wáwa",
+          "gloss": "kid",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "会",
+          "pinyin": "huì",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "诗",
+          "pinyin": "shī",
+          "gloss": "poem",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 4960
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "hanzi": "大明说：“我们试试看。月光照在……哪里呢？”",
+      "traditional": null,
+      "translation": "Da Ming said: “Let’s try. Where does the moonlight shine on...?”",
+      "pinyin": "Dà Míng shuō: “Wǒmen shì shì kàn. Yuèguāng zhào zài…… nǎ lǐ ne?”",
+      "tokens": [
+        {
+          "text": "大",
+          "pinyin": "dà",
+          "gloss": "big; Da (surname)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "明",
+          "pinyin": "míng",
+          "gloss": "bright; Ming (given name)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I; me",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "们",
+          "pinyin": "men",
+          "gloss": "plural suffix",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "试",
+          "pinyin": "shì",
+          "gloss": "try",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "试",
+          "pinyin": "shì",
+          "gloss": "try",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "see; look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "月",
+          "pinyin": "yuè",
+          "gloss": "moon",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "光",
+          "pinyin": "guāng",
+          "gloss": "light",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "shine",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at; on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "…",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "…",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "哪",
+          "pinyin": "nǎ",
+          "gloss": "where",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "呢",
+          "pinyin": "ne",
+          "gloss": "particle for emphasis",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 3760
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "hanzi": "小雨沉思了一会儿，说：“月光照在地上，像她的笑容一样温暖。”",
+      "traditional": null,
+      "translation": "Xiao Yu pondered for a while and said, “The moonlight shines on the ground, as warm as her smile.”",
+      "pinyin": "xiǎoyǔ chénsī le yīhuìr, shuō: “yuèguāng zhào zài dìshàng, xiàng tā de xiàoróng yīyàng wēnnuǎn.”",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "xiǎoyǔ",
+          "gloss": "Xiao Yu",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "沉思",
+          "pinyin": "chénsī",
+          "gloss": "pondered",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "aspect particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一会儿",
+          "pinyin": "yīhuìr",
+          "gloss": "a while",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "月光",
+          "pinyin": "yuèguāng",
+          "gloss": "moonlight",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "shines",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地上",
+          "pinyin": "dìshàng",
+          "gloss": "the ground",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "像",
+          "pinyin": "xiàng",
+          "gloss": "like",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "her",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "笑容",
+          "pinyin": "xiàoróng",
+          "gloss": "smile",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "一样",
+          "pinyin": "yīyàng",
+          "gloss": "as",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "温暖",
+          "pinyin": "wēnnuǎn",
+          "gloss": "warm",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 6960
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "这个句子让张爷爷非常激动，因为他知道这正是他要找的诗句。",
+      "traditional": null,
+      "translation": "This sentence made Grandpa Zhang very excited, because he knew that this was exactly the verse he was looking for.",
+      "pinyin": "zhè ge jù zi ràng zhāng yé ye fēi cháng jī dòng yīn wèi tā zhī dào zhè zhèng shì tā yào zhǎo de shī jù",
+      "tokens": [
+        {
+          "text": "这个",
+          "pinyin": "zhè ge",
+          "gloss": "this",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "句子",
+          "pinyin": "jù zi",
+          "gloss": "sentence",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "让",
+          "pinyin": "ràng",
+          "gloss": "makes, lets",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "张爷爷",
+          "pinyin": "zhāng yé ye",
+          "gloss": "Grandpa Zhang",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "非常",
+          "pinyin": "fēi cháng",
+          "gloss": "very",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "激动",
+          "pinyin": "jī dòng",
+          "gloss": "excited",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "因为",
+          "pinyin": "yīn wèi",
+          "gloss": "because",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "知道",
+          "pinyin": "zhī dào",
+          "gloss": "knows",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "正是",
+          "pinyin": "zhèng shì",
+          "gloss": "exactly is",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "要",
+          "pinyin": "yào",
+          "gloss": "wants to",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "look for",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possession/attributive marker)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "诗句",
+          "pinyin": "shī jù",
+          "gloss": "verse line",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 6400
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "张爷爷听了，眼睛一下子亮了：“对！就是这样的！‘月光照在地上，像她的笑容一样。’ 我想起来了！后面应该是‘她在天上看着我，我在人间想着她。’”",
+      "traditional": null,
+      "translation": "After Grandpa Zhang heard this, his eyes suddenly lit up: 'Right! That's it! \"Moonlight shines on the ground, like her smile.\" I remember! The next part should be: \"She is watching me from the sky, and I am thinking of her on earth.\"'",
+      "pinyin": "Zhāng yéye tīng le, yǎnjīng yīxiàzi liàng le: “Duì! Jiù shì zhèyàng de! ‘Yuèguāng zhào zài dìshang, xiàng tā de xiàoróng yīyàng.’ Wǒ xiǎng qǐlai le! Hòumiàn yīnggāi shì ‘Tā zài tiānshang kànzhe wǒ, wǒ zài rénjiān xiǎngzhe tā.’”",
+      "tokens": [
+        {
+          "text": "张",
+          "pinyin": "Zhāng",
+          "gloss": "surname",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "爷爷",
+          "pinyin": "yéye",
+          "gloss": "grandpa",
+          "difficulty": 1,
+          "focus": true
+        },
+        {
+          "text": "听",
+          "pinyin": "tīng",
+          "gloss": "listen",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "眼睛",
+          "pinyin": "yǎnjīng",
+          "gloss": "eyes",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "一下子",
+          "pinyin": "yīxiàzi",
+          "gloss": "suddenly",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "亮",
+          "pinyin": "liàng",
+          "gloss": "bright; shine",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "对",
+          "pinyin": "duì",
+          "gloss": "right",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "就",
+          "pinyin": "jiù",
+          "gloss": "just; exactly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这样",
+          "pinyin": "zhèyàng",
+          "gloss": "like this",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "‘",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "月光",
+          "pinyin": "yuèguāng",
+          "gloss": "moonlight",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "照",
+          "pinyin": "zhào",
+          "gloss": "shine",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "on; at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地上",
+          "pinyin": "dìshang",
+          "gloss": "on the ground",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "像",
+          "pinyin": "xiàng",
+          "gloss": "like",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "笑容",
+          "pinyin": "xiàoróng",
+          "gloss": "smile",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "一样",
+          "pinyin": "yīyàng",
+          "gloss": "same",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "’",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": " ",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "think",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "起来",
+          "pinyin": "qǐlai",
+          "gloss": "up (complement)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "后面",
+          "pinyin": "hòumiàn",
+          "gloss": "later part",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "应该",
+          "pinyin": "yīnggāi",
+          "gloss": "should",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "‘",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "on; at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "天上",
+          "pinyin": "tiānshang",
+          "gloss": "in the sky",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "看着",
+          "pinyin": "kànzhe",
+          "gloss": "watching",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "on; at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人间",
+          "pinyin": "rénjiān",
+          "gloss": "mortal world",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "想着",
+          "pinyin": "xiǎngzhe",
+          "gloss": "thinking of",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "’",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 19360
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "他激动地拿起笔，在灯笼上写下了完整的诗句。写完后，他又在灯笼的下方工工整整地写上了自己的名字——张明远。",
+      "traditional": null,
+      "translation": "He excitedly picked up the pen and wrote the complete verse on the lantern. After writing, he neatly wrote his own name—Zhang Mingyuan—underneath the lantern.",
+      "pinyin": "tā jīdòng de náqǐ bǐ, zài dēnglóng shàng xiěxià le wánzhěng de shījù. xiěwán hòu, tā yòu zài dēnglóng de xiàfāng gōnggōngzhěngzhěng de xiěshàng le zìjǐ de míngzì——Zhāng Míngyuǎn.",
+      "tokens": [
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "激动",
+          "pinyin": "jīdòng",
+          "gloss": "excited",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "adverbial suffix",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "拿起",
+          "pinyin": "náqǐ",
+          "gloss": "pick up",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "笔",
+          "pinyin": "bǐ",
+          "gloss": "pen",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写下",
+          "pinyin": "xiěxià",
+          "gloss": "write down",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "past aspect",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "完整",
+          "pinyin": "wánzhěng",
+          "gloss": "complete",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "attributive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "诗句",
+          "pinyin": "shījù",
+          "gloss": "verse",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "完",
+          "pinyin": "wán",
+          "gloss": "finish",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "又",
+          "pinyin": "yòu",
+          "gloss": "again",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "attributive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "下方",
+          "pinyin": "xiàfāng",
+          "gloss": "below",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "工工整整",
+          "pinyin": "gōnggōngzhěngzhěng",
+          "gloss": "neatly",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "adverbial suffix",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "写上",
+          "pinyin": "xiěshàng",
+          "gloss": "write on",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "past aspect",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "自己",
+          "pinyin": "zìjǐ",
+          "gloss": "self",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "attributive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名字",
+          "pinyin": "míngzì",
+          "gloss": "name",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "——",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "张明远",
+          "pinyin": "Zhāng Míngyuǎn",
+          "gloss": "Zhang Mingyuan (name)",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 11520
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "hanzi": "小雨和大明看到了完整的灯笼，都很高兴。小雨说：“爷爷，现在它完整了，而且非常美。”",
+      "traditional": null,
+      "translation": "Xiaoyu and Daming saw the complete lantern, and both were very happy. Xiaoyu said: \"Grandpa, now it is complete, and it's very beautiful.\"",
+      "pinyin": "Xiǎo Yǔ hé Dà Míng kàn dào le wán zhěng de dēng lóng，dōu hěn gāo xìng。Xiǎo Yǔ shuō：“Yé ye，xiàn zài tā wán zhěng le，ér qiě fēi cháng měi。”",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dà Míng",
+          "gloss": "Daming",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "看到",
+          "pinyin": "kàn dào",
+          "gloss": "saw",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "完整",
+          "pinyin": "wán zhěng",
+          "gloss": "complete",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng lóng",
+          "gloss": "lantern",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "高兴",
+          "pinyin": "gāo xìng",
+          "gloss": "happy",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "爷爷",
+          "pinyin": "yé ye",
+          "gloss": "grandpa",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "现在",
+          "pinyin": "xiàn zài",
+          "gloss": "now",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "完整",
+          "pinyin": "wán zhěng",
+          "gloss": "complete",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "而且",
+          "pinyin": "ér qiě",
+          "gloss": "and moreover",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "非常",
+          "pinyin": "fēi cháng",
+          "gloss": "extremely",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "美",
+          "pinyin": "měi",
+          "gloss": "beautiful",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 8480
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "dialogue",
+      "speakerId": "zhangyeye",
+      "hanzi": "张爷爷说：“谢谢你们，让我完成了心愿。”",
+      "traditional": null,
+      "translation": "Grandpa Zhang said: “Thank you for letting me fulfill my wish.”",
+      "pinyin": "Zhāng yéye shuō: “Xièxiè nǐmen, ràng wǒ wánchéng le xīnyuàn.”",
+      "tokens": [
+        {
+          "text": "张",
+          "pinyin": "Zhāng",
+          "gloss": "Zhang (surname)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "爷",
+          "pinyin": "yé",
+          "gloss": "grandpa (first syllable)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "爷",
+          "pinyin": "ye",
+          "gloss": "part of yéye (grandpa)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "谢",
+          "pinyin": "xiè",
+          "gloss": "thank (first syllable)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "谢",
+          "pinyin": "xiè",
+          "gloss": "thank (second syllable)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "们",
+          "pinyin": "men",
+          "gloss": "plural suffix",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "让",
+          "pinyin": "ràng",
+          "gloss": "let, allow",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I, me",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "完",
+          "pinyin": "wán",
+          "gloss": "finish",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "成",
+          "pinyin": "chéng",
+          "gloss": "accomplish",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "completed action marker",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "心",
+          "pinyin": "xīn",
+          "gloss": "heart",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "愿",
+          "pinyin": "yuàn",
+          "gloss": "wish",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 4320
+      }
+    },
+    {
+      "id": "b020",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "那天晚上，红色的灯笼被挂在了广场中央，大家看到了这首诗，都觉得很感动。张爷爷站在灯笼下，眼里闪着泪光。大家都被这个故事打动了，纷纷鼓掌。",
+      "traditional": null,
+      "translation": "That evening, the red lantern was hung in the center of the square. Everyone saw this poem and felt very moved. Grandpa Zhang stood under the lantern with tears glistening in his eyes. Everyone was moved by this story and applauded.",
+      "pinyin": "nà tiān wǎn shang, hóng sè de dēng lóng bèi guà zài le guǎng chǎng zhōng yāng, dà jiā kàn dào le zhè shǒu shī, dōu jué de hěn gǎn dòng. zhāng yé ye zhàn zài dēng lóng xià, yǎn lǐ shǎn zhe lèi guāng. dà jiā dōu bèi zhè ge gù shì dǎ dòng le, fēn fēn gǔ zhǎng.",
+      "tokens": [
+        {
+          "text": "那天",
+          "pinyin": "nà tiān",
+          "gloss": "that day",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "晚上",
+          "pinyin": "wǎn shang",
+          "gloss": "evening",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "红色",
+          "pinyin": "hóng sè",
+          "gloss": "red",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attribute",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng lóng",
+          "gloss": "lantern",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "被",
+          "pinyin": "bèi",
+          "gloss": "by (passive)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "挂",
+          "pinyin": "guà",
+          "gloss": "hang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "广场",
+          "pinyin": "guǎng chǎng",
+          "gloss": "square",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "中央",
+          "pinyin": "zhōng yāng",
+          "gloss": "center",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "大家",
+          "pinyin": "dà jiā",
+          "gloss": "everyone",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看到",
+          "pinyin": "kàn dào",
+          "gloss": "see",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "首",
+          "pinyin": "shǒu",
+          "gloss": "measure for poems",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "诗",
+          "pinyin": "shī",
+          "gloss": "poem",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "觉得",
+          "pinyin": "jué de",
+          "gloss": "feel",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "感动",
+          "pinyin": "gǎn dòng",
+          "gloss": "moved",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "张爷爷",
+          "pinyin": "Zhāng yé ye",
+          "gloss": "Grandpa Zhang",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "站",
+          "pinyin": "zhàn",
+          "gloss": "stand",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng lóng",
+          "gloss": "lantern",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "下",
+          "pinyin": "xià",
+          "gloss": "under",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "眼里",
+          "pinyin": "yǎn lǐ",
+          "gloss": "in eyes",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "闪着",
+          "pinyin": "shǎn zhe",
+          "gloss": "glistening",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "泪光",
+          "pinyin": "lèi guāng",
+          "gloss": "tears (glistening)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "大家",
+          "pinyin": "dà jiā",
+          "gloss": "everyone",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "被",
+          "pinyin": "bèi",
+          "gloss": "by (passive)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhè gè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "故事",
+          "pinyin": "gù shì",
+          "gloss": "story",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "打动",
+          "pinyin": "dǎ dòng",
+          "gloss": "move (emotionally)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "纷纷",
+          "pinyin": "fēn fēn",
+          "gloss": "one after another",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "鼓掌",
+          "pinyin": "gǔ zhǎng",
+          "gloss": "applaud",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b020.mp3",
+        "durationMs": 16000
+      }
+    },
+    {
+      "id": "b021",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "hanzi": "从此以后，每年元宵节，张爷爷都会做同样的灯笼，上面写着那首诗和他的名字。他说，这样，他就永远不会忘记老伴。这个灯笼成了社区的象征，每年都会出现在灯笼展上。",
+      "traditional": null,
+      "translation": "From then on, every year on the Lantern Festival, Grandpa Zhang would make the same lantern, with that poem and his name written on it. He said that in this way, he would never forget his wife. This lantern became a symbol of the community and appears every year at the lantern exhibition.",
+      "pinyin": "cóng cǐ yǐ hòu, měi nián yuán xiāo jié, zhāng yé ye dōu huì zuò tóng yàng de dēng lóng, shàng miàn xiě zhe nà shǒu shī hé tā de míng zì. tā shuō, zhè yàng, tā jiù yǒng yuǎn bù huì wàng jì lǎo bàn. zhè ge dēng lóng chéng le shè qū de xiàng zhēng, měi nián dōu huì chū xiàn zài dēng lóng zhǎn shàng.",
+      "tokens": [
+        {
+          "text": "从此",
+          "pinyin": "cóng cǐ",
+          "gloss": "from then on",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "以后",
+          "pinyin": "yǐ hòu",
+          "gloss": "after",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "每年",
+          "pinyin": "měi nián",
+          "gloss": "every year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "元宵节",
+          "pinyin": "yuán xiāo jié",
+          "gloss": "Lantern Festival",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "张爷爷",
+          "pinyin": "Zhāng yéye",
+          "gloss": "Grandpa Zhang",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "会",
+          "pinyin": "huì",
+          "gloss": "will",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "做",
+          "pinyin": "zuò",
+          "gloss": "make",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "同样",
+          "pinyin": "tóng yàng",
+          "gloss": "same",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng long",
+          "gloss": "lantern",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "上面",
+          "pinyin": "shàng miàn",
+          "gloss": "above",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "写着",
+          "pinyin": "xiě zhe",
+          "gloss": "written",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "首",
+          "pinyin": "shǒu",
+          "gloss": "measure word for poem",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "诗",
+          "pinyin": "shī",
+          "gloss": "poem",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名字",
+          "pinyin": "míng zì",
+          "gloss": "name",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "said",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这样",
+          "pinyin": "zhè yàng",
+          "gloss": "this way",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "就",
+          "pinyin": "jiù",
+          "gloss": "then",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "永远",
+          "pinyin": "yǒng yuǎn",
+          "gloss": "forever",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "会",
+          "pinyin": "huì",
+          "gloss": "will",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "忘记",
+          "pinyin": "wàng jì",
+          "gloss": "forget",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "老伴",
+          "pinyin": "lǎo bàn",
+          "gloss": "elderly spouse",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhè ge",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng long",
+          "gloss": "lantern",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "成了",
+          "pinyin": "chéng le",
+          "gloss": "became",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "社区",
+          "pinyin": "shè qū",
+          "gloss": "community",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "象征",
+          "pinyin": "xiàng zhēng",
+          "gloss": "symbol",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "每年",
+          "pinyin": "měi nián",
+          "gloss": "every year",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "会",
+          "pinyin": "huì",
+          "gloss": "will",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "出现",
+          "pinyin": "chū xiàn",
+          "gloss": "appear",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼展",
+          "pinyin": "dēng long zhǎn",
+          "gloss": "lantern exhibition",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b021.mp3",
+        "durationMs": 17200
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+name: Build and deploy Hub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install pinned Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.38.9
+          channel: stable
+          cache: true
+
+      - name: Resolve Flutter dependencies
+        working-directory: mandarin
+        run: flutter pub get --enforce-lockfile
+
+      - name: Analyze Flutter project
+        working-directory: mandarin
+        run: flutter analyze
+
+      - name: Test Flutter project
+        working-directory: mandarin
+        run: flutter test
+
+      - name: Validate published Mandarin content
+        run: python mandarin/workshop/validate_published.py
+
+      - name: Build Mandarin reader
+        working-directory: mandarin
+        run: flutter build web --release --base-href /Hub/mandarin/
+
+      - name: Assemble safe static artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          cp index.html script.js styles.css _site/
+          for project in brain-health laser-engraving md2pdf paypers smolov; do
+            cp -R "$project" "_site/$project"
+          done
+          cp -R mandarin/build/web _site/mandarin
+          touch _site/.nojekyll
+
+      - name: Assert private files are absent
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e _site/.env
+          test ! -e _site/pass.txt
+          test ! -e _site/mandarin/workshop
+          test ! -e _site/mandarin/models
+          test ! -e _site/mandarin/.workshop
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Mandarin Story Workshop</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="seal">作</div>
+    <div><strong>Mandarin Story Workshop</strong><span>LOCAL AUTHORING · DEEPSEEK + QWEN3-TTS</span></div>
+    <div id="status" class="status">Checking local tools…</div>
+  </header>
+
+  <main>
+    <aside>
+      <section class="panel">
+        <span class="eyebrow">NEW DRAFT</span>
+        <h1>Begin with a reading idea.</h1>
+        <label>Level<select id="new-level"></select></label>
+        <label>Topic<input id="new-topic" value="Everyday life and light fiction"></label>
+        <label>English title hint<input id="new-title" placeholder="The Red Umbrella"></label>
+        <label>Genre<select id="new-genre"><option>Everyday life with light fiction</option><option>Practical conversation</option><option>Gentle mystery</option><option>Culturally grounded fiction</option></select></label>
+        <label>Notes<textarea id="new-notes" rows="3" placeholder="Characters, target words, setting…"></textarea></label>
+        <button id="generate" class="primary">Generate with DeepSeek</button>
+        <p id="generate-note" class="note"></p>
+      </section>
+
+      <section class="panel">
+        <div class="section-head"><span class="eyebrow">DRAFTS</span><button id="refresh" class="text">Refresh</button></div>
+        <div id="drafts" class="draft-list"></div>
+      </section>
+
+      <section class="panel">
+        <span class="eyebrow">12-STORY LAUNCH SET</span>
+        <p class="note">Choose a planned title to load its reviewed generation brief into the form.</p>
+        <div id="starters" class="draft-list"></div>
+      </section>
+
+      <section class="panel compact">
+        <span class="eyebrow">VOICE CHECK</span>
+        <label>Text<textarea id="preview-text" rows="2">今天的故事，从一把红色的雨伞开始。</textarea></label>
+        <div class="row"><select id="preview-speaker"></select><button id="preview">Preview</button></div>
+        <audio id="preview-audio" controls></audio>
+      </section>
+
+      <section class="panel compact">
+        <span class="eyebrow">BASE VOICE CLONE</span>
+        <p class="note">Local only. Supply a short reference recording and its exact Mandarin transcript.</p>
+        <label>Reference audio<input id="clone-file" type="file" accept="audio/*"></label>
+        <label>Exact reference transcript<textarea id="clone-reference-text" rows="2"></textarea></label>
+        <label>Text to speak<textarea id="clone-target" rows="2"></textarea></label>
+        <button id="clone">Render clone preview</button>
+        <audio id="clone-audio" controls></audio>
+      </section>
+    </aside>
+
+    <section id="workspace" class="workspace empty">
+      <div id="empty-state"><div class="empty-glyph">稿</div><h2>Select a draft</h2><p>Generate a story or reopen a saved local draft. Nothing is published until its annotations and audio pass validation.</p></div>
+      <div id="editor" hidden>
+        <div class="editor-head">
+          <div><span id="editor-level" class="eyebrow"></span><h2 id="editor-title"></h2><p id="editor-id"></p></div>
+          <div class="actions"><button id="save">Save edits</button><button id="validate">Validate</button><button id="render-audio">Render all audio</button><button id="publish" class="primary">Publish to Flutter</button></div>
+        </div>
+        <div id="feedback" class="feedback"></div>
+        <div class="metadata">
+          <label>Chinese title<input id="story-title"></label>
+          <label>Pinyin title<input id="story-pinyin-title"></label>
+          <label>English title<input id="story-english-title"></label>
+          <label>Topic<input id="story-topic"></label>
+          <label class="wide">Summary<textarea id="story-summary" rows="2"></textarea></label>
+        </div>
+        <div id="blocks"></div>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

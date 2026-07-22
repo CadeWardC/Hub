@@ -14,12 +14,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'dual-n-back',
-    name: 'Dual N-Back',
+    name: 'Double Signal',
     domain: 'memory',
     icon: '◳',
     minLevel: 1, maxLevel: 9,
     scoreTarget: 320,
-    blurb: 'Track a moving square and a stream of spoken letters at once. Flag when either repeats N steps back.',
+    blurb: 'Track a moving tile and spoken letters together. Catch either signal when it repeats N steps back.',
     science: {
       what: 'The most heavily studied working-memory training task. You hold two independent streams (spatial + verbal) in mind and compare each to what occurred N steps earlier.',
       why: 'Continuously updating and monitoring two streams loads the central executive — the capacity most associated with fluid reasoning. Difficulty scales by increasing N.',
@@ -124,12 +124,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'n-back',
-    name: 'Position N-Back',
+    name: 'Grid Echo',
     domain: 'memory',
     icon: '⊞',
     minLevel: 1, maxLevel: 8,
     scoreTarget: 220,
-    blurb: 'A square jumps around a grid. Hit Match when its position repeats from N steps ago.',
+    blurb: 'A tile jumps around the grid. Catch the moment its position echoes from N steps ago.',
     science: {
       what: 'A single-stream n-back. You continuously update a memory of recent locations and compare the current one to N positions back.',
       why: 'Isolates the updating component of working memory without the dual load — a clean training target and a common neuroimaging probe of the fronto-parietal network.',
@@ -190,12 +190,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'digit-span',
-    name: 'Digit Span',
+    name: 'Number Thread',
     domain: 'memory',
     icon: '🔢',
     minLevel: 1, maxLevel: 10,
     scoreTarget: 260,
-    blurb: 'Memorize a string of digits shown one at a time, then type it back. Reverse order at higher levels.',
+    blurb: 'Hold a growing thread of digits, then rebuild it. Advanced rounds flip the sequence backward.',
     science: {
       what: 'A classic span task from the Wechsler scales. Span length grows with level; from level 5 you must reproduce the sequence in reverse.',
       why: 'Forward span indexes short-term storage capacity; backward span adds an executive manipulation load. Both are core clinical measures of verbal working memory.',
@@ -287,12 +287,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'corsi',
-    name: 'Corsi Blocks',
+    name: 'Light Path',
     domain: 'memory',
     icon: '⬚',
     minLevel: 1, maxLevel: 9,
     scoreTarget: 240,
-    blurb: 'Blocks light up in a sequence. Reproduce the path by tapping them in the same order.',
+    blurb: 'Tiles light in a fleeting path. Recreate every step in exactly the same order.',
     science: {
       what: 'The visuospatial analogue of digit span. A set of blocks flashes in sequence and you tap them back in order; sequence length scales with level.',
       why: 'Measures the capacity of the visuospatial sketchpad — spatial working memory that is partly dissociable from verbal span and sensitive to aging and injury.',

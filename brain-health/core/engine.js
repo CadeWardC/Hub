@@ -16,10 +16,10 @@
 
   // Cognitive domains. Each carries an accent color used across the UI.
   const DOMAINS = {
-    memory:      { id: 'memory',      name: 'Working Memory',        color: '#8b7cf6', icon: '◈' },
-    attention:   { id: 'attention',   name: 'Attention & Control',   color: '#34d3aa', icon: '◉' },
-    speed:       { id: 'speed',       name: 'Processing Speed',      color: '#f6c453', icon: '⚡' },
-    flexibility: { id: 'flexibility', name: 'Flexibility & Reasoning', color: '#f17eb8', icon: '↻' }
+    memory:      { id: 'memory',      name: 'Working Memory',    color: '#8ad8ff', icon: '◫' },
+    attention:   { id: 'attention',   name: 'Attention Control', color: '#c7f36b', icon: '◎' },
+    speed:       { id: 'speed',       name: 'Processing Speed',  color: '#ffd784', icon: '↯' },
+    flexibility: { id: 'flexibility', name: 'Flexible Thinking', color: '#ffb39e', icon: '↻' }
   };
 
   function register(spec) {

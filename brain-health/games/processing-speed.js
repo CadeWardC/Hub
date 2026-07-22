@@ -19,12 +19,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'reaction-time',
-    name: 'Reaction Time',
+    name: 'Flashpoint',
     domain: 'speed',
     icon: '⏱',
     minLevel: 1, maxLevel: 6,
     scoreTarget: 600,
-    blurb: 'Wait for green, then tap instantly. Measures raw stimulus–response speed with a penalty for jumping early.',
+    blurb: 'Hold steady through the wait, then tap at the exact instant the field flashes green.',
     science: {
       what: 'Simple reaction time: a single stimulus, a single response. Inter-stimulus intervals are randomized so you can’t anticipate the cue.',
       why: 'Processing speed is a foundational cognitive resource that declines earliest with age and underlies performance across most other tasks.',
@@ -82,12 +82,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'speed-match',
-    name: 'Speed Match',
+    name: 'Echo Match',
     domain: 'speed',
     icon: '⧉',
     minLevel: 1, maxLevel: 10,
     scoreTarget: 230,
-    blurb: 'Does this symbol match the one just before it? Decide fast — the clock shrinks as you level up.',
+    blurb: 'Same symbol as the one before it—or different? Decide before the shrinking clock decides for you.',
     science: {
       what: 'A rapid perceptual matching task: each card is judged "same" or "different" relative to the previous one, under a tightening time limit.',
       why: 'Trains speed of information processing and decision-making — the rate at which simple comparisons can be made — a key target of the ACTIVE speed-of-processing intervention.',
@@ -144,12 +144,12 @@
      --------------------------------------------------------- */
   BRAIN.register({
     id: 'trails',
-    name: 'Trail Making',
+    name: 'Connect Shift',
     domain: 'speed',
     icon: '➿',
     minLevel: 1, maxLevel: 8,
     scoreTarget: 500,
-    blurb: 'Connect the targets in order, against the clock. Higher levels alternate numbers and letters.',
+    blurb: 'Connect scattered targets in order. Later rounds alternate numbers and letters without warning.',
     science: {
       what: 'Trails A connects 1-2-3…; Trails B alternates 1-A-2-B-3-C…, forcing you to switch between two sequences. Unlocks at level 3.',
       why: 'A staple neuropsychological test of visual attention, processing speed, and (in part B) cognitive flexibility / set-shifting.',
