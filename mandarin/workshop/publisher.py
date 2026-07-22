@@ -16,13 +16,21 @@ class PublishError(RuntimeError):
 
 
 class Publisher:
-    def __init__(self, store: DraftStore | None = None) -> None:
+    def __init__(
+        self, store: DraftStore | None = None, *, enforce_grading: bool = True
+    ) -> None:
         self.store = store or DraftStore()
+        self.enforce_grading = enforce_grading
 
     def publish(self, draft_id: str) -> dict[str, Any]:
         story = self.store.get(draft_id)
         audio_root = self.store.audio_root(draft_id)
-        errors = validate_story(story, require_audio=True, audio_root=audio_root)
+        errors = validate_story(
+            story,
+            require_audio=True,
+            audio_root=audio_root,
+            enforce_grading=self.enforce_grading,
+        )
         if errors:
             raise PublishError("; ".join(errors))
 

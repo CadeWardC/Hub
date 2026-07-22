@@ -13,7 +13,7 @@ from typing import Any
 
 from .config import CACHE_ROOT, LEVELS, MODEL_PATHS, SUPPORTED_SPEAKERS
 from .draft_store import DraftStore
-from .schema import write_json
+from .schema import validate_story, write_json
 
 
 class TTSService:
@@ -124,6 +124,11 @@ class AudioJobManager:
 
     def start(self, draft_id: str) -> str:
         story = self.store.get(draft_id)
+        errors = validate_story(story, enforce_grading=True)
+        if errors:
+            raise ValueError(
+                "Fix the story before rendering audio: " + "; ".join(errors)
+            )
         job_id = uuid.uuid4().hex
         self.jobs[job_id] = {
             "id": job_id,

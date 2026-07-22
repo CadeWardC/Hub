@@ -82,7 +82,7 @@ class _LibraryBody extends ConsumerWidget {
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                'Read natural Mandarin in small blocks. Reveal only the help you need, tap any word, and listen at your pace.',
+                                'Read natural Mandarin in flowing sections. Switch languages, tap any word, and listen at your pace.',
                                 style: Theme.of(context).textTheme.bodyLarge
                                     ?.copyWith(
                                       color: ink.withValues(alpha: .68),
@@ -156,34 +156,71 @@ class _LibraryBody extends ConsumerWidget {
             ),
           ),
         ),
-        SliverPadding(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 48),
-          sliver: SliverLayoutBuilder(
-            builder: (context, constraints) {
-              final width = constraints.crossAxisExtent;
-              final count = width > 1050
-                  ? 3
-                  : width > 650
-                  ? 2
-                  : 1;
-              return SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => StoryCard(
-                    story: visible[index],
-                    progress: learning.progress[visible[index].id],
+        if (visible.isEmpty)
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 48),
+            sliver: SliverToBoxAdapter(
+              child: Container(
+                constraints: const BoxConstraints(minHeight: 220),
+                padding: const EdgeInsets.all(36),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: .55),
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: ink.withValues(alpha: .1)),
+                ),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('新', style: TextStyle(fontSize: 54, color: cinnabar)),
+                    SizedBox(height: 8),
+                    Text(
+                      'A new graded library is being prepared.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Stories appear here only after their vocabulary, translations, and audio have been reviewed.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xFF716A62)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        else
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 48),
+            sliver: SliverLayoutBuilder(
+              builder: (context, constraints) {
+                final width = constraints.crossAxisExtent;
+                final count = width > 1050
+                    ? 3
+                    : width > 650
+                    ? 2
+                    : 1;
+                return SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => StoryCard(
+                      story: visible[index],
+                      progress: learning.progress[visible[index].id],
+                    ),
+                    childCount: visible.length,
                   ),
-                  childCount: visible.length,
-                ),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: count,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: count == 1 ? 1.35 : 1.05,
-                ),
-              );
-            },
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: count,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: count == 1 ? 1.35 : 1.05,
+                  ),
+                );
+              },
+            ),
           ),
-        ),
       ],
     );
   }

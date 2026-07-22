@@ -63,31 +63,10 @@ flutter:
 
   assets:
     - assets/content/catalog.json
+    - assets/audio/
     # BEGIN PUBLISHED STORY ASSETS
-    - assets/content/stories/breakfast-for-two/
-    - assets/content/stories/breakfast-for-two/audio/
     - assets/content/stories/red-umbrella/
     - assets/content/stories/red-umbrella/audio/
-    - assets/content/stories/last-bus/
-    - assets/content/stories/last-bus/audio/
-    - assets/content/stories/new-neighbor/
-    - assets/content/stories/new-neighbor/audio/
-    - assets/content/stories/weekend-in-suzhou/
-    - assets/content/stories/weekend-in-suzhou/audio/
-    - assets/content/stories/cat-in-the-bookshop/
-    - assets/content/stories/cat-in-the-bookshop/audio/
-    - assets/content/stories/nameless-lantern/
-    - assets/content/stories/nameless-lantern/audio/
-    - assets/content/stories/wrong-delivery/
-    - assets/content/stories/wrong-delivery/audio/
-    - assets/content/stories/photograph-by-the-river/
-    - assets/content/stories/photograph-by-the-river/audio/
-    - assets/content/stories/teahouse-debate/
-    - assets/content/stories/teahouse-debate/audio/
-    - assets/content/stories/clockmakers-letter/
-    - assets/content/stories/clockmakers-letter/audio/
-    - assets/content/stories/map-beneath-the-courtyard/
-    - assets/content/stories/map-beneath-the-courtyard/audio/
     # END PUBLISHED STORY ASSETS
 
   # To add assets to your application, add an assets section, like this:

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from pathlib import Path
 from typing import Any
@@ -9,6 +10,7 @@ import jieba
 from pypinyin import Style, lazy_pinyin
 
 from .config import LEVELS, SUPPORTED_SPEAKERS
+from .vocabulary import vocabulary_errors
 
 
 HAN_RE = re.compile(r"[\u3400-\u9fff]")
@@ -65,18 +67,32 @@ def hydrate_story(story: dict[str, Any]) -> dict[str, Any]:
     )
     if not any(voice.get("id") == "narrator" for voice in voices):
         voices.insert(0, {"id": "narrator", "name": "Narrator", "speaker": "Vivian"})
-    for index, block in enumerate(story.setdefault("blocks", []), start=1):
+    blocks = story.setdefault("blocks", [])
+    level_id = story.get("level", "newbie")
+    section_limits = LEVELS.get(level_id, LEVELS["newbie"])["sections"]
+    authored_sections = any(block.get("section") for block in blocks)
+    target_sections = min(
+        section_limits[1], max(section_limits[0], math.ceil(len(blocks) / 4))
+    )
+    section_size = max(1, math.ceil(len(blocks) / max(1, target_sections)))
+    for index, block in enumerate(blocks, start=1):
         block.setdefault("id", f"b{index:03d}")
         block.setdefault("kind", "narration")
         block.setdefault("speakerId", "narrator")
         block.setdefault("traditional", None)
         block.setdefault("pinyin", " ".join(lazy_pinyin(block.get("hanzi", ""), style=Style.TONE)))
         block.setdefault("translation", "")
+        if not authored_sections:
+            block["section"] = min(target_sections, math.ceil(index / section_size))
+        else:
+            block.setdefault("section", 1)
         if not block.get("tokens"):
             block["tokens"] = baseline_tokens(block.get("hanzi", ""), level["rank"])
         block.setdefault("audio", {"path": f"audio/{block['id']}.mp3", "durationMs": 0})
     story.setdefault("schemaVersion", 1)
-    story.setdefault("minutes", max(2, round(sum(len(block.get("hanzi", "")) for block in story["blocks"]) / 220)))
+    story.setdefault("gradingProfile", "hsk2-v1")
+    story.setdefault("learningWords", [])
+    story.setdefault("minutes", LEVELS.get(level_id, LEVELS["newbie"])["minutes"])
     story.setdefault("glyph", story.get("title", "读")[:1] or "读")
     story.setdefault("colors", ["#D7482F", "#8E2F21"])
     story.setdefault("topic", "Story")
@@ -98,12 +114,26 @@ def normalize_story_for_spec(
         story["level"] = spec["level"]
     if spec.get("topic"):
         story["topic"] = spec["topic"]
-    story["minutes"] = min(8, max(4, int(story.get("minutes", 4))))
+    story["gradingProfile"] = "hsk2-v1"
+    requested = [
+        str(word).strip()
+        for word in (spec.get("requestedWords") or [])
+        if str(word).strip()
+    ]
+    # The author chooses the small teaching set. Model-invented vocabulary is
+    # never silently approved; any additional above-level term must fail the
+    # gate and be deliberately added in the Workshop.
+    story["learningWords"] = list(dict.fromkeys(requested))
+    story["minutes"] = LEVELS[story["level"]]["minutes"]
     return story
 
 
 def validate_story(
-    story: dict[str, Any], *, require_audio: bool = False, audio_root: Path | None = None
+    story: dict[str, Any],
+    *,
+    require_audio: bool = False,
+    audio_root: Path | None = None,
+    enforce_grading: bool = False,
 ) -> list[str]:
     errors: list[str] = []
     required = ("id", "title", "englishTitle", "level", "blocks", "voices")
@@ -115,8 +145,13 @@ def validate_story(
     if story.get("level") not in LEVELS:
         errors.append(f"Unknown level: {story.get('level')}")
     minutes = story.get("minutes")
-    if not isinstance(minutes, int) or not 4 <= minutes <= 8:
-        errors.append("Story minutes must be an integer from 4 through 8")
+    if not isinstance(minutes, int) or not 2 <= minutes <= 8:
+        errors.append("Story minutes must be an integer from 2 through 8")
+    learning_words = story.get("learningWords", [])
+    if not isinstance(learning_words, list) or any(
+        not isinstance(word, str) or not word.strip() for word in learning_words
+    ):
+        errors.append("learningWords must be a list of non-empty Chinese terms")
     voice_ids: set[str] = set()
     for voice in story.get("voices", []):
         voice_id = voice.get("id", "")
@@ -131,6 +166,7 @@ def validate_story(
         errors.append("Stories must define the narrator voice")
     block_ids: set[str] = set()
     dialogue_voice_ids: set[str] = set()
+    previous_section = 0
     for index, block in enumerate(story.get("blocks", []), start=1):
         label = block.get("id") or f"block {index}"
         if label in block_ids:
@@ -146,6 +182,15 @@ def validate_story(
             errors.append(f"{label}: block pinyin is required")
         if block.get("speakerId") not in voice_ids:
             errors.append(f"{label}: unknown speakerId {block.get('speakerId')!r}")
+        section = block.get("section")
+        if section is None and not enforce_grading:
+            pass
+        elif not isinstance(section, int) or section < 1:
+            errors.append(f"{label}: section must be a positive integer")
+        elif section < previous_section:
+            errors.append(f"{label}: sections must stay in reading order")
+        else:
+            previous_section = section
         if block.get("kind") == "narration" and block.get("speakerId") != "narrator":
             errors.append(f"{label}: narration must use the narrator voice")
         if block.get("kind") == "dialogue":
@@ -179,6 +224,11 @@ def validate_story(
                 errors.append(f"{label}: rendered audio duration is missing")
     if len(dialogue_voice_ids) > 3:
         errors.append("Stories may use at most three dialogue voices")
+    if enforce_grading:
+        if story.get("gradingProfile") != "hsk2-v1":
+            errors.append("Story must use the hsk2-v1 grading profile")
+        else:
+            errors.extend(vocabulary_errors(story))
     return errors
 
 

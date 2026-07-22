@@ -1,7 +1,7 @@
 # 声场 Shēngchǎng Mandarin Reader
 
-A Flutter graded reader with block-based Mandarin text, pinyin controls,
-translations, contextual vocabulary, saved words, reading progress, and
+A Flutter graded reader with flowing, paged Mandarin sections, Chinese/English
+tabs, pinyin controls, contextual vocabulary, saved words, reading progress, and
 pre-generated Qwen3-TTS audio. The published app is completely static: it never
 receives a DeepSeek key and never loads the local Qwen models.
 
@@ -26,8 +26,11 @@ versioned story document and MP3 files under `assets/content/stories/`.
 ## Run the local story workshop
 
 The workshop binds only to `127.0.0.1:8765`. It creates local drafts, asks
-DeepSeek for structured story JSON, supports block-by-block review, renders each
-block with Qwen, and publishes only complete stories into Flutter assets.
+DeepSeek for structured story JSON, shows fixed-level reading metrics, offers a
+learner preview, renders each sentence with Qwen, and publishes only complete
+stories into Flutter assets. A pinned classic HSK vocabulary set makes the
+level checks repeatable. Planned teaching words count toward readable coverage,
+while unplanned above-level words are rejected before audio can start.
 Long stories use two DeepSeek phases: a compact story structure followed by
 schema-checked contextual annotation of each block. Up to three remote
 annotation requests run together by default; local Qwen rendering remains
@@ -48,6 +51,17 @@ python -m venv --system-site-packages .venv
 python -m pip install -r requirements.txt
 python -m workshop.server
 ```
+
+After that one-time setup, Windows users can double-click
+`Start Story Workshop.bat`. It starts the local server and opens the GUI. The
+normal workflow is:
+
+1. Choose a level and story idea, with optional practice words.
+2. Generate a local draft and review the reading-comfort checks.
+3. Edit the flowing sections, then choose **Recheck all words** once.
+4. Preview the same Chinese/English pages learners will see.
+5. Render Qwen audio only after the story passes, preview it, and publish.
+6. Commit and push the newly tracked files under `assets/content/`.
 
 If the machine already has CUDA PyTorch 2.6, ensure torchaudio matches it:
 
@@ -80,8 +94,10 @@ Run `python download_models.py` to resume or verify the three official snapshots
 - `Qwen3-TTS-Tokenizer-12Hz`
 
 They remain under `models/` and are gitignored. The standalone Qwen tokenizer is
-an audio tokenizer. The reading dictionary uses `jieba` for lexical boundaries,
-`pypinyin` for a baseline, and DeepSeek for contextual glosses and corrections.
+an audio tokenizer. Reader vocabulary is checked against the pinned local HSK
+lists with deterministic segmentation; `pypinyin` supplies a baseline and
+DeepSeek adds contextual glosses, pronunciation corrections, and name-aware
+translations.
 
 ## Publishing contract
 

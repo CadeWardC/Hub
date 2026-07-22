@@ -29,7 +29,8 @@ class LaunchSetTests(unittest.TestCase):
 
         self.assertEqual(normalized["id"], "breakfast-for-two")
         self.assertEqual(normalized["englishTitle"], "Breakfast for Two")
-        self.assertEqual(normalized["minutes"], 8)
+        self.assertEqual(normalized["minutes"], 2)
+        self.assertEqual(normalized["gradingProfile"], "hsk2-v1")
 
 
 if __name__ == "__main__":

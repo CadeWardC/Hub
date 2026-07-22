@@ -34,7 +34,7 @@ class PublisherTests(unittest.TestCase):
             ), patch(
                 "workshop.publisher.PUBSPEC_PATH", pubspec
             ):
-                entry = Publisher(store).publish(story["id"])
+                entry = Publisher(store, enforce_grading=False).publish(story["id"])
             self.assertEqual(entry["id"], "red-umbrella")
             self.assertTrue((story_root / "red-umbrella" / "audio" / "b001.mp3").is_file())
             self.assertEqual(read_json(catalog)["stories"][0]["id"], "red-umbrella")

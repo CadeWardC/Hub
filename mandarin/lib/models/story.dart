@@ -111,6 +111,72 @@ class StoryDocument {
 
   String audioAsset(StoryBlock block) =>
       'assets/content/stories/$id/${block.audio.path}';
+
+  /// Reader-facing pages. Sentence blocks stay available for synchronized
+  /// audio and word lookup, while the learner sees one continuous section.
+  List<StorySection> get sections {
+    if (blocks.isEmpty) return const [];
+    final hasAuthoredSections = blocks.any((block) => block.section != null);
+    final result = <StorySection>[];
+    if (hasAuthoredSections) {
+      var start = 0;
+      var current = blocks.first.section ?? 1;
+      for (var index = 1; index <= blocks.length; index++) {
+        final next = index < blocks.length
+            ? (blocks[index].section ?? current)
+            : null;
+        if (next != current) {
+          result.add(
+            StorySection(
+              number: current,
+              startBlockIndex: start,
+              blocks: blocks.sublist(start, index),
+            ),
+          );
+          start = index;
+          current = next ?? current;
+        }
+      }
+      return result;
+    }
+
+    const targetSize = 4;
+    for (var start = 0; start < blocks.length; start += targetSize) {
+      final end = (start + targetSize).clamp(0, blocks.length);
+      result.add(
+        StorySection(
+          number: result.length + 1,
+          startBlockIndex: start,
+          blocks: blocks.sublist(start, end),
+        ),
+      );
+    }
+    return result;
+  }
+
+  int sectionIndexForBlock(int blockIndex) {
+    final pages = sections;
+    for (var index = 0; index < pages.length; index++) {
+      final section = pages[index];
+      if (blockIndex >= section.startBlockIndex &&
+          blockIndex < section.startBlockIndex + section.blocks.length) {
+        return index;
+      }
+    }
+    return 0;
+  }
+}
+
+class StorySection {
+  const StorySection({
+    required this.number,
+    required this.startBlockIndex,
+    required this.blocks,
+  });
+
+  final int number;
+  final int startBlockIndex;
+  final List<StoryBlock> blocks;
 }
 
 class CharacterVoice {
@@ -141,6 +207,7 @@ class StoryBlock {
     required this.translation,
     required this.tokens,
     required this.audio,
+    this.section,
   });
 
   final String id;
@@ -152,6 +219,7 @@ class StoryBlock {
   final String translation;
   final List<StoryToken> tokens;
   final StoryAudio audio;
+  final int? section;
 
   factory StoryBlock.fromJson(Map<String, dynamic> json) => StoryBlock(
     id: json['id'] as String,
@@ -165,6 +233,7 @@ class StoryBlock {
         .map((item) => StoryToken.fromJson(item as Map<String, dynamic>))
         .toList(),
     audio: StoryAudio.fromJson(json['audio'] as Map<String, dynamic>? ?? {}),
+    section: (json['section'] as num?)?.toInt(),
   );
 }
 

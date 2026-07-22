@@ -9,6 +9,11 @@ from workshop.tests.fixtures import valid_story
 
 
 class DeepSeekTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.grading = patch("workshop.schema.vocabulary_errors", return_value=[])
+        self.grading.start()
+        self.addCleanup(self.grading.stop)
+
     def test_missing_key_has_clear_error(self) -> None:
         with self.assertRaisesRegex(DeepSeekError, "DEEPSEEK_API_KEY"):
             DeepSeekClient(api_key="").generate_story({"level": "newbie"})
@@ -76,7 +81,13 @@ class DeepSeekTests(unittest.TestCase):
 
         story = DeepSeekClient(api_key="test").generate_story({"level": "newbie"})
 
-        self.assertEqual(story["blocks"][0]["tokens"], block["tokens"])
+        self.assertEqual(
+            [token["text"] for token in story["blocks"][0]["tokens"]],
+            [token["text"] for token in block["tokens"]],
+        )
+        self.assertTrue(
+            all(not token["focus"] for token in story["blocks"][0]["tokens"])
+        )
         self.assertEqual(post.call_count, 2)
 
     @patch("workshop.deepseek_client.requests.post")

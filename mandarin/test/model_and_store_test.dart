@@ -13,6 +13,9 @@ void main() {
       expect(story.level, MandarinLevel.newbie);
       expect(story.blocks.single.tokens.first.gloss, 'hello');
       expect(story.blocks.single.traditional, isNull);
+      expect(story.sections, hasLength(1));
+      expect(story.sections.single.startBlockIndex, 0);
+      expect(story.sectionIndexForBlock(0), 0);
     },
   );
 

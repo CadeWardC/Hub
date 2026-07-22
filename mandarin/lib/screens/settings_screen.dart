@@ -60,7 +60,7 @@ class SettingsScreen extends ConsumerWidget {
                 _SettingCard(
                   title: 'English translations',
                   description:
-                      'Start each story with translations open. You can still toggle individual blocks.',
+                      'Open each story on its English section tab. You can switch back to Chinese at any time.',
                   child: Switch(
                     value: learning.showTranslations,
                     onChanged: controller.setTranslations,
@@ -70,10 +70,10 @@ class SettingsScreen extends ConsumerWidget {
                 _SettingCard(
                   title: 'Playback speed',
                   description:
-                      'The speed applies to whole-story and individual-block playback.',
+                      'Pace changes both spoken phrases and the pauses between sentences.',
                   child: Wrap(
                     spacing: 8,
-                    children: [.75, 1.0, 1.25, 1.5]
+                    children: [.5, .75, 1.0, 1.25, 1.5]
                         .map(
                           (speed) => ChoiceChip(
                             label: Text('$speed×'),

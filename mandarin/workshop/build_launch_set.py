@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from .config import STORY_ROOT
-from .deepseek_client import DeepSeekClient
+from .deepseek_client import DeepSeekClient, DeepSeekValidationError
 from .draft_store import DraftStore
 from .publisher import Publisher
 from .schema import (
@@ -24,6 +24,7 @@ from .schema import (
     validate_story,
 )
 from .tts_service import AudioJobManager, TTSService
+from .vocabulary import sync_learning_words, vocabulary_errors
 
 
 PROMPTS_PATH = Path(__file__).with_name("starter_prompts.json")
@@ -81,13 +82,22 @@ def generate(specs: list[dict[str, Any]], *, force: bool) -> None:
                     spec,
                 )
             )
-            errors = validate_story(story)
+            errors = validate_story(story, enforce_grading=True)
             if errors:
                 raise ValueError("; ".join(errors))
             characters = sum(len(HAN_RE.findall(block["hanzi"])) for block in story["blocks"])
             print(
                 f"[{index}/{len(specs)}] {story_id}: saved "
                 f"{len(story['blocks'])} blocks, {characters} Han characters",
+                flush=True,
+            )
+        except DeepSeekValidationError as exc:
+            story = store.save(_normalize(exc.story, spec))
+            errors = validate_story(story, enforce_grading=True)
+            failures.append(f"{story_id}: {exc}")
+            print(
+                f"[{index}/{len(specs)}] {story_id}: SAVED FOR REVIEW "
+                f"({len(errors)} validation errors): {exc}",
                 flush=True,
             )
         except Exception as exc:
@@ -104,7 +114,7 @@ def render(specs: list[dict[str, Any]]) -> None:
         manager = AudioJobManager(service, store)
         story_id = spec["id"]
         story = store.get(story_id)
-        errors = validate_story(story)
+        errors = validate_story(story, enforce_grading=True)
         if errors:
             raise ValueError(f"{story_id}: {'; '.join(errors)}")
         print(f"[{index}/{len(specs)}] {story_id}: rendering audio", flush=True)
@@ -129,6 +139,46 @@ def render(specs: list[dict[str, Any]]) -> None:
             service.unload()
 
 
+def annotate(specs: list[dict[str, Any]], *, force: bool) -> None:
+    client = DeepSeekClient()
+    store = DraftStore()
+    for index, spec in enumerate(specs, start=1):
+        story_id = spec["id"]
+        story = store.get(story_id)
+
+        def report(completed: int, total: int) -> None:
+            print(
+                f"[{index}/{len(specs)}] {story_id}: "
+                f"annotated {completed}/{total} blocks",
+                flush=True,
+            )
+
+        story = client.annotate_story(story, force=force, on_progress=report)
+        store.save(story)
+        errors = validate_story(story, enforce_grading=True)
+        if errors:
+            raise ValueError(f"{story_id}: {'; '.join(errors)}")
+        print(f"[{index}/{len(specs)}] {story_id}: annotations valid", flush=True)
+
+
+def grade(specs: list[dict[str, Any]]) -> None:
+    store = DraftStore()
+    for index, spec in enumerate(specs, start=1):
+        story_id = spec["id"]
+        story = store.get(story_id)
+        report = sync_learning_words(story)
+        store.save(story)
+        errors = vocabulary_errors(story)
+        if errors:
+            raise ValueError(f"{story_id}: {'; '.join(errors)}")
+        print(
+            f"[{index}/{len(specs)}] {story_id}: "
+            f"{len(report.new_words)} taught words, "
+            f"{report.coverage:.0%} coverage",
+            flush=True,
+        )
+
+
 def publish(specs: list[dict[str, Any]]) -> None:
     publisher = Publisher()
     for index, spec in enumerate(specs, start=1):
@@ -149,11 +199,12 @@ def status(specs: list[dict[str, Any]]) -> None:
             print(f"{story_id}: missing draft")
             continue
         story = store.get(story_id)
-        draft_errors = validate_story(story)
+        draft_errors = validate_story(story, enforce_grading=True)
         full_errors = validate_story(
             story,
             require_audio=True,
             audio_root=store.audio_root(story_id),
+            enforce_grading=True,
         )
         audio_errors = [
             error
@@ -176,7 +227,10 @@ def main() -> None:
         sys.stdout.reconfigure(encoding="utf-8", errors="backslashreplace")
         sys.stderr.reconfigure(encoding="utf-8", errors="backslashreplace")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("status", "generate", "render", "publish"))
+    parser.add_argument(
+        "command",
+        choices=("status", "generate", "grade", "annotate", "render", "publish"),
+    )
     parser.add_argument(
         "--only",
         action="append",
@@ -191,6 +245,10 @@ def main() -> None:
     selected = _specs(args.only)
     if args.command == "generate":
         generate(selected, force=args.force)
+    elif args.command == "grade":
+        grade(selected)
+    elif args.command == "annotate":
+        annotate(selected, force=args.force)
     elif args.command == "render":
         render(selected)
     elif args.command == "publish":

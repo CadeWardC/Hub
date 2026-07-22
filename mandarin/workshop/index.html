@@ -5,77 +5,123 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Mandarin Story Workshop</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
-  <header>
-    <div class="seal">作</div>
-    <div><strong>Mandarin Story Workshop</strong><span>LOCAL AUTHORING · DEEPSEEK + QWEN3-TTS</span></div>
+  <header class="topbar">
+    <div class="brand">
+      <div class="seal">作</div>
+      <div><strong>Story Workshop</strong><span>LOCAL MANDARIN PUBLISHING STUDIO</span></div>
+    </div>
+    <div class="topbar-copy">Create → check the level → preview → voice → publish</div>
     <div id="status" class="status">Checking local tools…</div>
   </header>
 
-  <main>
-    <aside>
-      <section class="panel">
-        <span class="eyebrow">NEW DRAFT</span>
-        <h1>Begin with a reading idea.</h1>
-        <label>Level<select id="new-level"></select></label>
-        <label>Topic<input id="new-topic" value="Everyday life and light fiction"></label>
-        <label>English title hint<input id="new-title" placeholder="The Red Umbrella"></label>
-        <label>Genre<select id="new-genre"><option>Everyday life with light fiction</option><option>Practical conversation</option><option>Gentle mystery</option><option>Culturally grounded fiction</option></select></label>
-        <label>Notes<textarea id="new-notes" rows="3" placeholder="Characters, target words, setting…"></textarea></label>
-        <button id="generate" class="primary">Generate with DeepSeek</button>
+  <main class="app-shell">
+    <aside class="sidebar">
+      <section class="panel create-panel">
+        <div class="panel-title"><span class="step-number">1</span><div><span class="eyebrow">NEW STORY</span><h1>Start with one clear idea.</h1></div></div>
+        <label>Reader level<select id="new-level"></select></label>
+        <div id="level-guide" class="level-guide"></div>
+        <label>English title<input id="new-title" placeholder="The Red Umbrella"></label>
+        <label>Story idea<input id="new-topic" placeholder="Two friends walking home in the rain"></label>
+        <label>Story style<select id="new-genre"><option>Everyday life with light fiction</option><option>Practical conversation</option><option>Gentle mystery</option><option>Culturally grounded fiction</option></select></label>
+        <label>Words you want practiced<input id="new-words" placeholder="雨, 伞, 一起 (optional)"></label>
+        <label>Extra direction<textarea id="new-notes" rows="3" placeholder="Characters, setting, ending, or phrases to repeat…"></textarea></label>
+        <button id="generate" class="primary large">Generate checked draft</button>
         <p id="generate-note" class="note"></p>
       </section>
 
       <section class="panel">
-        <div class="section-head"><span class="eyebrow">DRAFTS</span><button id="refresh" class="text">Refresh</button></div>
+        <div class="section-head"><div><span class="eyebrow">YOUR DRAFTS</span><h2>Continue editing</h2></div><button id="refresh" class="text">Refresh</button></div>
         <div id="drafts" class="draft-list"></div>
       </section>
 
-      <section class="panel">
-        <span class="eyebrow">12-STORY LAUNCH SET</span>
-        <p class="note">Choose a planned title to load its reviewed generation brief into the form.</p>
+      <details class="panel collapsible">
+        <summary><span><span class="eyebrow">STORY IDEAS</span><strong>Original launch concepts</strong></span><span>＋</span></summary>
+        <p class="note">These load an idea into the form. They do not restore the archived stories.</p>
         <div id="starters" class="draft-list"></div>
-      </section>
+      </details>
 
-      <section class="panel compact">
-        <span class="eyebrow">VOICE CHECK</span>
+      <details class="panel collapsible">
+        <summary><span><span class="eyebrow">VOICE LAB</span><strong>Quick Qwen preview</strong></span><span>＋</span></summary>
         <label>Text<textarea id="preview-text" rows="2">今天的故事，从一把红色的雨伞开始。</textarea></label>
         <div class="row"><select id="preview-speaker"></select><button id="preview">Preview</button></div>
         <audio id="preview-audio" controls></audio>
-      </section>
-
-      <section class="panel compact">
+        <hr>
         <span class="eyebrow">BASE VOICE CLONE</span>
-        <p class="note">Local only. Supply a short reference recording and its exact Mandarin transcript.</p>
+        <p class="note">Local only. Add a short reference recording and its exact transcript.</p>
         <label>Reference audio<input id="clone-file" type="file" accept="audio/*"></label>
-        <label>Exact reference transcript<textarea id="clone-reference-text" rows="2"></textarea></label>
+        <label>Reference transcript<textarea id="clone-reference-text" rows="2"></textarea></label>
         <label>Text to speak<textarea id="clone-target" rows="2"></textarea></label>
         <button id="clone">Render clone preview</button>
         <audio id="clone-audio" controls></audio>
-      </section>
+      </details>
     </aside>
 
     <section id="workspace" class="workspace empty">
-      <div id="empty-state"><div class="empty-glyph">稿</div><h2>Select a draft</h2><p>Generate a story or reopen a saved local draft. Nothing is published until its annotations and audio pass validation.</p></div>
+      <div id="empty-state" class="empty-state">
+        <div class="empty-glyph">稿</div>
+        <span class="eyebrow">A SAFER CREATION FLOW</span>
+        <h2>Make the text right before using the GPU.</h2>
+        <p>Generate or open a draft. The Workshop checks vocabulary coverage, repetition, new words, sentence length, and sections before Qwen can render audio.</p>
+        <div class="empty-steps"><span>1 · Generate</span><span>2 · Review</span><span>3 · Render audio</span><span>4 · Publish</span></div>
+      </div>
+
       <div id="editor" hidden>
         <div class="editor-head">
           <div><span id="editor-level" class="eyebrow"></span><h2 id="editor-title"></h2><p id="editor-id"></p></div>
-          <div class="actions"><button id="save">Save edits</button><button id="validate">Validate</button><button id="render-audio">Render all audio</button><button id="publish" class="primary">Publish to Flutter</button></div>
+          <div id="save-state" class="save-state">Local draft</div>
+        </div>
+
+        <div class="stagebar" aria-label="Publishing progress">
+          <div id="stage-draft" class="stage current"><span>1</span><strong>Draft</strong><small>Story generated</small></div>
+          <div id="stage-review" class="stage"><span>2</span><strong>Review</strong><small>Level checks pass</small></div>
+          <div id="stage-audio" class="stage"><span>3</span><strong>Audio</strong><small>Every sentence voiced</small></div>
+          <div id="stage-publish" class="stage"><span>4</span><strong>Publish</strong><small>Ready for Git</small></div>
+        </div>
+
+        <div class="actionbar">
+          <div class="actions-left"><button id="save">Save draft</button><button id="validate">Run level check</button></div>
+          <div class="actions-right"><button id="render-audio">Render Qwen audio</button><button id="publish" class="primary">Publish to Flutter</button></div>
         </div>
         <div id="feedback" class="feedback"></div>
-        <div class="metadata">
-          <label>Chinese title<input id="story-title"></label>
-          <label>Pinyin title<input id="story-pinyin-title"></label>
-          <label>English title<input id="story-english-title"></label>
-          <label>Topic<input id="story-topic"></label>
-          <label class="wide">Summary<textarea id="story-summary" rows="2"></textarea></label>
-        </div>
-        <div id="blocks"></div>
+        <div id="job-progress" class="job-progress" hidden><div><span id="job-label">Preparing audio…</span><strong id="job-count">0 / 0</strong></div><progress id="job-bar" value="0" max="1"></progress></div>
+
+        <section class="quality-panel">
+          <div class="section-head"><div><span class="eyebrow">LEVEL CHECK</span><h3>Reading comfort</h3></div><span id="quality-state" class="quality-state">Not checked</span></div>
+          <div id="metrics" class="metrics"></div>
+          <div id="warnings" class="warnings"></div>
+        </section>
+
+        <nav class="workspace-tabs" aria-label="Draft views">
+          <button class="active" data-view="edit">Story editor</button>
+          <button data-view="learner">Learner preview</button>
+        </nav>
+
+        <section id="edit-view" class="workspace-view">
+          <div class="metadata sheet">
+            <label>Chinese title<input id="story-title"></label>
+            <label>Pinyin title<input id="story-pinyin-title"></label>
+            <label>English title<input id="story-english-title"></label>
+            <label>Topic<input id="story-topic"></label>
+            <label class="wide">Summary<textarea id="story-summary" rows="2"></textarea></label>
+            <label class="wide">Planned new words<input id="story-learning-words" placeholder="Only words intentionally introduced above the level list"></label>
+          </div>
+          <div class="sentence-toolbar"><div><span class="eyebrow">STORY SECTIONS</span><h3>Edit one sentence at a time</h3></div><div class="sentence-actions"><button id="sync-vocabulary">Use detected new words</button><button id="recheck-all">Recheck definitions</button><button id="add-sentence">＋ Add sentence</button></div></div>
+          <div id="blocks"></div>
+        </section>
+
+        <section id="learner-view" class="workspace-view" hidden>
+          <div class="preview-shell">
+            <div class="preview-head"><div><span id="preview-level" class="eyebrow"></span><h2 id="learner-title"></h2><p id="learner-english-title"></p></div><div class="language-switch"><button class="active" data-language="chinese">中文</button><button data-language="english">English</button></div></div>
+            <div id="preview-sections" class="preview-sections"></div>
+            <article id="learner-page" class="learner-page"></article>
+          </div>
+        </section>
       </div>
     </section>
   </main>
-  <script src="app.js"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>

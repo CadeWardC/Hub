@@ -9,7 +9,7 @@ from typing import Any
 from flask import Flask, jsonify, request, send_file, send_from_directory
 
 from .config import LEVELS, MODEL_PATHS, SUPPORTED_SPEAKERS
-from .deepseek_client import DeepSeekClient
+from .deepseek_client import DeepSeekClient, DeepSeekValidationError
 from .draft_store import DraftStore
 from .publisher import Publisher
 from .schema import (
@@ -19,6 +19,7 @@ from .schema import (
     validate_story,
 )
 from .tts_service import AudioJobManager, TTSService
+from .vocabulary import analyze_story, calibrate_token_difficulty, sync_learning_words
 
 
 HERE = Path(__file__).resolve().parent
@@ -54,6 +55,7 @@ def status():
                 "speakers": SUPPORTED_SPEAKERS,
             },
             "ffmpeg": shutil.which("ffmpeg") is not None,
+            "gradingProfile": "hsk2-v2",
             "levels": LEVELS,
         }
     )
@@ -72,13 +74,19 @@ def starter_prompts():
 @app.post("/api/stories/drafts")
 def create_draft():
     spec = request.get_json(silent=True) or {}
-    story = normalize_story_for_spec(deepseek.generate_story(spec), spec)
-    return jsonify({"story": store.save(story)}), 201
+    try:
+        story = normalize_story_for_spec(deepseek.generate_story(spec), spec)
+        errors: list[str] = []
+    except DeepSeekValidationError as error:
+        story = normalize_story_for_spec(hydrate_story(error.story), spec)
+        errors = validate_story(story, enforce_grading=True)
+    story = store.save(story)
+    return jsonify({**_story_payload(story), "errors": errors}), 201
 
 
 @app.get("/api/stories/drafts/<draft_id>")
 def get_draft(draft_id: str):
-    return jsonify({"story": store.get(draft_id)})
+    return jsonify(_story_payload(store.get(draft_id)))
 
 
 @app.put("/api/stories/drafts/<draft_id>")
@@ -86,7 +94,13 @@ def update_draft(draft_id: str):
     story = hydrate_story((request.get_json(silent=True) or {}).get("story", {}))
     if story.get("id") != draft_id:
         return jsonify({"error": "Draft id cannot be changed while editing."}), 400
-    return jsonify({"story": store.save(story), "errors": validate_story(story)})
+    story = store.save(story)
+    return jsonify(
+        {
+            **_story_payload(story),
+            "errors": validate_story(story, enforce_grading=True),
+        }
+    )
 
 
 @app.post("/api/stories/drafts/<draft_id>/annotate/<block_id>")
@@ -96,13 +110,70 @@ def annotate_block(draft_id: str, block_id: str):
         (index for index, block in enumerate(story["blocks"]) if block["id"] == block_id),
         None,
     )
+
+
     if index is None:
         return jsonify({"error": f"Unknown block: {block_id}"}), 404
     story["blocks"][index] = deepseek.annotate_block(
-        story["blocks"][index], level=story["level"]
+        story["blocks"][index],
+        level=story["level"],
+        context={
+            "characterNames": [
+                voice.get("name", "")
+                for voice in story.get("voices", [])
+                if voice.get("id") != "narrator"
+            ],
+            "speakerName": next(
+                (
+                    voice.get("name", "")
+                    for voice in story.get("voices", [])
+                    if voice.get("id") == story["blocks"][index].get("speakerId")
+                ),
+                "",
+            ),
+            "previousChinese": story["blocks"][index - 1].get("hanzi", "")
+            if index
+            else "",
+            "nextChinese": story["blocks"][index + 1].get("hanzi", "")
+            if index + 1 < len(story["blocks"])
+            else "",
+        },
     )
+    calibrate_token_difficulty(story)
     store.save(story)
-    return jsonify({"block": story["blocks"][index]})
+    return jsonify(
+        {
+            "block": story["blocks"][index],
+            "report": analyze_story(story).to_json(),
+        }
+    )
+
+
+@app.post("/api/stories/drafts/<draft_id>/annotate")
+def annotate_story(draft_id: str):
+    story = store.get(draft_id)
+    force = bool((request.get_json(silent=True) or {}).get("force"))
+    story = deepseek.annotate_story(story, force=force)
+    story = store.save(story)
+    return jsonify(
+        {
+            **_story_payload(story),
+            "errors": validate_story(story, enforce_grading=True),
+        }
+    )
+
+
+@app.post("/api/stories/drafts/<draft_id>/vocabulary")
+def sync_vocabulary(draft_id: str):
+    story = store.get(draft_id)
+    sync_learning_words(story)
+    story = store.save(story)
+    return jsonify(
+        {
+            **_story_payload(story),
+            "errors": validate_story(story, enforce_grading=True),
+        }
+    )
 
 
 @app.post("/api/stories/drafts/<draft_id>/validate")
@@ -113,8 +184,15 @@ def validate_draft(draft_id: str):
         story,
         require_audio=require_audio,
         audio_root=store.audio_root(draft_id) if require_audio else None,
+        enforce_grading=True,
     )
-    return jsonify({"valid": not errors, "errors": errors})
+    return jsonify(
+        {
+            "valid": not errors,
+            "errors": errors,
+            "report": analyze_story(story).to_json(),
+        }
+    )
 
 
 @app.post("/api/stories/drafts/<draft_id>/audio/jobs")
@@ -189,6 +267,10 @@ def handle_error(error: Exception):
     app.logger.exception("Workshop request failed")
     status_code = 404 if isinstance(error, (FileNotFoundError, KeyError)) else 400
     return jsonify({"error": str(error)}), status_code
+
+
+def _story_payload(story: dict[str, Any]) -> dict[str, Any]:
+    return {"story": story, "report": analyze_story(story).to_json()}
 
 
 def main() -> None:
