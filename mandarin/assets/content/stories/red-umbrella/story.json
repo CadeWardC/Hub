@@ -8,51 +8,37 @@
       "hanzi": "今天下雨了。",
       "id": "b001",
       "kind": "narration",
-      "pinyin": "jīn tiān xià yǔ le 。",
+      "pinyin": "jīntiān xiàyǔ le .",
       "section": 1,
       "speakerId": "narrator",
       "tokens": [
         {
-          "difficulty": 2,
-          "focus": false,
+          "text": "今天",
+          "pinyin": "jīntiān",
           "gloss": "today",
-          "pinyin": "jīn",
-          "text": "今"
-        },
-        {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "day",
-          "pinyin": "tiān",
-          "text": "天"
-        },
-        {
           "difficulty": 1,
-          "focus": false,
-          "gloss": "fall",
-          "pinyin": "xià",
-          "text": "下"
+          "focus": false
         },
         {
-          "difficulty": 2,
-          "focus": true,
+          "text": "下雨",
+          "pinyin": "xiàyǔ",
           "gloss": "rain",
-          "pinyin": "yǔ",
-          "text": "雨"
-        },
-        {
           "difficulty": 1,
-          "focus": false,
-          "gloss": "completed action marker",
-          "pinyin": "le",
-          "text": "了"
+          "focus": false
         },
         {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
           "pinyin": "",
-          "text": "。"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
@@ -71,43 +57,36 @@
       "speakerId": "narrator",
       "tokens": [
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "small; (prefix for names)",
-          "pinyin": "xiǎo",
-          "text": "小"
-        },
-        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming",
           "difficulty": 2,
-          "focus": false,
-          "gloss": "bright; (given name)",
-          "pinyin": "Míng",
-          "text": "明"
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "at; be in/on",
+          "text": "在",
           "pinyin": "zài",
-          "text": "在"
-        },
-        {
+          "gloss": "at",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "school",
-          "pinyin": "xuéxiào",
-          "text": "学校"
+          "focus": false
         },
         {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "学校",
+          "pinyin": "xuéxiào",
+          "gloss": "school",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
           "pinyin": "",
-          "text": "。"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
-      "translation": "Xiao Ming is at school."
+      "translation": "Xiaoming is at school."
     },
     {
       "audio": {
@@ -117,7 +96,7 @@
       "hanzi": "学校里，小明想回家。",
       "id": "b003",
       "kind": "narration",
-      "pinyin": "xué xiào lǐ, xiǎo míng xiǎng huí jiā.",
+      "pinyin": "xuéxiào lǐ, xiǎomíng xiǎng huíjiā.",
       "section": 1,
       "speakerId": "narrator",
       "tokens": [
@@ -144,8 +123,8 @@
         },
         {
           "text": "小明",
-          "pinyin": "Xiǎo Míng",
-          "gloss": "Xiao Ming",
+          "pinyin": "Xiǎomíng",
+          "gloss": "Xiaoming",
           "difficulty": 2,
           "focus": false
         },
@@ -158,7 +137,7 @@
         },
         {
           "text": "回家",
-          "pinyin": "huí jiā",
+          "pinyin": "huíjiā",
           "gloss": "go home",
           "difficulty": 1,
           "focus": false
@@ -172,7 +151,7 @@
         }
       ],
       "traditional": null,
-      "translation": "At school, Xiao Ming wants to go home."
+      "translation": "At school, Xiaoming wants to go home."
     },
     {
       "audio": {
@@ -182,51 +161,51 @@
       "hanzi": "我的红伞呢？",
       "id": "b004",
       "kind": "dialogue",
-      "pinyin": "wǒ de hóng sǎn ne？",
+      "pinyin": "wǒ de hóng sǎn ne ?",
       "section": 1,
       "speakerId": "xiaoming",
       "tokens": [
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "I/me",
+          "text": "我",
           "pinyin": "wǒ",
-          "text": "我"
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "possessive marker",
+          "text": "的",
           "pinyin": "de",
-          "text": "的"
-        },
-        {
-          "difficulty": 2,
-          "focus": true,
-          "gloss": "red",
-          "pinyin": "hóng",
-          "text": "红"
-        },
-        {
-          "difficulty": 3,
-          "focus": true,
-          "gloss": "umbrella",
-          "pinyin": "sǎn",
-          "text": "伞"
-        },
-        {
+          "gloss": "'s",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "question particle",
-          "pinyin": "ne",
-          "text": "呢"
+          "focus": false
         },
         {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "红",
+          "pinyin": "hóng",
+          "gloss": "red",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "伞",
+          "pinyin": "sǎn",
+          "gloss": "umbrella",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "呢",
+          "pinyin": "ne",
+          "gloss": "(question particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
           "pinyin": "",
-          "text": "？"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
@@ -245,36 +224,36 @@
       "speakerId": "narrator",
       "tokens": [
         {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "Xiao Ming (name)",
+          "text": "小明",
           "pinyin": "Xiǎo Míng",
-          "text": "小明"
+          "gloss": "Xiaoming",
+          "difficulty": 2,
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "doesn't have",
+          "text": "没有",
           "pinyin": "méiyǒu",
-          "text": "没有"
+          "gloss": "does not have",
+          "difficulty": 1,
+          "focus": false
         },
         {
-          "difficulty": 3,
-          "focus": true,
-          "gloss": "umbrella",
+          "text": "伞",
           "pinyin": "sǎn",
-          "text": "伞"
+          "gloss": "umbrella",
+          "difficulty": 3,
+          "focus": true
         },
         {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "。",
           "pinyin": "",
-          "text": "。"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
-      "translation": "Xiao Ming doesn't have an umbrella."
+      "translation": "Xiaoming doesn't have an umbrella."
     },
     {
       "audio": {
@@ -284,23 +263,16 @@
       "hanzi": "小雨来了。",
       "id": "b006",
       "kind": "narration",
-      "pinyin": "Xiǎo Yǔ lái le.",
+      "pinyin": "Xiǎoyǔ lái le.",
       "section": 2,
       "speakerId": "narrator",
       "tokens": [
         {
-          "text": "小",
-          "pinyin": "Xiǎo",
-          "gloss": "Xiao (surname/first name component)",
-          "difficulty": 1,
-          "focus": false
-        },
-        {
-          "text": "雨",
-          "pinyin": "Yǔ",
-          "gloss": "Yu (given name component)",
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu (person's name)",
           "difficulty": 2,
-          "focus": true
+          "focus": false
         },
         {
           "text": "来",
@@ -312,7 +284,7 @@
         {
           "text": "了",
           "pinyin": "le",
-          "gloss": "(perfective particle)",
+          "gloss": "particle indicating change/new situation",
           "difficulty": 1,
           "focus": false
         },
@@ -335,90 +307,76 @@
       "hanzi": "小明，你的红伞在这里。",
       "id": "b007",
       "kind": "dialogue",
-      "pinyin": "Xiǎo Míng, nǐ de hóng sǎn zài zhè lǐ.",
+      "pinyin": "Xiǎo Míng, nǐ de hóng sǎn zài zhèlǐ.",
       "section": 2,
       "speakerId": "xiaoyu",
       "tokens": [
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "small",
-          "pinyin": "xiǎo",
-          "text": "小"
-        },
-        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming",
           "difficulty": 2,
-          "focus": false,
-          "gloss": "bright",
-          "pinyin": "míng",
-          "text": "明"
+          "focus": false
         },
         {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "，",
           "pinyin": "",
-          "text": "，"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "you",
+          "text": "你",
           "pinyin": "nǐ",
-          "text": "你"
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "'s",
+          "text": "的",
           "pinyin": "de",
-          "text": "的"
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
         },
         {
-          "difficulty": 2,
-          "focus": true,
-          "gloss": "red",
+          "text": "红",
           "pinyin": "hóng",
-          "text": "红"
+          "gloss": "red",
+          "difficulty": 2,
+          "focus": true
         },
         {
-          "difficulty": 3,
-          "focus": true,
-          "gloss": "umbrella",
+          "text": "伞",
           "pinyin": "sǎn",
-          "text": "伞"
+          "gloss": "umbrella",
+          "difficulty": 3,
+          "focus": true
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "at",
+          "text": "在",
           "pinyin": "zài",
-          "text": "在"
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "this",
-          "pinyin": "zhè",
-          "text": "这"
-        },
-        {
-          "difficulty": 1,
-          "focus": false,
+          "text": "这里",
+          "pinyin": "zhèlǐ",
           "gloss": "here",
-          "pinyin": "lǐ",
-          "text": "里"
+          "difficulty": 1,
+          "focus": false
         },
         {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "。",
           "pinyin": "",
-          "text": "。"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
-      "translation": "Xiao Ming, your red umbrella is here."
+      "translation": "Xiaoming, your red umbrella is here."
     },
     {
       "audio": {
@@ -428,58 +386,44 @@
       "hanzi": "谢谢你，小雨！",
       "id": "b008",
       "kind": "dialogue",
-      "pinyin": "Xièxiè nǐ, Xiǎo Yǔ!",
+      "pinyin": "xièxiè nǐ, Xiǎoyǔ!",
       "section": 2,
       "speakerId": "xiaoming",
       "tokens": [
         {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "thank",
-          "pinyin": "xiè",
-          "text": "谢"
-        },
-        {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "thank",
-          "pinyin": "xiè",
-          "text": "谢"
-        },
-        {
+          "text": "谢谢",
+          "pinyin": "xièxie",
+          "gloss": "thanks",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "you",
+          "focus": false
+        },
+        {
+          "text": "你",
           "pinyin": "nǐ",
-          "text": "你"
-        },
-        {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
-          "pinyin": "",
-          "text": "，"
-        },
-        {
+          "gloss": "you",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "little",
-          "pinyin": "Xiǎo",
-          "text": "小"
+          "focus": false
         },
         {
-          "difficulty": 2,
-          "focus": true,
-          "gloss": "rain",
-          "pinyin": "Yǔ",
-          "text": "雨"
-        },
-        {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "，",
           "pinyin": "",
-          "text": "！"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
@@ -493,58 +437,37 @@
       "hanzi": "我们一起回家。",
       "id": "b009",
       "kind": "dialogue",
-      "pinyin": "wǒmen yīqǐ huíjiā",
+      "pinyin": "wǒmen yìqǐ huíjiā 。",
       "section": 2,
       "speakerId": "xiaoyu",
       "tokens": [
         {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "I/me",
-          "pinyin": "wǒ",
-          "text": "我"
+          "focus": false
         },
         {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "plural suffix",
-          "pinyin": "men",
-          "text": "们"
-        },
-        {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "one",
-          "pinyin": "yī",
-          "text": "一"
-        },
-        {
-          "difficulty": 2,
-          "focus": false,
+          "text": "一起",
+          "pinyin": "yìqǐ",
           "gloss": "together",
-          "pinyin": "qǐ",
-          "text": "起"
+          "difficulty": 2,
+          "focus": true
         },
         {
+          "text": "回家",
+          "pinyin": "huíjiā",
+          "gloss": "go home",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "return",
-          "pinyin": "huí",
-          "text": "回"
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "home",
-          "pinyin": "jiā",
-          "text": "家"
-        },
-        {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "。",
           "pinyin": "",
-          "text": "。"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
@@ -563,74 +486,46 @@
       "speakerId": "narrator",
       "tokens": [
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "small",
-          "pinyin": "xiǎo",
-          "text": "小"
-        },
-        {
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiao Ming",
           "difficulty": 2,
-          "focus": false,
-          "gloss": "bright",
-          "pinyin": "Míng",
-          "text": "明"
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "and",
+          "text": "和",
           "pinyin": "hé",
-          "text": "和"
-        },
-        {
+          "gloss": "and",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "small",
-          "pinyin": "xiǎo",
-          "text": "小"
+          "focus": false
         },
         {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiao Yu",
           "difficulty": 2,
-          "focus": true,
-          "gloss": "rain",
-          "pinyin": "Yǔ",
-          "text": "雨"
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "one",
-          "pinyin": "yì",
-          "text": "一"
-        },
-        {
-          "difficulty": 2,
-          "focus": false,
+          "text": "一起",
+          "pinyin": "yìqǐ",
           "gloss": "together",
-          "pinyin": "qǐ",
-          "text": "起"
+          "difficulty": 2,
+          "focus": true
         },
         {
+          "text": "回家",
+          "pinyin": "huí jiā",
+          "gloss": "go home",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "return",
-          "pinyin": "huí",
-          "text": "回"
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "home",
-          "pinyin": "jiā",
-          "text": "家"
-        },
-        {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "。",
           "pinyin": "",
-          "text": "。"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
@@ -649,16 +544,9 @@
       "speakerId": "narrator",
       "tokens": [
         {
-          "text": "小",
-          "pinyin": "xiǎo",
-          "gloss": "small",
-          "difficulty": 1,
-          "focus": false
-        },
-        {
-          "text": "明",
-          "pinyin": "Míng",
-          "gloss": "bright; Ming (name)",
+          "text": "小明",
+          "pinyin": "Xiǎo Míng",
+          "gloss": "Xiaoming",
           "difficulty": 2,
           "focus": false
         },
@@ -670,23 +558,16 @@
           "focus": false
         },
         {
-          "text": "小",
-          "pinyin": "xiǎo",
-          "gloss": "small",
-          "difficulty": 1,
-          "focus": false
-        },
-        {
-          "text": "雨",
-          "pinyin": "Yǔ",
-          "gloss": "rain; Yu (name)",
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
           "difficulty": 2,
-          "focus": true
+          "focus": false
         },
         {
           "text": "在",
           "pinyin": "zài",
-          "gloss": "at, in",
+          "gloss": "at",
           "difficulty": 1,
           "focus": false
         },
@@ -720,7 +601,7 @@
         }
       ],
       "traditional": null,
-      "translation": "Xiao Ming and Xiao Yu are under the red umbrella."
+      "translation": "Xiaoming and Xiaoyu are under the red umbrella."
     },
     {
       "audio": {
@@ -730,72 +611,65 @@
       "hanzi": "雨很大，红伞不大。",
       "id": "b012",
       "kind": "narration",
-      "pinyin": "yǔ hěn dà ，hóng sǎn bú dà 。",
+      "pinyin": "Yǔ hěn dà, hóng sǎn bù dà.",
       "section": 3,
       "speakerId": "narrator",
       "tokens": [
         {
-          "difficulty": 2,
-          "focus": true,
-          "gloss": "rain",
+          "text": "雨",
           "pinyin": "yǔ",
-          "text": "雨"
-        },
-        {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "very",
-          "pinyin": "hěn",
-          "text": "很"
-        },
-        {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "big",
-          "pinyin": "dà",
-          "text": "大"
-        },
-        {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
-          "pinyin": "",
-          "text": "，"
-        },
-        {
+          "gloss": "rain",
           "difficulty": 2,
-          "focus": true,
-          "gloss": "red",
-          "pinyin": "hóng",
-          "text": "红"
+          "focus": false
         },
         {
-          "difficulty": 3,
-          "focus": true,
-          "gloss": "umbrella",
-          "pinyin": "sǎn",
-          "text": "伞"
-        },
-        {
+          "text": "很大",
+          "pinyin": "hěn dà",
+          "gloss": "heavy",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "not",
-          "pinyin": "bú",
-          "text": "不"
+          "focus": false
         },
         {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "big",
-          "pinyin": "dà",
-          "text": "大"
-        },
-        {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "，",
           "pinyin": "",
-          "text": "。"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "红",
+          "pinyin": "hóng",
+          "gloss": "red",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "伞",
+          "pinyin": "sǎn",
+          "gloss": "umbrella",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大",
+          "pinyin": "dà",
+          "gloss": "big",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
@@ -809,72 +683,51 @@
       "hanzi": "今天下雨，谢谢你！",
       "id": "b013",
       "kind": "dialogue",
-      "pinyin": "jīn tiān xià yǔ ， xiè xiè nǐ ！",
+      "pinyin": "jīntiān xiàyǔ, xièxiè nǐ!",
       "section": 3,
       "speakerId": "xiaoming",
       "tokens": [
         {
-          "difficulty": 2,
-          "focus": false,
+          "text": "今天",
+          "pinyin": "jīntiān",
           "gloss": "today",
-          "pinyin": "jīn",
-          "text": "今"
-        },
-        {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "day",
-          "pinyin": "tiān",
-          "text": "天"
-        },
-        {
           "difficulty": 1,
-          "focus": false,
-          "gloss": "fall",
-          "pinyin": "xià",
-          "text": "下"
+          "focus": false
         },
         {
-          "difficulty": 2,
-          "focus": true,
+          "text": "下雨",
+          "pinyin": "xiàyǔ",
           "gloss": "rain",
-          "pinyin": "yǔ",
-          "text": "雨"
-        },
-        {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
-          "pinyin": "",
-          "text": "，"
-        },
-        {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "thank",
-          "pinyin": "xiè",
-          "text": "谢"
-        },
-        {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "thank",
-          "pinyin": "xiè",
-          "text": "谢"
-        },
-        {
           "difficulty": 1,
-          "focus": false,
-          "gloss": "you",
-          "pinyin": "nǐ",
-          "text": "你"
+          "focus": false
         },
         {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "，",
           "pinyin": "",
-          "text": "！"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "谢谢",
+          "pinyin": "xièxiè",
+          "gloss": "thank you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
@@ -888,58 +741,44 @@
       "hanzi": "我们是好朋友。",
       "id": "b014",
       "kind": "dialogue",
-      "pinyin": "wǒ men shì hǎo péng you。",
+      "pinyin": "wǒmen shì hǎo péngyou 。",
       "section": 3,
       "speakerId": "xiaoyu",
       "tokens": [
         {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "I, me",
-          "pinyin": "wǒ",
-          "text": "我"
+          "focus": false
         },
         {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "plural suffix",
-          "pinyin": "men",
-          "text": "们"
-        },
-        {
-          "difficulty": 1,
-          "focus": false,
-          "gloss": "am, is, are",
+          "text": "是",
           "pinyin": "shì",
-          "text": "是"
-        },
-        {
+          "gloss": "are",
           "difficulty": 1,
-          "focus": false,
-          "gloss": "good",
+          "focus": false
+        },
+        {
+          "text": "好",
           "pinyin": "hǎo",
-          "text": "好"
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
         },
         {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "friend (part)",
-          "pinyin": "péng",
-          "text": "朋"
+          "text": "朋友",
+          "pinyin": "péngyou",
+          "gloss": "friend(s)",
+          "difficulty": 1,
+          "focus": false
         },
         {
-          "difficulty": 2,
-          "focus": false,
-          "gloss": "friend (part)",
-          "pinyin": "you",
-          "text": "友"
-        },
-        {
-          "difficulty": 0,
-          "focus": false,
-          "gloss": "",
+          "text": "。",
           "pinyin": "",
-          "text": "。"
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
         }
       ],
       "traditional": null,
@@ -955,10 +794,9 @@
   "gradingProfile": "hsk2-v1",
   "id": "red-umbrella",
   "learningWords": [
-    "雨",
+    "红",
     "伞",
-    "一起",
-    "红"
+    "一起"
   ],
   "level": "newbie",
   "minutes": 2,

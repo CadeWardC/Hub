@@ -179,12 +179,16 @@ class AudioJobManager:
                 }
                 write_json(self.store._path(story["id"]) / "story.json", story)
                 self._update(job_id, completed=index)
-                release = getattr(self.service, "unload", None)
-                if callable(release):
-                    release()
             self._update(job_id, status="complete", currentBlock=None)
         except Exception as exc:
             self._update(job_id, status="failed", error=str(exc), currentBlock=None)
+        finally:
+            # Generation scratch memory is cleared inside custom_voice after
+            # every sentence. Keep the 1.7B model resident only for this one
+            # story, then release it before the next job/story begins.
+            release = getattr(self.service, "unload", None)
+            if callable(release):
+                release()
 
     def _render_block(
         self, *, text: str, speaker: str, instruction: str, destination: Path

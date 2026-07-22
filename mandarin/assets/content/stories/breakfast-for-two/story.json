@@ -1,0 +1,981 @@
+{
+  "schemaVersion": 1,
+  "id": "breakfast-for-two",
+  "title": "两个人的早餐",
+  "pinyinTitle": "Liǎng gè rén de zǎocān",
+  "englishTitle": "Breakfast for Two",
+  "summary": "Xiaoyu and Daming share a simple breakfast.",
+  "level": "newbie",
+  "topic": "Ordering breakfast",
+  "minutes": 2,
+  "gradingProfile": "hsk2-v1",
+  "learningWords": [
+    "豆浆",
+    "包子",
+    "两",
+    "一起",
+    "早餐"
+  ],
+  "glyph": "餐",
+  "colors": [
+    "#E07A32",
+    "#9D4520"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "xiaoyu",
+      "name": "小雨",
+      "speaker": "Serena"
+    },
+    {
+      "id": "daming",
+      "name": "大明",
+      "speaker": "Dylan"
+    },
+    {
+      "id": "clerk",
+      "name": "王先生",
+      "speaker": "Eric"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "今天，小雨和大明去饭馆。",
+      "traditional": null,
+      "translation": "Today, Xiaoyu and Daming go to a restaurant.",
+      "pinyin": "jīntiān, xiǎoyǔ hé dàmíng qù fànguǎn.",
+      "tokens": [
+        {
+          "text": "今天",
+          "pinyin": "jīntiān",
+          "gloss": "today",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "饭馆",
+          "pinyin": "fànguǎn",
+          "gloss": "restaurant",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 3920
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 1,
+      "hanzi": "我想喝豆浆。",
+      "traditional": null,
+      "translation": "I want to drink soy milk.",
+      "pinyin": "wǒ xiǎng hē dòujiāng 。",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "喝",
+          "pinyin": "hē",
+          "gloss": "drink",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "豆浆",
+          "pinyin": "dòujiāng",
+          "gloss": "soy milk",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 6400
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 1,
+      "hanzi": "我想吃包子。",
+      "traditional": null,
+      "translation": "I want to eat baozi.",
+      "pinyin": "wǒ xiǎng chī bāozi 。",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包子",
+          "pinyin": "bāozi",
+          "gloss": "steamed bun",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 1120
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 1,
+      "hanzi": "两杯豆浆，两个包子，多少钱？",
+      "traditional": null,
+      "translation": "Two cups of soy milk, two buns, how much?",
+      "pinyin": "Liǎng bēi dòujiāng, liǎng gè bāozi, duōshao qián?",
+      "tokens": [
+        {
+          "text": "两杯",
+          "pinyin": "liǎng bēi",
+          "gloss": "two cups",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "豆浆",
+          "pinyin": "dòujiāng",
+          "gloss": "soy milk",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "两个",
+          "pinyin": "liǎng gè",
+          "gloss": "two (measure word)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包子",
+          "pinyin": "bāozi",
+          "gloss": "bun",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "多少",
+          "pinyin": "duōshao",
+          "gloss": "how many/how much",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "钱",
+          "pinyin": "qián",
+          "gloss": "money",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 2160
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "dialogue",
+      "speakerId": "clerk",
+      "section": 1,
+      "hanzi": "十块。",
+      "traditional": null,
+      "translation": "Ten yuan.",
+      "pinyin": "shí kuài",
+      "tokens": [
+        {
+          "text": "十块",
+          "pinyin": "shí kuài",
+          "gloss": "ten yuan (unit of money)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 1120
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 1,
+      "hanzi": "谢谢。",
+      "traditional": null,
+      "translation": "Thank you.",
+      "pinyin": "xièxie",
+      "tokens": [
+        {
+          "text": "谢谢",
+          "pinyin": "xièxie",
+          "gloss": "thank you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 880
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "桌子上有两杯豆浆和两个包子。",
+      "traditional": null,
+      "translation": "There are two glasses of soy milk and two steamed buns on the table.",
+      "pinyin": "zhuōzi shàng yǒu liǎng bēi dòujiāng hé liǎng gè bāozi.",
+      "tokens": [
+        {
+          "text": "桌子",
+          "pinyin": "zhuōzi",
+          "gloss": "table",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "there are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "两杯",
+          "pinyin": "liǎng bēi",
+          "gloss": "two glasses of",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "豆浆",
+          "pinyin": "dòujiāng",
+          "gloss": "soy milk",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "两个",
+          "pinyin": "liǎng gè",
+          "gloss": "two (measure word)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包子",
+          "pinyin": "bāozi",
+          "gloss": "steamed bun",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 3760
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "小雨和大明坐在桌子前面。",
+      "traditional": null,
+      "translation": "Xiaoyu and Daming are sitting in front of the table.",
+      "pinyin": "Xiǎo Yǔ hé Dà Míng zuò zài zhuōzi qiánmiàn.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dà Míng",
+          "gloss": "Daming",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "坐在",
+          "pinyin": "zuò zài",
+          "gloss": "sit at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "桌子",
+          "pinyin": "zhuōzi",
+          "gloss": "table",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "前面",
+          "pinyin": "qiánmiàn",
+          "gloss": "in front of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 6880
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "小雨喝一杯豆浆，大明喝一杯豆浆。",
+      "traditional": null,
+      "translation": "Xiaoyu drinks a glass of soy milk, Daming drinks a glass of soy milk.",
+      "pinyin": "Xiǎoyǔ hē yī bēi dòujiāng, Dàmíng hē yī bēi dòujiāng.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "喝一杯",
+          "pinyin": "hē yī bēi",
+          "gloss": "drinks a glass of",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "豆浆",
+          "pinyin": "dòujiāng",
+          "gloss": "soy milk",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "喝一杯",
+          "pinyin": "hē yī bēi",
+          "gloss": "drinks a glass of",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "豆浆",
+          "pinyin": "dòujiāng",
+          "gloss": "soy milk",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 8800
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "小雨吃一个包子，大明吃一个包子。",
+      "traditional": null,
+      "translation": "Xiaoyu eats one baozi, Daming eats one baozi.",
+      "pinyin": "Xiǎoyǔ chī yīgè bāozi, Dàmíng chī yīgè bāozi.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包子",
+          "pinyin": "bāozi",
+          "gloss": "baozi",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包子",
+          "pinyin": "bāozi",
+          "gloss": "baozi",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 5040
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 3,
+      "hanzi": "豆浆很好喝。",
+      "traditional": null,
+      "translation": "Soy milk is very tasty.",
+      "pinyin": "dòujiāng hěn hǎohē 。",
+      "tokens": [
+        {
+          "text": "豆浆",
+          "pinyin": "dòujiāng",
+          "gloss": "soy milk",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好喝",
+          "pinyin": "hǎohē",
+          "gloss": "tasty (of drinks)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 2720
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 3,
+      "hanzi": "包子很好。",
+      "traditional": null,
+      "translation": "The steamed buns are very good.",
+      "pinyin": "bāozi hěn hǎo .",
+      "tokens": [
+        {
+          "text": "包子",
+          "pinyin": "bāozi",
+          "gloss": "steamed bun",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 1040
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 3,
+      "hanzi": "我们明天一起吃早餐吗？",
+      "traditional": null,
+      "translation": "Shall we have breakfast together tomorrow?",
+      "pinyin": "wǒmen míngtiān yìqǐ chī zǎocān ma ?",
+      "tokens": [
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "明天",
+          "pinyin": "míngtiān",
+          "gloss": "tomorrow",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "早餐",
+          "pinyin": "zǎocān",
+          "gloss": "breakfast",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 2160
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 3,
+      "hanzi": "好，明天一起吃早餐。",
+      "traditional": null,
+      "translation": "Okay, let's have breakfast together tomorrow.",
+      "pinyin": "hǎo, míngtiān yìqǐ chī zǎocān.",
+      "tokens": [
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good; okay",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "明天",
+          "pinyin": "míngtiān",
+          "gloss": "tomorrow",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "早餐",
+          "pinyin": "zǎocān",
+          "gloss": "breakfast",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 2160
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "今天的早餐很好，小雨和大明很高兴。",
+      "traditional": null,
+      "translation": "Today's breakfast is very good, Xiaoyu and Daming are very happy.",
+      "pinyin": "jīntiān de zǎocān hěn hǎo, Xiǎoyǔ hé Dàmíng hěn gāoxìng.",
+      "tokens": [
+        {
+          "text": "今天",
+          "pinyin": "jīntiān",
+          "gloss": "today",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "早餐",
+          "pinyin": "zǎocān",
+          "gloss": "breakfast",
+          "difficulty": 2,
+          "focus": true
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "高兴",
+          "pinyin": "gāoxìng",
+          "gloss": "happy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 7840
+      }
+    }
+  ]
+}

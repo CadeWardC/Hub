@@ -4,7 +4,7 @@ import copy
 import unittest
 from unittest.mock import Mock, patch
 
-from workshop.deepseek_client import DeepSeekClient, DeepSeekError
+from workshop.deepseek_client import DeepSeekClient, DeepSeekError, _required_token_texts
 from workshop.tests.fixtures import valid_story
 
 
@@ -17,6 +17,16 @@ class DeepSeekTests(unittest.TestCase):
     def test_missing_key_has_clear_error(self) -> None:
         with self.assertRaisesRegex(DeepSeekError, "DEEPSEEK_API_KEY"):
             DeepSeekClient(api_key="").generate_story({"level": "newbie"})
+
+    def test_required_tokens_keep_names_and_teaching_words_whole(self) -> None:
+        texts = _required_token_texts(
+            "小雨喝豆浆。",
+            1,
+            {"characterNames": ["小雨"], "learningWords": ["豆浆"]},
+        )
+        self.assertIn("小雨", texts)
+        self.assertIn("豆浆", texts)
+        self.assertEqual("".join(texts), "小雨喝豆浆。")
 
     @patch("workshop.deepseek_client.requests.post")
     def test_valid_json_story_is_returned(self, post: Mock) -> None:

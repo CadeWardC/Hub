@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import shutil
 import tempfile
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -47,16 +48,16 @@ class Publisher:
             if backup.exists():
                 shutil.rmtree(backup)
             if destination.exists():
-                destination.replace(backup)
+                _replace_directory(destination, backup)
             try:
-                stage.replace(destination)
+                _replace_directory(stage, destination)
                 if backup.exists():
                     shutil.rmtree(backup)
             except Exception:
                 if destination.exists():
                     shutil.rmtree(destination)
                 if backup.exists():
-                    backup.replace(destination)
+                    _replace_directory(backup, destination)
                 raise
 
         catalog = read_json(CATALOG_PATH, {"schemaVersion": 1, "stories": []})
@@ -86,6 +87,19 @@ class Publisher:
         write_json(CATALOG_PATH, catalog)
         _update_flutter_assets(entries)
         return entry
+
+
+def _replace_directory(source: Path, destination: Path) -> None:
+    """Atomically rename a directory, tolerating brief Windows file locks."""
+
+    for attempt in range(8):
+        try:
+            source.replace(destination)
+            return
+        except PermissionError:
+            if attempt == 7:
+                raise
+            time.sleep(0.15 * (attempt + 1))
 
 
 def _update_flutter_assets(entries: list[dict[str, Any]]) -> None:

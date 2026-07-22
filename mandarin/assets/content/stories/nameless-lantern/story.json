@@ -1,0 +1,2118 @@
+{
+  "schemaVersion": 1,
+  "id": "nameless-lantern",
+  "title": "无名的灯笼",
+  "pinyinTitle": "Wú míng de dēnglóng",
+  "englishTitle": "The Nameless Lantern",
+  "summary": "Students at a community lantern festival discover a beautiful lantern with no signature and set out to find its maker, uncovering a touching story.",
+  "level": "upper-intermediate",
+  "topic": "A lantern with an unfinished inscription",
+  "minutes": 5,
+  "gradingProfile": "hsk2-v1",
+  "learningWords": [
+    "社区",
+    "灯笼",
+    "署名",
+    "寻找",
+    "制作",
+    "心愿",
+    "去世",
+    "充满",
+    "心意",
+    "广场",
+    "从此"
+  ],
+  "glyph": "灯",
+  "colors": [
+    "#D7482F",
+    "#8E2F21"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "xiaoyu",
+      "name": "小雨",
+      "speaker": "Serena"
+    },
+    {
+      "id": "daming",
+      "name": "大明",
+      "speaker": "Dylan"
+    },
+    {
+      "id": "elder",
+      "name": "老人",
+      "speaker": "Uncle_Fu"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "社区举办了一个灯笼活动，很多学生都来参加。",
+      "traditional": null,
+      "translation": "The community held a lantern activity, and many students came to participate.",
+      "pinyin": "shèqū jǔbàn le yīgè dēnglóng huódòng ， hěnduō xuéshēng dōu lái cānjiā 。",
+      "tokens": [
+        {
+          "text": "社区",
+          "pinyin": "shèqū",
+          "gloss": "community",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "举办",
+          "pinyin": "jǔbàn",
+          "gloss": "held",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "活动",
+          "pinyin": "huódòng",
+          "gloss": "activity",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěnduō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "学生",
+          "pinyin": "xuéshēng",
+          "gloss": "student",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "来",
+          "pinyin": "lái",
+          "gloss": "come",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "参加",
+          "pinyin": "cānjiā",
+          "gloss": "participate",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 4240
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "小雨和大明也来了，他们喜欢看各种灯笼。",
+      "traditional": null,
+      "translation": "Xiaoyu and Daming also came; they like to look at various lanterns.",
+      "pinyin": "Xiǎoyǔ hé Dàmíng yě lái le, tāmen xǐhuān kàn gèzhǒng dēnglóng.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "来",
+          "pinyin": "lái",
+          "gloss": "come",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "喜欢",
+          "pinyin": "xǐhuān",
+          "gloss": "like",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "各种",
+          "pinyin": "gèzhǒng",
+          "gloss": "various",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 4320
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 1,
+      "hanzi": "大明，你看这个灯笼多漂亮！",
+      "traditional": null,
+      "translation": "Daming, look at this lantern, how beautiful!",
+      "pinyin": "Dàmíng, nǐ kàn zhège dēnglóng duō piàoliang!",
+      "tokens": [
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "多",
+          "pinyin": "duō",
+          "gloss": "how",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "漂亮",
+          "pinyin": "piàoliang",
+          "gloss": "beautiful",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 3200
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 1,
+      "hanzi": "是啊，可是上面没有题字，也没有署名。",
+      "traditional": null,
+      "translation": "Yes, but there is no inscription or signature on it.",
+      "pinyin": "shì a, kěshì shàngmiàn méiyǒu tízì, yě méiyǒu shǔmíng.",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "yes",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "啊",
+          "pinyin": "a",
+          "gloss": "(interjection)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "可是",
+          "pinyin": "kěshì",
+          "gloss": "but",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "上面",
+          "pinyin": "shàngmiàn",
+          "gloss": "on top",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "have not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "题字",
+          "pinyin": "tízì",
+          "gloss": "inscription",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "have not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "署名",
+          "pinyin": "shǔmíng",
+          "gloss": "signature",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 3280
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "小雨和大明开始寻找制作这个灯笼的人。",
+      "traditional": null,
+      "translation": "Xiaoyu and Daming begin to look for the person who made this lantern.",
+      "pinyin": "Xiǎo Yǔ hé Dà Míng kāishǐ xúnzhǎo zhìzuò zhège dēnglóng de rén.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dà Míng",
+          "gloss": "Daming",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "开始",
+          "pinyin": "kāishǐ",
+          "gloss": "begin",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "寻找",
+          "pinyin": "xúnzhǎo",
+          "gloss": "look for",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "制作",
+          "pinyin": "zhìzuò",
+          "gloss": "make",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s (possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 6800
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "他们问了很多人，但大家都不知道。",
+      "traditional": null,
+      "translation": "They asked many people, but no one knew.",
+      "pinyin": "tāmen wèn le hěnduō rén ， dàn dàjiā dōu bù zhīdào 。",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "问",
+          "pinyin": "wèn",
+          "gloss": "ask",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěnduō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "people",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "大家",
+          "pinyin": "dàjiā",
+          "gloss": "everyone",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "知道",
+          "pinyin": "zhīdào",
+          "gloss": "know",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 3120
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 2,
+      "hanzi": "也许是一位老人制作的，他可能忘记署名了。",
+      "traditional": null,
+      "translation": "Maybe it was made by an elderly person, who might have forgotten to sign it.",
+      "pinyin": "yěxǔ shì yī wèi lǎorén zhìzuò de ， tā kěnéng wàngjì shǔmíng le 。",
+      "tokens": [
+        {
+          "text": "也许",
+          "pinyin": "yěxǔ",
+          "gloss": "maybe",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一位",
+          "pinyin": "yī wèi",
+          "gloss": "a (measure word for people)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "老人",
+          "pinyin": "lǎorén",
+          "gloss": "elderly person",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "制作",
+          "pinyin": "zhìzuò",
+          "gloss": "make",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "particle (nominalizer)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "可能",
+          "pinyin": "kěnéng",
+          "gloss": "maybe",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "忘记",
+          "pinyin": "wàngjì",
+          "gloss": "forget",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "署名",
+          "pinyin": "shǔmíng",
+          "gloss": "sign one's name",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle (change of state)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 3680
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 2,
+      "hanzi": "我们再看看别的灯笼吧。",
+      "traditional": null,
+      "translation": "Let's look at other lanterns.",
+      "pinyin": "wǒmen zài kànkan biéde dēnglong ba 。",
+      "tokens": [
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "再",
+          "pinyin": "zài",
+          "gloss": "again",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "看看",
+          "pinyin": "kànkan",
+          "gloss": "look at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "别的",
+          "pinyin": "biéde",
+          "gloss": "other",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglong",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "suggestion particle",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 1680
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "后来，他们遇到了一位老人。",
+      "traditional": null,
+      "translation": "Later, they met an old man.",
+      "pinyin": "hòulái, tāmen yùdào le yī wèi lǎorén.",
+      "tokens": [
+        {
+          "text": "后来",
+          "pinyin": "hòulái",
+          "gloss": "later",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "遇到",
+          "pinyin": "yùdào",
+          "gloss": "met",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一位",
+          "pinyin": "yī wèi",
+          "gloss": "a (formal)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "老人",
+          "pinyin": "lǎorén",
+          "gloss": "old man",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 2720
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "老人看着灯笼，眼睛突然亮了。",
+      "traditional": null,
+      "translation": "The old man looked at the lantern, and his eyes suddenly lit up.",
+      "pinyin": "lǎorén kànzhe dēnglóng ， yǎnjīng tūrán liàng le 。",
+      "tokens": [
+        {
+          "text": "老人",
+          "pinyin": "lǎorén",
+          "gloss": "old man",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "看着",
+          "pinyin": "kànzhe",
+          "gloss": "looking at",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "眼睛",
+          "pinyin": "yǎnjīng",
+          "gloss": "eyes",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "突然",
+          "pinyin": "tūrán",
+          "gloss": "suddenly",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "亮",
+          "pinyin": "liàng",
+          "gloss": "lit up",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "completed-action particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 2960
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 3,
+      "hanzi": "您认出这个灯笼了吗？",
+      "traditional": null,
+      "translation": "Do you recognize this lantern?",
+      "pinyin": "Nín rènchū zhège dēnglóng le ma?",
+      "tokens": [
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "认出",
+          "pinyin": "rènchū",
+          "gloss": "recognize",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "(question particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 1440
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 3,
+      "hanzi": "是您制作的吗？",
+      "traditional": null,
+      "translation": "Did you make it?",
+      "pinyin": "shì nín zhìzuò de ma ？",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "制作",
+          "pinyin": "zhìzuò",
+          "gloss": "make",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(nominalizer)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "(question particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 1600
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "dialogue",
+      "speakerId": "elder",
+      "section": 3,
+      "hanzi": "是我和妻子一起制作的。",
+      "traditional": null,
+      "translation": "It was made by my wife and me.",
+      "pinyin": "shì wǒ hé qīzi yìqǐ zhìzuò de 。",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I/me",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "妻子",
+          "pinyin": "qīzi",
+          "gloss": "wife",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "制作",
+          "pinyin": "zhìzuò",
+          "gloss": "made",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 2640
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "学生问老人为什么不署名。",
+      "traditional": null,
+      "translation": "The student asked the old man why he didn't sign his name.",
+      "pinyin": "xuéshēng wèn lǎorén wèishénme bù shǔmíng.",
+      "tokens": [
+        {
+          "text": "学生",
+          "pinyin": "xuéshēng",
+          "gloss": "student",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "问",
+          "pinyin": "wèn",
+          "gloss": "ask",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "老人",
+          "pinyin": "lǎorén",
+          "gloss": "old man",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "为什么",
+          "pinyin": "wèishénme",
+          "gloss": "why",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "署名",
+          "pinyin": "shǔmíng",
+          "gloss": "sign one's name",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 2320
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "dialogue",
+      "speakerId": "elder",
+      "section": 4,
+      "hanzi": "这是我的一个心愿。",
+      "traditional": null,
+      "translation": "This is a wish of mine.",
+      "pinyin": "zhè shì wǒ de yī gè xīn yuàn 。",
+      "tokens": [
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yī gè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "心愿",
+          "pinyin": "xīn yuàn",
+          "gloss": "wish",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 2720
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "原来，老人的妻子以前喜欢制作灯笼。",
+      "traditional": null,
+      "translation": "It turns out that the old man's wife used to like making lanterns.",
+      "pinyin": "yuánlái, lǎorén de qīzi yǐqián xǐhuān zhìzuò dēnglong.",
+      "tokens": [
+        {
+          "text": "原来",
+          "pinyin": "yuánlái",
+          "gloss": "it turns out",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "老人",
+          "pinyin": "lǎorén",
+          "gloss": "old man",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s (possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "妻子",
+          "pinyin": "qīzi",
+          "gloss": "wife",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "以前",
+          "pinyin": "yǐqián",
+          "gloss": "before; previously",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "喜欢",
+          "pinyin": "xǐhuān",
+          "gloss": "like; be fond of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "制作",
+          "pinyin": "zhìzuò",
+          "gloss": "make; produce",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglong",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 14880
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "她去世前，制作了一个没有完成的灯笼。",
+      "traditional": null,
+      "translation": "Before she passed away, she made an unfinished lantern.",
+      "pinyin": "tā qùshì qián ， zhìzuò le yī gè méiyǒu wánchéng de dēnglóng 。",
+      "tokens": [
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "去世",
+          "pinyin": "qùshì",
+          "gloss": "pass away",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "前",
+          "pinyin": "qián",
+          "gloss": "before",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "制作",
+          "pinyin": "zhìzuò",
+          "gloss": "make",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yī gè",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "not have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "完成",
+          "pinyin": "wánchéng",
+          "gloss": "complete",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "MOD",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 4240
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "老人后来把灯笼完成了，但故意不署名。",
+      "traditional": null,
+      "translation": "The old man later finished the lantern, but deliberately did not sign it.",
+      "pinyin": "lǎo rén hòu lái bǎ dēng lóng wán chéng le ， dàn gù yì bù shǔ míng 。",
+      "tokens": [
+        {
+          "text": "老人",
+          "pinyin": "lǎo rén",
+          "gloss": "old man",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "后来",
+          "pinyin": "hòu lái",
+          "gloss": "later",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "gloss": "object marker",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng lóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "完成",
+          "pinyin": "wán chéng",
+          "gloss": "finish",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "故意",
+          "pinyin": "gù yì",
+          "gloss": "deliberately",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "署名",
+          "pinyin": "shǔ míng",
+          "gloss": "sign one's name",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 3280
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "他希望灯笼代表两个人的心愿。",
+      "traditional": null,
+      "translation": "He hoped the lantern represented the wishes of two people.",
+      "pinyin": "tā xīwàng dēnglong dàibiǎo liǎng gè rén de xīnyuàn 。",
+      "tokens": [
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "希望",
+          "pinyin": "xīwàng",
+          "gloss": "hope",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglong",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "代表",
+          "pinyin": "dàibiǎo",
+          "gloss": "represent",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "两个",
+          "pinyin": "liǎng gè",
+          "gloss": "two (people)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "person",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "心愿",
+          "pinyin": "xīnyuàn",
+          "gloss": "wish",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 2720
+      }
+    },
+    {
+      "id": "b020",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "学生听了，非常感动。",
+      "traditional": null,
+      "translation": "The students listened and were very moved.",
+      "pinyin": "xuéshēng tīng le, fēicháng gǎndòng.",
+      "tokens": [
+        {
+          "text": "学生",
+          "pinyin": "xuéshēng",
+          "gloss": "student",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "听",
+          "pinyin": "tīng",
+          "gloss": "listen",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective aspect marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "非常",
+          "pinyin": "fēicháng",
+          "gloss": "very",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "感动",
+          "pinyin": "gǎndòng",
+          "gloss": "moved",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b020.mp3",
+        "durationMs": 3200
+      }
+    },
+    {
+      "id": "b021",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 5,
+      "hanzi": "原来无名的灯笼有这样的原因。",
+      "traditional": null,
+      "translation": "It turns out that the nameless lantern has such a reason.",
+      "pinyin": "yuánlái wúmíng de dēnglóng yǒu zhèyàng de yuányīn.",
+      "tokens": [
+        {
+          "text": "原来",
+          "pinyin": "yuánlái",
+          "gloss": "it turns out",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "无名",
+          "pinyin": "wúmíng",
+          "gloss": "nameless",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "has",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这样",
+          "pinyin": "zhèyàng",
+          "gloss": "such",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "adjectival particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "原因",
+          "pinyin": "yuányīn",
+          "gloss": "reason",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b021.mp3",
+        "durationMs": 2480
+      }
+    },
+    {
+      "id": "b022",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 5,
+      "hanzi": "这个灯笼虽然没有署名，但充满了心意。",
+      "traditional": null,
+      "translation": "Although this lantern has no signature, it is full of heartfelt meaning.",
+      "pinyin": "zhège dēnglóng suīrán méiyǒu shǔmíng, dàn chōngmǎn le xīnyì.",
+      "tokens": [
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "虽然",
+          "pinyin": "suīrán",
+          "gloss": "although",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "have not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "署名",
+          "pinyin": "shǔmíng",
+          "gloss": "signature",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "充满",
+          "pinyin": "chōngmǎn",
+          "gloss": "full of",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "心意",
+          "pinyin": "xīnyì",
+          "gloss": "heartfelt meaning",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b022.mp3",
+        "durationMs": 3360
+      }
+    },
+    {
+      "id": "b023",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "活动结束时，大家把灯笼挂在了社区广场上。",
+      "traditional": null,
+      "translation": "When the activity ended, everyone hung the lanterns in the community square.",
+      "pinyin": "huódòng jiéshù shí ， dàjiā bǎ dēnglong guà zài le shèqū guǎngchǎng shàng 。",
+      "tokens": [
+        {
+          "text": "活动",
+          "pinyin": "huódòng",
+          "gloss": "activity",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "结束",
+          "pinyin": "jiéshù",
+          "gloss": "end",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "when",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "大家",
+          "pinyin": "dàjiā",
+          "gloss": "everyone",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "gloss": "BA (object marker)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēnglong",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "挂",
+          "pinyin": "guà",
+          "gloss": "hang",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "LE (perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "社区",
+          "pinyin": "shèqū",
+          "gloss": "community",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "广场",
+          "pinyin": "guǎngchǎng",
+          "gloss": "square",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b023.mp3",
+        "durationMs": 4960
+      }
+    },
+    {
+      "id": "b024",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "从此，这个无名的灯笼成了社区最特别的灯笼。",
+      "traditional": null,
+      "translation": "From then on, this nameless lantern became the most special lantern in the community.",
+      "pinyin": "cóng cǐ ， zhè ge wú míng de dēng lóng chéng le shè qū zuì tè bié de dēng lóng 。",
+      "tokens": [
+        {
+          "text": "从此",
+          "pinyin": "cóng cǐ",
+          "gloss": "from then on",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhè ge",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "无名",
+          "pinyin": "wú míng",
+          "gloss": "nameless",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng lóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "成",
+          "pinyin": "chéng",
+          "gloss": "become",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective aspect marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "社区",
+          "pinyin": "shè qū",
+          "gloss": "community",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "最",
+          "pinyin": "zuì",
+          "gloss": "most",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "特别",
+          "pinyin": "tè bié",
+          "gloss": "special",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯笼",
+          "pinyin": "dēng lóng",
+          "gloss": "lantern",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b024.mp3",
+        "durationMs": 7040
+      }
+    }
+  ]
+}

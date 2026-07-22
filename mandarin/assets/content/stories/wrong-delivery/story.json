@@ -1,0 +1,2426 @@
+{
+  "schemaVersion": 1,
+  "id": "wrong-delivery",
+  "title": "送错的包裹",
+  "pinyinTitle": "Sòng cuò de bāoguǒ",
+  "englishTitle": "The Wrong Delivery",
+  "summary": "A mistaken parcel delivery brings three neighbors together and reveals a thoughtful surprise.",
+  "level": "upper-intermediate",
+  "topic": "A parcel delivered to the wrong apartment",
+  "minutes": 5,
+  "gradingProfile": "hsk2-v1",
+  "learningWords": [
+    "公寓",
+    "递",
+    "包裹",
+    "牌",
+    "王",
+    "订",
+    "惊讶",
+    "享",
+    "温暖",
+    "惊喜"
+  ],
+  "glyph": "错",
+  "colors": [
+    "#4A90D9",
+    "#2C5F8A"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "xiaoyu",
+      "name": "小雨",
+      "speaker": "Serena"
+    },
+    {
+      "id": "daming",
+      "name": "大明",
+      "speaker": "Dylan"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "小雨住在一座公寓里。",
+      "traditional": null,
+      "translation": "Xiaoyu lives in an apartment.",
+      "pinyin": "Xiǎo Yǔ zhù zài yī zuò gōngyù lǐ.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "住",
+          "pinyin": "zhù",
+          "gloss": "lives",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一座",
+          "pinyin": "yī zuò",
+          "gloss": "a (measure word for buildings)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "公寓",
+          "pinyin": "gōngyù",
+          "gloss": "apartment",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 2960
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "一天下午，她收到一个快递。",
+      "traditional": null,
+      "translation": "One afternoon, she received a package.",
+      "pinyin": "yītiān xiàwǔ ， tā shōudào yīgè kuàidì 。",
+      "tokens": [
+        {
+          "text": "一天",
+          "pinyin": "yītiān",
+          "gloss": "one day",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "下午",
+          "pinyin": "xiàwǔ",
+          "gloss": "afternoon",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "收到",
+          "pinyin": "shōudào",
+          "gloss": "received",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "快递",
+          "pinyin": "kuàidì",
+          "gloss": "express delivery",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 2800
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "她打开包裹，发现是一个漂亮的蛋糕。",
+      "traditional": null,
+      "translation": "She opened the package and found it was a beautiful cake.",
+      "pinyin": "tā dǎkāi bāoguǒ, fāxiàn shì yīgè piàoliang de dàngāo.",
+      "tokens": [
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "打开",
+          "pinyin": "dǎkāi",
+          "gloss": "open",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "包裹",
+          "pinyin": "bāoguǒ",
+          "gloss": "package",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "find",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "漂亮",
+          "pinyin": "piàoliang",
+          "gloss": "beautiful",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive/attributive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàngāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 28960
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 1,
+      "hanzi": "这个蛋糕是谁的？我没有买蛋糕。",
+      "traditional": null,
+      "translation": "Whose cake is this? I didn't buy a cake.",
+      "pinyin": "zhège dàngāo shì shuí de? wǒ méiyǒu mǎi dàngāo.",
+      "tokens": [
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàngāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "谁",
+          "pinyin": "shuí",
+          "gloss": "who",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "did not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "买",
+          "pinyin": "mǎi",
+          "gloss": "buy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàngāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 2000
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "她看了看包裹上的门牌，发现送错了。",
+      "traditional": null,
+      "translation": "She looked at the address plate on the package and found it was delivered wrong.",
+      "pinyin": "tā kàn le kàn bāoguǒ shàng de ménpái, fāxiàn sòngcuò le.",
+      "tokens": [
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包裹",
+          "pinyin": "bāoguǒ",
+          "gloss": "package",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attribute marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "门牌",
+          "pinyin": "ménpái",
+          "gloss": "address plate",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "discover",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "送错",
+          "pinyin": "sòngcuò",
+          "gloss": "deliver wrong",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "change-of-state marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 3680
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "小雨决定把包裹还给真正的邻居。",
+      "traditional": null,
+      "translation": "Xiaoyu decided to return the package to the real neighbor.",
+      "pinyin": "Xiǎoyǔ juédìng bǎ bāoguǒ huán gěi zhēnzhèng de línjū.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "决定",
+          "pinyin": "juédìng",
+          "gloss": "decided",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "gloss": "BA (prep.)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "包裹",
+          "pinyin": "bāoguǒ",
+          "gloss": "package",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "还给",
+          "pinyin": "huán gěi",
+          "gloss": "return to",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "真正",
+          "pinyin": "zhēnzhèng",
+          "gloss": "real",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of/’s",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "邻居",
+          "pinyin": "línjū",
+          "gloss": "neighbor",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 2960
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "她按照门牌，找到了楼上的大明。",
+      "traditional": null,
+      "translation": "She followed the doorplate and found Daming upstairs.",
+      "pinyin": "tā ànzhào mén pái ， zhǎo dào le lóu shàng de dà míng 。",
+      "tokens": [
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "按照",
+          "pinyin": "ànzhào",
+          "gloss": "according to",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "门牌",
+          "pinyin": "mén pái",
+          "gloss": "doorplate",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎo dào",
+          "gloss": "found",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(completed action marker)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "楼上",
+          "pinyin": "lóu shàng",
+          "gloss": "upstairs",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive/attributive marker)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "dà míng",
+          "gloss": "Daming",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 2960
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 2,
+      "hanzi": "你好，这是你的快递吗？",
+      "traditional": null,
+      "translation": "Hello, is this your express delivery?",
+      "pinyin": "nǐ hǎo , zhè shì nǐ de kuài dì ma ?",
+      "tokens": [
+        {
+          "text": "你好",
+          "pinyin": "nǐ hǎo",
+          "gloss": "hello",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "快递",
+          "pinyin": "kuài dì",
+          "gloss": "express delivery",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 1760
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 2,
+      "hanzi": "不是我的。我也收到了一个送错的包裹。",
+      "traditional": null,
+      "translation": "It's not mine. I also received a misdelivered package.",
+      "pinyin": "búshì wǒ de . wǒ yě shōudào le yí gè sòngcuò de bāoguǒ .",
+      "tokens": [
+        {
+          "text": "不是",
+          "pinyin": "búshì",
+          "gloss": "be not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "收到",
+          "pinyin": "shōudào",
+          "gloss": "receive",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yí gè",
+          "gloss": "one (measure word)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "送错",
+          "pinyin": "sòngcuò",
+          "gloss": "misdeliver",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "modifier particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包裹",
+          "pinyin": "bāoguǒ",
+          "gloss": "package",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 4080
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "大明看了看包裹，说这个蛋糕应该是楼下王奶奶的。",
+      "traditional": null,
+      "translation": "Daming looked at the package and said this cake should be Grandma Wang's downstairs.",
+      "pinyin": "Dàmíng kàn le kàn bāoguǒ, shuō zhège dàngāo yīnggāi shì lóuxià Wáng nǎinai de.",
+      "tokens": [
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包裹",
+          "pinyin": "bāoguǒ",
+          "gloss": "package",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàngāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "应该",
+          "pinyin": "yīnggāi",
+          "gloss": "should",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "楼下",
+          "pinyin": "lóuxià",
+          "gloss": "downstairs",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 4480
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "小雨和大明一起下楼，找到了王奶奶。",
+      "traditional": null,
+      "translation": "Xiaoyu and Daming went downstairs together and found Grandma Wang.",
+      "pinyin": "Xiǎoyǔ hé Dàmíng yìqǐ xiàlóu, zhǎodào le Wáng nǎinai.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "下楼",
+          "pinyin": "xiàlóu",
+          "gloss": "go downstairs",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎodào",
+          "gloss": "find",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle indicating completion",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 3280
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 3,
+      "hanzi": "王奶奶，这个蛋糕是您的吗？",
+      "traditional": null,
+      "translation": "Grandma Wang, is this cake yours?",
+      "pinyin": "Wáng nǎinai, zhège dàngāo shì nín de ma?",
+      "tokens": [
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàngāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s (possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 2240
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 3,
+      "hanzi": "您订了这个蛋糕吗？",
+      "traditional": null,
+      "translation": "Did you order this cake?",
+      "pinyin": "nín dìng le zhè ge dàn gāo ma ?",
+      "tokens": [
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (formal)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "订",
+          "pinyin": "dìng",
+          "gloss": "order",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "particle (completed action)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhè ge",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàn gāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 1360
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "王奶奶很惊讶，说她没有订蛋糕。",
+      "traditional": null,
+      "translation": "Grandma Wang was very surprised, saying that she did not order a cake.",
+      "pinyin": "Wáng nǎinai hěn jīngyà, shuō tā méiyǒu dìng dàngāo.",
+      "tokens": [
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "惊讶",
+          "pinyin": "jīngyà",
+          "gloss": "surprised",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "gloss": "say",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "did not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "订",
+          "pinyin": "dìng",
+          "gloss": "order",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàngāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 3280
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "小雨发现包裹上还有一张卡片。",
+      "traditional": null,
+      "translation": "Xiaoyu found that there was also a card on the package.",
+      "pinyin": "Xiǎoyǔ fāxiàn bāoguǒ shàng háiyǒu yī zhāng kǎpiàn.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "discover",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "包裹",
+          "pinyin": "bāoguǒ",
+          "gloss": "package",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "还有",
+          "pinyin": "háiyǒu",
+          "gloss": "also have",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一张",
+          "pinyin": "yī zhāng",
+          "gloss": "one (measure word for flat objects)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "卡片",
+          "pinyin": "kǎpiàn",
+          "gloss": "card",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 3520
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "卡片上写着：“祝王奶奶生日快乐！——您的女儿。”",
+      "traditional": null,
+      "translation": "The card reads: “Happy birthday, Grandma Wang! — Your daughter.”",
+      "pinyin": "kǎpiàn shàng xiě zhe: “zhù Wáng nǎinai shēngrì kuàilè!——nín de nǚ'ér.”",
+      "tokens": [
+        {
+          "text": "卡片",
+          "pinyin": "kǎpiàn",
+          "gloss": "card",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "progressive particle",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "：“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "祝",
+          "pinyin": "zhù",
+          "gloss": "wish",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "生日快乐",
+          "pinyin": "shēngrì kuàilè",
+          "gloss": "happy birthday",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "！——",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (polite)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "女儿",
+          "pinyin": "nǚ'ér",
+          "gloss": "daughter",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 6960
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 4,
+      "hanzi": "王奶奶，今天是您的生日吗？",
+      "traditional": null,
+      "translation": "Grandma Wang, is today your birthday?",
+      "pinyin": "Wáng nǎinai, jīntiān shì nín de shēngrì ma?",
+      "tokens": [
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "今天",
+          "pinyin": "jīntiān",
+          "gloss": "today",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (formal)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "生日",
+          "pinyin": "shēngrì",
+          "gloss": "birthday",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 2720
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 4,
+      "hanzi": "生日快乐！我们陪您吃蛋糕吧！",
+      "traditional": null,
+      "translation": "Happy birthday! We'll have cake with you!",
+      "pinyin": "shēngrì kuàilè! wǒmen péi nín chī dàngāo ba!",
+      "tokens": [
+        {
+          "text": "生日快乐",
+          "pinyin": "shēngrì kuàilè",
+          "gloss": "happy birthday",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "陪您",
+          "pinyin": "péi nín",
+          "gloss": "accompany you",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàngāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "(suggestion particle)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 2320
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "王奶奶这才想起今天是自己的生日。",
+      "traditional": null,
+      "translation": "Grandma Wang only then remembered that today is her own birthday.",
+      "pinyin": "Wáng nǎinai zhè cái xiǎngqǐ jīntiān shì zìjǐ de shēngrì.",
+      "tokens": [
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "才",
+          "pinyin": "cái",
+          "gloss": "only then",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "想起",
+          "pinyin": "xiǎngqǐ",
+          "gloss": "remember",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "今天",
+          "pinyin": "jīntiān",
+          "gloss": "today",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "自己",
+          "pinyin": "zìjǐ",
+          "gloss": "own",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "生日",
+          "pinyin": "shēngrì",
+          "gloss": "birthday",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 5040
+      }
+    },
+    {
+      "id": "b020",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 4,
+      "hanzi": "王奶奶，您忘了自己的生日吗？",
+      "traditional": null,
+      "translation": "Grandma Wang, have you forgotten your birthday?",
+      "pinyin": "Wáng nǎinai, nín wàng le zìjǐ de shēngrì ma?",
+      "tokens": [
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "您",
+          "pinyin": "nín",
+          "gloss": "you (formal)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "忘",
+          "pinyin": "wàng",
+          "gloss": "forget",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "自己",
+          "pinyin": "zìjǐ",
+          "gloss": "oneself",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "POSS",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "生日",
+          "pinyin": "shēngrì",
+          "gloss": "birthday",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "Q",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b020.mp3",
+        "durationMs": 3040
+      }
+    },
+    {
+      "id": "b021",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "王奶奶很高兴，打开了蛋糕。",
+      "traditional": null,
+      "translation": "Grandma Wang was very happy and opened the cake.",
+      "pinyin": "Wáng nǎinai hěn gāoxìng, dǎkāi le dàngāo.",
+      "tokens": [
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "高兴",
+          "pinyin": "gāoxìng",
+          "gloss": "happy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "打开",
+          "pinyin": "dǎkāi",
+          "gloss": "open",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàngāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b021.mp3",
+        "durationMs": 2400
+      }
+    },
+    {
+      "id": "b022",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "三个人一起分享蛋糕，有说有笑。",
+      "traditional": null,
+      "translation": "Three people shared a cake together, chatting and laughing.",
+      "pinyin": "sān gè rén yì qǐ fēn xiǎng dàn gāo ， yǒu shuō yǒu xiào 。",
+      "tokens": [
+        {
+          "text": "三个",
+          "pinyin": "sān gè",
+          "gloss": "three",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "people",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yì qǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "分享",
+          "pinyin": "fēn xiǎng",
+          "gloss": "share",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "蛋糕",
+          "pinyin": "dàn gāo",
+          "gloss": "cake",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "有说有笑",
+          "pinyin": "yǒu shuō yǒu xiào",
+          "gloss": "chatting and laughing",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b022.mp3",
+        "durationMs": 3040
+      }
+    },
+    {
+      "id": "b023",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "后来，小雨发现自己的包裹也送错了。",
+      "traditional": null,
+      "translation": "Later, Xiaoyu discovered that her own package was also delivered incorrectly.",
+      "pinyin": "hòulái, xiǎoyǔ fāxiàn zìjǐ de bāoguǒ yě sòng cuò le.",
+      "tokens": [
+        {
+          "text": "后来",
+          "pinyin": "hòulái",
+          "gloss": "later",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "发现自己",
+          "pinyin": "fāxiàn zìjǐ",
+          "gloss": "discovered that she",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包裹",
+          "pinyin": "bāoguǒ",
+          "gloss": "package",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "送错",
+          "pinyin": "sòng cuò",
+          "gloss": "delivered incorrectly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "completed action marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b023.mp3",
+        "durationMs": 27120
+      }
+    },
+    {
+      "id": "b024",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "她联系了快递公司，很快收到了正确的包裹。",
+      "traditional": null,
+      "translation": "She contacted the courier company and soon received the correct package.",
+      "pinyin": "tā liánxì le kuàidì gōngsī ， hěn kuài shōudào le zhèngquè de bāoguǒ 。",
+      "tokens": [
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "联系",
+          "pinyin": "liánxì",
+          "gloss": "contact",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "快递",
+          "pinyin": "kuàidì",
+          "gloss": "courier",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "公司",
+          "pinyin": "gōngsī",
+          "gloss": "company",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "很快",
+          "pinyin": "hěn kuài",
+          "gloss": "soon",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "收到",
+          "pinyin": "shōudào",
+          "gloss": "receive",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "正确",
+          "pinyin": "zhèngquè",
+          "gloss": "correct",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "包裹",
+          "pinyin": "bāoguǒ",
+          "gloss": "package",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b024.mp3",
+        "durationMs": 3440
+      }
+    },
+    {
+      "id": "b025",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "这次送错的经历，让小雨和大明成为了好朋友。",
+      "traditional": null,
+      "translation": "This mistaken delivery experience made Xiaoyu and Daming become good friends.",
+      "pinyin": "zhè cì sòng cuò de jīng lì ， ràng Xiǎo Yǔ hé Dà Míng chéng wéi le hǎo péng yǒu 。",
+      "tokens": [
+        {
+          "text": "这次",
+          "pinyin": "zhè cì",
+          "gloss": "this time",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "送错",
+          "pinyin": "sòng cuò",
+          "gloss": "deliver wrongly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "经历",
+          "pinyin": "jīng lì",
+          "gloss": "experience",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "让",
+          "pinyin": "ràng",
+          "gloss": "make",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dà Míng",
+          "gloss": "Daming",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "成为",
+          "pinyin": "chéng wéi",
+          "gloss": "become",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "朋友",
+          "pinyin": "péng yǒu",
+          "gloss": "friend",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b025.mp3",
+        "durationMs": 3680
+      }
+    },
+    {
+      "id": "b026",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "王奶奶也多了两个关心她的邻居。",
+      "traditional": null,
+      "translation": "Grandma Wang also gained two neighbors who care about her.",
+      "pinyin": "Wáng nǎinai yě duō le liǎng gè guānxīn tā de línjū.",
+      "tokens": [
+        {
+          "text": "王奶奶",
+          "pinyin": "Wáng nǎinai",
+          "gloss": "Grandma Wang",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "多",
+          "pinyin": "duō",
+          "gloss": "more",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "两个",
+          "pinyin": "liǎng gè",
+          "gloss": "two",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "关心",
+          "pinyin": "guānxīn",
+          "gloss": "care about",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "her",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "MOD",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "邻居",
+          "pinyin": "línjū",
+          "gloss": "neighbor",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b026.mp3",
+        "durationMs": 3200
+      }
+    },
+    {
+      "id": "b027",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "小雨觉得，虽然送错了，但这是一个温暖的惊喜。",
+      "traditional": null,
+      "translation": "Xiaoyu felt that although it was delivered wrong, it was a warm surprise.",
+      "pinyin": "Xiǎoyǔ juéde, suīrán sòngcuò le, dàn zhè shì yī ge wēnnuǎn de jīngxǐ.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "觉得",
+          "pinyin": "juéde",
+          "gloss": "feel",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "虽然",
+          "pinyin": "suīrán",
+          "gloss": "although",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "送错",
+          "pinyin": "sòngcuò",
+          "gloss": "deliver wrongly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PFV",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yī ge",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "温暖",
+          "pinyin": "wēnnuǎn",
+          "gloss": "warm",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "MOD",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "惊喜",
+          "pinyin": "jīngxǐ",
+          "gloss": "surprise",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b027.mp3",
+        "durationMs": 4560
+      }
+    }
+  ]
+}

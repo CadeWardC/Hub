@@ -1,0 +1,1462 @@
+{
+  "schemaVersion": 1,
+  "id": "new-neighbor",
+  "title": "新邻居",
+  "pinyinTitle": "Xīn Línjū",
+  "englishTitle": "The New Neighbor",
+  "summary": "Xiaoyu meets her new neighbor Daming and helps him carry a flowerpot upstairs.",
+  "level": "elementary",
+  "topic": "Meeting a neighbor",
+  "minutes": 3,
+  "gradingProfile": "hsk2-v1",
+  "learningWords": [
+    "楼",
+    "口",
+    "邻居",
+    "搬",
+    "花",
+    "盆",
+    "帮忙"
+  ],
+  "glyph": "邻",
+  "colors": [
+    "#D7482F",
+    "#8E2F21"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "xiaoyu",
+      "name": "小雨",
+      "speaker": "Serena"
+    },
+    {
+      "id": "daming",
+      "name": "大明",
+      "speaker": "Dylan"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "小雨住在一楼。",
+      "traditional": null,
+      "translation": "Xiaoyu lives on the first floor.",
+      "pinyin": "Xiǎoyǔ zhù zài yīlóu.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu (name)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "住",
+          "pinyin": "zhù",
+          "gloss": "live",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in/at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一楼",
+          "pinyin": "yīlóu",
+          "gloss": "first floor",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 2400
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "今天上午，她在门口看见一个新邻居。",
+      "traditional": null,
+      "translation": "This morning, she saw a new neighbor at the door.",
+      "pinyin": "jīntiān shàngwǔ, tā zài ménkǒu kànjiàn yīgè xīn línjū.",
+      "tokens": [
+        {
+          "text": "今天上午",
+          "pinyin": "jīntiān shàngwǔ",
+          "gloss": "this morning",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "gloss": "she",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "门口",
+          "pinyin": "ménkǒu",
+          "gloss": "doorway",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "看见",
+          "pinyin": "kànjiàn",
+          "gloss": "see",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "新",
+          "pinyin": "xīn",
+          "gloss": "new",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "邻居",
+          "pinyin": "línjū",
+          "gloss": "neighbor",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 14400
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 1,
+      "hanzi": "你好！你是新邻居吗？",
+      "traditional": null,
+      "translation": "Hello! Are you a new neighbor?",
+      "pinyin": "nǐ hǎo！ nǐ shì xīn línjū ma？",
+      "tokens": [
+        {
+          "text": "你好",
+          "pinyin": "nǐ hǎo",
+          "gloss": "hello",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "新",
+          "pinyin": "xīn",
+          "gloss": "new",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "邻居",
+          "pinyin": "línjū",
+          "gloss": "neighbor",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 2000
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 1,
+      "hanzi": "是的，我叫大明。我住在三楼。",
+      "traditional": null,
+      "translation": "Yes, my name is Daming. I live on the third floor.",
+      "pinyin": "shì de, wǒ jiào Dàmíng. wǒ zhù zài sān lóu.",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "gloss": "call",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "住",
+          "pinyin": "zhù",
+          "gloss": "live",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "三",
+          "pinyin": "sān",
+          "gloss": "three",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "楼",
+          "pinyin": "lóu",
+          "gloss": "floor",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 3120
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "大明正在搬一个大花盆。",
+      "traditional": null,
+      "translation": "Daming is moving a large flowerpot.",
+      "pinyin": "Dàmíng zhèngzài bān yīgè dà huāpén.",
+      "tokens": [
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming (person's name)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "正在",
+          "pinyin": "zhèngzài",
+          "gloss": "is (doing something)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "搬",
+          "pinyin": "bān",
+          "gloss": "move",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大",
+          "pinyin": "dà",
+          "gloss": "big",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "花盆",
+          "pinyin": "huāpén",
+          "gloss": "flowerpot",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 7280
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 2,
+      "hanzi": "这个花盆很大，我能帮忙吗？",
+      "traditional": null,
+      "translation": "This flowerpot is very big. Can I help?",
+      "pinyin": "zhège huāpén hěn dà ， wǒ néng bāngmáng ma ？",
+      "tokens": [
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "花盆",
+          "pinyin": "huāpén",
+          "gloss": "flowerpot",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "很大",
+          "pinyin": "hěn dà",
+          "gloss": "very big",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "能",
+          "pinyin": "néng",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "帮忙",
+          "pinyin": "bāngmáng",
+          "gloss": "help",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 3120
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 2,
+      "hanzi": "谢谢！你能帮我搬上楼上吗？",
+      "traditional": null,
+      "translation": "Thank you! Can you help me carry it upstairs?",
+      "pinyin": "xièxiè! nǐ néng bāng wǒ bān shàng lóushàng ma?",
+      "tokens": [
+        {
+          "text": "谢谢",
+          "pinyin": "xièxie",
+          "gloss": "thank you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "能",
+          "pinyin": "néng",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "帮",
+          "pinyin": "bāng",
+          "gloss": "help",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "me",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "搬",
+          "pinyin": "bān",
+          "gloss": "carry",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "up",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "楼上",
+          "pinyin": "lóushàng",
+          "gloss": "upstairs",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吗",
+          "pinyin": "ma",
+          "gloss": "question particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 2720
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 2,
+      "hanzi": "没问题！我们一起搬。",
+      "traditional": null,
+      "translation": "No problem! Let's move it together.",
+      "pinyin": "méi wèntí ！ wǒmen yìqǐ bān 。",
+      "tokens": [
+        {
+          "text": "没",
+          "pinyin": "méi",
+          "gloss": "no",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "问题",
+          "pinyin": "wèntí",
+          "gloss": "problem",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "搬",
+          "pinyin": "bān",
+          "gloss": "move",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 3280
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "小雨和大明一起搬花盆。",
+      "traditional": null,
+      "translation": "Xiaoyu and Daming move the flowerpot together.",
+      "pinyin": "Xiǎo Yǔ hé Dà Míng yìqǐ bān huāpén.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dà Míng",
+          "gloss": "Daming",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "搬",
+          "pinyin": "bān",
+          "gloss": "move",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "花盆",
+          "pinyin": "huāpén",
+          "gloss": "flowerpot",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 6400
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "花盆很大，但是他们慢慢走上楼。",
+      "traditional": null,
+      "translation": "The flowerpot is very big, but they slowly walk upstairs.",
+      "pinyin": "huāpén hěn dà, dànshì tāmen mànmàn zǒu shàng lóu.",
+      "tokens": [
+        {
+          "text": "花盆",
+          "pinyin": "huāpén",
+          "gloss": "flowerpot",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "很大",
+          "pinyin": "hěn dà",
+          "gloss": "very big",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但是",
+          "pinyin": "dànshì",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "慢慢",
+          "pinyin": "mànmàn",
+          "gloss": "slowly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "走上",
+          "pinyin": "zǒu shàng",
+          "gloss": "walk up",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "楼",
+          "pinyin": "lóu",
+          "gloss": "floor",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 5680
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "到了三楼，大明打开门。",
+      "traditional": null,
+      "translation": "Arriving at the third floor, Daming opened the door.",
+      "pinyin": "dào le sān lóu ， dà míng dǎ kāi mén 。",
+      "tokens": [
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrive",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "三",
+          "pinyin": "sān",
+          "gloss": "three",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "楼",
+          "pinyin": "lóu",
+          "gloss": "floor",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "dà míng",
+          "gloss": "Daming",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "打开门",
+          "pinyin": "dǎ kāi mén",
+          "gloss": "open the door",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 4240
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 3,
+      "hanzi": "请进！这是我的家。",
+      "traditional": null,
+      "translation": "Please come in! This is my home.",
+      "pinyin": "qǐng jìn ! zhè shì wǒ de jiā .",
+      "tokens": [
+        {
+          "text": "请",
+          "pinyin": "qǐng",
+          "gloss": "please",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "进",
+          "pinyin": "jìn",
+          "gloss": "enter",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "my",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s (possession)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 1760
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "小雨看见房间里有很多花。",
+      "traditional": null,
+      "translation": "Xiaoyu sees many flowers in the room.",
+      "pinyin": "Xiǎo Yǔ kànjiàn fángjiān lǐ yǒu hěnduō huā.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "看见",
+          "pinyin": "kànjiàn",
+          "gloss": "see",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "房间",
+          "pinyin": "fángjiān",
+          "gloss": "room",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěnduō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "花",
+          "pinyin": "huā",
+          "gloss": "flower",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 4960
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 4,
+      "hanzi": "你的家很漂亮！这些花真好看。",
+      "traditional": null,
+      "translation": "Your home is very beautiful! These flowers are really pretty.",
+      "pinyin": "nǐ de jiā hěn piàoliang! zhèxiē huā zhēn hǎokàn.",
+      "tokens": [
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "gloss": "home",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很漂亮",
+          "pinyin": "hěn piàoliang",
+          "gloss": "very beautiful",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "花",
+          "pinyin": "huā",
+          "gloss": "flower",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "真",
+          "pinyin": "zhēn",
+          "gloss": "really",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "好看",
+          "pinyin": "hǎokàn",
+          "gloss": "pretty",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 8560
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 4,
+      "hanzi": "谢谢！我每天都看这些花。",
+      "traditional": null,
+      "translation": "Thank you! I look at these flowers every day.",
+      "pinyin": "xièxie! wǒ měitiān dōu kàn zhèxiē huā.",
+      "tokens": [
+        {
+          "text": "谢谢",
+          "pinyin": "xièxie",
+          "gloss": "thanks",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "每天",
+          "pinyin": "měitiān",
+          "gloss": "every day",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "花",
+          "pinyin": "huā",
+          "gloss": "flower",
+          "difficulty": 3,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 2400
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 4,
+      "hanzi": "对了，你叫什么名字？",
+      "traditional": null,
+      "translation": "By the way, what's your name?",
+      "pinyin": "duì le, nǐ jiào shénme míngzì?",
+      "tokens": [
+        {
+          "text": "对",
+          "pinyin": "duì",
+          "gloss": "right",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "gloss": "called",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shénme",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名字",
+          "pinyin": "míngzì",
+          "gloss": "name",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 1760
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 4,
+      "hanzi": "我叫小雨。很高兴认识你！",
+      "traditional": null,
+      "translation": "My name is Xiaoyu. Nice to meet you!",
+      "pinyin": "wǒ jiào xiǎoyǔ. hěn gāoxìng rènshi nǐ!",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "gloss": "be called",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "高兴",
+          "pinyin": "gāoxìng",
+          "gloss": "happy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "认识",
+          "pinyin": "rènshi",
+          "gloss": "know",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 2240
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "大明和小雨是好朋友。",
+      "traditional": null,
+      "translation": "Daming and Xiaoyu are good friends.",
+      "pinyin": "Dà Míng hé Xiǎo Yǔ shì hǎo péngyǒu.",
+      "tokens": [
+        {
+          "text": "大明",
+          "pinyin": "Dà Míng",
+          "gloss": "Daming",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo Yǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "朋友",
+          "pinyin": "péngyǒu",
+          "gloss": "friends",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 9040
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "他们喜欢一起喝咖啡。",
+      "traditional": null,
+      "translation": "They like to drink coffee together.",
+      "pinyin": "tāmen xǐhuān yìqǐ hē kāfēi.",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "喜欢",
+          "pinyin": "xǐhuān",
+          "gloss": "like",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "喝咖啡",
+          "pinyin": "hē kāfēi",
+          "gloss": "drink coffee",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 7840
+      }
+    }
+  ]
+}

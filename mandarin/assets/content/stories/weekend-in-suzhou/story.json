@@ -1,0 +1,2560 @@
+{
+  "schemaVersion": 1,
+  "id": "weekend-in-suzhou",
+  "title": "苏州的周末",
+  "pinyinTitle": "Sūzhōu de zhōumò",
+  "englishTitle": "A Weekend in Suzhou",
+  "summary": "Xiaoyu and Daming visit Suzhou for the weekend, exploring gardens and canals, trying local snacks, and resolving a small misunderstanding.",
+  "level": "intermediate",
+  "topic": "A short trip to Suzhou",
+  "minutes": 4,
+  "gradingProfile": "hsk2-v1",
+  "learningWords": [
+    "苏",
+    "州",
+    "园林",
+    "桥",
+    "风景",
+    "小吃",
+    "房子",
+    "迷路",
+    "好像",
+    "误会"
+  ],
+  "glyph": "苏",
+  "colors": [
+    "#4A90D9",
+    "#2C5F8A"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "xiaoyu",
+      "name": "小雨",
+      "speaker": "Serena"
+    },
+    {
+      "id": "daming",
+      "name": "大明",
+      "speaker": "Dylan"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "周末，小雨和大明去苏州旅行。",
+      "traditional": null,
+      "translation": "On the weekend, Xiaoyu and Daming go to Suzhou for a trip.",
+      "pinyin": "zhōumò, Xiǎoyǔ hé Dàmíng qù Sūzhōu lǚxíng.",
+      "tokens": [
+        {
+          "text": "周末",
+          "pinyin": "zhōumò",
+          "gloss": "weekend",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "旅行",
+          "pinyin": "lǚxíng",
+          "gloss": "travel",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 3920
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "他们坐火车，早上就到了苏州。",
+      "traditional": null,
+      "translation": "They took the train and arrived in Suzhou in the morning.",
+      "pinyin": "Tāmen zuò huǒchē, zǎoshang jiù dào le Sūzhōu.",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "坐火车",
+          "pinyin": "zuò huǒchē",
+          "gloss": "take a train",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "早上",
+          "pinyin": "zǎoshang",
+          "gloss": "morning",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "就",
+          "pinyin": "jiù",
+          "gloss": "then; already",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "arrive",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou (city)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 3680
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 1,
+      "hanzi": "我们先去园林看看吧。",
+      "traditional": null,
+      "translation": "Let's go check out the gardens first.",
+      "pinyin": "wǒmen xiān qù yuánlín kànkan ba .",
+      "tokens": [
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "先",
+          "pinyin": "xiān",
+          "gloss": "first",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "园林",
+          "pinyin": "yuánlín",
+          "gloss": "gardens",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "看看",
+          "pinyin": "kànkan",
+          "gloss": "have a look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "suggestion particle",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 1440
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 1,
+      "hanzi": "好，我听说苏州的园林很有名。",
+      "traditional": null,
+      "translation": "Okay, I've heard that Suzhou's gardens are very famous.",
+      "pinyin": "Hǎo, wǒ tīngshuō Sūzhōu de yuánlín hěn yǒumíng.",
+      "tokens": [
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "okay",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "听说",
+          "pinyin": "tīngshuō",
+          "gloss": "hear that",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "园林",
+          "pinyin": "yuánlín",
+          "gloss": "gardens",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有名",
+          "pinyin": "yǒumíng",
+          "gloss": "famous",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 3040
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "他们买了门票，走进一个漂亮的园林。",
+      "traditional": null,
+      "translation": "They bought tickets and walked into a beautiful garden.",
+      "pinyin": "tāmen mǎi le ménpiào, zǒujìn yīgè piàoliang de yuánlín.",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "买",
+          "pinyin": "mǎi",
+          "gloss": "buy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "门票",
+          "pinyin": "ménpiào",
+          "gloss": "ticket",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "走进",
+          "pinyin": "zǒujìn",
+          "gloss": "walk into",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "漂亮",
+          "pinyin": "piàoliang",
+          "gloss": "beautiful",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "MOD",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "园林",
+          "pinyin": "yuánlín",
+          "gloss": "garden",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 34240
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "园林里有桥、水和很多花。",
+      "traditional": null,
+      "translation": "There are bridges, water, and many flowers in the garden.",
+      "pinyin": "yuán lín lǐ yǒu qiáo shuǐ hé hěn duō huā",
+      "tokens": [
+        {
+          "text": "园林",
+          "pinyin": "yuán lín",
+          "gloss": "garden",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "there are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "桥",
+          "pinyin": "qiáo",
+          "gloss": "bridge",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "、",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "水",
+          "pinyin": "shuǐ",
+          "gloss": "water",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěn duō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "花",
+          "pinyin": "huā",
+          "gloss": "flower",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 3040
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 2,
+      "hanzi": "这里的风景真好！",
+      "traditional": null,
+      "translation": "The scenery here is really beautiful!",
+      "pinyin": "zhèlǐ de fēngjǐng zhēn hǎo",
+      "tokens": [
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "gloss": "here",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "风景",
+          "pinyin": "fēngjǐng",
+          "gloss": "scenery",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "真",
+          "pinyin": "zhēn",
+          "gloss": "really",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 1600
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 2,
+      "hanzi": "是啊，我们多看一看吧。",
+      "traditional": null,
+      "translation": "Yes, let's take a good look.",
+      "pinyin": "shì a, wǒmen duō kàn yī kàn ba.",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "yes",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "啊",
+          "pinyin": "a",
+          "gloss": "(interjection)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "多",
+          "pinyin": "duō",
+          "gloss": "more",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看一看",
+          "pinyin": "kàn yī kàn",
+          "gloss": "take a look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "(suggestion)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 2080
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "中午，他们去吃苏州小吃。",
+      "traditional": null,
+      "translation": "At noon, they went to eat Suzhou snacks.",
+      "pinyin": "zhōngwǔ, tāmen qù chī Sūzhōu xiǎochī.",
+      "tokens": [
+        {
+          "text": "中午",
+          "pinyin": "zhōngwǔ",
+          "gloss": "noon",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou (city)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "小吃",
+          "pinyin": "xiǎochī",
+          "gloss": "snacks",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 2880
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 3,
+      "hanzi": "我想吃这里的小吃。",
+      "traditional": null,
+      "translation": "I want to eat the snacks here.",
+      "pinyin": "Wǒ xiǎng chī zhèlǐ de xiǎochī.",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "gloss": "here",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小吃",
+          "pinyin": "xiǎochī",
+          "gloss": "snacks",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 1600
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 3,
+      "hanzi": "好，我也喜欢这些小吃。",
+      "traditional": null,
+      "translation": "Good, I also like these snacks.",
+      "pinyin": "hǎo, wǒ yě xǐhuān zhèxiē xiǎochī.",
+      "tokens": [
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "喜欢",
+          "pinyin": "xǐhuān",
+          "gloss": "like",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小吃",
+          "pinyin": "xiǎochī",
+          "gloss": "snacks",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 2080
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "吃完小吃，他们在运河旁边走。",
+      "traditional": null,
+      "translation": "After eating snacks, they walked beside the canal.",
+      "pinyin": "chī wán xiǎochī , tāmen zài yùnhé pángbiān zǒu .",
+      "tokens": [
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "gloss": "eat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "完",
+          "pinyin": "wán",
+          "gloss": "finish",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "小吃",
+          "pinyin": "xiǎochī",
+          "gloss": "snack",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "运河",
+          "pinyin": "yùnhé",
+          "gloss": "canal",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "旁边",
+          "pinyin": "pángbiān",
+          "gloss": "beside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "walk",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 2560
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "运河旁边有很多房子和桥。",
+      "traditional": null,
+      "translation": "There are many houses and bridges beside the canal.",
+      "pinyin": "yùnhé pángbiān yǒu hěnduō fángzi hé qiáo 。",
+      "tokens": [
+        {
+          "text": "运河",
+          "pinyin": "yùnhé",
+          "gloss": "canal",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "旁边",
+          "pinyin": "pángbiān",
+          "gloss": "beside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have/there be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěnduō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "房子",
+          "pinyin": "fángzi",
+          "gloss": "house",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "桥",
+          "pinyin": "qiáo",
+          "gloss": "bridge",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 2320
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 3,
+      "hanzi": "苏州真是一个好地方。",
+      "traditional": null,
+      "translation": "Suzhou is really a good place.",
+      "pinyin": "Sūzhōu zhēn shì yī gè hǎo dìfang.",
+      "tokens": [
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou (city)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "真是",
+          "pinyin": "zhēn shì",
+          "gloss": "really",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yī gè",
+          "gloss": "a (one + measure word)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地方",
+          "pinyin": "dìfang",
+          "gloss": "place",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 1760
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 3,
+      "hanzi": "是啊，但是天气要下雨了。",
+      "traditional": null,
+      "translation": "Yes, but it's going to rain.",
+      "pinyin": "shì a, dànshì tiānqì yào xiàyǔ le.",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "啊",
+          "pinyin": "a",
+          "gloss": "(particle)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但是",
+          "pinyin": "dànshì",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "天气",
+          "pinyin": "tiānqì",
+          "gloss": "weather",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "要",
+          "pinyin": "yào",
+          "gloss": "will",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "下雨",
+          "pinyin": "xiàyǔ",
+          "gloss": "rain",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 2720
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "下午，突然下雨了。",
+      "traditional": null,
+      "translation": "In the afternoon, it suddenly rained.",
+      "pinyin": "xiàwǔ, tūrán xiàyǔ le.",
+      "tokens": [
+        {
+          "text": "下午",
+          "pinyin": "xiàwǔ",
+          "gloss": "afternoon",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "突然",
+          "pinyin": "tūrán",
+          "gloss": "suddenly",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "下雨",
+          "pinyin": "xiàyǔ",
+          "gloss": "rain",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(particle indicating change)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 1760
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 4,
+      "hanzi": "我们没有伞，怎么办？",
+      "traditional": null,
+      "translation": "We don't have an umbrella, what should we do?",
+      "pinyin": "wǒmen méiyǒu sǎn, zěnme bàn?",
+      "tokens": [
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "don't have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "伞",
+          "pinyin": "sǎn",
+          "gloss": "umbrella",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "怎么办",
+          "pinyin": "zěnme bàn",
+          "gloss": "what to do",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 1760
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 4,
+      "hanzi": "别担心，那边有一个小店，我们去买伞。",
+      "traditional": null,
+      "translation": "Don't worry, there is a small shop over there, let's go buy an umbrella.",
+      "pinyin": "bié dānxīn, nàbiān yǒu yīgè xiǎodiàn, wǒmen qù mǎi sǎn.",
+      "tokens": [
+        {
+          "text": "别",
+          "pinyin": "bié",
+          "gloss": "don't",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "担心",
+          "pinyin": "dānxīn",
+          "gloss": "worry",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "那边",
+          "pinyin": "nàbiān",
+          "gloss": "over there",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "there is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小店",
+          "pinyin": "xiǎodiàn",
+          "gloss": "small shop",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "买",
+          "pinyin": "mǎi",
+          "gloss": "buy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "伞",
+          "pinyin": "sǎn",
+          "gloss": "umbrella",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 3040
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "他们买了伞，但是走错了路，迷路了。",
+      "traditional": null,
+      "translation": "They bought umbrellas, but took the wrong path and got lost.",
+      "pinyin": "tāmen mǎi le sǎn, dànshì zǒu cuò le lù, mílù le.",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "买",
+          "pinyin": "mǎi",
+          "gloss": "buy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "伞",
+          "pinyin": "sǎn",
+          "gloss": "umbrella",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但是",
+          "pinyin": "dànshì",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "walk",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "错",
+          "pinyin": "cuò",
+          "gloss": "wrong",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "路",
+          "pinyin": "lù",
+          "gloss": "road",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "迷路",
+          "pinyin": "mílù",
+          "gloss": "get lost",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 4160
+      }
+    },
+    {
+      "id": "b020",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 4,
+      "hanzi": "我们好像迷路了。",
+      "traditional": null,
+      "translation": "We seem to be lost.",
+      "pinyin": "wǒmen hǎoxiàng mílù le .",
+      "tokens": [
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好像",
+          "pinyin": "hǎoxiàng",
+          "gloss": "seem",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "迷路",
+          "pinyin": "mílù",
+          "gloss": "lost",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b020.mp3",
+        "durationMs": 1200
+      }
+    },
+    {
+      "id": "b021",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 4,
+      "hanzi": "没关系，我们问一下路。",
+      "traditional": null,
+      "translation": "It's okay, let's ask for directions.",
+      "pinyin": "méiguānxì, wǒmen wèn yīxià lù.",
+      "tokens": [
+        {
+          "text": "没关系",
+          "pinyin": "méiguānxì",
+          "gloss": "it's okay",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "问",
+          "pinyin": "wèn",
+          "gloss": "ask",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一下",
+          "pinyin": "yīxià",
+          "gloss": "a bit",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "路",
+          "pinyin": "lù",
+          "gloss": "road",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b021.mp3",
+        "durationMs": 1920
+      }
+    },
+    {
+      "id": "b022",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "一位阿姨告诉他们怎么走，他们很快找到了路。",
+      "traditional": null,
+      "translation": "An aunt told them how to go, and they quickly found the way.",
+      "pinyin": "yī wèi ā yí gào su tā men zěn me zǒu ，tā men hěn kuài zhǎo dào le lù 。",
+      "tokens": [
+        {
+          "text": "一位",
+          "pinyin": "yī wèi",
+          "gloss": "one (measure word for people)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "阿姨",
+          "pinyin": "ā yí",
+          "gloss": "aunt",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "告诉",
+          "pinyin": "gào su",
+          "gloss": "told",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tā men",
+          "gloss": "they",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "怎么",
+          "pinyin": "zěn me",
+          "gloss": "how",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "go",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tā men",
+          "gloss": "they",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "很快",
+          "pinyin": "hěn kuài",
+          "gloss": "quickly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎo dào",
+          "gloss": "found",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(completion marker)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "路",
+          "pinyin": "lù",
+          "gloss": "road",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b022.mp3",
+        "durationMs": 3120
+      }
+    },
+    {
+      "id": "b023",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "但是小雨和大明有了一个小误会。",
+      "traditional": null,
+      "translation": "But Xiaoyu and Daming had a small misunderstanding.",
+      "pinyin": "dànshì Xiǎoyǔ hé Dàmíng yǒule yī gè xiǎo wùhuì.",
+      "tokens": [
+        {
+          "text": "但是",
+          "pinyin": "dànshì",
+          "gloss": "but",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "大明",
+          "pinyin": "Dàmíng",
+          "gloss": "Daming",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yī gè",
+          "gloss": "one (measure word)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "误会",
+          "pinyin": "wùhuì",
+          "gloss": "misunderstanding",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b023.mp3",
+        "durationMs": 2560
+      }
+    },
+    {
+      "id": "b024",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 5,
+      "hanzi": "你刚才为什么走那么快？我以为你生气了。",
+      "traditional": null,
+      "translation": "Why were you walking so fast just now? I thought you were angry.",
+      "pinyin": "nǐ gāngcái wèishénme zǒu nàme kuài? wǒ yǐwéi nǐ shēngqì le.",
+      "tokens": [
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "刚才",
+          "pinyin": "gāngcái",
+          "gloss": "just now",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "为什么",
+          "pinyin": "wèishénme",
+          "gloss": "why",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "walk",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "那么",
+          "pinyin": "nàme",
+          "gloss": "so",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "快",
+          "pinyin": "kuài",
+          "gloss": "fast",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "以为",
+          "pinyin": "yǐwéi",
+          "gloss": "thought",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "生气",
+          "pinyin": "shēngqì",
+          "gloss": "angry",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(past tense marker)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b024.mp3",
+        "durationMs": 2880
+      }
+    },
+    {
+      "id": "b025",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 5,
+      "hanzi": "我没有生气，我只是想快点找到路。",
+      "traditional": null,
+      "translation": "I'm not angry, I just want to find the way quickly.",
+      "pinyin": "Wǒ méiyǒu shēngqì, wǒ zhǐshì xiǎng kuàidiǎn zhǎodào lù.",
+      "tokens": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "生气",
+          "pinyin": "shēngqì",
+          "gloss": "angry",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "只是",
+          "pinyin": "zhǐshì",
+          "gloss": "just",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "快点",
+          "pinyin": "kuàidiǎn",
+          "gloss": "quickly",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎodào",
+          "gloss": "find",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "路",
+          "pinyin": "lù",
+          "gloss": "way",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b025.mp3",
+        "durationMs": 4720
+      }
+    },
+    {
+      "id": "b026",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 5,
+      "hanzi": "对不起，是我误会了。",
+      "traditional": null,
+      "translation": "I'm sorry, it was my misunderstanding.",
+      "pinyin": "duìbuqǐ, shì wǒ wùhuì le.",
+      "tokens": [
+        {
+          "text": "对不起",
+          "pinyin": "duìbuqǐ",
+          "gloss": "sorry",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "误会",
+          "pinyin": "wùhuì",
+          "gloss": "misunderstand",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b026.mp3",
+        "durationMs": 1440
+      }
+    },
+    {
+      "id": "b027",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 5,
+      "hanzi": "没关系，我们再去看苏州吧。",
+      "traditional": null,
+      "translation": "It's okay, let's go see Suzhou again.",
+      "pinyin": "méiguānxì, wǒmen zài qù kàn Sūzhōu ba.",
+      "tokens": [
+        {
+          "text": "没关系",
+          "pinyin": "méiguānxì",
+          "gloss": "it's okay",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "再",
+          "pinyin": "zài",
+          "gloss": "again",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "see",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "(suggestion particle)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b027.mp3",
+        "durationMs": 2160
+      }
+    },
+    {
+      "id": "b028",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 6,
+      "hanzi": "晚上没有雨了，他们去看晚上的苏州。",
+      "traditional": null,
+      "translation": "There was no rain in the evening, so they went to see Suzhou at night.",
+      "pinyin": "wǎnshang méiyǒu yǔ le, tāmen qù kàn wǎnshang de Sūzhōu.",
+      "tokens": [
+        {
+          "text": "晚上",
+          "pinyin": "wǎnshang",
+          "gloss": "evening",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "not have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "雨",
+          "pinyin": "yǔ",
+          "gloss": "rain",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "change of state",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "see",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "晚上",
+          "pinyin": "wǎnshang",
+          "gloss": "evening",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou (city)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b028.mp3",
+        "durationMs": 11920
+      }
+    },
+    {
+      "id": "b029",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 6,
+      "hanzi": "桥上有很多灯，运河里的灯很漂亮。",
+      "traditional": null,
+      "translation": "There are many lights on the bridge, and the lights in the canal are very beautiful.",
+      "pinyin": "qiáo shàng yǒu hěn duō dēng ， yùn hé lǐ de dēng hěn piào liang 。",
+      "tokens": [
+        {
+          "text": "桥",
+          "pinyin": "qiáo",
+          "gloss": "bridge",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "there is/are",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěn duō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯",
+          "pinyin": "dēng",
+          "gloss": "light",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "运河",
+          "pinyin": "yùn hé",
+          "gloss": "canal",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "灯",
+          "pinyin": "dēng",
+          "gloss": "light",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "很漂亮",
+          "pinyin": "hěn piào liang",
+          "gloss": "very beautiful",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b029.mp3",
+        "durationMs": 2960
+      }
+    },
+    {
+      "id": "b030",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 6,
+      "hanzi": "这个周末真好，下次我们再来苏州旅行吧。",
+      "traditional": null,
+      "translation": "This weekend is really nice; next time we'll come to Suzhou for a trip again.",
+      "pinyin": "zhège zhōumò zhēn hǎo ， xiàcì wǒmen zài lái Sūzhōu lǚxíng ba 。",
+      "tokens": [
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "周末",
+          "pinyin": "zhōumò",
+          "gloss": "weekend",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "真",
+          "pinyin": "zhēn",
+          "gloss": "really",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "下次",
+          "pinyin": "xiàcì",
+          "gloss": "next time",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "再",
+          "pinyin": "zài",
+          "gloss": "again",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "来",
+          "pinyin": "lái",
+          "gloss": "come",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "苏州",
+          "pinyin": "Sūzhōu",
+          "gloss": "Suzhou",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "旅行",
+          "pinyin": "lǚxíng",
+          "gloss": "travel",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "吧",
+          "pinyin": "ba",
+          "gloss": "particle (suggestion)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b030.mp3",
+        "durationMs": 3760
+      }
+    },
+    {
+      "id": "b031",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 6,
+      "hanzi": "好，我们下次还要去更多的园林。",
+      "traditional": null,
+      "translation": "Good, we need to go to more gardens next time.",
+      "pinyin": "hǎo, wǒmen xiàcì hái yào qù gèng duō de yuánlín.",
+      "tokens": [
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "good",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "下次",
+          "pinyin": "xiàcì",
+          "gloss": "next time",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "还要",
+          "pinyin": "hái yào",
+          "gloss": "still need to",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "gloss": "go",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "更",
+          "pinyin": "gèng",
+          "gloss": "more",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "多",
+          "pinyin": "duō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "园林",
+          "pinyin": "yuánlín",
+          "gloss": "garden",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b031.mp3",
+        "durationMs": 2480
+      }
+    }
+  ]
+}

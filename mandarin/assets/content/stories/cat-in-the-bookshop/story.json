@@ -1,0 +1,2050 @@
+{
+  "schemaVersion": 1,
+  "id": "cat-in-the-bookshop",
+  "title": "书店里的猫",
+  "pinyinTitle": "Shūdiàn lǐ de māo",
+  "englishTitle": "The Cat in the Bookshop",
+  "summary": "A cat disappears among the shelves, leading the owner and a customer to an old note.",
+  "level": "intermediate",
+  "topic": "A bookshop cat leads to a discovery",
+  "minutes": 4,
+  "gradingProfile": "hsk2-v1",
+  "learningWords": [
+    "常常",
+    "书架",
+    "最后",
+    "角落",
+    "秘密",
+    "惊喜"
+  ],
+  "glyph": "猫",
+  "colors": [
+    "#D7482F",
+    "#8E2F21"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "laoban",
+      "name": "老板",
+      "speaker": "Dylan"
+    },
+    {
+      "id": "guke",
+      "name": "顾客",
+      "speaker": "Serena"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "有一个小书店，书店里有一只猫。",
+      "traditional": null,
+      "translation": "There is a small bookstore, and there is a cat in the bookstore.",
+      "pinyin": "yǒu yí gè xiǎo shū diàn, shū diàn lǐ yǒu yì zhī māo.",
+      "tokens": [
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have/exist",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yí gè",
+          "gloss": "one (measure word)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "小",
+          "pinyin": "xiǎo",
+          "gloss": "small",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "书店",
+          "pinyin": "shū diàn",
+          "gloss": "bookstore",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "书店",
+          "pinyin": "shū diàn",
+          "gloss": "bookstore",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have/exist",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一只",
+          "pinyin": "yì zhī",
+          "gloss": "one (measure word for animals)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 4080
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "猫是老板的猫，它常常在书架旁边睡觉。",
+      "traditional": null,
+      "translation": "The cat is the boss's cat, it often sleeps next to the bookshelf.",
+      "pinyin": "māo shì lǎobǎn de māo ， tā chángcháng zài shūjià pángbiān shuìjiào 。",
+      "tokens": [
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "老板",
+          "pinyin": "lǎobǎn",
+          "gloss": "boss",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s (possessive particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "常常",
+          "pinyin": "chángcháng",
+          "gloss": "often",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at/in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "书架",
+          "pinyin": "shūjià",
+          "gloss": "bookshelf",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "旁边",
+          "pinyin": "pángbiān",
+          "gloss": "beside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "睡觉",
+          "pinyin": "shuìjiào",
+          "gloss": "sleep",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 6000
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "一天下午，一个顾客走进书店。",
+      "traditional": null,
+      "translation": "One afternoon, a customer walked into a bookstore.",
+      "pinyin": "yītiān xiàwǔ , yí gè gùkè zǒujìn shūdiàn .",
+      "tokens": [
+        {
+          "text": "一天",
+          "pinyin": "yītiān",
+          "gloss": "one day",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "下午",
+          "pinyin": "xiàwǔ",
+          "gloss": "afternoon",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yí gè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "顾客",
+          "pinyin": "gùkè",
+          "gloss": "customer",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "走进",
+          "pinyin": "zǒujìn",
+          "gloss": "walk into",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "书店",
+          "pinyin": "shūdiàn",
+          "gloss": "bookstore",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 3600
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "dialogue",
+      "speakerId": "guke",
+      "section": 1,
+      "hanzi": "你好，我想买一本书。",
+      "traditional": null,
+      "translation": "Hello, I want to buy a book.",
+      "pinyin": "nǐ hǎo, wǒ xiǎng mǎi yī běn shū.",
+      "tokens": [
+        {
+          "text": "你好",
+          "pinyin": "nǐ hǎo",
+          "gloss": "hello",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "I",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "gloss": "want",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "买",
+          "pinyin": "mǎi",
+          "gloss": "buy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "本书",
+          "pinyin": "běn shū",
+          "gloss": "book (measure word + book)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 1680
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "dialogue",
+      "speakerId": "laoban",
+      "section": 1,
+      "hanzi": "欢迎！你找什么书？",
+      "traditional": null,
+      "translation": "Welcome! What book are you looking for?",
+      "pinyin": "huānyíng",
+      "tokens": [
+        {
+          "text": "欢迎",
+          "pinyin": "huānyíng",
+          "gloss": "welcome",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "look for",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shénme",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "书",
+          "pinyin": "shū",
+          "gloss": "book",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 1920
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "顾客看了看书架，发现猫不见了。",
+      "traditional": null,
+      "translation": "The customer looked at the bookshelf and found that the cat was missing.",
+      "pinyin": "gùkè kàn le kàn shūjià, fāxiàn māo bùjiàn le.",
+      "tokens": [
+        {
+          "text": "顾客",
+          "pinyin": "gùkè",
+          "gloss": "customer",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "书架",
+          "pinyin": "shūjià",
+          "gloss": "bookshelf",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "discover",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "不见",
+          "pinyin": "bùjiàn",
+          "gloss": "disappear",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 4160
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "dialogue",
+      "speakerId": "guke",
+      "section": 2,
+      "hanzi": "猫呢？刚才它还在这里的。",
+      "traditional": null,
+      "translation": "Where is the cat? It was just here.",
+      "pinyin": "Māo ne? Gāngcái tā hái zài zhèlǐ de.",
+      "tokens": [
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "呢",
+          "pinyin": "ne",
+          "gloss": "[question particle]",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "刚才",
+          "pinyin": "gāngcái",
+          "gloss": "just now",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "还",
+          "pinyin": "hái",
+          "gloss": "still",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "gloss": "here",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "[modal particle]",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 2400
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "dialogue",
+      "speakerId": "laoban",
+      "section": 2,
+      "hanzi": "是啊，它一般不会走远的。",
+      "traditional": null,
+      "translation": "Yes, it usually doesn't go far.",
+      "pinyin": "shì a, tā yībān bù huì zǒu yuǎn de.",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "yes",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "啊",
+          "pinyin": "a",
+          "gloss": "(interjection)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一般",
+          "pinyin": "yībān",
+          "gloss": "usually",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "不会",
+          "pinyin": "bù huì",
+          "gloss": "won't",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "go",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "远",
+          "pinyin": "yuǎn",
+          "gloss": "far",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(particle)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 2080
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "老板和顾客开始在书店里找猫。",
+      "traditional": null,
+      "translation": "The boss and the customer started looking for the cat in the bookstore.",
+      "pinyin": "lǎobǎn hé gùkè kāishǐ zài shūdiàn lǐ zhǎo māo .",
+      "tokens": [
+        {
+          "text": "老板",
+          "pinyin": "lǎobǎn",
+          "gloss": "boss",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "顾客",
+          "pinyin": "gùkè",
+          "gloss": "customer",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "开始",
+          "pinyin": "kāishǐ",
+          "gloss": "start",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "书店",
+          "pinyin": "shūdiàn",
+          "gloss": "bookstore",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "look for",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 3200
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "他们找了很多地方，都没有找到。",
+      "traditional": null,
+      "translation": "They looked in many places but didn't find it.",
+      "pinyin": "tāmen zhǎo le hěnduō dìfang, dōu méiyǒu zhǎodào.",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "找",
+          "pinyin": "zhǎo",
+          "gloss": "look for",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěnduō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地方",
+          "pinyin": "dìfang",
+          "gloss": "place",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "gloss": "did not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎodào",
+          "gloss": "find",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 2880
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "最后，老板走到书店的一个角落。",
+      "traditional": null,
+      "translation": "Finally, the boss walked to a corner of the bookstore.",
+      "pinyin": "zuìhòu, lǎobǎn zǒu dào shūdiàn de yīgè jiǎoluò.",
+      "tokens": [
+        {
+          "text": "最后",
+          "pinyin": "zuìhòu",
+          "gloss": "finally",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "老板",
+          "pinyin": "lǎobǎn",
+          "gloss": "boss",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "walk",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "to",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "书店",
+          "pinyin": "shūdiàn",
+          "gloss": "bookstore",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "角落",
+          "pinyin": "jiǎoluò",
+          "gloss": "corner",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 2960
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "他发现猫坐在一个旧书架下面。",
+      "traditional": null,
+      "translation": "He found the cat sitting under an old bookshelf.",
+      "pinyin": "tā fāxiàn māo zuò zài yī gè jiù shūjià xiàmiàn .",
+      "tokens": [
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "find",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "坐在",
+          "pinyin": "zuò zài",
+          "gloss": "sit at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yī gè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "旧",
+          "pinyin": "jiù",
+          "gloss": "old",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "书架",
+          "pinyin": "shūjià",
+          "gloss": "bookshelf",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "下面",
+          "pinyin": "xiàmiàn",
+          "gloss": "under",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 2960
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "dialogue",
+      "speakerId": "laoban",
+      "section": 3,
+      "hanzi": "找到了！它在这里。",
+      "traditional": null,
+      "translation": "Found it! It is here.",
+      "pinyin": "zhǎodào le! Tā zài zhèlǐ.",
+      "tokens": [
+        {
+          "text": "找到",
+          "pinyin": "zhǎodào",
+          "gloss": "found",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "gloss": "here",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 1600
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "顾客也走过来，看见猫的旁边有一张纸条。",
+      "traditional": null,
+      "translation": "The customer also walked over and saw a note beside the cat.",
+      "pinyin": "gùkè yě zǒu guòlái ， kànjiàn māo de pángbiān yǒu yī zhāng zhǐtiáo 。",
+      "tokens": [
+        {
+          "text": "顾客",
+          "pinyin": "gùkè",
+          "gloss": "customer",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "gloss": "walk",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "过来",
+          "pinyin": "guòlái",
+          "gloss": "come over",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "看见",
+          "pinyin": "kànjiàn",
+          "gloss": "see",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "旁边",
+          "pinyin": "pángbiān",
+          "gloss": "beside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一张",
+          "pinyin": "yī zhāng",
+          "gloss": "a (piece of)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "纸条",
+          "pinyin": "zhǐtiáo",
+          "gloss": "note",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 5920
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "dialogue",
+      "speakerId": "guke",
+      "section": 3,
+      "hanzi": "那是什么？一张旧纸条。",
+      "traditional": null,
+      "translation": "What is that? An old note.",
+      "pinyin": "nà shì shénme? yī zhāng jiù zhǐtiáo.",
+      "tokens": [
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shénme",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "一张",
+          "pinyin": "yī zhāng",
+          "gloss": "a piece of",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "旧",
+          "pinyin": "jiù",
+          "gloss": "old",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "纸条",
+          "pinyin": "zhǐtiáo",
+          "gloss": "note",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 2000
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "老板拿起纸条，上面写着几个字。",
+      "traditional": null,
+      "translation": "The boss picked up the note, on which were written a few words.",
+      "pinyin": "lǎo bǎn ná qǐ zhǐ tiáo ， shàng miàn xiě zhe jǐ gè zì 。",
+      "tokens": [
+        {
+          "text": "老板",
+          "pinyin": "lǎo bǎn",
+          "gloss": "boss",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "拿",
+          "pinyin": "ná",
+          "gloss": "pick up",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "起",
+          "pinyin": "qǐ",
+          "gloss": "up",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "纸条",
+          "pinyin": "zhǐ tiáo",
+          "gloss": "note",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "上面",
+          "pinyin": "shàng miàn",
+          "gloss": "on top",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "写",
+          "pinyin": "xiě",
+          "gloss": "write",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "-ing",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "几个",
+          "pinyin": "jǐ gè",
+          "gloss": "a few",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "字",
+          "pinyin": "zì",
+          "gloss": "word",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 2800
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "dialogue",
+      "speakerId": "laoban",
+      "section": 4,
+      "hanzi": "“谢谢你的猫，它帮我找到了这本书。”",
+      "traditional": null,
+      "translation": "Thank you for your cat, it helped me find this book.",
+      "pinyin": "Xièxiè nǐ de māo, tā bāng wǒ zhǎodào le zhè běn shū.",
+      "tokens": [
+        {
+          "text": "“",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "谢谢",
+          "pinyin": "xièxie",
+          "gloss": "thank",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "gloss": "you",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "它",
+          "pinyin": "tā",
+          "gloss": "it",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "帮",
+          "pinyin": "bāng",
+          "gloss": "help",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "gloss": "me",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "找到",
+          "pinyin": "zhǎodào",
+          "gloss": "find",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "本书",
+          "pinyin": "běn shū",
+          "gloss": "book",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。”",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 3520
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "纸条下面还有一本书，是一本很旧的故事书。",
+      "traditional": null,
+      "translation": "Under the note, there was also a book, a very old storybook.",
+      "pinyin": "zhǐtiáo xiàmiàn hái yǒu yī běn shū ， shì yī běn hěn jiù de gùshìshū 。",
+      "tokens": [
+        {
+          "text": "纸条",
+          "pinyin": "zhǐtiáo",
+          "gloss": "note",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "下面",
+          "pinyin": "xiàmiàn",
+          "gloss": "under",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "还有",
+          "pinyin": "hái yǒu",
+          "gloss": "there is also",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "一",
+          "pinyin": "yī",
+          "gloss": "one",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "本书",
+          "pinyin": "běn shū",
+          "gloss": "book (measure word)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一本",
+          "pinyin": "yī běn",
+          "gloss": "a (volume)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "旧",
+          "pinyin": "jiù",
+          "gloss": "old",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "故事书",
+          "pinyin": "gùshìshū",
+          "gloss": "storybook",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 4000
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "dialogue",
+      "speakerId": "guke",
+      "section": 4,
+      "hanzi": "真有意思！这只猫发现了这个秘密。",
+      "traditional": null,
+      "translation": "How interesting! This cat discovered this secret.",
+      "pinyin": "zhēn yǒuyìsi! zhè zhī māo fāxiàn le zhège mìmì.",
+      "tokens": [
+        {
+          "text": "真",
+          "pinyin": "zhēn",
+          "gloss": "really",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "有意思",
+          "pinyin": "yǒuyìsi",
+          "gloss": "interesting",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "！",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "只",
+          "pinyin": "zhī",
+          "gloss": "[measure word for animals]",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "discovered",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "[past tense marker]",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "秘密",
+          "pinyin": "mìmì",
+          "gloss": "secret",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 2880
+      }
+    },
+    {
+      "id": "b020",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "老板笑了，他把旧书放在书架上。",
+      "traditional": null,
+      "translation": "The boss smiled, he put the old book on the bookshelf.",
+      "pinyin": "lǎobǎn xiào le, tā bǎ jiùshū fàng zài shūjià shàng.",
+      "tokens": [
+        {
+          "text": "老板",
+          "pinyin": "lǎobǎn",
+          "gloss": "boss",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "笑",
+          "pinyin": "xiào",
+          "gloss": "smile",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "PERF",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他",
+          "pinyin": "tā",
+          "gloss": "he",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "gloss": "BA (object marker)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "旧书",
+          "pinyin": "jiùshū",
+          "gloss": "old book",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "放在",
+          "pinyin": "fàng zài",
+          "gloss": "put on",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "书架上",
+          "pinyin": "shūjià shàng",
+          "gloss": "bookshelf on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b020.mp3",
+        "durationMs": 3840
+      }
+    },
+    {
+      "id": "b021",
+      "kind": "dialogue",
+      "speakerId": "laoban",
+      "section": 5,
+      "hanzi": "这只猫总是能带来惊喜。",
+      "traditional": null,
+      "translation": "This cat always brings surprises.",
+      "pinyin": "zhè zhǐ māo zǒngshì néng dàilái jīngxǐ 。",
+      "tokens": [
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "只",
+          "pinyin": "zhǐ",
+          "gloss": "measure word for animals",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "总是",
+          "pinyin": "zǒngshì",
+          "gloss": "always",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "能",
+          "pinyin": "néng",
+          "gloss": "can",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "带来",
+          "pinyin": "dàilái",
+          "gloss": "bring",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "惊喜",
+          "pinyin": "jīngxǐ",
+          "gloss": "surprise",
+          "difficulty": 4,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b021.mp3",
+        "durationMs": 2080
+      }
+    },
+    {
+      "id": "b022",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "顾客买了那本旧故事书，高兴地离开了。",
+      "traditional": null,
+      "translation": "The customer bought that old storybook and left happily.",
+      "pinyin": "Gùkè mǎi le nà běn jiù gùshìshū, gāoxìng de líkāi le.",
+      "tokens": [
+        {
+          "text": "顾客",
+          "pinyin": "gùkè",
+          "gloss": "customer",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "买",
+          "pinyin": "mǎi",
+          "gloss": "buy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "gloss": "that",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "本",
+          "pinyin": "běn",
+          "gloss": "(measure for books)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "旧",
+          "pinyin": "jiù",
+          "gloss": "old",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "故事书",
+          "pinyin": "gùshìshū",
+          "gloss": "storybook",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "高兴",
+          "pinyin": "gāoxìng",
+          "gloss": "happy",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地",
+          "pinyin": "de",
+          "gloss": "(adverbial)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "离开",
+          "pinyin": "líkāi",
+          "gloss": "leave",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b022.mp3",
+        "durationMs": 3840
+      }
+    },
+    {
+      "id": "b023",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "猫又回到书架旁边，开始睡觉。",
+      "traditional": null,
+      "translation": "The cat returned to the bookshelf and started sleeping.",
+      "pinyin": "māo yòu huí dào shū jià páng biān , kāi shǐ shuì jiào .",
+      "tokens": [
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "gloss": "cat",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "又",
+          "pinyin": "yòu",
+          "gloss": "again",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "回到",
+          "pinyin": "huí dào",
+          "gloss": "return to",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "书架",
+          "pinyin": "shū jià",
+          "gloss": "bookshelf",
+          "difficulty": 5,
+          "focus": true
+        },
+        {
+          "text": "旁边",
+          "pinyin": "páng biān",
+          "gloss": "beside",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "开始",
+          "pinyin": "kāi shǐ",
+          "gloss": "start",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "睡觉",
+          "pinyin": "shuì jiào",
+          "gloss": "sleep",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b023.mp3",
+        "durationMs": 3280
+      }
+    }
+  ]
+}

@@ -72,6 +72,21 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(saved["summary"], "Updated learner data.")
 
+    def test_vocabulary_route_uses_actual_above_level_words(self) -> None:
+        story = valid_story()
+        story["learningWords"] = []
+        story["blocks"][0]["hanzi"] = "锈迹斑斑下雨了。"
+        with tempfile.TemporaryDirectory() as temp_name:
+            draft_store = DraftStore(Path(temp_name))
+            draft_store.save(story)
+            with patch.object(server, "store", draft_store):
+                response = server.app.test_client().post(
+                    "/api/stories/drafts/red-umbrella/vocabulary"
+                )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json()["story"]["learningWords"], ["锈迹斑斑"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -15,6 +15,7 @@ from .config import LEVELS
 HAN_RE = re.compile(r"[\u3400-\u9fff]")
 HAN_RUN_RE = re.compile(r"[\u3400-\u9fff]+")
 DATA_PATH = Path(__file__).resolve().parent / "data" / "hsk2.json"
+CLASSIFIER_PREFIXES = frozenset("\u96f6\u4e00\u4e8c\u4e24\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d\u5341\u767e\u5343\u4e07\u51e0\u6bcf")
 
 
 @dataclass(frozen=True)
@@ -143,6 +144,22 @@ def _segment_han(
     return best[0][3] if best[0] else list(text)
 
 
+def _normalize_classifier_tokens(tokens: list[str]) -> list[str]:
+    """Avoid reading number + classifier + person as the word 'individual'."""
+
+    output: list[str] = []
+    for token in tokens:
+        if (
+            token == "\u4e2a\u4eba"
+            and output
+            and output[-1][-1] in CLASSIFIER_PREFIXES
+        ):
+            output.extend(("\u4e2a", "\u4eba"))
+        else:
+            output.append(token)
+    return output
+
+
 def lexical_words(story: dict[str, Any]) -> list[str]:
     words: list[str] = []
     learning = set(story.get("learningWords") or [])
@@ -175,7 +192,9 @@ def lexical_words(story: dict[str, Any]) -> list[str]:
                 )
                 if unknown_characters >= 2:
                     run_extras.add(candidate)
-            words.extend(_segment_han(run, run_extras, extras))
+            words.extend(
+                _normalize_classifier_tokens(_segment_han(run, run_extras, extras))
+            )
     return words
 
 
@@ -273,9 +292,15 @@ def vocabulary_errors(story: dict[str, Any]) -> list[str]:
 def sync_learning_words(story: dict[str, Any]) -> VocabularyReport:
     """Make the teaching list match the above-level words actually in the text."""
 
+    previous_learning_words = story.get("learningWords", [])
+    # Existing teaching terms influence the preferred segmenter. Clear them
+    # before measuring so deleted or reworded terms cannot keep themselves in
+    # the list after an editorial change.
+    story["learningWords"] = []
     report = analyze_story(story)
     maximum = LEVELS[story["level"]]["max_new_words"]
     if len(report.new_words) > maximum:
+        story["learningWords"] = previous_learning_words
         raise ValueError(
             f"Simplify the story first: it uses {len(report.new_words)} "
             f"above-level words, but {story['level']} allows {maximum}."

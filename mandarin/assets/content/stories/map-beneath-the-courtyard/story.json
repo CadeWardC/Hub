@@ -1,0 +1,2448 @@
+{
+  "schemaVersion": 1,
+  "id": "map-beneath-the-courtyard",
+  "title": "院子底下的地图",
+  "pinyinTitle": "Yuànzi dǐxià de dìtú",
+  "englishTitle": "The Map Beneath the Courtyard",
+  "summary": "During courtyard repairs, residents discover a hand-drawn map that leads them to uncover their neighborhood's shared history, sparking communal renewal.",
+  "level": "master",
+  "topic": "A hand-drawn map found during courtyard repairs",
+  "minutes": 7,
+  "gradingProfile": "hsk2-v1",
+  "learningWords": [
+    "院子",
+    "工程",
+    "居民",
+    "手绘",
+    "藏宝图",
+    "聚集",
+    "公共",
+    "宝藏",
+    "传承",
+    "焕然一新"
+  ],
+  "glyph": "图",
+  "colors": [
+    "#D7482F",
+    "#8E2F21"
+  ],
+  "voices": [
+    {
+      "id": "narrator",
+      "name": "Narrator",
+      "speaker": "Vivian"
+    },
+    {
+      "id": "xiaoyu",
+      "name": "小雨",
+      "speaker": "Serena"
+    },
+    {
+      "id": "daming",
+      "name": "大明",
+      "speaker": "Dylan"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b001",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "老院子的维修工程开始了，居民们都很期待。",
+      "traditional": null,
+      "translation": "The renovation project of the old courtyard has begun, and the residents are all looking forward to it.",
+      "pinyin": "lǎo yuànzi de wéixiū gōngchéng kāishǐ le , jūmín men dōu hěn qīdài .",
+      "tokens": [
+        {
+          "text": "老",
+          "pinyin": "lǎo",
+          "gloss": "old",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "courtyard",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s (possessive marker)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "维修",
+          "pinyin": "wéixiū",
+          "gloss": "renovation",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "工程",
+          "pinyin": "gōngchéng",
+          "gloss": "project",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "开始",
+          "pinyin": "kāishǐ",
+          "gloss": "begin",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "居民",
+          "pinyin": "jūmín",
+          "gloss": "resident",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "们",
+          "pinyin": "men",
+          "gloss": "plural suffix",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "都",
+          "pinyin": "dōu",
+          "gloss": "all",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "期待",
+          "pinyin": "qīdài",
+          "gloss": "look forward to",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b001.mp3",
+        "durationMs": 3840
+      }
+    },
+    {
+      "id": "b002",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "工人挖开地面时，发现了一个铁盒子。",
+      "traditional": null,
+      "translation": "When the workers dug open the ground, they found an iron box.",
+      "pinyin": "gōngrén wākāi dìmiàn shí ， fāxiàn le yīgè tiěhézi 。",
+      "tokens": [
+        {
+          "text": "工人",
+          "pinyin": "gōngrén",
+          "gloss": "workers",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "挖开",
+          "pinyin": "wākāi",
+          "gloss": "dug open",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "地面",
+          "pinyin": "dìmiàn",
+          "gloss": "ground",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "时",
+          "pinyin": "shí",
+          "gloss": "when",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "found",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "ASP",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "铁盒子",
+          "pinyin": "tiěhézi",
+          "gloss": "iron box",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b002.mp3",
+        "durationMs": 3440
+      }
+    },
+    {
+      "id": "b003",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 1,
+      "hanzi": "这是什么？里面好像有东西。",
+      "traditional": null,
+      "translation": "What is this? It seems there is something inside.",
+      "pinyin": "zhè shì shénme? lǐmiàn hǎoxiàng yǒu dōngxi.",
+      "tokens": [
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shénme",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "里面",
+          "pinyin": "lǐmiàn",
+          "gloss": "inside",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "好像",
+          "pinyin": "hǎoxiàng",
+          "gloss": "seems",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have/exist",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "东西",
+          "pinyin": "dōngxi",
+          "gloss": "thing",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b003.mp3",
+        "durationMs": 2560
+      }
+    },
+    {
+      "id": "b004",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 1,
+      "hanzi": "大明打开盒子，发现了一张手绘地图。",
+      "traditional": null,
+      "translation": "Daming opened the box and found a hand-drawn map.",
+      "pinyin": "Dà Míng dǎ kāi hé zi, fā xiàn le yī zhāng shǒu huì dì tú.",
+      "tokens": [
+        {
+          "text": "大明",
+          "pinyin": "Dà Míng",
+          "gloss": "Daming",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "打开",
+          "pinyin": "dǎ kāi",
+          "gloss": "open",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "盒子",
+          "pinyin": "hé zi",
+          "gloss": "box",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fā xiàn",
+          "gloss": "found",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "completed-action particle",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一张",
+          "pinyin": "yī zhāng",
+          "gloss": "a",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "手绘",
+          "pinyin": "shǒu huì",
+          "gloss": "hand-drawn",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "地图",
+          "pinyin": "dì tú",
+          "gloss": "map",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b004.mp3",
+        "durationMs": 12000
+      }
+    },
+    {
+      "id": "b005",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 2,
+      "hanzi": "地图上的记号好奇怪，不像是藏宝图。",
+      "traditional": null,
+      "translation": "The markings on the map are very strange; it doesn't look like a treasure map.",
+      "pinyin": "dìtú shàng de jìhao hǎo qíguài ， bù xiàng shì cángbǎotú 。",
+      "tokens": [
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "gloss": "on",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "记号",
+          "pinyin": "jìhao",
+          "gloss": "marking",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "好",
+          "pinyin": "hǎo",
+          "gloss": "very",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "奇怪",
+          "pinyin": "qíguài",
+          "gloss": "strange",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "gloss": "not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "像是",
+          "pinyin": "xiàng shì",
+          "gloss": "seem like",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "藏宝图",
+          "pinyin": "cángbǎotú",
+          "gloss": "treasure map",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b005.mp3",
+        "durationMs": 3120
+      }
+    },
+    {
+      "id": "b006",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "小雨仔细看地图，发现上面标着许多名字。",
+      "traditional": null,
+      "translation": "Xiaoyu carefully looked at the map and found many names marked on it.",
+      "pinyin": "Xiǎo yǔ zǐxì kàn dìtú, fāxiàn shàngmiàn biāo zhe xǔduō míngzì.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎo yǔ",
+          "gloss": "Xiaoyu (person's name)",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "仔细",
+          "pinyin": "zǐxì",
+          "gloss": "carefully",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "gloss": "look at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "discover",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "上面",
+          "pinyin": "shàngmiàn",
+          "gloss": "on it",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "标",
+          "pinyin": "biāo",
+          "gloss": "mark",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "-ing (progressive suffix)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "许多",
+          "pinyin": "xǔduō",
+          "gloss": "many",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "名字",
+          "pinyin": "míngzì",
+          "gloss": "names",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b006.mp3",
+        "durationMs": 3920
+      }
+    },
+    {
+      "id": "b007",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 2,
+      "hanzi": "这些名字好像是以前住在这里的居民。",
+      "traditional": null,
+      "translation": "These names seem to be the residents who lived here before.",
+      "pinyin": "zhèxiē míngzì hǎoxiàng shì yǐqián zhù zài zhèlǐ de jūmín.",
+      "tokens": [
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "名字",
+          "pinyin": "míngzì",
+          "gloss": "names",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "好像",
+          "pinyin": "hǎoxiàng",
+          "gloss": "seem",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "以前",
+          "pinyin": "yǐqián",
+          "gloss": "before",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "住",
+          "pinyin": "zhù",
+          "gloss": "live",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "gloss": "here",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "of",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "居民",
+          "pinyin": "jūmín",
+          "gloss": "residents",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b007.mp3",
+        "durationMs": 49040
+      }
+    },
+    {
+      "id": "b008",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 2,
+      "hanzi": "他们决定根据地图寻找线索，了解院子的历史。",
+      "traditional": null,
+      "translation": "They decided to look for clues based on the map and learn about the yard's history.",
+      "pinyin": "tāmen juédìng gēnjù dìtú xúnzhǎo xiànsuǒ ， liǎojiě yuànzi de lìshǐ 。",
+      "tokens": [
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "决定",
+          "pinyin": "juédìng",
+          "gloss": "decide",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "根据",
+          "pinyin": "gēnjù",
+          "gloss": "according to",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "寻找",
+          "pinyin": "xúnzhǎo",
+          "gloss": "look for",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "线索",
+          "pinyin": "xiànsuǒ",
+          "gloss": "clue",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "了解",
+          "pinyin": "liǎojiě",
+          "gloss": "understand",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "yard",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "历史",
+          "pinyin": "lìshǐ",
+          "gloss": "history",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b008.mp3",
+        "durationMs": 4560
+      }
+    },
+    {
+      "id": "b009",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "按照地图的指示，他们在院子东边的树下挖了起来。",
+      "traditional": null,
+      "translation": "According to the map's instructions, they dug under the tree on the east side of the yard.",
+      "pinyin": "ànzhào dìtú de zhǐshì, tāmen zài yuànzi dōngbiān de shù xià wā le qǐlai.",
+      "tokens": [
+        {
+          "text": "按照",
+          "pinyin": "ànzhào",
+          "gloss": "according to",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s (possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "指示",
+          "pinyin": "zhǐshì",
+          "gloss": "instructions",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "他们",
+          "pinyin": "tāmen",
+          "gloss": "they",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "yard",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "东边",
+          "pinyin": "dōngbiān",
+          "gloss": "east side",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s (possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "树",
+          "pinyin": "shù",
+          "gloss": "tree",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "下",
+          "pinyin": "xià",
+          "gloss": "under",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "挖",
+          "pinyin": "wā",
+          "gloss": "dig",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "起来",
+          "pinyin": "qǐlai",
+          "gloss": "up (directional complement)",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b009.mp3",
+        "durationMs": 5120
+      }
+    },
+    {
+      "id": "b010",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 3,
+      "hanzi": "这里有一个陶罐，里面装着什么东西？",
+      "traditional": null,
+      "translation": "There is a clay pot here, what is inside it?",
+      "pinyin": "zhèlǐ yǒu yīgè táoguàn ， lǐmiàn zhuāng zhe shénme dōngxī ？",
+      "tokens": [
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "gloss": "here",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "there is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "陶罐",
+          "pinyin": "táoguàn",
+          "gloss": "clay pot",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "里面",
+          "pinyin": "lǐmiàn",
+          "gloss": "inside",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "装",
+          "pinyin": "zhuāng",
+          "gloss": "contains",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "gloss": "(progressive)",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "什么",
+          "pinyin": "shénme",
+          "gloss": "what",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "东西",
+          "pinyin": "dōngxī",
+          "gloss": "thing",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "？",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b010.mp3",
+        "durationMs": 2640
+      }
+    },
+    {
+      "id": "b011",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 3,
+      "hanzi": "小雨打开陶罐，发现里面是一些老照片和信件。",
+      "traditional": null,
+      "translation": "Xiaoyu opened the clay pot and found some old photos and letters inside.",
+      "pinyin": "Xiǎoyǔ dǎkāi táoguàn, fāxiàn lǐmiàn shì yìxiē lǎozhàopiàn hé xìnjiàn.",
+      "tokens": [
+        {
+          "text": "小雨",
+          "pinyin": "Xiǎoyǔ",
+          "gloss": "Xiaoyu",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "打开",
+          "pinyin": "dǎkāi",
+          "gloss": "open",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "陶罐",
+          "pinyin": "táoguàn",
+          "gloss": "clay pot",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "发现",
+          "pinyin": "fāxiàn",
+          "gloss": "find",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "里面",
+          "pinyin": "lǐmiàn",
+          "gloss": "inside",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "be",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一些",
+          "pinyin": "yìxiē",
+          "gloss": "some",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "老照片",
+          "pinyin": "lǎozhàopiàn",
+          "gloss": "old photos",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "信件",
+          "pinyin": "xìnjiàn",
+          "gloss": "letters",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b011.mp3",
+        "durationMs": 5600
+      }
+    },
+    {
+      "id": "b012",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 3,
+      "hanzi": "这些照片记录了社区过去的模样。",
+      "traditional": null,
+      "translation": "These photos record the past appearance of the community.",
+      "pinyin": "zhèxiē zhàopiàn jìlù le shèqū guòqù de múyàng .",
+      "tokens": [
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "照片",
+          "pinyin": "zhàopiàn",
+          "gloss": "photos",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "记录",
+          "pinyin": "jìlù",
+          "gloss": "record",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "社区",
+          "pinyin": "shèqū",
+          "gloss": "community",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "过去",
+          "pinyin": "guòqù",
+          "gloss": "past",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "模样",
+          "pinyin": "múyàng",
+          "gloss": "appearance",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b012.mp3",
+        "durationMs": 2800
+      }
+    },
+    {
+      "id": "b013",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "居民们聚集在一起，分享这些珍贵的回忆。",
+      "traditional": null,
+      "translation": "The residents gathered together to share these precious memories.",
+      "pinyin": "jūmín men jùjí zài yìqǐ , fēnxiǎng zhèxiē zhēnguì de huíyì .",
+      "tokens": [
+        {
+          "text": "居民",
+          "pinyin": "jūmín",
+          "gloss": "residents",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "们",
+          "pinyin": "men",
+          "gloss": "plural suffix",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "聚集",
+          "pinyin": "jùjí",
+          "gloss": "gathered",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一起",
+          "pinyin": "yìqǐ",
+          "gloss": "together",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "分享",
+          "pinyin": "fēnxiǎng",
+          "gloss": "share",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "珍贵",
+          "pinyin": "zhēnguì",
+          "gloss": "precious",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive/attributive",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "回忆",
+          "pinyin": "huíyì",
+          "gloss": "memories",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b013.mp3",
+        "durationMs": 4800
+      }
+    },
+    {
+      "id": "b014",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 4,
+      "hanzi": "原来这个院子以前是一个公共活动中心。",
+      "traditional": null,
+      "translation": "It turns out this yard used to be a public activity center.",
+      "pinyin": "yuánlái zhège yuànzi yǐqián shì yīgè gōnggòng huódòng zhōngxīn .",
+      "tokens": [
+        {
+          "text": "原来",
+          "pinyin": "yuánlái",
+          "gloss": "originally",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "这个",
+          "pinyin": "zhège",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "yard",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "以前",
+          "pinyin": "yǐqián",
+          "gloss": "before",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "is",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yīgè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "公共",
+          "pinyin": "gōnggòng",
+          "gloss": "public",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "活动中心",
+          "pinyin": "huódòng zhōngxīn",
+          "gloss": "activity center",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b014.mp3",
+        "durationMs": 4400
+      }
+    },
+    {
+      "id": "b015",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 4,
+      "hanzi": "这些信件里提到了很多邻里之间的故事。",
+      "traditional": null,
+      "translation": "These letters mentioned many stories among neighbors.",
+      "pinyin": "zhèxiē xìnjiàn lǐ tídào le hěnduō línlǐ zhījiān de gùshì .",
+      "tokens": [
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "信件",
+          "pinyin": "xìnjiàn",
+          "gloss": "letters",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "in",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "提到",
+          "pinyin": "tídào",
+          "gloss": "mentioned",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(perfective)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "很多",
+          "pinyin": "hěnduō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "邻里",
+          "pinyin": "línlǐ",
+          "gloss": "neighbors",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "之间",
+          "pinyin": "zhījiān",
+          "gloss": "among",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "故事",
+          "pinyin": "gùshì",
+          "gloss": "stories",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b015.mp3",
+        "durationMs": 3440
+      }
+    },
+    {
+      "id": "b016",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 4,
+      "hanzi": "大家意识到，地图的真正宝藏不是金银，而是共同的历史。",
+      "traditional": null,
+      "translation": "Everyone realized that the real treasure of the map was not gold and silver, but a shared history.",
+      "pinyin": "dàjiā yìshi dào ， dìtú de zhēnzhèng bǎozàng bùshì jīnyín ， érshì gòngtóng de lìshǐ 。",
+      "tokens": [
+        {
+          "text": "大家",
+          "pinyin": "dàjiā",
+          "gloss": "everyone",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "意识",
+          "pinyin": "yìshi",
+          "gloss": "realize",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "gloss": "to",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "真正",
+          "pinyin": "zhēnzhèng",
+          "gloss": "real",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "宝藏",
+          "pinyin": "bǎozàng",
+          "gloss": "treasure",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "不是",
+          "pinyin": "bùshì",
+          "gloss": "is not",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "金银",
+          "pinyin": "jīnyín",
+          "gloss": "gold and silver",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "而是",
+          "pinyin": "érshì",
+          "gloss": "but rather",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "共同",
+          "pinyin": "gòngtóng",
+          "gloss": "shared",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "possessive marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "历史",
+          "pinyin": "lìshǐ",
+          "gloss": "history",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b016.mp3",
+        "durationMs": 7040
+      }
+    },
+    {
+      "id": "b017",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "受到启发，居民们决定保护这些历史资料。",
+      "traditional": null,
+      "translation": "inspired",
+      "pinyin": "shòudào",
+      "tokens": [
+        {
+          "text": "受到",
+          "pinyin": "shòudào",
+          "gloss": "receive",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "启发",
+          "pinyin": "qǐfā",
+          "gloss": "inspiration",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "居民",
+          "pinyin": "jūmín",
+          "gloss": "residents",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "们",
+          "pinyin": "men",
+          "gloss": "plural suffix",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "决定",
+          "pinyin": "juédìng",
+          "gloss": "decide",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "保护",
+          "pinyin": "bǎohù",
+          "gloss": "protect",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "这些",
+          "pinyin": "zhèxiē",
+          "gloss": "these",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "历史",
+          "pinyin": "lìshǐ",
+          "gloss": "history",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "资料",
+          "pinyin": "zīliào",
+          "gloss": "materials",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b017.mp3",
+        "durationMs": 4480
+      }
+    },
+    {
+      "id": "b018",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 5,
+      "hanzi": "我们应该把地图和照片放在社区展览室里。",
+      "traditional": null,
+      "translation": "We should put the map and photos in the community exhibition room.",
+      "pinyin": "wǒmen yīnggāi bǎ dìtú hé zhàopiàn fàng zài shèqū zhǎnlǎnshì lǐ .",
+      "tokens": [
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "应该",
+          "pinyin": "yīnggāi",
+          "gloss": "should",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "gloss": "BA (object marker)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "和",
+          "pinyin": "hé",
+          "gloss": "and",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "照片",
+          "pinyin": "zhàopiàn",
+          "gloss": "photo",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "放在",
+          "pinyin": "fàng zài",
+          "gloss": "put in",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "社区",
+          "pinyin": "shèqū",
+          "gloss": "community",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "展览室",
+          "pinyin": "zhǎnlǎnshì",
+          "gloss": "exhibition room",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "gloss": "inside",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b018.mp3",
+        "durationMs": 3760
+      }
+    },
+    {
+      "id": "b019",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 5,
+      "hanzi": "对，让更多人了解我们的历史，传承下去。",
+      "traditional": null,
+      "translation": "Yes, let more people understand our history and pass it on.",
+      "pinyin": "duì, ràng gèng duō rén liǎojiě wǒmen de lìshǐ, chuánchéng xiàqù.",
+      "tokens": [
+        {
+          "text": "对",
+          "pinyin": "duì",
+          "gloss": "yes",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "让",
+          "pinyin": "ràng",
+          "gloss": "let",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "更",
+          "pinyin": "gèng",
+          "gloss": "more",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "多",
+          "pinyin": "duō",
+          "gloss": "many",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "gloss": "people",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了解",
+          "pinyin": "liǎojiě",
+          "gloss": "understand",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "'s",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "历史",
+          "pinyin": "lìshǐ",
+          "gloss": "history",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "传承",
+          "pinyin": "chuánchéng",
+          "gloss": "pass on",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "下去",
+          "pinyin": "xiàqù",
+          "gloss": "continue",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b019.mp3",
+        "durationMs": 3520
+      }
+    },
+    {
+      "id": "b020",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 5,
+      "hanzi": "维修工程继续，但院子有了新的意义。",
+      "traditional": null,
+      "translation": "The repair work continued, but the courtyard had a new meaning.",
+      "pinyin": "wéixiū gōngchéng jìxù ， dàn yuànzi yǒu le xīn de yìyì 。",
+      "tokens": [
+        {
+          "text": "维修",
+          "pinyin": "wéixiū",
+          "gloss": "repair",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "工程",
+          "pinyin": "gōngchéng",
+          "gloss": "project",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "继续",
+          "pinyin": "jìxù",
+          "gloss": "continue",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "但",
+          "pinyin": "dàn",
+          "gloss": "but",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuànzi",
+          "gloss": "courtyard",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "gloss": "have",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "perfective marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "新",
+          "pinyin": "xīn",
+          "gloss": "new",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "modifier marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "意义",
+          "pinyin": "yìyì",
+          "gloss": "meaning",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b020.mp3",
+        "durationMs": 34240
+      }
+    },
+    {
+      "id": "b021",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 6,
+      "hanzi": "几个月后，院子焕然一新，居民们举办了一个庆祝活动。",
+      "traditional": null,
+      "translation": "A few months later, the courtyard took on an entirely new look, and the residents held a celebration.",
+      "pinyin": "jǐ ge yuè hòu ， yuàn zi huàn rán yì xīn ， jū mín men jǔ bàn le yí gè qìng zhù huó dòng 。",
+      "tokens": [
+        {
+          "text": "几个",
+          "pinyin": "jǐ ge",
+          "gloss": "several",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "月",
+          "pinyin": "yuè",
+          "gloss": "month",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "后",
+          "pinyin": "hòu",
+          "gloss": "after",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuàn zi",
+          "gloss": "courtyard",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "焕然一新",
+          "pinyin": "huàn rán yì xīn",
+          "gloss": "take on an entirely new look",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "居民",
+          "pinyin": "jū mín",
+          "gloss": "resident",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "们",
+          "pinyin": "men",
+          "gloss": "plural suffix",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "举办",
+          "pinyin": "jǔ bàn",
+          "gloss": "hold",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "past tense marker",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "一个",
+          "pinyin": "yí gè",
+          "gloss": "a",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "庆祝",
+          "pinyin": "qìng zhù",
+          "gloss": "celebration",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "活动",
+          "pinyin": "huó dòng",
+          "gloss": "event",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b021.mp3",
+        "durationMs": 5760
+      }
+    },
+    {
+      "id": "b022",
+      "kind": "dialogue",
+      "speakerId": "xiaoyu",
+      "section": 6,
+      "hanzi": "感谢这张地图，让我们重新认识了社区。",
+      "traditional": null,
+      "translation": "Thanks to this map, we got to know the community anew.",
+      "pinyin": "gǎnxiè zhè zhāng dìtú , ràng wǒmen chóngxīn rènshi le shèqū .",
+      "tokens": [
+        {
+          "text": "感谢",
+          "pinyin": "gǎnxiè",
+          "gloss": "thank",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "gloss": "this",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "gloss": "[measure word for flat objects]",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "地图",
+          "pinyin": "dìtú",
+          "gloss": "map",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "让",
+          "pinyin": "ràng",
+          "gloss": "let, make",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "重新认识",
+          "pinyin": "chóngxīn rènshi",
+          "gloss": "get to know again",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "[perfective aspect marker]",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "社区",
+          "pinyin": "shèqū",
+          "gloss": "community",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b022.mp3",
+        "durationMs": 4240
+      }
+    },
+    {
+      "id": "b023",
+      "kind": "dialogue",
+      "speakerId": "daming",
+      "section": 6,
+      "hanzi": "是啊，历史就在我们脚下，需要我们共同保护。",
+      "traditional": null,
+      "translation": "Yes, history is right under our feet, and we need to protect it together.",
+      "pinyin": "Shì a, lìshǐ jiù zài wǒmen jiǎoxià, xūyào wǒmen gòngtóng bǎohù.",
+      "tokens": [
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "gloss": "yes",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "啊",
+          "pinyin": "a",
+          "gloss": "(interjection)",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "历史",
+          "pinyin": "lìshǐ",
+          "gloss": "history",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "就",
+          "pinyin": "jiù",
+          "gloss": "just",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "gloss": "at",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "脚下",
+          "pinyin": "jiǎoxià",
+          "gloss": "underfoot",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "需要",
+          "pinyin": "xūyào",
+          "gloss": "need",
+          "difficulty": 3,
+          "focus": false
+        },
+        {
+          "text": "我们",
+          "pinyin": "wǒmen",
+          "gloss": "we",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "共同",
+          "pinyin": "gòngtóng",
+          "gloss": "together",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "保护",
+          "pinyin": "bǎohù",
+          "gloss": "protect",
+          "difficulty": 4,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b023.mp3",
+        "durationMs": 4240
+      }
+    },
+    {
+      "id": "b024",
+      "kind": "narration",
+      "speakerId": "narrator",
+      "section": 6,
+      "hanzi": "从此，院子成了社区更新的象征，邻里关系也更加紧密。",
+      "traditional": null,
+      "translation": "From then on, the courtyard became a symbol of community renewal, and neighborly relations became even closer.",
+      "pinyin": "cóng cǐ, yuàn zi chéng le shè qū gēng xīn de xiàng zhēng, lín lǐ guān xì yě gèng jiā jǐn mì.",
+      "tokens": [
+        {
+          "text": "从此",
+          "pinyin": "cóng cǐ",
+          "gloss": "from then on",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "院子",
+          "pinyin": "yuàn zi",
+          "gloss": "courtyard",
+          "difficulty": 6,
+          "focus": true
+        },
+        {
+          "text": "成",
+          "pinyin": "chéng",
+          "gloss": "became",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "gloss": "(past marker)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "社区",
+          "pinyin": "shè qū",
+          "gloss": "community",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "更新",
+          "pinyin": "gēng xīn",
+          "gloss": "renewal",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "gloss": "(possessive/attribute marker)",
+          "difficulty": 1,
+          "focus": false
+        },
+        {
+          "text": "象征",
+          "pinyin": "xiàng zhēng",
+          "gloss": "symbol",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "，",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        },
+        {
+          "text": "邻里关系",
+          "pinyin": "lín lǐ guān xì",
+          "gloss": "neighborly relations",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "也",
+          "pinyin": "yě",
+          "gloss": "also",
+          "difficulty": 2,
+          "focus": false
+        },
+        {
+          "text": "更加",
+          "pinyin": "gèng jiā",
+          "gloss": "even more",
+          "difficulty": 5,
+          "focus": false
+        },
+        {
+          "text": "紧密",
+          "pinyin": "jǐn mì",
+          "gloss": "close",
+          "difficulty": 6,
+          "focus": false
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "gloss": "",
+          "difficulty": 0,
+          "focus": false
+        }
+      ],
+      "audio": {
+        "path": "audio/b024.mp3",
+        "durationMs": 6240
+      }
+    }
+  ]
+}

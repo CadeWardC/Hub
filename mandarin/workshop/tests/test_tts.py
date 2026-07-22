@@ -63,7 +63,7 @@ class TTSServiceTests(unittest.TestCase):
         self.assertGreater(len(fake.texts), 1)
         self.assertEqual(fake.unloads, 0)
 
-    def test_audio_job_unloads_qwen_after_each_completed_block(self) -> None:
+    def test_audio_job_unloads_qwen_when_the_story_finishes(self) -> None:
         fake = _FakeTTS()
         with tempfile.TemporaryDirectory() as temp_name:
             store = DraftStore(Path(temp_name))

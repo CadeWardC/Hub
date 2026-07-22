@@ -16,6 +16,7 @@ from .config import (
 )
 from .schema import (
     HAN_RE,
+    baseline_tokens,
     hydrate_story,
     normalize_story_for_spec,
     validate_story,
@@ -253,13 +254,17 @@ Use simplified Chinese. Stay inside the fixed vocabulary above; do not assume a 
     ) -> dict[str, Any]:
         rank = LEVELS[level]["rank"]
         system = """
-You annotate simplified Chinese for a graded reader. Return valid JSON only with keys pinyin, translation, and tokens. tokens must preserve every character and punctuation mark in order so concatenating token.text exactly reproduces the input. Every Chinese lexical token needs tone-mark pinyin, a short contextual English gloss, integer difficulty 1-6, and boolean focus. Punctuation tokens use empty pinyin/gloss, difficulty 0, focus false. Use the supplied story context to distinguish character names from ordinary words: transliterate a listed character name and never translate it literally (for example, 小雨 as the person Xiaoyu, not “light rain”).
+You annotate simplified Chinese for a graded reader. Return valid JSON only with keys pinyin, translation, and tokens. The token.text sequence must exactly equal requiredTokenTexts, including punctuation; do not split, merge, omit, or add token entries. Every Chinese lexical token needs tone-mark pinyin, a short contextual English gloss, integer difficulty 1-6, and boolean focus. Punctuation tokens use empty pinyin/gloss, difficulty 0, focus false. Use the supplied story context to distinguish character names from ordinary words: transliterate a listed character name and never translate it literally (for example, 小雨 as the person Xiaoyu, not “light rain”).
 """.strip()
+        required_token_texts = _required_token_texts(
+            block.get("hanzi", ""), rank, context or {}
+        )
         request = json.dumps(
             {
                 "hanzi": block.get("hanzi", ""),
                 "levelRank": rank,
                 "storyContext": context or {},
+                "requiredTokenTexts": required_token_texts,
             },
             ensure_ascii=False,
         )
@@ -298,20 +303,26 @@ You annotate simplified Chinese for a graded reader. Return valid JSON only with
             for token in updated["tokens"]:
                 if not token.get("gloss") and token.get("text") in _PARTICLE_GLOSSES:
                     token["gloss"] = _PARTICLE_GLOSSES[token["text"]]
-            errors = _annotation_errors(updated)
+            errors = _annotation_errors(updated, required_token_texts)
             if not errors:
                 return updated
             last_error = "; ".join(errors)
         raise DeepSeekError(f"DeepSeek annotation did not pass validation: {last_error}")
 
 
-def _annotation_errors(block: dict[str, Any]) -> list[str]:
+def _annotation_errors(
+    block: dict[str, Any], expected_token_texts: list[str] | None = None
+) -> list[str]:
     errors: list[str] = []
     if not block.get("pinyin"):
         errors.append("block pinyin is required")
     if not block.get("translation"):
         errors.append("translation is required")
     tokens = block.get("tokens") or []
+    if expected_token_texts is not None and [
+        token.get("text", "") for token in tokens
+    ] != expected_token_texts:
+        errors.append("token texts must exactly match requiredTokenTexts")
     if "".join(token.get("text", "") for token in tokens) != block.get("hanzi", ""):
         errors.append("token text must reconstruct the Chinese block")
     for index, token in enumerate(tokens, start=1):
@@ -393,6 +404,49 @@ def _annotation_context(story: dict[str, Any], index: int) -> dict[str, Any]:
             if voice.get("id") != "narrator"
         ],
         "speakerName": voices.get(block.get("speakerId"), {}).get("name", ""),
+        "learningWords": list(story.get("learningWords") or []),
         "previousChinese": blocks[index - 1].get("hanzi", "") if index else "",
         "nextChinese": blocks[index + 1].get("hanzi", "") if index + 1 < len(blocks) else "",
     }
+
+
+def _required_token_texts(
+    hanzi: str, rank: int, context: dict[str, Any]
+) -> list[str]:
+    """Use deterministic lexical boundaries, preserving names/teaching words."""
+
+    texts = [token["text"] for token in baseline_tokens(hanzi, rank)]
+    preferred = sorted(
+        {
+            str(value).strip()
+            for value in [
+                *(context.get("characterNames") or []),
+                *(context.get("learningWords") or []),
+            ]
+            if str(value).strip()
+        },
+        key=len,
+        reverse=True,
+    )
+    output: list[str] = []
+    index = 0
+    while index < len(texts):
+        matched: tuple[str, int] | None = None
+        for phrase in preferred:
+            combined = ""
+            for end in range(index, len(texts)):
+                combined += texts[end]
+                if combined == phrase:
+                    matched = (phrase, end + 1)
+                    break
+                if len(combined) >= len(phrase):
+                    break
+            if matched:
+                break
+        if matched:
+            output.append(matched[0])
+            index = matched[1]
+        else:
+            output.append(texts[index])
+            index += 1
+    return output

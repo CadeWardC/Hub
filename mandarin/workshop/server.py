@@ -55,7 +55,7 @@ def status():
                 "speakers": SUPPORTED_SPEAKERS,
             },
             "ffmpeg": shutil.which("ffmpeg") is not None,
-            "gradingProfile": "hsk2-v2",
+            "gradingProfile": "hsk2-v1",
             "levels": LEVELS,
         }
     )
@@ -131,6 +131,7 @@ def annotate_block(draft_id: str, block_id: str):
                 ),
                 "",
             ),
+            "learningWords": list(story.get("learningWords") or []),
             "previousChinese": story["blocks"][index - 1].get("hanzi", "")
             if index
             else "",
