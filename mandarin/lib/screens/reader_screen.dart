@@ -27,11 +27,20 @@ class _ReaderScreenState extends State<ReaderScreen> {
   late Future<Story> _story;
   StreamSubscription<void>? _completionSubscription;
   Story? _loadedStory;
+  List<List<StoryWord>> _segmentWords = const [];
+  final Map<int, GlobalKey> _segmentKeys = {};
+
   bool _showPinyin = true;
-  bool _showEnglish = false;
   bool _playAll = false;
+  int _activeIndex = 0;
   int? _playingIndex;
   double _speed = 1;
+
+  // When set, the top panel shows this word instead of the sentence
+  // translation, mirroring Du Chinese's press-a-word behavior.
+  StoryWord? _heldWord;
+  int? _heldSegmentIndex;
+  int? _heldWordIndex;
 
   @override
   void initState() {
@@ -49,6 +58,45 @@ class _ReaderScreenState extends State<ReaderScreen> {
     super.dispose();
   }
 
+  void _prepareStory(Story story) {
+    if (identical(_loadedStory, story)) return;
+    _loadedStory = story;
+    _segmentWords = [
+      for (final segment in story.segments)
+        _WordTokenizer.tokenize(segment, story.vocabulary),
+    ];
+    for (var i = 0; i < story.segments.length; i++) {
+      _segmentKeys[i] = GlobalKey();
+    }
+  }
+
+  void _selectSegment(int index, {bool play = true}) {
+    setState(() {
+      _activeIndex = index;
+      _heldWord = null;
+      _heldSegmentIndex = null;
+      _heldWordIndex = null;
+    });
+    if (play) _playSegment(index);
+  }
+
+  void _holdWord(int segmentIndex, int wordIndex, StoryWord word) {
+    setState(() {
+      _activeIndex = segmentIndex;
+      _heldWord = word;
+      _heldSegmentIndex = segmentIndex;
+      _heldWordIndex = wordIndex;
+    });
+  }
+
+  void _dismissHeldWord() {
+    setState(() {
+      _heldWord = null;
+      _heldSegmentIndex = null;
+      _heldWordIndex = null;
+    });
+  }
+
   Future<void> _playSegment(int index, {bool playAll = false}) async {
     final story = _loadedStory;
     if (story == null) return;
@@ -61,9 +109,11 @@ class _ReaderScreenState extends State<ReaderScreen> {
 
     if (mounted) {
       setState(() {
+        _activeIndex = index;
         _playingIndex = index;
         _playAll = playAll;
       });
+      _scrollToSegment(index);
     }
 
     try {
@@ -86,6 +136,18 @@ class _ReaderScreenState extends State<ReaderScreen> {
         _playAll = false;
       });
     }
+  }
+
+  void _scrollToSegment(int index) {
+    final key = _segmentKeys[index];
+    final context = key?.currentContext;
+    if (context == null) return;
+    Scrollable.ensureVisible(
+      context,
+      alignment: 0.25,
+      duration: const Duration(milliseconds: 350),
+      curve: Curves.easeOutCubic,
+    );
   }
 
   Future<void> _setSpeed(double speed) async {
@@ -155,16 +217,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F5EF),
-      appBar: AppBar(
-        title: Text(widget.summary.titleChinese),
-        actions: [
-          IconButton(
-            onPressed: () => _showSettings(context),
-            icon: const Icon(Icons.tune),
-            tooltip: 'Reading settings',
-          ),
-        ],
-      ),
+      appBar: AppBar(title: Text(widget.summary.titleChinese)),
       body: FutureBuilder<Story>(
         future: _story,
         builder: (context, snapshot) {
@@ -175,17 +228,25 @@ class _ReaderScreenState extends State<ReaderScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           final story = snapshot.data!;
-          _loadedStory = story;
+          _prepareStory(story);
+          final activeSegment =
+              _activeIndex < story.segments.length
+                  ? story.segments[_activeIndex]
+                  : null;
           return Column(
             children: [
               _ReaderControls(
                 showPinyin: _showPinyin,
-                showEnglish: _showEnglish,
                 speed: _speed,
                 onPinyinChanged: (value) => setState(() => _showPinyin = value),
-                onEnglishChanged: (value) =>
-                    setState(() => _showEnglish = value),
                 onSpeedChanged: _setSpeed,
+              ),
+              _TranslationPanel(
+                segment: activeSegment,
+                segmentNumber: _activeIndex + 1,
+                segmentCount: story.segments.length,
+                heldWord: _heldWord,
+                onDismissWord: _dismissHeldWord,
               ),
               Expanded(
                 child: ListView(
@@ -213,29 +274,21 @@ class _ReaderScreenState extends State<ReaderScreen> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(
                                   22,
-                                  10,
+                                  14,
                                   22,
-                                  28,
+                                  30,
                                 ),
-                                child: Column(
-                                  children: [
-                                    for (
-                                      var index = 0;
-                                      index < story.segments.length;
-                                      index++
-                                    )
-                                      _StoryParagraph(
-                                        segment: story.segments[index],
-                                        vocabulary: story.vocabulary,
-                                        index: index,
-                                        showPinyin: _showPinyin,
-                                        showEnglish:
-                                            _showEnglish ||
-                                            _playingIndex == index,
-                                        playing: _playingIndex == index,
-                                        onPlay: () => _playSegment(index),
-                                      ),
-                                  ],
+                                child: _StoryFlow(
+                                  story: story,
+                                  segmentWords: _segmentWords,
+                                  segmentKeys: _segmentKeys,
+                                  showPinyin: _showPinyin,
+                                  activeIndex: _activeIndex,
+                                  playingIndex: _playingIndex,
+                                  heldSegmentIndex: _heldSegmentIndex,
+                                  heldWordIndex: _heldWordIndex,
+                                  onTapSegment: _selectSegment,
+                                  onHoldWord: _holdWord,
                                 ),
                               ),
                             ],
@@ -261,56 +314,284 @@ class _ReaderScreenState extends State<ReaderScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _playAll ? _stopAudio : () => _playSegment(0, playAll: true),
+        onPressed: _playAll
+            ? _stopAudio
+            : () => _playSegment(_activeIndex, playAll: true),
         backgroundColor: MandarinReaderApp.ink,
         foregroundColor: Colors.white,
         icon: Icon(_playAll ? Icons.stop_rounded : Icons.play_arrow_rounded),
-        label: Text(_playAll ? 'Stop narration' : 'Play full story'),
+        label: Text(_playAll ? 'Stop narration' : 'Play story'),
+      ),
+    );
+  }
+}
+
+/// The persistent panel pinned under the toolbar. It always shows the English
+/// translation of the sentence the reader is on; while a word is being held
+/// it switches to that word's definition, like Du Chinese.
+class _TranslationPanel extends StatelessWidget {
+  const _TranslationPanel({
+    required this.segment,
+    required this.segmentNumber,
+    required this.segmentCount,
+    required this.heldWord,
+    required this.onDismissWord,
+  });
+
+  final StorySegment? segment;
+  final int segmentNumber;
+  final int segmentCount;
+  final StoryWord? heldWord;
+  final VoidCallback onDismissWord;
+
+  @override
+  Widget build(BuildContext context) {
+    final word = heldWord;
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color(0xFFFFFDF8),
+        border: Border(
+          bottom: BorderSide(color: Color(0xFFE7E1D5)),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0x0D0F2F26),
+            blurRadius: 12,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 760, minHeight: 84),
+          child: AnimatedSize(
+            duration: const Duration(milliseconds: 160),
+            alignment: Alignment.topCenter,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 140),
+              child: word != null
+                  ? _wordView(context, word)
+                  : _translationView(context),
+            ),
+          ),
+        ),
       ),
     );
   }
 
-  Future<void> _showSettings(BuildContext context) async {
-    await showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Reading help',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 16),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Show pinyin'),
-                value: _showPinyin,
-                onChanged: (value) {
-                  setState(() => _showPinyin = value);
-                  Navigator.pop(context);
-                },
-              ),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                title: const Text('Always show English'),
-                subtitle: const Text(
-                  'The current paragraph is translated automatically.',
-                ),
-                value: _showEnglish,
-                onChanged: (value) {
-                  setState(() => _showEnglish = value);
-                  Navigator.pop(context);
-                },
-              ),
-            ],
+  Widget _translationView(BuildContext context) {
+    return Padding(
+      key: const ValueKey('translation'),
+      padding: const EdgeInsets.fromLTRB(22, 14, 22, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'SENTENCE $segmentNumber OF $segmentCount · ENGLISH',
+            style: const TextStyle(
+              color: MandarinReaderApp.jade,
+              fontSize: 11,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 1.1,
+            ),
           ),
+          const SizedBox(height: 6),
+          Text(
+            segment?.english.isNotEmpty == true
+                ? segment!.english
+                : 'Tap a sentence below to hear it and see its translation.',
+            style: const TextStyle(
+              color: MandarinReaderApp.ink,
+              fontSize: 17,
+              height: 1.45,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _wordView(BuildContext context, StoryWord word) {
+    return Padding(
+      key: ValueKey('word-${word.text}'),
+      padding: const EdgeInsets.fromLTRB(22, 12, 10, 14),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            word.text,
+            style: const TextStyle(
+              color: MandarinReaderApp.ink,
+              fontSize: 34,
+              fontWeight: FontWeight.w700,
+              height: 1.2,
+            ),
+          ),
+          const SizedBox(width: 18),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (word.pinyin.isNotEmpty)
+                  Text(
+                    word.pinyin,
+                    style: const TextStyle(
+                      color: MandarinReaderApp.jade,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                Text(
+                  word.english.isNotEmpty
+                      ? word.english
+                      : 'No definition added for this word yet.',
+                  style: const TextStyle(
+                    color: MandarinReaderApp.ink,
+                    fontSize: 16,
+                    height: 1.35,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: onDismissWord,
+            tooltip: 'Back to translation',
+            icon: const Icon(Icons.close_rounded, color: Color(0xFF7D827E)),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// The whole story rendered as one continuous, book-like flow of tappable
+/// words. Sentences are not boxed apart; the active sentence is highlighted
+/// inline, and pinyin sits above each word as ruby text.
+class _StoryFlow extends StatelessWidget {
+  const _StoryFlow({
+    required this.story,
+    required this.segmentWords,
+    required this.segmentKeys,
+    required this.showPinyin,
+    required this.activeIndex,
+    required this.playingIndex,
+    required this.heldSegmentIndex,
+    required this.heldWordIndex,
+    required this.onTapSegment,
+    required this.onHoldWord,
+  });
+
+  final Story story;
+  final List<List<StoryWord>> segmentWords;
+  final Map<int, GlobalKey> segmentKeys;
+  final bool showPinyin;
+  final int activeIndex;
+  final int? playingIndex;
+  final int? heldSegmentIndex;
+  final int? heldWordIndex;
+  final void Function(int index) onTapSegment;
+  final void Function(int segmentIndex, int wordIndex, StoryWord word)
+      onHoldWord;
+
+  @override
+  Widget build(BuildContext context) {
+    final children = <Widget>[];
+    for (var s = 0; s < story.segments.length; s++) {
+      final words = s < segmentWords.length ? segmentWords[s] : const <StoryWord>[];
+      for (var w = 0; w < words.length; w++) {
+        final word = words[w];
+        final punctuation = _WordTokenizer.isPunctuation(word.text);
+        Widget child = _WordChip(
+          word: word,
+          showPinyin: showPinyin,
+          active: s == activeIndex,
+          playing: s == playingIndex,
+          held: s == heldSegmentIndex && w == heldWordIndex,
         );
-      },
+        if (!punctuation) {
+          final segmentIndex = s;
+          final wordIndex = w;
+          child = GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => onTapSegment(segmentIndex),
+            onLongPress: () => onHoldWord(segmentIndex, wordIndex, word),
+            child: child,
+          );
+        }
+        if (w == 0) {
+          child = KeyedSubtree(key: segmentKeys[s], child: child);
+        }
+        children.add(child);
+      }
+    }
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.end,
+      runSpacing: showPinyin ? 10 : 6,
+      children: children,
+    );
+  }
+}
+
+class _WordChip extends StatelessWidget {
+  const _WordChip({
+    required this.word,
+    required this.showPinyin,
+    required this.active,
+    required this.playing,
+    required this.held,
+  });
+
+  final StoryWord word;
+  final bool showPinyin;
+  final bool active;
+  final bool playing;
+  final bool held;
+
+  @override
+  Widget build(BuildContext context) {
+    final background = held
+        ? const Color(0xFFBFE3D2)
+        : active
+            ? const Color(0xFFE6F2EB)
+            : Colors.transparent;
+    final hanzi = Text(
+      word.text,
+      style: TextStyle(
+        color: MandarinReaderApp.ink,
+        fontSize: 26,
+        fontWeight: playing ? FontWeight.w600 : FontWeight.w500,
+        height: 1.35,
+      ),
+    );
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: showPinyin
+          ? Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: 15,
+                  child: Text(
+                    word.pinyin,
+                    style: const TextStyle(
+                      color: MandarinReaderApp.jade,
+                      fontSize: 11.5,
+                      height: 1.15,
+                    ),
+                  ),
+                ),
+                hanzi,
+              ],
+            )
+          : hanzi,
     );
   }
 }
@@ -318,18 +599,14 @@ class _ReaderScreenState extends State<ReaderScreen> {
 class _ReaderControls extends StatelessWidget {
   const _ReaderControls({
     required this.showPinyin,
-    required this.showEnglish,
     required this.speed,
     required this.onPinyinChanged,
-    required this.onEnglishChanged,
     required this.onSpeedChanged,
   });
 
   final bool showPinyin;
-  final bool showEnglish;
   final double speed;
   final ValueChanged<bool> onPinyinChanged;
-  final ValueChanged<bool> onEnglishChanged;
   final ValueChanged<double> onSpeedChanged;
 
   String _speedLabel(double value) {
@@ -353,12 +630,6 @@ class _ReaderControls extends StatelessWidget {
             selected: showPinyin,
             onSelected: onPinyinChanged,
             label: const Text('拼 Pinyin'),
-          ),
-          const SizedBox(width: 8),
-          FilterChip(
-            selected: showEnglish,
-            onSelected: onEnglishChanged,
-            label: const Text('EN'),
           ),
           const Spacer(),
           PopupMenuButton<double>(
@@ -446,7 +717,7 @@ class _StoryHeader extends StatelessWidget {
               ),
               const SizedBox(width: 5),
               const Text(
-                'Hold a word',
+                'Hold a word · tap a sentence',
                 style: TextStyle(color: Color(0xFF7D827E), fontSize: 12),
               ),
             ],
@@ -484,26 +755,14 @@ class _StoryHeader extends StatelessWidget {
   }
 }
 
-class _StoryParagraph extends StatelessWidget {
-  const _StoryParagraph({
-    required this.segment,
-    required this.vocabulary,
-    required this.index,
-    required this.showPinyin,
-    required this.showEnglish,
-    required this.playing,
-    required this.onPlay,
-  });
-
-  final StorySegment segment;
-  final List<VocabularyItem> vocabulary;
-  final int index;
-  final bool showPinyin;
-  final bool showEnglish;
-  final bool playing;
-  final VoidCallback onPlay;
-
+/// Splits a segment's Chinese text into tappable words using the segment's own
+/// word data when present, otherwise the story vocabulary plus a small
+/// built-in HSK glossary.
+class _WordTokenizer {
   static final RegExp _punctuation = RegExp(r'^[\s，。！？；：“”‘’、,.!?;:—…（）()]+$');
+
+  static bool isPunctuation(String text) => _punctuation.hasMatch(text);
+
   static const List<VocabularyItem> _fallbackGlossary = [
     VocabularyItem(simplified: '我', pinyin: 'wǒ', english: 'I; me'),
     VocabularyItem(simplified: '是', pinyin: 'shì', english: 'to be'),
@@ -617,7 +876,10 @@ class _StoryParagraph extends StatelessWidget {
     VocabularyItem(simplified: '困', pinyin: 'kùn', english: 'sleepy'),
   ];
 
-  List<StoryWord> _words() {
+  static List<StoryWord> tokenize(
+    StorySegment segment,
+    List<VocabularyItem> vocabulary,
+  ) {
     if (segment.words.isNotEmpty) return segment.words;
 
     final glossary = [...vocabulary, ..._fallbackGlossary]
@@ -650,156 +912,6 @@ class _StoryParagraph extends StatelessWidget {
       }
     }
     return words;
-  }
-
-  void _showDefinition(BuildContext context, StoryWord word) {
-    if (_punctuation.hasMatch(word.text)) return;
-    showModalBottomSheet<void>(
-      context: context,
-      showDragHandle: true,
-      builder: (context) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 4, 24, 28),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                word.text,
-                style: const TextStyle(
-                  color: MandarinReaderApp.ink,
-                  fontSize: 36,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              if (word.pinyin.isNotEmpty) ...[
-                const SizedBox(height: 3),
-                Text(
-                  word.pinyin,
-                  style: const TextStyle(
-                    color: MandarinReaderApp.jade,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-              const SizedBox(height: 16),
-              Text(
-                word.english.isNotEmpty
-                    ? word.english
-                    : 'A definition has not been added for this word yet.',
-                style: const TextStyle(fontSize: 17, height: 1.45),
-              ),
-              const SizedBox(height: 18),
-              Text(
-                segment.english,
-                style: const TextStyle(
-                  color: Color(0xFF747A75),
-                  fontSize: 14,
-                  height: 1.4,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final words = _words();
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 180),
-      margin: const EdgeInsets.only(bottom: 6),
-      padding: const EdgeInsets.fromLTRB(12, 14, 8, 14),
-      decoration: BoxDecoration(
-        color: playing ? const Color(0xFFEAF4EE) : Colors.transparent,
-        borderRadius: BorderRadius.circular(10),
-        border: Border(
-          left: BorderSide(
-            color: playing ? MandarinReaderApp.jade : Colors.transparent,
-            width: 3,
-          ),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      for (final word in words)
-                        WidgetSpan(
-                          alignment: PlaceholderAlignment.baseline,
-                          baseline: TextBaseline.ideographic,
-                          child: GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onLongPress: () => _showDefinition(context, word),
-                            child: Text(
-                              word.text,
-                              style: TextStyle(
-                                color: MandarinReaderApp.ink,
-                                fontSize: 26,
-                                fontWeight: playing
-                                    ? FontWeight.w600
-                                    : FontWeight.w500,
-                                height: 1.6,
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-              IconButton(
-                onPressed: onPlay,
-                tooltip: 'Play paragraph ${index + 1}',
-                visualDensity: VisualDensity.compact,
-                icon: Icon(
-                  playing ? Icons.graphic_eq_rounded : Icons.volume_up_outlined,
-                  color: MandarinReaderApp.jade,
-                ),
-              ),
-            ],
-          ),
-          if (showPinyin && segment.pinyin.isNotEmpty) ...[
-            const SizedBox(height: 3),
-            Text(
-              segment.pinyin,
-              style: const TextStyle(
-                color: MandarinReaderApp.jade,
-                fontSize: 14,
-                height: 1.5,
-              ),
-            ),
-          ],
-          AnimatedSize(
-            duration: const Duration(milliseconds: 180),
-            alignment: Alignment.topCenter,
-            child: showEnglish && segment.english.isNotEmpty
-                ? Padding(
-                    padding: const EdgeInsets.only(top: 8, right: 38),
-                    child: Text(
-                      segment.english,
-                      style: const TextStyle(
-                        color: Color(0xFF59635D),
-                        fontSize: 15,
-                        height: 1.5,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ),
-        ],
-      ),
-    );
   }
 }
 
