@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>Story Workshop</title>
+  <meta name="description" content="A private local workshop for creating Mandarin graded-reader stories.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">文</span>
+        <div>
+          <p class="eyebrow">Local authoring studio</p>
+          <h1>Story Workshop</h1>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="connection-pill" id="deepseekStatus">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Checking DeepSeek</span>
+        </div>
+        <button class="button button-ghost" id="openHistoryButton" type="button">Recent stories</button>
+        <button class="button button-dark" id="newStoryButton" type="button">New story</button>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside class="rail" aria-label="Story workflow">
+        <div class="rail-intro">
+          <p class="eyebrow">Workflow</p>
+          <p class="rail-copy">Shape the story first. Language and audio preparation come after approval.</p>
+        </div>
+
+        <nav class="steps">
+          <button class="step is-active" type="button" data-step-target="1">
+            <span class="step-number">01</span>
+            <span>
+              <strong>Draft</strong>
+              <small>Prompt & generate</small>
+            </span>
+          </button>
+          <div class="step-line" aria-hidden="true"></div>
+          <button class="step" type="button" data-step-target="2">
+            <span class="step-number">02</span>
+            <span>
+              <strong>Review</strong>
+              <small>Edit & approve</small>
+            </span>
+          </button>
+          <div class="step-line" aria-hidden="true"></div>
+          <button class="step" type="button" data-step-target="3">
+            <span class="step-number">03</span>
+            <span>
+              <strong>Prepare</strong>
+              <small>Chinese, pinyin & audio</small>
+            </span>
+          </button>
+        </nav>
+
+        <div class="rail-footer">
+          <span class="local-lock" aria-hidden="true">●</span>
+          <p><strong>Private by design</strong><br>Drafts stay in this folder.</p>
+        </div>
+      </aside>
+
+      <main class="main-stage">
+        <div class="stage-toolbar">
+          <div>
+            <p class="eyebrow" id="stepEyebrow">Step 1 of 3</p>
+            <h2 id="stepTitle">Create the English story</h2>
+          </div>
+          <div class="save-state" id="saveState" role="status" aria-live="polite">Ready</div>
+        </div>
+
+        <section class="panel is-active" id="step1Panel" data-step-panel="1">
+          <div class="intro-block">
+            <p class="section-kicker">Start with intent</p>
+            <h3>Give DeepSeek a strong story brief.</h3>
+            <p>The saved master prompt controls the writing style. This brief changes from story to story.</p>
+          </div>
+
+          <div class="form-grid">
+            <label class="field field-wide">
+              <span>Working title <small>optional</small></span>
+              <input id="storyTitle" type="text" placeholder="The Lantern at the Night Market" autocomplete="off">
+            </label>
+
+            <label class="field field-wide">
+              <span>Story idea</span>
+              <textarea id="storyIdea" rows="5" placeholder="A shy child helps an elderly lantern maker find a missing red kite before the night market opens."></textarea>
+            </label>
+
+            <label class="field">
+              <span>Learner level</span>
+              <select id="storyLevel">
+                <option>HSK 1</option>
+                <option selected>HSK 1–2</option>
+                <option>HSK 2</option>
+                <option>HSK 2–3</option>
+                <option>HSK 3</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Target length</span>
+              <select id="storyLength">
+                <option>100–200 words</option>
+                <option>300–500 words</option>
+                <option selected>600–900 words</option>
+                <option>1,000–1,400 words</option>
+                <option>1,500–2,000 words</option>
+              </select>
+            </label>
+
+            <label class="field field-wide">
+              <span>Details or constraints <small>optional</small></span>
+              <textarea id="storyConstraints" rows="3" placeholder="Present day, warm tone, one gentle surprise, no fantasy."></textarea>
+            </label>
+          </div>
+
+          <details class="prompt-editor" open>
+            <summary>
+              <span>
+                <span class="prompt-icon" aria-hidden="true">Aa</span>
+                <span><strong>Master story prompt</strong><small>Sent with every English story request</small></span>
+              </span>
+              <span class="summary-action">Edit prompt</span>
+            </summary>
+            <div class="prompt-body">
+              <textarea id="storyPrompt" rows="12" spellcheck="true"></textarea>
+              <div class="prompt-actions">
+                <p>Saved locally and reused next time you open the workshop.</p>
+                <button class="button button-secondary" id="savePromptButton" type="button">Save prompt</button>
+              </div>
+            </div>
+          </details>
+
+          <div class="action-bar">
+            <div>
+              <p class="action-title">Ready to draft?</p>
+              <p class="action-copy">This sends the prompt and brief to DeepSeek V4 Pro.</p>
+            </div>
+            <button class="button button-primary button-large" id="generateStoryButton" type="button">
+              <span>Generate English story</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="panel" id="step2Panel" data-step-panel="2">
+          <div class="review-header">
+            <div>
+              <p class="section-kicker">Editorial pass</p>
+              <h3>Read it like an editor.</h3>
+              <p>Change any text directly, or describe a revision and let DeepSeek try again.</p>
+            </div>
+            <div class="story-stats">
+              <span id="wordCount">0 words</span>
+              <span id="readTime">0 min read</span>
+            </div>
+          </div>
+
+          <label class="story-editor">
+            <span class="sr-only">English story</span>
+            <textarea id="englishStory" spellcheck="true" placeholder="Your generated story will appear here. You can also write or paste one yourself."></textarea>
+          </label>
+
+          <div class="revision-card">
+            <label class="field">
+              <span>What should change?</span>
+              <textarea id="revisionInstructions" rows="3" placeholder="Make the ending less predictable and give Mei more agency. Keep the same length."></textarea>
+            </label>
+            <button class="button button-secondary" id="reviseStoryButton" type="button">Ask DeepSeek to revise</button>
+          </div>
+
+          <div class="action-bar">
+            <div>
+              <p class="action-title">Happy with the English?</p>
+              <p class="action-copy">Approval locks this version as the source for Mandarin.</p>
+            </div>
+            <div class="button-row">
+              <button class="button button-ghost" id="saveStoryButton" type="button">Save changes</button>
+              <button class="button button-primary button-large" id="approveStoryButton" type="button">
+                <span>Approve & continue</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="step3Panel" data-step-panel="3">
+          <div class="prepare-hero">
+            <div>
+              <p class="section-kicker">Learning package</p>
+              <h3>Turn the approved story into Mandarin.</h3>
+              <p>DeepSeek creates aligned Chinese, tone-mark pinyin, English translations, vocabulary, and one clean TTS item per segment.</p>
+            </div>
+            <div class="qwen-card" id="qwenCard">
+              <span class="qwen-orb" aria-hidden="true"></span>
+              <div>
+                <strong>Checking Qwen models</strong>
+                <small>Base · CustomVoice · Tokenizer</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="empty-package" id="emptyPackage">
+            <div class="package-symbol" aria-hidden="true">译</div>
+            <h4>Your approved story is ready.</h4>
+            <p>Generate the structured Mandarin package when you are ready for the second API call.</p>
+            <button class="button button-primary button-large" id="localizeButton" type="button">Create Mandarin package</button>
+          </div>
+
+          <div class="package-view is-hidden" id="packageView">
+            <div class="package-head">
+              <div>
+                <p class="eyebrow">Prepared story</p>
+                <h4 id="packageTitle">Story title</h4>
+                <p id="packageTitlePinyin" class="pinyin-line"></p>
+              </div>
+              <span class="ready-badge">Story files ready</span>
+            </div>
+
+            <div class="segment-list" id="segmentList"></div>
+
+            <div class="production-pipeline">
+              <div class="production-step" id="checkpointStep">
+                <span class="production-number">1</span>
+                <div class="production-copy">
+                  <p class="action-title">Checkpoint story files</p>
+                  <p class="action-copy">Lock this Chinese, pinyin, translation, vocabulary, and audio manifest as a durable checkpoint. You can close the workshop and return later.</p>
+                </div>
+                <button class="button button-secondary" id="checkpointButton" type="button">Save checkpoint</button>
+              </div>
+
+              <div class="production-step" id="audioStep">
+                <span class="production-number">2</span>
+                <div class="production-copy">
+                  <p class="action-title">Generate local narration</p>
+                  <p class="action-copy">Continue from the checkpoint whenever you are ready. Qwen creates one WAV clip for every story segment.</p>
+                </div>
+                <button class="button button-primary" id="generateAudioButton" type="button">Generate Qwen audio</button>
+              </div>
+
+              <div class="production-step" id="publishStep">
+                <span class="production-number">3</span>
+                <div class="production-copy">
+                  <p class="action-title">Publish to Flutter</p>
+                  <p class="action-copy">Copy the checkpointed story and finished audio into <code>mandarin/assets/content/</code> and update the reader library.</p>
+                </div>
+                <button class="button button-dark" id="publishToFlutterButton" type="button">Publish to app</button>
+              </div>
+            </div>
+
+            <div class="export-card">
+              <div>
+                <p class="action-title">Workshop files</p>
+                <p class="action-copy">Inspect or export the working package kept outside the Flutter app.</p>
+              </div>
+              <div class="button-row button-row-wrap">
+                <button class="button button-ghost" id="downloadStoryButton" type="button">Download story JSON</button>
+                <button class="button button-ghost" id="downloadAudioButton" type="button">Download audio manifest</button>
+                <button class="button button-dark" id="openFolderButton" type="button">Open project folder</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="history-dialog" id="historyDialog">
+    <div class="dialog-head">
+      <div>
+        <p class="eyebrow">Saved locally</p>
+        <h2>Recent stories</h2>
+      </div>
+      <button class="icon-button" id="closeHistoryButton" type="button" aria-label="Close recent stories">×</button>
+    </div>
+    <div class="history-list" id="historyList"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="busy-overlay is-hidden" id="busyOverlay" aria-live="assertive">
+    <div class="busy-card">
+      <div class="loader" aria-hidden="true"></div>
+      <p class="eyebrow">DeepSeek V4 Pro</p>
+      <h2 id="busyTitle">Writing your story</h2>
+      <p id="busyMessage">This can take a minute. Your draft will be saved automatically.</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "stories": [
+    {
+      "id": "a-cat-looks-for-places-to-sleep-and-eat-1784840714",
+      "path": "assets/content/stories/a-cat-looks-for-places-to-sleep-and-eat-1784840714.json",
+      "titleEnglish": "My Day as a Cat",
+      "titleChinese": "我当猫的一天",
+      "titlePinyin": "Wǒ dāng māo de yì tiān",
+      "summaryEnglish": "A small white cat named Snow looks for food and finds a cozy bed.",
+      "summaryChinese": "一只叫雪儿的小白猫找食物，找到了舒服的床。",
+      "level": "HSK 1",
+      "segmentCount": 25,
+      "durationSeconds": 85,
+      "publishedAt": "2026-07-23T22:57:00+00:00"
+    },
+    {
+      "id": "a-cup-of-hot-tea",
+      "path": "assets/content/stories/a-cup-of-hot-tea.json",
+      "titleEnglish": "A Cup of Hot Tea",
+      "titleChinese": "一杯热茶",
+      "titlePinyin": "Yì bēi rè chá",
+      "summaryEnglish": "On a rainy morning, Xiaoyu discovers that a small kindness can warm two people.",
+      "summaryChinese": "下雨的早上，小雨发现一个小小的好意可以温暖两个人。",
+      "level": "HSK 1–2",
+      "segmentCount": 5,
+      "durationSeconds": 27,
+      "publishedAt": "2026-07-23T00:00:00+00:00"
+    }
+  ]
+}

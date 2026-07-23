@@ -30,22 +30,19 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Resolve Flutter dependencies
+      - name: Resolve Mandarin Reader dependencies
         working-directory: mandarin
         run: flutter pub get --enforce-lockfile
 
-      - name: Analyze Flutter project
+      - name: Analyze Mandarin Reader
         working-directory: mandarin
         run: flutter analyze
 
-      - name: Test Flutter project
+      - name: Test Mandarin Reader
         working-directory: mandarin
         run: flutter test
 
-      - name: Validate published Mandarin content
-        run: python mandarin/workshop/validate_published.py
-
-      - name: Build Mandarin reader
+      - name: Build Mandarin Reader for web
         working-directory: mandarin
         run: flutter build web --release --base-href /Hub/mandarin/
 
@@ -67,9 +64,9 @@ jobs:
           set -euo pipefail
           test ! -e _site/.env
           test ! -e _site/pass.txt
-          test ! -e _site/mandarin/workshop
+          test ! -e _site/story-workshop
           test ! -e _site/mandarin/models
-          test ! -e _site/mandarin/.workshop
+          test ! -e _site/mandarin/.venv
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "title": {
+    "english": "My Day as a Cat",
+    "chinese": "我当猫的一天",
+    "pinyin": "Wǒ dāng māo de yì tiān"
+  },
+  "level": "HSK 1",
+  "summary": {
+    "english": "A small white cat named Snow looks for food and finds a cozy bed.",
+    "chinese": "一只叫雪儿的小白猫找食物，找到了舒服的床。",
+    "pinyin": "Yì zhī jiào Xuě'ér de xiǎo bái māo zhǎo shíwù, zhǎo dàole shūfu de chuáng."
+  },
+  "segments": [
+    {
+      "id": "001",
+      "english": "I am a cat. I am a small cat.",
+      "chinese": "我是猫。我是小猫。",
+      "pinyin": "Wǒ shì māo. Wǒ shì xiǎo māo.",
+      "audioText": "我是猫。我是小猫。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_001.wav"
+    },
+    {
+      "id": "002",
+      "english": "I am a white cat. My name is Snow.",
+      "chinese": "我是白猫。我名字叫雪儿。",
+      "pinyin": "Wǒ shì bái māo. Wǒ míngzi jiào Xuě'ér.",
+      "audioText": "我是白猫。我名字叫雪儿。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_002.wav"
+    },
+    {
+      "id": "003",
+      "english": "I open my eyes. I am in a box.",
+      "chinese": "我睁开眼睛。我在盒子里。",
+      "pinyin": "Wǒ zhēngkāi yǎnjīng. Wǒ zài hézi lǐ.",
+      "audioText": "我睁开眼睛。我在盒子里。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_003.wav"
+    },
+    {
+      "id": "004",
+      "english": "The box is small. The box is warm. I like this box.",
+      "chinese": "盒子很小。盒子很暖和。我喜欢这个盒子。",
+      "pinyin": "Hézi hěn xiǎo. Hézi hěn nuǎnhuo. Wǒ xǐhuan zhège hézi.",
+      "audioText": "盒子很小。盒子很暖和。我喜欢这个盒子。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_004.wav"
+    },
+    {
+      "id": "005",
+      "english": "But I am hungry. I go to find food.",
+      "chinese": "但是我饿了。我去找食物。",
+      "pinyin": "Dànshì wǒ è le. Wǒ qù zhǎo shíwù.",
+      "audioText": "但是我饿了。我去找食物。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_005.wav"
+    },
+    {
+      "id": "006",
+      "english": "I walk and walk. I see a big chair.",
+      "chinese": "我走啊走。我看见一把大椅子。",
+      "pinyin": "Wǒ zǒu a zǒu. Wǒ kànjiàn yì bǎ dà yǐzi.",
+      "audioText": "我走啊走。我看见一把大椅子。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_006.wav"
+    },
+    {
+      "id": "007",
+      "english": "I sit on the chair. The chair is soft. I can sleep here.",
+      "chinese": "我坐在椅子上。椅子很软。我可以在这里睡觉。",
+      "pinyin": "Wǒ zuò zài yǐzi shàng. Yǐzi hěn ruǎn. Wǒ kěyǐ zài zhèlǐ shuìjiào.",
+      "audioText": "我坐在椅子上。椅子很软。我可以在这里睡觉。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_007.wav"
+    },
+    {
+      "id": "008",
+      "english": "No, I am hungry. I go to find food.",
+      "chinese": "不，我饿了。我去找食物。",
+      "pinyin": "Bù, wǒ è le. Wǒ qù zhǎo shíwù.",
+      "audioText": "不，我饿了。我去找食物。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_008.wav"
+    },
+    {
+      "id": "009",
+      "english": "I see a table. The table is high.",
+      "chinese": "我看见一张桌子。桌子很高。",
+      "pinyin": "Wǒ kànjiàn yì zhāng zhuōzi. Zhuōzi hěn gāo.",
+      "audioText": "我看见一张桌子。桌子很高。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_009.wav"
+    },
+    {
+      "id": "010",
+      "english": "I jump on the table. There is no food on the table.",
+      "chinese": "我跳上桌子。桌子上没有食物。",
+      "pinyin": "Wǒ tiào shàng zhuōzi. Zhuōzi shàng méiyǒu shíwù.",
+      "audioText": "我跳上桌子。桌子上没有食物。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_010.wav"
+    },
+    {
+      "id": "011",
+      "english": "I see a cup. The cup has water.",
+      "chinese": "我看见一个杯子。杯子里有水。",
+      "pinyin": "Wǒ kànjiàn yí gè bēizi. Bēizi lǐ yǒu shuǐ.",
+      "audioText": "我看见一个杯子。杯子里有水。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_011.wav"
+    },
+    {
+      "id": "012",
+      "english": "I drink the water. The water is cold. I like the water.",
+      "chinese": "我喝水。水很凉。我喜欢水。",
+      "pinyin": "Wǒ hē shuǐ. Shuǐ hěn liáng. Wǒ xǐhuan shuǐ.",
+      "audioText": "我喝水。水很凉。我喜欢水。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_012.wav"
+    },
+    {
+      "id": "013",
+      "english": "But I am still hungry. I go to find food.",
+      "chinese": "但是我还是很饿。我去找食物。",
+      "pinyin": "Dànshì wǒ háishì hěn è. Wǒ qù zhǎo shíwù.",
+      "audioText": "但是我还是很饿。我去找食物。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_013.wav"
+    },
+    {
+      "id": "014",
+      "english": "I see a bed. The bed is big.",
+      "chinese": "我看见一张床。床很大。",
+      "pinyin": "Wǒ kànjiàn yì zhāng chuáng. Chuáng hěn dà.",
+      "audioText": "我看见一张床。床很大。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_014.wav"
+    },
+    {
+      "id": "015",
+      "english": "I jump on the bed. The bed is soft and warm. I can sleep here.",
+      "chinese": "我跳上床。床很软很暖和。我可以在这里睡觉。",
+      "pinyin": "Wǒ tiào shàng chuáng. Chuáng hěn ruǎn hěn nuǎnhuo. Wǒ kěyǐ zài zhèlǐ shuìjiào.",
+      "audioText": "我跳上床。床很软很暖和。我可以在这里睡觉。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_015.wav"
+    },
+    {
+      "id": "016",
+      "english": "But I am very hungry. I go to find food.",
+      "chinese": "但是我非常饿。我去找食物。",
+      "pinyin": "Dànshì wǒ fēicháng è. Wǒ qù zhǎo shíwù.",
+      "audioText": "但是我非常饿。我去找食物。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_016.wav"
+    },
+    {
+      "id": "017",
+      "english": "I walk and walk. I see a room. The room has a box.",
+      "chinese": "我走啊走。我看见一个房间。房间里有一个盒子。",
+      "pinyin": "Wǒ zǒu a zǒu. Wǒ kànjiàn yí gè fángjiān. Fángjiān lǐ yǒu yí gè hézi.",
+      "audioText": "我走啊走。我看见一个房间。房间里有一个盒子。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_017.wav"
+    },
+    {
+      "id": "018",
+      "english": "The box is on the floor. I look in the box.",
+      "chinese": "盒子在地上。我往盒子里看。",
+      "pinyin": "Hézi zài dì shàng. Wǒ wǎng hézi lǐ kàn.",
+      "audioText": "盒子在地上。我往盒子里看。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_018.wav"
+    },
+    {
+      "id": "019",
+      "english": "There is food in the box. The food is for me.",
+      "chinese": "盒子里有食物。食物是给我的。",
+      "pinyin": "Hézi lǐ yǒu shíwù. Shíwù shì gěi wǒ de.",
+      "audioText": "盒子里有食物。食物是给我的。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_019.wav"
+    },
+    {
+      "id": "020",
+      "english": "I eat the food. The food is good. I am happy.",
+      "chinese": "我吃食物。食物很好吃。我高兴。",
+      "pinyin": "Wǒ chī shíwù. Shíwù hěn hǎochī. Wǒ gāoxìng.",
+      "audioText": "我吃食物。食物很好吃。我高兴。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_020.wav"
+    },
+    {
+      "id": "021",
+      "english": "Now I am not hungry. I am full. I am sleepy.",
+      "chinese": "现在我不饿了。我饱了。我困了。",
+      "pinyin": "Xiànzài wǒ bú è le. Wǒ bǎo le. Wǒ kùn le.",
+      "audioText": "现在我不饿了。我饱了。我困了。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_021.wav"
+    },
+    {
+      "id": "022",
+      "english": "I go back to the chair. No, the bed is better.",
+      "chinese": "我回到椅子那儿。不，床更好。",
+      "pinyin": "Wǒ huí dào yǐzi nàr. Bù, chuáng gèng hǎo.",
+      "audioText": "我回到椅子那儿。不，床更好。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_022.wav"
+    },
+    {
+      "id": "023",
+      "english": "I go to the bed. I jump on the bed.",
+      "chinese": "我去床边。我跳上床。",
+      "pinyin": "Wǒ qù chuáng biān. Wǒ tiào shàng chuáng.",
+      "audioText": "我去床边。我跳上床。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_023.wav"
+    },
+    {
+      "id": "024",
+      "english": "The bed is soft. The bed is warm. I close my eyes.",
+      "chinese": "床很软。床很暖和。我闭上眼睛。",
+      "pinyin": "Chuáng hěn ruǎn. Chuáng hěn nuǎnhuo. Wǒ bì shàng yǎnjīng.",
+      "audioText": "床很软。床很暖和。我闭上眼睛。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_024.wav"
+    },
+    {
+      "id": "025",
+      "english": "I sleep. I am a happy cat.",
+      "chinese": "我睡觉。我是一只高兴的猫。",
+      "pinyin": "Wǒ shuìjiào. Wǒ shì yì zhī gāoxìng de māo.",
+      "audioText": "我睡觉。我是一只高兴的猫。",
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_025.wav"
+    }
+  ],
+  "vocabulary": [
+    {
+      "simplified": "猫",
+      "pinyin": "māo",
+      "english": "cat"
+    },
+    {
+      "simplified": "小",
+      "pinyin": "xiǎo",
+      "english": "small"
+    },
+    {
+      "simplified": "白",
+      "pinyin": "bái",
+      "english": "white"
+    },
+    {
+      "simplified": "名字",
+      "pinyin": "míngzi",
+      "english": "name"
+    },
+    {
+      "simplified": "盒子",
+      "pinyin": "hézi",
+      "english": "box"
+    },
+    {
+      "simplified": "暖和",
+      "pinyin": "nuǎnhuo",
+      "english": "warm"
+    },
+    {
+      "simplified": "饿",
+      "pinyin": "è",
+      "english": "hungry"
+    },
+    {
+      "simplified": "食物",
+      "pinyin": "shíwù",
+      "english": "food"
+    },
+    {
+      "simplified": "椅子",
+      "pinyin": "yǐzi",
+      "english": "chair"
+    },
+    {
+      "simplified": "软",
+      "pinyin": "ruǎn",
+      "english": "soft"
+    },
+    {
+      "simplified": "桌子",
+      "pinyin": "zhuōzi",
+      "english": "table"
+    },
+    {
+      "simplified": "水",
+      "pinyin": "shuǐ",
+      "english": "water"
+    },
+    {
+      "simplified": "床",
+      "pinyin": "chuáng",
+      "english": "bed"
+    },
+    {
+      "simplified": "高兴",
+      "pinyin": "gāoxìng",
+      "english": "happy"
+    },
+    {
+      "simplified": "睡觉",
+      "pinyin": "shuìjiào",
+      "english": "sleep"
+    }
+  ],
+  "storyId": "a-cat-looks-for-places-to-sleep-and-eat-1784840714",
+  "source": {
+    "approvedEnglish": "My Day as a Cat\n\nI am a cat. I am a small cat. I am a white cat. My name is Snow.\n\nI open my eyes. I am in a box. The box is small. The box is warm. I like this box. But I am hungry. I go to find food.\n\nI walk and walk. I see a big chair. I sit on the chair. The chair is soft. I can sleep here. No, I am hungry. I go to find food.\n\nI see a table. The table is high. I jump on the table. There is no food on the table. I see a cup. The cup has water. I drink the water. The water is cold. I like the water. But I am still hungry. I go to find food.\n\nI see a bed. The bed is big. I jump on the bed. The bed is soft and warm. I can sleep here. But I am very hungry. I go to find food.\n\nI walk and walk. I see a room. The room has a box. The box is on the floor. I look in the box. There is food in the box. The food is for me. I eat the food. The food is good. I am happy.\n\nNow I am not hungry. I am full. I am sleepy. I go back to the chair. No, the bed is better. I go to the bed. I jump on the bed. The bed is soft. The bed is warm. I close my eyes. I sleep. I am a happy cat.",
+    "generatedAt": "2026-07-23T22:44:05+00:00",
+    "model": "deepseek-v4-pro"
+  },
+  "audio": {
+    "engine": "Qwen3-TTS",
+    "voice": "Vivian",
+    "language": "Chinese",
+    "manifest": "audio_manifest.json",
+    "durationSeconds": 84.96
+  },
+  "publishedAt": "2026-07-23T22:57:00+00:00"
+}
