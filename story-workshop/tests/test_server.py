@@ -92,6 +92,23 @@ class WorkshopTests(unittest.TestCase):
                     "chinese": "林和朋友一起喝茶。",
                     "pinyin": "Lín hé péngyou yìqǐ hē chá.",
                     "audioText": "林和朋友一起喝茶。",
+                    "words": [
+                        {"text": "林", "pinyin": "Lín", "english": "Lin"},
+                        {"text": "和", "pinyin": "hé", "english": "with"},
+                        {
+                            "text": "朋友",
+                            "pinyin": "péngyou",
+                            "english": "friend",
+                        },
+                        {
+                            "text": "一起",
+                            "pinyin": "yìqǐ",
+                            "english": "together",
+                        },
+                        {"text": "喝", "pinyin": "hē", "english": "to drink"},
+                        {"text": "茶", "pinyin": "chá", "english": "tea"},
+                        {"text": "。", "pinyin": "", "english": ""},
+                    ],
                 }
             ],
             "vocabulary": [
@@ -109,6 +126,10 @@ class WorkshopTests(unittest.TestCase):
         folder = server.project_path(project["id"])
         self.assertEqual(localized["status"], "files_ready")
         self.assertEqual(usage["total_tokens"], 10)
+        self.assertEqual(
+            localized["package"]["segments"][0]["words"][2]["english"],
+            "friend",
+        )
         self.assertTrue((folder / "story.json").is_file())
         self.assertTrue((folder / "audio_manifest.json").is_file())
         manifest = json.loads((folder / "audio_manifest.json").read_text(encoding="utf-8"))
@@ -259,6 +280,25 @@ class WorkshopTests(unittest.TestCase):
                     "chinese": "米娜找到了风筝。",
                     "pinyin": "Mǐnà zhǎodào le fēngzheng.",
                     "audioText": "米娜找到了风筝。",
+                    "words": [
+                        {"text": "米娜", "pinyin": "Mǐnà", "english": "Mina"},
+                        {
+                            "text": "找到",
+                            "pinyin": "zhǎodào",
+                            "english": "to find",
+                        },
+                        {
+                            "text": "了",
+                            "pinyin": "le",
+                            "english": "completion particle",
+                        },
+                        {
+                            "text": "风筝",
+                            "pinyin": "fēngzheng",
+                            "english": "kite",
+                        },
+                        {"text": "。", "pinyin": "", "english": ""},
+                    ],
                 }
             ],
             "vocabulary": [],

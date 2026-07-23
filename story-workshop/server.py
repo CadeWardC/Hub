@@ -46,9 +46,11 @@ Convert the approved English story into natural Simplified Chinese for the reque
 - faithful, natural English;
 - Simplified Chinese with appropriate punctuation;
 - Hanyu Pinyin with tone marks, matching the Chinese exactly;
+- an ordered words array that reconstructs the Chinese exactly, with contextual pinyin and English definitions for every lexical word;
 - clean Chinese audio text for speech synthesis.
 
 Use consistent names and vocabulary. Prefer spoken, standard Mainland Mandarin. Do not add facts or plot events. Pinyin must use tone marks rather than tone numbers. Audio text must contain Chinese only, with punctuation and no pinyin, labels, stage directions, or Markdown.
+Split the Chinese into real words rather than individual characters. Include punctuation as separate word items with blank pinyin and English fields. Every definition must describe what the word means in that particular sentence.
 
 Return one valid json object matching the supplied schema exactly."""
 
@@ -430,6 +432,51 @@ def validate_package(package: Any) -> dict[str, Any]:
                 f"Generated segment {index} is missing English, Chinese, pinyin, or audio text.",
                 502,
             )
+        words = segment.get("words")
+        if not isinstance(words, list) or not words:
+            raise WorkshopError(
+                f"Generated segment {index} is missing word definitions.",
+                502,
+            )
+        normalized_words = []
+        for word_index, word in enumerate(words, start=1):
+            if not isinstance(word, dict):
+                raise WorkshopError(
+                    f"Generated segment {index}, word {word_index} is invalid.",
+                    502,
+                )
+            text = str(word.get("text") or "").strip()
+            word_pinyin = str(word.get("pinyin") or "").strip()
+            word_english = str(word.get("english") or "").strip()
+            if not text:
+                raise WorkshopError(
+                    f"Generated segment {index}, word {word_index} has no text.",
+                    502,
+                )
+            punctuation = re.fullmatch(
+                r"[\s，。！？；：“”‘’、,.!?;:—…（）()]+",
+                text,
+            )
+            if not punctuation and not (word_pinyin and word_english):
+                raise WorkshopError(
+                    f"Generated segment {index}, word {word_index} needs pinyin and a contextual definition.",
+                    502,
+                )
+            normalized_words.append(
+                {
+                    "text": text,
+                    "pinyin": word_pinyin,
+                    "english": word_english,
+                }
+            )
+        reconstructed = "".join(
+            word["text"] for word in normalized_words
+        ).replace(" ", "")
+        if reconstructed != chinese.replace(" ", ""):
+            raise WorkshopError(
+                f"Generated segment {index}'s word list does not reconstruct its Chinese text.",
+                502,
+            )
         segment_id = f"{index:03d}"
         normalized_segments.append(
             {
@@ -439,6 +486,7 @@ def validate_package(package: Any) -> dict[str, Any]:
                 "pinyin": pinyin,
                 "audioText": audio_text,
                 "audioFile": f"audio/{segment_id}.wav",
+                "words": normalized_words,
             }
         )
     package["segments"] = normalized_segments
@@ -473,6 +521,29 @@ def localize_story(project: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
                 "chinese": "适合学习者的中文。",
                 "pinyin": "Shìhé xuéxízhě de Zhōngwén.",
                 "audioText": "适合学习者的中文。",
+                "words": [
+                    {
+                        "text": "适合",
+                        "pinyin": "shìhé",
+                        "english": "suitable for",
+                    },
+                    {
+                        "text": "学习者",
+                        "pinyin": "xuéxízhě",
+                        "english": "learner",
+                    },
+                    {
+                        "text": "的",
+                        "pinyin": "de",
+                        "english": "possessive particle",
+                    },
+                    {
+                        "text": "中文",
+                        "pinyin": "Zhōngwén",
+                        "english": "Chinese language",
+                    },
+                    {"text": "。", "pinyin": "", "english": ""},
+                ],
             }
         ],
         "vocabulary": [
@@ -495,6 +566,8 @@ Requirements:
 - Use sequential three-digit segment ids.
 - Include 8–20 useful vocabulary items.
 - The English field in every segment is a natural translation of that Chinese segment.
+- In every words array, use real lexical words in exact reading order. The text values, including punctuation, must concatenate to the segment's Chinese field exactly.
+- Give every non-punctuation word tone-mark pinyin and its context-specific English meaning. Punctuation items must have blank pinyin and English.
 
 Approved English story:
 {story}"""

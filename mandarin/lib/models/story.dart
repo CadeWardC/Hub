@@ -115,6 +115,7 @@ class StorySegment {
     required this.pinyin,
     required this.audioText,
     required this.audioFile,
+    required this.words,
   });
 
   final String id;
@@ -123,6 +124,7 @@ class StorySegment {
   final String pinyin;
   final String audioText;
   final String? audioFile;
+  final List<StoryWord> words;
 
   factory StorySegment.fromJson(Map<String, dynamic> json) {
     return StorySegment(
@@ -132,6 +134,31 @@ class StorySegment {
       pinyin: json['pinyin'] as String? ?? '',
       audioText: json['audioText'] as String? ?? '',
       audioFile: json['audioFile'] as String?,
+      words: (json['words'] as List<dynamic>? ?? const [])
+          .whereType<Map<String, dynamic>>()
+          .map(StoryWord.fromJson)
+          .where((word) => word.text.isNotEmpty)
+          .toList(growable: false),
+    );
+  }
+}
+
+class StoryWord {
+  const StoryWord({
+    required this.text,
+    required this.pinyin,
+    required this.english,
+  });
+
+  final String text;
+  final String pinyin;
+  final String english;
+
+  factory StoryWord.fromJson(Map<String, dynamic> json) {
+    return StoryWord(
+      text: json['text'] as String? ?? '',
+      pinyin: json['pinyin'] as String? ?? '',
+      english: json['english'] as String? ?? '',
     );
   }
 }
