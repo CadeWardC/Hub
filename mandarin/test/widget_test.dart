@@ -41,16 +41,16 @@ void main() {
         home: ReaderScreen(summary: summary, repository: repository),
       ),
     );
-    await pumpUntilFound(tester, find.text('Tap a word for its meaning'));
+    await pumpUntilFound(tester, find.text('Hold a word for its meaning'));
 
-    expect(find.text('Tap a word for its meaning'), findsOneWidget);
+    expect(find.text('Hold a word for its meaning'), findsOneWidget);
     // The docked player bar shows position and speed.
     expect(find.text('1 / ${story.segments.length}'), findsOneWidget);
     expect(find.text('1.0×'), findsOneWidget);
     expect(find.byIcon(Icons.play_arrow_rounded), findsOneWidget);
 
-    // Tap a word from the first sentence; its definition appears in the
-    // pinned translation panel.
+    // Press a word from the first sentence; its definition appears in the
+    // translation panel for as long as the press is held.
     final candidates = [
       ...story.segments
           .expand((segment) => segment.words)
@@ -63,19 +63,22 @@ void main() {
         ),
     ];
     final word = candidates.first;
-    await tester.tap(find.text(word.text).first);
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.text(word.text).first),
+    );
     await tester.pumpAndSettle();
 
+    final sentenceLabel = 'SENTENCE 1 OF ${story.segments.length} · ENGLISH';
     expect(find.text(word.english), findsWidgets);
-    expect(find.byIcon(Icons.close_rounded), findsOneWidget);
-    // The word view offers a bookmark to save the word.
-    expect(find.byIcon(Icons.bookmark_border_rounded), findsOneWidget);
-
-    // Dismiss the held word with the panel's close button; let the panel's
-    // switcher animation finish before asserting it is gone.
-    await tester.tap(find.byIcon(Icons.close_rounded));
-    await tester.pumpAndSettle();
+    expect(find.text(sentenceLabel), findsNothing);
+    // A held word is transient, so it carries no buttons of its own.
     expect(find.byIcon(Icons.close_rounded), findsNothing);
+
+    // Releasing the press returns the panel to the sentence translation; let
+    // the switcher animation finish before asserting the word is gone.
+    await gesture.up();
+    await tester.pumpAndSettle();
+    expect(find.text(sentenceLabel), findsOneWidget);
 
     if (story.vocabulary.isEmpty) return;
 

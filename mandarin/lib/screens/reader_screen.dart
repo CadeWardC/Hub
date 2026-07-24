@@ -57,6 +57,11 @@ class _ReaderScreenState extends State<ReaderScreen> {
   int? _heldSegmentIndex;
   int? _heldWordIndex;
 
+  // Words pressed in the story flow are transient — the definition lives only
+  // as long as the finger is down. Words opened from the vocabulary list are
+  // pinned instead, and stay until dismissed.
+  bool _wordPinned = false;
+
   @override
   void initState() {
     super.initState();
@@ -108,16 +113,28 @@ class _ReaderScreenState extends State<ReaderScreen> {
     }
   }
 
-  /// Tapping (or holding) a word shows its definition in the top panel and
-  /// makes its sentence the active one, without starting audio — listening is
-  /// driven from the player bar.
-  void _tapWord(int segmentIndex, int wordIndex, StoryWord word) {
+  /// Pressing a word shows its definition in the top panel and makes its
+  /// sentence the active one, without starting audio — listening is driven
+  /// from the player bar. The definition lasts only while the press is held.
+  void _pressWord(int segmentIndex, int wordIndex, StoryWord word) {
     setState(() {
       _activeIndex = segmentIndex;
       _revealedIndex = null;
       _heldWord = word;
       _heldSegmentIndex = segmentIndex;
       _heldWordIndex = wordIndex;
+      _wordPinned = false;
+    });
+  }
+
+  /// Releasing (or cancelling, e.g. by scrolling away) returns the panel to
+  /// the sentence translation. Pinned words are left alone.
+  void _releaseWord() {
+    if (_heldWord == null || _wordPinned) return;
+    setState(() {
+      _heldWord = null;
+      _heldSegmentIndex = null;
+      _heldWordIndex = null;
     });
   }
 
@@ -139,6 +156,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
       _heldWord = null;
       _heldSegmentIndex = null;
       _heldWordIndex = null;
+      _wordPinned = false;
     });
     _scrollToSegment(index);
     if (wasPlaying) {
@@ -177,6 +195,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
       _heldWord = null;
       _heldSegmentIndex = null;
       _heldWordIndex = null;
+      _wordPinned = false;
     });
   }
 
@@ -191,6 +210,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
       // story flow gets highlighted.
       _heldSegmentIndex = null;
       _heldWordIndex = null;
+      _wordPinned = true;
     });
   }
 
@@ -355,6 +375,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 segmentNumber: _activeIndex + 1,
                 segmentCount: story.segments.length,
                 heldWord: _heldWord,
+                wordPinned: _wordPinned,
                 hidden: !_showEnglish && _revealedIndex != _activeIndex,
                 toneColors: _showToneColors,
                 heldWordSaved:
@@ -405,7 +426,8 @@ class _ReaderScreenState extends State<ReaderScreen> {
                                   heldSegmentIndex: _heldSegmentIndex,
                                   heldWordIndex: _heldWordIndex,
                                   savedTexts: _savedTexts,
-                                  onWord: _tapWord,
+                                  onWordPressed: _pressWord,
+                                  onWordReleased: _releaseWord,
                                 ),
                               ),
                             ],
@@ -461,6 +483,7 @@ class _TranslationPanel extends StatelessWidget {
     required this.segmentNumber,
     required this.segmentCount,
     required this.heldWord,
+    required this.wordPinned,
     required this.hidden,
     required this.toneColors,
     required this.heldWordSaved,
@@ -473,6 +496,7 @@ class _TranslationPanel extends StatelessWidget {
   final int segmentNumber;
   final int segmentCount;
   final StoryWord? heldWord;
+  final bool wordPinned;
   final bool hidden;
   final bool toneColors;
   final bool heldWordSaved;
@@ -519,7 +543,7 @@ class _TranslationPanel extends StatelessWidget {
   Widget _translationView(BuildContext context) {
     final english = segment?.english.isNotEmpty == true
         ? segment!.english
-        : 'Tap a word below to see its meaning here.';
+        : 'Hold a word below to see its meaning here.';
     return GestureDetector(
       key: ValueKey('translation-$hidden'),
       behavior: HitTestBehavior.opaque,
@@ -616,28 +640,33 @@ class _TranslationPanel extends StatelessWidget {
               ],
             ),
           ),
-          IconButton(
-            onPressed: onToggleSaved,
-            tooltip: heldWordSaved ? 'Remove saved word' : 'Save word',
-            icon: Icon(
-              heldWordSaved
-                  ? Icons.bookmark_rounded
-                  : Icons.bookmark_border_rounded,
-              color: MandarinReaderApp.jade,
+          // A word being held disappears the moment the finger lifts, so its
+          // buttons would be unreachable — only pinned words get them.
+          if (wordPinned) ...[
+            IconButton(
+              onPressed: onToggleSaved,
+              tooltip: heldWordSaved ? 'Remove saved word' : 'Save word',
+              icon: Icon(
+                heldWordSaved
+                    ? Icons.bookmark_rounded
+                    : Icons.bookmark_border_rounded,
+                color: MandarinReaderApp.jade,
+              ),
             ),
-          ),
-          IconButton(
-            onPressed: onDismissWord,
-            tooltip: 'Back to translation',
-            icon: const Icon(Icons.close_rounded, color: Color(0xFF7D827E)),
-          ),
+            IconButton(
+              onPressed: onDismissWord,
+              tooltip: 'Back to translation',
+              icon: const Icon(Icons.close_rounded, color: Color(0xFF7D827E)),
+            ),
+          ] else
+            const SizedBox(width: 12),
         ],
       ),
     );
   }
 }
 
-/// The whole story rendered as one continuous, book-like flow of tappable
+/// The whole story rendered as one continuous, book-like flow of pressable
 /// words. Sentences are not boxed apart; the active sentence is highlighted
 /// inline, and pinyin sits above each word as ruby text.
 class _StoryFlow extends StatelessWidget {
@@ -652,7 +681,8 @@ class _StoryFlow extends StatelessWidget {
     required this.heldSegmentIndex,
     required this.heldWordIndex,
     required this.savedTexts,
-    required this.onWord,
+    required this.onWordPressed,
+    required this.onWordReleased,
   });
 
   final Story story;
@@ -665,7 +695,9 @@ class _StoryFlow extends StatelessWidget {
   final int? heldSegmentIndex;
   final int? heldWordIndex;
   final Set<String> savedTexts;
-  final void Function(int segmentIndex, int wordIndex, StoryWord word) onWord;
+  final void Function(int segmentIndex, int wordIndex, StoryWord word)
+      onWordPressed;
+  final VoidCallback onWordReleased;
 
   @override
   Widget build(BuildContext context) {
@@ -687,10 +719,19 @@ class _StoryFlow extends StatelessWidget {
         if (!punctuation) {
           final segmentIndex = s;
           final wordIndex = w;
+          // The definition is shown for exactly as long as the finger (or
+          // mouse button) is down: press to reveal, release to dismiss.
+          // Both recognizers are wired so a long hold keeps it up too — the
+          // long-press win cancels the tap, which would otherwise release it.
           child = GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => onWord(segmentIndex, wordIndex, word),
-            onLongPress: () => onWord(segmentIndex, wordIndex, word),
+            onTapDown: (_) => onWordPressed(segmentIndex, wordIndex, word),
+            onTapUp: (_) => onWordReleased(),
+            onTapCancel: onWordReleased,
+            onLongPressStart: (_) =>
+                onWordPressed(segmentIndex, wordIndex, word),
+            onLongPressEnd: (_) => onWordReleased(),
+            onLongPressCancel: onWordReleased,
             child: child,
           );
         }
@@ -882,7 +923,7 @@ class _StoryHeader extends StatelessWidget {
               ),
               const SizedBox(width: 5),
               const Text(
-                'Tap a word for its meaning',
+                'Hold a word for its meaning',
                 style: TextStyle(color: Color(0xFF7D827E), fontSize: 12),
               ),
             ],
