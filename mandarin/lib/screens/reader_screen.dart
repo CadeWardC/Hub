@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -669,7 +670,11 @@ class _TranslationPanel extends StatelessWidget {
 /// The whole story rendered as one continuous, book-like flow of pressable
 /// words. Sentences are not boxed apart; the active sentence is highlighted
 /// inline, and pinyin sits above each word as ruby text.
-class _StoryFlow extends StatelessWidget {
+///
+/// The press is tracked by the flow as a whole rather than by per-word gesture
+/// detectors, so a press can slide from word to word without lifting: the
+/// definition always follows whichever word the pointer is currently over.
+class _StoryFlow extends StatefulWidget {
   const _StoryFlow({
     required this.story,
     required this.segmentWords,
@@ -700,51 +705,129 @@ class _StoryFlow extends StatelessWidget {
   final VoidCallback onWordReleased;
 
   @override
+  State<_StoryFlow> createState() => _StoryFlowState();
+}
+
+class _StoryFlowState extends State<_StoryFlow> {
+  /// One key per pressable word, kept across rebuilds so the boxes we hit-test
+  /// against stay put. Keyed by `'segment:word'`.
+  final Map<String, GlobalKey> _wordKeys = {};
+
+  bool _pressing = false;
+  String? _pressedKey;
+  Offset _pressOrigin = Offset.zero;
+
+  // Set once a press has clearly become a sweep across words rather than the
+  // start of a scroll, after which vertical movement no longer cancels it.
+  bool _sweeping = false;
+
+  void _handlePointerDown(PointerDownEvent event) {
+    _pressing = true;
+    _pressedKey = null;
+    _pressOrigin = event.position;
+    // A mouse drag never scrolls the story, so it is a sweep from the outset.
+    _sweeping = event.kind != PointerDeviceKind.touch;
+    _updateForPosition(event.position);
+  }
+
+  /// The flow sits inside a vertically scrolling list, and a [Listener] does
+  /// not compete in the gesture arena, so a press that turns into a vertical
+  /// drag has to bow out by hand — otherwise the definition would ride along
+  /// while the reader scrolls.
+  void _handlePointerMove(PointerMoveEvent event) {
+    if (!_pressing) return;
+    if (!_sweeping) {
+      final delta = event.position - _pressOrigin;
+      if (delta.dx.abs() > kTouchSlop && delta.dx.abs() > delta.dy.abs()) {
+        _sweeping = true;
+      } else if (delta.dy.abs() > kTouchSlop) {
+        _endPress();
+        return;
+      }
+    }
+    _updateForPosition(event.position);
+  }
+
+  void _endPress() {
+    if (!_pressing) return;
+    _pressing = false;
+    _pressedKey = null;
+    _sweeping = false;
+    widget.onWordReleased();
+  }
+
+  /// Shows the definition of whichever word sits under [globalPosition]. When
+  /// the pointer is between words — on punctuation, a gap, or off the
+  /// paragraph — the current definition simply stays put, so sliding along a
+  /// line does not flicker.
+  void _updateForPosition(Offset globalPosition) {
+    for (final entry in _wordKeys.entries) {
+      final box = entry.value.currentContext?.findRenderObject() as RenderBox?;
+      if (box == null || !box.hasSize) continue;
+      final rect = box.localToGlobal(Offset.zero) & box.size;
+      if (!rect.contains(globalPosition)) continue;
+      if (entry.key == _pressedKey) return;
+      final parts = entry.key.split(':');
+      final segmentIndex = int.parse(parts[0]);
+      final wordIndex = int.parse(parts[1]);
+      final words = segmentIndex < widget.segmentWords.length
+          ? widget.segmentWords[segmentIndex]
+          : const <StoryWord>[];
+      if (wordIndex >= words.length) return;
+      _pressedKey = entry.key;
+      widget.onWordPressed(segmentIndex, wordIndex, words[wordIndex]);
+      return;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final story = widget.story;
     final children = <Widget>[];
+    final liveKeys = <String>{};
     for (var s = 0; s < story.segments.length; s++) {
-      final words = s < segmentWords.length ? segmentWords[s] : const <StoryWord>[];
+      final words = s < widget.segmentWords.length
+          ? widget.segmentWords[s]
+          : const <StoryWord>[];
       for (var w = 0; w < words.length; w++) {
         final word = words[w];
-        final punctuation = _WordTokenizer.isPunctuation(word.text);
         Widget child = _WordChip(
           word: word,
-          showPinyin: showPinyin,
-          toneColors: toneColors,
-          active: s == activeIndex,
-          playing: s == playingIndex,
-          held: s == heldSegmentIndex && w == heldWordIndex,
-          saved: savedTexts.contains(word.text),
+          showPinyin: widget.showPinyin,
+          toneColors: widget.toneColors,
+          active: s == widget.activeIndex,
+          playing: s == widget.playingIndex,
+          held: s == widget.heldSegmentIndex && w == widget.heldWordIndex,
+          saved: widget.savedTexts.contains(word.text),
         );
-        if (!punctuation) {
-          final segmentIndex = s;
-          final wordIndex = w;
-          // The definition is shown for exactly as long as the finger (or
-          // mouse button) is down: press to reveal, release to dismiss.
-          // Both recognizers are wired so a long hold keeps it up too — the
-          // long-press win cancels the tap, which would otherwise release it.
-          child = GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTapDown: (_) => onWordPressed(segmentIndex, wordIndex, word),
-            onTapUp: (_) => onWordReleased(),
-            onTapCancel: onWordReleased,
-            onLongPressStart: (_) =>
-                onWordPressed(segmentIndex, wordIndex, word),
-            onLongPressEnd: (_) => onWordReleased(),
-            onLongPressCancel: onWordReleased,
+        if (!_WordTokenizer.isPunctuation(word.text)) {
+          final id = '$s:$w';
+          liveKeys.add(id);
+          child = KeyedSubtree(
+            key: _wordKeys.putIfAbsent(id, GlobalKey.new),
             child: child,
           );
         }
         if (w == 0) {
-          child = KeyedSubtree(key: segmentKeys[s], child: child);
+          child = KeyedSubtree(key: widget.segmentKeys[s], child: child);
         }
         children.add(child);
       }
     }
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.end,
-      runSpacing: showPinyin ? 10 : 6,
-      children: children,
+    _wordKeys.removeWhere((id, _) => !liveKeys.contains(id));
+
+    // The definition is shown for exactly as long as the pointer is down:
+    // press to reveal, drag to move between words, release to dismiss.
+    return Listener(
+      onPointerDown: _handlePointerDown,
+      onPointerMove: _handlePointerMove,
+      onPointerUp: (_) => _endPress(),
+      onPointerCancel: (_) => _endPress(),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.end,
+        runSpacing: widget.showPinyin ? 10 : 6,
+        children: children,
+      ),
     );
   }
 }

@@ -74,6 +74,21 @@ void main() {
     // A held word is transient, so it carries no buttons of its own.
     expect(find.byIcon(Icons.close_rounded), findsNothing);
 
+    // Dragging the same press onto another word swaps the definition without
+    // ever lifting the pointer.
+    final neighbour = story.segments.first.words.firstWhere(
+      (other) =>
+          other.english.isNotEmpty &&
+          other.english != word.english &&
+          other.text != word.text,
+      orElse: () => const StoryWord(text: '', pinyin: '', english: ''),
+    );
+    if (neighbour.text.isNotEmpty) {
+      await gesture.moveTo(tester.getCenter(find.text(neighbour.text).first));
+      await tester.pumpAndSettle();
+      expect(find.text(neighbour.english), findsWidgets);
+    }
+
     // Releasing the press returns the panel to the sentence translation; let
     // the switcher animation finish before asserting the word is gone.
     await gesture.up();
