@@ -53,6 +53,7 @@ def synthesize_items(
     speaker: str = "Vivian",
     instruct: str = "Speak naturally, clearly, and warmly for a Mandarin learner.",
 ) -> list[dict[str, Any]]:
+    import numpy as np
     import soundfile as sf
 
     if not items:
@@ -78,7 +79,11 @@ def synthesize_items(
                 instruct=instruct,
                 do_sample=True,
             )
-            waveform = wavs[0]
+            waveform = np.asarray(wavs[0])
+            # Lead-in silence so the first syllable survives audio pipeline
+            # start-up latency (output sinks can eat ~100-200ms on web/BT).
+            lead = np.zeros(int(sample_rate * 0.25), dtype=waveform.dtype)
+            waveform = np.concatenate([lead, waveform])
             sf.write(output_path, waveform, sample_rate)
             duration_seconds = round(len(waveform) / sample_rate, 3)
             results.append(
