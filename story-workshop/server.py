@@ -742,6 +742,49 @@ def synthesize_project_audio(project: dict[str, Any]) -> dict[str, Any]:
     return project
 
 
+# Speed variants generated at publish time with ffmpeg so the reader can play
+# genuinely slowed audio instead of asking the browser to time-stretch, which
+# sounds choppy. Keys are filename suffixes, values are atempo factors (both
+# within ffmpeg's single-filter atempo range of [0.5, 100]).
+SLOW_VARIANTS = {"r075": "0.75", "r050": "0.5"}
+
+
+def generate_slow_variants(source: Path) -> dict[str, str]:
+    """Generate slowed WAVs next to *source*.
+
+    Returns a mapping of speed (e.g. "0.75") to the variant file name. Missing
+    ffmpeg or a failed conversion skips that variant instead of failing the
+    publish; the app falls back to browser-side rate adjustment.
+    """
+    variants: dict[str, str] = {}
+    for suffix, atempo in SLOW_VARIANTS.items():
+        target = source.with_name(f"{source.stem}_{suffix}{source.suffix}")
+        command = [
+            "ffmpeg",
+            "-y",
+            "-i",
+            str(source),
+            "-filter:a",
+            f"atempo={atempo}",
+            "-ar",
+            "24000",
+            "-c:a",
+            "pcm_s16le",
+            str(target),
+        ]
+        try:
+            result = subprocess.run(command, capture_output=True)
+        except FileNotFoundError:
+            print("ffmpeg not found; skipping slow audio variants.")
+            return variants
+        if result.returncode != 0:
+            detail = result.stderr.decode("utf-8", "replace").strip()[-300:]
+            print(f"ffmpeg failed for {target.name}: {detail}")
+            continue
+        variants[atempo] = target.name
+    return variants
+
+
 def publish_project_to_flutter(project: dict[str, Any]) -> dict[str, Any]:
     package = project.get("package")
     if not isinstance(package, dict):
@@ -756,22 +799,35 @@ def publish_project_to_flutter(project: dict[str, Any]) -> dict[str, Any]:
     target_audio = FLUTTER_CONTENT_ROOT / "audio"
     target_audio.mkdir(parents=True, exist_ok=True)
     published_audio_files: dict[str, str] = {}
+    published_audio_variants: dict[str, dict[str, str]] = {}
     for item in manifest.get("items") or []:
         relative_output = str(item.get("output") or "")
         source_audio = source_folder / relative_output
         if not source_audio.is_file():
             raise WorkshopError(f"Audio file is missing: {relative_output}")
         published_name = f"{project['id']}_{source_audio.name}"
-        shutil.copy2(source_audio, target_audio / published_name)
-        published_audio_files[str(item.get("id") or "")] = (
+        published_path = target_audio / published_name
+        shutil.copy2(source_audio, published_path)
+        item_id = str(item.get("id") or "")
+        published_audio_files[item_id] = (
             f"assets/content/audio/{published_name}"
         )
+        variants = generate_slow_variants(published_path)
+        if variants:
+            published_audio_variants[item_id] = {
+                speed: f"assets/content/audio/{name}"
+                for speed, name in variants.items()
+            }
 
     published_package = json.loads(json.dumps(package))
     for segment in published_package.get("segments") or []:
-        published_audio = published_audio_files.get(str(segment.get("id") or ""))
+        segment_id = str(segment.get("id") or "")
+        published_audio = published_audio_files.get(segment_id)
         if published_audio:
             segment["audioFile"] = published_audio
+        variants = published_audio_variants.get(segment_id)
+        if variants:
+            segment["audioVariants"] = variants
     published_package["publishedAt"] = utc_now()
     published_package["audio"]["durationSeconds"] = manifest.get(
         "durationSeconds",

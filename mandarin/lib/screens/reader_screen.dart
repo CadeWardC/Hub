@@ -36,6 +36,10 @@ class _ReaderScreenState extends State<ReaderScreen> {
   int? _playingIndex;
   double _speed = 1;
 
+  // Bumped whenever playback state changes so a pending auto-advance that was
+  // scheduled before the change can detect it is stale and abort.
+  int _playToken = 0;
+
   // When set, the top panel shows this word instead of the sentence
   // translation, mirroring Du Chinese's press-a-word behavior.
   StoryWord? _heldWord;
@@ -97,12 +101,26 @@ class _ReaderScreenState extends State<ReaderScreen> {
     });
   }
 
+  void _showVocabularyWord(VocabularyItem item) {
+    setState(() {
+      _heldWord = StoryWord(
+        text: item.simplified,
+        pinyin: item.pinyin,
+        english: item.english,
+      );
+      // Vocabulary entries are not tied to a sentence, so nothing in the
+      // story flow gets highlighted.
+      _heldSegmentIndex = null;
+      _heldWordIndex = null;
+    });
+  }
+
   Future<void> _playSegment(int index, {bool playAll = false}) async {
     final story = _loadedStory;
     if (story == null) return;
     final segment = story.segments[index];
-    final asset = story.audioAssetFor(segment);
-    if (asset == null) {
+    final plan = story.audioPlanFor(segment, _speed);
+    if (plan == null) {
       _showMessage('This paragraph does not have audio yet.');
       return;
     }
@@ -116,15 +134,17 @@ class _ReaderScreenState extends State<ReaderScreen> {
       _scrollToSegment(index);
     }
 
+    _playToken++;
     try {
       await _player.stop();
-      final sourcePath = asset.startsWith('assets/')
-          ? asset.substring('assets/'.length)
-          : asset;
-      await _player.play(AssetSource(sourcePath));
-      // Audioplayers needs an active source before web/mobile playback rate
-      // changes are consistently honored.
-      await _player.setPlaybackRate(_speed);
+      final sourcePath = plan.asset.startsWith('assets/')
+          ? plan.asset.substring('assets/'.length)
+          : plan.asset;
+      // Load the source and apply the rate before starting playback so the
+      // first syllable is never clipped by a cold decoder or late rate change.
+      await _player.setSource(AssetSource(sourcePath));
+      await _player.setPlaybackRate(plan.playbackRate);
+      await _player.resume();
       await _saveProgress(index);
     } catch (_) {
       if (!mounted) return;
@@ -152,13 +172,11 @@ class _ReaderScreenState extends State<ReaderScreen> {
 
   Future<void> _setSpeed(double speed) async {
     setState(() => _speed = speed);
-    if (_playingIndex == null) return;
-    try {
-      await _player.setPlaybackRate(speed);
-    } catch (_) {
-      if (mounted) {
-        _showMessage('The speed will be applied when the next audio starts.');
-      }
+    // The slow speeds may use a different audio file entirely, so restart the
+    // current segment rather than adjusting the rate mid-stream.
+    final playing = _playingIndex;
+    if (playing != null) {
+      await _playSegment(playing, playAll: _playAll);
     }
   }
 
@@ -167,6 +185,11 @@ class _ReaderScreenState extends State<ReaderScreen> {
     final index = _playingIndex;
     if (story == null || index == null || !mounted) return;
     if (_playAll && index + 1 < story.segments.length) {
+      // Short breather between sentences; abort if the user stopped or
+      // started other playback while we were waiting.
+      final token = ++_playToken;
+      await Future<void>.delayed(const Duration(milliseconds: 280));
+      if (!mounted || token != _playToken || !_playAll) return;
       await _playSegment(index + 1, playAll: true);
       return;
     }
@@ -180,6 +203,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
   }
 
   Future<void> _stopAudio() async {
+    _playToken++;
     await _player.stop();
     if (!mounted) return;
     setState(() {
@@ -301,7 +325,10 @@ class _ReaderScreenState extends State<ReaderScreen> {
                       Center(
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(maxWidth: 760),
-                          child: _VocabularySection(items: story.vocabulary),
+                          child: _VocabularySection(
+                            items: story.vocabulary,
+                            onTapItem: _showVocabularyWord,
+                          ),
                         ),
                       ),
                     ],
@@ -916,9 +943,10 @@ class _WordTokenizer {
 }
 
 class _VocabularySection extends StatelessWidget {
-  const _VocabularySection({required this.items});
+  const _VocabularySection({required this.items, required this.onTapItem});
 
   final List<VocabularyItem> items;
+  final ValueChanged<VocabularyItem> onTapItem;
 
   @override
   Widget build(BuildContext context) {
@@ -942,6 +970,7 @@ class _VocabularySection extends StatelessWidget {
             children: [
               for (var index = 0; index < items.length; index++) ...[
                 ListTile(
+                  onTap: () => onTapItem(items[index]),
                   title: Text(
                     items[index].simplified,
                     style: const TextStyle(fontSize: 20),

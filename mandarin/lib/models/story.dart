@@ -100,7 +100,25 @@ class Story {
   }
 
   String? audioAssetFor(StorySegment segment) {
-    final audioFile = segment.audioFile;
+    return _resolveAudioPath(segment.audioFile);
+  }
+
+  /// Picks the audio file and playback rate for [speed]. Slow speeds prefer a
+  /// pre-generated variant played at 1.0 so the browser never has to
+  /// time-stretch; without a variant (or for fast speeds) the normal file is
+  /// rate-adjusted instead.
+  ({String asset, double playbackRate})? audioPlanFor(
+    StorySegment segment,
+    double speed,
+  ) {
+    final variant = _resolveAudioPath(segment.audioVariants['$speed']);
+    if (variant != null) return (asset: variant, playbackRate: 1.0);
+    final asset = audioAssetFor(segment);
+    if (asset == null) return null;
+    return (asset: asset, playbackRate: speed);
+  }
+
+  String? _resolveAudioPath(String? audioFile) {
     if (audioFile == null || audioFile.isEmpty) return null;
     if (audioFile.startsWith('assets/')) return audioFile;
     return '$assetDirectory/$audioFile';
@@ -115,6 +133,7 @@ class StorySegment {
     required this.pinyin,
     required this.audioText,
     required this.audioFile,
+    this.audioVariants = const {},
     required this.words,
   });
 
@@ -124,6 +143,10 @@ class StorySegment {
   final String pinyin;
   final String audioText;
   final String? audioFile;
+
+  /// Pre-generated speed variants, keyed by speed (e.g. "0.75") with the
+  /// audio file path as the value.
+  final Map<String, String> audioVariants;
   final List<StoryWord> words;
 
   factory StorySegment.fromJson(Map<String, dynamic> json) {
@@ -134,6 +157,12 @@ class StorySegment {
       pinyin: json['pinyin'] as String? ?? '',
       audioText: json['audioText'] as String? ?? '',
       audioFile: json['audioFile'] as String?,
+      audioVariants: {
+        for (final entry
+            in (json['audioVariants'] as Map<String, dynamic>? ?? const {})
+                .entries)
+          if (entry.value is String) entry.key: entry.value as String,
+      },
       words: (json['words'] as List<dynamic>? ?? const [])
           .whereType<Map<String, dynamic>>()
           .map(StoryWord.fromJson)

@@ -18,7 +18,11 @@
       "chinese": "我是猫。我是小猫。",
       "pinyin": "Wǒ shì māo. Wǒ shì xiǎo māo.",
       "audioText": "我是猫。我是小猫。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_001.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_001.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_001_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_001_r075.wav"
+      }
     },
     {
       "id": "002",
@@ -26,7 +30,11 @@
       "chinese": "我是白猫。我名字叫雪儿。",
       "pinyin": "Wǒ shì bái māo. Wǒ míngzi jiào Xuě'ér.",
       "audioText": "我是白猫。我名字叫雪儿。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_002.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_002.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_002_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_002_r075.wav"
+      }
     },
     {
       "id": "003",
@@ -34,7 +42,11 @@
       "chinese": "我睁开眼睛。我在盒子里。",
       "pinyin": "Wǒ zhēngkāi yǎnjīng. Wǒ zài hézi lǐ.",
       "audioText": "我睁开眼睛。我在盒子里。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_003.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_003.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_003_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_003_r075.wav"
+      }
     },
     {
       "id": "004",
@@ -42,7 +54,11 @@
       "chinese": "盒子很小。盒子很暖和。我喜欢这个盒子。",
       "pinyin": "Hézi hěn xiǎo. Hézi hěn nuǎnhuo. Wǒ xǐhuan zhège hézi.",
       "audioText": "盒子很小。盒子很暖和。我喜欢这个盒子。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_004.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_004.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_004_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_004_r075.wav"
+      }
     },
     {
       "id": "005",
@@ -50,7 +66,11 @@
       "chinese": "但是我饿了。我去找食物。",
       "pinyin": "Dànshì wǒ è le. Wǒ qù zhǎo shíwù.",
       "audioText": "但是我饿了。我去找食物。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_005.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_005.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_005_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_005_r075.wav"
+      }
     },
     {
       "id": "006",
@@ -58,7 +78,11 @@
       "chinese": "我走啊走。我看见一把大椅子。",
       "pinyin": "Wǒ zǒu a zǒu. Wǒ kànjiàn yì bǎ dà yǐzi.",
       "audioText": "我走啊走。我看见一把大椅子。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_006.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_006.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_006_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_006_r075.wav"
+      }
     },
     {
       "id": "007",
@@ -66,7 +90,11 @@
       "chinese": "我坐在椅子上。椅子很软。我可以在这里睡觉。",
       "pinyin": "Wǒ zuò zài yǐzi shàng. Yǐzi hěn ruǎn. Wǒ kěyǐ zài zhèlǐ shuìjiào.",
       "audioText": "我坐在椅子上。椅子很软。我可以在这里睡觉。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_007.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_007.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_007_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_007_r075.wav"
+      }
     },
     {
       "id": "008",
@@ -74,7 +102,11 @@
       "chinese": "不，我饿了。我去找食物。",
       "pinyin": "Bù, wǒ è le. Wǒ qù zhǎo shíwù.",
       "audioText": "不，我饿了。我去找食物。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_008.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_008.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_008_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_008_r075.wav"
+      }
     },
     {
       "id": "009",
@@ -82,7 +114,11 @@
       "chinese": "我看见一张桌子。桌子很高。",
       "pinyin": "Wǒ kànjiàn yì zhāng zhuōzi. Zhuōzi hěn gāo.",
       "audioText": "我看见一张桌子。桌子很高。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_009.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_009.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_009_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_009_r075.wav"
+      }
     },
     {
       "id": "010",
@@ -90,7 +126,11 @@
       "chinese": "我跳上桌子。桌子上没有食物。",
       "pinyin": "Wǒ tiào shàng zhuōzi. Zhuōzi shàng méiyǒu shíwù.",
       "audioText": "我跳上桌子。桌子上没有食物。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_010.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_010.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_010_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_010_r075.wav"
+      }
     },
     {
       "id": "011",
@@ -98,7 +138,11 @@
       "chinese": "我看见一个杯子。杯子里有水。",
       "pinyin": "Wǒ kànjiàn yí gè bēizi. Bēizi lǐ yǒu shuǐ.",
       "audioText": "我看见一个杯子。杯子里有水。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_011.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_011.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_011_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_011_r075.wav"
+      }
     },
     {
       "id": "012",
@@ -106,7 +150,11 @@
       "chinese": "我喝水。水很凉。我喜欢水。",
       "pinyin": "Wǒ hē shuǐ. Shuǐ hěn liáng. Wǒ xǐhuan shuǐ.",
       "audioText": "我喝水。水很凉。我喜欢水。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_012.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_012.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_012_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_012_r075.wav"
+      }
     },
     {
       "id": "013",
@@ -114,7 +162,11 @@
       "chinese": "但是我还是很饿。我去找食物。",
       "pinyin": "Dànshì wǒ háishì hěn è. Wǒ qù zhǎo shíwù.",
       "audioText": "但是我还是很饿。我去找食物。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_013.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_013.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_013_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_013_r075.wav"
+      }
     },
     {
       "id": "014",
@@ -122,7 +174,11 @@
       "chinese": "我看见一张床。床很大。",
       "pinyin": "Wǒ kànjiàn yì zhāng chuáng. Chuáng hěn dà.",
       "audioText": "我看见一张床。床很大。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_014.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_014.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_014_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_014_r075.wav"
+      }
     },
     {
       "id": "015",
@@ -130,7 +186,11 @@
       "chinese": "我跳上床。床很软很暖和。我可以在这里睡觉。",
       "pinyin": "Wǒ tiào shàng chuáng. Chuáng hěn ruǎn hěn nuǎnhuo. Wǒ kěyǐ zài zhèlǐ shuìjiào.",
       "audioText": "我跳上床。床很软很暖和。我可以在这里睡觉。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_015.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_015.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_015_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_015_r075.wav"
+      }
     },
     {
       "id": "016",
@@ -138,7 +198,11 @@
       "chinese": "但是我非常饿。我去找食物。",
       "pinyin": "Dànshì wǒ fēicháng è. Wǒ qù zhǎo shíwù.",
       "audioText": "但是我非常饿。我去找食物。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_016.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_016.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_016_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_016_r075.wav"
+      }
     },
     {
       "id": "017",
@@ -146,7 +210,11 @@
       "chinese": "我走啊走。我看见一个房间。房间里有一个盒子。",
       "pinyin": "Wǒ zǒu a zǒu. Wǒ kànjiàn yí gè fángjiān. Fángjiān lǐ yǒu yí gè hézi.",
       "audioText": "我走啊走。我看见一个房间。房间里有一个盒子。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_017.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_017.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_017_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_017_r075.wav"
+      }
     },
     {
       "id": "018",
@@ -154,7 +222,11 @@
       "chinese": "盒子在地上。我往盒子里看。",
       "pinyin": "Hézi zài dì shàng. Wǒ wǎng hézi lǐ kàn.",
       "audioText": "盒子在地上。我往盒子里看。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_018.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_018.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_018_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_018_r075.wav"
+      }
     },
     {
       "id": "019",
@@ -162,7 +234,11 @@
       "chinese": "盒子里有食物。食物是给我的。",
       "pinyin": "Hézi lǐ yǒu shíwù. Shíwù shì gěi wǒ de.",
       "audioText": "盒子里有食物。食物是给我的。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_019.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_019.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_019_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_019_r075.wav"
+      }
     },
     {
       "id": "020",
@@ -170,7 +246,11 @@
       "chinese": "我吃食物。食物很好吃。我高兴。",
       "pinyin": "Wǒ chī shíwù. Shíwù hěn hǎochī. Wǒ gāoxìng.",
       "audioText": "我吃食物。食物很好吃。我高兴。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_020.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_020.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_020_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_020_r075.wav"
+      }
     },
     {
       "id": "021",
@@ -178,7 +258,11 @@
       "chinese": "现在我不饿了。我饱了。我困了。",
       "pinyin": "Xiànzài wǒ bú è le. Wǒ bǎo le. Wǒ kùn le.",
       "audioText": "现在我不饿了。我饱了。我困了。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_021.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_021.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_021_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_021_r075.wav"
+      }
     },
     {
       "id": "022",
@@ -186,7 +270,11 @@
       "chinese": "我回到椅子那儿。不，床更好。",
       "pinyin": "Wǒ huí dào yǐzi nàr. Bù, chuáng gèng hǎo.",
       "audioText": "我回到椅子那儿。不，床更好。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_022.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_022.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_022_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_022_r075.wav"
+      }
     },
     {
       "id": "023",
@@ -194,7 +282,11 @@
       "chinese": "我去床边。我跳上床。",
       "pinyin": "Wǒ qù chuáng biān. Wǒ tiào shàng chuáng.",
       "audioText": "我去床边。我跳上床。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_023.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_023.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_023_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_023_r075.wav"
+      }
     },
     {
       "id": "024",
@@ -202,7 +294,11 @@
       "chinese": "床很软。床很暖和。我闭上眼睛。",
       "pinyin": "Chuáng hěn ruǎn. Chuáng hěn nuǎnhuo. Wǒ bì shàng yǎnjīng.",
       "audioText": "床很软。床很暖和。我闭上眼睛。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_024.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_024.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_024_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_024_r075.wav"
+      }
     },
     {
       "id": "025",
@@ -210,7 +306,11 @@
       "chinese": "我睡觉。我是一只高兴的猫。",
       "pinyin": "Wǒ shuìjiào. Wǒ shì yì zhī gāoxìng de māo.",
       "audioText": "我睡觉。我是一只高兴的猫。",
-      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_025.wav"
+      "audioFile": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_025.wav",
+      "audioVariants": {
+        "0.5": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_025_r050.wav",
+        "0.75": "assets/content/audio/a-cat-looks-for-places-to-sleep-and-eat-1784840714_025_r075.wav"
+      }
     }
   ],
   "vocabulary": [

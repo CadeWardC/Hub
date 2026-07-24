@@ -47,5 +47,26 @@ void main() {
     await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('cat'), findsOneWidget);
+
+    // Dismiss the held word with the panel's close button.
+    await tester.tap(find.byIcon(Icons.close_rounded));
+    await tester.pump(const Duration(milliseconds: 300));
+
+    // Tapping an entry in the vocabulary list shows its definition in the
+    // pinned translation panel.
+    await tester.scrollUntilVisible(
+      find.text('Useful words'),
+      400,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.ensureVisible(find.byType(ListTile).first);
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.byIcon(Icons.close_rounded), findsNothing);
+    await tester.tap(find.byType(ListTile).first);
+    await tester.pump(const Duration(milliseconds: 300));
+
+    // The panel's word view (with its dismiss button) replaces the sentence
+    // translation.
+    expect(find.byIcon(Icons.close_rounded), findsOneWidget);
   });
 }
