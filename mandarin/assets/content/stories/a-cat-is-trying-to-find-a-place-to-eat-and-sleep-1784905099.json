@@ -1,0 +1,1299 @@
+{
+  "schemaVersion": 1,
+  "title": {
+    "english": "A Cat's Day",
+    "chinese": "猫的一天",
+    "pinyin": "Māo de yì tiān"
+  },
+  "level": "HSK 1",
+  "summary": {
+    "english": "A cat named Mimi eats fish and sleeps in a warm bed.",
+    "chinese": "猫咪咪吃了鱼后睡在温暖的床上。",
+    "pinyin": "Māo Mīmi chī le yú hòu shuì zài wēnnuǎn de chuáng shang."
+  },
+  "segments": [
+    {
+      "id": "001",
+      "english": "I am a cat. My name is Mimi.",
+      "chinese": "我是一只猫。我的名字叫咪咪。",
+      "pinyin": "Wǒ shì yì zhī māo. Wǒ de míngzi jiào Mīmi.",
+      "audioText": "我是一只猫。我的名字叫咪咪。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_001.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "english": "am"
+        },
+        {
+          "text": "一",
+          "pinyin": "yì",
+          "english": "a"
+        },
+        {
+          "text": "只",
+          "pinyin": "zhī",
+          "english": "measure word for cats"
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "english": "cat"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "my"
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "english": "possessive particle"
+        },
+        {
+          "text": "名字",
+          "pinyin": "míngzi",
+          "english": "name"
+        },
+        {
+          "text": "叫",
+          "pinyin": "jiào",
+          "english": "is called"
+        },
+        {
+          "text": "咪咪",
+          "pinyin": "Mīmi",
+          "english": "Mimi"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_001_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_001_r050.wav"
+      }
+    },
+    {
+      "id": "002",
+      "english": "I want to sleep. I want to eat.",
+      "chinese": "我想睡觉。我想吃饭。",
+      "pinyin": "Wǒ xiǎng shuìjiào. Wǒ xiǎng chīfàn.",
+      "audioText": "我想睡觉。我想吃饭。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_002.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "english": "want to"
+        },
+        {
+          "text": "睡觉",
+          "pinyin": "shuìjiào",
+          "english": "sleep"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "english": "want to"
+        },
+        {
+          "text": "吃饭",
+          "pinyin": "chīfàn",
+          "english": "eat"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_002_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_002_r050.wav"
+      }
+    },
+    {
+      "id": "003",
+      "english": "I see a soft bed.",
+      "chinese": "我看见一张软床。",
+      "pinyin": "Wǒ kànjiàn yì zhāng ruǎn chuáng.",
+      "audioText": "我看见一张软床。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_003.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "看见",
+          "pinyin": "kànjiàn",
+          "english": "see"
+        },
+        {
+          "text": "一",
+          "pinyin": "yì",
+          "english": "a"
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "english": "measure word for beds"
+        },
+        {
+          "text": "软",
+          "pinyin": "ruǎn",
+          "english": "soft"
+        },
+        {
+          "text": "床",
+          "pinyin": "chuáng",
+          "english": "bed"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_003_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_003_r050.wav"
+      }
+    },
+    {
+      "id": "004",
+      "english": "The bed is warm.",
+      "chinese": "这张床很温暖。",
+      "pinyin": "Zhè zhāng chuáng hěn wēnnuǎn.",
+      "audioText": "这张床很温暖。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_004.wav",
+      "words": [
+        {
+          "text": "这",
+          "pinyin": "zhè",
+          "english": "this"
+        },
+        {
+          "text": "张",
+          "pinyin": "zhāng",
+          "english": "measure word for beds"
+        },
+        {
+          "text": "床",
+          "pinyin": "chuáng",
+          "english": "bed"
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "english": "very"
+        },
+        {
+          "text": "温暖",
+          "pinyin": "wēnnuǎn",
+          "english": "warm"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_004_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_004_r050.wav"
+      }
+    },
+    {
+      "id": "005",
+      "english": "I go to the bed.",
+      "chinese": "我走到床边。",
+      "pinyin": "Wǒ zǒu dào chuáng biān.",
+      "audioText": "我走到床边。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_005.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "english": "walk"
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "english": "to"
+        },
+        {
+          "text": "床",
+          "pinyin": "chuáng",
+          "english": "bed"
+        },
+        {
+          "text": "边",
+          "pinyin": "biān",
+          "english": "side"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_005_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_005_r050.wav"
+      }
+    },
+    {
+      "id": "006",
+      "english": "I lie down. I close my eyes.",
+      "chinese": "我躺下来。我闭上眼睛。",
+      "pinyin": "Wǒ tǎng xiàlái. Wǒ bì shàng yǎnjīng.",
+      "audioText": "我躺下来。我闭上眼睛。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_006.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "躺",
+          "pinyin": "tǎng",
+          "english": "lie"
+        },
+        {
+          "text": "下来",
+          "pinyin": "xiàlái",
+          "english": "down"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "闭",
+          "pinyin": "bì",
+          "english": "close"
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "english": "up (resultative complement)"
+        },
+        {
+          "text": "眼睛",
+          "pinyin": "yǎnjīng",
+          "english": "eyes"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_006_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_006_r050.wav"
+      }
+    },
+    {
+      "id": "007",
+      "english": "But I am hungry. I cannot sleep.",
+      "chinese": "但是我饿了。我睡不着。",
+      "pinyin": "Dànshì wǒ è le. Wǒ shuì bù zháo.",
+      "audioText": "但是我饿了。我睡不着。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_007.wav",
+      "words": [
+        {
+          "text": "但是",
+          "pinyin": "dànshì",
+          "english": "but"
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "饿",
+          "pinyin": "è",
+          "english": "hungry"
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "english": "change of state"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "睡",
+          "pinyin": "shuì",
+          "english": "sleep"
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "english": "not"
+        },
+        {
+          "text": "着",
+          "pinyin": "zháo",
+          "english": "resultative complement: successfully"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_007_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_007_r050.wav"
+      }
+    },
+    {
+      "id": "008",
+      "english": "I get up.",
+      "chinese": "我起来了。",
+      "pinyin": "Wǒ qǐlái le.",
+      "audioText": "我起来了。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_008.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "起来",
+          "pinyin": "qǐlái",
+          "english": "get up"
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "english": "completion marker"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_008_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_008_r050.wav"
+      }
+    },
+    {
+      "id": "009",
+      "english": "I see a bowl.",
+      "chinese": "我看见一个碗。",
+      "pinyin": "Wǒ kànjiàn yí ge wǎn.",
+      "audioText": "我看见一个碗。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_009.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "看见",
+          "pinyin": "kànjiàn",
+          "english": "see"
+        },
+        {
+          "text": "一",
+          "pinyin": "yí",
+          "english": "a"
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "english": "general measure word"
+        },
+        {
+          "text": "碗",
+          "pinyin": "wǎn",
+          "english": "bowl"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_009_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_009_r050.wav"
+      }
+    },
+    {
+      "id": "010",
+      "english": "The bowl has no food. The bowl is empty.",
+      "chinese": "碗里没有食物。碗是空的。",
+      "pinyin": "Wǎn lǐ méiyǒu shíwù. Wǎn shì kōng de.",
+      "audioText": "碗里没有食物。碗是空的。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_010.wav",
+      "words": [
+        {
+          "text": "碗",
+          "pinyin": "wǎn",
+          "english": "bowl"
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "english": "inside"
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "english": "no, not have"
+        },
+        {
+          "text": "食物",
+          "pinyin": "shíwù",
+          "english": "food"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "碗",
+          "pinyin": "wǎn",
+          "english": "bowl"
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "english": "is"
+        },
+        {
+          "text": "空",
+          "pinyin": "kōng",
+          "english": "empty"
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "english": "attributive particle"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_010_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_010_r050.wav"
+      }
+    },
+    {
+      "id": "011",
+      "english": "I am sad.",
+      "chinese": "我很伤心。",
+      "pinyin": "Wǒ hěn shāngxīn.",
+      "audioText": "我很伤心。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_011.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "english": "very"
+        },
+        {
+          "text": "伤心",
+          "pinyin": "shāngxīn",
+          "english": "sad"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_011_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_011_r050.wav"
+      }
+    },
+    {
+      "id": "012",
+      "english": "I walk to the kitchen.",
+      "chinese": "我走到厨房。",
+      "pinyin": "Wǒ zǒu dào chúfáng.",
+      "audioText": "我走到厨房。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_012.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "english": "walk"
+        },
+        {
+          "text": "到",
+          "pinyin": "dào",
+          "english": "to"
+        },
+        {
+          "text": "厨房",
+          "pinyin": "chúfáng",
+          "english": "kitchen"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_012_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_012_r050.wav"
+      }
+    },
+    {
+      "id": "013",
+      "english": "I see a person. The person is a girl.",
+      "chinese": "我看见一个人。那个人是一个女孩。",
+      "pinyin": "Wǒ kànjiàn yí ge rén. Nàge rén shì yí ge nǚhái.",
+      "audioText": "我看见一个人。那个人是一个女孩。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_013.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "看见",
+          "pinyin": "kànjiàn",
+          "english": "see"
+        },
+        {
+          "text": "一",
+          "pinyin": "yí",
+          "english": "a"
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "english": "general measure word"
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "english": "person"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "那个",
+          "pinyin": "nàge",
+          "english": "that"
+        },
+        {
+          "text": "人",
+          "pinyin": "rén",
+          "english": "person"
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "english": "is"
+        },
+        {
+          "text": "一",
+          "pinyin": "yí",
+          "english": "a"
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "english": "general measure word"
+        },
+        {
+          "text": "女孩",
+          "pinyin": "nǚhái",
+          "english": "girl"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_013_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_013_r050.wav"
+      }
+    },
+    {
+      "id": "014",
+      "english": "The girl has fish. The fish is in her hand.",
+      "chinese": "女孩有鱼。鱼在她的手里。",
+      "pinyin": "Nǚhái yǒu yú. Yú zài tā de shǒu lǐ.",
+      "audioText": "女孩有鱼。鱼在她的手里。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_014.wav",
+      "words": [
+        {
+          "text": "女孩",
+          "pinyin": "nǚhái",
+          "english": "girl"
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "english": "has"
+        },
+        {
+          "text": "鱼",
+          "pinyin": "yú",
+          "english": "fish"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "鱼",
+          "pinyin": "yú",
+          "english": "fish"
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "english": "is at"
+        },
+        {
+          "text": "她",
+          "pinyin": "tā",
+          "english": "her"
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "english": "possessive particle"
+        },
+        {
+          "text": "手",
+          "pinyin": "shǒu",
+          "english": "hand"
+        },
+        {
+          "text": "里",
+          "pinyin": "lǐ",
+          "english": "inside"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_014_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_014_r050.wav"
+      }
+    },
+    {
+      "id": "015",
+      "english": "I look at the girl.",
+      "chinese": "我看着女孩。",
+      "pinyin": "Wǒ kàn zhe nǚhái.",
+      "audioText": "我看着女孩。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_015.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "english": "look"
+        },
+        {
+          "text": "着",
+          "pinyin": "zhe",
+          "english": "continuous aspect marker"
+        },
+        {
+          "text": "女孩",
+          "pinyin": "nǚhái",
+          "english": "girl"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_015_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_015_r050.wav"
+      }
+    },
+    {
+      "id": "016",
+      "english": "I say, “Meow.”",
+      "chinese": "我说：“喵。”",
+      "pinyin": "Wǒ shuō: “Miāo.”",
+      "audioText": "我说：“喵。”",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_016.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "english": "say"
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "喵",
+          "pinyin": "miāo",
+          "english": "meow"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_016_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_016_r050.wav"
+      }
+    },
+    {
+      "id": "017",
+      "english": "The girl smiles. The girl gives the fish to me.",
+      "chinese": "女孩笑了。女孩把鱼给我。",
+      "pinyin": "Nǚhái xiào le. Nǚhái bǎ yú gěi wǒ.",
+      "audioText": "女孩笑了。女孩把鱼给我。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_017.wav",
+      "words": [
+        {
+          "text": "女孩",
+          "pinyin": "nǚhái",
+          "english": "girl"
+        },
+        {
+          "text": "笑",
+          "pinyin": "xiào",
+          "english": "smile"
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "english": "completion marker"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "女孩",
+          "pinyin": "nǚhái",
+          "english": "girl"
+        },
+        {
+          "text": "把",
+          "pinyin": "bǎ",
+          "english": "disposal marker"
+        },
+        {
+          "text": "鱼",
+          "pinyin": "yú",
+          "english": "fish"
+        },
+        {
+          "text": "给",
+          "pinyin": "gěi",
+          "english": "give"
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "me"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_017_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_017_r050.wav"
+      }
+    },
+    {
+      "id": "018",
+      "english": "I eat the fish.",
+      "chinese": "我吃鱼。",
+      "pinyin": "Wǒ chī yú.",
+      "audioText": "我吃鱼。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_018.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "吃",
+          "pinyin": "chī",
+          "english": "eat"
+        },
+        {
+          "text": "鱼",
+          "pinyin": "yú",
+          "english": "fish"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_018_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_018_r050.wav"
+      }
+    },
+    {
+      "id": "019",
+      "english": "The fish is good.",
+      "chinese": "鱼很好吃。",
+      "pinyin": "Yú hěn hǎochī.",
+      "audioText": "鱼很好吃。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_019.wav",
+      "words": [
+        {
+          "text": "鱼",
+          "pinyin": "yú",
+          "english": "fish"
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "english": "very"
+        },
+        {
+          "text": "好吃",
+          "pinyin": "hǎochī",
+          "english": "good to eat"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_019_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_019_r050.wav"
+      }
+    },
+    {
+      "id": "020",
+      "english": "Now I am not hungry. I am happy.",
+      "chinese": "现在我不饿了。我很开心。",
+      "pinyin": "Xiànzài wǒ bú è le. Wǒ hěn kāixīn.",
+      "audioText": "现在我不饿了。我很开心。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_020.wav",
+      "words": [
+        {
+          "text": "现在",
+          "pinyin": "xiànzài",
+          "english": "now"
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "不",
+          "pinyin": "bú",
+          "english": "not"
+        },
+        {
+          "text": "饿",
+          "pinyin": "è",
+          "english": "hungry"
+        },
+        {
+          "text": "了",
+          "pinyin": "le",
+          "english": "change of state"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "english": "very"
+        },
+        {
+          "text": "开心",
+          "pinyin": "kāixīn",
+          "english": "happy"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_020_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_020_r050.wav"
+      }
+    },
+    {
+      "id": "021",
+      "english": "I walk back to the bed.",
+      "chinese": "我走回床边。",
+      "pinyin": "Wǒ zǒu huí chuáng biān.",
+      "audioText": "我走回床边。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_021.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "走",
+          "pinyin": "zǒu",
+          "english": "walk"
+        },
+        {
+          "text": "回",
+          "pinyin": "huí",
+          "english": "back"
+        },
+        {
+          "text": "床",
+          "pinyin": "chuáng",
+          "english": "bed"
+        },
+        {
+          "text": "边",
+          "pinyin": "biān",
+          "english": "side"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_021_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_021_r050.wav"
+      }
+    },
+    {
+      "id": "022",
+      "english": "The bed is still warm.",
+      "chinese": "床还是很温暖。",
+      "pinyin": "Chuáng háishì hěn wēnnuǎn.",
+      "audioText": "床还是很温暖。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_022.wav",
+      "words": [
+        {
+          "text": "床",
+          "pinyin": "chuáng",
+          "english": "bed"
+        },
+        {
+          "text": "还是",
+          "pinyin": "háishì",
+          "english": "still"
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "english": "very"
+        },
+        {
+          "text": "温暖",
+          "pinyin": "wēnnuǎn",
+          "english": "warm"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_022_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_022_r050.wav"
+      }
+    },
+    {
+      "id": "023",
+      "english": "I lie down. I close my eyes. I sleep.",
+      "chinese": "我躺下来。我闭上眼睛。我睡觉。",
+      "pinyin": "Wǒ tǎng xiàlái. Wǒ bì shàng yǎnjīng. Wǒ shuìjiào.",
+      "audioText": "我躺下来。我闭上眼睛。我睡觉。",
+      "audioFile": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_023.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "躺",
+          "pinyin": "tǎng",
+          "english": "lie"
+        },
+        {
+          "text": "下来",
+          "pinyin": "xiàlái",
+          "english": "down"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "闭",
+          "pinyin": "bì",
+          "english": "close"
+        },
+        {
+          "text": "上",
+          "pinyin": "shàng",
+          "english": "up"
+        },
+        {
+          "text": "眼睛",
+          "pinyin": "yǎnjīng",
+          "english": "eyes"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "睡觉",
+          "pinyin": "shuìjiào",
+          "english": "sleep"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_023_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099_023_r050.wav"
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "simplified": "猫",
+      "pinyin": "māo",
+      "english": "cat"
+    },
+    {
+      "simplified": "睡觉",
+      "pinyin": "shuìjiào",
+      "english": "to sleep"
+    },
+    {
+      "simplified": "吃饭",
+      "pinyin": "chīfàn",
+      "english": "to eat"
+    },
+    {
+      "simplified": "床",
+      "pinyin": "chuáng",
+      "english": "bed"
+    },
+    {
+      "simplified": "温暖",
+      "pinyin": "wēnnuǎn",
+      "english": "warm"
+    },
+    {
+      "simplified": "饿",
+      "pinyin": "è",
+      "english": "hungry"
+    },
+    {
+      "simplified": "鱼",
+      "pinyin": "yú",
+      "english": "fish"
+    },
+    {
+      "simplified": "女孩",
+      "pinyin": "nǚhái",
+      "english": "girl"
+    },
+    {
+      "simplified": "开心",
+      "pinyin": "kāixīn",
+      "english": "happy"
+    },
+    {
+      "simplified": "碗",
+      "pinyin": "wǎn",
+      "english": "bowl"
+    },
+    {
+      "simplified": "空",
+      "pinyin": "kōng",
+      "english": "empty"
+    },
+    {
+      "simplified": "厨房",
+      "pinyin": "chúfáng",
+      "english": "kitchen"
+    },
+    {
+      "simplified": "手",
+      "pinyin": "shǒu",
+      "english": "hand"
+    },
+    {
+      "simplified": "给",
+      "pinyin": "gěi",
+      "english": "to give"
+    },
+    {
+      "simplified": "好吃",
+      "pinyin": "hǎochī",
+      "english": "delicious"
+    }
+  ],
+  "storyId": "a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099",
+  "source": {
+    "approvedEnglish": "A Cat’s Day\n\nI am a cat. My name is Mimi. I want to sleep. I want to eat. I see a soft bed. The bed is warm. I go to the bed. I lie down. I close my eyes. But I am hungry. I cannot sleep. I get up.\n\nI see a bowl. The bowl has no food. The bowl is empty. I am sad. I walk to the kitchen. I see a person. The person is a girl. The girl has fish. The fish is in her hand. I look at the girl. I say, “Meow.” The girl smiles. The girl gives the fish to me. I eat the fish. The fish is good.\n\nNow I am not hungry. I am happy. I walk back to the bed. The bed is still warm. I lie down. I close my eyes. I sleep.",
+    "generatedAt": "2026-07-24T15:07:17+00:00",
+    "model": "deepseek-v4-pro"
+  },
+  "audio": {
+    "engine": "Qwen3-TTS",
+    "voice": "Vivian",
+    "language": "Chinese",
+    "manifest": "audio_manifest.json",
+    "durationSeconds": 50.48
+  },
+  "publishedAt": "2026-07-24T15:15:34+00:00"
+}
