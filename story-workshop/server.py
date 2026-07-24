@@ -247,6 +247,41 @@ def list_projects() -> list[dict[str, Any]]:
     return sorted(projects, key=lambda item: item.get("updatedAt") or "", reverse=True)
 
 
+def unpublish_story_assets(story_id: str) -> None:
+    """Remove a story's published files from the Flutter app content.
+
+    Tolerates partially published or already-missing files so a delete can
+    also clean up dangling library entries.
+    """
+    story_file = FLUTTER_CONTENT_ROOT / "stories" / f"{story_id}.json"
+    story_file.unlink(missing_ok=True)
+
+    audio_root = FLUTTER_CONTENT_ROOT / "audio"
+    if audio_root.is_dir():
+        for audio_file in audio_root.glob(f"{story_id}_*"):
+            audio_file.unlink(missing_ok=True)
+
+    index_path = FLUTTER_CONTENT_ROOT / "index.json"
+    library = read_json(index_path, None)
+    if isinstance(library, dict) and isinstance(library.get("stories"), list):
+        remaining = [
+            story
+            for story in library["stories"]
+            if not (isinstance(story, dict) and story.get("id") == story_id)
+        ]
+        if len(remaining) != len(library["stories"]):
+            library["stories"] = remaining
+            atomic_write_json(index_path, library)
+
+
+def delete_project(project_id: str) -> None:
+    folder = project_path(project_id)
+    if not (folder / "project.json").exists():
+        raise WorkshopError("Story project not found.", 404)
+    unpublish_story_assets(project_id)
+    shutil.rmtree(folder, ignore_errors=True)
+
+
 def detect_qwen_models() -> dict[str, Any]:
     candidates = [REPO_ROOT / "models", REPO_ROOT / "mandarin" / "models"]
     model_root = next((path for path in candidates if path.exists()), candidates[-1])
@@ -954,6 +989,17 @@ class WorkshopHandler(BaseHTTPRequestHandler):
     def do_PUT(self) -> None:
         try:
             self.handle_api_put(self.route_parts(), self.read_json_body())
+        except Exception as error:
+            self.handle_error(error)
+
+    def do_DELETE(self) -> None:
+        try:
+            parts = self.route_parts()
+            if len(parts) == 3 and parts[:2] == ["api", "projects"]:
+                delete_project(parts[2])
+                self.send_json({"ok": True, "projects": list_projects()})
+                return
+            raise WorkshopError("API route not found.", 404)
         except Exception as error:
             self.handle_error(error)
 

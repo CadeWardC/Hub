@@ -955,11 +955,17 @@ select:focus {
   overflow: auto;
 }
 
+.history-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line);
+}
+
 .history-item {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   padding: 15px;
   border: 0;
-  border-bottom: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -967,6 +973,20 @@ select:focus {
   background: transparent;
   text-align: left;
   cursor: pointer;
+}
+
+.history-delete {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0 18px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.history-delete:hover {
+  color: #b3402f;
+  background: #faf0ee;
 }
 
 .history-item:hover {

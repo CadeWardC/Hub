@@ -543,6 +543,9 @@
       return;
     }
     state.projects.forEach((project) => {
+      const row = document.createElement("div");
+      row.className = "history-row";
+
       const button = document.createElement("button");
       button.type = "button";
       button.className = "history-item";
@@ -563,8 +566,42 @@
       status.textContent = project.status || "draft";
       button.append(copy, status);
       button.addEventListener("click", () => loadProject(project.id));
-      elements.historyList.append(button);
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "history-delete";
+      remove.textContent = "🗑";
+      remove.title = "Delete story";
+      remove.setAttribute(
+        "aria-label",
+        `Delete ${project.title || "Untitled Story"}`,
+      );
+      remove.addEventListener("click", () => deleteProject(project));
+
+      row.append(button, remove);
+      elements.historyList.append(row);
     });
+  }
+
+  async function deleteProject(project) {
+    const name = project.title || "Untitled Story";
+    const confirmed = window.confirm(
+      `Delete "${name}"? This removes the workshop project and unpublishes the story from the reader app.`,
+    );
+    if (!confirmed) return;
+    try {
+      const result = await request(`/api/projects/${project.id}`, {
+        method: "DELETE",
+      });
+      state.projects = result.projects || [];
+      renderHistory();
+      if (state.project && state.project.id === project.id) {
+        newStory();
+      }
+      showToast(`Deleted "${name}".`);
+    } catch (error) {
+      showToast(error.message, true);
+    }
   }
 
   async function loadProject(projectId) {
