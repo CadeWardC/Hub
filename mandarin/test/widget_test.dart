@@ -40,7 +40,7 @@ void main() {
     );
     await tester.pump(const Duration(seconds: 1));
 
-    expect(find.text('Hold a word'), findsOneWidget);
+    expect(find.text('Hold a word · tap a sentence'), findsOneWidget);
     expect(find.text('1.0×'), findsOneWidget);
 
     await tester.longPress(find.text('猫').first);
