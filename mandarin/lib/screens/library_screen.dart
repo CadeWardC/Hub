@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 import '../models/story.dart';
 import '../services/story_repository.dart';
+import 'my_reading_screen.dart';
 import 'reader_screen.dart';
 
 class LibraryScreen extends StatefulWidget {
@@ -18,7 +21,10 @@ class LibraryScreen extends StatefulWidget {
 class _LibraryScreenState extends State<LibraryScreen> {
   late Future<List<StorySummary>> _stories;
   String _filter = 'All';
+  int _tabIndex = 0;
   Set<String> _completedStories = const {};
+  Map<String, int> _progress = const {};
+  String? _lastReadId;
 
   @override
   void initState() {
@@ -29,11 +35,28 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   Future<void> _loadProgress() async {
     final preferences = await SharedPreferences.getInstance();
+    const progressPrefix = 'mandarin.progress.';
+    final progress = <String, int>{
+      for (final key in preferences.getKeys())
+        if (key.startsWith(progressPrefix))
+          key.substring(progressPrefix.length): preferences.getInt(key) ?? 0,
+    };
+    String? lastReadId;
+    final rawLastRead = preferences.getString('mandarin.lastRead.v1');
+    if (rawLastRead != null) {
+      try {
+        lastReadId =
+            (jsonDecode(rawLastRead) as Map<String, dynamic>)['storyId']
+                as String?;
+      } catch (_) {}
+    }
     if (!mounted) return;
     setState(() {
       _completedStories =
           preferences.getStringList('mandarin.completedStories')?.toSet() ??
           const {};
+      _progress = progress;
+      _lastReadId = lastReadId;
     });
   }
 
@@ -43,12 +66,42 @@ class _LibraryScreenState extends State<LibraryScreen> {
     await _loadProgress();
   }
 
+  /// A "Continue reading" card for the most recently opened, unfinished
+  /// story; empty when there is nothing to resume.
+  List<Widget> _continueReadingSlivers(List<StorySummary> stories) {
+    final lastReadId = _lastReadId;
+    if (lastReadId == null || _completedStories.contains(lastReadId)) {
+      return const [];
+    }
+    final matches = stories.where((story) => story.id == lastReadId);
+    if (matches.isEmpty) return const [];
+    final story = matches.first;
+    return [
+      SliverToBoxAdapter(
+        child: _ContinueReadingCard(
+          story: story,
+          progress: _progressFor(story),
+          onTap: () => _openStory(story),
+        ),
+      ),
+    ];
+  }
+
+  double _progressFor(StorySummary story) {
+    if (_completedStories.contains(story.id)) return 1;
+    final index = _progress[story.id];
+    if (index == null || story.segmentCount <= 0) return 0;
+    return ((index + 1) / story.segmentCount).clamp(0.0, 1.0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: FutureBuilder<List<StorySummary>>(
+        child: _tabIndex == 1
+            ? const MyReadingScreen()
+            : FutureBuilder<List<StorySummary>>(
           future: _stories,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
@@ -74,6 +127,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                   SliverToBoxAdapter(
                     child: _LibraryHero(storyCount: allStories.length),
                   ),
+                  ..._continueReadingSlivers(allStories),
                   SliverToBoxAdapter(
                     child: _LevelFilters(
                       levels: levels,
@@ -97,6 +151,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                           return _StoryCard(
                             story: story,
                             completed: _completedStories.contains(story.id),
+                            progress: _progressFor(story),
                             onTap: () => _openStory(story),
                           );
                         },
@@ -109,7 +164,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: 0,
+        selectedIndex: _tabIndex,
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.auto_stories_outlined),
@@ -123,13 +178,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
           ),
         ],
         onDestinationSelected: (index) {
-          if (index == 1) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Saved words and reading history are next.'),
-              ),
-            );
-          }
+          setState(() => _tabIndex = index);
+          if (index == 0) _loadProgress();
         },
       ),
     );
@@ -264,15 +314,97 @@ class _LevelFilters extends StatelessWidget {
   }
 }
 
+class _ContinueReadingCard extends StatelessWidget {
+  const _ContinueReadingCard({
+    required this.story,
+    required this.progress,
+    required this.onTap,
+  });
+
+  final StorySummary story;
+  final double progress;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 6),
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        color: const Color(0xFFEFF6F1),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Color(0xFFCBE2D5)),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(18, 14, 18, 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'CONTINUE READING',
+                  style: TextStyle(
+                    color: MandarinReaderApp.jade,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '${story.titleChinese} · ${story.titleEnglish}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: MandarinReaderApp.ink,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    const Icon(
+                      Icons.play_circle_fill_rounded,
+                      color: MandarinReaderApp.jade,
+                      size: 30,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: LinearProgressIndicator(
+                    value: progress,
+                    minHeight: 6,
+                    backgroundColor: const Color(0xFFD8E8DE),
+                    color: MandarinReaderApp.jade,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _StoryCard extends StatelessWidget {
   const _StoryCard({
     required this.story,
     required this.completed,
+    required this.progress,
     required this.onTap,
   });
 
   final StorySummary story;
   final bool completed;
+  final double progress;
   final VoidCallback onTap;
 
   @override
@@ -368,6 +500,18 @@ class _StoryCard extends StatelessWidget {
                         Text('${story.segmentCount} parts'),
                       ],
                     ),
+                    if (!completed && progress > 0) ...[
+                      const SizedBox(height: 10),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(3),
+                        child: LinearProgressIndicator(
+                          value: progress,
+                          minHeight: 5,
+                          backgroundColor: const Color(0xFFE8E3D7),
+                          color: MandarinReaderApp.jade,
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),

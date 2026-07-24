@@ -34,13 +34,48 @@ FLUTTER_CONTENT_ROOT = MANDARIN_ROOT / "assets" / "content"
 PORT = 8766
 DEEPSEEK_URL = "https://api.deepseek.com/chat/completions"
 
-DEFAULT_STORY_PROMPT = """You are an expert children's fiction writer creating engaging source stories for a graded Mandarin reader.
+DEFAULT_STORY_PROMPT = """You are an expert writer of graded readers for absolute beginners in Mandarin, in the style of Du Chinese Newbie stories.
+
+Write a complete story in natural English that will be translated into HSK 1 level Chinese. The story must be genuinely engaging, not a flat list of actions:
+- Give the main character one small, concrete want or problem in the first few lines, an attempt that does not immediately work, and a warm resolution that feels earned.
+- Include at least two short dialogue exchanges (characters saying or asking something), written so they translate into simple spoken Mandarin.
+- Vary how sentences begin. Never write more than two sentences in a row that start with the same subject. Mix in time words (then, later, at night), places, and reactions as openers.
+- Vary sentence length: mostly short sentences, with an occasional slightly longer one for rhythm.
+- Use concrete, sensory details a beginner can picture (warm sun, cold water, a red door) instead of abstract description.
+- Repeat the story's key words naturally in NEW sentences so learners meet them several times, but never repeat a whole sentence verbatim.
+- Use simple, common vocabulary and grammar that maps cleanly onto HSK 1 Mandarin: everyday objects, family, food, animals, home, weather. Avoid idioms, wordplay, and anything culturally untranslatable. Keep names and places consistent.
+
+Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary."""
+
+DEFAULT_LOCALIZATION_PROMPT = """You are a meticulous Mandarin graded-reader editor and pronunciation specialist preparing Newbie (HSK 1) content.
+
+Convert the approved English story into natural Simplified Chinese for the requested learner level. Divide it into short, narratable segments. For every segment provide:
+- faithful, natural English;
+- Simplified Chinese with appropriate punctuation;
+- Hanyu Pinyin with tone marks, matching the Chinese exactly;
+- an ordered words array that reconstructs the Chinese exactly, with contextual pinyin and English definitions for every lexical word;
+- clean Chinese audio text for speech synthesis.
+
+Level discipline for HSK 1: stay inside the HSK 1 vocabulary (~150 core words) plus at most 3-5 extra topic words that the story reuses several times; those extra words must appear in the vocabulary list. Keep sentences roughly 4-10 characters. Prefer 说 and 问 for dialogue and keep each spoken line inside its own segment. Use connectives the level allows (然后, 可是, 因为, 所以) instead of starting every sentence the same way. Never produce two segments whose Chinese is identical.
+
+Use consistent names and vocabulary. Prefer spoken, standard Mainland Mandarin. Do not add facts or plot events. Pinyin must use tone marks rather than tone numbers. Audio text must contain Chinese only, with punctuation and no pinyin, labels, stage directions, or Markdown.
+Split the Chinese into real words rather than individual characters. Include punctuation as separate word items with blank pinyin and English fields. Every definition must describe what the word means in that particular sentence.
+
+Return one valid json object matching the supplied schema exactly."""
+
+# Superseded default prompts. A saved settings.json that still carries one of
+# these verbatim is not a real customization, so get_settings drops it and
+# the current default applies.
+LEGACY_DEFAULT_PROMPTS = {
+    "storyPrompt": [
+        """You are an expert children's fiction writer creating engaging source stories for a graded Mandarin reader.
 
 Write a complete story in natural English. Use a clear narrative arc, concrete actions, warm character details, and an ending that feels earned. Keep the language easy to translate into beginner-friendly Mandarin: prefer direct sentences, avoid wordplay that depends on English, and keep names and locations consistent.
 
 Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary."""
-
-DEFAULT_LOCALIZATION_PROMPT = """You are a meticulous Mandarin graded-reader editor and pronunciation specialist.
+    ],
+    "localizationPrompt": [
+        """You are a meticulous Mandarin graded-reader editor and pronunciation specialist.
 
 Convert the approved English story into natural Simplified Chinese for the requested learner level. Divide it into short, narratable segments. For every segment provide:
 - faithful, natural English;
@@ -53,6 +88,8 @@ Use consistent names and vocabulary. Prefer spoken, standard Mainland Mandarin. 
 Split the Chinese into real words rather than individual characters. Include punctuation as separate word items with blank pinyin and English fields. Every definition must describe what the word means in that particular sentence.
 
 Return one valid json object matching the supplied schema exactly."""
+    ],
+}
 
 DEFAULT_SETTINGS = {
     "storyPrompt": DEFAULT_STORY_PROMPT,
@@ -136,8 +173,13 @@ def get_settings() -> dict[str, Any]:
     settings = dict(DEFAULT_SETTINGS)
     if isinstance(saved, dict):
         for key in settings:
-            if isinstance(saved.get(key), str) and saved[key].strip():
-                settings[key] = saved[key]
+            value = saved.get(key)
+            if not (isinstance(value, str) and value.strip()):
+                continue
+            legacy = LEGACY_DEFAULT_PROMPTS.get(key, [])
+            if any(value.strip() == old.strip() for old in legacy):
+                continue
+            settings[key] = value
     return settings
 
 

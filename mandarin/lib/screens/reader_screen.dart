@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 import '../models/story.dart';
+import '../services/saved_words_store.dart';
 import '../services/story_repository.dart';
+import '../utils/tones.dart';
+import '../widgets/player_bar.dart';
 
 class ReaderScreen extends StatefulWidget {
   const ReaderScreen({
@@ -31,9 +35,16 @@ class _ReaderScreenState extends State<ReaderScreen> {
   final Map<int, GlobalKey> _segmentKeys = {};
 
   bool _showPinyin = true;
+  bool _showToneColors = false;
+  bool _showEnglish = true;
   bool _playAll = false;
   int _activeIndex = 0;
   int? _playingIndex;
+
+  // When translations are hidden, the one sentence the reader tapped to
+  // reveal.
+  int? _revealedIndex;
+  Set<String> _savedTexts = {};
   double _speed = 1;
 
   // Bumped whenever playback state changes so a pending auto-advance that was
@@ -50,9 +61,32 @@ class _ReaderScreenState extends State<ReaderScreen> {
   void initState() {
     super.initState();
     _story = widget.repository.loadStory(widget.summary);
+    // The player bar lives outside the FutureBuilder, so surface the loaded
+    // story through state as well.
+    _story.then((story) {
+      if (mounted) setState(() => _prepareStory(story));
+    }).catchError((_) {});
     _completionSubscription = _player.onPlayerComplete.listen((_) {
       _handleAudioComplete();
     });
+    _loadSavedWords();
+    _recordLastRead();
+  }
+
+  Future<void> _loadSavedWords() async {
+    final texts = await SavedWordsStore.savedTexts();
+    if (mounted) setState(() => _savedTexts = texts);
+  }
+
+  Future<void> _recordLastRead() async {
+    final preferences = await SharedPreferences.getInstance();
+    await preferences.setString(
+      'mandarin.lastRead.v1',
+      jsonEncode({
+        'storyId': widget.summary.id,
+        'at': DateTime.now().toIso8601String(),
+      }),
+    );
   }
 
   @override
@@ -74,23 +108,68 @@ class _ReaderScreenState extends State<ReaderScreen> {
     }
   }
 
-  void _selectSegment(int index, {bool play = true}) {
-    setState(() {
-      _activeIndex = index;
-      _heldWord = null;
-      _heldSegmentIndex = null;
-      _heldWordIndex = null;
-    });
-    if (play) _playSegment(index);
-  }
-
-  void _holdWord(int segmentIndex, int wordIndex, StoryWord word) {
+  /// Tapping (or holding) a word shows its definition in the top panel and
+  /// makes its sentence the active one, without starting audio — listening is
+  /// driven from the player bar.
+  void _tapWord(int segmentIndex, int wordIndex, StoryWord word) {
     setState(() {
       _activeIndex = segmentIndex;
+      _revealedIndex = null;
       _heldWord = word;
       _heldSegmentIndex = segmentIndex;
       _heldWordIndex = wordIndex;
     });
+  }
+
+  void _togglePlay() {
+    if (_playingIndex != null || _playAll) {
+      _stopAudio();
+    } else {
+      _playSegment(_activeIndex, playAll: true);
+    }
+  }
+
+  void _goToSegment(int index) {
+    final story = _loadedStory;
+    if (story == null || index < 0 || index >= story.segments.length) return;
+    final wasPlaying = _playingIndex != null;
+    setState(() {
+      _activeIndex = index;
+      _revealedIndex = null;
+      _heldWord = null;
+      _heldSegmentIndex = null;
+      _heldWordIndex = null;
+    });
+    _scrollToSegment(index);
+    if (wasPlaying) {
+      _playSegment(index, playAll: _playAll);
+    } else {
+      _playToken++;
+    }
+  }
+
+  Future<void> _toggleSavedWord() async {
+    final word = _heldWord;
+    final story = _loadedStory;
+    if (word == null || story == null) return;
+    final saved = await SavedWordsStore.toggle(
+      text: word.text,
+      pinyin: word.pinyin,
+      english: word.english,
+      storyId: story.id,
+    );
+    if (!mounted) return;
+    setState(() {
+      if (saved) {
+        _savedTexts.add(word.text);
+      } else {
+        _savedTexts.remove(word.text);
+      }
+    });
+  }
+
+  void _revealTranslation() {
+    setState(() => _revealedIndex = _activeIndex);
   }
 
   void _dismissHeldWord() {
@@ -261,20 +340,33 @@ class _ReaderScreenState extends State<ReaderScreen> {
             children: [
               _ReaderControls(
                 showPinyin: _showPinyin,
-                speed: _speed,
+                showToneColors: _showToneColors,
+                showEnglish: _showEnglish,
                 onPinyinChanged: (value) => setState(() => _showPinyin = value),
-                onSpeedChanged: _setSpeed,
+                onToneColorsChanged: (value) =>
+                    setState(() => _showToneColors = value),
+                onEnglishChanged: (value) => setState(() {
+                  _showEnglish = value;
+                  _revealedIndex = null;
+                }),
               ),
               _TranslationPanel(
                 segment: activeSegment,
                 segmentNumber: _activeIndex + 1,
                 segmentCount: story.segments.length,
                 heldWord: _heldWord,
+                hidden: !_showEnglish && _revealedIndex != _activeIndex,
+                toneColors: _showToneColors,
+                heldWordSaved:
+                    _heldWord != null && _savedTexts.contains(_heldWord!.text),
                 onDismissWord: _dismissHeldWord,
+                onReveal: _revealTranslation,
+                onToggleSaved: _toggleSavedWord,
               ),
               Expanded(
                 child: ListView(
-                  padding: const EdgeInsets.fromLTRB(18, 18, 18, 130),
+                  key: const Key('storyScroll'),
+                  padding: const EdgeInsets.fromLTRB(18, 18, 18, 40),
                   children: [
                     Center(
                       child: ConstrainedBox(
@@ -307,12 +399,13 @@ class _ReaderScreenState extends State<ReaderScreen> {
                                   segmentWords: _segmentWords,
                                   segmentKeys: _segmentKeys,
                                   showPinyin: _showPinyin,
+                                  toneColors: _showToneColors,
                                   activeIndex: _activeIndex,
                                   playingIndex: _playingIndex,
                                   heldSegmentIndex: _heldSegmentIndex,
                                   heldWordIndex: _heldWordIndex,
-                                  onTapSegment: _selectSegment,
-                                  onHoldWord: _holdWord,
+                                  savedTexts: _savedTexts,
+                                  onWord: _tapWord,
                                 ),
                               ),
                             ],
@@ -339,16 +432,22 @@ class _ReaderScreenState extends State<ReaderScreen> {
           );
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _playAll
-            ? _stopAudio
-            : () => _playSegment(_activeIndex, playAll: true),
-        backgroundColor: MandarinReaderApp.ink,
-        foregroundColor: Colors.white,
-        icon: Icon(_playAll ? Icons.stop_rounded : Icons.play_arrow_rounded),
-        label: Text(_playAll ? 'Stop narration' : 'Play story'),
-      ),
+      bottomNavigationBar: _loadedStory == null
+          ? null
+          : PlayerBar(
+              playing: _playingIndex != null,
+              sentenceNumber: _activeIndex + 1,
+              sentenceCount: _loadedStory!.segments.length,
+              speed: _speed,
+              onPlayPause: _togglePlay,
+              onPrevious: _activeIndex > 0
+                  ? () => _goToSegment(_activeIndex - 1)
+                  : null,
+              onNext: _activeIndex + 1 < _loadedStory!.segments.length
+                  ? () => _goToSegment(_activeIndex + 1)
+                  : null,
+              onSpeedChanged: _setSpeed,
+            ),
     );
   }
 }
@@ -362,14 +461,24 @@ class _TranslationPanel extends StatelessWidget {
     required this.segmentNumber,
     required this.segmentCount,
     required this.heldWord,
+    required this.hidden,
+    required this.toneColors,
+    required this.heldWordSaved,
     required this.onDismissWord,
+    required this.onReveal,
+    required this.onToggleSaved,
   });
 
   final StorySegment? segment;
   final int segmentNumber;
   final int segmentCount;
   final StoryWord? heldWord;
+  final bool hidden;
+  final bool toneColors;
+  final bool heldWordSaved;
   final VoidCallback onDismissWord;
+  final VoidCallback onReveal;
+  final VoidCallback onToggleSaved;
 
   @override
   Widget build(BuildContext context) {
@@ -408,34 +517,52 @@ class _TranslationPanel extends StatelessWidget {
   }
 
   Widget _translationView(BuildContext context) {
-    return Padding(
-      key: const ValueKey('translation'),
-      padding: const EdgeInsets.fromLTRB(22, 14, 22, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'SENTENCE $segmentNumber OF $segmentCount · ENGLISH',
-            style: const TextStyle(
-              color: MandarinReaderApp.jade,
-              fontSize: 11,
-              fontWeight: FontWeight.w800,
-              letterSpacing: 1.1,
+    final english = segment?.english.isNotEmpty == true
+        ? segment!.english
+        : 'Tap a word below to see its meaning here.';
+    return GestureDetector(
+      key: ValueKey('translation-$hidden'),
+      behavior: HitTestBehavior.opaque,
+      onTap: hidden ? onReveal : null,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(22, 14, 22, 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              hidden
+                  ? 'SENTENCE $segmentNumber OF $segmentCount · TAP TO REVEAL'
+                  : 'SENTENCE $segmentNumber OF $segmentCount · ENGLISH',
+              style: const TextStyle(
+                color: MandarinReaderApp.jade,
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 1.1,
+              ),
             ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            segment?.english.isNotEmpty == true
-                ? segment!.english
-                : 'Tap a sentence below to hear it and see its translation.',
-            style: const TextStyle(
-              color: MandarinReaderApp.ink,
-              fontSize: 17,
-              height: 1.45,
+            const SizedBox(height: 6),
+            Text(
+              english,
+              style: hidden
+                  // Blur the translation in hide-English mode; the shadow is
+                  // the only visible ink.
+                  ? const TextStyle(
+                      color: Colors.transparent,
+                      fontSize: 17,
+                      height: 1.45,
+                      shadows: [
+                        Shadow(color: Color(0xFF9AA39D), blurRadius: 10),
+                      ],
+                    )
+                  : const TextStyle(
+                      color: MandarinReaderApp.ink,
+                      fontSize: 17,
+                      height: 1.45,
+                    ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -463,10 +590,15 @@ class _TranslationPanel extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (word.pinyin.isNotEmpty)
-                  Text(
-                    word.pinyin,
+                  Text.rich(
+                    TextSpan(
+                      children: pinyinSpans(
+                        word.pinyin,
+                        colored: toneColors,
+                        fallback: MandarinReaderApp.jade,
+                      ),
+                    ),
                     style: const TextStyle(
-                      color: MandarinReaderApp.jade,
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                     ),
@@ -482,6 +614,16 @@ class _TranslationPanel extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          IconButton(
+            onPressed: onToggleSaved,
+            tooltip: heldWordSaved ? 'Remove saved word' : 'Save word',
+            icon: Icon(
+              heldWordSaved
+                  ? Icons.bookmark_rounded
+                  : Icons.bookmark_border_rounded,
+              color: MandarinReaderApp.jade,
             ),
           ),
           IconButton(
@@ -504,25 +646,26 @@ class _StoryFlow extends StatelessWidget {
     required this.segmentWords,
     required this.segmentKeys,
     required this.showPinyin,
+    required this.toneColors,
     required this.activeIndex,
     required this.playingIndex,
     required this.heldSegmentIndex,
     required this.heldWordIndex,
-    required this.onTapSegment,
-    required this.onHoldWord,
+    required this.savedTexts,
+    required this.onWord,
   });
 
   final Story story;
   final List<List<StoryWord>> segmentWords;
   final Map<int, GlobalKey> segmentKeys;
   final bool showPinyin;
+  final bool toneColors;
   final int activeIndex;
   final int? playingIndex;
   final int? heldSegmentIndex;
   final int? heldWordIndex;
-  final void Function(int index) onTapSegment;
-  final void Function(int segmentIndex, int wordIndex, StoryWord word)
-      onHoldWord;
+  final Set<String> savedTexts;
+  final void Function(int segmentIndex, int wordIndex, StoryWord word) onWord;
 
   @override
   Widget build(BuildContext context) {
@@ -535,17 +678,19 @@ class _StoryFlow extends StatelessWidget {
         Widget child = _WordChip(
           word: word,
           showPinyin: showPinyin,
+          toneColors: toneColors,
           active: s == activeIndex,
           playing: s == playingIndex,
           held: s == heldSegmentIndex && w == heldWordIndex,
+          saved: savedTexts.contains(word.text),
         );
         if (!punctuation) {
           final segmentIndex = s;
           final wordIndex = w;
           child = GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => onTapSegment(segmentIndex),
-            onLongPress: () => onHoldWord(segmentIndex, wordIndex, word),
+            onTap: () => onWord(segmentIndex, wordIndex, word),
+            onLongPress: () => onWord(segmentIndex, wordIndex, word),
             child: child,
           );
         }
@@ -567,16 +712,20 @@ class _WordChip extends StatelessWidget {
   const _WordChip({
     required this.word,
     required this.showPinyin,
+    required this.toneColors,
     required this.active,
     required this.playing,
     required this.held,
+    required this.saved,
   });
 
   final StoryWord word;
   final bool showPinyin;
+  final bool toneColors;
   final bool active;
   final bool playing;
   final bool held;
+  final bool saved;
 
   @override
   Widget build(BuildContext context) {
@@ -585,13 +734,22 @@ class _WordChip extends StatelessWidget {
         : active
             ? const Color(0xFFE6F2EB)
             : Colors.transparent;
-    final hanzi = Text(
-      word.text,
-      style: TextStyle(
-        color: MandarinReaderApp.ink,
-        fontSize: 26,
-        fontWeight: playing ? FontWeight.w600 : FontWeight.w500,
-        height: 1.35,
+    final hanzi = Container(
+      decoration: saved
+          ? const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: MandarinReaderApp.jade, width: 2),
+              ),
+            )
+          : null,
+      child: Text(
+        word.text,
+        style: TextStyle(
+          color: MandarinReaderApp.ink,
+          fontSize: 26,
+          fontWeight: playing ? FontWeight.w600 : FontWeight.w500,
+          height: 1.35,
+        ),
       ),
     );
     return Container(
@@ -606,13 +764,15 @@ class _WordChip extends StatelessWidget {
               children: [
                 SizedBox(
                   height: 15,
-                  child: Text(
-                    word.pinyin,
-                    style: const TextStyle(
-                      color: MandarinReaderApp.jade,
-                      fontSize: 11.5,
-                      height: 1.15,
+                  child: Text.rich(
+                    TextSpan(
+                      children: pinyinSpans(
+                        word.pinyin,
+                        colored: toneColors,
+                        fallback: MandarinReaderApp.jade,
+                      ),
                     ),
+                    style: const TextStyle(fontSize: 11.5, height: 1.15),
                   ),
                 ),
                 hanzi,
@@ -626,21 +786,19 @@ class _WordChip extends StatelessWidget {
 class _ReaderControls extends StatelessWidget {
   const _ReaderControls({
     required this.showPinyin,
-    required this.speed,
+    required this.showToneColors,
+    required this.showEnglish,
     required this.onPinyinChanged,
-    required this.onSpeedChanged,
+    required this.onToneColorsChanged,
+    required this.onEnglishChanged,
   });
 
   final bool showPinyin;
-  final double speed;
+  final bool showToneColors;
+  final bool showEnglish;
   final ValueChanged<bool> onPinyinChanged;
-  final ValueChanged<double> onSpeedChanged;
-
-  String _speedLabel(double value) {
-    return value == value.roundToDouble()
-        ? '${value.toStringAsFixed(1)}×'
-        : '${value.toStringAsFixed(2).replaceFirst(RegExp(r'0$'), '')}×';
-  }
+  final ValueChanged<bool> onToneColorsChanged;
+  final ValueChanged<bool> onEnglishChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -651,51 +809,31 @@ class _ReaderControls extends StatelessWidget {
         color: Color(0xFFFFFDF8),
         border: Border(bottom: BorderSide(color: Color(0xFFE7E1D5))),
       ),
-      child: Row(
+      child: ListView(
+        scrollDirection: Axis.horizontal,
         children: [
-          FilterChip(
-            selected: showPinyin,
-            onSelected: onPinyinChanged,
-            label: const Text('拼 Pinyin'),
+          Center(
+            child: FilterChip(
+              selected: showPinyin,
+              onSelected: onPinyinChanged,
+              label: const Text('拼 Pinyin'),
+            ),
           ),
-          const Spacer(),
-          PopupMenuButton<double>(
-            tooltip: 'Narration speed',
-            initialValue: speed,
-            onSelected: onSpeedChanged,
-            itemBuilder: (context) => [
-              for (final value in const [0.5, 0.75, 1.0, 1.25, 1.5])
-                PopupMenuItem(
-                  value: value,
-                  child: Row(
-                    children: [
-                      if (value == speed)
-                        const Icon(
-                          Icons.check_rounded,
-                          size: 18,
-                          color: MandarinReaderApp.jade,
-                        )
-                      else
-                        const SizedBox(width: 18),
-                      const SizedBox(width: 8),
-                      Text(_speedLabel(value)),
-                    ],
-                  ),
-                ),
-            ],
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-              child: Row(
-                children: [
-                  const Icon(Icons.speed_rounded, size: 19),
-                  const SizedBox(width: 6),
-                  Text(
-                    _speedLabel(speed),
-                    style: const TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                  const Icon(Icons.arrow_drop_down_rounded),
-                ],
-              ),
+          const SizedBox(width: 8),
+          Center(
+            child: FilterChip(
+              selected: showToneColors,
+              onSelected: onToneColorsChanged,
+              label: const Text('声 Tones'),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Center(
+            child: FilterChip(
+              selected: showEnglish,
+              onSelected: onEnglishChanged,
+              label: const Text('EN'),
+              tooltip: 'Show translations (off = tap to reveal)',
             ),
           ),
         ],
@@ -744,7 +882,7 @@ class _StoryHeader extends StatelessWidget {
               ),
               const SizedBox(width: 5),
               const Text(
-                'Hold a word · tap a sentence',
+                'Tap a word for its meaning',
                 style: TextStyle(color: Color(0xFF7D827E), fontSize: 12),
               ),
             ],

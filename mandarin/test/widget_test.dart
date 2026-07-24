@@ -41,13 +41,16 @@ void main() {
         home: ReaderScreen(summary: summary, repository: repository),
       ),
     );
-    await pumpUntilFound(tester, find.text('Hold a word · tap a sentence'));
+    await pumpUntilFound(tester, find.text('Tap a word for its meaning'));
 
-    expect(find.text('Hold a word · tap a sentence'), findsOneWidget);
+    expect(find.text('Tap a word for its meaning'), findsOneWidget);
+    // The docked player bar shows position and speed.
+    expect(find.text('1 / ${story.segments.length}'), findsOneWidget);
     expect(find.text('1.0×'), findsOneWidget);
+    expect(find.byIcon(Icons.play_arrow_rounded), findsOneWidget);
 
-    // Long-press a word from the first sentence; its definition appears in
-    // the pinned translation panel.
+    // Tap a word from the first sentence; its definition appears in the
+    // pinned translation panel.
     final candidates = [
       ...story.segments
           .expand((segment) => segment.words)
@@ -60,11 +63,13 @@ void main() {
         ),
     ];
     final word = candidates.first;
-    await tester.longPress(find.text(word.text).first);
+    await tester.tap(find.text(word.text).first);
     await tester.pumpAndSettle();
 
     expect(find.text(word.english), findsWidgets);
     expect(find.byIcon(Icons.close_rounded), findsOneWidget);
+    // The word view offers a bookmark to save the word.
+    expect(find.byIcon(Icons.bookmark_border_rounded), findsOneWidget);
 
     // Dismiss the held word with the panel's close button; let the panel's
     // switcher animation finish before asserting it is gone.
@@ -79,7 +84,10 @@ void main() {
     await tester.scrollUntilVisible(
       find.text('Useful words'),
       400,
-      scrollable: find.byType(Scrollable).first,
+      scrollable: find.descendant(
+        of: find.byKey(const Key('storyScroll')),
+        matching: find.byType(Scrollable),
+      ),
     );
     await tester.ensureVisible(find.byType(ListTile).first);
     await tester.pump(const Duration(milliseconds: 400));
