@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import unquote, urlparse
 
+import hsk1
 from tts_engine import missing_runtime_modules, synthesize_items
 
 
@@ -28,13 +29,49 @@ REPO_ROOT = ROOT.parent
 STATIC_ROOT = ROOT / "static"
 DATA_ROOT = ROOT / ".workshop"
 PROJECTS_ROOT = DATA_ROOT / "projects"
+BOOKS_ROOT = DATA_ROOT / "books"
 SETTINGS_FILE = DATA_ROOT / "settings.json"
 MANDARIN_ROOT = REPO_ROOT / "mandarin"
 FLUTTER_CONTENT_ROOT = MANDARIN_ROOT / "assets" / "content"
 PORT = 8766
 DEEPSEEK_URL = "https://api.deepseek.com/chat/completions"
 
-DEFAULT_STORY_PROMPT = """You are an expert writer of graded readers for absolute beginners in Mandarin, in the style of Du Chinese Newbie stories.
+DEFAULT_STORY_PROMPT = """You are an expert writer of graded readers for Mandarin learners, in the style of Du Chinese.
+
+Write a complete story in natural English that will be translated into Chinese at the requested learner level. The story must be genuinely engaging, not a flat list of actions:
+- Give the main character one small, concrete want or problem in the first few lines, an attempt that does not immediately work, and a warm resolution that feels earned.
+- Include at least two short dialogue exchanges (characters saying or asking something), written so they translate into simple spoken Mandarin.
+- Vary sentence length: mostly short sentences, with an occasional slightly longer one for rhythm.
+- Use concrete, sensory details a beginner can picture (warm sun, cold water, a red door) instead of abstract description.
+- Repeat the story's key words and actions in NEW sentences so learners meet them several times, but never repeat a whole sentence verbatim.
+- Use simple, common vocabulary and grammar: everyday objects, family, food, animals, home, weather. Avoid idioms, wordplay, and anything culturally untranslatable. Keep names and places consistent.
+
+The brief carries level rules. Those rules are binding and override anything above them when the two disagree.
+
+Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary."""
+
+DEFAULT_LOCALIZATION_PROMPT = """You are a meticulous Mandarin graded-reader editor and pronunciation specialist.
+
+Convert the approved English story into natural Simplified Chinese for the requested learner level. Divide it into short, narratable segments. For every segment provide:
+- faithful, natural English;
+- Simplified Chinese with appropriate punctuation;
+- Hanyu Pinyin with tone marks, matching the Chinese exactly;
+- an ordered words array that reconstructs the Chinese exactly, with contextual pinyin and English definitions for every lexical word;
+- clean Chinese audio text for speech synthesis.
+
+The request carries a vocabulary budget for the level. Treat it as a hard limit rather than a suggestion: it is what makes the story readable at that level. Prefer rewriting a sentence with words you are allowed to use over reaching for a word outside the budget.
+
+Use consistent names and vocabulary. Prefer spoken, standard Mainland Mandarin. Do not add facts or plot events. Pinyin must use tone marks rather than tone numbers. Audio text must contain Chinese only, with punctuation and no pinyin, labels, stage directions, or Markdown.
+Split the Chinese into real words rather than individual characters. Include punctuation as separate word items with blank pinyin and English fields. Every definition must describe what the word means in that particular sentence.
+
+Return one valid json object matching the supplied schema exactly."""
+
+# Superseded default prompts. A saved settings.json that still carries one of
+# these verbatim is not a real customization, so get_settings drops it and
+# the current default applies.
+LEGACY_DEFAULT_PROMPTS = {
+    "storyPrompt": [
+        """You are an expert writer of graded readers for absolute beginners in Mandarin, in the style of Du Chinese Newbie stories.
 
 Write a complete story in natural English that will be translated into HSK 1 level Chinese. The story must be genuinely engaging, not a flat list of actions:
 - Give the main character one small, concrete want or problem in the first few lines, an attempt that does not immediately work, and a warm resolution that feels earned.
@@ -45,9 +82,15 @@ Write a complete story in natural English that will be translated into HSK 1 lev
 - Repeat the story's key words naturally in NEW sentences so learners meet them several times, but never repeat a whole sentence verbatim.
 - Use simple, common vocabulary and grammar that maps cleanly onto HSK 1 Mandarin: everyday objects, family, food, animals, home, weather. Avoid idioms, wordplay, and anything culturally untranslatable. Keep names and places consistent.
 
-Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary."""
+Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary.""",
+        """You are an expert children's fiction writer creating engaging source stories for a graded Mandarin reader.
 
-DEFAULT_LOCALIZATION_PROMPT = """You are a meticulous Mandarin graded-reader editor and pronunciation specialist preparing Newbie (HSK 1) content.
+Write a complete story in natural English. Use a clear narrative arc, concrete actions, warm character details, and an ending that feels earned. Keep the language easy to translate into beginner-friendly Mandarin: prefer direct sentences, avoid wordplay that depends on English, and keep names and locations consistent.
+
+Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary."""
+    ],
+    "localizationPrompt": [
+        """You are a meticulous Mandarin graded-reader editor and pronunciation specialist preparing Newbie (HSK 1) content.
 
 Convert the approved English story into natural Simplified Chinese for the requested learner level. Divide it into short, narratable segments. For every segment provide:
 - faithful, natural English;
@@ -61,20 +104,7 @@ Level discipline for HSK 1: stay inside the HSK 1 vocabulary (~150 core words) p
 Use consistent names and vocabulary. Prefer spoken, standard Mainland Mandarin. Do not add facts or plot events. Pinyin must use tone marks rather than tone numbers. Audio text must contain Chinese only, with punctuation and no pinyin, labels, stage directions, or Markdown.
 Split the Chinese into real words rather than individual characters. Include punctuation as separate word items with blank pinyin and English fields. Every definition must describe what the word means in that particular sentence.
 
-Return one valid json object matching the supplied schema exactly."""
-
-# Superseded default prompts. A saved settings.json that still carries one of
-# these verbatim is not a real customization, so get_settings drops it and
-# the current default applies.
-LEGACY_DEFAULT_PROMPTS = {
-    "storyPrompt": [
-        """You are an expert children's fiction writer creating engaging source stories for a graded Mandarin reader.
-
-Write a complete story in natural English. Use a clear narrative arc, concrete actions, warm character details, and an ending that feels earned. Keep the language easy to translate into beginner-friendly Mandarin: prefer direct sentences, avoid wordplay that depends on English, and keep names and locations consistent.
-
-Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary."""
-    ],
-    "localizationPrompt": [
+Return one valid json object matching the supplied schema exactly.""",
         """You are a meticulous Mandarin graded-reader editor and pronunciation specialist.
 
 Convert the approved English story into natural Simplified Chinese for the requested learner level. Divide it into short, narratable segments. For every segment provide:
@@ -98,6 +128,98 @@ DEFAULT_SETTINGS = {
     "voiceInstruction": "Speak naturally, clearly, and warmly for a Mandarin learner.",
 }
 
+NEWBIE_LENGTH = "120–220 words"
+MIN_CHAPTERS = 4
+MAX_CHAPTERS = 12
+DEFAULT_CHAPTERS = 12
+
+
+def is_newbie(level: Any) -> bool:
+    """Whether *level* is the Newbie tier that the HSK 1 budget applies to."""
+    normalized = re.sub(r"[\s()]+", "", str(level or "")).upper()
+    return normalized in {"HSK1", "NEWBIE", "HSK1NEWBIE"}
+
+
+def newbie_story_rules() -> str:
+    return f"""This is a Newbie (HSK 1) story. It will be translated using a budget of about 150 Chinese words, so the English has to be written to survive that translation.
+
+- Write 12–20 short sentences, landing at roughly 150–260 Chinese characters once translated. One idea per sentence; almost every sentence is a subject, a verb, and an object.
+- Choose 5–8 actions for the whole story and use each of them at least three times, in different sentences. These are the only actions the story needs: {", ".join(HSK1_ACTION_GLOSSES)}.
+- Aim for about three uses of every word you introduce. A published Newbie chapter runs roughly 100 words of running text over only 30–45 different words, and its commonest verb appears five or more times.
+- Repetition with one thing changed is the point of this level, not a flaw. Reuse a sentence shape across a list of days, places, or people ("On Monday I ate at the shop. On Tuesday the shop had no food.") so the learner meets the same words in a new place.
+- Introduce at most 3–5 new topic words beyond everyday HSK 1 vocabulary, and use each of them at least three times.
+- Keep throwaway words down: no more than about a third of the different words in the story may appear only once.
+- Stay concrete and physical: eat, drink, sleep, look, go, come, buy, sit, want, like, have. No metaphor, no inner monologue, no abstract nouns (freedom, memory, courage).
+- Keep the cast to two or three characters with short names, and refer to them the same way every time.
+- Dialogue must be plain spoken lines: "I want to eat." "Can I eat here?" "Yes." Nothing indirect.
+- Do not repeat a whole sentence word for word; change at least one word each time."""
+
+
+def newbie_localization_rules() -> str:
+    return f"""Vocabulary budget for Newbie (HSK 1). Use these words:
+{hsk1.word_budget_text()}
+
+- Anything outside that list counts as a new word. Allow at most 5 new words in the whole story, each used at least three times, and list every one of them in the vocabulary array.
+- Target the density of a published Newbie chapter: 150–260 Chinese characters, 30–45 different words, and at least 2.5 uses per different word. Fewer than a third of the different words may appear only once.
+- Lean hard on these core verbs and reuse them across the story rather than reaching for synonyms: {hsk1.core_verbs_text()}
+- Recycle these sentence patterns: {hsk1.patterns_text()}
+- Keep segments to roughly 4–12 characters. Split long sentences instead of adding conjunctions.
+- Prefer 说 and 问 for dialogue and keep each spoken line in its own segment.
+- Never produce two segments whose Chinese is identical.
+- Numbers, days of the week, and family words are all inside the budget; use them freely for repetition."""
+
+
+# Plain-English names for the HSK 1 core verbs, used to steer the English draft
+# before any Chinese exists.
+HSK1_ACTION_GLOSSES = (
+    "be",
+    "have",
+    "not have",
+    "be at a place",
+    "go",
+    "come",
+    "eat",
+    "drink",
+    "look at",
+    "see",
+    "say",
+    "be called",
+    "want",
+    "like",
+    "can",
+    "buy",
+    "do",
+    "sit",
+    "live",
+    "sleep",
+    "return",
+    "open",
+    "listen",
+    "know someone",
+)
+
+
+def story_level_rules(level: Any) -> str:
+    if is_newbie(level):
+        return newbie_story_rules()
+    return (
+        "Keep the grammar and vocabulary within reach of a learner at this "
+        "level, and reuse the story's key words in new sentences."
+    )
+
+
+def localization_level_rules(level: Any) -> str:
+    if is_newbie(level):
+        return newbie_localization_rules()
+    return (
+        "Stay inside the vocabulary a learner at this level knows, plus a "
+        "handful of topic words that the story reuses several times; those "
+        "extra words must appear in the vocabulary list. Use connectives the "
+        "level allows instead of starting every sentence the same way. Never "
+        "produce two segments whose Chinese is identical."
+    )
+
+
 MIME_TYPES = {
     ".html": "text/html; charset=utf-8",
     ".css": "text/css; charset=utf-8",
@@ -120,6 +242,7 @@ def utc_now() -> str:
 
 def ensure_data_dirs() -> None:
     PROJECTS_ROOT.mkdir(parents=True, exist_ok=True)
+    BOOKS_ROOT.mkdir(parents=True, exist_ok=True)
 
 
 def atomic_write_json(path: Path, value: Any) -> None:
@@ -240,6 +363,11 @@ def normalize_project(payload: dict[str, Any], existing: dict[str, Any] | None =
         elif key not in project:
             project[key] = ""
 
+    # Chapter projects carry their book reference for the whole pipeline; the
+    # editing form never sends it, so an absent key must not clear it.
+    if isinstance(payload.get("book"), dict):
+        project["book"] = payload["book"]
+
     if "approved" in payload:
         project["approved"] = bool(payload["approved"])
     if existing and "englishStory" in payload and project["englishStory"] != previous_story:
@@ -278,15 +406,330 @@ def list_projects() -> list[dict[str, Any]]:
         project = read_json(path, None)
         if not isinstance(project, dict):
             continue
+        book = project.get("book") if isinstance(project.get("book"), dict) else None
         projects.append(
             {
                 "id": project.get("id"),
                 "title": project.get("title") or "Untitled Story",
                 "status": project.get("status") or "draft",
                 "updatedAt": project.get("updatedAt"),
+                "book": book,
             }
         )
     return sorted(projects, key=lambda item: item.get("updatedAt") or "", reverse=True)
+
+
+def book_path(book_id: str) -> Path:
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,79}", book_id):
+        raise WorkshopError("Invalid book id.")
+    return BOOKS_ROOT / book_id
+
+
+def book_file(book_id: str) -> Path:
+    return book_path(book_id) / "book.json"
+
+
+def load_book(book_id: str) -> dict[str, Any]:
+    book = read_json(book_file(book_id), None)
+    if not isinstance(book, dict):
+        raise WorkshopError("Book not found.", 404)
+    return book
+
+
+def save_book(book: dict[str, Any]) -> dict[str, Any]:
+    book["updatedAt"] = utc_now()
+    atomic_write_json(book_file(str(book.get("id", ""))), book)
+    return book
+
+
+def list_books() -> list[dict[str, Any]]:
+    BOOKS_ROOT.mkdir(parents=True, exist_ok=True)
+    books: list[dict[str, Any]] = []
+    for path in BOOKS_ROOT.glob("*/book.json"):
+        book = read_json(path, None)
+        if not isinstance(book, dict):
+            continue
+        chapters = book.get("chapters") or []
+        books.append(
+            {
+                "id": book.get("id"),
+                "titleEnglish": book.get("titleEnglish") or "Untitled Book",
+                "titleChinese": book.get("titleChinese") or "",
+                "level": book.get("level") or "",
+                "chapterCount": len(chapters),
+                "updatedAt": book.get("updatedAt"),
+            }
+        )
+    return sorted(books, key=lambda item: item.get("updatedAt") or "", reverse=True)
+
+
+def book_reference(book: dict[str, Any], chapter: dict[str, Any]) -> dict[str, Any]:
+    """The slice of a book that travels with one chapter's project and, later,
+    into the published library entry."""
+    return {
+        "id": book.get("id"),
+        "titleEnglish": book.get("titleEnglish") or "",
+        "titleChinese": book.get("titleChinese") or "",
+        "titlePinyin": book.get("titlePinyin") or "",
+        "summaryEnglish": book.get("summaryEnglish") or "",
+        "chapterNumber": int(chapter.get("number") or 0),
+        "chapterCount": int(book.get("chapterCount") or len(book.get("chapters") or [])),
+        "chapterTitleEnglish": chapter.get("titleEnglish") or "",
+        "chapterTitleChinese": chapter.get("titleChinese") or "",
+    }
+
+
+def book_context_text(project: dict[str, Any]) -> str:
+    """Continuity briefing for one chapter: the book's cast, its shared word
+    budget, what already happened, and what this chapter has to cover."""
+    reference = project.get("book")
+    if not isinstance(reference, dict) or not reference.get("id"):
+        return ""
+    try:
+        book = load_book(str(reference["id"]))
+    except WorkshopError:
+        return ""
+
+    number = int(reference.get("chapterNumber") or 0)
+    chapters = [
+        chapter
+        for chapter in (book.get("chapters") or [])
+        if isinstance(chapter, dict)
+    ]
+    current = next(
+        (chapter for chapter in chapters if int(chapter.get("number") or 0) == number),
+        None,
+    )
+    previous = [
+        f"  {chapter.get('number')}. {chapter.get('titleEnglish')} — {chapter.get('outline')}"
+        for chapter in chapters
+        if 0 < int(chapter.get("number") or 0) < number
+    ]
+    upcoming = [
+        f"  {chapter.get('number')}. {chapter.get('titleEnglish')}"
+        for chapter in chapters
+        if int(chapter.get("number") or 0) > number
+    ]
+    characters = "; ".join(
+        f"{person.get('name')} ({person.get('chinese')}) — {person.get('about')}"
+        for person in (book.get("characters") or [])
+        if isinstance(person, dict)
+    )
+    shared_words = "、".join(
+        f"{word.get('simplified')}({word.get('pinyin')}) {word.get('english')}"
+        for word in (book.get("newWords") or [])
+        if isinstance(word, dict)
+    )
+
+    lines = [
+        "",
+        f"""This is chapter {number} of {reference.get("chapterCount")} of the book "{book.get("titleEnglish")}" ({book.get("titleChinese")}).""",
+        f"Book premise: {book.get('summaryEnglish') or book.get('theme') or ''}",
+    ]
+    if characters:
+        lines.append(f"Recurring characters (never rename them): {characters}")
+    if shared_words:
+        lines.append(
+            "Words this book teaches across every chapter — reuse them here rather "
+            f"than inventing synonyms: {shared_words}"
+        )
+    if current:
+        lines.append(f"This chapter must cover: {current.get('outline')}")
+    if previous:
+        lines.append("Already told in earlier chapters (do not retell):")
+        lines.extend(previous)
+    if upcoming:
+        lines.append("Saved for later chapters (do not use them up here):")
+        lines.extend(upcoming)
+    lines.append(
+        "Write this chapter so it stands on its own for a reader who opens it "
+        "first, while still following on from the earlier ones."
+    )
+    lines.append("")
+    return "\n".join(lines)
+
+
+def plan_book(payload: dict[str, Any]) -> dict[str, Any]:
+    """Ask DeepSeek for a book plan, then create one chapter project per
+    chapter so each chapter runs through the normal story pipeline."""
+    title = str(payload.get("title") or "").strip()
+    idea = str(payload.get("idea") or "").strip()
+    if not idea:
+        raise WorkshopError("Add a book idea before planning.")
+    level = str(payload.get("level") or "HSK 1").strip() or "HSK 1"
+    try:
+        chapter_count = int(payload.get("chapterCount") or DEFAULT_CHAPTERS)
+    except (TypeError, ValueError) as error:
+        raise WorkshopError("Chapter count must be a number.") from error
+    if not MIN_CHAPTERS <= chapter_count <= MAX_CHAPTERS:
+        raise WorkshopError(
+            f"Choose between {MIN_CHAPTERS} and {MAX_CHAPTERS} chapters."
+        )
+    constraints = str(payload.get("constraints") or "").strip()
+
+    schema = {
+        "titleEnglish": "I'm a Cat",
+        "titleChinese": "我是猫",
+        "titlePinyin": "Wǒ shì māo",
+        "summaryEnglish": "One or two sentences describing the whole book.",
+        "summaryChinese": "一两句话的介绍。",
+        "characters": [
+            {
+                "name": "Fanfan",
+                "chinese": "饭饭",
+                "pinyin": "Fànfan",
+                "about": "A young stray cat looking for a home.",
+            }
+        ],
+        "newWords": [
+            {"simplified": "苹果", "pinyin": "píngguǒ", "english": "apple"}
+        ],
+        "chapters": [
+            {
+                "number": 1,
+                "titleEnglish": "What is Home?",
+                "titleChinese": "家是什么？",
+                "outline": "Two or three sentences describing exactly what happens in this chapter.",
+            }
+        ],
+    }
+
+    request = f"""Plan a {chapter_count}-chapter graded reader.
+
+Working title: {title or "Choose a fitting title"}
+Book idea: {idea}
+Mandarin learner level: {level}
+Additional constraints: {constraints or "None"}
+
+Level rules (binding for every chapter):
+{story_level_rules(level)}
+
+Requirements:
+- Give the book one running premise and a cast of two or three characters who appear again and again.
+- Plan exactly {chapter_count} chapters, numbered 1 to {chapter_count}, each a self-contained episode of 12–20 short sentences that also moves the book forward.
+- Chapter 1 introduces the character and the want. The last chapter resolves it.
+- Each chapter outline must be concrete: who is there, what they do, what changes.
+- Choose 4–8 shared new words the whole book teaches by repeating them across chapters, and list them in newWords. These are the only words outside the level's budget that any chapter may use.
+- Chinese titles must be writable at this level.
+
+Use this exact JSON shape and key names:
+{json.dumps(schema, ensure_ascii=False, indent=2)}
+
+Return one valid json object."""
+
+    content, usage = deepseek_chat(
+        [
+            {"role": "system", "content": get_settings()["storyPrompt"]},
+            {"role": "user", "content": request},
+        ],
+        json_output=True,
+        max_tokens=8_000,
+    )
+    try:
+        plan = json.loads(strip_json_fence(content))
+    except json.JSONDecodeError as error:
+        raise WorkshopError("DeepSeek returned malformed JSON. Please try again.", 502) from error
+    if not isinstance(plan, dict):
+        raise WorkshopError("DeepSeek did not return a book plan.", 502)
+
+    chapters_raw = plan.get("chapters")
+    if not isinstance(chapters_raw, list) or not chapters_raw:
+        raise WorkshopError("The generated book plan has no chapters.", 502)
+    chapters = []
+    for index, chapter in enumerate(chapters_raw[:chapter_count], start=1):
+        if not isinstance(chapter, dict):
+            raise WorkshopError("A generated chapter is invalid.", 502)
+        outline = str(chapter.get("outline") or "").strip()
+        if not outline:
+            raise WorkshopError(f"Chapter {index} of the plan has no outline.", 502)
+        chapters.append(
+            {
+                "number": index,
+                "titleEnglish": str(chapter.get("titleEnglish") or f"Chapter {index}").strip(),
+                "titleChinese": str(chapter.get("titleChinese") or "").strip(),
+                "outline": outline,
+                "projectId": "",
+            }
+        )
+    if len(chapters) != chapter_count:
+        raise WorkshopError(
+            f"The plan came back with {len(chapters)} chapters instead of {chapter_count}. Please try again.",
+            502,
+        )
+
+    book_title = str(plan.get("titleEnglish") or title or "Untitled Book").strip()
+    book = {
+        "schemaVersion": 1,
+        "id": f"{slugify(book_title)}-{int(time.time())}",
+        "createdAt": utc_now(),
+        "level": level,
+        "theme": idea,
+        "constraints": constraints,
+        "titleEnglish": book_title,
+        "titleChinese": str(plan.get("titleChinese") or "").strip(),
+        "titlePinyin": str(plan.get("titlePinyin") or "").strip(),
+        "summaryEnglish": str(plan.get("summaryEnglish") or "").strip(),
+        "summaryChinese": str(plan.get("summaryChinese") or "").strip(),
+        "characters": [
+            person for person in (plan.get("characters") or []) if isinstance(person, dict)
+        ],
+        "newWords": [
+            word for word in (plan.get("newWords") or []) if isinstance(word, dict)
+        ],
+        "chapterCount": chapter_count,
+        "chapters": chapters,
+        "model": get_deepseek_model(),
+    }
+
+    length = NEWBIE_LENGTH if is_newbie(level) else "300–500 words"
+    for chapter in book["chapters"]:
+        project = normalize_project(
+            {
+                "title": f"{book['titleEnglish']} {chapter['number']}: {chapter['titleEnglish']}",
+                "idea": chapter["outline"],
+                "level": level,
+                "length": length,
+                "constraints": constraints,
+                "book": book_reference(book, chapter),
+            }
+        )
+        save_project(project)
+        chapter["projectId"] = project["id"]
+
+    save_book(book)
+    return {"book": book, "usage": usage}
+
+
+def forget_book_chapter(project_id: str) -> None:
+    """Drop a deleted chapter project from its book so the book still opens."""
+    BOOKS_ROOT.mkdir(parents=True, exist_ok=True)
+    for path in BOOKS_ROOT.glob("*/book.json"):
+        book = read_json(path, None)
+        if not isinstance(book, dict):
+            continue
+        changed = False
+        for chapter in book.get("chapters") or []:
+            if isinstance(chapter, dict) and chapter.get("projectId") == project_id:
+                chapter["projectId"] = ""
+                changed = True
+        if changed:
+            book["updatedAt"] = utc_now()
+            atomic_write_json(path, book)
+
+
+def delete_book(book_id: str) -> None:
+    book = load_book(book_id)
+    for chapter in book.get("chapters") or []:
+        if not isinstance(chapter, dict):
+            continue
+        chapter_project = str(chapter.get("projectId") or "")
+        if not chapter_project:
+            continue
+        folder = project_path(chapter_project)
+        if (folder / "project.json").exists():
+            unpublish_story_assets(chapter_project)
+            shutil.rmtree(folder, ignore_errors=True)
+    shutil.rmtree(book_path(book_id), ignore_errors=True)
 
 
 def unpublish_story_assets(story_id: str) -> None:
@@ -322,6 +765,7 @@ def delete_project(project_id: str) -> None:
         raise WorkshopError("Story project not found.", 404)
     unpublish_story_assets(project_id)
     shutil.rmtree(folder, ignore_errors=True)
+    forget_book_chapter(project_id)
 
 
 def detect_qwen_models() -> dict[str, Any]:
@@ -416,13 +860,17 @@ def create_story(project: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any
         raise WorkshopError("Add a story idea before generating.")
 
     settings = get_settings()
+    level = project.get("level") or "HSK 1–2"
     request = f"""Create the English story using this brief:
 
 Working title: {project.get("title") or "Choose a fitting title"}
 Story idea: {project.get("idea")}
-Mandarin learner level after translation: {project.get("level") or "HSK 1–2"}
+Mandarin learner level after translation: {level}
 Target length: {project.get("length") or "600–900 words"}
 Additional constraints: {project.get("constraints") or "None"}
+{book_context_text(project)}
+Level rules (binding):
+{story_level_rules(level)}
 
 Return only the finished English story."""
     story, usage = deepseek_chat(
@@ -450,10 +898,14 @@ def revise_story(project: dict[str, Any], instructions: str) -> tuple[dict[str, 
         raise WorkshopError("Add revision instructions first.")
 
     settings = get_settings()
+    level = project.get("level") or "HSK 1–2"
     request = f"""Revise the English story below.
 
 Revision instructions:
 {instructions.strip()}
+{book_context_text(project)}
+Level rules (binding, they still apply after the revision):
+{story_level_rules(level)}
 
 Current story:
 {story}
@@ -631,9 +1083,14 @@ def localize_story(project: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
             }
         ],
     }
+    level = project.get("level") or "HSK 1–2"
     request = f"""Return a valid json object for this approved story.
 
-Learner level: {project.get("level") or "HSK 1–2"}
+Learner level: {level}
+
+Level rules (binding):
+{localization_level_rules(level)}
+
 Use this exact JSON shape and key names:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 
@@ -905,6 +1362,8 @@ def publish_project_to_flutter(project: dict[str, Any]) -> dict[str, Any]:
         variants = published_audio_variants.get(segment_id)
         if variants:
             segment["audioVariants"] = variants
+    if isinstance(project.get("book"), dict):
+        published_package["book"] = project["book"]
     published_package["publishedAt"] = utc_now()
     published_package["audio"]["durationSeconds"] = manifest.get(
         "durationSeconds",
@@ -941,6 +1400,8 @@ def publish_project_to_flutter(project: dict[str, Any]) -> dict[str, Any]:
         "durationSeconds": round(float(manifest.get("durationSeconds") or 0)),
         "publishedAt": published_package["publishedAt"],
     }
+    if isinstance(project.get("book"), dict):
+        entry["book"] = project["book"]
     stories = [story for story in stories if story.get("id") != project["id"]]
     stories.insert(0, entry)
     library["schemaVersion"] = 1
@@ -1039,7 +1500,15 @@ class WorkshopHandler(BaseHTTPRequestHandler):
             parts = self.route_parts()
             if len(parts) == 3 and parts[:2] == ["api", "projects"]:
                 delete_project(parts[2])
-                self.send_json({"ok": True, "projects": list_projects()})
+                self.send_json(
+                    {"ok": True, "projects": list_projects(), "books": list_books()}
+                )
+                return
+            if len(parts) == 3 and parts[:2] == ["api", "books"]:
+                delete_book(parts[2])
+                self.send_json(
+                    {"ok": True, "projects": list_projects(), "books": list_books()}
+                )
                 return
             raise WorkshopError("API route not found.", 404)
         except Exception as error:
@@ -1059,8 +1528,21 @@ class WorkshopHandler(BaseHTTPRequestHandler):
                     "qwen": detect_qwen_models(),
                     "projects": projects,
                     "activeProject": active,
+                    "books": list_books(),
+                    "levels": {
+                        "newbieWordCount": len(hsk1.HSK1_WORDS),
+                        "minChapters": MIN_CHAPTERS,
+                        "maxChapters": MAX_CHAPTERS,
+                        "defaultChapters": DEFAULT_CHAPTERS,
+                    },
                 }
             )
+            return
+        if parts == ["api", "books"]:
+            self.send_json({"books": list_books()})
+            return
+        if len(parts) == 3 and parts[:2] == ["api", "books"]:
+            self.send_json({"book": load_book(parts[2])})
             return
         if len(parts) == 3 and parts[:2] == ["api", "projects"]:
             self.send_json({"project": load_project(parts[2])})
@@ -1095,6 +1577,18 @@ class WorkshopHandler(BaseHTTPRequestHandler):
         if parts == ["api", "projects"]:
             project = save_project(normalize_project(payload))
             self.send_json({"project": project}, 201)
+            return
+        if parts == ["api", "books"]:
+            result = plan_book(payload)
+            self.send_json(
+                {
+                    "book": result["book"],
+                    "usage": result["usage"],
+                    "books": list_books(),
+                    "projects": list_projects(),
+                },
+                201,
+            )
             return
         if len(parts) == 4 and parts[:2] == ["api", "projects"]:
             project = load_project(parts[2])

@@ -1,3 +1,47 @@
+/// Where a story sits inside a multi-chapter book. Standalone stories have
+/// none; chapters published from the workshop carry one, and it is what lets
+/// the library show a twelve-part book as a single shelf item.
+class BookRef {
+  const BookRef({
+    required this.id,
+    required this.titleEnglish,
+    required this.titleChinese,
+    required this.titlePinyin,
+    required this.summaryEnglish,
+    required this.chapterNumber,
+    required this.chapterCount,
+    required this.chapterTitleEnglish,
+    required this.chapterTitleChinese,
+  });
+
+  final String id;
+  final String titleEnglish;
+  final String titleChinese;
+  final String titlePinyin;
+  final String summaryEnglish;
+  final int chapterNumber;
+  final int chapterCount;
+  final String chapterTitleEnglish;
+  final String chapterTitleChinese;
+
+  static BookRef? fromJson(Map<String, dynamic>? json) {
+    if (json == null) return null;
+    final id = json['id'] as String? ?? '';
+    if (id.isEmpty) return null;
+    return BookRef(
+      id: id,
+      titleEnglish: json['titleEnglish'] as String? ?? 'Untitled Book',
+      titleChinese: json['titleChinese'] as String? ?? '',
+      titlePinyin: json['titlePinyin'] as String? ?? '',
+      summaryEnglish: json['summaryEnglish'] as String? ?? '',
+      chapterNumber: (json['chapterNumber'] as num?)?.toInt() ?? 0,
+      chapterCount: (json['chapterCount'] as num?)?.toInt() ?? 0,
+      chapterTitleEnglish: json['chapterTitleEnglish'] as String? ?? '',
+      chapterTitleChinese: json['chapterTitleChinese'] as String? ?? '',
+    );
+  }
+}
+
 class StorySummary {
   const StorySummary({
     required this.id,
@@ -11,6 +55,7 @@ class StorySummary {
     required this.segmentCount,
     required this.durationSeconds,
     required this.publishedAt,
+    this.book,
   });
 
   final String id;
@@ -24,6 +69,7 @@ class StorySummary {
   final int segmentCount;
   final int durationSeconds;
   final DateTime? publishedAt;
+  final BookRef? book;
 
   factory StorySummary.fromJson(Map<String, dynamic> json) {
     return StorySummary(
@@ -38,6 +84,7 @@ class StorySummary {
       segmentCount: (json['segmentCount'] as num?)?.toInt() ?? 0,
       durationSeconds: (json['durationSeconds'] as num?)?.toInt() ?? 0,
       publishedAt: DateTime.tryParse(json['publishedAt'] as String? ?? ''),
+      book: BookRef.fromJson(json['book'] as Map<String, dynamic>?),
     );
   }
 }

@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 import '../models/story.dart';
+import '../services/library_shelf.dart';
 import '../services/story_repository.dart';
+import 'book_screen.dart';
 import 'my_reading_screen.dart';
 import 'reader_screen.dart';
 
@@ -115,9 +117,12 @@ class _LibraryScreenState extends State<LibraryScreen> {
               'All',
               ...{for (final story in allStories) story.level},
             ];
+            // Books collapse into one shelf row, so filtering happens on the
+            // stories and the grouping runs over what survives.
             final stories = _filter == 'All'
                 ? allStories
                 : allStories.where((story) => story.level == _filter).toList();
+            final entries = buildShelf(stories);
 
             return RefreshIndicator(
               onRefresh: _refresh,
@@ -125,7 +130,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
                   SliverToBoxAdapter(
-                    child: _LibraryHero(storyCount: allStories.length),
+                    child: _LibraryHero(shelf: buildShelf(allStories)),
                   ),
                   ..._continueReadingSlivers(allStories),
                   SliverToBoxAdapter(
@@ -135,7 +140,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
                       onSelected: (value) => setState(() => _filter = value),
                     ),
                   ),
-                  if (stories.isEmpty)
+                  if (entries.isEmpty)
                     const SliverFillRemaining(
                       hasScrollBody: false,
                       child: _EmptyLibrary(),
@@ -144,16 +149,28 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     SliverPadding(
                       padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
                       sliver: SliverList.separated(
-                        itemCount: stories.length,
+                        itemCount: entries.length,
                         separatorBuilder: (_, _) => const SizedBox(height: 14),
                         itemBuilder: (context, index) {
-                          final story = stories[index];
-                          return _StoryCard(
-                            story: story,
-                            completed: _completedStories.contains(story.id),
-                            progress: _progressFor(story),
-                            onTap: () => _openStory(story),
-                          );
+                          final entry = entries[index];
+                          return switch (entry) {
+                            StoryEntry(:final story) => _StoryCard(
+                              story: story,
+                              completed: _completedStories.contains(story.id),
+                              progress: _progressFor(story),
+                              onTap: () => _openStory(story),
+                            ),
+                            BookEntry() => _BookCard(
+                              entry: entry,
+                              chaptersRead: entry.chapters
+                                  .where(
+                                    (chapter) =>
+                                        _completedStories.contains(chapter.id),
+                                  )
+                                  .length,
+                              onTap: () => _openBook(entry),
+                            ),
+                          };
                         },
                       ),
                     ),
@@ -194,12 +211,206 @@ class _LibraryScreenState extends State<LibraryScreen> {
     );
     await _loadProgress();
   }
+
+  Future<void> _openBook(BookEntry entry) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) =>
+            BookScreen(entry: entry, repository: widget.repository),
+      ),
+    );
+    await _loadProgress();
+  }
+}
+
+/// A whole book as one shelf row: cover letter, chapter count, and how far
+/// through it the reader is.
+class _BookCard extends StatelessWidget {
+  const _BookCard({
+    required this.entry,
+    required this.chaptersRead,
+    required this.onTap,
+  });
+
+  final BookEntry entry;
+  final int chaptersRead;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final book = entry.book;
+    final total = entry.totalChapters;
+    final minutes = entry.durationSeconds > 0
+        ? (entry.durationSeconds / 60).ceil()
+        : (entry.segmentCount / 3).ceil().clamp(1, 999);
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22),
+        side: const BorderSide(color: Color(0xFFCBE2D5)),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // A stacked cover, so a book reads as a book at a glance.
+              SizedBox(
+                width: 72,
+                height: 84,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: 6,
+                      top: 0,
+                      child: Container(
+                        width: 62,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFD3E7DC),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 0,
+                      top: 4,
+                      child: Container(
+                        width: 62,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE3EFE9),
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: const Color(0xFFCBE2D5)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            book.titleChinese.isEmpty
+                                ? '书'
+                                : book.titleChinese.characters.first,
+                            style: const TextStyle(
+                              color: MandarinReaderApp.jade,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        _LevelBadge(level: entry.level),
+                        const SizedBox(width: 8),
+                        const Icon(
+                          Icons.auto_stories_rounded,
+                          size: 15,
+                          color: MandarinReaderApp.jade,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'BOOK',
+                          style: Theme.of(context).textTheme.labelSmall
+                              ?.copyWith(
+                                color: MandarinReaderApp.jade,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 1,
+                              ),
+                        ),
+                        if (chaptersRead == total && total > 0) ...[
+                          const Spacer(),
+                          const Icon(
+                            Icons.check_circle,
+                            color: MandarinReaderApp.jade,
+                            size: 19,
+                          ),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    if (book.titleChinese.isNotEmpty)
+                      Text(
+                        book.titleChinese,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    Text(
+                      book.titleEnglish,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: const Color(0xFF657068),
+                      ),
+                    ),
+                    if (book.summaryEnglish.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      Text(
+                        book.summaryEnglish,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: const Color(0xFF657068),
+                          height: 1.4,
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        const Icon(Icons.menu_book_outlined, size: 15),
+                        const SizedBox(width: 5),
+                        Text('$chaptersRead/$total chapters read'),
+                        const SizedBox(width: 14),
+                        const Icon(Icons.headphones, size: 15),
+                        const SizedBox(width: 5),
+                        Text('$minutes min'),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(3),
+                      child: LinearProgressIndicator(
+                        value: total == 0 ? 0 : chaptersRead / total,
+                        minHeight: 5,
+                        backgroundColor: const Color(0xFFE8E3D7),
+                        color: MandarinReaderApp.jade,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _LibraryHero extends StatelessWidget {
-  const _LibraryHero({required this.storyCount});
+  const _LibraryHero({required this.shelf});
 
-  final int storyCount;
+  final List<ShelfEntry> shelf;
+
+  /// Books are counted as one item each, alongside standalone stories.
+  String get _summaryLine {
+    final books = shelf.whereType<BookEntry>().length;
+    final stories = shelf.length - books;
+    final parts = [
+      if (stories > 0) '$stories ${stories == 1 ? 'story' : 'stories'}',
+      if (books > 0) '$books ${books == 1 ? 'book' : 'books'}',
+    ];
+    if (parts.isEmpty) return 'Pinyin, translation, and narration on every line.';
+    return '${parts.join(' and ')} with pinyin, translation, and narration.';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +458,7 @@ class _LibraryHero extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  '$storyCount ${storyCount == 1 ? 'story' : 'stories'} with pinyin, translation, and narration.',
+                  _summaryLine,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: const Color(0xFFD5E8DE),
                     height: 1.5,

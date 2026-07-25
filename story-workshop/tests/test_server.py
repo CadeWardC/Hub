@@ -14,18 +14,22 @@ sys.path.insert(0, str(WORKSHOP_ROOT))
 import server  # noqa: E402
 
 
-class WorkshopTests(unittest.TestCase):
+class WorkshopTestCase(unittest.TestCase):
+    """Redirects the workshop's on-disk roots into a temporary folder."""
+
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         data_root = Path(self.temporary.name)
         self.original_paths = (
             server.DATA_ROOT,
             server.PROJECTS_ROOT,
+            server.BOOKS_ROOT,
             server.SETTINGS_FILE,
             server.FLUTTER_CONTENT_ROOT,
         )
         server.DATA_ROOT = data_root
         server.PROJECTS_ROOT = data_root / "projects"
+        server.BOOKS_ROOT = data_root / "books"
         server.SETTINGS_FILE = data_root / "settings.json"
         server.FLUTTER_CONTENT_ROOT = data_root / "flutter_content"
         server.ensure_data_dirs()
@@ -34,11 +38,55 @@ class WorkshopTests(unittest.TestCase):
         (
             server.DATA_ROOT,
             server.PROJECTS_ROOT,
+            server.BOOKS_ROOT,
             server.SETTINGS_FILE,
             server.FLUTTER_CONTENT_ROOT,
         ) = self.original_paths
         self.temporary.cleanup()
 
+    def plan_a_book(self, chapter_count=4, level="HSK 1"):
+        plan = {
+            "titleEnglish": "I'm a Cat",
+            "titleChinese": "我是猫",
+            "titlePinyin": "Wǒ shì māo",
+            "summaryEnglish": "A stray cat looks for a home.",
+            "characters": [
+                {
+                    "name": "Fanfan",
+                    "chinese": "饭饭",
+                    "pinyin": "Fànfan",
+                    "about": "A stray cat.",
+                }
+            ],
+            "newWords": [
+                {"simplified": "苹果", "pinyin": "píngguǒ", "english": "apple"}
+            ],
+            "chapters": [
+                {
+                    "number": index,
+                    "titleEnglish": f"Chapter {index}",
+                    "titleChinese": f"第{index}章",
+                    "outline": f"The cat eats and sleeps in place {index}.",
+                }
+                for index in range(1, chapter_count + 1)
+            ],
+        }
+        with patch.object(
+            server,
+            "deepseek_chat",
+            return_value=(json.dumps(plan, ensure_ascii=False), {}),
+        ):
+            return server.plan_book(
+                {
+                    "title": "I'm a Cat",
+                    "idea": "A stray cat looks for a home.",
+                    "level": level,
+                    "chapterCount": chapter_count,
+                }
+            )["book"]
+
+
+class WorkshopTests(WorkshopTestCase):
     def test_prompt_settings_are_saved(self):
         settings = server.save_settings({"storyPrompt": "Write a gentle English story."})
 
@@ -388,6 +436,162 @@ class WorkshopTests(unittest.TestCase):
         self.assertEqual(audio_ready["status"], "audio_ready")
         self.assertEqual(published["status"], "published")
         self.assertEqual(localized["package"]["segments"][0]["audioFile"], "audio/001.wav")
+
+
+class NewbieLevelTests(WorkshopTestCase):
+    def test_newbie_requests_carry_the_hsk1_word_budget(self):
+        localization = server.localization_level_rules("HSK 1")
+
+        # A sample of the list itself, not just a description of it.
+        self.assertIn("睡觉", localization)
+        self.assertIn("商店", localization)
+        self.assertIn("at least three times", localization)
+        self.assertNotIn("睡觉", server.localization_level_rules("HSK 3"))
+
+    def test_newbie_story_rules_ask_for_repetition(self):
+        rules = server.story_level_rules("HSK 1")
+
+        self.assertIn("three times", rules)
+        self.assertIn("150–260 Chinese characters", rules)
+        self.assertNotIn("150–260", server.story_level_rules("HSK 3"))
+
+    def test_newbie_detection_accepts_the_level_names_in_use(self):
+        self.assertTrue(server.is_newbie("HSK 1"))
+        self.assertTrue(server.is_newbie("Newbie"))
+        self.assertFalse(server.is_newbie("HSK 1–2"))
+        self.assertFalse(server.is_newbie(""))
+
+
+class BookTests(WorkshopTestCase):
+    def test_planning_a_book_creates_one_project_per_chapter(self):
+        book = self.plan_a_book(chapter_count=4)
+
+        self.assertEqual(len(book["chapters"]), 4)
+        self.assertEqual(server.load_book(book["id"])["titleChinese"], "我是猫")
+        projects = server.list_projects()
+        self.assertEqual(len(projects), 4)
+        for chapter in book["chapters"]:
+            project = server.load_project(chapter["projectId"])
+            self.assertEqual(project["level"], "HSK 1")
+            self.assertEqual(project["idea"], chapter["outline"])
+            self.assertEqual(project["book"]["chapterNumber"], chapter["number"])
+            self.assertEqual(project["book"]["chapterCount"], 4)
+            self.assertEqual(project["book"]["id"], book["id"])
+
+    def test_a_short_plan_is_rejected_rather_than_published(self):
+        plan = {
+            "titleEnglish": "Half a Book",
+            "chapters": [
+                {"number": 1, "titleEnglish": "One", "outline": "Something happens."}
+            ],
+        }
+        with patch.object(
+            server,
+            "deepseek_chat",
+            return_value=(json.dumps(plan, ensure_ascii=False), {}),
+        ):
+            with self.assertRaises(server.WorkshopError):
+                server.plan_book({"idea": "A book.", "chapterCount": 6})
+
+    def test_chapter_brief_carries_the_book_so_far(self):
+        book = self.plan_a_book(chapter_count=4)
+        project = server.load_project(book["chapters"][2]["projectId"])
+
+        context = server.book_context_text(project)
+
+        self.assertIn("chapter 3 of 4", context)
+        self.assertIn("A stray cat looks for a home.", context)
+        self.assertIn("饭饭", context)
+        self.assertIn("苹果", context)
+        # The outlines of chapters 1 and 2 are history; chapter 4 is not.
+        self.assertIn("place 1.", context)
+        self.assertIn("place 2.", context)
+        self.assertNotIn("place 4.", context)
+        self.assertIn("This chapter must cover: The cat eats and sleeps in place 3.", context)
+
+    def test_a_standalone_story_gets_no_book_briefing(self):
+        project = server.normalize_project({"title": "Solo", "idea": "One story."})
+
+        self.assertEqual(server.book_context_text(project), "")
+
+    def test_editing_a_chapter_keeps_its_book_reference(self):
+        book = self.plan_a_book(chapter_count=4)
+        project = server.load_project(book["chapters"][0]["projectId"])
+
+        # The editing form never sends the book reference back.
+        updated = server.normalize_project(
+            {"title": "Renamed", "idea": "Changed.", "level": "HSK 1"},
+            project,
+        )
+
+        self.assertEqual(updated["book"]["id"], book["id"])
+
+    def test_deleting_a_chapter_leaves_the_book_openable(self):
+        book = self.plan_a_book(chapter_count=4)
+        removed = book["chapters"][1]["projectId"]
+
+        server.delete_project(removed)
+
+        reloaded = server.load_book(book["id"])
+        self.assertEqual(reloaded["chapters"][1]["projectId"], "")
+        self.assertEqual(len(reloaded["chapters"]), 4)
+
+    def test_deleting_a_book_removes_its_chapter_projects(self):
+        book = self.plan_a_book(chapter_count=4)
+
+        server.delete_book(book["id"])
+
+        self.assertEqual(server.list_projects(), [])
+        self.assertEqual(server.list_books(), [])
+
+    def test_publishing_a_chapter_records_the_book_in_the_library(self):
+        book = self.plan_a_book(chapter_count=4)
+        project = server.load_project(book["chapters"][0]["projectId"])
+        package = {
+            "schemaVersion": 1,
+            "storyId": project["id"],
+            "title": {"english": "Chapter 1", "chinese": "第一章", "pinyin": "Dì yī zhāng"},
+            "summary": {"english": "The cat eats.", "chinese": "猫吃饭。", "pinyin": "Māo chī fàn."},
+            "level": "HSK 1",
+            "segments": [
+                {
+                    "id": "001",
+                    "english": "The cat eats.",
+                    "chinese": "猫吃饭。",
+                    "pinyin": "Māo chī fàn.",
+                    "audioText": "猫吃饭。",
+                    "audioFile": "audio/001.wav",
+                }
+            ],
+            "vocabulary": [],
+            "audio": {"engine": "Qwen3-TTS", "voice": "Vivian", "language": "Chinese"},
+        }
+        project["package"] = package
+        server.save_project(project)
+        folder = server.project_path(project["id"])
+        (folder / "audio").mkdir(parents=True, exist_ok=True)
+        (folder / "audio" / "001.wav").write_bytes(b"RIFF-test")
+        server.atomic_write_json(
+            folder / "audio_manifest.json",
+            {
+                "storyId": project["id"],
+                "generatedAt": server.utc_now(),
+                "durationSeconds": 2.0,
+                "items": [{"id": "001", "text": "猫吃饭。", "output": "audio/001.wav"}],
+            },
+        )
+
+        with patch.object(server, "generate_slow_variants", return_value={}):
+            server.publish_project_to_flutter(project)
+
+        library = json.loads(
+            (server.FLUTTER_CONTENT_ROOT / "index.json").read_text(encoding="utf-8")
+        )
+        entry = library["stories"][0]
+        self.assertEqual(entry["book"]["id"], book["id"])
+        self.assertEqual(entry["book"]["chapterNumber"], 1)
+        self.assertEqual(entry["book"]["chapterCount"], 4)
+        self.assertEqual(entry["book"]["titleEnglish"], "I'm a Cat")
 
 
 if __name__ == "__main__":

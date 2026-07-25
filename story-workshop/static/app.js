@@ -7,6 +7,8 @@
     qwen: null,
     projects: [],
     project: null,
+    books: [],
+    book: null,
     step: 1,
     saveTimer: null,
     toastTimer: null,
@@ -44,6 +46,18 @@
     publishButton: $("#publishToFlutterButton"),
     historyDialog: $("#historyDialog"),
     historyList: $("#historyList"),
+    booksDialog: $("#booksDialog"),
+    booksList: $("#booksList"),
+    newBookDialog: $("#newBookDialog"),
+    bookTitle: $("#bookTitle"),
+    bookIdea: $("#bookIdea"),
+    bookLevel: $("#bookLevel"),
+    bookChapterCount: $("#bookChapterCount"),
+    bookConstraints: $("#bookConstraints"),
+    chapterBanner: $("#chapterBanner"),
+    chapterEyebrow: $("#chapterEyebrow"),
+    chapterBookTitle: $("#chapterBookTitle"),
+    chapterOutline: $("#chapterOutline"),
     toast: $("#toast"),
     busyOverlay: $("#busyOverlay"),
     busyTitle: $("#busyTitle"),
@@ -117,7 +131,21 @@
     elements.englishStory.value = value.englishStory || "";
     elements.revisionInstructions.value = value.revisionNotes || "";
     updateStoryStats();
+    renderChapterBanner(project);
     renderPackage(value.package);
+  }
+
+  // Shows which chapter of which book the loaded project is, so a twelve-part
+  /// book does not turn into twelve interchangeable drafts.
+  function renderChapterBanner(project) {
+    const book = project && project.book;
+    elements.chapterBanner.classList.toggle("is-hidden", !book);
+    if (!book) return;
+    elements.chapterEyebrow.textContent = `Chapter ${book.chapterNumber} of ${book.chapterCount}`;
+    elements.chapterBookTitle.textContent = book.titleChinese
+      ? `${book.titleEnglish} · ${book.titleChinese}`
+      : book.titleEnglish || "Book";
+    elements.chapterOutline.textContent = book.chapterTitleEnglish || "";
   }
 
   function updateStoryStats() {
@@ -530,6 +558,7 @@
   async function refreshProjects() {
     const result = await request("/api/bootstrap");
     state.projects = result.projects;
+    state.books = result.books || [];
     renderHistory();
   }
 
@@ -581,6 +610,171 @@
       row.append(button, remove);
       elements.historyList.append(row);
     });
+  }
+
+  async function planBook() {
+    const idea = elements.bookIdea.value.trim();
+    if (!idea) {
+      showToast("Describe what the book is about first.", true);
+      elements.bookIdea.focus();
+      return;
+    }
+    const chapterCount = Number(elements.bookChapterCount.value);
+    if (!Number.isInteger(chapterCount) || chapterCount < 4 || chapterCount > 12) {
+      showToast("Choose between 4 and 12 chapters.", true);
+      return;
+    }
+    try {
+      setBusy(
+        true,
+        "Planning the book",
+        "DeepSeek is writing the premise, the cast, the shared word budget, and one outline per chapter.",
+      );
+      const result = await request("/api/books", {
+        method: "POST",
+        body: JSON.stringify({
+          title: elements.bookTitle.value.trim(),
+          idea,
+          level: elements.bookLevel.value,
+          chapterCount,
+          constraints: elements.bookConstraints.value.trim(),
+        }),
+      });
+      state.books = result.books || [];
+      state.projects = result.projects || [];
+      elements.newBookDialog.close();
+      showBook(result.book);
+      showToast(
+        `Planned "${result.book.titleEnglish}" with ${result.book.chapters.length} chapters. Each chapter is now a draft.`,
+      );
+    } catch (error) {
+      showToast(error.message, true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function openBook(bookId) {
+    try {
+      const result = await request(`/api/books/${bookId}`);
+      showBook(result.book);
+    } catch (error) {
+      showToast(error.message, true);
+    }
+  }
+
+  function showBook(book) {
+    state.book = book;
+    renderBooks();
+    if (!elements.booksDialog.open) elements.booksDialog.showModal();
+  }
+
+  function renderBooks() {
+    elements.booksList.replaceChildren();
+    if (!state.books.length) {
+      const empty = document.createElement("p");
+      empty.className = "history-empty";
+      empty.textContent = "No books yet. Plan one to write a themed reader in chapters.";
+      elements.booksList.append(empty);
+      return;
+    }
+    state.books.forEach((summary) => {
+      const open = state.book && state.book.id === summary.id;
+      const row = document.createElement("div");
+      row.className = "history-row";
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "history-item";
+      const copy = document.createElement("span");
+      const title = document.createElement("strong");
+      title.textContent = summary.titleChinese
+        ? `${summary.titleEnglish} · ${summary.titleChinese}`
+        : summary.titleEnglish;
+      const detail = document.createElement("small");
+      detail.textContent = `${summary.chapterCount} chapters · ${summary.level || "level unset"}`;
+      copy.append(title, detail);
+      const status = document.createElement("span");
+      status.className = "history-status";
+      status.textContent = open ? "open" : "book";
+      button.append(copy, status);
+      button.addEventListener("click", () => {
+        if (open) {
+          state.book = null;
+          renderBooks();
+        } else {
+          openBook(summary.id);
+        }
+      });
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "history-delete";
+      remove.textContent = "🗑";
+      remove.title = "Delete book";
+      remove.setAttribute("aria-label", `Delete ${summary.titleEnglish}`);
+      remove.addEventListener("click", () => deleteBook(summary));
+
+      row.append(button, remove);
+      elements.booksList.append(row);
+
+      if (open) elements.booksList.append(chapterList(state.book));
+    });
+  }
+
+  function chapterList(book) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "chapter-list";
+    (book.chapters || []).forEach((chapter) => {
+      const project = state.projects.find((item) => item.id === chapter.projectId);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "history-item chapter-item";
+      const copy = document.createElement("span");
+      const title = document.createElement("strong");
+      title.textContent = `${chapter.number}. ${chapter.titleEnglish}`;
+      const outline = document.createElement("small");
+      outline.textContent = chapter.outline || "";
+      copy.append(title, outline);
+      const status = document.createElement("span");
+      status.className = "history-status";
+      status.textContent = project ? project.status : "missing";
+      button.append(copy, status);
+      button.disabled = !project;
+      if (project) {
+        button.addEventListener("click", () => {
+          elements.booksDialog.close();
+          loadProject(project.id);
+        });
+      }
+      wrapper.append(button);
+    });
+    return wrapper;
+  }
+
+  async function deleteBook(summary) {
+    const confirmed = window.confirm(
+      `Delete "${summary.titleEnglish}" and all ${summary.chapterCount} chapter projects? Published chapters are removed from the reader app too.`,
+    );
+    if (!confirmed) return;
+    try {
+      const result = await request(`/api/books/${summary.id}`, { method: "DELETE" });
+      state.books = result.books || [];
+      state.projects = result.projects || [];
+      if (state.book && state.book.id === summary.id) state.book = null;
+      if (
+        state.project &&
+        state.project.book &&
+        state.project.book.id === summary.id
+      ) {
+        newStory();
+      }
+      renderBooks();
+      renderHistory();
+      showToast(`Deleted "${summary.titleEnglish}".`);
+    } catch (error) {
+      showToast(error.message, true);
+    }
   }
 
   async function deleteProject(project) {
@@ -688,6 +882,26 @@
     elements.historyDialog.addEventListener("click", (event) => {
       if (event.target === elements.historyDialog) elements.historyDialog.close();
     });
+    $("#openBooksButton").addEventListener("click", () => {
+      renderBooks();
+      elements.booksDialog.showModal();
+    });
+    $("#closeBooksButton").addEventListener("click", () => elements.booksDialog.close());
+    elements.booksDialog.addEventListener("click", (event) => {
+      if (event.target === elements.booksDialog) elements.booksDialog.close();
+    });
+    $("#newBookButton").addEventListener("click", () => {
+      elements.newBookDialog.showModal();
+      elements.bookIdea.focus();
+    });
+    $("#closeNewBookButton").addEventListener("click", () => elements.newBookDialog.close());
+    elements.newBookDialog.addEventListener("click", (event) => {
+      if (event.target === elements.newBookDialog) elements.newBookDialog.close();
+    });
+    $("#planBookButton").addEventListener("click", planBook);
+    $("#openChapterBookButton").addEventListener("click", () => {
+      if (state.project && state.project.book) openBook(state.project.book.id);
+    });
     $("#downloadStoryButton").addEventListener("click", () => downloadExport("story"));
     $("#downloadAudioButton").addEventListener("click", () => downloadExport("audio"));
     $("#openFolderButton").addEventListener("click", openProjectFolder);
@@ -701,6 +915,7 @@
       state.api = bootstrap.api;
       state.qwen = bootstrap.qwen;
       state.projects = bootstrap.projects;
+      state.books = bootstrap.books || [];
       state.project = bootstrap.activeProject;
       elements.storyPrompt.value = state.settings.storyPrompt;
       fillForm(state.project);

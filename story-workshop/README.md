@@ -26,6 +26,40 @@ DEEPSEEK_MODEL=deepseek-v4-pro
 The API key stays in the local server and is never sent to browser JavaScript or
 saved in a story file.
 
+## Levels
+
+The learner level chosen for a story decides the vocabulary budget sent with
+every request. **HSK 1 (Newbie)** is handled specially: `hsk1.py` holds the
+150-word HSK 1 list, the core verbs a Newbie story should lean on, and the
+sentence patterns it should recycle. Those are pasted into both the English
+draft request and the localization request, along with density targets measured
+from published Newbie chapters:
+
+* 150–260 Chinese characters per story or chapter;
+* 30–45 different words, used at least 2.5 times each on average;
+* at most 5 words from outside the list, each used three or more times;
+* fewer than a third of the different words appearing only once.
+
+Other levels get general guidance instead. Editing the master prompts does not
+remove these rules — they travel with the brief, not the prompt.
+
+## Books
+
+**New book** plans a themed multi-chapter reader (4–12 chapters). DeepSeek
+returns the premise, the recurring cast, the shared word budget, and one
+outline per chapter; the workshop then creates a chapter project for each and
+lists them under **Books**.
+
+Each chapter runs through the normal story pipeline below. When a chapter is
+generated or revised, its brief also carries the book's premise, cast, shared
+words, the outlines of earlier chapters, and the titles of later ones, so
+chapters stay consistent without retelling each other.
+
+Publishing a chapter records its book in `mandarin/assets/content/index.json`,
+which is what makes the reader app show the book as one library item with a
+chapter list and read progress. Deleting a book deletes and unpublishes all of
+its chapters.
+
 ## Workflow
 
 1. Change and save the master story prompt, enter a brief, and generate an
@@ -49,6 +83,8 @@ Drafts and generated assets are stored under:
   story.json
   audio_manifest.json
   audio/
+.workshop/books/<book-id>/
+  book.json
 ```
 
 The `.workshop` folder is ignored by Git. The generated audio manifest points at
