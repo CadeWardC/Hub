@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>The Speak tab listens to your Mandarin so it can show what you said and how your tones came out.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Your speech is turned into Chinese characters so you can check that what you said means what you meant.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

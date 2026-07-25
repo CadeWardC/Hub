@@ -11,6 +11,7 @@ import 'book_screen.dart';
 import 'dictionary_screen.dart';
 import 'my_reading_screen.dart';
 import 'reader_screen.dart';
+import 'speak_screen.dart';
 
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key, required this.repository});
@@ -102,7 +103,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: _tabIndex == 2
+        child: _tabIndex == 3
+            ? const SpeakScreen()
+            : _tabIndex == 2
             ? const DictionaryScreen(embedded: true)
             : _tabIndex == 1
             ? const MyReadingScreen()
@@ -200,6 +203,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
             icon: Icon(Icons.menu_book_outlined),
             selectedIcon: Icon(Icons.menu_book),
             label: 'Dictionary',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.mic_none_rounded),
+            selectedIcon: Icon(Icons.mic_rounded),
+            label: 'Speak',
           ),
         ],
         onDestinationSelected: (index) {
