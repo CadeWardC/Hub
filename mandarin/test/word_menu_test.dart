@@ -121,6 +121,27 @@ void main() {
     expect(find.textContaining('Saved ${word.text}'), findsOneWidget);
   });
 
+  testWidgets('the open menu does not block sliding to the next word', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({});
+    await openReader(tester);
+
+    // 我 and 是 sit side by side in the first sentence, under the menu.
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.text('我').first),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('I; me'), findsWidgets);
+
+    await gesture.moveTo(tester.getCenter(find.text('是').first));
+    await tester.pumpAndSettle();
+
+    expect(find.text('to be'), findsWidgets);
+    expect(find.text('I; me'), findsNothing);
+    await gesture.up();
+  });
+
   testWidgets('releasing off the menu saves nothing', (tester) async {
     SharedPreferences.setMockInitialValues({});
     final word = await openReader(tester);

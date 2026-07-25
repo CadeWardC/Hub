@@ -971,15 +971,19 @@ class _MenuLayout {
   final Rect wordRect;
   final WordAction? hovered;
 
-  /// The menu plus the corridor back down to the word, so the drag between
-  /// the two is never mistaken for the start of a scroll.
+  /// The menu plus the corridor between it and the word, so reaching for it is
+  /// never mistaken for the start of a scroll.
+  ///
+  /// The corridor stops at the word's own edge: the line of words stays free
+  /// for sliding sideways from one definition to the next.
   Rect get zone {
     final bounds = rect.expandToInclude(wordRect);
+    final above = rect.top < wordRect.top;
     return Rect.fromLTRB(
       bounds.left - 16,
-      bounds.top - 12,
+      above ? rect.top - 12 : wordRect.bottom,
       bounds.right + 16,
-      bounds.bottom + 8,
+      above ? wordRect.top : rect.bottom + 12,
     );
   }
 
