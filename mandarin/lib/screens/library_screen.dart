@@ -8,6 +8,7 @@ import '../models/story.dart';
 import '../services/library_shelf.dart';
 import '../services/story_repository.dart';
 import 'book_screen.dart';
+import 'dictionary_screen.dart';
 import 'my_reading_screen.dart';
 import 'reader_screen.dart';
 
@@ -101,7 +102,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: _tabIndex == 1
+        child: _tabIndex == 2
+            ? const DictionaryScreen(embedded: true)
+            : _tabIndex == 1
             ? const MyReadingScreen()
             : FutureBuilder<List<StorySummary>>(
           future: _stories,
@@ -192,6 +195,11 @@ class _LibraryScreenState extends State<LibraryScreen> {
             icon: Icon(Icons.bookmark_border),
             selectedIcon: Icon(Icons.bookmark),
             label: 'My reading',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.menu_book_outlined),
+            selectedIcon: Icon(Icons.menu_book),
+            label: 'Dictionary',
           ),
         ],
         onDestinationSelected: (index) {

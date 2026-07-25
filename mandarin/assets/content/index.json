@@ -2,17 +2,17 @@
   "schemaVersion": 1,
   "stories": [
     {
-      "id": "a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099",
-      "path": "assets/content/stories/a-cat-is-trying-to-find-a-place-to-eat-and-sleep-1784905099.json",
-      "titleEnglish": "A Warm Spot",
-      "titleChinese": "一个温暖的地方",
-      "titlePinyin": "Yí ge wēnnuǎn de dìfang",
-      "summaryEnglish": "A tired cat finds a comfortable place to sleep and later enjoys a good meal.",
-      "summaryChinese": "一只累了的猫找到一个舒服的地方睡觉，后来吃了一顿美餐。",
+      "id": "a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596",
+      "path": "assets/content/stories/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596.json",
+      "titleEnglish": "The Cat and the Woman",
+      "titleChinese": "猫和女人",
+      "titlePinyin": "Māo hé nǚrén",
+      "summaryEnglish": "A cat wants to sleep, tries a store and a house, then finds rest at a shop with a kind woman.",
+      "summaryChinese": "一只猫想睡觉，去商店和家，最后在商店和一个好女人休息。",
       "level": "HSK 1",
-      "segmentCount": 20,
-      "durationSeconds": 74,
-      "publishedAt": "2026-07-24T19:55:12+00:00"
+      "segmentCount": 29,
+      "durationSeconds": 49,
+      "publishedAt": "2026-07-25T04:16:55+00:00"
     },
     {
       "id": "a-cup-of-hot-tea",

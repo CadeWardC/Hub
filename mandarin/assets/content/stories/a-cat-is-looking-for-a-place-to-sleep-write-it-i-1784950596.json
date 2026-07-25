@@ -1,0 +1,1318 @@
+{
+  "schemaVersion": 1,
+  "title": {
+    "english": "The Cat and the Woman",
+    "chinese": "猫和女人",
+    "pinyin": "Māo hé nǚrén"
+  },
+  "level": "HSK 1",
+  "summary": {
+    "english": "A cat wants to sleep, tries a store and a house, then finds rest at a shop with a kind woman.",
+    "chinese": "一只猫想睡觉，去商店和家，最后在商店和一个好女人休息。",
+    "pinyin": "Yì zhī māo xiǎng shuìjiào, qù shāngdiàn hé jiā, zuìhòu zài shāngdiàn hé yí ge hǎo nǚrén xiūxi."
+  },
+  "segments": [
+    {
+      "id": "001",
+      "english": "I am a cat.",
+      "chinese": "我是一只猫。",
+      "pinyin": "Wǒ shì yì zhī māo.",
+      "audioText": "我是一只猫。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_001.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "english": "am"
+        },
+        {
+          "text": "一",
+          "pinyin": "yì",
+          "english": "a"
+        },
+        {
+          "text": "只",
+          "pinyin": "zhī",
+          "english": "measure word for animals"
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "english": "cat"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_001_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_001_r050.wav"
+      }
+    },
+    {
+      "id": "002",
+      "english": "I want to sleep.",
+      "chinese": "我想睡觉。",
+      "pinyin": "Wǒ xiǎng shuìjiào.",
+      "audioText": "我想睡觉。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_002.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "english": "want"
+        },
+        {
+          "text": "睡觉",
+          "pinyin": "shuìjiào",
+          "english": "to sleep"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_002_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_002_r050.wav"
+      }
+    },
+    {
+      "id": "003",
+      "english": "I look at the store.",
+      "chinese": "我看商店。",
+      "pinyin": "Wǒ kàn shāngdiàn.",
+      "audioText": "我看商店。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_003.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "english": "look at"
+        },
+        {
+          "text": "商店",
+          "pinyin": "shāngdiàn",
+          "english": "store"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_003_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_003_r050.wav"
+      }
+    },
+    {
+      "id": "004",
+      "english": "The store has a big door.",
+      "chinese": "商店有一个大门。",
+      "pinyin": "Shāngdiàn yǒu yí ge dà mén.",
+      "audioText": "商店有一个大门。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_004.wav",
+      "words": [
+        {
+          "text": "商店",
+          "pinyin": "shāngdiàn",
+          "english": "store"
+        },
+        {
+          "text": "有",
+          "pinyin": "yǒu",
+          "english": "has"
+        },
+        {
+          "text": "一",
+          "pinyin": "yí",
+          "english": "a"
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "english": "measure word"
+        },
+        {
+          "text": "大",
+          "pinyin": "dà",
+          "english": "big"
+        },
+        {
+          "text": "门",
+          "pinyin": "mén",
+          "english": "door"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_004_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_004_r050.wav"
+      }
+    },
+    {
+      "id": "005",
+      "english": "I go to the door.",
+      "chinese": "我去门那里。",
+      "pinyin": "Wǒ qù mén nàlǐ.",
+      "audioText": "我去门那里。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_005.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "english": "go to"
+        },
+        {
+          "text": "门",
+          "pinyin": "mén",
+          "english": "door"
+        },
+        {
+          "text": "那里",
+          "pinyin": "nàlǐ",
+          "english": "there"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_005_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_005_r050.wav"
+      }
+    },
+    {
+      "id": "006",
+      "english": "I sit at the door.",
+      "chinese": "我坐在门那里。",
+      "pinyin": "Wǒ zuò zài mén nàlǐ.",
+      "audioText": "我坐在门那里。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_006.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "坐",
+          "pinyin": "zuò",
+          "english": "sit"
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "english": "at"
+        },
+        {
+          "text": "门",
+          "pinyin": "mén",
+          "english": "door"
+        },
+        {
+          "text": "那里",
+          "pinyin": "nàlǐ",
+          "english": "there"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_006_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_006_r050.wav"
+      }
+    },
+    {
+      "id": "007",
+      "english": "The door does not open.",
+      "chinese": "门没有开。",
+      "pinyin": "Mén méiyǒu kāi.",
+      "audioText": "门没有开。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_007.wav",
+      "words": [
+        {
+          "text": "门",
+          "pinyin": "mén",
+          "english": "door"
+        },
+        {
+          "text": "没有",
+          "pinyin": "méiyǒu",
+          "english": "does not"
+        },
+        {
+          "text": "开",
+          "pinyin": "kāi",
+          "english": "open"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_007_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_007_r050.wav"
+      }
+    },
+    {
+      "id": "008",
+      "english": "I am not happy.",
+      "chinese": "我不高兴。",
+      "pinyin": "Wǒ bù gāoxìng.",
+      "audioText": "我不高兴。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_008.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "english": "not"
+        },
+        {
+          "text": "高兴",
+          "pinyin": "gāoxìng",
+          "english": "happy"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_008_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_008_r050.wav"
+      }
+    },
+    {
+      "id": "009",
+      "english": "I look at the house.",
+      "chinese": "我看那个家。",
+      "pinyin": "Wǒ kàn nà ge jiā.",
+      "audioText": "我看那个家。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_009.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "english": "look at"
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "english": "that"
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "english": "measure word"
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "english": "house"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_009_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_009_r050.wav"
+      }
+    },
+    {
+      "id": "010",
+      "english": "I go to the house.",
+      "chinese": "我去那个家。",
+      "pinyin": "Wǒ qù nà ge jiā.",
+      "audioText": "我去那个家。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_010.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "english": "go to"
+        },
+        {
+          "text": "那",
+          "pinyin": "nà",
+          "english": "that"
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "english": "measure word"
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "english": "house"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_010_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_010_r050.wav"
+      }
+    },
+    {
+      "id": "011",
+      "english": "I see a dog at the house.",
+      "chinese": "我看见一只狗在家那里。",
+      "pinyin": "Wǒ kànjiàn yì zhī gǒu zài jiā nàlǐ.",
+      "audioText": "我看见一只狗在家那里。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_011.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "看见",
+          "pinyin": "kànjiàn",
+          "english": "see"
+        },
+        {
+          "text": "一",
+          "pinyin": "yì",
+          "english": "a"
+        },
+        {
+          "text": "只",
+          "pinyin": "zhī",
+          "english": "measure word for animals"
+        },
+        {
+          "text": "狗",
+          "pinyin": "gǒu",
+          "english": "dog"
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "english": "at"
+        },
+        {
+          "text": "家",
+          "pinyin": "jiā",
+          "english": "house"
+        },
+        {
+          "text": "那里",
+          "pinyin": "nàlǐ",
+          "english": "there"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_011_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_011_r050.wav"
+      }
+    },
+    {
+      "id": "012",
+      "english": "The dog sits there.",
+      "chinese": "狗坐在那里。",
+      "pinyin": "Gǒu zuò zài nàlǐ.",
+      "audioText": "狗坐在那里。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_012.wav",
+      "words": [
+        {
+          "text": "狗",
+          "pinyin": "gǒu",
+          "english": "dog"
+        },
+        {
+          "text": "坐",
+          "pinyin": "zuò",
+          "english": "sits"
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "english": "at"
+        },
+        {
+          "text": "那里",
+          "pinyin": "nàlǐ",
+          "english": "there"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_012_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_012_r050.wav"
+      }
+    },
+    {
+      "id": "013",
+      "english": "The dog looks at me.",
+      "chinese": "狗看我。",
+      "pinyin": "Gǒu kàn wǒ.",
+      "audioText": "狗看我。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_013.wav",
+      "words": [
+        {
+          "text": "狗",
+          "pinyin": "gǒu",
+          "english": "dog"
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "english": "looks at"
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "me"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_013_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_013_r050.wav"
+      }
+    },
+    {
+      "id": "014",
+      "english": "The dog says, \"I sit here. Do not sit here.\"",
+      "chinese": "狗说：“我坐这里。不要坐这里。”",
+      "pinyin": "Gǒu shuō: “Wǒ zuò zhèlǐ. Búyào zuò zhèlǐ.”",
+      "audioText": "狗说：“我坐这里。不要坐这里。”",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_014.wav",
+      "words": [
+        {
+          "text": "狗",
+          "pinyin": "gǒu",
+          "english": "dog"
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "english": "says"
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "坐",
+          "pinyin": "zuò",
+          "english": "sit"
+        },
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "english": "here"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "不要",
+          "pinyin": "búyào",
+          "english": "do not"
+        },
+        {
+          "text": "坐",
+          "pinyin": "zuò",
+          "english": "sit"
+        },
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "english": "here"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_014_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_014_r050.wav"
+      }
+    },
+    {
+      "id": "015",
+      "english": "I do not want the dog.",
+      "chinese": "我不要狗。",
+      "pinyin": "Wǒ búyào gǒu.",
+      "audioText": "我不要狗。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_015.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "不要",
+          "pinyin": "búyào",
+          "english": "do not want"
+        },
+        {
+          "text": "狗",
+          "pinyin": "gǒu",
+          "english": "dog"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_015_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_015_r050.wav"
+      }
+    },
+    {
+      "id": "016",
+      "english": "I want to sleep.",
+      "chinese": "我想睡觉。",
+      "pinyin": "Wǒ xiǎng shuìjiào.",
+      "audioText": "我想睡觉。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_016.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "english": "want"
+        },
+        {
+          "text": "睡觉",
+          "pinyin": "shuìjiào",
+          "english": "to sleep"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_016_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_016_r050.wav"
+      }
+    },
+    {
+      "id": "017",
+      "english": "I am not happy.",
+      "chinese": "我不高兴。",
+      "pinyin": "Wǒ bù gāoxìng.",
+      "audioText": "我不高兴。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_017.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "不",
+          "pinyin": "bù",
+          "english": "not"
+        },
+        {
+          "text": "高兴",
+          "pinyin": "gāoxìng",
+          "english": "happy"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_017_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_017_r050.wav"
+      }
+    },
+    {
+      "id": "018",
+      "english": "I look at the shop.",
+      "chinese": "我看商店。",
+      "pinyin": "Wǒ kàn shāngdiàn.",
+      "audioText": "我看商店。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_018.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "english": "look at"
+        },
+        {
+          "text": "商店",
+          "pinyin": "shāngdiàn",
+          "english": "shop"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_018_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_018_r050.wav"
+      }
+    },
+    {
+      "id": "019",
+      "english": "I go to the shop.",
+      "chinese": "我去商店。",
+      "pinyin": "Wǒ qù shāngdiàn.",
+      "audioText": "我去商店。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_019.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "去",
+          "pinyin": "qù",
+          "english": "go to"
+        },
+        {
+          "text": "商店",
+          "pinyin": "shāngdiàn",
+          "english": "shop"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_019_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_019_r050.wav"
+      }
+    },
+    {
+      "id": "020",
+      "english": "I see a woman at the shop.",
+      "chinese": "我看见一个女人在商店。",
+      "pinyin": "Wǒ kànjiàn yí ge nǚrén zài shāngdiàn.",
+      "audioText": "我看见一个女人在商店。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_020.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "看见",
+          "pinyin": "kànjiàn",
+          "english": "see"
+        },
+        {
+          "text": "一",
+          "pinyin": "yí",
+          "english": "a"
+        },
+        {
+          "text": "个",
+          "pinyin": "ge",
+          "english": "measure word"
+        },
+        {
+          "text": "女人",
+          "pinyin": "nǚrén",
+          "english": "woman"
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "english": "at"
+        },
+        {
+          "text": "商店",
+          "pinyin": "shāngdiàn",
+          "english": "shop"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_020_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_020_r050.wav"
+      }
+    },
+    {
+      "id": "021",
+      "english": "I sit near the woman.",
+      "chinese": "我坐在女人旁边。",
+      "pinyin": "Wǒ zuò zài nǚrén pángbiān.",
+      "audioText": "我坐在女人旁边。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_021.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "坐",
+          "pinyin": "zuò",
+          "english": "sit"
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "english": "near"
+        },
+        {
+          "text": "女人",
+          "pinyin": "nǚrén",
+          "english": "woman"
+        },
+        {
+          "text": "旁边",
+          "pinyin": "pángbiān",
+          "english": "beside"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_021_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_021_r050.wav"
+      }
+    },
+    {
+      "id": "022",
+      "english": "The woman looks at me.",
+      "chinese": "女人看我。",
+      "pinyin": "Nǚrén kàn wǒ.",
+      "audioText": "女人看我。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_022.wav",
+      "words": [
+        {
+          "text": "女人",
+          "pinyin": "nǚrén",
+          "english": "woman"
+        },
+        {
+          "text": "看",
+          "pinyin": "kàn",
+          "english": "looks at"
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "me"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_022_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_022_r050.wav"
+      }
+    },
+    {
+      "id": "023",
+      "english": "I say, \"I want to sleep.\"",
+      "chinese": "我说：“我想睡觉。”",
+      "pinyin": "Wǒ shuō: “Wǒ xiǎng shuìjiào.”",
+      "audioText": "我说：“我想睡觉。”",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_023.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "english": "say"
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "想",
+          "pinyin": "xiǎng",
+          "english": "want"
+        },
+        {
+          "text": "睡觉",
+          "pinyin": "shuìjiào",
+          "english": "to sleep"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_023_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_023_r050.wav"
+      }
+    },
+    {
+      "id": "024",
+      "english": "The woman says, \"You can sleep here.\"",
+      "chinese": "女人说：“你可以在这里睡觉。”",
+      "pinyin": "Nǚrén shuō: “Nǐ kěyǐ zài zhèlǐ shuìjiào.”",
+      "audioText": "女人说：“你可以在这里睡觉。”",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_024.wav",
+      "words": [
+        {
+          "text": "女人",
+          "pinyin": "nǚrén",
+          "english": "woman"
+        },
+        {
+          "text": "说",
+          "pinyin": "shuō",
+          "english": "says"
+        },
+        {
+          "text": "：",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "“",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "你",
+          "pinyin": "nǐ",
+          "english": "you"
+        },
+        {
+          "text": "可以",
+          "pinyin": "kěyǐ",
+          "english": "can"
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "english": "at"
+        },
+        {
+          "text": "这里",
+          "pinyin": "zhèlǐ",
+          "english": "here"
+        },
+        {
+          "text": "睡觉",
+          "pinyin": "shuìjiào",
+          "english": "sleep"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        },
+        {
+          "text": "”",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_024_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_024_r050.wav"
+      }
+    },
+    {
+      "id": "025",
+      "english": "I am happy.",
+      "chinese": "我很高兴。",
+      "pinyin": "Wǒ hěn gāoxìng.",
+      "audioText": "我很高兴。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_025.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "很",
+          "pinyin": "hěn",
+          "english": "very"
+        },
+        {
+          "text": "高兴",
+          "pinyin": "gāoxìng",
+          "english": "happy"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_025_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_025_r050.wav"
+      }
+    },
+    {
+      "id": "026",
+      "english": "I sleep at the shop.",
+      "chinese": "我在商店睡觉。",
+      "pinyin": "Wǒ zài shāngdiàn shuìjiào.",
+      "audioText": "我在商店睡觉。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_026.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "在",
+          "pinyin": "zài",
+          "english": "at"
+        },
+        {
+          "text": "商店",
+          "pinyin": "shāngdiàn",
+          "english": "shop"
+        },
+        {
+          "text": "睡觉",
+          "pinyin": "shuìjiào",
+          "english": "sleep"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_026_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_026_r050.wav"
+      }
+    },
+    {
+      "id": "027",
+      "english": "I like the shop.",
+      "chinese": "我喜欢商店。",
+      "pinyin": "Wǒ xǐhuan shāngdiàn.",
+      "audioText": "我喜欢商店。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_027.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "喜欢",
+          "pinyin": "xǐhuan",
+          "english": "like"
+        },
+        {
+          "text": "商店",
+          "pinyin": "shāngdiàn",
+          "english": "shop"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_027_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_027_r050.wav"
+      }
+    },
+    {
+      "id": "028",
+      "english": "I like the woman.",
+      "chinese": "我喜欢女人。",
+      "pinyin": "Wǒ xǐhuan nǚrén.",
+      "audioText": "我喜欢女人。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_028.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "喜欢",
+          "pinyin": "xǐhuan",
+          "english": "like"
+        },
+        {
+          "text": "女人",
+          "pinyin": "nǚrén",
+          "english": "woman"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_028_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_028_r050.wav"
+      }
+    },
+    {
+      "id": "029",
+      "english": "I am a happy cat.",
+      "chinese": "我是一只高兴的猫。",
+      "pinyin": "Wǒ shì yì zhī gāoxìng de māo.",
+      "audioText": "我是一只高兴的猫。",
+      "audioFile": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_029.wav",
+      "words": [
+        {
+          "text": "我",
+          "pinyin": "wǒ",
+          "english": "I"
+        },
+        {
+          "text": "是",
+          "pinyin": "shì",
+          "english": "am"
+        },
+        {
+          "text": "一",
+          "pinyin": "yì",
+          "english": "a"
+        },
+        {
+          "text": "只",
+          "pinyin": "zhī",
+          "english": "measure word for animals"
+        },
+        {
+          "text": "高兴",
+          "pinyin": "gāoxìng",
+          "english": "happy"
+        },
+        {
+          "text": "的",
+          "pinyin": "de",
+          "english": "possessive particle"
+        },
+        {
+          "text": "猫",
+          "pinyin": "māo",
+          "english": "cat"
+        },
+        {
+          "text": "。",
+          "pinyin": "",
+          "english": ""
+        }
+      ],
+      "audioVariants": {
+        "0.75": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_029_r075.wav",
+        "0.5": "assets/content/audio/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596_029_r050.wav"
+      }
+    }
+  ],
+  "vocabulary": [
+    {
+      "simplified": "只",
+      "pinyin": "zhī",
+      "english": "measure word for animals"
+    },
+    {
+      "simplified": "猫",
+      "pinyin": "māo",
+      "english": "cat"
+    },
+    {
+      "simplified": "门",
+      "pinyin": "mén",
+      "english": "door"
+    },
+    {
+      "simplified": "那里",
+      "pinyin": "nàlǐ",
+      "english": "there"
+    },
+    {
+      "simplified": "狗",
+      "pinyin": "gǒu",
+      "english": "dog"
+    },
+    {
+      "simplified": "这里",
+      "pinyin": "zhèlǐ",
+      "english": "here"
+    },
+    {
+      "simplified": "不要",
+      "pinyin": "búyào",
+      "english": "do not / don't want"
+    },
+    {
+      "simplified": "女人",
+      "pinyin": "nǚrén",
+      "english": "woman"
+    },
+    {
+      "simplified": "旁边",
+      "pinyin": "pángbiān",
+      "english": "beside"
+    },
+    {
+      "simplified": "可以",
+      "pinyin": "kěyǐ",
+      "english": "can"
+    }
+  ],
+  "storyId": "a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596",
+  "source": {
+    "approvedEnglish": "I am a cat. I want to sleep. I look at the store. The store has a big door. I go to the door. I sit at the door. The door does not open. I am not happy.\n\nI look at the house. I go to the house. I see a dog at the house. The dog sits there. The dog looks at me. The dog says, \"I sit here. Do not sit here.\" I do not want the dog. I want to sleep. I am not happy.\n\nI look at the shop. I go to the shop. I see a woman at the shop. I sit near the woman. The woman looks at me. I say, \"I want to sleep.\" The woman says, \"You can sleep here.\" I am happy. I sleep at the shop. I like the shop. I like the woman. I am a happy cat.",
+    "generatedAt": "2026-07-25T03:39:53+00:00",
+    "model": "deepseek-v4-pro"
+  },
+  "audio": {
+    "engine": "Qwen3-TTS",
+    "voice": "Vivian",
+    "language": "Chinese",
+    "manifest": "audio_manifest.json",
+    "durationSeconds": 49.41
+  },
+  "publishedAt": "2026-07-25T04:16:55+00:00"
+}

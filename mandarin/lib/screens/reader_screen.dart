@@ -12,6 +12,19 @@ import '../services/saved_words_store.dart';
 import '../services/story_repository.dart';
 import '../utils/tones.dart';
 import '../widgets/player_bar.dart';
+import 'dictionary_screen.dart';
+
+/// What a reader can do with the word under their finger, chosen by dragging
+/// onto the little menu that appears above it.
+enum WordAction {
+  save(icon: Icons.bookmark_add_rounded, label: 'Save'),
+  dictionary(icon: Icons.menu_book_rounded, label: 'Dictionary');
+
+  const WordAction({required this.icon, required this.label});
+
+  final IconData icon;
+  final String label;
+}
 
 class ReaderScreen extends StatefulWidget {
   const ReaderScreen({
@@ -167,10 +180,26 @@ class _ReaderScreenState extends State<ReaderScreen> {
     }
   }
 
-  Future<void> _toggleSavedWord() async {
-    final word = _heldWord;
+  /// Runs the menu item the reader released on, using the word that was under
+  /// their finger when the menu opened.
+  Future<void> _handleWordAction(StoryWord word, WordAction action) async {
+    switch (action) {
+      case WordAction.save:
+        await _saveWord(word);
+      case WordAction.dictionary:
+        if (!mounted) return;
+        await Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => DictionaryScreen(initialQuery: word.text),
+          ),
+        );
+        await _loadSavedWords();
+    }
+  }
+
+  Future<void> _saveWord(StoryWord word) async {
     final story = _loadedStory;
-    if (word == null || story == null) return;
+    if (story == null) return;
     final saved = await SavedWordsStore.toggle(
       text: word.text,
       pinyin: word.pinyin,
@@ -185,6 +214,15 @@ class _ReaderScreenState extends State<ReaderScreen> {
         _savedTexts.remove(word.text);
       }
     });
+    _showMessage(
+      saved ? 'Saved ${word.text} to your words.' : 'Removed ${word.text}.',
+    );
+  }
+
+  Future<void> _toggleSavedWord() async {
+    final word = _heldWord;
+    if (word == null) return;
+    await _saveWord(word);
   }
 
   void _revealTranslation() {
@@ -429,6 +467,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                                   savedTexts: _savedTexts,
                                   onWordPressed: _pressWord,
                                   onWordReleased: _releaseWord,
+                                  onWordAction: _handleWordAction,
                                 ),
                               ),
                             ],
@@ -688,6 +727,7 @@ class _StoryFlow extends StatefulWidget {
     required this.savedTexts,
     required this.onWordPressed,
     required this.onWordReleased,
+    required this.onWordAction,
   });
 
   final Story story;
@@ -703,6 +743,9 @@ class _StoryFlow extends StatefulWidget {
   final void Function(int segmentIndex, int wordIndex, StoryWord word)
       onWordPressed;
   final VoidCallback onWordReleased;
+
+  /// Fired when the press is released on one of the menu items above the word.
+  final void Function(StoryWord word, WordAction action) onWordAction;
 
   @override
   State<_StoryFlow> createState() => _StoryFlowState();
@@ -721,6 +764,18 @@ class _StoryFlowState extends State<_StoryFlow> {
   // start of a scroll, after which vertical movement no longer cancels it.
   bool _sweeping = false;
 
+  // The drag-onto action menu floating above the pressed word.
+  OverlayEntry? _menuEntry;
+  final ValueNotifier<_MenuLayout?> _menu = ValueNotifier(null);
+  StoryWord? _menuWord;
+
+  @override
+  void dispose() {
+    _removeMenu();
+    _menu.dispose();
+    super.dispose();
+  }
+
   void _handlePointerDown(PointerDownEvent event) {
     _pressing = true;
     _pressedKey = null;
@@ -736,6 +791,20 @@ class _StoryFlowState extends State<_StoryFlow> {
   /// while the reader scrolls.
   void _handlePointerMove(PointerMoveEvent event) {
     if (!_pressing) return;
+
+    // Reaching for the action menu is also a vertical drag, so the corridor
+    // between the word and the menu is exempt from the scroll check below.
+    final layout = _menu.value;
+    if (layout != null && layout.zone.contains(event.position)) {
+      _sweeping = true;
+      final hovered = layout.actionAt(event.position);
+      if (hovered != layout.hovered) {
+        _menu.value = layout.withHover(hovered);
+      }
+      return;
+    }
+    if (layout?.hovered != null) _menu.value = layout!.withHover(null);
+
     if (!_sweeping) {
       final delta = event.position - _pressOrigin;
       if (delta.dx.abs() > kTouchSlop && delta.dx.abs() > delta.dy.abs()) {
@@ -748,12 +817,68 @@ class _StoryFlowState extends State<_StoryFlow> {
     _updateForPosition(event.position);
   }
 
+  void _handlePointerUp() {
+    final action = _menu.value?.hovered;
+    final word = _menuWord;
+    _endPress();
+    if (action != null && word != null) {
+      widget.onWordAction(word, action);
+    }
+  }
+
   void _endPress() {
     if (!_pressing) return;
     _pressing = false;
     _pressedKey = null;
     _sweeping = false;
+    _removeMenu();
     widget.onWordReleased();
+  }
+
+  /// Puts the action menu just above the pressed word, or below it when the
+  /// word sits too close to the top of the screen to fit.
+  void _showMenuFor(Rect wordRect, StoryWord word) {
+    final media = MediaQuery.of(context);
+    final size = media.size;
+    const menuSize = Size(244, 48);
+    const gap = 8.0;
+
+    final above = wordRect.top - gap - menuSize.height;
+    final fitsAbove = above > media.padding.top + 8;
+    final top = fitsAbove ? above : wordRect.bottom + gap;
+    final left = (wordRect.center.dx - menuSize.width / 2).clamp(
+      12.0,
+      size.width - menuSize.width - 12,
+    );
+    final rect = Rect.fromLTWH(left, top, menuSize.width, menuSize.height);
+
+    _menuWord = word;
+    _menu.value = _MenuLayout(rect: rect, wordRect: wordRect, hovered: null);
+    if (_menuEntry != null) return;
+    final entry = OverlayEntry(
+      builder: (context) => ValueListenableBuilder<_MenuLayout?>(
+        valueListenable: _menu,
+        builder: (context, layout, _) {
+          if (layout == null) return const SizedBox.shrink();
+          return Positioned(
+            left: layout.rect.left,
+            top: layout.rect.top,
+            width: layout.rect.width,
+            height: layout.rect.height,
+            child: _WordActionMenu(hovered: layout.hovered),
+          );
+        },
+      ),
+    );
+    _menuEntry = entry;
+    Overlay.of(context, rootOverlay: true).insert(entry);
+  }
+
+  void _removeMenu() {
+    _menuEntry?.remove();
+    _menuEntry = null;
+    _menuWord = null;
+    _menu.value = null;
   }
 
   /// Shows the definition of whichever word sits under [globalPosition]. When
@@ -776,6 +901,7 @@ class _StoryFlowState extends State<_StoryFlow> {
       if (wordIndex >= words.length) return;
       _pressedKey = entry.key;
       widget.onWordPressed(segmentIndex, wordIndex, words[wordIndex]);
+      _showMenuFor(rect, words[wordIndex]);
       return;
     }
   }
@@ -821,12 +947,118 @@ class _StoryFlowState extends State<_StoryFlow> {
     return Listener(
       onPointerDown: _handlePointerDown,
       onPointerMove: _handlePointerMove,
-      onPointerUp: (_) => _endPress(),
+      onPointerUp: (_) => _handlePointerUp(),
       onPointerCancel: (_) => _endPress(),
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.end,
         runSpacing: widget.showPinyin ? 10 : 6,
         children: children,
+      ),
+    );
+  }
+}
+
+/// Where the action menu sits, which item the finger is over, and the region
+/// the finger may travel through to reach it.
+class _MenuLayout {
+  const _MenuLayout({
+    required this.rect,
+    required this.wordRect,
+    required this.hovered,
+  });
+
+  final Rect rect;
+  final Rect wordRect;
+  final WordAction? hovered;
+
+  /// The menu plus the corridor back down to the word, so the drag between
+  /// the two is never mistaken for the start of a scroll.
+  Rect get zone {
+    final bounds = rect.expandToInclude(wordRect);
+    return Rect.fromLTRB(
+      bounds.left - 16,
+      bounds.top - 12,
+      bounds.right + 16,
+      bounds.bottom + 8,
+    );
+  }
+
+  WordAction? actionAt(Offset position) {
+    // Generous vertically: once the finger is level with the menu, the column
+    // it is in decides the action.
+    if (position.dy < rect.top - 12 || position.dy > rect.bottom + 12) {
+      return null;
+    }
+    if (position.dx < rect.left || position.dx > rect.right) return null;
+    final index = ((position.dx - rect.left) / (rect.width / WordAction.values.length))
+        .floor()
+        .clamp(0, WordAction.values.length - 1);
+    return WordAction.values[index];
+  }
+
+  _MenuLayout withHover(WordAction? action) =>
+      _MenuLayout(rect: rect, wordRect: wordRect, hovered: action);
+}
+
+class _WordActionMenu extends StatelessWidget {
+  const _WordActionMenu({required this.hovered});
+
+  final WordAction? hovered;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        decoration: BoxDecoration(
+          color: MandarinReaderApp.ink,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x3A0F2F26),
+              blurRadius: 18,
+              offset: Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            for (final action in WordAction.values)
+              Expanded(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 110),
+                  margin: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: hovered == action
+                        ? MandarinReaderApp.jade
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(action.icon, size: 16, color: Colors.white),
+                      const SizedBox(width: 5),
+                      Flexible(
+                        child: Text(
+                          action.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: hovered == action
+                                ? FontWeight.w800
+                                : FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
