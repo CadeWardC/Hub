@@ -1,6 +1,7 @@
 import 'dictionary.dart';
 import 'sentence_translator_stub.dart'
-    if (dart.library.io) 'sentence_translator_mlkit.dart';
+    if (dart.library.io) 'sentence_translator_mlkit.dart'
+    if (dart.library.js_interop) 'sentence_translator_web.dart';
 
 /// One recognised word and what it means.
 class GlossedWord {

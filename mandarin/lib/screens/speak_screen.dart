@@ -43,6 +43,10 @@ class _SpeakScreenState extends State<SpeakScreen> {
   bool _starting = false;
   bool _stopRequested = false;
 
+  /// False when the recorder could not take the microphone, so there is a
+  /// transcript to show but no pitch to score.
+  bool _pitchAvailable = true;
+
   bool _ready = false;
   String? _blocked;
   String _heard = '';
@@ -96,8 +100,15 @@ class _SpeakScreenState extends State<SpeakScreen> {
       return;
     }
     // The recogniser and the pitch track run on the same breath: one gives the
-    // characters, the other the melody they were said with.
-    await _recorder.start();
+    // characters, the other the melody they were said with. Some platforms —
+    // browsers in particular — will not hand the microphone to both at once,
+    // and losing the tones is no reason to lose the transcript too.
+    _pitchAvailable = true;
+    try {
+      await _recorder.start();
+    } catch (_) {
+      _pitchAvailable = false;
+    }
     await _recognizer.listen(
       onResult: (text, isFinal) {
         if (!mounted) return;
@@ -132,10 +143,18 @@ class _SpeakScreenState extends State<SpeakScreen> {
     }
 
     final translation = await _translator.translate(heard);
-    final tones = _analyzer.analyse(
-      samples: samples,
-      expectedPinyin: translation.pinyinSyllables,
-    );
+    final tones = _pitchAvailable
+        ? _analyzer.analyse(
+            samples: samples,
+            expectedPinyin: translation.pinyinSyllables,
+          )
+        : const ToneReport(
+            syllables: [],
+            note:
+                'Tone scoring needs its own microphone stream, and this '
+                'browser gave it to the recogniser instead. The characters '
+                'and meaning above are still yours.',
+          );
     if (!mounted) return;
     setState(() {
       _translation = translation;

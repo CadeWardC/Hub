@@ -57,9 +57,14 @@ came out.
   for a Mandarin locale (`zh_CN` and friends). Android may need Chinese added in
   the Google app's voice settings; iOS can run it on device.
 * **Meaning** is a word-by-word gloss from the bundled CC-CEDICT everywhere,
-  plus a whole-sentence translation from Google ML Kit on Android and iOS. ML
-  Kit downloads a ~30 MB model on first use and then works offline. The web has
-  no on-device translator, so the gloss stands alone there.
+  plus a whole-sentence translation where the platform provides one: Google ML
+  Kit on Android and iOS (a ~30 MB model downloads on first use, then works
+  offline), and the browser's own
+  [Translator API](https://developer.chrome.com/docs/ai/translator-api) on the
+  web. The browser API is desktop Chrome and Edge only and needs a lot of free
+  disk, so the gloss is what carries the web when it is absent. Which engine is
+  used is picked at compile time by conditional import, which is also why a
+  mobile-only plugin does not break the web build.
 * **Tones** come from the microphone, not from the transcript: the recogniser's
   language model will happily "correct" a wrong tone, so the pitch is measured
   separately. `PitchRecorder` runs YIN over the raw PCM, and `ToneAnalyzer`
@@ -74,3 +79,11 @@ speech and is presented as a hint rather than a grade.
 Both platforms need permissions: `RECORD_AUDIO` in the Android manifest, and
 `NSMicrophoneUsageDescription` plus `NSSpeechRecognitionUsageDescription` in the
 iOS `Info.plist`.
+
+On the web the tab works in Chrome and Edge, which are the browsers with the
+Web Speech API; Firefox has none and Safari's is partial. The page must be
+served over HTTPS (or localhost) for the microphone. Recognition there runs
+through the browser vendor's servers rather than on device. If a browser refuses
+to give the microphone to both the recogniser and the pitch recorder at once,
+the tab keeps the transcript and meaning and says that tones could not be
+measured.

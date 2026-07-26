@@ -39,16 +39,21 @@ class FakeRecognizer extends SpeechRecognizer {
 }
 
 class FakeRecorder extends PitchRecorder {
-  FakeRecorder(this.samples, {this.permitted = true});
+  FakeRecorder(this.samples, {this.permitted = true, this.failsToStart = false});
 
   final List<PitchSample> samples;
   final bool permitted;
+
+  /// Browsers may hand the microphone to the recogniser and refuse it here.
+  final bool failsToStart;
 
   @override
   Future<bool> hasPermission() async => permitted;
 
   @override
-  Future<void> start() async {}
+  Future<void> start() async {
+    if (failsToStart) throw StateError('microphone busy');
+  }
 
   @override
   Future<List<PitchSample>> stop() async => samples;
@@ -152,6 +157,7 @@ Future<void> pumpScreen(
   String transcript = '我想吃饭',
   String? sentence = 'I want to eat.',
   bool available = true,
+  bool micBusy = false,
 }) async {
   await tester.pumpWidget(
     MaterialApp(
@@ -161,7 +167,7 @@ Future<void> pumpScreen(
             transcript: transcript,
             available: available,
           ),
-          recorder: FakeRecorder(samples),
+          recorder: FakeRecorder(samples, failsToStart: micBusy),
           translator: BackTranslator(
             dictionary: buildDictionary(),
             sentences: FakeSentences(sentence),
@@ -234,6 +240,23 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('to eat a meal'), findsOneWidget);
+  });
+
+  testWidgets('keeps the transcript when the mic cannot be shared', (
+    tester,
+  ) async {
+    // A browser that gives the microphone to the recogniser and not to us.
+    await pumpScreen(tester, samples: const [], micBusy: true);
+
+    await speak(tester);
+
+    expect(find.text('我想吃饭'), findsOneWidget);
+    expect(find.text('I want to eat.'), findsOneWidget);
+    await scrollToTones(tester);
+    expect(
+      find.textContaining('Tone scoring needs its own microphone stream'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('says so when the device has no Mandarin recogniser', (
