@@ -6,6 +6,41 @@ import 'package:mandarin_reader/screens/reader_screen.dart';
 import 'package:mandarin_reader/services/story_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class _PublishedStory {
+  const _PublishedStory({required this.summary, required this.story});
+
+  final StorySummary summary;
+  final Story story;
+}
+
+class _LoadedStoryRepository extends StoryRepository {
+  const _LoadedStoryRepository(this.summary, this.story);
+
+  final StorySummary summary;
+  final Story story;
+
+  @override
+  Future<List<StorySummary>> loadLibrary() async => [summary];
+
+  @override
+  Future<Story> loadStory(StorySummary summary) async => story;
+}
+
+Future<_PublishedStory?> _loadFirstPublishedStory(
+  StoryRepository repository,
+) async {
+  final summaries = await repository.loadLibrary();
+  for (final candidate in summaries) {
+    try {
+      final story = await repository.loadStory(candidate);
+      return _PublishedStory(summary: candidate, story: story);
+    } catch (_) {
+      continue;
+    }
+  }
+  return null;
+}
+
 /// Pumps frames until [finder] matches, yielding to the event loop each time
 /// so real asset loading (story JSON, library index) can complete.
 Future<void> pumpUntilFound(WidgetTester tester, Finder finder) async {
@@ -26,27 +61,20 @@ void main() {
     // library entry whose story file is missing is skipped rather than failed:
     // the app handles that case, and it is the workshop's job to publish.
     const repository = StoryRepository();
-    final summaries = await repository.loadLibrary();
-    StorySummary? summary;
-    Story? story;
-    for (final candidate in summaries) {
-      try {
-        story = await repository.loadStory(candidate);
-        summary = candidate;
-        break;
-      } catch (_) {
-        continue;
-      }
-    }
-    if (summary == null || story == null) {
+    final published = await tester.runAsync(
+      () => _loadFirstPublishedStory(repository),
+    );
+    if (published == null) {
       markTestSkipped(
         'No published story could be opened: publish one from the workshop.',
       );
       return;
     }
+    final summary = published.summary;
+    final story = published.story;
+    final loadedRepository = _LoadedStoryRepository(summary, story);
 
-    await tester.pumpWidget(const MandarinReaderApp());
-    await tester.pumpAndSettle();
+    await tester.pumpWidget(MandarinReaderApp(repository: loadedRepository));
     await pumpUntilFound(tester, find.text(summary.titleEnglish));
 
     expect(find.text('Read a little.\nUnderstand a lot.'), findsOneWidget);
@@ -54,7 +82,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: ReaderScreen(summary: summary, repository: repository),
+        home: ReaderScreen(summary: summary, repository: loadedRepository),
       ),
     );
     await pumpUntilFound(tester, find.text('Hold a word for its meaning'));

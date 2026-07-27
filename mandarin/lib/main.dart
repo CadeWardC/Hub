@@ -9,7 +9,12 @@ void main() {
 }
 
 class MandarinReaderApp extends StatelessWidget {
-  const MandarinReaderApp({super.key});
+  const MandarinReaderApp({
+    super.key,
+    this.repository = const StoryRepository(),
+  });
+
+  final StoryRepository repository;
 
   static const ink = Color(0xFF17211B);
   static const jade = Color(0xFF286B55);
@@ -42,7 +47,7 @@ class MandarinReaderApp extends StatelessWidget {
           margin: EdgeInsets.zero,
         ),
       ),
-      home: LibraryScreen(repository: const StoryRepository()),
+      home: LibraryScreen(repository: repository),
     );
   }
 }
