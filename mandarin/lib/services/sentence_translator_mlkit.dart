@@ -11,6 +11,13 @@ export 'sentence_translator_stub.dart' show SentenceTranslator;
 /// ML Kit exists only on Android and iOS, so desktop falls back to the gloss.
 /// The language model is roughly thirty megabytes and is fetched once, on the
 /// first translation; after that this works with no network at all.
+///
+/// ML Kit ships exactly one Chinese model (`zh`) with no Traditional variant, so
+/// Traditional input goes through a Simplified-oriented model. In practice it
+/// copes, and the word-by-word gloss — which is keyed by Traditional headword
+/// and always present — is what the Speak tab actually relies on. If sentence
+/// quality ever proves a problem, the fix is to convert to Simplified before
+/// calling, not to change the script the reader teaches.
 class MlKitSentenceTranslator implements SentenceTranslator {
   MlKitSentenceTranslator();
 

@@ -10,33 +10,50 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// menu tests do not depend on whatever happens to be in the library.
 const fixtureJson = {
   'storyId': 'fixture',
-  'title': {'english': 'The Cat', 'chinese': '猫', 'pinyin': 'Māo'},
-  'level': 'HSK 1',
-  'summary': {'english': 'A cat eats.', 'chinese': '猫吃饭。'},
+  'title': {
+    'english': 'The Cat',
+    'chinese': '貓',
+    'chineseSimplified': '猫',
+    'pinyin': 'Māo',
+  },
+  'level': 'TOCFL Novice 1',
+  'summary': {'english': 'A cat eats.', 'chinese': '貓吃飯。'},
   'segments': [
     {
       'id': '001',
       'english': 'I am a cat.',
-      'chinese': '我是猫。',
+      'chinese': '我是貓。',
+      'chineseSimplified': '我是猫。',
       'pinyin': 'Wǒ shì māo.',
-      'audioText': '我是猫。',
+      'audioText': '我是貓。',
       'words': [
         {'text': '我', 'pinyin': 'wǒ', 'english': 'I; me'},
         {'text': '是', 'pinyin': 'shì', 'english': 'to be'},
-        {'text': '猫', 'pinyin': 'māo', 'english': 'cat'},
+        {'text': '貓', 'textSimplified': '猫', 'pinyin': 'māo', 'english': 'cat'},
         {'text': '。', 'pinyin': '', 'english': ''},
       ],
     },
     {
       'id': '002',
       'english': 'I like to eat.',
-      'chinese': '我喜欢吃饭。',
-      'pinyin': 'Wǒ xǐhuan chī fàn.',
-      'audioText': '我喜欢吃饭。',
+      'chinese': '我喜歡吃飯。',
+      'chineseSimplified': '我喜欢吃饭。',
+      'pinyin': 'Wǒ xǐhuān chī fàn.',
+      'audioText': '我喜歡吃飯。',
       'words': [
         {'text': '我', 'pinyin': 'wǒ', 'english': 'I; me'},
-        {'text': '喜欢', 'pinyin': 'xǐhuan', 'english': 'to like'},
-        {'text': '吃饭', 'pinyin': 'chī fàn', 'english': 'to eat'},
+        {
+          'text': '喜歡',
+          'textSimplified': '喜欢',
+          'pinyin': 'xǐhuān',
+          'english': 'to like',
+        },
+        {
+          'text': '吃飯',
+          'textSimplified': '吃饭',
+          'pinyin': 'chī fàn',
+          'english': 'to eat',
+        },
         {'text': '。', 'pinyin': '', 'english': ''},
       ],
     },
@@ -48,8 +65,9 @@ final fixtureSummary = StorySummary.fromJson({
   'id': 'fixture',
   'path': 'assets/content/stories/fixture.json',
   'titleEnglish': 'The Cat',
-  'titleChinese': '猫',
-  'level': 'HSK 1',
+  'titleChinese': '貓',
+  'titleChineseSimplified': '猫',
+  'level': 'TOCFL Novice 1',
   'segmentCount': 2,
 });
 

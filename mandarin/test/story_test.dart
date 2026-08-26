@@ -9,7 +9,7 @@ void main() {
       titleEnglish: '',
       titleChinese: '',
       titlePinyin: '',
-      level: 'HSK 1',
+      level: 'TOCFL Novice 1',
       summaryEnglish: '',
       summaryChinese: '',
       summaryPinyin: '',
@@ -78,5 +78,78 @@ void main() {
       words: [],
     );
     expect(storyWith(segment).audioPlanFor(segment, 1.0), isNull);
+  });
+
+  group('script selection', () {
+    const both = StorySegment(
+      id: '001',
+      english: 'He studies Chinese.',
+      chinese: '他學習中文。',
+      chineseSimplified: '他学习中文。',
+      pinyin: 'Tā xuéxí Zhōngwén.',
+      audioText: '他學習中文。',
+      audioFile: null,
+      words: [
+        StoryWord(
+          text: '學習',
+          textSimplified: '学习',
+          pinyin: 'xuéxí',
+          english: 'to study',
+        ),
+        StoryWord(text: '中文', pinyin: 'Zhōngwén', english: 'Chinese'),
+      ],
+    );
+
+    test('returns the requested script', () {
+      expect(both.chineseIn(ChineseScript.traditional), '他學習中文。');
+      expect(both.chineseIn(ChineseScript.simplified), '他学习中文。');
+      expect(both.words[0].textIn(ChineseScript.simplified), '学习');
+    });
+
+    test('falls back to traditional when no simplified form was derived', () {
+      // 中文 is written the same either way, so the workshop stores nothing.
+      expect(both.words[1].textIn(ChineseScript.simplified), '中文');
+    });
+
+    test('a story with no simplified text reports none', () {
+      const only = StorySegment(
+        id: '001',
+        english: '',
+        chinese: '中文',
+        pinyin: '',
+        audioText: '',
+        audioFile: null,
+        words: [],
+      );
+
+      expect(storyWith(both).hasSimplified, isTrue);
+      expect(storyWith(only).hasSimplified, isFalse);
+    });
+
+    test('vocabulary follows the script and keys on traditional', () {
+      const item = VocabularyItem(
+        traditional: '學習',
+        simplified: '学习',
+        pinyin: 'xuéxí',
+        english: 'to study',
+      );
+
+      expect(item.textIn(ChineseScript.traditional), '學習');
+      expect(item.textIn(ChineseScript.simplified), '学习');
+      expect(item.traditional, '學習');
+    });
+
+    test('a summary read from JSON carries both scripts', () {
+      final summary = StorySummary.fromJson({
+        'id': 'story',
+        'path': 'assets/content/stories/story.json',
+        'titleChinese': '學習',
+        'titleChineseSimplified': '学习',
+      });
+
+      expect(summary.titleChineseIn(ChineseScript.traditional), '學習');
+      expect(summary.titleChineseIn(ChineseScript.simplified), '学习');
+      expect(summary.level, 'TOCFL Novice 1');
+    });
   });
 }

@@ -34,6 +34,7 @@
     readTime: $("#readTime"),
     qwenCard: $("#qwenCard"),
     emptyPackage: $("#emptyPackage"),
+    packageError: $("#packageError"),
     packageView: $("#packageView"),
     packageTitle: $("#packageTitle"),
     packageTitlePinyin: $("#packageTitlePinyin"),
@@ -109,6 +110,35 @@
     if (message) elements.busyMessage.textContent = message;
   }
 
+  function setPackageError(message = "") {
+    elements.packageError.textContent = message;
+    elements.packageError.classList.toggle("is-hidden", !message);
+  }
+
+  function defaultLevel() {
+    return (state.levels && state.levels.default) || "TOCFL Novice 1";
+  }
+
+  // The TOCFL ladder lives in tocfl.py; building the dropdowns from the
+  // bootstrap payload keeps the two from drifting apart.
+  function fillLevelOptions() {
+    const options = (state.levels && state.levels.options) || [];
+    if (!options.length) return;
+    [elements.storyLevel, elements.bookLevel].forEach((select) => {
+      select.replaceChildren();
+      options.forEach((option) => {
+        const node = document.createElement("option");
+        node.value = option.value;
+        const words = option.budgeted
+          ? `${option.wordCount} words`
+          : `~${option.wordCount} words`;
+        node.textContent = `${option.label} · ${option.cefr} · ${words}`;
+        select.append(node);
+      });
+      select.value = defaultLevel();
+    });
+  }
+
   function formValues() {
     return {
       title: elements.storyTitle.value.trim(),
@@ -125,7 +155,7 @@
     const value = project || {};
     elements.storyTitle.value = value.title || "";
     elements.storyIdea.value = value.idea || "";
-    elements.storyLevel.value = value.level || "HSK 1–2";
+    elements.storyLevel.value = value.level || defaultLevel();
     elements.storyLength.value = value.length || "600–900 words";
     elements.storyConstraints.value = value.constraints || "";
     elements.englishStory.value = value.englishStory || "";
@@ -357,6 +387,7 @@
       return;
     }
     try {
+      setPackageError();
       await saveCurrentProject({ silent: true });
       setBusy(
         true,
@@ -372,10 +403,12 @@
       });
       state.project = result.project;
       renderPackage(state.project.package);
+      setPackageError();
       setSaveState("Story files saved", true);
       await refreshProjects();
       showToast("Story files are ready. Save a checkpoint before generating audio.");
     } catch (error) {
+      setPackageError(error.message);
       showToast(error.message, true);
     } finally {
       setBusy(false);
@@ -917,7 +950,9 @@
       state.projects = bootstrap.projects;
       state.books = bootstrap.books || [];
       state.project = bootstrap.activeProject;
+      state.levels = bootstrap.levels || {};
       elements.storyPrompt.value = state.settings.storyPrompt;
+      fillLevelOptions();
       fillForm(state.project);
       renderDeepSeekStatus();
       renderQwenStatus();

@@ -20,7 +20,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import unquote, urlparse
 
-import hsk1
+import script_convert
+import tocfl
 from tts_engine import missing_runtime_modules, synthesize_items
 
 
@@ -36,7 +37,46 @@ FLUTTER_CONTENT_ROOT = MANDARIN_ROOT / "assets" / "content"
 PORT = 8766
 DEEPSEEK_URL = "https://api.deepseek.com/chat/completions"
 
-DEFAULT_STORY_PROMPT = """You are an expert writer of graded readers for Mandarin learners, in the style of Du Chinese.
+DEFAULT_STORY_PROMPT = """You are an expert writer of graded readers for learners of Taiwan Mandarin.
+
+Write a complete story in natural English that will be translated into Taiwan Mandarin at the requested learner level. The story must be genuinely engaging, not a flat list of actions:
+- Give the main character one small, concrete want or problem in the first few lines, an attempt that does not immediately work, and a warm resolution that feels earned.
+- Include at least two short dialogue exchanges (characters saying or asking something), written so they translate into simple spoken Mandarin.
+- Vary sentence length: mostly short sentences, with an occasional slightly longer one for rhythm.
+- Use concrete, sensory details a beginner can picture (warm sun, cold water, a red door) instead of abstract description.
+- Repeat the story's key words and actions in NEW sentences so learners meet them several times, but never repeat a whole sentence verbatim.
+- Use simple, common vocabulary and grammar: everyday objects, family, food, animals, home, weather. Avoid idioms, wordplay, and anything culturally untranslatable. Keep names and places consistent.
+- Where the story needs a setting, prefer everyday Taiwan: a night market, a convenience store, a bus or the MRT, a lunchbox, rain in the afternoon, a scooter, a temple, a bubble tea shop. Keep it ordinary rather than touristic, and never require a word the level cannot afford.
+
+The brief carries level rules. Those rules are binding and override anything above them when the two disagree.
+
+Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary."""
+
+DEFAULT_LOCALIZATION_PROMPT = """You are a meticulous Taiwan Mandarin graded-reader editor and pronunciation specialist.
+
+Convert the approved English story into natural Taiwan Mandarin, written in Traditional characters (正體字), for the requested learner level. Divide it into short, narratable segments. For every segment provide:
+- faithful, natural English;
+- Traditional Chinese with appropriate punctuation;
+- Hanyu Pinyin with tone marks, matching the Chinese exactly and using Taiwan-standard readings;
+- an ordered words array that reconstructs the Chinese exactly, with contextual pinyin and English definitions for every lexical word;
+- clean Chinese audio text for speech synthesis.
+
+The request carries a vocabulary budget for the level. Treat it as a hard limit rather than a suggestion: it is what makes the story readable at that level. Prefer rewriting a sentence with words you are allowed to use over reaching for a word outside the budget.
+
+Write the Mandarin of Taiwan, not of the mainland. The request lists the specific readings, words, and grammar rules this requires; they are binding. Writing mainland vocabulary in Traditional characters is the most common way this task goes wrong, so check each word against the Taiwan usage list before using it.
+
+Use consistent names and vocabulary. Do not add facts or plot events. Pinyin must use tone marks rather than tone numbers. Audio text must contain Chinese only, with punctuation and no pinyin, labels, stage directions, or Markdown.
+Split the Chinese into real words rather than individual characters. Include punctuation as separate word items with blank pinyin and English fields. Every definition must describe what the word means in that particular sentence.
+
+Return one valid json object matching the supplied schema exactly."""
+
+# Superseded default prompts. A saved settings.json that still carries one of
+# these verbatim is not a real customization, so get_settings drops it and
+# the current default applies.
+LEGACY_DEFAULT_PROMPTS = {
+    "storyPrompt": [
+        # The Simplified/HSK era, before the move to Taiwan Mandarin and TOCFL.
+        """You are an expert writer of graded readers for Mandarin learners, in the style of Du Chinese.
 
 Write a complete story in natural English that will be translated into Chinese at the requested learner level. The story must be genuinely engaging, not a flat list of actions:
 - Give the main character one small, concrete want or problem in the first few lines, an attempt that does not immediately work, and a warm resolution that feels earned.
@@ -48,29 +88,7 @@ Write a complete story in natural English that will be translated into Chinese a
 
 The brief carries level rules. Those rules are binding and override anything above them when the two disagree.
 
-Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary."""
-
-DEFAULT_LOCALIZATION_PROMPT = """You are a meticulous Mandarin graded-reader editor and pronunciation specialist.
-
-Convert the approved English story into natural Simplified Chinese for the requested learner level. Divide it into short, narratable segments. For every segment provide:
-- faithful, natural English;
-- Simplified Chinese with appropriate punctuation;
-- Hanyu Pinyin with tone marks, matching the Chinese exactly;
-- an ordered words array that reconstructs the Chinese exactly, with contextual pinyin and English definitions for every lexical word;
-- clean Chinese audio text for speech synthesis.
-
-The request carries a vocabulary budget for the level. Treat it as a hard limit rather than a suggestion: it is what makes the story readable at that level. Prefer rewriting a sentence with words you are allowed to use over reaching for a word outside the budget.
-
-Use consistent names and vocabulary. Prefer spoken, standard Mainland Mandarin. Do not add facts or plot events. Pinyin must use tone marks rather than tone numbers. Audio text must contain Chinese only, with punctuation and no pinyin, labels, stage directions, or Markdown.
-Split the Chinese into real words rather than individual characters. Include punctuation as separate word items with blank pinyin and English fields. Every definition must describe what the word means in that particular sentence.
-
-Return one valid json object matching the supplied schema exactly."""
-
-# Superseded default prompts. A saved settings.json that still carries one of
-# these verbatim is not a real customization, so get_settings drops it and
-# the current default applies.
-LEGACY_DEFAULT_PROMPTS = {
-    "storyPrompt": [
+Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary.""",
         """You are an expert writer of graded readers for absolute beginners in Mandarin, in the style of Du Chinese Newbie stories.
 
 Write a complete story in natural English that will be translated into HSK 1 level Chinese. The story must be genuinely engaging, not a flat list of actions:
@@ -90,6 +108,22 @@ Write a complete story in natural English. Use a clear narrative arc, concrete a
 Return only the finished English story. Do not include planning notes, headings such as "Story:", Markdown fences, or commentary."""
     ],
     "localizationPrompt": [
+        # The Simplified/HSK era, before the move to Taiwan Mandarin and TOCFL.
+        """You are a meticulous Mandarin graded-reader editor and pronunciation specialist.
+
+Convert the approved English story into natural Simplified Chinese for the requested learner level. Divide it into short, narratable segments. For every segment provide:
+- faithful, natural English;
+- Simplified Chinese with appropriate punctuation;
+- Hanyu Pinyin with tone marks, matching the Chinese exactly;
+- an ordered words array that reconstructs the Chinese exactly, with contextual pinyin and English definitions for every lexical word;
+- clean Chinese audio text for speech synthesis.
+
+The request carries a vocabulary budget for the level. Treat it as a hard limit rather than a suggestion: it is what makes the story readable at that level. Prefer rewriting a sentence with words you are allowed to use over reaching for a word outside the budget.
+
+Use consistent names and vocabulary. Prefer spoken, standard Mainland Mandarin. Do not add facts or plot events. Pinyin must use tone marks rather than tone numbers. Audio text must contain Chinese only, with punctuation and no pinyin, labels, stage directions, or Markdown.
+Split the Chinese into real words rather than individual characters. Include punctuation as separate word items with blank pinyin and English fields. Every definition must describe what the word means in that particular sentence.
+
+Return one valid json object matching the supplied schema exactly.""",
         """You are a meticulous Mandarin graded-reader editor and pronunciation specialist preparing Newbie (HSK 1) content.
 
 Convert the approved English story into natural Simplified Chinese for the requested learner level. Divide it into short, narratable segments. For every segment provide:
@@ -128,50 +162,23 @@ DEFAULT_SETTINGS = {
     "voiceInstruction": "Speak naturally, clearly, and warmly for a Mandarin learner.",
 }
 
-NEWBIE_LENGTH = "120–220 words"
 MIN_CHAPTERS = 4
 MAX_CHAPTERS = 12
 DEFAULT_CHAPTERS = 12
 
+# How long the English draft should run, per TOCFL level key. The English is
+# always longer than the Chinese it becomes.
+DRAFT_LENGTHS = {
+    "NOVICE1": "100–180 words",
+    "NOVICE2": "120–220 words",
+    "LEVEL1": "200–330 words",
+    "LEVEL2": "300–460 words",
+    "LEVEL3": "400–620 words",
+}
 
-def is_newbie(level: Any) -> bool:
-    """Whether *level* is the Newbie tier that the HSK 1 budget applies to."""
-    normalized = re.sub(r"[\s()]+", "", str(level or "")).upper()
-    return normalized in {"HSK1", "NEWBIE", "HSK1NEWBIE"}
-
-
-def newbie_story_rules() -> str:
-    return f"""This is a Newbie (HSK 1) story. It will be translated using a budget of about 150 Chinese words, so the English has to be written to survive that translation.
-
-- Write 12–20 short sentences, landing at roughly 150–260 Chinese characters once translated. One idea per sentence; almost every sentence is a subject, a verb, and an object.
-- Choose 5–8 actions for the whole story and use each of them at least three times, in different sentences. These are the only actions the story needs: {", ".join(HSK1_ACTION_GLOSSES)}.
-- Aim for about three uses of every word you introduce. A published Newbie chapter runs roughly 100 words of running text over only 30–45 different words, and its commonest verb appears five or more times.
-- Repetition with one thing changed is the point of this level, not a flaw. Reuse a sentence shape across a list of days, places, or people ("On Monday I ate at the shop. On Tuesday the shop had no food.") so the learner meets the same words in a new place.
-- Introduce at most 3–5 new topic words beyond everyday HSK 1 vocabulary, and use each of them at least three times.
-- Keep throwaway words down: no more than about a third of the different words in the story may appear only once.
-- Stay concrete and physical: eat, drink, sleep, look, go, come, buy, sit, want, like, have. No metaphor, no inner monologue, no abstract nouns (freedom, memory, courage).
-- Keep the cast to two or three characters with short names, and refer to them the same way every time.
-- Dialogue must be plain spoken lines: "I want to eat." "Can I eat here?" "Yes." Nothing indirect.
-- Do not repeat a whole sentence word for word; change at least one word each time."""
-
-
-def newbie_localization_rules() -> str:
-    return f"""Vocabulary budget for Newbie (HSK 1). Use these words:
-{hsk1.word_budget_text()}
-
-- Anything outside that list counts as a new word. Allow at most 5 new words in the whole story, each used at least three times, and list every one of them in the vocabulary array.
-- Target the density of a published Newbie chapter: 150–260 Chinese characters, 30–45 different words, and at least 2.5 uses per different word. Fewer than a third of the different words may appear only once.
-- Lean hard on these core verbs and reuse them across the story rather than reaching for synonyms: {hsk1.core_verbs_text()}
-- Recycle these sentence patterns: {hsk1.patterns_text()}
-- Keep segments to roughly 4–12 characters. Split long sentences instead of adding conjunctions.
-- Prefer 说 and 问 for dialogue and keep each spoken line in its own segment.
-- Never produce two segments whose Chinese is identical.
-- Numbers, days of the week, and family words are all inside the budget; use them freely for repetition."""
-
-
-# Plain-English names for the HSK 1 core verbs, used to steer the English draft
+# Plain-English names for the TOCFL core verbs, used to steer the English draft
 # before any Chinese exists.
-HSK1_ACTION_GLOSSES = (
+TOCFL_ACTION_GLOSSES = (
     "be",
     "have",
     "not have",
@@ -181,43 +188,108 @@ HSK1_ACTION_GLOSSES = (
     "eat",
     "drink",
     "look at",
-    "see",
     "say",
+    "ask",
     "be called",
+    "think",
     "want",
     "like",
-    "can",
+    "know how to",
+    "be able to",
+    "may",
     "buy",
     "do",
     "sit",
+    "stand",
     "live",
     "sleep",
     "return",
     "open",
     "listen",
-    "know someone",
+    "study",
+    "write",
+    "walk",
+    "look for",
+    "give",
+    "know",
+    "wait",
+    "take",
 )
 
 
+def draft_length(level: Any) -> str:
+    return DRAFT_LENGTHS.get(tocfl.normalize(level), "300–500 words")
+
+
+def budgeted_story_rules(level: tocfl.Level) -> str:
+    """English-draft rules for a level that ships a full word budget."""
+    return f"""This is a {level.label} ({level.chinese}) story. It will be translated using a budget of about {level.vocabulary} Taiwan Mandarin words, so the English has to be written to survive that translation.
+
+- Write 12–20 short sentences, landing at roughly {level.characters} Chinese characters once translated. One idea per sentence; almost every sentence is a subject, a verb, and an object.
+- Choose 5–8 actions for the whole story and use each of them at least three times, in different sentences. These are the only actions the story needs: {", ".join(TOCFL_ACTION_GLOSSES)}.
+- Aim for about three uses of every word you introduce. A chapter at this level runs its running text over only {level.distinct_words} different words, and its commonest verb appears five or more times.
+- Repetition with one thing changed is the point of this level, not a flaw. Reuse a sentence shape across a list of days, places, or people ("On Monday I ate at the shop. On Tuesday the shop had no food.") so the learner meets the same words in a new place.
+- Introduce at most 3–5 new topic words beyond the level's everyday vocabulary, and use each of them at least three times.
+- Keep throwaway words down: no more than about a third of the different words in the story may appear only once.
+- Stay concrete and physical: eat, drink, sleep, look, go, come, buy, sit, want, like, have. No metaphor, no inner monologue, no abstract nouns (freedom, memory, courage).
+- Keep the cast to two or three characters with short names, and refer to them the same way every time.
+- Dialogue must be plain spoken lines: "I want to eat." "Can I eat here?" "Yes." Nothing indirect.
+- Do not repeat a whole sentence word for word; change at least one word each time."""
+
+
+def budgeted_localization_rules(level: tocfl.Level) -> str:
+    """Localization rules for a level that ships a full word budget."""
+    return f"""Vocabulary budget for {level.label} ({level.chinese}, {level.cefr}). Use these words, with exactly the readings given:
+{tocfl.word_budget_text(level.key)}
+
+- Anything outside that list counts as a new word. Allow at most 5 new words in the whole story, each used at least three times, and list every one of them in the vocabulary array.
+- The pinyin above is Taiwan-standard. Where it differs from the mainland reading you may know, the list wins.
+- Target the density of a graded chapter at this level: {level.characters} Chinese characters, {level.distinct_words} different words, and at least 2.5 uses per different word. Fewer than a third of the different words may appear only once.
+- Lean hard on these core verbs and reuse them across the story rather than reaching for synonyms: {tocfl.core_verbs_text()}
+- Recycle these sentence patterns: {tocfl.patterns_text()}
+- Keep segments to roughly 4–12 characters. Split long sentences instead of adding conjunctions.
+- Prefer 說 and 問 for dialogue and keep each spoken line in its own segment.
+- Never produce two segments whose Chinese is identical.
+- Numbers, days of the week, and family words are all inside the budget; use them freely for repetition."""
+
+
+def open_level_rules(level: tocfl.Level) -> str:
+    """Localization rules for a band too large to paste a word list for."""
+    return f"""Level: {level.label} ({level.chinese}, {level.cefr}), which assumes about {level.vocabulary} words.
+
+- Stay inside the vocabulary a learner at this level knows, plus a handful of topic words that the story reuses several times; those extra words must appear in the vocabulary array.
+- Target roughly {level.characters} Chinese characters over {level.distinct_words} different words.
+- Use connectives the level allows instead of starting every sentence the same way.
+- Never produce two segments whose Chinese is identical."""
+
+
+def taiwan_rules() -> str:
+    """The Taiwan-versus-mainland rules that every localization must follow."""
+    return f"""Taiwan Mandarin rules (binding):
+{tocfl.taiwan_style_text()}
+
+Use the Taiwan word, not the mainland one: {tocfl.taiwan_lexicon_text()}"""
+
+
 def story_level_rules(level: Any) -> str:
-    if is_newbie(level):
-        return newbie_story_rules()
+    resolved = tocfl.level_for(level)
+    if resolved.words is not None:
+        return budgeted_story_rules(resolved)
     return (
+        f"This is a {resolved.label} ({resolved.chinese}, {resolved.cefr}) "
+        f"story, translated with about {resolved.vocabulary} words available. "
         "Keep the grammar and vocabulary within reach of a learner at this "
         "level, and reuse the story's key words in new sentences."
     )
 
 
 def localization_level_rules(level: Any) -> str:
-    if is_newbie(level):
-        return newbie_localization_rules()
-    return (
-        "Stay inside the vocabulary a learner at this level knows, plus a "
-        "handful of topic words that the story reuses several times; those "
-        "extra words must appear in the vocabulary list. Use connectives the "
-        "level allows instead of starting every sentence the same way. Never "
-        "produce two segments whose Chinese is identical."
-    )
+    resolved = tocfl.level_for(level)
+    if resolved.words is not None:
+        body = budgeted_localization_rules(resolved)
+    else:
+        body = open_level_rules(resolved)
+    return f"{body}\n\n{taiwan_rules()}"
 
 
 MIME_TYPES = {
@@ -516,7 +588,8 @@ def book_context_text(project: dict[str, Any]) -> str:
         if isinstance(person, dict)
     )
     shared_words = "、".join(
-        f"{word.get('simplified')}({word.get('pinyin')}) {word.get('english')}"
+        f"{word.get('traditional') or word.get('simplified')}"
+        f"({word.get('pinyin')}) {word.get('english')}"
         for word in (book.get("newWords") or [])
         if isinstance(word, dict)
     )
@@ -556,7 +629,9 @@ def plan_book(payload: dict[str, Any]) -> dict[str, Any]:
     idea = str(payload.get("idea") or "").strip()
     if not idea:
         raise WorkshopError("Add a book idea before planning.")
-    level = str(payload.get("level") or "HSK 1").strip() or "HSK 1"
+    level = str(payload.get("level") or tocfl.DEFAULT_LEVEL).strip() or (
+        tocfl.DEFAULT_LEVEL
+    )
     try:
         chapter_count = int(payload.get("chapterCount") or DEFAULT_CHAPTERS)
     except (TypeError, ValueError) as error:
@@ -569,20 +644,20 @@ def plan_book(payload: dict[str, Any]) -> dict[str, Any]:
 
     schema = {
         "titleEnglish": "I'm a Cat",
-        "titleChinese": "我是猫",
+        "titleChinese": "我是貓",
         "titlePinyin": "Wǒ shì māo",
         "summaryEnglish": "One or two sentences describing the whole book.",
-        "summaryChinese": "一两句话的介绍。",
+        "summaryChinese": "一兩句話的介紹。",
         "characters": [
             {
                 "name": "Fanfan",
-                "chinese": "饭饭",
-                "pinyin": "Fànfan",
+                "chinese": "飯飯",
+                "pinyin": "Fànfàn",
                 "about": "A young stray cat looking for a home.",
             }
         ],
         "newWords": [
-            {"simplified": "苹果", "pinyin": "píngguǒ", "english": "apple"}
+            {"traditional": "蘋果", "pinyin": "píngguǒ", "english": "apple"}
         ],
         "chapters": [
             {
@@ -681,7 +756,7 @@ Return one valid json object."""
         "model": get_deepseek_model(),
     }
 
-    length = NEWBIE_LENGTH if is_newbie(level) else "300–500 words"
+    length = draft_length(level)
     for chapter in book["chapters"]:
         project = normalize_project(
             {
@@ -860,7 +935,7 @@ def create_story(project: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any
         raise WorkshopError("Add a story idea before generating.")
 
     settings = get_settings()
-    level = project.get("level") or "HSK 1–2"
+    level = project.get("level") or tocfl.DEFAULT_LEVEL
     request = f"""Create the English story using this brief:
 
 Working title: {project.get("title") or "Choose a fitting title"}
@@ -898,7 +973,7 @@ def revise_story(project: dict[str, Any], instructions: str) -> tuple[dict[str, 
         raise WorkshopError("Add revision instructions first.")
 
     settings = get_settings()
-    level = project.get("level") or "HSK 1–2"
+    level = project.get("level") or tocfl.DEFAULT_LEVEL
     request = f"""Revise the English story below.
 
 Revision instructions:
@@ -937,6 +1012,155 @@ def strip_json_fence(content: str) -> str:
     return content.strip()
 
 
+def derive_simplified(traditional: str) -> str:
+    """The Simplified rendering of *traditional*, or "" when unavailable.
+
+    Conversion is best effort: a missing or stale dictionary must not stop a
+    story being published, it just means the reader has nothing to toggle to.
+    """
+    if not traditional:
+        return ""
+    try:
+        simplified = script_convert.to_simplified(traditional)
+    except script_convert.ConversionUnavailable:
+        return ""
+    return "" if simplified == traditional else simplified
+
+
+def repair_package_word_metadata(package: Any) -> Any:
+    """Fill isolated model omissions without weakening package validation.
+
+    Prefer the package's contextual vocabulary, then fall back to the first
+    CC-CEDICT reading.  Anything that still lacks metadata is left untouched so
+    validation can describe it precisely and the model gets one repair pass.
+    """
+    if not isinstance(package, dict):
+        return package
+    vocabulary: dict[str, tuple[str, str]] = {}
+    for item in package.get("vocabulary") or []:
+        if not isinstance(item, dict):
+            continue
+        traditional = str(
+            item.get("traditional") or item.get("simplified") or ""
+        ).strip()
+        if traditional:
+            vocabulary[traditional] = (
+                str(item.get("pinyin") or "").strip(),
+                str(item.get("english") or "").strip(),
+            )
+
+    for segment in package.get("segments") or []:
+        if not isinstance(segment, dict):
+            continue
+        for word in segment.get("words") or []:
+            if not isinstance(word, dict):
+                continue
+            text = str(word.get("text") or "").strip()
+            if not text or re.fullmatch(
+                r"[\s，。！？；：“”‘’、,.!?;:—…（）()]+",
+                text,
+            ):
+                continue
+            pinyin = str(word.get("pinyin") or "").strip()
+            english = str(word.get("english") or "").strip()
+            if pinyin and english:
+                continue
+            fallback_pinyin, fallback_english = vocabulary.get(text, ("", ""))
+            if not (fallback_pinyin and fallback_english):
+                try:
+                    dictionary_pinyin, dictionary_english = (
+                        script_convert.word_metadata(text)
+                    )
+                except script_convert.ConversionUnavailable:
+                    dictionary_pinyin, dictionary_english = "", ""
+                fallback_pinyin = fallback_pinyin or dictionary_pinyin
+                fallback_english = fallback_english or dictionary_english
+            if not pinyin and fallback_pinyin:
+                word["pinyin"] = fallback_pinyin
+            if not english and fallback_english:
+                word["english"] = fallback_english
+    return package
+
+
+def missing_package_word_metadata(package: Any) -> list[dict[str, Any]]:
+    """Describe every lexical word that still needs generated metadata."""
+    missing: list[dict[str, Any]] = []
+    if not isinstance(package, dict):
+        return missing
+    for segment_index, segment in enumerate(package.get("segments") or [], start=1):
+        if not isinstance(segment, dict):
+            continue
+        for word_index, word in enumerate(segment.get("words") or [], start=1):
+            if not isinstance(word, dict):
+                continue
+            text = str(word.get("text") or "").strip()
+            if not text or re.fullmatch(
+                r"[\s，。！？；：“”‘’、,.!?;:—…（）()]+",
+                text,
+            ):
+                continue
+            if str(word.get("pinyin") or "").strip() and str(
+                word.get("english") or ""
+            ).strip():
+                continue
+            missing.append(
+                {
+                    "segment": segment_index,
+                    "word": word_index,
+                    "text": text,
+                    "segmentChinese": str(segment.get("chinese") or "").strip(),
+                    "segmentEnglish": str(segment.get("english") or "").strip(),
+                }
+            )
+    return missing
+
+
+def apply_word_metadata_repairs(package: Any, content: str) -> Any:
+    """Merge a small DeepSeek repair response without regenerating the package."""
+    try:
+        response = json.loads(strip_json_fence(content))
+    except json.JSONDecodeError as error:
+        raise WorkshopError(
+            "DeepSeek returned malformed word metadata JSON. Please try again.", 502
+        ) from error
+    repairs = response.get("repairs") if isinstance(response, dict) else None
+    if not isinstance(repairs, list):
+        raise WorkshopError("DeepSeek did not return the requested word repairs.", 502)
+
+    segments = package.get("segments") if isinstance(package, dict) else None
+    if not isinstance(segments, list):
+        return package
+    for repair in repairs:
+        if not isinstance(repair, dict):
+            continue
+        segment_index = repair.get("segment")
+        word_index = repair.get("word")
+        if not isinstance(segment_index, int) or not isinstance(word_index, int):
+            continue
+        if not (1 <= segment_index <= len(segments)):
+            continue
+        segment = segments[segment_index - 1]
+        words = segment.get("words") if isinstance(segment, dict) else None
+        if not isinstance(words, list) or not (1 <= word_index <= len(words)):
+            continue
+        word = words[word_index - 1]
+        if not isinstance(word, dict):
+            continue
+        # Indices are authoritative, but matching text prevents an accidental
+        # off-by-one repair from silently annotating the wrong learner token.
+        expected_text = str(word.get("text") or "").strip()
+        returned_text = str(repair.get("text") or "").strip()
+        if returned_text and returned_text != expected_text:
+            continue
+        pinyin = str(repair.get("pinyin") or "").strip()
+        english = str(repair.get("english") or "").strip()
+        if pinyin:
+            word["pinyin"] = pinyin
+        if english:
+            word["english"] = english
+    return package
+
+
 def validate_package(package: Any) -> dict[str, Any]:
     if not isinstance(package, dict):
         raise WorkshopError("DeepSeek did not return a story package object.", 502)
@@ -959,6 +1183,21 @@ def validate_package(package: Any) -> dict[str, Any]:
         if not all((english, chinese, pinyin, audio_text)):
             raise WorkshopError(
                 f"Generated segment {index} is missing English, Chinese, pinyin, or audio text.",
+                502,
+            )
+        # The whole point of this reader is Traditional characters, so a segment
+        # written in Simplified is a failed generation, not something to fix up
+        # silently — the pinyin and word splits were reasoned about in the wrong
+        # script too.
+        try:
+            intruders = script_convert.simplified_only_characters(chinese)
+        except script_convert.ConversionUnavailable:
+            intruders = []
+        if intruders:
+            raise WorkshopError(
+                f"Generated segment {index} is written in Simplified characters "
+                f"({''.join(intruders)}). Regenerate: this story must be "
+                "Traditional throughout.",
                 502,
             )
         words = segment.get("words")
@@ -994,6 +1233,7 @@ def validate_package(package: Any) -> dict[str, Any]:
             normalized_words.append(
                 {
                     "text": text,
+                    "textSimplified": derive_simplified(text),
                     "pinyin": word_pinyin,
                     "english": word_english,
                 }
@@ -1012,14 +1252,117 @@ def validate_package(package: Any) -> dict[str, Any]:
                 "id": segment_id,
                 "english": english,
                 "chinese": chinese,
+                "chineseSimplified": derive_simplified(chinese),
                 "pinyin": pinyin,
+                # Traditional, deliberately: converting the audio text down to
+                # Simplified would hand the synthesiser 干 for both 乾 and 幹 and
+                # let it pick the wrong reading.
                 "audioText": audio_text,
                 "audioFile": f"audio/{segment_id}.wav",
                 "words": normalized_words,
             }
         )
     package["segments"] = normalized_segments
+    package["vocabulary"] = normalize_vocabulary(package.get("vocabulary"))
+    package["schemaVersion"] = 2
+    package["script"] = "traditional"
     return package
+
+
+def decode_and_validate_package(content: str) -> dict[str, Any]:
+    try:
+        package = json.loads(strip_json_fence(content))
+    except json.JSONDecodeError as error:
+        raise WorkshopError(
+            "DeepSeek returned malformed JSON. Please try again.", 502
+        ) from error
+    return validate_package(repair_package_word_metadata(package))
+
+
+def decode_package(content: str) -> dict[str, Any]:
+    try:
+        package = json.loads(strip_json_fence(content))
+    except json.JSONDecodeError as error:
+        raise WorkshopError(
+            "DeepSeek returned malformed JSON. Please try again.", 502
+        ) from error
+    if not isinstance(package, dict):
+        raise WorkshopError("DeepSeek did not return a story package object.", 502)
+    return package
+
+
+def combine_usage(*values: dict[str, Any]) -> dict[str, Any]:
+    combined: dict[str, Any] = {}
+    for usage in values:
+        for key, value in usage.items():
+            if isinstance(value, (int, float)) and not isinstance(value, bool):
+                previous = combined.get(key)
+                combined[key] = (
+                    previous + value
+                    if isinstance(previous, (int, float))
+                    else value
+                )
+            else:
+                combined[key] = value
+    return combined
+
+
+def request_missing_word_metadata(
+    package: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Ask only for unresolved word fields and merge them without regeneration."""
+    missing_metadata = missing_package_word_metadata(package)
+    if not missing_metadata:
+        return package, {}
+    metadata_request = f"""Fill the missing Mandarin word metadata below.
+
+Return only this JSON shape:
+{{"repairs":[{{"segment":1,"word":1,"text":"詞","pinyin":"cí","english":"contextual meaning"}}]}}
+
+Return every requested item exactly once, keeping its segment, word, and text
+values unchanged. Pinyin must use tone marks and English must define the word in
+the supplied sentence context.
+
+Missing items:
+{json.dumps(missing_metadata, ensure_ascii=False, indent=2)}"""
+    metadata_content, metadata_usage = deepseek_chat(
+        [
+            {
+                "role": "system",
+                "content": "Return valid JSON only. Complete every requested repair.",
+            },
+            {"role": "user", "content": metadata_request},
+        ],
+        json_output=True,
+        max_tokens=4_000,
+    )
+    return apply_word_metadata_repairs(package, metadata_content), metadata_usage
+
+
+def normalize_vocabulary(vocabulary: Any) -> list[dict[str, Any]]:
+    """Key vocabulary by traditional headword, with the simplified form beside."""
+    if not isinstance(vocabulary, list):
+        return []
+    normalized = []
+    for item in vocabulary:
+        if not isinstance(item, dict):
+            continue
+        # Accept the old "simplified" key so a checkpoint written before the
+        # move to Traditional still loads.
+        traditional = str(
+            item.get("traditional") or item.get("simplified") or ""
+        ).strip()
+        if not traditional:
+            continue
+        normalized.append(
+            {
+                "traditional": traditional,
+                "simplified": derive_simplified(traditional),
+                "pinyin": str(item.get("pinyin") or "").strip(),
+                "english": str(item.get("english") or "").strip(),
+            }
+        )
+    return normalized
 
 
 def localize_story(project: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -1031,33 +1374,33 @@ def localize_story(project: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
 
     settings = get_settings()
     schema = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "title": {
             "english": "Story title",
-            "chinese": "中文标题",
+            "chinese": "中文標題",
             "pinyin": "Zhōngwén biāotí",
         },
-        "level": project.get("level") or "HSK 1–2",
+        "level": project.get("level") or tocfl.DEFAULT_LEVEL,
         "summary": {
             "english": "One sentence summary",
-            "chinese": "一句话摘要。",
+            "chinese": "一句話摘要。",
             "pinyin": "Yí jù huà zhāiyào.",
         },
         "segments": [
             {
                 "id": "001",
                 "english": "Natural English translation.",
-                "chinese": "适合学习者的中文。",
+                "chinese": "適合學習者的中文。",
                 "pinyin": "Shìhé xuéxízhě de Zhōngwén.",
-                "audioText": "适合学习者的中文。",
+                "audioText": "適合學習者的中文。",
                 "words": [
                     {
-                        "text": "适合",
+                        "text": "適合",
                         "pinyin": "shìhé",
                         "english": "suitable for",
                     },
                     {
-                        "text": "学习者",
+                        "text": "學習者",
                         "pinyin": "xuéxízhě",
                         "english": "learner",
                     },
@@ -1077,13 +1420,13 @@ def localize_story(project: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
         ],
         "vocabulary": [
             {
-                "simplified": "故事",
-                "pinyin": "gùshi",
+                "traditional": "故事",
+                "pinyin": "gùshì",
                 "english": "story",
             }
         ],
     }
-    level = project.get("level") or "HSK 1–2"
+    level = project.get("level") or tocfl.DEFAULT_LEVEL
     request = f"""Return a valid json object for this approved story.
 
 Learner level: {level}
@@ -1095,33 +1438,73 @@ Use this exact JSON shape and key names:
 {json.dumps(schema, ensure_ascii=False, indent=2)}
 
 Requirements:
+- Write Traditional characters (正體字) only. A single Simplified character rejects the whole story.
 - Preserve the full story without skipping events.
 - Make each segment short enough for one audio clip, usually 1–3 Chinese sentences.
 - Use sequential three-digit segment ids.
-- Include 8–20 useful vocabulary items.
+- Include 8–20 useful vocabulary items, keyed by "traditional".
 - The English field in every segment is a natural translation of that Chinese segment.
 - In every words array, use real lexical words in exact reading order. The text values, including punctuation, must concatenate to the segment's Chinese field exactly.
 - Give every non-punctuation word tone-mark pinyin and its context-specific English meaning. Punctuation items must have blank pinyin and English.
 
 Approved English story:
 {story}"""
+    messages = [
+        {"role": "system", "content": settings["localizationPrompt"]},
+        {"role": "user", "content": request},
+    ]
     content, usage = deepseek_chat(
-        [
-            {"role": "system", "content": settings["localizationPrompt"]},
-            {"role": "user", "content": request},
-        ],
+        messages,
         json_output=True,
         max_tokens=16_000,
     )
     try:
-        package = json.loads(strip_json_fence(content))
-    except json.JSONDecodeError as error:
-        raise WorkshopError("DeepSeek returned malformed JSON. Please try again.", 502) from error
-    package = validate_package(package)
+        package = repair_package_word_metadata(decode_package(content))
+        package, metadata_usage = request_missing_word_metadata(package)
+        usage = combine_usage(usage, metadata_usage)
+        package = validate_package(package)
+    except WorkshopError as first_error:
+        repair_request = f"""Your JSON package failed validation:
 
-    package["schemaVersion"] = 1
+{first_error}
+
+Return the complete corrected JSON object again. Preserve the approved story,
+Traditional characters, segment order, and schema. Check every lexical word:
+each one needs tone-mark pinyin and a contextual English definition, and every
+words array must reconstruct its segment's Chinese text exactly."""
+        corrected, repair_usage = deepseek_chat(
+            [
+                *messages,
+                {"role": "assistant", "content": content},
+                {"role": "user", "content": repair_request},
+            ],
+            json_output=True,
+            max_tokens=16_000,
+        )
+        usage = combine_usage(usage, repair_usage)
+        try:
+            package = repair_package_word_metadata(decode_package(corrected))
+            package, metadata_usage = request_missing_word_metadata(package)
+            usage = combine_usage(usage, metadata_usage)
+            package = validate_package(package)
+        except WorkshopError as second_error:
+            raise WorkshopError(
+                f"DeepSeek could not repair the Mandarin package: {second_error}",
+                502,
+            ) from second_error
+
+    # validate_package stamps schemaVersion 2 and derives the Simplified
+    # segment text; the title and summary live outside it, so derive those here.
+    for block in ("title", "summary"):
+        value = package.get(block)
+        if isinstance(value, dict):
+            value["chineseSimplified"] = derive_simplified(
+                str(value.get("chinese") or "")
+            )
     package["storyId"] = project["id"]
-    package["level"] = project.get("level") or package.get("level") or "HSK 1–2"
+    package["level"] = (
+        project.get("level") or package.get("level") or tocfl.DEFAULT_LEVEL
+    )
     package["source"] = {
         "approvedEnglish": story,
         "generatedAt": utc_now(),
@@ -1388,13 +1771,17 @@ def publish_project_to_flutter(project: dict[str, Any]) -> dict[str, Any]:
             title.get("english") or project.get("title") or "Untitled Story"
         ),
         "titleChinese": title.get("chinese") or "",
+        "titleChineseSimplified": title.get("chineseSimplified")
+        or derive_simplified(str(title.get("chinese") or "")),
         "titlePinyin": title.get("pinyin") or "",
         "summaryEnglish": summary.get("english") or "",
         "summaryChinese": summary.get("chinese") or "",
+        "summaryChineseSimplified": summary.get("chineseSimplified")
+        or derive_simplified(str(summary.get("chinese") or "")),
         "level": (
             published_package.get("level")
             or project.get("level")
-            or "HSK 1–2"
+            or tocfl.DEFAULT_LEVEL
         ),
         "segmentCount": len(published_package.get("segments") or []),
         "durationSeconds": round(float(manifest.get("durationSeconds") or 0)),
@@ -1468,6 +1855,7 @@ class WorkshopHandler(BaseHTTPRequestHandler):
 
     def handle_error(self, error: Exception) -> None:
         if isinstance(error, WorkshopError):
+            print(f"Workshop error ({error.status}): {error}")
             self.send_json({"error": str(error)}, error.status)
             return
         print(f"Unexpected error: {error!r}")
@@ -1530,7 +1918,17 @@ class WorkshopHandler(BaseHTTPRequestHandler):
                     "activeProject": active,
                     "books": list_books(),
                     "levels": {
-                        "newbieWordCount": len(hsk1.HSK1_WORDS),
+                        "options": [
+                            {
+                                "value": level.label,
+                                "label": f"{level.label} ({level.chinese})",
+                                "cefr": level.cefr,
+                                "wordCount": level.vocabulary,
+                                "budgeted": level.words is not None,
+                            }
+                            for level in tocfl.LEVELS
+                        ],
+                        "default": tocfl.DEFAULT_LEVEL,
                         "minChapters": MIN_CHAPTERS,
                         "maxChapters": MAX_CHAPTERS,
                         "defaultChapters": DEFAULT_CHAPTERS,

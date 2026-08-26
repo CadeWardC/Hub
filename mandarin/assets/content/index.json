@@ -2,30 +2,19 @@
   "schemaVersion": 1,
   "stories": [
     {
-      "id": "a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596",
-      "path": "assets/content/stories/a-cat-is-looking-for-a-place-to-sleep-write-it-i-1784950596.json",
-      "titleEnglish": "A Boy and a Girl",
-      "titleChinese": "男孩和女孩",
-      "titlePinyin": "Nánhái hé nǚhái",
-      "summaryEnglish": "A boy learns to count to ten with the help of a girl.",
-      "summaryChinese": "一个男孩在一个女孩的帮助下学会数到十。",
-      "level": "HSK 1",
-      "segmentCount": 33,
-      "durationSeconds": 104,
-      "publishedAt": "2026-07-26T18:20:33+00:00"
-    },
-    {
-      "id": "a-cup-of-hot-tea",
-      "path": "assets/content/stories/a-cup-of-hot-tea.json",
-      "titleEnglish": "A Cup of Hot Tea",
-      "titleChinese": "一杯热茶",
-      "titlePinyin": "Yì bēi rè chá",
-      "summaryEnglish": "On a rainy morning, Xiaoyu discovers that a small kindness can warm two people.",
-      "summaryChinese": "下雨的早上，小雨发现一个小小的好意可以温暖两个人。",
-      "level": "HSK 1–2",
-      "segmentCount": 5,
-      "durationSeconds": 27,
-      "publishedAt": "2026-07-23T00:00:00+00:00"
+      "id": "give-me-a-story-about-a-boy-who-travels-to-taiwa-1785518914",
+      "path": "assets/content/stories/give-me-a-story-about-a-boy-who-travels-to-taiwa-1785518914.json",
+      "titleEnglish": "The Big Win",
+      "titleChinese": "大勝利",
+      "titleChineseSimplified": "大胜利",
+      "titlePinyin": "Dà shènglì",
+      "summaryEnglish": "Xiaomei and her brother go to a game, win, and enjoy bubble tea and noodles.",
+      "summaryChinese": "小美和她的哥哥去看球賽，他們贏了，然後喝珍奶、吃麵。",
+      "summaryChineseSimplified": "小美和她的哥哥去看球赛，他们赢了，然后喝珍奶、吃面。",
+      "level": "TOCFL Novice 1",
+      "segmentCount": 28,
+      "durationSeconds": 107,
+      "publishedAt": "2026-08-01T20:41:04+00:00"
     }
   ]
 }

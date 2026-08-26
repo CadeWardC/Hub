@@ -16,7 +16,12 @@ export 'sentence_translator_stub.dart' show SentenceTranslator;
 class BrowserSentenceTranslator implements SentenceTranslator {
   BrowserSentenceTranslator();
 
-  static const _source = 'zh';
+  /// Traditional Chinese, because that is the script the reader recognises and
+  /// displays. Chrome treats `zh` and `zh-Hant` as separate languages with
+  /// separate packs, so asking for `zh` would send Traditional text to the
+  /// Simplified model. `availability` is checked before use, so a browser that
+  /// does not offer this pair falls back to the word-by-word gloss.
+  static const _source = 'zh-Hant';
   static const _target = 'en';
 
   JSObject? _translator;

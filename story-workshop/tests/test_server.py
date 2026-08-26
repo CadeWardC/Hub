@@ -11,7 +11,9 @@ from unittest.mock import patch
 WORKSHOP_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(WORKSHOP_ROOT))
 
+import script_convert  # noqa: E402
 import server  # noqa: E402
+import tocfl  # noqa: E402
 
 
 class WorkshopTestCase(unittest.TestCase):
@@ -44,22 +46,22 @@ class WorkshopTestCase(unittest.TestCase):
         ) = self.original_paths
         self.temporary.cleanup()
 
-    def plan_a_book(self, chapter_count=4, level="HSK 1"):
+    def plan_a_book(self, chapter_count=4, level="TOCFL Novice 2"):
         plan = {
             "titleEnglish": "I'm a Cat",
-            "titleChinese": "我是猫",
+            "titleChinese": "我是貓",
             "titlePinyin": "Wǒ shì māo",
             "summaryEnglish": "A stray cat looks for a home.",
             "characters": [
                 {
                     "name": "Fanfan",
-                    "chinese": "饭饭",
+                    "chinese": "飯飯",
                     "pinyin": "Fànfan",
                     "about": "A stray cat.",
                 }
             ],
             "newWords": [
-                {"simplified": "苹果", "pinyin": "píngguǒ", "english": "apple"}
+                {"traditional": "蘋果", "pinyin": "píngguǒ", "english": "apple"}
             ],
             "chapters": [
                 {
@@ -99,7 +101,7 @@ class WorkshopTests(WorkshopTestCase):
             {
                 "title": "The Red Kite",
                 "idea": "A kite disappears.",
-                "level": "HSK 1",
+                "level": "TOCFL Novice 2",
             }
         )
         server.save_project(project)
@@ -114,23 +116,23 @@ class WorkshopTests(WorkshopTestCase):
             {
                 "title": "Tea for Two",
                 "idea": "Friends share tea.",
-                "level": "HSK 1",
+                "level": "TOCFL Novice 2",
                 "englishStory": "Lin shared tea with her friend.",
                 "approved": True,
             }
         )
         server.save_project(project)
         response = {
-            "schemaVersion": 1,
+            "schemaVersion": 2,
             "title": {
                 "english": "Tea for Two",
-                "chinese": "两个人的茶",
+                "chinese": "兩個人的茶",
                 "pinyin": "Liǎng ge rén de chá",
             },
-            "level": "HSK 1",
+            "level": "TOCFL Novice 2",
             "summary": {
                 "english": "Two friends share tea.",
-                "chinese": "两个朋友一起喝茶。",
+                "chinese": "兩個朋友一起喝茶。",
                 "pinyin": "Liǎng ge péngyou yìqǐ hē chá.",
             },
             "segments": [
@@ -160,7 +162,7 @@ class WorkshopTests(WorkshopTestCase):
                 }
             ],
             "vocabulary": [
-                {"simplified": "茶", "pinyin": "chá", "english": "tea"}
+                {"traditional": "茶", "pinyin": "chá", "english": "tea"}
             ],
         }
 
@@ -184,22 +186,79 @@ class WorkshopTests(WorkshopTestCase):
         self.assertEqual(manifest["items"][0]["output"], "audio/001.wav")
         self.assertEqual(manifest["items"][0]["text"], "林和朋友一起喝茶。")
 
+    def test_localization_retries_an_incomplete_word_definition(self):
+        project = server.normalize_project(
+            {
+                "title": "A New Friend",
+                "idea": "A child meets a friend.",
+                "level": "TOCFL Novice 1",
+                "englishStory": "Ami meets a friend.",
+                "approved": True,
+            }
+        )
+        server.save_project(project)
+        incomplete = {
+            "segments": [
+                {
+                    "english": "Ami meets a friend.",
+                    "chinese": "測試名看見朋友。",
+                    "pinyin": "Cèshìmíng kànjiàn péngyou.",
+                    "audioText": "測試名看見朋友。",
+                    "words": [
+                        {"text": "測試名", "pinyin": "", "english": ""},
+                        {"text": "看見", "pinyin": "kànjiàn", "english": "to see"},
+                        {"text": "朋友", "pinyin": "péngyou", "english": "friend"},
+                        {"text": "。", "pinyin": "", "english": ""},
+                    ],
+                }
+            ],
+            "vocabulary": [],
+        }
+        repairs = {
+            "repairs": [
+                {
+                    "segment": 1,
+                    "word": 1,
+                    "text": "測試名",
+                    "pinyin": "Cèshìmíng",
+                    "english": "Ami (a name)",
+                }
+            ]
+        }
+
+        with patch.object(
+            server,
+            "deepseek_chat",
+            side_effect=[
+                (json.dumps(incomplete, ensure_ascii=False), {"total_tokens": 4}),
+                (json.dumps(repairs, ensure_ascii=False), {"total_tokens": 6}),
+            ],
+        ) as chat:
+            localized, usage = server.localize_story(project)
+
+        self.assertEqual(chat.call_count, 2)
+        self.assertEqual(usage["total_tokens"], 10)
+        self.assertEqual(localized["status"], "files_ready")
+        repair_prompt = chat.call_args_list[1].args[0][-1]["content"]
+        self.assertIn('"word": 1', repair_prompt)
+        self.assertIn('"text": "測試名"', repair_prompt)
+
     def test_audio_publish_copies_assets_into_flutter_library(self):
         project = server.normalize_project(
             {
                 "title": "Tea for Two",
                 "idea": "Friends share tea.",
-                "level": "HSK 1",
+                "level": "TOCFL Novice 2",
                 "englishStory": "Lin shared tea with her friend.",
                 "approved": True,
             }
         )
         package = {
-            "schemaVersion": 1,
+            "schemaVersion": 2,
             "storyId": project["id"],
             "title": {
                 "english": "Tea for Two",
-                "chinese": "两个人的茶",
+                "chinese": "兩個人的茶",
                 "pinyin": "Liǎng ge rén de chá",
             },
             "summary": {
@@ -207,7 +266,7 @@ class WorkshopTests(WorkshopTestCase):
                 "chinese": "朋友一起喝茶。",
                 "pinyin": "Péngyou yìqǐ hē chá.",
             },
-            "level": "HSK 1",
+            "level": "TOCFL Novice 2",
             "segments": [
                 {
                     "id": "001",
@@ -314,20 +373,20 @@ class WorkshopTests(WorkshopTestCase):
         package_response = {
             "title": {
                 "english": "The Kite",
-                "chinese": "风筝",
+                "chinese": "風箏",
                 "pinyin": "Fēngzheng",
             },
             "summary": {
                 "english": "Mina finds a kite.",
-                "chinese": "米娜找到风筝。",
+                "chinese": "米娜找到風箏。",
                 "pinyin": "Mǐnà zhǎodào fēngzheng.",
             },
             "segments": [
                 {
                     "english": "Mina found the kite.",
-                    "chinese": "米娜找到了风筝。",
+                    "chinese": "米娜找到了風箏。",
                     "pinyin": "Mǐnà zhǎodào le fēngzheng.",
-                    "audioText": "米娜找到了风筝。",
+                    "audioText": "米娜找到了風箏。",
                     "words": [
                         {"text": "米娜", "pinyin": "Mǐnà", "english": "Mina"},
                         {
@@ -341,7 +400,7 @@ class WorkshopTests(WorkshopTestCase):
                             "english": "completion particle",
                         },
                         {
-                            "text": "风筝",
+                            "text": "風箏",
                             "pinyin": "fēngzheng",
                             "english": "kite",
                         },
@@ -365,7 +424,7 @@ class WorkshopTests(WorkshopTestCase):
             return [
                 {
                     "id": "001",
-                    "text": "米娜找到了风筝。",
+                    "text": "米娜找到了風箏。",
                     "output": "audio/001.wav",
                     "durationSeconds": 1.0,
                     "sampleRate": 24000,
@@ -396,7 +455,7 @@ class WorkshopTests(WorkshopTestCase):
                     {
                         "title": "The Kite",
                         "idea": "Mina finds a kite.",
-                        "level": "HSK 1",
+                        "level": "TOCFL Novice 2",
                     },
                 )["project"]
                 project_id = created["id"]
@@ -438,28 +497,65 @@ class WorkshopTests(WorkshopTestCase):
         self.assertEqual(localized["package"]["segments"][0]["audioFile"], "audio/001.wav")
 
 
-class NewbieLevelTests(WorkshopTestCase):
-    def test_newbie_requests_carry_the_hsk1_word_budget(self):
-        localization = server.localization_level_rules("HSK 1")
+class TocflLevelTests(WorkshopTestCase):
+    def test_budgeted_requests_carry_the_tocfl_word_list(self):
+        localization = server.localization_level_rules("TOCFL Novice 2")
 
         # A sample of the list itself, not just a description of it.
-        self.assertIn("睡觉", localization)
-        self.assertIn("商店", localization)
+        self.assertIn("睡覺", localization)
+        self.assertIn("朋友", localization)
         self.assertIn("at least three times", localization)
-        self.assertNotIn("睡觉", server.localization_level_rules("HSK 3"))
+        # Level 3 ships no vendored list, so the words must not appear.
+        self.assertNotIn("睡覺", server.localization_level_rules("TOCFL Level 3"))
 
-    def test_newbie_story_rules_ask_for_repetition(self):
-        rules = server.story_level_rules("HSK 1")
+    def test_budgeted_story_rules_ask_for_repetition(self):
+        rules = server.story_level_rules("TOCFL Novice 2")
 
         self.assertIn("three times", rules)
         self.assertIn("150–260 Chinese characters", rules)
-        self.assertNotIn("150–260", server.story_level_rules("HSK 3"))
+        self.assertNotIn("150–260", server.story_level_rules("TOCFL Level 3"))
 
-    def test_newbie_detection_accepts_the_level_names_in_use(self):
-        self.assertTrue(server.is_newbie("HSK 1"))
-        self.assertTrue(server.is_newbie("Newbie"))
-        self.assertFalse(server.is_newbie("HSK 1–2"))
-        self.assertFalse(server.is_newbie(""))
+    def test_every_localization_carries_the_taiwan_rules(self):
+        for level in ("TOCFL Novice 1", "TOCFL Level 1", "TOCFL Level 3"):
+            rules = server.localization_level_rules(level)
+            with self.subTest(level=level):
+                self.assertIn("正體字", rules)
+                self.assertIn("兒化", rules)
+                self.assertIn("lèsè", rules)
+                self.assertIn("腳踏車", rules)
+
+    def test_level_names_resolve_including_legacy_hsk_labels(self):
+        self.assertEqual(tocfl.normalize("TOCFL Novice 1"), "NOVICE1")
+        self.assertEqual(tocfl.normalize("準備級二級"), "NOVICE2")
+        self.assertEqual(tocfl.normalize("TOCFL Level 2"), "LEVEL2")
+        # Projects saved before the move to TOCFL still open.
+        self.assertEqual(tocfl.normalize("HSK 1"), "NOVICE2")
+        self.assertEqual(tocfl.normalize("HSK 3"), "LEVEL3")
+        # Anything unrecognised falls back to the gentlest level.
+        self.assertEqual(tocfl.normalize(""), "NOVICE1")
+        self.assertEqual(tocfl.normalize("nonsense"), "NOVICE1")
+
+    def test_only_low_levels_ship_a_word_budget(self):
+        self.assertTrue(tocfl.has_word_budget("TOCFL Novice 1"))
+        self.assertTrue(tocfl.has_word_budget("TOCFL Level 1"))
+        self.assertFalse(tocfl.has_word_budget("TOCFL Level 2"))
+
+    def test_budgets_are_cumulative(self):
+        novice1 = {word for word, _, _ in tocfl.NOVICE1_BUDGET}
+        novice2 = {word for word, _, _ in tocfl.NOVICE2_BUDGET}
+        level1 = {word for word, _, _ in tocfl.LEVEL1_BUDGET}
+
+        self.assertTrue(novice1 < novice2)
+        self.assertTrue(novice2 < level1)
+
+    def test_word_budget_uses_taiwan_readings(self):
+        budget = dict(
+            (word, pinyin) for word, pinyin, _ in tocfl.LEVEL1_BUDGET
+        )
+        # Taiwan says xīngqí and gives 喜歡 and 眼睛 their full second tone.
+        self.assertEqual(budget["星期"], "xīngqí")
+        self.assertEqual(budget["喜歡"], "xǐhuān")
+        self.assertEqual(budget["眼睛"], "yǎnjīng")
 
 
 class BookTests(WorkshopTestCase):
@@ -467,12 +563,12 @@ class BookTests(WorkshopTestCase):
         book = self.plan_a_book(chapter_count=4)
 
         self.assertEqual(len(book["chapters"]), 4)
-        self.assertEqual(server.load_book(book["id"])["titleChinese"], "我是猫")
+        self.assertEqual(server.load_book(book["id"])["titleChinese"], "我是貓")
         projects = server.list_projects()
         self.assertEqual(len(projects), 4)
         for chapter in book["chapters"]:
             project = server.load_project(chapter["projectId"])
-            self.assertEqual(project["level"], "HSK 1")
+            self.assertEqual(project["level"], "TOCFL Novice 2")
             self.assertEqual(project["idea"], chapter["outline"])
             self.assertEqual(project["book"]["chapterNumber"], chapter["number"])
             self.assertEqual(project["book"]["chapterCount"], 4)
@@ -501,8 +597,8 @@ class BookTests(WorkshopTestCase):
 
         self.assertIn("chapter 3 of 4", context)
         self.assertIn("A stray cat looks for a home.", context)
-        self.assertIn("饭饭", context)
-        self.assertIn("苹果", context)
+        self.assertIn("飯飯", context)
+        self.assertIn("蘋果", context)
         # The outlines of chapters 1 and 2 are history; chapter 4 is not.
         self.assertIn("place 1.", context)
         self.assertIn("place 2.", context)
@@ -520,7 +616,7 @@ class BookTests(WorkshopTestCase):
 
         # The editing form never sends the book reference back.
         updated = server.normalize_project(
-            {"title": "Renamed", "idea": "Changed.", "level": "HSK 1"},
+            {"title": "Renamed", "idea": "Changed.", "level": "TOCFL Novice 2"},
             project,
         )
 
@@ -548,18 +644,18 @@ class BookTests(WorkshopTestCase):
         book = self.plan_a_book(chapter_count=4)
         project = server.load_project(book["chapters"][0]["projectId"])
         package = {
-            "schemaVersion": 1,
+            "schemaVersion": 2,
             "storyId": project["id"],
             "title": {"english": "Chapter 1", "chinese": "第一章", "pinyin": "Dì yī zhāng"},
-            "summary": {"english": "The cat eats.", "chinese": "猫吃饭。", "pinyin": "Māo chī fàn."},
-            "level": "HSK 1",
+            "summary": {"english": "The cat eats.", "chinese": "貓吃飯。", "pinyin": "Māo chī fàn."},
+            "level": "TOCFL Novice 2",
             "segments": [
                 {
                     "id": "001",
                     "english": "The cat eats.",
-                    "chinese": "猫吃饭。",
+                    "chinese": "貓吃飯。",
                     "pinyin": "Māo chī fàn.",
-                    "audioText": "猫吃饭。",
+                    "audioText": "貓吃飯。",
                     "audioFile": "audio/001.wav",
                 }
             ],
@@ -577,7 +673,7 @@ class BookTests(WorkshopTestCase):
                 "storyId": project["id"],
                 "generatedAt": server.utc_now(),
                 "durationSeconds": 2.0,
-                "items": [{"id": "001", "text": "猫吃饭。", "output": "audio/001.wav"}],
+                "items": [{"id": "001", "text": "貓吃飯。", "output": "audio/001.wav"}],
             },
         )
 
@@ -592,6 +688,231 @@ class BookTests(WorkshopTestCase):
         self.assertEqual(entry["book"]["chapterNumber"], 1)
         self.assertEqual(entry["book"]["chapterCount"], 4)
         self.assertEqual(entry["book"]["titleEnglish"], "I'm a Cat")
+
+
+class ScriptConversionTests(unittest.TestCase):
+    """The Traditional-to-Simplified table read out of the reader's dictionary."""
+
+    def test_converts_words_not_just_characters(self):
+        self.assertEqual(script_convert.to_simplified("頭髮很長"), "头发很长")
+        self.assertEqual(script_convert.to_simplified("學習中文"), "学习中文")
+        self.assertEqual(script_convert.to_simplified("臺灣"), "台湾")
+
+    def test_leaves_shared_characters_and_punctuation_alone(self):
+        self.assertEqual(script_convert.to_simplified("我是男孩。"), "我是男孩。")
+        self.assertEqual(script_convert.to_simplified("A cat 說："), "A cat 说：")
+        self.assertEqual(script_convert.to_simplified(""), "")
+
+    def test_converts_script_without_translating_vocabulary(self):
+        # 軟體 is the Taiwan word; converting script must not turn it into the
+        # mainland's 软件. The Simplified view is Taiwan Mandarin, just written
+        # in the other script.
+        self.assertEqual(script_convert.to_simplified("軟體"), "软体")
+
+    def test_detects_simplified_characters(self):
+        self.assertEqual(script_convert.simplified_only_characters("學習"), [])
+        self.assertEqual(script_convert.simplified_only_characters("中文"), [])
+        self.assertEqual(
+            script_convert.simplified_only_characters("这里有学习"),
+            ["这", "学", "习"],
+        )
+
+
+class TraditionalPackageTests(WorkshopTestCase):
+    def segment(self, chinese, words):
+        return {
+            "id": "001",
+            "english": "A line.",
+            "chinese": chinese,
+            "pinyin": "Pīnyīn.",
+            "audioText": chinese,
+            "words": words,
+        }
+
+    def test_validate_derives_simplified_alongside_traditional(self):
+        package = server.validate_package(
+            {
+                "segments": [
+                    self.segment(
+                        "他學習中文。",
+                        [
+                            {"text": "他", "pinyin": "tā", "english": "he"},
+                            {
+                                "text": "學習",
+                                "pinyin": "xuéxí",
+                                "english": "to study",
+                            },
+                            {
+                                "text": "中文",
+                                "pinyin": "Zhōngwén",
+                                "english": "Chinese",
+                            },
+                            {"text": "。", "pinyin": "", "english": ""},
+                        ],
+                    )
+                ],
+                "vocabulary": [
+                    {"traditional": "學習", "pinyin": "xuéxí", "english": "to study"}
+                ],
+            }
+        )
+
+        segment = package["segments"][0]
+        self.assertEqual(segment["chinese"], "他學習中文。")
+        self.assertEqual(segment["chineseSimplified"], "他学习中文。")
+        # Audio text stays Traditional: 干 would be ambiguous for the synthesiser.
+        self.assertEqual(segment["audioText"], "他學習中文。")
+        self.assertEqual(segment["words"][1]["textSimplified"], "学习")
+        # Characters the scripts share carry no derived form at all.
+        self.assertEqual(segment["words"][0]["textSimplified"], "")
+        self.assertEqual(package["vocabulary"][0]["simplified"], "学习")
+        self.assertEqual(package["schemaVersion"], 2)
+        self.assertEqual(package["script"], "traditional")
+
+    def test_validate_rejects_simplified_segments(self):
+        with self.assertRaises(server.WorkshopError) as caught:
+            server.validate_package(
+                {
+                    "segments": [
+                        self.segment(
+                            "他学习中文。",
+                            [
+                                {"text": "他", "pinyin": "tā", "english": "he"},
+                                {
+                                    "text": "学习",
+                                    "pinyin": "xuéxí",
+                                    "english": "to study",
+                                },
+                                {
+                                    "text": "中文",
+                                    "pinyin": "Zhōngwén",
+                                    "english": "Chinese",
+                                },
+                                {"text": "。", "pinyin": "", "english": ""},
+                            ],
+                        )
+                    ]
+                }
+            )
+
+        self.assertIn("Simplified", str(caught.exception))
+        self.assertEqual(caught.exception.status, 502)
+
+    def test_dictionary_repairs_isolated_missing_word_metadata(self):
+        package = {
+            "segments": [
+                self.segment(
+                    "阿米喝茶。",
+                    [
+                        {"text": "阿米", "pinyin": "", "english": ""},
+                        {"text": "喝", "pinyin": "hē", "english": "to drink"},
+                        {"text": "茶", "pinyin": "chá", "english": "tea"},
+                        {"text": "。", "pinyin": "", "english": ""},
+                    ],
+                )
+            ],
+            "vocabulary": [],
+        }
+
+        with patch.object(
+            script_convert,
+            "word_metadata",
+            return_value=("Āmǐ", "Ami (a name)"),
+        ):
+            repaired = server.validate_package(
+                server.repair_package_word_metadata(package)
+            )
+
+        word = repaired["segments"][0]["words"][0]
+        self.assertEqual(word["pinyin"], "Āmǐ")
+        self.assertEqual(word["english"], "Ami (a name)")
+
+    def test_vocabulary_accepts_the_pre_traditional_key(self):
+        package = server.validate_package(
+            {
+                "segments": [
+                    self.segment(
+                        "茶。",
+                        [
+                            {"text": "茶", "pinyin": "chá", "english": "tea"},
+                            {"text": "。", "pinyin": "", "english": ""},
+                        ],
+                    )
+                ],
+                # A checkpoint written before the move to Traditional.
+                "vocabulary": [
+                    {"simplified": "茶", "pinyin": "chá", "english": "tea"}
+                ],
+            }
+        )
+
+        self.assertEqual(package["vocabulary"][0]["traditional"], "茶")
+
+    def test_published_index_carries_both_scripts(self):
+        project = server.normalize_project(
+            {
+                "title": "Studying",
+                "idea": "A student studies.",
+                "level": "TOCFL Novice 2",
+                "englishStory": "A student studies Chinese.",
+                "approved": True,
+            }
+        )
+        package = {
+            "schemaVersion": 2,
+            "storyId": project["id"],
+            "title": {"english": "Studying", "chinese": "學習", "pinyin": "Xuéxí"},
+            "summary": {
+                "english": "A student studies.",
+                "chinese": "他學習中文。",
+                "pinyin": "Tā xuéxí Zhōngwén.",
+            },
+            "level": "TOCFL Novice 2",
+            "segments": [
+                {
+                    "id": "001",
+                    "english": "He studies Chinese.",
+                    "chinese": "他學習中文。",
+                    "chineseSimplified": "他学习中文。",
+                    "pinyin": "Tā xuéxí Zhōngwén.",
+                    "audioText": "他學習中文。",
+                    "audioFile": "audio/001.wav",
+                }
+            ],
+            "vocabulary": [],
+            "audio": {"engine": "Qwen3-TTS", "voice": "Vivian"},
+        }
+        project["package"] = package
+        project["status"] = "files_ready"
+        server.save_project(project)
+        folder = server.project_path(project["id"])
+        server.atomic_write_json(folder / "story.json", package)
+        server.atomic_write_json(
+            folder / "audio_manifest.json",
+            {
+                "storyId": project["id"],
+                "voice": "Vivian",
+                "generatedAt": server.utc_now(),
+                "durationSeconds": 2.0,
+                "items": [
+                    {"id": "001", "text": "他學習中文。", "output": "audio/001.wav"}
+                ],
+            },
+        )
+        (folder / "audio").mkdir(exist_ok=True)
+        (folder / "audio" / "001.wav").write_bytes(b"RIFF0000WAVE")
+
+        with patch.object(server, "generate_slow_variants", return_value={}):
+            server.publish_project_to_flutter(project)
+
+        library = json.loads(
+            (server.FLUTTER_CONTENT_ROOT / "index.json").read_text(encoding="utf-8")
+        )
+        entry = library["stories"][0]
+        self.assertEqual(entry["titleChinese"], "學習")
+        self.assertEqual(entry["titleChineseSimplified"], "学习")
+        self.assertEqual(entry["summaryChineseSimplified"], "他学习中文。")
+        self.assertEqual(entry["level"], "TOCFL Novice 2")
 
 
 if __name__ == "__main__":

@@ -730,8 +730,21 @@ select:focus {
   line-height: 1.6;
 }
 
+.empty-package .package-error {
+  width: min(100%, 620px);
+  margin: 0 auto 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(166, 55, 45, 0.28);
+  border-radius: 10px;
+  background: rgba(166, 55, 45, 0.08);
+  color: #8f3028;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .package-view.is-hidden,
 .empty-package.is-hidden,
+.package-error.is-hidden,
 .busy-overlay.is-hidden {
   display: none;
 }

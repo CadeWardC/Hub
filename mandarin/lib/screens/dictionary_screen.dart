@@ -67,7 +67,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
 
   Future<void> _toggleSaved(DictionaryEntry entry) async {
     final saved = await SavedWordsStore.toggle(
-      text: entry.simplified,
+      text: entry.traditional,
       pinyin: entry.firstPinyin,
       english: entry.summary,
       storyId: 'dictionary',
@@ -75,9 +75,9 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
     if (!mounted) return;
     setState(() {
       if (saved) {
-        _savedTexts.add(entry.simplified);
+        _savedTexts.add(entry.traditional);
       } else {
-        _savedTexts.remove(entry.simplified);
+        _savedTexts.remove(entry.traditional);
       }
     });
   }
@@ -158,7 +158,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                   final entry = _results[index];
                   return _EntryCard(
                     entry: entry,
-                    saved: _savedTexts.contains(entry.simplified),
+                    saved: _savedTexts.contains(entry.traditional),
                     onToggleSaved: () => _toggleSaved(entry),
                   );
                 },
@@ -215,7 +215,7 @@ class _EntryCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  entry.simplified,
+                  entry.traditional,
                   style: const TextStyle(
                     color: MandarinReaderApp.ink,
                     fontSize: 30,
@@ -238,10 +238,10 @@ class _EntryCard extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  if (reading.traditional != null &&
-                      reading.traditional!.isNotEmpty)
+                  if (reading.simplified != null &&
+                      reading.simplified!.isNotEmpty)
                     Text(
-                      'traditional ${reading.traditional}',
+                      'simplified ${reading.simplified}',
                       style: const TextStyle(
                         color: Color(0xFF8A918B),
                         fontSize: 12,

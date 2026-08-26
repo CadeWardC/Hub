@@ -7,9 +7,19 @@ reader ships in `assets/dictionary/cedict.json`.
     python tool/build_dictionary.py            # download and convert
     python tool/build_dictionary.py --source cedict.txt
 
-The output is keyed by simplified headword so the reader can look a word up
-without scanning, and numbered pinyin (ni3 hao3) is converted to the tone marks
-(nǐ hǎo) used everywhere else in the app.
+The output is keyed by **traditional** headword, because that is the script the
+reader teaches and displays. Numbered pinyin (ni3 hao3) is converted to the tone
+marks (nǐ hǎo) used everywhere else in the app.
+
+Two extras make the Simplified/Traditional toggle work without shipping a
+conversion library:
+
+* each reading carries its simplified form when it differs, so the Story
+  Workshop can build a traditional-to-simplified table straight from this file;
+  and
+* `simplifiedIndex` maps a simplified headword back to the traditional ones it
+  could be, so the Dictionary tab still finds 学习 when the entry is 學習 — and
+  so does the Speak tab when a device recogniser hands back Simplified.
 """
 
 from __future__ import annotations
@@ -82,9 +92,14 @@ def pinyin_to_marks(pinyin: str) -> str:
 
 
 # CC-CEDICT writes cross-references as 歡迎|欢迎[huan1 ying2] and classifiers as
-# CL:個|个[ge4]. Readable definitions keep the simplified form and tone marks.
+# CL:個|个[ge4]. Readable definitions keep the traditional form and tone marks,
+# matching the script the entries are keyed by.
 CROSS_REFERENCE = re.compile(r"([^\s,;/]+?)\|([^\s,;/\[]+)\[([^\]]+)\]")
 BARE_REFERENCE = re.compile(r"([一-鿿]+)\[([^\]]+)\]")
+# CC-CEDICT records Taiwan's reading where it differs from the mainland's, as
+# "Taiwan pr. [fa3]". Those notes matter to a reader that teaches Taiwan
+# Mandarin, so render them in tone marks like every other reading.
+LOOSE_READING = re.compile(r"\[([a-zA-ZüÜ:0-9 ]+)\]")
 
 
 def clean_sense(sense: str) -> str:
@@ -93,10 +108,19 @@ def clean_sense(sense: str) -> str:
     classifier = "CL:" in sense
     sense = sense.replace("CL:", "classifier: ")
     sense = CROSS_REFERENCE.sub(
-        lambda m: f"{m.group(2)} ({pinyin_to_marks(m.group(3))})", sense
+        lambda m: f"{m.group(1)} ({pinyin_to_marks(m.group(3))})", sense
     )
     sense = BARE_REFERENCE.sub(
         lambda m: f"{m.group(1)} ({pinyin_to_marks(m.group(2))})", sense
+    )
+    # Whatever numbered pinyin is left stands on its own, as in "Taiwan pr.
+    # [fa3]". Only substitute when the conversion actually changes something,
+    # so bracketed prose is left alone.
+    sense = LOOSE_READING.sub(
+        lambda m: marks
+        if (marks := pinyin_to_marks(m.group(1))) != m.group(1)
+        else m.group(0),
+        sense,
     )
     if classifier:
         sense = sense.replace(",", ", ").replace(",  ", ", ")
@@ -117,6 +141,9 @@ def read_source(source: Path | None) -> str:
 
 def build(text: str) -> dict:
     entries: dict[str, list] = {}
+    # A simplified headword can come from several traditional ones: 发 is both
+    # 發 (fā, to send) and 髮 (fà, hair). Keep every candidate.
+    simplified_index: dict[str, list[str]] = {}
     metadata = {}
     kept = 0
     for line in text.splitlines():
@@ -138,13 +165,20 @@ def build(text: str) -> dict:
             continue
         reading = [pinyin_to_marks(pinyin), readings]
         if traditional != simplified:
-            reading.append(traditional)
-        entries.setdefault(simplified, []).append(reading)
+            reading.append(simplified)
+            candidates = simplified_index.setdefault(simplified, [])
+            if traditional not in candidates:
+                candidates.append(traditional)
+        entries.setdefault(traditional, []).append(reading)
         kept += 1
 
-    print(f"{kept} entries over {len(entries)} headwords")
+    print(
+        f"{kept} entries over {len(entries)} traditional headwords, "
+        f"{len(simplified_index)} simplified aliases"
+    )
     return {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
+        "script": "traditional",
         "source": "CC-CEDICT",
         "publisher": "MDBG",
         "license": "CC BY-SA 4.0",
@@ -152,6 +186,7 @@ def build(text: str) -> dict:
         "url": "https://www.mdbg.net/chinese/dictionary?page=cc-cedict",
         "version": metadata.get("date", ""),
         "entries": entries,
+        "simplifiedIndex": simplified_index,
     }
 
 

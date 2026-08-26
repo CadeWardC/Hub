@@ -1,8 +1,8 @@
 # Story Workshop
 
-A private, local authoring studio for building Mandarin graded-reader stories.
-It is separate from the Flutter app and is never included in the Hub's public
-GitHub Pages artifact.
+A private, local authoring studio for building Taiwan Mandarin graded-reader
+stories in Traditional characters. It is separate from the Flutter app and is
+never included in the Hub's public GitHub Pages artifact.
 
 ## Start
 
@@ -28,20 +28,62 @@ saved in a story file.
 
 ## Levels
 
-The learner level chosen for a story decides the vocabulary budget sent with
-every request. **HSK 1 (Newbie)** is handled specially: `hsk1.py` holds the
-150-word HSK 1 list, the core verbs a Newbie story should lean on, and the
-sentence patterns it should recycle. Those are pasted into both the English
-draft request and the localization request, along with density targets measured
-from published Newbie chapters:
+Levels are **TOCFL** (華語文能力測驗), Taiwan's proficiency test, not the
+mainland's HSK. `tocfl.py` defines the ladder and the editorial guidance;
+`tocfl_words.py` holds the vendored word data and is generated:
 
-* 150–260 Chinese characters per story or chapter;
-* 30–45 different words, used at least 2.5 times each on average;
+```text
+python tool/build_tocfl.py
+```
+
+| Level | Chinese | CEFR | Words | Full list in prompt |
+| --- | --- | --- | --- | --- |
+| Novice 1 | 準備級一級 | pre-A1 | 160 | yes |
+| Novice 2 | 準備級二級 | pre-A1 | 394 | yes |
+| Level 1 | 入門級 | A1 | 739 | yes |
+| Level 2 | 基礎級 | A2 | ~1,250 | no |
+| Level 3 | 進階級 | B1 | ~2,500 | no |
+
+Budgets are cumulative: a Novice 2 story may use everything Novice 1 may. The
+three low tiers paste their whole word list into both the English draft request
+and the localization request, along with the core verbs a story should lean on,
+the sentence patterns it should recycle, and density targets:
+
+* the level's character and distinct-word targets;
+* at least 2.5 uses per different word;
 * at most 5 words from outside the list, each used three or more times;
 * fewer than a third of the different words appearing only once.
 
-Other levels get general guidance instead. Editing the master prompts does not
-remove these rules — they travel with the brief, not the prompt.
+The upper bands are too large to paste, so they get count-based guidance
+instead. Editing the master prompts does not remove any of this — it travels
+with the brief, not the prompt.
+
+The vendored pinyin is **Taiwan-standard**, taken from the official list, so the
+budget itself is what teaches 垃圾 lèsè and 喜歡 xǐhuān rather than the mainland
+readings. Every localization request also carries the Taiwan-versus-mainland
+rules (no 兒化, the 有 + verb question, 腳踏車 not 自行車) from `TAIWAN_LEXICON` and
+`TAIWAN_STYLE_RULES`.
+
+Levels saved before the move to TOCFL still open: `tocfl.normalize` maps the old
+HSK labels onto the nearest rung.
+
+## Script
+
+Stories are written in Traditional and the Simplified rendering is derived from
+it, never the reverse. `script_convert.py` builds its table by reading the
+reader's own `assets/dictionary/cedict.json`, so there is no OpenCC dependency
+to install next to the Qwen runtime, and conversion runs longest-match over
+whole words before falling back to characters.
+
+Only this direction is automated. Simplified-to-Traditional is genuinely
+ambiguous — a table will happily give you 昰 for 是, 咊 for 和, and 瞭 for the
+particle 了 — which is why Traditional is the authored form.
+
+Generation is checked rather than trusted: a segment containing a
+Simplified-only character is rejected outright instead of being quietly fixed
+up, because its pinyin and word splits were reasoned about in the wrong script
+too. The segment `audioText` stays Traditional, since converting it down would
+hand the synthesiser 干 for both 乾 and 幹 and let it pick the wrong reading.
 
 ## Books
 
@@ -66,8 +108,9 @@ its chapters.
    English story with DeepSeek V4 Pro.
 2. Edit the story directly or ask DeepSeek for a revision. Approve the exact
    English version that should become the source.
-3. Generate aligned Simplified Chinese, tone-mark pinyin, English translations,
-   vocabulary, and the audio manifest.
+3. Generate aligned Traditional Chinese, Taiwan-standard tone-mark pinyin,
+   English translations, vocabulary, and the audio manifest. The Simplified
+   rendering is derived here too.
 4. Save a durable checkpoint. You can close the workshop and return later.
 5. Continue from that checkpoint to generate Qwen3-TTS narration locally.
 6. Publish the complete story and audio into the Flutter reader.

@@ -108,13 +108,8 @@
 
             <label class="field">
               <span>Learner level</span>
-              <select id="storyLevel">
-                <option selected value="HSK 1">HSK 1 (Newbie)</option>
-                <option>HSK 1–2</option>
-                <option>HSK 2</option>
-                <option>HSK 2–3</option>
-                <option>HSK 3</option>
-              </select>
+              <!-- Options are filled from the server's TOCFL ladder on load. -->
+              <select id="storyLevel"></select>
             </label>
 
             <label class="field">
@@ -224,6 +219,7 @@
             <div class="package-symbol" aria-hidden="true">译</div>
             <h4>Your approved story is ready.</h4>
             <p>Generate the structured Mandarin package when you are ready for the second API call.</p>
+            <p class="package-error is-hidden" id="packageError" role="alert"></p>
             <button class="button button-primary button-large" id="localizeButton" type="button">Create Mandarin package</button>
           </div>
 
@@ -326,13 +322,8 @@
       </label>
       <label class="field">
         <span>Learner level</span>
-        <select id="bookLevel">
-          <option selected value="HSK 1">HSK 1 (Newbie)</option>
-          <option>HSK 1–2</option>
-          <option>HSK 2</option>
-          <option>HSK 2–3</option>
-          <option>HSK 3</option>
-        </select>
+        <!-- Options are filled from the server's TOCFL ladder on load. -->
+        <select id="bookLevel"></select>
       </label>
       <label class="field">
         <span>Chapters</span>

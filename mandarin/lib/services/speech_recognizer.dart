@@ -11,7 +11,22 @@ class SpeechRecognizer {
   final SpeechToText _speech;
 
   /// Mandarin locale ids, best first. Devices differ in what they call it.
-  static const _preferredLocales = ['zh_CN', 'zh-CN', 'cmn_CN', 'zh', 'zh_Hans'];
+  ///
+  /// Taiwan comes first deliberately. A mainland recogniser transcribes into
+  /// Simplified characters, which then have to be mapped back before they match
+  /// a Traditional story — and it scores Taiwan pronunciation against mainland
+  /// expectations. `zh` is kept as a last resort because some devices offer
+  /// nothing more specific.
+  static const _preferredLocales = [
+    'zh_TW',
+    'zh-TW',
+    'cmn_TW',
+    'cmn-Hant-TW',
+    'zh_Hant_TW',
+    'zh_Hant',
+    'zh_HK',
+    'zh',
+  ];
 
   bool _available = false;
   String? _localeId;
@@ -65,7 +80,7 @@ class SpeechRecognizer {
       _available = false;
       _unavailableReason =
           'No Mandarin speech recognition is installed on this device. On '
-          'Android, add Chinese in the Google app\'s voice settings.';
+          'Android, add Chinese (Taiwan) in the Google app\'s voice settings.';
     }
     return _available;
   }

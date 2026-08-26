@@ -50,6 +50,10 @@ class _ReaderScreenState extends State<ReaderScreen> {
 
   bool _showPinyin = true;
   bool _showToneColors = false;
+
+  /// Traditional unless the reader asks otherwise; Taiwan is what this app is
+  /// for. Unlike the display chips, the choice is remembered across stories.
+  ChineseScript _script = ChineseScript.traditional;
   bool _showEnglish = true;
   bool _playAll = false;
   int _activeIndex = 0;
@@ -89,7 +93,23 @@ class _ReaderScreenState extends State<ReaderScreen> {
       _handleAudioComplete();
     });
     _loadSavedWords();
+    _loadScript();
     _recordLastRead();
+  }
+
+  static const _scriptKey = 'mandarin.script.v1';
+
+  Future<void> _loadScript() async {
+    final preferences = await SharedPreferences.getInstance();
+    final saved = preferences.getString(_scriptKey);
+    if (!mounted || saved != ChineseScript.simplified.name) return;
+    setState(() => _script = ChineseScript.simplified);
+  }
+
+  Future<void> _setScript(ChineseScript script) async {
+    setState(() => _script = script);
+    final preferences = await SharedPreferences.getInstance();
+    await preferences.setString(_scriptKey, script.name);
   }
 
   Future<void> _loadSavedWords() async {
@@ -241,7 +261,8 @@ class _ReaderScreenState extends State<ReaderScreen> {
   void _showVocabularyWord(VocabularyItem item) {
     setState(() {
       _heldWord = StoryWord(
-        text: item.simplified,
+        text: item.traditional,
+        textSimplified: item.simplified,
         pinyin: item.pinyin,
         english: item.english,
       );
@@ -379,7 +400,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F5EF),
-      appBar: AppBar(title: Text(widget.summary.titleChinese)),
+      appBar: AppBar(title: Text(widget.summary.titleChineseIn(_script))),
       body: FutureBuilder<Story>(
         future: _story,
         builder: (context, snapshot) {
@@ -401,6 +422,8 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 showPinyin: _showPinyin,
                 showToneColors: _showToneColors,
                 showEnglish: _showEnglish,
+                script: _script,
+                canSwitchScript: story.hasSimplified,
                 onPinyinChanged: (value) => setState(() => _showPinyin = value),
                 onToneColorsChanged: (value) =>
                     setState(() => _showToneColors = value),
@@ -408,6 +431,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                   _showEnglish = value;
                   _revealedIndex = null;
                 }),
+                onScriptChanged: _setScript,
               ),
               _TranslationPanel(
                 segment: activeSegment,
@@ -417,6 +441,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                 wordPinned: _wordPinned,
                 hidden: !_showEnglish && _revealedIndex != _activeIndex,
                 toneColors: _showToneColors,
+                script: _script,
                 heldWordSaved:
                     _heldWord != null && _savedTexts.contains(_heldWord!.text),
                 onDismissWord: _dismissHeldWord,
@@ -446,7 +471,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _StoryHeader(story: story),
+                              _StoryHeader(story: story, script: _script),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(
                                   22,
@@ -460,6 +485,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                                   segmentKeys: _segmentKeys,
                                   showPinyin: _showPinyin,
                                   toneColors: _showToneColors,
+                                  script: _script,
                                   activeIndex: _activeIndex,
                                   playingIndex: _playingIndex,
                                   heldSegmentIndex: _heldSegmentIndex,
@@ -483,6 +509,7 @@ class _ReaderScreenState extends State<ReaderScreen> {
                           child: _VocabularySection(
                             items: story.vocabulary,
                             onTapItem: _showVocabularyWord,
+                            script: _script,
                           ),
                         ),
                       ),
@@ -526,6 +553,7 @@ class _TranslationPanel extends StatelessWidget {
     required this.wordPinned,
     required this.hidden,
     required this.toneColors,
+    required this.script,
     required this.heldWordSaved,
     required this.onDismissWord,
     required this.onReveal,
@@ -539,6 +567,7 @@ class _TranslationPanel extends StatelessWidget {
   final bool wordPinned;
   final bool hidden;
   final bool toneColors;
+  final ChineseScript script;
   final bool heldWordSaved;
   final VoidCallback onDismissWord;
   final VoidCallback onReveal;
@@ -639,7 +668,7 @@ class _TranslationPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            word.text,
+            word.textIn(script),
             style: const TextStyle(
               color: MandarinReaderApp.ink,
               fontSize: 34,
@@ -720,6 +749,7 @@ class _StoryFlow extends StatefulWidget {
     required this.segmentKeys,
     required this.showPinyin,
     required this.toneColors,
+    required this.script,
     required this.activeIndex,
     required this.playingIndex,
     required this.heldSegmentIndex,
@@ -735,6 +765,7 @@ class _StoryFlow extends StatefulWidget {
   final Map<int, GlobalKey> segmentKeys;
   final bool showPinyin;
   final bool toneColors;
+  final ChineseScript script;
   final int activeIndex;
   final int? playingIndex;
   final int? heldSegmentIndex;
@@ -921,6 +952,7 @@ class _StoryFlowState extends State<_StoryFlow> {
           word: word,
           showPinyin: widget.showPinyin,
           toneColors: widget.toneColors,
+          script: widget.script,
           active: s == widget.activeIndex,
           playing: s == widget.playingIndex,
           held: s == widget.heldSegmentIndex && w == widget.heldWordIndex,
@@ -1073,6 +1105,7 @@ class _WordChip extends StatelessWidget {
     required this.word,
     required this.showPinyin,
     required this.toneColors,
+    required this.script,
     required this.active,
     required this.playing,
     required this.held,
@@ -1082,6 +1115,7 @@ class _WordChip extends StatelessWidget {
   final StoryWord word;
   final bool showPinyin;
   final bool toneColors;
+  final ChineseScript script;
   final bool active;
   final bool playing;
   final bool held;
@@ -1103,7 +1137,7 @@ class _WordChip extends StatelessWidget {
             )
           : null,
       child: Text(
-        word.text,
+        word.textIn(script),
         style: TextStyle(
           color: MandarinReaderApp.ink,
           fontSize: 26,
@@ -1148,20 +1182,30 @@ class _ReaderControls extends StatelessWidget {
     required this.showPinyin,
     required this.showToneColors,
     required this.showEnglish,
+    required this.script,
+    required this.canSwitchScript,
     required this.onPinyinChanged,
     required this.onToneColorsChanged,
     required this.onEnglishChanged,
+    required this.onScriptChanged,
   });
 
   final bool showPinyin;
   final bool showToneColors;
   final bool showEnglish;
+  final ChineseScript script;
+
+  /// False when the story ships no Simplified text, in which case the chip is
+  /// hidden rather than shown as a switch that changes nothing.
+  final bool canSwitchScript;
   final ValueChanged<bool> onPinyinChanged;
   final ValueChanged<bool> onToneColorsChanged;
   final ValueChanged<bool> onEnglishChanged;
+  final ValueChanged<ChineseScript> onScriptChanged;
 
   @override
   Widget build(BuildContext context) {
+    final simplified = script == ChineseScript.simplified;
     return Container(
       height: 58,
       padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -1172,6 +1216,19 @@ class _ReaderControls extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
+          if (canSwitchScript) ...[
+            Center(
+              child: FilterChip(
+                selected: simplified,
+                onSelected: (value) => onScriptChanged(
+                  value ? ChineseScript.simplified : ChineseScript.traditional,
+                ),
+                label: Text(simplified ? '简 Simplified' : '繁 Traditional'),
+                tooltip: 'Taiwan writes Traditional; switch to read Simplified',
+              ),
+            ),
+            const SizedBox(width: 8),
+          ],
           Center(
             child: FilterChip(
               selected: showPinyin,
@@ -1203,9 +1260,10 @@ class _ReaderControls extends StatelessWidget {
 }
 
 class _StoryHeader extends StatelessWidget {
-  const _StoryHeader({required this.story});
+  const _StoryHeader({required this.story, required this.script});
 
   final Story story;
+  final ChineseScript script;
 
   @override
   Widget build(BuildContext context) {
@@ -1249,7 +1307,7 @@ class _StoryHeader extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           Text(
-            story.titleChinese,
+            story.titleChineseIn(script),
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
               color: MandarinReaderApp.ink,
               fontWeight: FontWeight.w800,
@@ -1282,123 +1340,158 @@ class _StoryHeader extends StatelessWidget {
 
 /// Splits a segment's Chinese text into tappable words using the segment's own
 /// word data when present, otherwise the story vocabulary plus a small
-/// built-in HSK glossary.
+/// built-in Traditional glossary.
 class _WordTokenizer {
   static final RegExp _punctuation = RegExp(r'^[\s，。！？；：“”‘’、,.!?;:—…（）()]+$');
 
   static bool isPunctuation(String text) => _punctuation.hasMatch(text);
 
+  /// A small Traditional-character glossary for stories published without
+  /// per-word data. Readings are Taiwan-standard, which is why 喜歡 is xǐhuān
+  /// and 眼睛 is yǎnjīng here, and why there is no 兒化 form in the list.
   static const List<VocabularyItem> _fallbackGlossary = [
-    VocabularyItem(simplified: '我', pinyin: 'wǒ', english: 'I; me'),
-    VocabularyItem(simplified: '是', pinyin: 'shì', english: 'to be'),
+    VocabularyItem(traditional: '我', pinyin: 'wǒ', english: 'I; me'),
+    VocabularyItem(traditional: '你', pinyin: 'nǐ', english: 'you'),
+    VocabularyItem(traditional: '他', pinyin: 'tā', english: 'he; him'),
+    VocabularyItem(traditional: '她', pinyin: 'tā', english: 'she; her'),
+    VocabularyItem(traditional: '是', pinyin: 'shì', english: 'to be'),
     VocabularyItem(
-      simplified: '的',
+      traditional: '的',
       pinyin: 'de',
       english: 'possessive particle',
     ),
     VocabularyItem(
-      simplified: '了',
+      traditional: '了',
       pinyin: 'le',
       english: 'change or completion particle',
     ),
-    VocabularyItem(simplified: '在', pinyin: 'zài', english: 'at; in; on'),
+    VocabularyItem(traditional: '在', pinyin: 'zài', english: 'at; in; on'),
     VocabularyItem(
-      simplified: '有',
+      traditional: '有',
       pinyin: 'yǒu',
       english: 'to have; there is',
     ),
-    VocabularyItem(simplified: '不', pinyin: 'bù', english: 'not; no'),
-    VocabularyItem(simplified: '很', pinyin: 'hěn', english: 'very'),
-    VocabularyItem(simplified: '去', pinyin: 'qù', english: 'to go'),
-    VocabularyItem(simplified: '看', pinyin: 'kàn', english: 'to look; to see'),
-    VocabularyItem(simplified: '里', pinyin: 'lǐ', english: 'inside'),
-    VocabularyItem(simplified: '上', pinyin: 'shàng', english: 'on; above'),
-    VocabularyItem(simplified: '但是', pinyin: 'dànshì', english: 'but; however'),
     VocabularyItem(
-      simplified: '还是',
-      pinyin: 'háishì',
-      english: 'still; nevertheless',
-    ),
-    VocabularyItem(simplified: '可以', pinyin: 'kěyǐ', english: 'can; may'),
-    VocabularyItem(
-      simplified: '没有',
+      traditional: '沒有',
       pinyin: 'méiyǒu',
       english: 'to not have; there is not',
     ),
-    VocabularyItem(simplified: '看见', pinyin: 'kànjiàn', english: 'to see'),
-    VocabularyItem(simplified: '喜欢', pinyin: 'xǐhuan', english: 'to like'),
-    VocabularyItem(simplified: '这里', pinyin: 'zhèlǐ', english: 'here'),
-    VocabularyItem(simplified: '这个', pinyin: 'zhège', english: 'this'),
-    VocabularyItem(simplified: '现在', pinyin: 'xiànzài', english: 'now'),
+    VocabularyItem(traditional: '不', pinyin: 'bù', english: 'not; no'),
+    VocabularyItem(traditional: '沒', pinyin: 'méi', english: 'not (past)'),
+    VocabularyItem(traditional: '很', pinyin: 'hěn', english: 'very'),
+    VocabularyItem(traditional: '也', pinyin: 'yě', english: 'also'),
+    VocabularyItem(traditional: '都', pinyin: 'dōu', english: 'all; both'),
+    VocabularyItem(traditional: '去', pinyin: 'qù', english: 'to go'),
+    VocabularyItem(traditional: '來', pinyin: 'lái', english: 'to come'),
+    VocabularyItem(traditional: '看', pinyin: 'kàn', english: 'to look; to see'),
+    VocabularyItem(traditional: '看見', pinyin: 'kànjiàn', english: 'to see'),
+    VocabularyItem(traditional: '聽', pinyin: 'tīng', english: 'to listen'),
+    VocabularyItem(traditional: '說', pinyin: 'shuō', english: 'to say'),
+    VocabularyItem(traditional: '問', pinyin: 'wèn', english: 'to ask'),
+    VocabularyItem(traditional: '叫', pinyin: 'jiào', english: 'to be called'),
     VocabularyItem(
-      simplified: '非常',
-      pinyin: 'fēicháng',
-      english: 'extremely; very',
+      traditional: '想',
+      pinyin: 'xiǎng',
+      english: 'to want; to think',
+    ),
+    VocabularyItem(traditional: '要', pinyin: 'yào', english: 'to want; will'),
+    VocabularyItem(traditional: '會', pinyin: 'huì', english: 'can; will'),
+    VocabularyItem(traditional: '能', pinyin: 'néng', english: 'to be able to'),
+    VocabularyItem(traditional: '可以', pinyin: 'kěyǐ', english: 'can; may'),
+    VocabularyItem(traditional: '喜歡', pinyin: 'xǐhuān', english: 'to like'),
+    VocabularyItem(traditional: '知道', pinyin: 'zhīdào', english: 'to know'),
+    VocabularyItem(traditional: '吃', pinyin: 'chī', english: 'to eat'),
+    VocabularyItem(traditional: '喝', pinyin: 'hē', english: 'to drink'),
+    VocabularyItem(traditional: '買', pinyin: 'mǎi', english: 'to buy'),
+    VocabularyItem(traditional: '做', pinyin: 'zuò', english: 'to do; to make'),
+    VocabularyItem(traditional: '坐', pinyin: 'zuò', english: 'to sit'),
+    VocabularyItem(traditional: '站', pinyin: 'zhàn', english: 'to stand'),
+    VocabularyItem(traditional: '住', pinyin: 'zhù', english: 'to live'),
+    VocabularyItem(traditional: '走', pinyin: 'zǒu', english: 'to walk'),
+    VocabularyItem(traditional: '找', pinyin: 'zhǎo', english: 'to look for'),
+    VocabularyItem(traditional: '給', pinyin: 'gěi', english: 'to give; for'),
+    VocabularyItem(traditional: '拿', pinyin: 'ná', english: 'to take'),
+    VocabularyItem(traditional: '等', pinyin: 'děng', english: 'to wait'),
+    VocabularyItem(traditional: '開', pinyin: 'kāi', english: 'to open'),
+    VocabularyItem(traditional: '回', pinyin: 'huí', english: 'to return'),
+    VocabularyItem(traditional: '學', pinyin: 'xué', english: 'to study'),
+    VocabularyItem(traditional: '寫', pinyin: 'xiě', english: 'to write'),
+    VocabularyItem(traditional: '睡覺', pinyin: 'shuìjiào', english: 'to sleep'),
+    VocabularyItem(traditional: '起來', pinyin: 'qǐlái', english: 'to get up'),
+    VocabularyItem(traditional: '裡', pinyin: 'lǐ', english: 'inside'),
+    VocabularyItem(traditional: '上', pinyin: 'shàng', english: 'on; above'),
+    VocabularyItem(traditional: '下', pinyin: 'xià', english: 'under; below'),
+    VocabularyItem(traditional: '這', pinyin: 'zhè', english: 'this'),
+    VocabularyItem(traditional: '那', pinyin: 'nà', english: 'that'),
+    VocabularyItem(traditional: '這裡', pinyin: 'zhèlǐ', english: 'here'),
+    VocabularyItem(traditional: '那裡', pinyin: 'nàlǐ', english: 'there'),
+    VocabularyItem(traditional: '哪裡', pinyin: 'nǎlǐ', english: 'where'),
+    VocabularyItem(traditional: '可是', pinyin: 'kěshì', english: 'but; however'),
+    VocabularyItem(traditional: '還是', pinyin: 'háishì', english: 'still; or'),
+    VocabularyItem(traditional: '因為', pinyin: 'yīnwèi', english: 'because'),
+    VocabularyItem(
+      traditional: '所以',
+      pinyin: 'suǒyǐ',
+      english: 'so; therefore',
     ),
     VocabularyItem(
-      simplified: '回到',
-      pinyin: 'huí dào',
-      english: 'to return to',
+      traditional: '然後',
+      pinyin: 'ránhòu',
+      english: 'then; afterwards',
     ),
-    VocabularyItem(simplified: '睁开', pinyin: 'zhēngkāi', english: 'to open'),
-    VocabularyItem(simplified: '闭上', pinyin: 'bì shàng', english: 'to close'),
+    VocabularyItem(traditional: '現在', pinyin: 'xiànzài', english: 'now'),
+    VocabularyItem(traditional: '非常', pinyin: 'fēicháng', english: 'extremely'),
+    VocabularyItem(traditional: '真', pinyin: 'zhēn', english: 'really'),
     VocabularyItem(
-      simplified: '坐在',
-      pinyin: 'zuò zài',
-      english: 'to sit on or at',
+      traditional: '太',
+      pinyin: 'tài',
+      english: 'too; excessively',
+    ),
+    VocabularyItem(traditional: '最', pinyin: 'zuì', english: 'most'),
+    VocabularyItem(traditional: '還', pinyin: 'hái', english: 'still; yet'),
+    VocabularyItem(traditional: '朋友', pinyin: 'péngyǒu', english: 'friend'),
+    VocabularyItem(traditional: '名字', pinyin: 'míngzi', english: 'name'),
+    VocabularyItem(traditional: '眼睛', pinyin: 'yǎnjīng', english: 'eyes'),
+    VocabularyItem(traditional: '房間', pinyin: 'fángjiān', english: 'room'),
+    VocabularyItem(traditional: '杯子', pinyin: 'bēizi', english: 'cup'),
+    VocabularyItem(traditional: '東西', pinyin: 'dōngxi', english: 'thing'),
+    VocabularyItem(traditional: '茶', pinyin: 'chá', english: 'tea'),
+    VocabularyItem(traditional: '水', pinyin: 'shuǐ', english: 'water'),
+    VocabularyItem(traditional: '飯', pinyin: 'fàn', english: 'rice; meal'),
+    VocabularyItem(traditional: '一個', pinyin: 'yí ge', english: 'one; a'),
+    VocabularyItem(
+      traditional: '一隻',
+      pinyin: 'yì zhī',
+      english: 'one (animal)',
+    ),
+    VocabularyItem(traditional: '大', pinyin: 'dà', english: 'big'),
+    VocabularyItem(traditional: '小', pinyin: 'xiǎo', english: 'small'),
+    VocabularyItem(traditional: '高', pinyin: 'gāo', english: 'high; tall'),
+    VocabularyItem(traditional: '好', pinyin: 'hǎo', english: 'good'),
+    VocabularyItem(traditional: '好吃', pinyin: 'hǎochī', english: 'delicious'),
+    VocabularyItem(traditional: '熱', pinyin: 'rè', english: 'hot'),
+    VocabularyItem(traditional: '冷', pinyin: 'lěng', english: 'cold'),
+    VocabularyItem(
+      traditional: '飽',
+      pinyin: 'bǎo',
+      english: 'full; not hungry',
+    ),
+    VocabularyItem(traditional: '累', pinyin: 'lèi', english: 'tired'),
+    VocabularyItem(
+      traditional: '嗎',
+      pinyin: 'ma',
+      english: 'question particle',
     ),
     VocabularyItem(
-      simplified: '跳上',
-      pinyin: 'tiào shàng',
-      english: 'to jump onto',
-    ),
-    VocabularyItem(simplified: '找', pinyin: 'zhǎo', english: 'to look for'),
-    VocabularyItem(simplified: '走', pinyin: 'zǒu', english: 'to walk'),
-    VocabularyItem(simplified: '喝', pinyin: 'hē', english: 'to drink'),
-    VocabularyItem(simplified: '吃', pinyin: 'chī', english: 'to eat'),
-    VocabularyItem(simplified: '叫', pinyin: 'jiào', english: 'to be called'),
-    VocabularyItem(simplified: '名字', pinyin: 'míngzi', english: 'name'),
-    VocabularyItem(simplified: '眼睛', pinyin: 'yǎnjing', english: 'eyes'),
-    VocabularyItem(simplified: '房间', pinyin: 'fángjiān', english: 'room'),
-    VocabularyItem(simplified: '杯子', pinyin: 'bēizi', english: 'cup'),
-    VocabularyItem(
-      simplified: '地上',
-      pinyin: 'dìshang',
-      english: 'on the floor',
+      traditional: '呢',
+      pinyin: 'ne',
+      english: 'follow-up question particle',
     ),
     VocabularyItem(
-      simplified: '床边',
-      pinyin: 'chuángbiān',
-      english: 'beside the bed',
+      traditional: '吧',
+      pinyin: 'ba',
+      english: 'suggestion particle',
     ),
-    VocabularyItem(simplified: '一只', pinyin: 'yì zhī', english: 'one (animal)'),
-    VocabularyItem(
-      simplified: '一把',
-      pinyin: 'yì bǎ',
-      english: 'one (object with a handle)',
-    ),
-    VocabularyItem(
-      simplified: '一张',
-      pinyin: 'yì zhāng',
-      english: 'one (flat object)',
-    ),
-    VocabularyItem(simplified: '一个', pinyin: 'yí ge', english: 'one; a'),
-    VocabularyItem(
-      simplified: '雪儿',
-      pinyin: "Xuě'ér",
-      english: 'Snow (a name)',
-    ),
-    VocabularyItem(simplified: '那儿', pinyin: 'nàr', english: 'there'),
-    VocabularyItem(simplified: '往', pinyin: 'wǎng', english: 'toward'),
-    VocabularyItem(simplified: '给', pinyin: 'gěi', english: 'for; to give'),
-    VocabularyItem(simplified: '啊', pinyin: 'a', english: 'softening particle'),
-    VocabularyItem(simplified: '大', pinyin: 'dà', english: 'big'),
-    VocabularyItem(simplified: '高', pinyin: 'gāo', english: 'high; tall'),
-    VocabularyItem(simplified: '凉', pinyin: 'liáng', english: 'cool; cold'),
-    VocabularyItem(simplified: '好吃', pinyin: 'hǎochī', english: 'delicious'),
-    VocabularyItem(simplified: '更好', pinyin: 'gèng hǎo', english: 'better'),
-    VocabularyItem(simplified: '饱', pinyin: 'bǎo', english: 'full; not hungry'),
-    VocabularyItem(simplified: '困', pinyin: 'kùn', english: 'sleepy'),
   ];
 
   static List<StoryWord> tokenize(
@@ -1408,14 +1501,14 @@ class _WordTokenizer {
     if (segment.words.isNotEmpty) return segment.words;
 
     final glossary = [...vocabulary, ..._fallbackGlossary]
-      ..sort((a, b) => b.simplified.length.compareTo(a.simplified.length));
+      ..sort((a, b) => b.traditional.length.compareTo(a.traditional.length));
     final words = <StoryWord>[];
     var offset = 0;
     while (offset < segment.chinese.length) {
       VocabularyItem? match;
       for (final item in glossary) {
-        if (item.simplified.isNotEmpty &&
-            segment.chinese.startsWith(item.simplified, offset)) {
+        if (item.traditional.isNotEmpty &&
+            segment.chinese.startsWith(item.traditional, offset)) {
           match = item;
           break;
         }
@@ -1423,12 +1516,13 @@ class _WordTokenizer {
       if (match != null) {
         words.add(
           StoryWord(
-            text: match.simplified,
+            text: match.traditional,
+            textSimplified: match.simplified,
             pinyin: match.pinyin,
             english: match.english,
           ),
         );
-        offset += match.simplified.length;
+        offset += match.traditional.length;
       } else {
         final rune = segment.chinese.substring(offset).runes.first;
         final text = String.fromCharCode(rune);
@@ -1441,9 +1535,14 @@ class _WordTokenizer {
 }
 
 class _VocabularySection extends StatelessWidget {
-  const _VocabularySection({required this.items, required this.onTapItem});
+  const _VocabularySection({
+    required this.items,
+    required this.onTapItem,
+    required this.script,
+  });
 
   final List<VocabularyItem> items;
+  final ChineseScript script;
   final ValueChanged<VocabularyItem> onTapItem;
 
   @override
@@ -1470,7 +1569,7 @@ class _VocabularySection extends StatelessWidget {
                 ListTile(
                   onTap: () => onTapItem(items[index]),
                   title: Text(
-                    items[index].simplified,
+                    items[index].textIn(script),
                     style: const TextStyle(fontSize: 20),
                   ),
                   subtitle: Text(items[index].pinyin),
