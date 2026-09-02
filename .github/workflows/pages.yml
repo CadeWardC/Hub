@@ -52,7 +52,7 @@ jobs:
           set -euo pipefail
           mkdir -p _site
           cp index.html script.js styles.css _site/
-          for project in brain-health laser-engraving md2pdf paypers smolov; do
+          for project in brain-health conversions laser-engraving md2pdf paypers smolov; do
             cp -R "$project" "_site/$project"
           done
           cp -R mandarin/build/web _site/mandarin
