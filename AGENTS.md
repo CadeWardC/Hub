@@ -14,7 +14,7 @@
 - `mandarin/` — Flutter graded Taiwan Mandarin story reader (Traditional characters, TOCFL levels) plus published story JSON/WAV assets and ignored local Qwen models
 - `paypers/` — PubMed paper discovery app with swipe interface (static HTML/CSS/JS)
 - `laser-engraving/` — Laser engraver bed layout tool with CAD-style SVG engine
-- `conversions/` — Local file converter: audio/video → MP3 (vendored `lame.min.js`, a lamejs build) or WAV via Web Audio `decodeAudioData`, images → JPEG/PNG/WebP via canvas (static HTML/CSS/JS)
+- `conversions/` — Local file converter, all client-side: audio/video → MP3 (vendored `lame.min.js`, a lamejs build), WAV via Web Audio `decodeAudioData`, Opus/M4A/WebM/MP4 via MediaRecorder (feature-detected, real-time), animated GIF (vendored `gifenc.js`); images → JPEG/PNG/WebP via canvas plus BMP/GIF/ICO/PDF hand-written encoders; CSV/TSV ⇄ JSON; TXT/MD → PDF; batch results download as a store-only ZIP
 - `story-workshop/` — Local-only DeepSeek story studio that prepares Mandarin, pinyin, and Qwen3-TTS audio manifests
 
 Each static sub-project has its own `index.html`. Mandarin's deployed `index.html` is generated in `mandarin/build/web/`.

@@ -123,6 +123,12 @@ body {
     align-items: center;
     gap: 0.5rem;
 }
+.setting-group[hidden] { display: none; }
+.setting-static {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+}
 .setting-label {
     font-size: 0.78rem;
     font-weight: 600;
@@ -230,6 +236,9 @@ select:focus { border-color: var(--accent); }
     font-size: 0.88rem;
     font-weight: 600;
     color: var(--muted);
+}
+.zip-btn {
+    margin-left: auto;
 }
 
 .file-list {
