@@ -14,6 +14,7 @@
 - `mandarin/` — Flutter graded Taiwan Mandarin story reader (Traditional characters, TOCFL levels) plus published story JSON/WAV assets and ignored local Qwen models
 - `paypers/` — PubMed paper discovery app with swipe interface (static HTML/CSS/JS)
 - `laser-engraving/` — Laser engraver bed layout tool with CAD-style SVG engine
+- `conversions/` — Local file converter: audio/video → MP3 (vendored `lame.min.js`, a lamejs build) or WAV via Web Audio `decodeAudioData`, images → JPEG/PNG/WebP via canvas (static HTML/CSS/JS)
 - `story-workshop/` — Local-only DeepSeek story studio that prepares Mandarin, pinyin, and Qwen3-TTS audio manifests
 
 Each static sub-project has its own `index.html`. Mandarin's deployed `index.html` is generated in `mandarin/build/web/`.
@@ -46,6 +47,7 @@ Each static sub-project has its own `index.html`. Mandarin's deployed `index.htm
 - `smolov/` — Supabase (Postgres via PostgREST): `lift_maxes`, `smolov_plans`
 - `paypers/` — localStorage (`paypersState`)
 - `laser-engraving/` — localStorage (`laserEngraving_bedSize`, `laserEngraving_presets`)
+- `conversions/` — none; source files are decoded in memory and results download straight to disk
 - `brain-health/` — localStorage (`brainHealth.v1`: levels, history, bests, streak, settings, earnings cache) + Supabase `brain_earnings` ledger (authoritative for payouts)
 - `mandarin/` — Flutter `shared_preferences` for reading progress, completed stories, and the chosen script (`mandarin.script.v1`); ignored `models/`; reviewed `assets/content/` JSON/WAV files are published
 - `story-workshop/` — local filesystem JSON under gitignored `.workshop/`; never included in the GitHub Pages artifact

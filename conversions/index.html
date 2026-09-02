@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversions — Local File Converter</title>
+    <meta name="description" content="Convert video and audio to MP3 or WAV, and images to JPEG, PNG, or WebP. Everything runs locally in your browser — files never leave your device.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#128260;</text></svg>">
+    <link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+    <header class="app-header">
+        <a href="../index.html" class="back-link" aria-label="Back to Hub">&#8592; Hub</a>
+        <div class="app-title">
+            <span class="title-mark">&#128260;</span>
+            <span>Conversions</span>
+        </div>
+        <div class="header-actions">
+            <button id="convert-btn" class="btn btn-primary" type="button" disabled>Convert</button>
+            <button id="clear-btn" class="btn btn-ghost" type="button" disabled>Clear</button>
+        </div>
+    </header>
+
+    <div class="settings-bar">
+        <div class="setting-group">
+            <span class="setting-label">Audio &amp; video &#8594;</span>
+            <select id="audio-format" aria-label="Audio and video output format">
+                <option value="mp3" selected>MP3</option>
+                <option value="wav">WAV</option>
+            </select>
+            <select id="mp3-bitrate" aria-label="MP3 bitrate">
+                <option value="128">128 kbps</option>
+                <option value="192" selected>192 kbps</option>
+                <option value="320">320 kbps</option>
+            </select>
+        </div>
+        <div class="setting-group">
+            <span class="setting-label">Images &#8594;</span>
+            <select id="image-format" aria-label="Image output format">
+                <option value="jpeg" selected>JPEG</option>
+                <option value="png">PNG</option>
+                <option value="webp">WebP</option>
+            </select>
+            <label class="quality-field" id="quality-field">
+                Quality
+                <input type="range" id="image-quality" min="50" max="100" step="5" value="90" aria-label="Image quality">
+                <span id="quality-value">90</span>
+            </label>
+        </div>
+        <span class="privacy-note">&#128274; Runs entirely in your browser</span>
+    </div>
+
+    <main class="content">
+        <!-- Welcome state: nothing queued yet -->
+        <section id="drop-view" class="drop-view">
+            <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Add files to convert">
+                <span class="dropzone-icon">&#128228;</span>
+                <p class="dropzone-title">Drop files here</p>
+                <p class="dropzone-sub">or click to browse &middot; paste with Ctrl&nbsp;+&nbsp;V</p>
+            </div>
+            <p class="format-hint">
+                Video &amp; audio (MP4, MOV, WebM, M4A, MP3, WAV, OGG&hellip;) become <strong>MP3</strong> or <strong>WAV</strong> &middot;
+                images (PNG, JPG, WebP, GIF, BMP, SVG) become <strong>JPEG</strong>, <strong>PNG</strong>, or <strong>WebP</strong>
+            </p>
+        </section>
+
+        <!-- Main state: conversion queue -->
+        <section id="queue-view" class="queue-view" hidden>
+            <div class="queue-head">
+                <span id="queue-summary" class="queue-summary">0 files</span>
+            </div>
+            <ul id="file-list" class="file-list"></ul>
+            <div id="add-more" class="add-more" tabindex="0" role="button">+ Add more files</div>
+        </section>
+    </main>
+
+    <input type="file" id="file-input" multiple hidden
+           accept="audio/*,video/*,image/*,.mp4,.mov,.m4a,.webm,.mkv,.mp3,.wav,.ogg,.oga,.flac,.opus,.aac,.png,.jpg,.jpeg,.webp,.gif,.bmp,.svg,.avif">
+    <div id="toast" class="toast" role="status" hidden></div>
+
+    <script src="lame.min.js?v=1"></script>
+    <script src="app.js?v=1"></script>
+</body>
+</html>
