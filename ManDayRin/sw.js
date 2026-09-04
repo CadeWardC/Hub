@@ -1,4 +1,4 @@
-const CACHE_NAME = "mandayrin-v8";
+const CACHE_NAME = "mandayrin-v11";
 const APP_SHELL = ["./", "./index.html", "./styles.css", "./vocabulary.js", "./app.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 const REMINDER_DB = "mandayrin-reminders";
 const REMINDER_STORE = "settings";

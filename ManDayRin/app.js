@@ -8,7 +8,9 @@
   const todayKey = localDateKey(new Date());
   let deferredInstallPrompt = null;
   let activeFilter = "all";
+  let historyQuery = "";
   let reminderTimer = null;
+  let quizState = { current: null, choices: [], correct: 0, attempts: 0, questionNumber: 0, answered: false, previousKey: "" };
 
   const state = loadState();
   const day = getCourseDay(state.startedOn);
@@ -16,6 +18,8 @@
   renderToday();
   bindNavigation();
   bindHistoryFilters();
+  bindHistorySearch();
+  setupQuiz();
   setupInstall();
   setupReminders();
   registerWebMcpTools();
@@ -121,12 +125,16 @@
   }
 
   function speakWord(kind, button) {
+    const word = vocab[kind][state.selections[todayKey][kind]];
+    speakChinese(word[0], button);
+  }
+
+  function speakChinese(hanzi, button) {
     if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
       showToast("Speech is not available in this browser");
       return;
     }
-    const word = vocab[kind][state.selections[todayKey][kind]];
-    const utterance = new SpeechSynthesisUtterance(word[0]);
+    const utterance = new SpeechSynthesisUtterance(hanzi);
     const voices = window.speechSynthesis.getVoices();
     utterance.voice = voices.find((voice) => /^zh-CN$/i.test(voice.lang)) || voices.find((voice) => /^zh/i.test(voice.lang)) || null;
     utterance.lang = "zh-CN";
@@ -178,14 +186,169 @@
     });
   }
 
+  function bindHistorySearch() {
+    const input = document.querySelector("#historySearch");
+    const clearButton = document.querySelector("#clearHistorySearch");
+    input.addEventListener("input", () => {
+      historyQuery = input.value;
+      clearButton.hidden = !historyQuery;
+      renderHistory();
+    });
+    clearButton.addEventListener("click", () => {
+      input.value = "";
+      historyQuery = "";
+      clearButton.hidden = true;
+      renderHistory();
+      input.focus();
+    });
+  }
+
+  function normalizeSearch(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[’']/g, "")
+      .toLocaleLowerCase()
+      .trim();
+  }
+
   function renderHistory() {
-    const entries = state.history.filter((entry) => activeFilter === "all" || entry.kind === activeFilter).slice().reverse();
-    document.querySelector("#historyTotal").textContent = `${state.history.length} ${state.history.length === 1 ? "word" : "words"}`;
-    document.querySelector("#historyList").innerHTML = entries.length ? entries.map((entry) => `<article class="history-entry">
+    const queryTokens = normalizeSearch(historyQuery).split(/\s+/).filter(Boolean);
+    const entries = state.history.filter((entry) => {
+      if (activeFilter !== "all" && entry.kind !== activeFilter) return false;
+      if (!queryTokens.length) return true;
+      const searchable = normalizeSearch(entry.word.join(" "));
+      return queryTokens.every((token) => searchable.includes(token));
+    }).slice().reverse();
+    const filtered = activeFilter !== "all" || queryTokens.length > 0;
+    document.querySelector("#historyTotal").textContent = filtered
+      ? `${entries.length} ${entries.length === 1 ? "match" : "matches"}`
+      : `${state.history.length} ${state.history.length === 1 ? "word" : "words"}`;
+    document.querySelector("#historyList").innerHTML = entries.length ? entries.map((entry, position) => `<article class="history-entry">
       <span class="history-hanzi" lang="zh-Hans">${entry.word[0]}</span>
       <div class="history-word"><strong>${entry.word[1]} · ${entry.word[2]}</strong><span>Day ${entry.day}${entry.rerolled ? " · rerolled" : ""}</span></div>
-      <span class="history-kind">${labels[entry.kind]}</span>
-    </article>`).join("") : `<div class="empty-state"><strong>No words here yet</strong>Your vocabulary will appear as you learn.</div>`;
+      <div class="history-actions">
+        <span class="history-kind">${labels[entry.kind]}</span>
+        <button class="history-speak" type="button" data-history-speak="${position}" aria-label="Hear ${entry.word[0]} pronounced">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 10v4h3l4 4V6L8 10H5zM16 9a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10"/></svg>
+        </button>
+      </div>
+    </article>`).join("") : `<div class="empty-state"><strong>${queryTokens.length ? "No matching words" : "No words here yet"}</strong>${queryTokens.length ? "Try another English word, pinyin spelling, or Chinese character." : "Your vocabulary will appear as you learn."}</div>`;
+    document.querySelectorAll("[data-history-speak]").forEach((button) => {
+      button.addEventListener("click", () => speakChinese(entries[Number(button.dataset.historySpeak)].word[0], button));
+    });
+  }
+
+  function setupQuiz() {
+    const toggleButton = document.querySelector("#quizToggleButton");
+    const nextButton = document.querySelector("#quizNextButton");
+    const speakButton = document.querySelector("#quizSpeakButton");
+
+    toggleButton.addEventListener("click", () => toggleQuiz(toggleButton.getAttribute("aria-expanded") !== "true"));
+    nextButton.addEventListener("click", nextQuizQuestion);
+    speakButton.addEventListener("click", () => {
+      if (quizState.current) speakChinese(quizState.current.word[0], speakButton);
+    });
+  }
+
+  function toggleQuiz(open) {
+    const toggleButton = document.querySelector("#quizToggleButton");
+    document.querySelector("#historyArchive").hidden = open;
+    document.querySelector("#quizPanel").hidden = !open;
+    toggleButton.setAttribute("aria-expanded", String(open));
+    toggleButton.querySelector("span").textContent = open ? "Close quiz" : "Quiz";
+    if (open) {
+      if (!quizState.current) nextQuizQuestion();
+      document.querySelector("#quizPanel").scrollIntoView({ block: "start", behavior: "smooth" });
+    } else {
+      renderHistory();
+      toggleButton.focus();
+    }
+  }
+
+  function learnedWords() {
+    const seen = new Set();
+    return state.history.slice().reverse().filter((entry) => {
+      const key = `${entry.kind}:${entry.word[0]}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function nextQuizQuestion() {
+    const learned = learnedWords();
+    if (!learned.length) return;
+    const alternatives = learned.filter((entry) => `${entry.kind}:${entry.word[0]}` !== quizState.previousKey);
+    const pool = alternatives.length ? alternatives : learned;
+    const current = pool[Math.floor(Math.random() * pool.length)];
+    const currentIndex = vocab[current.kind].findIndex((word) => word[0] === current.word[0]);
+    const bandStart = Math.max(0, Math.floor(currentIndex / 40) * 40);
+    const correctMeaning = current.word[2];
+    const distractors = shuffle(vocab[current.kind].slice(bandStart, bandStart + 40)
+      .map((word) => word[2])
+      .filter((meaning, index, meanings) => meaning !== correctMeaning && meanings.indexOf(meaning) === index))
+      .slice(0, 3);
+
+    quizState = {
+      ...quizState,
+      current,
+      choices: shuffle([correctMeaning, ...distractors]),
+      questionNumber: quizState.questionNumber + 1,
+      answered: false,
+      previousKey: `${current.kind}:${current.word[0]}`
+    };
+    renderQuiz();
+  }
+
+  function shuffle(items) {
+    const shuffled = items.slice();
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+    }
+    return shuffled;
+  }
+
+  function renderQuiz() {
+    const current = quizState.current;
+    if (!current) return;
+    document.querySelector("#quizKind").textContent = `${labels[current.kind]} · ${String(quizState.questionNumber).padStart(2, "0")}`;
+    document.querySelector("#quizScore").textContent = `${quizState.correct} / ${quizState.attempts}`;
+    document.querySelector("#quizHanzi").textContent = current.word[0];
+    document.querySelector("#quizPinyin").textContent = current.word[1];
+    document.querySelector("#quizFeedback").textContent = "";
+    document.querySelector("#quizNextButton").hidden = true;
+    const options = document.querySelector("#quizOptions");
+    options.replaceChildren();
+    quizState.choices.forEach((choice) => {
+      const button = document.createElement("button");
+      button.className = "quiz-option";
+      button.type = "button";
+      button.textContent = choice;
+      button.addEventListener("click", () => answerQuiz(choice, button));
+      options.appendChild(button);
+    });
+  }
+
+  function answerQuiz(choice, selectedButton) {
+    if (quizState.answered || !quizState.current) return;
+    const correctMeaning = quizState.current.word[2];
+    const correct = choice === correctMeaning;
+    quizState.answered = true;
+    quizState.attempts += 1;
+    if (correct) quizState.correct += 1;
+
+    document.querySelectorAll(".quiz-option").forEach((button) => {
+      button.disabled = true;
+      if (button.textContent === correctMeaning) button.classList.add("correct");
+    });
+    if (!correct) selectedButton.classList.add("wrong");
+    document.querySelector("#quizScore").textContent = `${quizState.correct} / ${quizState.attempts}`;
+    document.querySelector("#quizFeedback").textContent = correct
+      ? "Correct. Nice work."
+      : `Not quite — ${quizState.current.word[0]} means ${correctMeaning}.`;
+    document.querySelector("#quizNextButton").hidden = false;
   }
 
   function showToast(message) {

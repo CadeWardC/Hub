@@ -57,16 +57,53 @@
       <section class="view" id="historyView" aria-labelledby="historyHeading" hidden>
         <div class="section-heading">
           <p class="signal-label">Vocabulary archive</p>
-          <div><h1 id="historyHeading">History<span class="title-dot">.</span></h1><strong class="history-total" id="historyTotal">0 words</strong></div>
+          <div>
+            <h1 id="historyHeading">History<span class="title-dot">.</span></h1>
+            <div class="history-heading-actions">
+              <strong class="history-total" id="historyTotal">0 words</strong>
+              <button class="history-quiz-button" id="quizToggleButton" type="button" aria-controls="quizPanel" aria-expanded="false">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 7h9M8 12h6M8 17h4M5 7h.01M5 12h.01M5 17h.01"/></svg>
+                <span>Quiz</span>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div class="filter-row" role="group" aria-label="Filter vocabulary history">
-          <button class="filter-chip active" type="button" data-filter="all">All</button>
-          <button class="filter-chip" type="button" data-filter="noun">Nouns</button>
-          <button class="filter-chip" type="button" data-filter="verb">Verbs</button>
-          <button class="filter-chip" type="button" data-filter="adjective">Adjectives</button>
+        <div id="historyArchive">
+          <label class="history-search" for="historySearch">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/></svg>
+            <input id="historySearch" type="search" placeholder="English, pinyin, or 汉字" autocomplete="off" spellcheck="false">
+            <button id="clearHistorySearch" type="button" aria-label="Clear vocabulary search" hidden>×</button>
+          </label>
+
+          <div class="filter-row" role="group" aria-label="Filter vocabulary history">
+            <button class="filter-chip active" type="button" data-filter="all">All</button>
+            <button class="filter-chip" type="button" data-filter="noun">Nouns</button>
+            <button class="filter-chip" type="button" data-filter="verb">Verbs</button>
+            <button class="filter-chip" type="button" data-filter="adjective">Adjectives</button>
+          </div>
+          <div class="history-list" id="historyList"></div>
         </div>
-        <div class="history-list" id="historyList"></div>
+
+        <section class="quiz-panel" id="quizPanel" aria-labelledby="quizQuestion" hidden>
+          <div class="quiz-status-line">
+            <span id="quizKind">Noun</span>
+            <strong id="quizScore">0 / 0</strong>
+          </div>
+          <div class="quiz-word-row">
+            <div>
+              <p class="quiz-hanzi" id="quizHanzi" lang="zh-Hans"></p>
+              <p class="quiz-pinyin" id="quizPinyin"></p>
+            </div>
+            <button class="quiz-speak" id="quizSpeakButton" type="button" aria-label="Hear the quiz word pronounced">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 10v4h3l4 4V6L8 10H5zM16 9a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10"/></svg>
+            </button>
+          </div>
+          <h2 id="quizQuestion">Choose the English meaning</h2>
+          <div class="quiz-options" id="quizOptions"></div>
+          <p class="quiz-feedback" id="quizFeedback" role="status" aria-live="polite"></p>
+          <button class="quiz-next-button" id="quizNextButton" type="button" hidden>Next word <span aria-hidden="true">→</span></button>
+        </section>
       </section>
 
       <section class="view" id="settingsView" aria-labelledby="settingsHeading" hidden>
