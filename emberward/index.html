@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Emberward is a pixel-art colony survival game about building by day and defending the Heartfire by night." />
+    <title>Emberward</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="game-shell" id="gameShell">
+      <header class="topbar">
+        <div class="brand" aria-label="Emberward">
+          <span class="brand-mark" aria-hidden="true">◆</span>
+          <span class="brand-name">EMBERWARD</span>
+          <span class="build-tag">PROTOTYPE</span>
+        </div>
+
+        <div class="resource-strip" aria-label="Colony resources">
+          <div class="resource"><span class="resource-icon food-icon" aria-hidden="true"></span><span>Food</span><strong id="foodValue">80</strong></div>
+          <div class="resource"><span class="resource-icon wood-icon" aria-hidden="true"></span><span>Wood</span><strong id="woodValue">90</strong></div>
+          <div class="resource"><span class="resource-icon stone-icon" aria-hidden="true"></span><span>Stone</span><strong id="stoneValue">35</strong></div>
+          <div class="resource"><span class="resource-icon water-icon" aria-hidden="true"></span><span>Water</span><strong id="waterValue">60</strong></div>
+          <div class="resource"><span class="resource-icon spirit-icon" aria-hidden="true"></span><span>Spirit</span><strong id="spiritValue">60</strong></div>
+          <div class="resource"><span class="resource-icon people-icon" aria-hidden="true"></span><span>Settlers</span><strong><span id="populationValue">8</span>/<span id="capacityValue">10</span></strong></div>
+        </div>
+
+        <div class="time-controls" aria-label="Time controls">
+          <button class="icon-button" id="pauseButton" type="button" aria-label="Pause or resume">Ⅱ</button>
+          <button class="speed-button is-active" type="button" data-speed="1" aria-pressed="true">1×</button>
+          <button class="speed-button" type="button" data-speed="2" aria-pressed="false">2×</button>
+          <button class="speed-button" type="button" data-speed="3" aria-pressed="false">3×</button>
+        </div>
+      </header>
+
+      <main class="play-layout">
+        <aside class="side-panel objective-panel">
+          <p class="panel-kicker">EXPEDITION</p>
+          <h2>Hold the Heartfire</h2>
+          <p class="objective-copy">Survive six nights and cleanse all three ancient shrines.</p>
+
+          <div class="cycle-card">
+            <div class="cycle-heading"><span id="phaseLabel">DAY 1 · MORNING</span><strong id="cycleTimer">01:00</strong></div>
+            <div class="cycle-track" role="progressbar" aria-label="Day cycle" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="cycleProgress"></i></div>
+            <p id="phaseHint">The dark is quiet. Prepare while you can.</p>
+          </div>
+
+          <div class="objective-list">
+            <div><i class="objective-state is-done" aria-hidden="true">✓</i><span>Kindle the Heartfire</span></div>
+            <div><i class="objective-state" id="nightObjective" aria-hidden="true">1</i><span>Survive night six</span></div>
+            <div><i class="objective-state" id="shrineObjective" aria-hidden="true">0</i><span>Cleanse three shrines</span></div>
+          </div>
+
+          <div class="workforce-panel">
+            <div class="workforce-heading"><span>WORKFORCE</span><small id="idleWorkers">0 idle</small></div>
+            <div class="job-row"><span><i class="job-dot builder-dot"></i>Builders</span><div><button type="button" data-job="builders" data-delta="-1" aria-label="Remove one builder">−</button><strong id="buildersCount">3</strong><button type="button" data-job="builders" data-delta="1" aria-label="Add one builder">+</button></div></div>
+            <div class="job-row"><span><i class="job-dot gatherer-dot"></i>Gatherers</span><div><button type="button" data-job="gatherers" data-delta="-1" aria-label="Remove one gatherer">−</button><strong id="gatherersCount">4</strong><button type="button" data-job="gatherers" data-delta="1" aria-label="Add one gatherer">+</button></div></div>
+            <div class="job-row"><span><i class="job-dot farmer-dot"></i>Farmers</span><div><button type="button" data-job="farmers" data-delta="-1" aria-label="Remove one farmer">−</button><strong id="farmersCount">1</strong><button type="button" data-job="farmers" data-delta="1" aria-label="Add one farmer">+</button></div></div>
+            <div class="stock-limit"><span>Stockpile capacity</span><strong id="storageValue">120</strong></div>
+          </div>
+
+          <div class="threat-readout">
+            <div><span>BLIGHT PRESSURE</span><strong id="threatValue">LOW</strong></div>
+            <div class="threat-pips" id="threatPips" aria-label="Low blight pressure"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </aside>
+
+        <section class="world-frame" aria-label="Game world">
+          <canvas id="gameCanvas" width="960" height="624" aria-label="Emberward colony map"></canvas>
+          <div class="canvas-vignette" aria-hidden="true"></div>
+          <div class="cursor-label" id="cursorLabel" hidden></div>
+
+          <section class="start-screen" id="startScreen" aria-labelledby="gameTitle">
+            <div class="start-art" aria-hidden="true"></div>
+            <div class="start-shade" aria-hidden="true"></div>
+            <div class="start-content">
+              <p class="start-eyebrow">A COLONY SURVIVAL GAME</p>
+              <h1 id="gameTitle">EMBERWARD</h1>
+              <p>Raise a settlement in the last warm valley. Build by daylight. Stand with your people when the blight arrives.</p>
+              <div class="start-actions">
+                <button class="primary-button" id="newGameButton" type="button">BEGIN EXPEDITION</button>
+                <button class="secondary-button" id="howToPlayButton" type="button">HOW TO PLAY</button>
+              </div>
+              <p class="start-tip">Mouse to build · R or right-click rotates · Space pauses · 1–9 select tools</p>
+            </div>
+          </section>
+
+          <section class="modal-panel" id="howToPanel" aria-labelledby="howToTitle" hidden>
+            <div class="modal-heading"><div><p class="panel-kicker">FIELD MANUAL</p><h2 id="howToTitle">Keep the fire alive</h2></div><button class="icon-button" id="closeHowTo" type="button" aria-label="Close instructions">×</button></div>
+            <ol>
+              <li><strong>Assign.</strong> Set builders, gatherers, and farmers. Unassigned settlers remain idle until you give them a job.</li>
+              <li><strong>Gather.</strong> Mark trees, stone, and berry bushes. Gatherers physically carry every bundle back to the Heartfire stockpile.</li>
+              <li><strong>Plan.</strong> Buildings have different footprints. Press R or right-click while placing to rotate them into tight spaces.</li>
+              <li><strong>Build.</strong> A blueprint spends nothing immediately. Builders carry wood and stone to it first, then construct it.</li>
+              <li><strong>Live.</strong> Settlers stop to eat and drink. Farmers tend fields and carry each harvest home instead of creating passive income.</li>
+              <li><strong>Defend.</strong> The blight attacks at night. Use the terrain and compact defensive courtyards to buy time.</li>
+              <li><strong>Intervene.</strong> Spend Spirit on guardian powers when the colony cannot cope alone. Cast Ward on each violet shrine to cleanse it.</li>
+            </ol>
+          </section>
+
+          <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+        </section>
+
+        <aside class="side-panel detail-panel">
+          <div class="detail-heading">
+            <div><p class="panel-kicker">HEARTFIRE</p><h2 id="selectionTitle">Settlement pulse</h2></div>
+            <span class="status-chip"><i></i> STABLE</span>
+          </div>
+
+          <div class="health-block">
+            <div><span>HEARTFIRE</span><strong id="heartHealthValue">500 / 500</strong></div>
+            <div class="health-track"><i id="heartHealthBar"></i></div>
+          </div>
+
+          <div class="settler-focus" id="settlerFocus">
+            <div class="portrait" aria-hidden="true"><span>●</span></div>
+            <div><strong id="settlerName">Mara Thorn</strong><span id="settlerJob">Gathering wood</span></div>
+            <span class="mood" id="settlerMood">HOPEFUL</span>
+          </div>
+          <div class="need-meters" id="needMeters">
+            <div><span>Hunger</span><i><b id="hungerBar"></b></i></div>
+            <div><span>Thirst</span><i><b id="thirstBar"></b></i></div>
+          </div>
+
+          <div class="colony-stats">
+            <div><span>Housing</span><strong id="housingStat">8 / 10</strong></div>
+            <div><span>Food days</span><strong id="foodDaysStat">4.2</strong></div>
+            <div><span>Defenses</span><strong id="defenseStat">0</strong></div>
+            <div><span>Blight slain</span><strong id="killsStat">0</strong></div>
+          </div>
+
+          <div class="event-log">
+            <div class="event-heading"><span>COLONY CHRONICLE</span><button id="clearLogButton" type="button">CLEAR</button></div>
+            <div id="eventLog" class="event-items" aria-live="polite">
+              <p><time>DAWN</time>The Heartfire answers. Eight settlers enter the valley.</p>
+            </div>
+          </div>
+        </aside>
+      </main>
+
+      <footer class="command-bar">
+        <div class="command-group">
+          <span class="command-label">ORDERS</span>
+          <button class="tool-button is-selected" type="button" data-tool="inspect" data-key="1" aria-pressed="true"><kbd>1</kbd><span class="tool-glyph inspect-glyph">◎</span><span>Inspect</span></button>
+          <button class="tool-button" type="button" data-tool="harvest" data-key="2" aria-pressed="false"><kbd>2</kbd><span class="tool-glyph harvest-glyph">⌁</span><span>Harvest</span></button>
+        </div>
+        <div class="command-group">
+          <span class="command-label">BUILD</span>
+          <button class="tool-button" type="button" data-tool="hut" data-key="3" aria-pressed="false"><kbd>3</kbd><span class="tool-glyph hut-glyph">⌂</span><span>Hut</span><small>30 wood</small></button>
+          <button class="tool-button" type="button" data-tool="farm" data-key="4" aria-pressed="false"><kbd>4</kbd><span class="tool-glyph farm-glyph">≋</span><span>Farm</span><small>25 wood</small></button>
+          <button class="tool-button" type="button" data-tool="wall" data-key="5" aria-pressed="false"><kbd>5</kbd><span class="tool-glyph wall-glyph">▦</span><span>Wall</span><small>8 stone</small></button>
+          <button class="tool-button" type="button" data-tool="tower" data-key="6" aria-pressed="false"><kbd>6</kbd><span class="tool-glyph tower-glyph">♜</span><span>Tower</span><small>25w · 20s</small></button>
+          <button class="tool-button" type="button" data-tool="storehouse" data-key="7" aria-pressed="false"><kbd>7</kbd><span class="tool-glyph">▣</span><span>Storage</span><small>35w · 15s</small></button>
+          <button class="rotate-control" id="rotateButton" type="button" disabled><kbd>R</kbd><span>Rotate</span><small>Right-click too</small></button>
+        </div>
+        <div class="command-group power-group">
+          <span class="command-label">GUARDIAN POWER</span>
+          <button class="tool-button power-button" type="button" data-tool="ward" data-key="8" aria-pressed="false"><kbd>8</kbd><span class="tool-glyph">◈</span><span>Ward</span><small>25 spirit</small></button>
+          <button class="tool-button power-button" type="button" data-tool="flare" data-key="9" aria-pressed="false"><kbd>9</kbd><span class="tool-glyph">✦</span><span>Sunflare</span><small>35 spirit</small></button>
+        </div>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

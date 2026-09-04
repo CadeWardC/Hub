@@ -229,6 +229,19 @@ a {
     position: relative;
 }
 
+.card-image > img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    image-rendering: pixelated;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-card:hover .card-image > img {
+    transform: scale(1.035);
+}
+
 .placeholder-badge {
     position: absolute;
     top: 12px;
