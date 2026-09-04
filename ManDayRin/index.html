@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090b0d">
+  <meta name="description" content="Learn one beginner Mandarin noun, verb, and adjective every day.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ManDayRin">
+  <title>ManDayRin</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="ManDayRin home">
+        <span class="brand-glyph" aria-hidden="true"><i>M</i><b>日</b></span>
+        <span class="brand-word">MANDAY<span>/</span>RIN</span>
+      </a>
+      <div class="top-actions">
+        <span class="live-mark"><i></i> YEAR 01</span>
+        <button class="icon-button" id="installButton" type="button" aria-label="Install ManDayRin">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 18v2h14v-2"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="view active" id="todayView" aria-labelledby="todayHeading">
+        <div class="day-stage">
+          <div class="day-copy">
+            <p class="signal-label" id="dateLabel"></p>
+            <h1 id="todayHeading">Today<span class="title-dot">.</span></h1>
+            <p class="level-label" id="levelLabel">First steps · very basic</p>
+          </div>
+          <div class="day-counter" aria-label="Year progress">
+            <span>DAY</span>
+            <strong id="dayNumber">001</strong>
+            <small>OF 365</small>
+          </div>
+        </div>
+
+        <div class="progress-module" aria-label="Year progress">
+          <div class="progress-track"><span id="progressFill"></span></div>
+          <div class="progress-scale" aria-hidden="true"><span>START</span><span>FOUNDATION YEAR</span><span>365</span></div>
+        </div>
+
+        <div class="word-stack" id="wordStack" aria-live="polite"></div>
+
+        <div class="review-note"><span>↺</span><p><strong>Built to stick.</strong> Words return during the year for spaced review.</p></div>
+      </section>
+
+      <section class="view" id="historyView" aria-labelledby="historyHeading" hidden>
+        <div class="section-heading">
+          <p class="signal-label">Vocabulary archive</p>
+          <div><h1 id="historyHeading">History<span class="title-dot">.</span></h1><strong class="history-total" id="historyTotal">0 words</strong></div>
+        </div>
+
+        <div class="filter-row" role="group" aria-label="Filter vocabulary history">
+          <button class="filter-chip active" type="button" data-filter="all">All</button>
+          <button class="filter-chip" type="button" data-filter="noun">Nouns</button>
+          <button class="filter-chip" type="button" data-filter="verb">Verbs</button>
+          <button class="filter-chip" type="button" data-filter="adjective">Adjectives</button>
+        </div>
+        <div class="history-list" id="historyList"></div>
+      </section>
+
+      <section class="view" id="settingsView" aria-labelledby="settingsHeading" hidden>
+        <div class="section-heading settings-heading">
+          <p class="signal-label">Your daily rhythm</p>
+          <div><h1 id="settingsHeading">Reminder<span class="title-dot">.</span></h1></div>
+        </div>
+
+        <section class="reminder-panel" aria-labelledby="dailyReminderTitle">
+          <div class="reminder-topline">
+            <span class="setting-number">01</span>
+            <div class="setting-copy">
+              <h2 id="dailyReminderTitle">Daily notification</h2>
+              <p>Get a nudge when today’s words are ready.</p>
+            </div>
+            <label class="switch" aria-label="Enable daily reminder">
+              <input id="reminderToggle" type="checkbox">
+              <span></span>
+            </label>
+          </div>
+
+          <label class="time-control" for="reminderTime">
+            <span>REMIND ME AT</span>
+            <input id="reminderTime" type="time" value="09:00">
+          </label>
+
+          <button class="primary-button" id="saveReminderButton" type="button">Save reminder</button>
+          <button class="secondary-button" id="testReminderButton" type="button">Send a test notification</button>
+          <p class="setting-status" id="reminderStatus" role="status">Reminders are off.</p>
+        </section>
+
+        <section class="device-panel">
+          <span class="setting-number">02</span>
+          <div>
+            <h2>Keep it reliable</h2>
+            <p>Install ManDayRin and allow notifications. Mobile systems may pause website timers, so you can also add a device calendar alert for the same time.</p>
+          </div>
+          <button class="calendar-button" id="calendarReminderButton" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16v14H4zM8 3v6m8-6v6M4 10h16"/></svg>
+            Create calendar alert
+          </button>
+        </section>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button class="nav-item active" type="button" data-view="todayView" aria-current="page">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg>
+        <span>Today</span>
+      </button>
+      <button class="nav-item" type="button" data-view="historyView">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12M6 10h12M6 16h8"/></svg>
+        <span>History</span>
+      </button>
+      <button class="nav-item" type="button" data-view="settingsView">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M5 17h14M9 4v6m6 4v6"/></svg>
+        <span>Reminder</span>
+      </button>
+    </nav>
+  </div>
+
+  <div class="install-dialog" id="installDialog" role="dialog" aria-modal="true" aria-labelledby="installTitle" hidden>
+    <button class="dialog-backdrop" type="button" data-close-install aria-label="Close install instructions"></button>
+    <section class="dialog-sheet">
+      <div class="dialog-index">INSTALL / 01</div>
+      <div class="dialog-title-row">
+        <h2 id="installTitle">Put it on<br>your phone<span class="title-dot">.</span></h2>
+        <button class="dialog-close" type="button" data-close-install aria-label="Close">×</button>
+      </div>
+      <div class="install-steps">
+        <p><strong>iPhone / iPad</strong><span>Open in Safari → Share → Add to Home Screen</span></p>
+        <p><strong>Android</strong><span>Open the browser menu → Install app</span></p>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="vocabulary.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

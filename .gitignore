@@ -2,10 +2,3 @@
 pass.txt
 .env
 smolov/config.js
-brain-health/config.js
-mandarin/models/
-mandarin/.tts-cache/
-mandarin/generated-audio/
-mandarin/.workshop/
-mandarin/.venv/
-mandarin/__pycache__/
