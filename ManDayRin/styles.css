@@ -207,6 +207,7 @@ h1 { margin: 0; font-size: clamp(3.7rem, 20vw, 7.8rem); font-weight: 850; line-h
 .setting-status { min-height: 1.2rem; margin: 0.8rem 0 0; color: var(--muted); font-size: 0.75rem; text-align: center; }
 .device-panel { display: grid; grid-template-columns: auto 1fr; gap: 0.85rem; margin-top: 0.8rem; padding: 1.1rem; }
 .calendar-button { grid-column: 1 / -1; display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; border: 1px solid var(--cyan); background: transparent; color: var(--cyan); }
+.creator-credit { margin: 3.5rem 0 0; padding: 1.25rem 0 1rem; border-top: 1px solid var(--line); color: var(--muted); font-family: ui-monospace, monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-align: center; text-transform: uppercase; }
 
 .bottom-nav { position: fixed; z-index: 10; right: 0.75rem; bottom: calc(0.75rem + env(safe-area-inset-bottom)); left: 0.75rem; display: grid; grid-template-columns: repeat(3,1fr); width: min(calc(100% - 1.5rem), 32rem); margin: 0 auto; padding: 0.35rem; border: 1px solid var(--line-hot); background: rgba(15,18,21,0.94); box-shadow: 0 1rem 3rem rgba(0,0,0,0.4); backdrop-filter: blur(18px); }
 .nav-item { display: grid; grid-template-columns: auto auto; min-height: 3.35rem; align-items: center; justify-content: center; gap: 0.4rem; border: 0; background: transparent; color: var(--muted); font-size: 0.75rem; font-weight: 850; letter-spacing: 0.03em; }
