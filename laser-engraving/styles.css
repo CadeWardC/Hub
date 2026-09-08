@@ -991,6 +991,19 @@ body {
 /* ========================================
    STATUS BAR
    ======================================== */
+.time-estimate-summary {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color, #333);
+    display: grid;
+    gap: 6px;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.time-estimate-summary strong { color: #d4a853; }
+.time-estimate-summary small { opacity: 0.7; line-height: 1.5; }
+#time-estimate-missing:empty { display: none; }
+
 .status-bar {
     position: fixed;
     bottom: 0;

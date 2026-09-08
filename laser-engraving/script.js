@@ -333,6 +333,8 @@
                 selectionLayer: document.getElementById('selection-layer'),
                 canvasArea: document.getElementById('canvas-area'),
                 panelBody: document.getElementById('panel-body'),
+                timeEstimate: document.getElementById('time-estimate'),
+                timeEstimateMissing: document.getElementById('time-estimate-missing'),
                 layersList: document.getElementById('layers-list'),
                 layersPanel: document.getElementById('layers-panel'),
                 layersToggle: document.getElementById('layers-toggle'),
@@ -2925,9 +2927,67 @@
             this.dom.viewport.setAttribute('transform', `translate(${this.offset.x.toFixed(2)}, ${this.offset.y.toFixed(2)}) scale(${this.scale.toFixed(4)})`);
         }
 
+        // Feed time in seconds. Raster estimates assume every row is scanned;
+        // rapid travel and acceleration depend on the machine and are excluded.
+        estimateObjectSeconds(obj) {
+            if (!Number.isFinite(obj.speed) || obj.speed <= 0 ||
+                !Number.isFinite(obj.power) || obj.power <= 0) return null;
+            const w = Math.abs(obj.width || 0), h = Math.abs(obj.height || 0);
+            let distance = 0;
+            if (obj.type === 'polyline') {
+                const pts = obj.points || [];
+                for (let i = 1; i < pts.length; i++) {
+                    distance += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+                }
+            } else if (obj.type === 'rect') {
+                distance = obj.mode === 'cut' ? 2 * (w + h) : w * Math.max(1, Math.floor(h / 0.1));
+            } else if (obj.type === 'ellipse') {
+                const rx = w / 2, ry = h / 2;
+                if (obj.mode === 'cut') {
+                    if (Math.abs(rx - ry) < 0.1) distance = 2 * Math.PI * rx;
+                    else for (let i = 1; i <= 64; i++) {
+                        const a = (i - 1) * Math.PI / 32, b = i * Math.PI / 32;
+                        distance += Math.hypot(rx * (Math.cos(b) - Math.cos(a)), ry * (Math.sin(b) - Math.sin(a)));
+                    }
+                } else if (ry > 0) {
+                    for (let row = 0; row < Math.max(1, Math.floor(h / 0.1)); row++) {
+                        const y = -ry + row * 0.1;
+                        distance += 2 * rx * Math.sqrt(Math.max(0, 1 - y * y / (ry * ry)));
+                    }
+                }
+            } else if (obj.type === 'image') {
+                distance = Math.max(1, Math.round(w / 0.1)) * 0.1 * Math.max(1, Math.round(h / 0.1));
+            } else if (obj.type === 'text') {
+                distance = (obj.text || '').trim() ? w * Math.ceil(obj.fontSize * 12) : 0;
+            } else return null;
+            const seconds = distance / obj.speed * 60 * Math.max(1, Math.ceil(obj.passes || 1));
+            return Number.isFinite(seconds) ? seconds : null;
+        }
+
+        updateTimeEstimate() {
+            if (!this.dom.timeEstimate) return;
+            const visible = this.objects.filter(o => o.visible !== false);
+            let seconds = 0, missing = 0;
+            for (const obj of visible) {
+                const estimate = this.estimateObjectSeconds(obj);
+                if (estimate === null) missing++;
+                else seconds += estimate;
+            }
+            const rounded = Math.ceil(seconds);
+            const duration = rounded < 60 ? `${rounded}s` : rounded < 3600
+                ? `${Math.floor(rounded / 60)}m ${rounded % 60}s`
+                : `${Math.floor(rounded / 3600)}h ${Math.floor(rounded % 3600 / 60)}m`;
+            this.dom.timeEstimate.textContent = visible.length === 0 ? 'Add items to estimate time'
+                : missing === visible.length ? 'Choose a preset or set power and speed'
+                : `${missing ? 'Partial estimate' : 'Estimated time'}: ~${duration}`;
+            this.dom.timeEstimateMissing.textContent = missing
+                ? `${missing} item${missing === 1 ? '' : 's'} excluded: set power and speed.` : '';
+        }
+
         renderObjects() {
             const svg = this.objects.filter(o => o.visible !== false).map(o => this.objectToSVG(o)).join('');
             this.dom.objectsLayer.innerHTML = svg;
+            this.updateTimeEstimate();
         }
 
         renderTempObject() {
