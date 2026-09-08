@@ -1278,7 +1278,19 @@
                 nh = bottom - ny;
             }
 
-            if (ctrlKey) {
+            if (o.type === 'image') {
+                const horizontal = h.includes('l') || h.includes('r');
+                const vertical = h.includes('t') || h.includes('b');
+                const scale = Math.max(1 / s.w, 1 / s.h,
+                    horizontal && vertical ? Math.max(nw / s.w, nh / s.h)
+                        : horizontal ? nw / s.w : nh / s.h);
+                nw = s.w * scale;
+                nh = s.h * scale;
+                nx = h.includes('l') ? s.x + s.w - nw
+                    : horizontal ? s.x : s.x + (s.w - nw) / 2;
+                ny = h.includes('t') ? s.y + s.h - nh
+                    : vertical ? s.y : s.y + (s.h - nh) / 2;
+            } else if (ctrlKey) {
                 const size = Math.max(nw, nh);
                 nw = size;
                 nh = size;
@@ -1550,7 +1562,8 @@
                     <div class="prop-row">
                         <label>Length</label>
                         <input type="number" id="prop-h" step="0.1" value="${fmt(obj.height)}"${obj.type === 'text' ? ' disabled' : ''}>
-                    </div>`;
+                    </div>
+                    ${obj.type === 'image' ? '<p class="panel-hint">Proportions locked. Changing width or length updates both.</p>' : ''}`;
                 posCollapse = `
                     <div class="prop-collapse${this.posOpen ? ' open' : ''}">
                         <button class="prop-collapse-toggle" data-toggle-pos>
@@ -1779,6 +1792,21 @@
             const propMap = { 'prop-x': 'x', 'prop-y': 'y', 'prop-w': 'width', 'prop-h': 'height', 'prop-power': 'power', 'prop-speed': 'speed', 'prop-passes': 'passes', 'prop-session-split': 'sessionSplit' };
             const prop = propMap[id];
             if (!prop) return;
+            if (obj.type === 'image' && (id === 'prop-w' || id === 'prop-h')) {
+                const oldW = obj.width, oldH = obj.height;
+                const scale = Math.max(0.1 / oldW, 0.1 / oldH,
+                    val / (id === 'prop-w' ? oldW : oldH));
+                obj.width = oldW * scale;
+                obj.height = oldH * scale;
+                this.pushUndo({ type: 'resize', objId: obj.id,
+                    oldX: obj.x, oldY: obj.y, oldW, oldH,
+                    newX: obj.x, newY: obj.y, newW: obj.width, newH: obj.height });
+                const linkedInput = document.getElementById(id === 'prop-w' ? 'prop-h' : 'prop-w');
+                if (linkedInput) linkedInput.value = fmt(id === 'prop-w' ? obj.height : obj.width);
+                this.renderObjects();
+                this.renderSelection();
+                return;
+            }
             const oldVal = obj[prop];
             if (id === 'prop-w') obj.width = Math.max(0.1, val);
             else if (id === 'prop-h') obj.height = Math.max(0.1, val);
