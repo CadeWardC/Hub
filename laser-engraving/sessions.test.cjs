@@ -4,8 +4,9 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync(__dirname + '/script.js', 'utf8');
 let blankRows = new Set([1]);
+let marginFixture = false;
 const context = {
-    window: {}, console,
+    window: {}, console, setTimeout, clearTimeout,
     Image: class { set src(value) { queueMicrotask(() => this.onload()); } },
     document: {
         addEventListener() {}, getElementById() { return null; },
@@ -16,6 +17,10 @@ const context = {
                     const i = (r * w + c) * 4;
                     data[i] = data[i + 1] = data[i + 2] = (r + c) % 3 * 80;
                     data[i + 3] = blankRows.has(r) ? 0 : 255;
+                    if (marginFixture) {
+                        data[i] = data[i + 1] = data[i + 2] = c === 1 || c === 3 ? 0 : 255;
+                        data[i + 3] = 255;
+                    }
                 }
                 return { data };
             } }) };
@@ -83,18 +88,102 @@ test('blank image rows produce no travel and each pass positions at its first ac
         const lines = await app.generateImageMoves(obj);
         const travel = lines.filter(l => l.startsWith('G0 '));
         assert.equal(travel.length, 4); // Only two active rows per pass.
-        assert.equal(travel[0], 'G0 X12 Y84.8');
+        assert.equal(travel[0], 'G0 X11.1 Y84.8 S0');
         assert.equal(travel[2], travel[0]);
-        assert.ok(travel.every(l => /Y84\.[68]$/.test(l)));
+        assert.ok(travel.every(l => /Y84\.[68] S0$/.test(l)));
         blankRows = new Set([0, 1, 2, 3, 4, 5, 6]);
         const empty = await app.generateImageMoves(obj);
         assert.ok(empty.every(l => !/^G[01] /.test(l)));
         blankRows = new Set();
         const filled = await app.generateImageMoves(obj);
-        assert.equal(filled[1], 'G0 X12 Y85');
+        assert.equal(filled[1], 'G0 X11 Y85 S0');
     } finally {
         blankRows = new Set([1]);
     }
+});
+
+test('image scans trim side margins while preserving burn positions, internal gaps and rotated sessions', async () => {
+    const app = Object.create(CADApp.prototype);
+    app.bed = { x: 100, y: 100 };
+    marginFixture = true;
+    try {
+        for (const rotation of [0, 37, 90]) for (const engraveMode of ['dither', 'grayscale']) {
+            const obj = { type: 'image', x: 12, y: 15, width: 0.5, height: 0.2,
+                power: 40, speed: 1500, passes: 2, rotation, engraveMode, href: 'fixture' };
+            const initial = app.mp(obj, obj.x, obj.y);
+            const expected = [];
+            for (let pass = 0; pass < 2; pass++) for (let row = 0; row < 2; row++) {
+                for (const col of row === 0 ? [1, 3] : [3, 1]) {
+                    const from = app.mp(obj, obj.x + (col + row) * 0.1, obj.y + row * 0.1);
+                    const to = app.mp(obj, obj.x + (col + 1 - row) * 0.1, obj.y + row * 0.1);
+                    expected.push(JSON.stringify([from.x, from.y, to.x, to.y, 400].map(v => Math.round(v * 1000) / 1000)));
+                }
+            }
+            const full = await app.generateImageMoves(obj);
+            assert.deepEqual(burns(full, initial), expected);
+            assert.equal(full.filter(l => /^G1 /.test(l)).length, 20); // Burns, interior gap and two laser-off margins per row.
+            assert.equal(full.filter(l => /^G1 .* S0/.test(l)).length, 12);
+            const first = await app.generateImageMoves(obj, { start: 0, end: 1 });
+            const second = await app.generateImageMoves(obj, { start: 1, end: 2 });
+            assert.deepEqual([...burns(first, initial), ...burns(second, initial)].sort(), expected.slice().sort());
+        }
+    } finally { marginFixture = false; }
+});
+
+test('one millimetre margins are laser-off, clipped at bed edges, and split pauses preserve burns', async () => {
+    const app = Object.create(CADApp.prototype);
+    app.bed = { x: 100, y: 100 };
+    marginFixture = true;
+    try {
+        const obj = { type: 'image', x: 12, y: 15, width: 0.5, height: 0.2,
+            power: 40, speed: 1500, passes: 2, sessionSplit: 50, href: 'fixture' };
+        const base = await app.generateImageMoves(obj);
+        assert.equal(base[1], 'G0 X11.1 Y85 S0');
+        assert.ok(base.includes('G1 X13.4 S0'));
+        const paused = await app.generateImageMoves({ ...obj, pauseAtSplit: true });
+        assert.equal(paused.filter(l => l === 'M0').length, 2);
+        for (let i = 0; i < paused.length; i++) if (paused[i] === 'M0') {
+            assert.equal(paused[i - 1], 'M5');
+            assert.equal(paused[i + 1], 'M3 S0');
+        }
+        const initial = app.mp(obj, obj.x, obj.y);
+        assert.deepEqual(burns(paused, initial), burns(base, initial));
+        const session = await app.generateImageMoves({ ...obj, pauseAtSplit: true }, { start: 0, end: 1 });
+        assert.ok(!session.includes('M0'));
+        for (const rotation of [0, 90]) {
+            const edge = await app.generateImageMoves({ ...obj, x: 0, y: 0.2, rotation });
+            for (const line of edge) for (const match of line.matchAll(/\b[XY](-?[\d.]+)/g)) {
+                assert.ok(Number(match[1]) >= 0 && Number(match[1]) <= 100);
+            }
+        }
+    } finally { marginFixture = false; }
+});
+
+test('image estimate matches exported feed distance with margins, rotation, passes and blank rows', async () => {
+    const app = Object.create(CADApp.prototype);
+    app.bed = { x: 100, y: 100 };
+    for (const rotation of [0, 37, 90]) for (const engraveMode of ['dither', 'grayscale']) {
+        const obj = { type: 'image', x: 0.2, y: 0.3, width: 0.5, height: 0.7,
+            rotation, engraveMode, power: 40, speed: 1500, passes: 2, href: 'fixture' };
+        const lines = await app.generateImageMoves(obj);
+        let x = 0, y = 0, distance = 0;
+        for (const line of lines) {
+            if (!/^G[01] /.test(line)) continue;
+            const mx = / X(-?[\d.]+)/.exec(line), my = / Y(-?[\d.]+)/.exec(line);
+            const nx = mx ? Number(mx[1]) : x, ny = my ? Number(my[1]) : y;
+            if (line.startsWith('G1 ')) distance += Math.hypot(nx - x, ny - y);
+            x = nx; y = ny;
+        }
+        const estimate = await app.estimateImageSeconds(obj);
+        assert.ok(Math.abs(estimate - distance / obj.speed * 60) < 0.002);
+        obj.speed *= 2;
+        assert.ok(Math.abs(await app.estimateImageSeconds(obj) - estimate / 2) < 1e-9);
+    }
+    try {
+        blankRows = new Set([0, 1, 2, 3, 4, 5, 6]);
+        assert.equal(await app.estimateImageSeconds({ type: 'image', x: 12, y: 15, width: 0.5,
+            height: 0.7, power: 40, speed: 1500, href: 'fixture' }), 0);
+    } finally { blankRows = new Set([1]); }
 });
 
 test('legacy dither displays recover alpha while current images keep their own alpha', () => {

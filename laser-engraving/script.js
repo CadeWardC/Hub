@@ -318,6 +318,8 @@
         }
 
         destroy() {
+            clearTimeout(this.timeEstimateTimer);
+            this.timeEstimateRevision = (this.timeEstimateRevision || 0) + 1;
             this.listeners.forEach(({ el, type, fn }) => el.removeEventListener(type, fn));
             this.listeners = [];
         }
@@ -1610,6 +1612,8 @@
                         <input id="prop-session-split" type="number" min="1" max="99" step="1" required value="${fmt(obj.sessionSplit || 50)}">
                     </div>
                     <p class="panel-hint">Split from top to bottom along the picture’s own orientation. 50% makes two equal sections, rounded to complete scan rows. The dashed gold line shows the split.</p>
+                    <div class="prop-row"><label for="prop-pause-split">Pause at split</label><input id="prop-pause-split" type="checkbox"${obj.pauseAtSplit ? ' checked' : ''}></div>
+                    <p class="panel-hint">Optional pause in the main export, at this split on each pass. Laser turns off until resumed. Uses M0; Falcon SD-card button resume is unverified. Test a small job first. Keep power on and the material in place.</p>
                     <div class="prop-row"><button class="prop-mode-btn" data-export-session="1">Download session 1 · Top</button></div>
                     <div class="prop-row"><button class="prop-mode-btn" data-export-session="2">Download session 2 · Bottom</button></div>
                     <p class="panel-hint" id="session-status" role="status">Exports only this image. Keep the material and work origin unchanged between sessions. Download both files with the same settings. Outlines export separately through the main export button.</p>
@@ -1789,6 +1793,15 @@
         }
 
         onPropChange(e) {
+            if (e.target.id === 'prop-pause-split') {
+                const obj = this.objects.find(o => o.id === this.selectedId);
+                if (!obj) return;
+                const oldVal = obj.pauseAtSplit;
+                obj.pauseAtSplit = e.target.checked;
+                this.updateTimeEstimate();
+                this.pushUndo({ type: 'property', objId: obj.id, prop: 'pauseAtSplit', oldVal, newVal: obj.pauseAtSplit });
+                return;
+            }
             if (e.target.dataset.exportSession) {
                 this.exportImageSession(Number(e.target.dataset.exportSession), e.target);
                 return;
@@ -2524,7 +2537,7 @@
             lines.push('G00 G17 G40 G21 G54');
             lines.push('G90');
             lines.push('; Constant Laser Power Mode');
-            if (imageRange) lines.push('S0');
+            lines.push('S0');
             lines.push('M3');
             lines.push(`; ${obj.type} @ ${fmt(obj.speed)} mm/min, ${fmt(obj.power)}% power`);
             lines.push('; Air assist / laser power relay on');
@@ -2773,10 +2786,12 @@
             return lines;
         }
 
-        generateImageMoves(obj, range) {
+        generateImageMoves(obj, range, estimateOnly = false) {
+            const pauseRow = !range && obj.pauseAtSplit ? imageSessionRange(obj, 1).end : -1;
             return new Promise((resolve, reject) => {
                 const img = new Image();
                 img.onload = () => {
+                    try {
                     const step = 0.1; // 0.1mm pixel step
                     const cols = Math.max(1, Math.round(obj.width / step));
                     const rows = Math.max(1, Math.round(obj.height / step));
@@ -2794,7 +2809,8 @@
                     const lines = [];
                     const pwrOn = Math.round(obj.power * 10); // Standard GRBL S0-S1000 scale
                     const f = fmt(obj.speed);
-                    const passes = obj.passes || 1;
+                    const passes = estimateOnly ? 1 : (obj.passes || 1);
+                    let scanDistance = 0;
                     
                     // Scan in the image's own frame and map each point out through mp().
                     // Rows stay parallel to the image's edges, so a rotated engrave
@@ -2810,6 +2826,17 @@
 
                     const startLX = firstRow % 2 === 0 ? obj.x : obj.x + obj.width;
                     const startLY = obj.y + firstRow * step;
+                    // Clip the 1 mm laser-off run-up/run-out to the configured bed.
+                    const paddedX = (x, y, direction) => {
+                        const p = this.mp(obj, x, y), q = this.mp(obj, x + direction, y);
+                        let length = 1;
+                        for (const [axis, max] of [['x', this.bed.x], ['y', this.bed.y]]) {
+                            const delta = q[axis] - p[axis];
+                            if (delta > 1e-8) length = Math.min(length, (max - p[axis]) / delta);
+                            else if (delta < -1e-8) length = Math.min(length, -p[axis] / delta);
+                        }
+                        return x + direction * Math.max(0, length);
+                    };
 
                     lines.push('G90'); // Absolute mode
                     // Each session starts independently, at the original row position.
@@ -2831,6 +2858,9 @@
 
                         let isFirstMove = true;
                         for (let r = firstRow; r < endRow; r++) {
+                            if (r === pauseRow) {
+                                lines.push('; Pause at image split: resume to continue', 'M5', 'M0', 'M3 S0');
+                            }
                             const lyRow = obj.y + r * step;
                             const isEven = r % 2 === 0;
                             
@@ -2874,19 +2904,34 @@
                             }
                             
                             const allOff = groups.length === 1 && groups[0].power === 0;
-                            const rowStartX = isEven ? obj.x : obj.x + obj.width;
-                            const rowEndX = isEven ? obj.x + obj.width : obj.x;
+                            let rowStartX = isEven ? obj.x : obj.x + obj.width;
 
                             if (allOff) {
                                 // Leave the head in place until a row actually needs engraving.
                                 continue;
                             }
 
-                            if (!Number.isFinite(currentX) || Math.abs(currentX - rowStartX) > 0.01 || Math.abs(currentY - lyRow) > 0.01) {
-                                lines.push(emit('G0', rowStartX, lyRow, ''));
-                                currentX = rowStartX;
+                            // Trim only unpowered margins. Keep gaps inside the artwork
+                            // and the original pixel spacing, direction and power values.
+                            if (groups[0].power === 0) {
+                                const margin = groups.shift().count * step;
+                                rowStartX += isEven ? margin : -margin;
+                            }
+                            if (groups[groups.length - 1].power === 0) groups.pop();
+
+                            const direction = isEven ? 1 : -1;
+                            const leadX = paddedX(rowStartX, lyRow, -direction);
+                            if (estimateOnly) {
+                                const endX = rowStartX + direction * groups.reduce((sum, g) => sum + g.count * step, 0);
+                                scanDistance += Math.abs(paddedX(endX, lyRow, direction) - leadX);
+                                continue;
+                            }
+                            if (!Number.isFinite(currentX) || Math.abs(currentX - leadX) > 1e-8 || Math.abs(currentY - lyRow) > 1e-8) {
+                                lines.push(emit('G0', leadX, lyRow, ' S0'));
+                                currentX = leadX;
                                 currentY = lyRow;
                             }
+                            lines.push(emit('G1', rowStartX, lyRow, ` S0 F${f}`));
 
                             let accumX = rowStartX;
                             for (const g of groups) {
@@ -2899,12 +2944,15 @@
                                     lines.push(emit('G1', accumX, lyRow, ` S${g.power}`));
                                 }
                             }
-                            currentX = rowEndX;
+                            const trailX = paddedX(accumX, lyRow, direction);
+                            lines.push(emit('G1', trailX, lyRow, ' S0'));
+                            currentX = trailX;
                             currentY = lyRow;
                         }
                     }
                     lines.push('M5');
-                    resolve(lines);
+                    resolve(estimateOnly ? scanDistance / obj.speed * 60 * Math.max(1, Math.ceil(obj.passes || 1)) : lines);
+                    } catch (error) { reject(error); }
                 };
                 img.onerror = reject;
                 img.src = obj.engraveMode === 'grayscale' ? (obj.grayscaleHref || obj.href) : (obj.ditheredHref || obj.href);
@@ -2925,8 +2973,7 @@
             this.dom.viewport.setAttribute('transform', `translate(${this.offset.x.toFixed(2)}, ${this.offset.y.toFixed(2)}) scale(${this.scale.toFixed(4)})`);
         }
 
-        // Feed time in seconds. Raster estimates assume every row is scanned;
-        // rapid travel and acceleration depend on the machine and are excluded.
+        // Feed time in seconds; image pixels are measured asynchronously below.
         estimateObjectSeconds(obj) {
             if (!Number.isFinite(obj.speed) || obj.speed <= 0 ||
                 !Number.isFinite(obj.power) || obj.power <= 0) return null;
@@ -2954,7 +3001,7 @@
                     }
                 }
             } else if (obj.type === 'image') {
-                distance = Math.max(1, Math.round(w / 0.1)) * 0.1 * Math.max(1, Math.round(h / 0.1));
+                return null;
             } else if (obj.type === 'text') {
                 distance = (obj.text || '').trim() ? w * Math.ceil(obj.fontSize * 12) : 0;
             } else return null;
@@ -2962,30 +3009,56 @@
             return Number.isFinite(seconds) ? seconds : null;
         }
 
-        updateTimeEstimate() {
+        estimateImageSeconds(obj) {
+            if (!this.imageTimeCache) this.imageTimeCache = new WeakMap();
+            const href = obj.engraveMode === 'grayscale' ? (obj.grayscaleHref || obj.href) : (obj.ditheredHref || obj.href);
+            const key = JSON.stringify([obj.x, obj.y, obj.width, obj.height, obj.rotation,
+                obj.power, obj.speed, obj.passes, obj.engraveMode, this.bed.x, this.bed.y]);
+            const cached = this.imageTimeCache.get(obj);
+            if (cached && cached.key === key && cached.href === href) return cached.promise;
+            const snapshot = { ...obj, pauseAtSplit: false };
+            const worker = Object.create(this);
+            worker.bed = { ...this.bed };
+            const promise = worker.generateImageMoves(snapshot, undefined, true);
+            this.imageTimeCache.set(obj, { key, href, promise });
+            return promise;
+        }
+
+        async updateTimeEstimate() {
             if (!this.dom.timeEstimate) return;
+            const revision = this.timeEstimateRevision = (this.timeEstimateRevision || 0) + 1;
             const visible = this.objects.filter(o => o.visible !== false);
-            let seconds = 0, missing = 0;
-            for (const obj of visible) {
-                const estimate = this.estimateObjectSeconds(obj);
-                if (estimate === null) missing++;
-                else seconds += estimate;
-            }
+            if (visible.some(o => o.type === 'image')) this.dom.timeEstimate.textContent = 'Calculating estimated time…';
+            const results = await Promise.all(visible.map(async obj => {
+                if (!Number.isFinite(obj.speed) || obj.speed <= 0 || !Number.isFinite(obj.power) || obj.power <= 0) return null;
+                try { return obj.type === 'image' ? await this.estimateImageSeconds(obj) : this.estimateObjectSeconds(obj); }
+                catch (_) { return 'failed'; }
+            }));
+            if (revision !== this.timeEstimateRevision) return;
+            const missing = results.filter(value => value === null).length;
+            const failed = results.filter(value => value === 'failed').length;
+            const seconds = results.reduce((sum, value) => sum + (typeof value === 'number' ? value : 0), 0);
             const rounded = Math.ceil(seconds);
             const duration = rounded < 60 ? `${rounded}s` : rounded < 3600
                 ? `${Math.floor(rounded / 60)}m ${rounded % 60}s`
                 : `${Math.floor(rounded / 3600)}h ${Math.floor(rounded % 3600 / 60)}m`;
             this.dom.timeEstimate.textContent = visible.length === 0 ? 'Add items to estimate time'
                 : missing === visible.length ? 'Choose a preset or set power and speed'
-                : `${missing ? 'Partial estimate' : 'Estimated time'}: ~${duration}`;
-            this.dom.timeEstimateMissing.textContent = missing
-                ? `${missing} item${missing === 1 ? '' : 's'} excluded: set power and speed.` : '';
+                : failed === visible.length ? 'Could not estimate image time'
+                : `${missing || failed ? 'Partial estimate' : 'Estimated time'}: ~${duration}`;
+            this.dom.timeEstimateMissing.textContent = [
+                missing ? `${missing} item${missing === 1 ? '' : 's'} excluded: set power and speed.` : '',
+                failed ? `${failed} image${failed === 1 ? '' : 's'} could not be read.` : '',
+                visible.some(o => o.type === 'image' && o.pauseAtSplit) ? 'Manual pause time is not included.' : ''
+            ].filter(Boolean).join(' ');
         }
 
         renderObjects() {
             const svg = this.objects.filter(o => o.visible !== false).map(o => this.objectToSVG(o)).join('');
             this.dom.objectsLayer.innerHTML = svg;
-            this.updateTimeEstimate();
+            clearTimeout(this.timeEstimateTimer);
+            this.timeEstimateRevision = (this.timeEstimateRevision || 0) + 1;
+            this.timeEstimateTimer = setTimeout(() => this.updateTimeEstimate(), 150);
         }
 
         renderTempObject() {
