@@ -691,6 +691,7 @@
                         href: ditheredHref,
                         grayscaleHref: grayscaleHref,
                         ditheredHref: ditheredHref,
+                        ditherAlphaPreserved: true,
                         engraveMode: 'dither',
                         mode: 'engrave',
                         pxWidth: dw,
@@ -1592,6 +1593,15 @@
                     <p class="panel-hint">Traces the outer subject edge. Uses transparency when available; otherwise removes pixels lighter than the threshold. Lower it to remove more background. Photos may need background removal first.</p>
                     <button class="prop-mode-btn" id="btn-outline">Outline picture</button>
                     <p class="panel-hint" id="outline-status" role="status">Creates separate editable paths. Set their laser power before exporting.</p>
+                    <h3>Two engraving sessions</h3>
+                    <div class="prop-row">
+                        <label for="prop-session-split">Top section (%)</label>
+                        <input id="prop-session-split" type="number" min="1" max="99" step="1" required value="${fmt(obj.sessionSplit || 50)}">
+                    </div>
+                    <p class="panel-hint">Split from top to bottom along the picture’s own orientation. 50% makes two equal sections, rounded to complete scan rows. The dashed gold line shows the split.</p>
+                    <div class="prop-row"><button class="prop-mode-btn" data-export-session="1">Download session 1 · Top</button></div>
+                    <div class="prop-row"><button class="prop-mode-btn" data-export-session="2">Download session 2 · Bottom</button></div>
+                    <p class="panel-hint" id="session-status" role="status">Exports only this image. Keep the material and work origin unchanged between sessions. Download both files with the same settings. Outlines export separately through the main export button.</p>
                     ` : ''}
                 </div>`;
             } else {
@@ -1751,7 +1761,7 @@
             }
             const val = parseFloat(e.target.value);
             if (!isFinite(val)) return;
-            const propMap = { 'prop-x': 'x', 'prop-y': 'y', 'prop-w': 'width', 'prop-h': 'height', 'prop-power': 'power', 'prop-speed': 'speed', 'prop-passes': 'passes' };
+            const propMap = { 'prop-x': 'x', 'prop-y': 'y', 'prop-w': 'width', 'prop-h': 'height', 'prop-power': 'power', 'prop-speed': 'speed', 'prop-passes': 'passes', 'prop-session-split': 'sessionSplit' };
             const prop = propMap[id];
             if (!prop) return;
             const oldVal = obj[prop];
@@ -1760,6 +1770,7 @@
             else if (id === 'prop-power') obj.power = Math.max(0, val);
             else if (id === 'prop-speed') obj.speed = Math.max(0, val);
             else if (id === 'prop-passes') obj.passes = Math.max(1, Math.floor(val));
+            else if (id === 'prop-session-split') obj.sessionSplit = Math.max(1, Math.min(99, Math.round(val)));
             else obj[prop] = val;
             this.pushUndo({ type: 'property', objId: obj.id, prop, oldVal, newVal: obj[prop] });
             this.renderObjects();
@@ -1767,6 +1778,10 @@
         }
 
         onPropChange(e) {
+            if (e.target.dataset.exportSession) {
+                this.exportImageSession(Number(e.target.dataset.exportSession), e.target);
+                return;
+            }
             if (e.target.id === 'btn-outline') {
                 this.outlineSelectedImage();
                 return;
@@ -1779,6 +1794,7 @@
             if (tabBtn) {
                 this.propTab = tabBtn.dataset.propTab;
                 this.updatePropertiesPanel();
+                this.renderSelection();
                 return;
             }
             if (e.target.closest && e.target.closest('[data-toggle-pos]')) {
@@ -2355,6 +2371,38 @@
 
         // ---------- G-CODE EXPORT ----------
 
+        async exportImageSession(session, button) {
+            const selected = this.objects.find(o => o.id === this.selectedId);
+            const status = document.getElementById('session-status');
+            const splitInput = document.getElementById('prop-session-split');
+            if (!selected || selected.type !== 'image' || !splitInput.reportValidity()) return;
+            button.disabled = true;
+            status.textContent = `Preparing session ${session}…`;
+            try {
+                const obj = this.snapshotObject(selected);
+                obj.sessionSplit = Number(splitInput.value);
+                if (!(obj.power > 0 && obj.speed > 0)) throw new Error('Set the image’s laser power and speed before downloading.');
+                const range = imageSessionRange(obj, session);
+                const body = await this.objectToGC(obj, range);
+                const content = [
+                    `; Image session ${session} of 2 (${session === 1 ? 'top' : 'bottom'})`,
+                    `; Scan rows ${range.start + 1}-${range.end} of ${range.rows}; split ${fmt(obj.sessionSplit)}%`,
+                    '; Keep the material position and G54 work origin unchanged between sessions.',
+                    '; Coordinates refer to the full image; other layers are not included.',
+                    'M5', 'G21', 'G90', 'G17', 'G40', 'G54',
+                    `; Work Area: ${fmt(this.bed.x)}mm x ${fmt(this.bed.y)}mm`,
+                    body, 'M5', 'M9', 'G0 X0 Y0'
+                ].join('\n');
+                const base = (obj.name || 'image').replace(/[^a-z0-9_-]+/gi, '-');
+                this.downloadGC(content, `${base}-session-${session}.gc`);
+                status.textContent = `Session ${session} downloaded. Download the other session before changing the picture or settings.`;
+            } catch (err) {
+                status.textContent = err.message || 'Could not prepare this session. Please try again.';
+            } finally {
+                button.disabled = false;
+            }
+        }
+
         async exportGC() {
             const validObjects = this.objects.filter(o => o.visible !== false && typeof o.power === 'number' && typeof o.speed === 'number' && o.power > 0 && o.speed > 0);
             dlog('export', `${validObjects.length} of ${this.objects.length} objects are exportable`,
@@ -2416,12 +2464,12 @@
             }
         }
 
-        downloadGC(content) {
+        downloadGC(content, name = 'engrave.gc') {
             const blob = new Blob([content], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'engrave.gc';
+            a.download = name;
             a.click();
             URL.revokeObjectURL(url);
         }
@@ -2452,7 +2500,7 @@
             };
         }
 
-        async objectToGC(obj) {
+        async objectToGC(obj, imageRange) {
             const lines = [];
             const bounds = this.getBounds(obj);
             const modeLabel = obj.mode === 'engrave' ? 'Engrave' : 'Cut';
@@ -2465,11 +2513,14 @@
             lines.push('G00 G17 G40 G21 G54');
             lines.push('G90');
             lines.push('; Constant Laser Power Mode');
+            if (imageRange) lines.push('S0');
             lines.push('M3');
             lines.push(`; ${obj.type} @ ${fmt(obj.speed)} mm/min, ${fmt(obj.power)}% power`);
             lines.push('; Air assist / laser power relay on');
             lines.push('M8');
-            const body = await this.generateObjectMoves(obj);
+            const body = imageRange && obj.type === 'image'
+                ? await this.generateImageMoves(obj, imageRange)
+                : await this.generateObjectMoves(obj);
             for (const line of body) lines.push(line);
             lines.push('M5');
             lines.push('M9');
@@ -2711,13 +2762,15 @@
             return lines;
         }
 
-        generateImageMoves(obj) {
+        generateImageMoves(obj, range) {
             return new Promise((resolve, reject) => {
                 const img = new Image();
                 img.onload = () => {
                     const step = 0.1; // 0.1mm pixel step
                     const cols = Math.max(1, Math.round(obj.width / step));
                     const rows = Math.max(1, Math.round(obj.height / step));
+                    const firstRow = range ? range.start : 0;
+                    const endRow = range ? range.end : rows;
                     const canvas = document.createElement('canvas');
                     canvas.width = cols;
                     canvas.height = rows;
@@ -2744,10 +2797,16 @@
                         return `${cmd} X${fmt(p.x)} Y${fmt(p.y)}${suffix}`;
                     };
 
-                    const startLX = obj.x;
-                    const startLY = obj.y;
+                    const startLX = firstRow % 2 === 0 ? obj.x : obj.x + obj.width;
+                    const startLY = obj.y + firstRow * step;
 
                     lines.push('G90'); // Absolute mode
+                    // Each session starts independently, at the original row position.
+                    // S0 clears any power inherited from a previously run file.
+                    if (range) {
+                        lines.push('S0');
+                        lines.push(emit('G0', startLX, startLY, ''));
+                    }
 
                     let currentX = startLX;
                     let currentY = startLY;
@@ -2760,7 +2819,7 @@
                         }
 
                         let isFirstMove = true;
-                        for (let r = 0; r < rows; r++) {
+                        for (let r = firstRow; r < endRow; r++) {
                             const lyRow = obj.y + r * step;
                             const isEven = r % 2 === 0;
                             
@@ -2884,7 +2943,13 @@
 
             if (o.type === 'image') {
                 const imgHref = o.engraveMode === 'grayscale' ? (o.grayscaleHref || o.href) : (o.ditheredHref || o.href);
-                return `<image class="cad-object" x="${fmt(o.x)}" y="${fmt(o.y)}" width="${fmt(o.width)}" height="${fmt(o.height)}" href="${imgHref}" style="filter:grayscale(1)"${rt} data-id="${o.id}"/>`;
+                const bounds = `x="${fmt(o.x)}" y="${fmt(o.y)}" width="${fmt(o.width)}" height="${fmt(o.height)}"`;
+                // Older projects flattened dither transparency to white. Recover the
+                // original alpha from their retained grayscale image when displaying.
+                const restoreAlpha = o.engraveMode !== 'grayscale' && !o.ditherAlphaPreserved && o.grayscaleHref;
+                const maskId = `image-alpha-${o.id}`;
+                const mask = restoreAlpha ? `<defs><mask id="${maskId}" maskUnits="userSpaceOnUse" ${bounds} style="mask-type:alpha"><image ${bounds} href="${o.grayscaleHref}"/></mask></defs>` : '';
+                return `${mask}<image class="cad-object" ${bounds} href="${imgHref}" style="filter:grayscale(1)"${restoreAlpha ? ` mask="url(#${maskId})"` : ''}${rt} data-id="${o.id}"/>`;
             }
 
             const isSel = o.id === this.selectedId;
@@ -2946,6 +3011,11 @@
             const stemTop = by - ROT_HANDLE_GAP / this.scale;
 
             let svg = `<g${rt} pointer-events="none">`;
+            if (obj.type === 'image' && (this.propTab || 'dimensions') === 'dimensions' && Math.round(obj.height / 0.1) >= 2) {
+                const split = imageSessionRange(obj, 1).end;
+                const sy = obj.y + split * 0.1;
+                svg += `<line x1="${fmt(obj.x)}" y1="${fmt(sy)}" x2="${fmt(obj.x + obj.width)}" y2="${fmt(sy)}" stroke="#d4a853" stroke-width="${fmt(2 / this.scale)}" stroke-dasharray="${fmt(6 / this.scale)} ${fmt(4 / this.scale)}"/>`;
+            }
             svg += `<rect x="${fmt(bx)}" y="${fmt(by)}" width="${fmt(bw)}" height="${fmt(bh)}" fill="none" stroke="#ffffff" stroke-width="${fmt(1.5 / this.scale)}" stroke-dasharray="${fmt(6 / this.scale)} ${fmt(4 / this.scale)}"/>`;
             // Stem connecting the shape to its rotate grip.
             svg += `<line x1="${fmt(bx + bw / 2)}" y1="${fmt(by)}" x2="${fmt(bx + bw / 2)}" y2="${fmt(stemTop)}" stroke="#d4a853" stroke-width="${fmt(1 / this.scale)}"/>`;
@@ -3485,6 +3555,15 @@
         return /[?&]debug=1/.test(location.search);
     }
 
+    function imageSessionRange(obj, session) {
+        const rows = Math.max(1, Math.round(obj.height / 0.1));
+        if (rows < 2) throw new Error('The image must be at least two scan rows tall to split.');
+        if (session !== 1 && session !== 2) throw new Error('Choose session 1 or 2.');
+        const percent = Number.isFinite(obj.sessionSplit) ? Math.max(1, Math.min(99, obj.sessionSplit)) : 50;
+        const split = Math.max(1, Math.min(rows - 1, Math.round(rows * percent / 100)));
+        return { start: session === 1 ? 0 : split, end: session === 1 ? split : rows, rows };
+    }
+
     // Exact squared Euclidean distance transform, followed by clockwise pixel-edge
     // tracing. Positive-area loops are exterior contours; holes are excluded.
     function traceOutlineMask(mask, w, h, radius) {
@@ -3593,7 +3672,7 @@
             data[idx] = v;
             data[idx + 1] = v;
             data[idx + 2] = v;
-            data[idx + 3] = 255;
+            // Preserve the source alpha so the editor canvas shows through.
         }
     }
 

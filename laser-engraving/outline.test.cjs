@@ -36,10 +36,10 @@ test('diagonally touching subjects stay separate; blank images have no outline',
     assert.equal(traceOutlineMask(new Uint8Array(25), 5, 5, 2).length, 0);
 });
 
-test('transparent pixels become white rather than laser-on black during dithering', () => {
+test('transparent pixels stay invisible during dithering; opaque white details remain intact', () => {
     const image = { width: 3, height: 1, data: new Uint8ClampedArray([0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 255]) };
     ditherImageData(image);
-    assert.deepEqual([...image.data], [255, 255, 255, 255, 0, 0, 0, 255, 255, 255, 255, 255]);
+    assert.deepEqual([...image.data], [255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 255]);
 });
 
 test('outline paths rotate with their image, export closed G-code, and undo together', () => {
