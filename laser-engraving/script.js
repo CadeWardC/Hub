@@ -2819,14 +2819,14 @@
                         lines.push(emit('G0', startLX, startLY, ''));
                     }
 
-                    let currentX = startLX;
-                    let currentY = startLY;
+                    // A full export may follow another object at any position.
+                    let currentX = range ? startLX : NaN;
+                    let currentY = range ? startLY : NaN;
 
                     for (let pass = 0; pass < passes; pass++) {
                         if (pass > 0) {
-                            lines.push(emit('G0', startLX, startLY, ''));
-                            currentX = startLX;
-                            currentY = startLY;
+                            currentX = NaN;
+                            currentY = NaN;
                         }
 
                         let isFirstMove = true;
@@ -2878,13 +2878,11 @@
                             const rowEndX = isEven ? obj.x + obj.width : obj.x;
 
                             if (allOff) {
-                                lines.push(emit('G0', rowEndX, lyRow, ''));
-                                currentX = rowEndX;
-                                currentY = lyRow;
+                                // Leave the head in place until a row actually needs engraving.
                                 continue;
                             }
 
-                            if (Math.abs(currentX - rowStartX) > 0.01 || Math.abs(currentY - lyRow) > 0.01) {
+                            if (!Number.isFinite(currentX) || Math.abs(currentX - rowStartX) > 0.01 || Math.abs(currentY - lyRow) > 0.01) {
                                 lines.push(emit('G0', rowStartX, lyRow, ''));
                                 currentX = rowStartX;
                                 currentY = lyRow;
