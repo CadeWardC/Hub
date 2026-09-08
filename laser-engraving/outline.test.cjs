@@ -7,9 +7,28 @@ const source = fs.readFileSync(__dirname + '/script.js', 'utf8');
 const context = { window: {}, document: { addEventListener() {}, getElementById() { return null; } }, console };
 vm.createContext(context);
 vm.runInContext(source.replace('document.addEventListener(\'DOMContentLoaded\', init);',
-    'window.testing = { traceOutlineMask, ditherImageData, CADApp };'), context);
-const { traceOutlineMask, ditherImageData, CADApp } = context.window.testing;
+    'window.testing = { traceOutlineMask, ditherImageData, getVisibleImageBounds, CADApp };'), context);
+const { traceOutlineMask, ditherImageData, getVisibleImageBounds, CADApp } = context.window.testing;
 const mask = (w, h, predicate) => Uint8Array.from({ length: w * h }, (_, i) => +predicate(i % w, Math.floor(i / w)));
+
+test('image dimensions exclude transparent margins and include faint edge pixels', () => {
+    const data = new Uint8ClampedArray(8 * 6 * 4);
+    data[(2 * 8 + 3) * 4 + 3] = 255;
+    data[(4 * 8 + 6) * 4 + 3] = 1;
+    const bounds = getVisibleImageBounds({ data, width: 8, height: 6 });
+    assert.deepEqual({ ...bounds }, { x: 3, y: 2, width: 4, height: 3 });
+});
+
+test('visible bounds handle opaque, fully transparent and single-pixel images', () => {
+    const data = new Uint8ClampedArray(4 * 3 * 4).fill(255);
+    assert.deepEqual({ ...getVisibleImageBounds({ data, width: 4, height: 3 }) },
+        { x: 0, y: 0, width: 4, height: 3 });
+    data.fill(0);
+    assert.equal(getVisibleImageBounds({ data, width: 4, height: 3 }), null);
+    data[(2 * 4 + 3) * 4 + 3] = 255;
+    assert.deepEqual({ ...getVisibleImageBounds({ data, width: 4, height: 3 }) },
+        { x: 3, y: 2, width: 1, height: 1 });
+});
 
 test('traces a concave subject, closes paths and excludes interior holes', () => {
     const concave = traceOutlineMask(mask(10, 10, (x, y) => x >= 2 && y >= 2 && x < 8 && y < 8 && (x < 4 || y > 5)), 10, 10, 0);

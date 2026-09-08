@@ -644,19 +644,28 @@
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
+                    // Measure before resizing so even faint edge pixels define the artwork.
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    ctx.drawImage(img, 0, 0);
+                    const visible = getVisibleImageBounds(ctx.getImageData(0, 0, canvas.width, canvas.height));
+                    if (!visible) {
+                        alert('This image is fully transparent. Choose an image with visible artwork.');
+                        return;
+                    }
                     const maxDim = 800;
-                    let dw = img.naturalWidth;
-                    let dh = img.naturalHeight;
+                    let dw = visible.width;
+                    let dh = visible.height;
                     if (dw > maxDim || dh > maxDim) {
                         const ratio = Math.min(maxDim / dw, maxDim / dh);
-                        dw = Math.round(dw * ratio);
-                        dh = Math.round(dh * ratio);
+                        dw = Math.max(1, Math.round(dw * ratio));
+                        dh = Math.max(1, Math.round(dh * ratio));
                     }
                     canvas.width = dw;
                     canvas.height = dh;
                     
                     // Create grayscale version
-                    ctx.drawImage(img, 0, 0, dw, dh);
+                    ctx.drawImage(img, visible.x, visible.y, visible.width, visible.height, 0, 0, dw, dh);
                     const grayImageData = ctx.getImageData(0, 0, dw, dh);
                     const data = grayImageData.data;
                     for (let i = 0; i < data.length; i += 4) {
@@ -673,7 +682,7 @@
                     ctx.putImageData(grayImageData, 0, 0);
                     const ditheredHref = canvas.toDataURL('image/png');
 
-                    const aspect = img.naturalWidth / img.naturalHeight;
+                    const aspect = visible.width / visible.height;
                     const cx = this.bed.x / 2;
                     const cy = this.bed.y / 2;
                     let w = 100;
@@ -3639,6 +3648,20 @@
             paths.push(corners);
         }
         return paths;
+    }
+
+    function getVisibleImageBounds({ data, width, height }) {
+        let left = width, top = height, right = -1, bottom = -1;
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                if (data[(y * width + x) * 4 + 3] === 0) continue;
+                left = Math.min(left, x);
+                top = Math.min(top, y);
+                right = Math.max(right, x);
+                bottom = Math.max(bottom, y);
+            }
+        }
+        return right < 0 ? null : { x: left, y: top, width: right - left + 1, height: bottom - top + 1 };
     }
 
     function ditherImageData(imageData) {
