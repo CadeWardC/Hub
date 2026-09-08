@@ -1580,6 +1580,19 @@
                     ${textFields}
                     ${dimFields}
                     ${posCollapse}
+                    ${obj.type === 'image' ? `
+                    <div class="prop-row">
+                        <label for="outline-padding">Outline padding (mm)</label>
+                        <input id="outline-padding" type="number" min="0" max="100" step="0.1" value="2">
+                    </div>
+                    <div class="prop-row">
+                        <label for="outline-threshold">White background threshold</label>
+                        <input id="outline-threshold" type="number" min="1" max="255" step="1" value="245">
+                    </div>
+                    <p class="panel-hint">Traces the outer subject edge. Uses transparency when available; otherwise removes pixels lighter than the threshold. Lower it to remove more background. Photos may need background removal first.</p>
+                    <button class="prop-mode-btn" id="btn-outline">Outline picture</button>
+                    <p class="panel-hint" id="outline-status" role="status">Creates separate editable paths. Set their laser power before exporting.</p>
+                    ` : ''}
                 </div>`;
             } else {
                 tabContent = `
@@ -1754,6 +1767,10 @@
         }
 
         onPropChange(e) {
+            if (e.target.id === 'btn-outline') {
+                this.outlineSelectedImage();
+                return;
+            }
             if (e.target.id === 'btn-delete') {
                 this.deleteSelected();
                 return;
@@ -1816,6 +1833,68 @@
         }
 
         // ---------- PRESETS ----------
+
+        async outlineSelectedImage() {
+            const obj = this.objects.find(o => o.id === this.selectedId);
+            if (!obj || obj.type !== 'image') return;
+            const paddingInput = document.getElementById('outline-padding');
+            const thresholdInput = document.getElementById('outline-threshold');
+            if (!paddingInput.reportValidity() || !thresholdInput.reportValidity()) return;
+            const padding = Number(paddingInput.value);
+            const threshold = Number(thresholdInput.value);
+            const button = document.getElementById('btn-outline');
+            const status = document.getElementById('outline-status');
+            button.disabled = true;
+            status.textContent = 'Tracing outline…';
+            try {
+                const img = new Image();
+                await new Promise((resolve, reject) => {
+                    img.onload = resolve;
+                    img.onerror = () => reject(new Error('The picture could not be loaded.'));
+                    img.src = obj.grayscaleHref || obj.href;
+                });
+                if (!this.objects.includes(obj)) return;
+                // A square physical sampling grid keeps padding uniform on stretched images.
+                const step = Math.max(0.05, (Math.max(obj.width, obj.height) + 2 * padding) / 700);
+                const margin = Math.ceil(padding / step) + 2;
+                const w = Math.max(1, Math.round(obj.width / step));
+                const h = Math.max(1, Math.round(obj.height / step));
+                const canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, w, h);
+                const rgba = ctx.getImageData(0, 0, w, h).data;
+                const transparent = rgba.some((v, i) => i % 4 === 3 && v < 128);
+                const cols = w + margin * 2, rows = h + margin * 2;
+                const mask = new Uint8Array(cols * rows);
+                for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+                    const i = (y * w + x) * 4;
+                    mask[(y + margin) * cols + x + margin] = rgba[i + 3] >= 128 &&
+                        (transparent || rgba[i] < threshold) ? 1 : 0;
+                }
+                const paths = traceOutlineMask(mask, cols, rows, padding / step);
+                if (!paths.length) throw new Error('No subject found. Try a higher threshold or a picture with a transparent background.');
+                const added = [];
+                for (const path of paths) {
+                    const points = path.map(p => this.toWorld(obj,
+                        obj.x + (p.x - margin) * step, obj.y + (p.y - margin) * step));
+                    const outline = { id: this.nextId++, type: 'polyline', points,
+                        x: 0, y: 0, width: 0, height: 0, rotation: 0, visible: true,
+                        mode: 'cut', power: 0, speed: obj.speed || 1500, passes: 1, presetName: '',
+                        name: `${obj.name} outline${paths.length > 1 ? ' ' + (added.length + 1) : ''}` };
+                    this.objects.push(outline);
+                    added.push(this.snapshotObject(outline));
+                }
+                this.pushUndo({ type: 'outline', objects: added });
+                this.renderObjects();
+                this.selectObject(added[added.length - 1].id);
+            } catch (err) {
+                status.textContent = err.message || 'Could not trace this picture.';
+            } finally {
+                button.disabled = false;
+            }
+        }
 
         loadPresets() {
             try {
@@ -3146,7 +3225,16 @@
 
         applyCommand(cmd, reverse) {
             const type = reverse ? this.invertType(cmd.type) : cmd.type;
-            if (type === 'add') {
+            if (type === 'outline') {
+                if (reverse) {
+                    const ids = new Set(cmd.objects.map(o => o.id));
+                    this.objects = this.objects.filter(o => !ids.has(o.id));
+                    this.selectObject(null);
+                } else {
+                    this.objects.push(...cmd.objects.map(o => this.snapshotObject(o)));
+                    this.selectObject(cmd.objects[cmd.objects.length - 1].id);
+                }
+            } else if (type === 'add') {
                 const obj = { ...cmd.obj };
                 this.objects.push(obj);
                 this.selectObject(obj.id);
@@ -3397,6 +3485,83 @@
         return /[?&]debug=1/.test(location.search);
     }
 
+    // Exact squared Euclidean distance transform, followed by clockwise pixel-edge
+    // tracing. Positive-area loops are exterior contours; holes are excluded.
+    function traceOutlineMask(mask, w, h, radius) {
+        if (radius > 0) {
+            const dist = Float64Array.from(mask, v => v ? 0 : 1e12);
+            const transform = (values) => {
+                const n = values.length, sites = new Int32Array(n), limits = new Float64Array(n + 1);
+                const result = new Float64Array(n);
+                let k = 0;
+                limits[0] = -Infinity; limits[1] = Infinity;
+                for (let q = 1; q < n; q++) {
+                    let s;
+                    do {
+                        const p = sites[k];
+                        s = ((values[q] + q * q) - (values[p] + p * p)) / (2 * (q - p));
+                        if (s > limits[k]) break;
+                        k--;
+                    } while (k >= 0);
+                    sites[++k] = q; limits[k] = s; limits[k + 1] = Infinity;
+                }
+                k = 0;
+                for (let q = 0; q < n; q++) {
+                    while (limits[k + 1] < q) k++;
+                    result[q] = (q - sites[k]) ** 2 + values[sites[k]];
+                }
+                return result;
+            };
+            for (let y = 0; y < h; y++) dist.set(transform(dist.slice(y * w, (y + 1) * w)), y * w);
+            for (let x = 0; x < w; x++) {
+                const column = transform(Float64Array.from({ length: h }, (_, y) => dist[y * w + x]));
+                for (let y = 0; y < h; y++) mask[y * w + x] = column[y] <= radius * radius ? 1 : 0;
+            }
+        }
+        const edges = new Map(), stride = w + 1;
+        const edge = (x, y, dx, dy, dir) => {
+            const start = y * stride + x;
+            if (!edges.has(start)) edges.set(start, []);
+            edges.get(start).push({ end: (y + dy) * stride + x + dx, dir });
+        };
+        const filled = (x, y) => x >= 0 && y >= 0 && x < w && y < h && mask[y * w + x];
+        for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (filled(x, y)) {
+            if (!filled(x, y - 1)) edge(x, y, 1, 0, 0);
+            if (!filled(x + 1, y)) edge(x + 1, y, 0, 1, 1);
+            if (!filled(x, y + 1)) edge(x + 1, y + 1, -1, 0, 2);
+            if (!filled(x - 1, y)) edge(x, y + 1, 0, -1, 3);
+        }
+        const paths = [];
+        while (edges.size) {
+            const start = edges.keys().next().value;
+            let at = start, previous = null;
+            const path = [];
+            do {
+                path.push({ x: at % stride, y: Math.floor(at / stride) });
+                const options = edges.get(at);
+                // At diagonal contacts, turn right to keep separate subjects separate.
+                const rank = dir => [1, 0, 3, 2][(dir - previous + 4) % 4];
+                if (previous !== null) options.sort((a, b) => rank(a.dir) - rank(b.dir));
+                const next = options.shift();
+                if (!options.length) edges.delete(at);
+                at = next.end; previous = next.dir;
+            } while (at !== start);
+            const area = path.reduce((sum, p, i) => {
+                const q = path[(i + 1) % path.length];
+                return sum + p.x * q.y - q.x * p.y;
+            }, 0);
+            if (area <= 0) continue;
+            // Remove collinear points without altering the traced silhouette.
+            const corners = path.filter((p, i) => {
+                const a = path[(i + path.length - 1) % path.length], b = path[(i + 1) % path.length];
+                return (p.x - a.x) * (b.y - p.y) !== (p.y - a.y) * (b.x - p.x);
+            });
+            corners.push({ ...corners[0] });
+            paths.push(corners);
+        }
+        return paths;
+    }
+
     function ditherImageData(imageData) {
         const w = imageData.width;
         const h = imageData.height;
@@ -3404,7 +3569,8 @@
         const gray = new Float32Array(w * h);
         for (let i = 0; i < w * h; i++) {
             const idx = i * 4;
-            gray[i] = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
+            const alpha = data[idx + 3] / 255;
+            gray[i] = (0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2]) * alpha + 255 * (1 - alpha);
         }
         for (let y = 0; y < h; y++) {
             for (let x = 0; x < w; x++) {
