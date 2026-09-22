@@ -219,6 +219,7 @@ h1 { margin: 0; font-size: clamp(3.7rem, 20vw, 7.8rem); font-weight: 850; line-h
 .speech-debug-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--cyan); }
 .speech-debug-heading button { border: 0; background: transparent; color: var(--text); font-size: 1.5rem; line-height: 1; }
 .speech-debug pre { margin: 0.6rem 0 0; overflow-wrap: anywhere; white-space: pre-wrap; color: var(--text); font-size: 0.75rem; line-height: 1.45; }
+.speech-debug-test { min-height: 2.5rem; margin-top: 0.5rem; padding: 0.35rem 0.75rem; border: 1px solid var(--cyan); background: transparent; color: var(--cyan); font-size: 0.75rem; font-weight: 800; }
 .install-dialog { position: fixed; z-index: 30; inset: 0; display: grid; align-items: end; }
 .dialog-backdrop { position: absolute; inset: 0; border: 0; background: rgba(0,0,0,0.72); backdrop-filter: blur(5px); }
 .dialog-sheet { position: relative; width: min(100%, 34rem); margin: 0 auto; padding: 1rem 1rem calc(1.3rem + env(safe-area-inset-bottom)); border-top: 1px solid var(--line-hot); background: var(--panel); animation: sheet 210ms cubic-bezier(.22,.8,.32,1); }

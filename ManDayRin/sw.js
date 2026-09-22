@@ -1,5 +1,5 @@
-const CACHE_NAME = "mandayrin-v15";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./vocabulary.js", "./app.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+const CACHE_NAME = "mandayrin-v16";
+const APP_SHELL = ["./", "./index.html", "./styles.css", "./vocabulary.js", "./app.js", "./audio-test.wav", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 const REMINDER_DB = "mandayrin-reminders";
 const REMINDER_STORE = "settings";
 

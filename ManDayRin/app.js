@@ -11,6 +11,7 @@
   let historyQuery = "";
   let reminderTimer = null;
   let activeUtterance = null;
+  let activeTestAudio = null;
   let speechDebugSequence = 0;
   let quizState = { current: null, choices: [], correct: 0, attempts: 0, questionNumber: 0, answered: false, previousKey: "" };
 
@@ -22,6 +23,7 @@
   document.querySelector("#closeSpeechDebug").addEventListener("click", () => {
     document.querySelector("#speechDebug").hidden = true;
   });
+  document.querySelector("#testMediaAudio").addEventListener("click", testMediaAudio);
   bindNavigation();
   bindHistoryFilters();
   bindHistorySearch();
@@ -224,6 +226,24 @@
     return (message) => {
       if (sequence === speechDebugSequence) output.textContent += `${message}\n`;
     };
+  }
+
+  function testMediaAudio() {
+    const output = document.querySelector("#speechDebugOutput");
+    const report = (message) => { output.textContent += `${message}\n`; };
+    if (activeTestAudio) activeTestAudio.pause();
+    const audio = new Audio("./audio-test.wav");
+    activeTestAudio = audio;
+    report("Media test: playing a short tone");
+    audio.onended = () => {
+      report("Media test: ended");
+      if (activeTestAudio === audio) activeTestAudio = null;
+    };
+    audio.onerror = () => {
+      report(`Media test: error (${audio.error?.code || "unknown"})`);
+      if (activeTestAudio === audio) activeTestAudio = null;
+    };
+    audio.play().catch((error) => report(`Media test: blocked (${error.name || "unknown"})`));
   }
 
   function reroll(kind) {
