@@ -10,6 +10,7 @@
   let activeFilter = "all";
   let historyQuery = "";
   let reminderTimer = null;
+  let activeUtterance = null;
   let quizState = { current: null, choices: [], correct: 0, attempts: 0, questionNumber: 0, answered: false, previousKey: "" };
 
   const state = loadState();
@@ -134,16 +135,35 @@
       showToast("Speech is not available in this browser");
       return;
     }
+    const synthesis = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(hanzi);
-    const voices = window.speechSynthesis.getVoices();
+    const voices = synthesis.getVoices();
     utterance.voice = voices.find((voice) => /^zh-CN$/i.test(voice.lang)) || voices.find((voice) => /^zh/i.test(voice.lang)) || null;
     utterance.lang = "zh-CN";
     utterance.rate = 0.78;
     utterance.pitch = 1;
     utterance.onstart = () => { if (button) button.classList.add("speaking"); };
-    utterance.onend = utterance.onerror = () => { if (button) button.classList.remove("speaking"); };
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
+    utterance.onend = () => {
+      if (button) button.classList.remove("speaking");
+      if (activeUtterance === utterance) activeUtterance = null;
+    };
+    utterance.onerror = (event) => {
+      if (button) button.classList.remove("speaking");
+      if (activeUtterance !== utterance) return;
+      activeUtterance = null;
+      if (event.error === "canceled" || event.error === "interrupted") return;
+      const message = event.error === "language-unavailable" || event.error === "voice-unavailable"
+        ? "Mandarin speech voice is unavailable on this device"
+        : event.error === "not-allowed"
+          ? "Speech was blocked. Tap the speaker again."
+          : "Speech failed. Check your device sound settings.";
+      showToast(message);
+      console.warn("ManDayRin speech failed:", event.error);
+    };
+    activeUtterance = utterance;
+    if (synthesis.speaking || synthesis.pending) synthesis.cancel();
+    if (synthesis.paused) synthesis.resume();
+    synthesis.speak(utterance);
   }
 
   function reroll(kind) {
