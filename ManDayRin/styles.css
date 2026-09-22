@@ -215,6 +215,10 @@ h1 { margin: 0; font-size: clamp(3.7rem, 20vw, 7.8rem); font-weight: 850; line-h
 
 .toast { position: fixed; z-index: 40; bottom: calc(5.7rem + env(safe-area-inset-bottom)); left: 50%; max-width: calc(100% - 2rem); padding: 0.8rem 1rem; border: 1px solid var(--line-hot); background: var(--text); color: var(--void); font-size: 0.875rem; font-weight: 800; opacity: 0; pointer-events: none; transform: translate(-50%,0.7rem); transition: opacity 160ms ease, transform 160ms ease; }
 .toast.show { opacity: 1; transform: translate(-50%,0); }
+.speech-debug { position: fixed; z-index: 45; top: calc(0.75rem + env(safe-area-inset-top)); right: 0.75rem; left: 0.75rem; max-width: 32rem; max-height: 38vh; margin: 0 auto; overflow: auto; padding: 0.8rem 1rem; border: 1px solid var(--cyan); background: var(--panel); box-shadow: 0 0.8rem 2rem rgba(0,0,0,0.55); }
+.speech-debug-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--cyan); }
+.speech-debug-heading button { border: 0; background: transparent; color: var(--text); font-size: 1.5rem; line-height: 1; }
+.speech-debug pre { margin: 0.6rem 0 0; overflow-wrap: anywhere; white-space: pre-wrap; color: var(--text); font-size: 0.75rem; line-height: 1.45; }
 .install-dialog { position: fixed; z-index: 30; inset: 0; display: grid; align-items: end; }
 .dialog-backdrop { position: absolute; inset: 0; border: 0; background: rgba(0,0,0,0.72); backdrop-filter: blur(5px); }
 .dialog-sheet { position: relative; width: min(100%, 34rem); margin: 0 auto; padding: 1rem 1rem calc(1.3rem + env(safe-area-inset-bottom)); border-top: 1px solid var(--line-hot); background: var(--panel); animation: sheet 210ms cubic-bezier(.22,.8,.32,1); }

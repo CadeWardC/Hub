@@ -11,12 +11,16 @@
   let historyQuery = "";
   let reminderTimer = null;
   let activeUtterance = null;
+  let speechDebugSequence = 0;
   let quizState = { current: null, choices: [], correct: 0, attempts: 0, questionNumber: 0, answered: false, previousKey: "" };
 
   const state = loadState();
   const day = getCourseDay(state.startedOn);
   ensureTodaySelection();
   renderToday();
+  document.querySelector("#closeSpeechDebug").addEventListener("click", () => {
+    document.querySelector("#speechDebug").hidden = true;
+  });
   bindNavigation();
   bindHistoryFilters();
   bindHistorySearch();
@@ -131,23 +135,38 @@
   }
 
   function speakChinese(hanzi, button) {
+    const debug = beginSpeechDebug(hanzi);
     if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+      debug("Speech synthesis is unavailable.");
       showToast("Speech is not available in this browser");
       return;
     }
     const synthesis = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(hanzi);
     const voices = synthesis.getVoices();
-    utterance.voice = voices.find((voice) => /^zh-CN$/i.test(voice.lang)) || voices.find((voice) => /^zh/i.test(voice.lang)) || null;
+    const mandarinVoices = voices.filter((voice) => /^zh/i.test(voice.lang));
+    utterance.voice = mandarinVoices.find((voice) => /^zh-CN$/i.test(voice.lang)) || mandarinVoices[0] || null;
     utterance.lang = "zh-CN";
     utterance.rate = 0.78;
     utterance.pitch = 1;
-    utterance.onstart = () => { if (button) button.classList.add("speaking"); };
+    debug(`Voices: ${voices.length} total, ${mandarinVoices.length} Chinese`);
+    debug(`Selected: ${utterance.voice ? `${utterance.voice.name} (${utterance.voice.lang})` : "browser default (zh-CN)"}`);
+    debug(`Before: speaking=${synthesis.speaking}, pending=${synthesis.pending}, paused=${synthesis.paused}`);
+    let heardEvent = false;
+    utterance.onstart = () => {
+      heardEvent = true;
+      debug("Event: start");
+      if (button) button.classList.add("speaking");
+    };
     utterance.onend = () => {
+      heardEvent = true;
+      debug("Event: end");
       if (button) button.classList.remove("speaking");
       if (activeUtterance === utterance) activeUtterance = null;
     };
     utterance.onerror = (event) => {
+      heardEvent = true;
+      debug(`Event: error (${event.error || "unknown"})`);
       if (button) button.classList.remove("speaking");
       if (activeUtterance !== utterance) return;
       activeUtterance = null;
@@ -161,9 +180,35 @@
       console.warn("ManDayRin speech failed:", event.error);
     };
     activeUtterance = utterance;
-    if (synthesis.speaking || synthesis.pending) synthesis.cancel();
-    if (synthesis.paused) synthesis.resume();
-    synthesis.speak(utterance);
+    try {
+      if (synthesis.speaking || synthesis.pending) {
+        debug("Canceling previous speech");
+        synthesis.cancel();
+      }
+      if (synthesis.paused) {
+        debug("Resuming paused speech engine");
+        synthesis.resume();
+      }
+      synthesis.speak(utterance);
+      debug(`Queued: speaking=${synthesis.speaking}, pending=${synthesis.pending}, paused=${synthesis.paused}`);
+      setTimeout(() => {
+        if (!heardEvent) debug(`No speech event after 4 seconds; speaking=${synthesis.speaking}, pending=${synthesis.pending}, paused=${synthesis.paused}`);
+      }, 4000);
+    } catch (error) {
+      activeUtterance = null;
+      debug(`Exception: ${error.name || "Error"}: ${error.message || "No details"}`);
+    }
+  }
+
+  function beginSpeechDebug(hanzi) {
+    const panel = document.querySelector("#speechDebug");
+    const output = document.querySelector("#speechDebugOutput");
+    const sequence = ++speechDebugSequence;
+    panel.hidden = false;
+    output.textContent = `Word: ${hanzi}\n`;
+    return (message) => {
+      if (sequence === speechDebugSequence) output.textContent += `${message}\n`;
+    };
   }
 
   function reroll(kind) {
