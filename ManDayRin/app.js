@@ -18,6 +18,7 @@
   const day = getCourseDay(state.startedOn);
   ensureTodaySelection();
   renderToday();
+  configureSpeechAudioSession();
   document.querySelector("#closeSpeechDebug").addEventListener("click", () => {
     document.querySelector("#speechDebug").hidden = true;
   });
@@ -136,6 +137,7 @@
 
   function speakChinese(hanzi, button) {
     const debug = beginSpeechDebug(hanzi);
+    configureSpeechAudioSession(debug);
     if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
       debug("Speech synthesis is unavailable.");
       showToast("Speech is not available in this browser");
@@ -197,6 +199,19 @@
     } catch (error) {
       activeUtterance = null;
       debug(`Exception: ${error.name || "Error"}: ${error.message || "No details"}`);
+    }
+  }
+
+  function configureSpeechAudioSession(debug) {
+    if (!("audioSession" in navigator)) {
+      if (debug) debug("Audio session API: unavailable");
+      return;
+    }
+    try {
+      navigator.audioSession.type = "playback";
+      if (debug) debug(`Audio session: ${navigator.audioSession.type}`);
+    } catch (error) {
+      if (debug) debug(`Audio session failed: ${error.name || "Error"}`);
     }
   }
 
