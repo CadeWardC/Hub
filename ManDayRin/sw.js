@@ -1,5 +1,5 @@
-const CACHE_NAME = "mandayrin-v16";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./vocabulary.js", "./app.js", "./audio-test.wav", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+const CACHE_NAME = "mandayrin-v17";
+const APP_SHELL = ["./", "./index.html", "./styles.css", "./vocabulary.js", "./audio-index.js", "./app.js", "./words.audio", "./audio-test.wav", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 const REMINDER_DB = "mandayrin-reminders";
 const REMINDER_STORE = "settings";
 
@@ -23,7 +23,7 @@ self.addEventListener("fetch", (event) => {
     }).catch(() => caches.match("./index.html")));
     return;
   }
-  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request).then((response) => {
+  event.respondWith(caches.match(event.request, { ignoreSearch: true }).then((cached) => cached || fetch(event.request).then((response) => {
     const copy = response.clone();
     caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
     return response;

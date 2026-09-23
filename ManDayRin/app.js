@@ -11,6 +11,11 @@
   let historyQuery = "";
   let reminderTimer = null;
   let activeUtterance = null;
+  let activeWordAudio = null;
+  let activeWordAudioUrl = null;
+  let activeWordButton = null;
+  let audioPack = null;
+  let audioPackError = null;
   let activeTestAudio = null;
   let speechDebugSequence = 0;
   let quizState = { current: null, choices: [], correct: 0, attempts: 0, questionNumber: 0, answered: false, previousKey: "" };
@@ -20,6 +25,19 @@
   ensureTodaySelection();
   renderToday();
   configureSpeechAudioSession();
+  fetch("./words.audio").then((response) => {
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.arrayBuffer();
+  }).then((buffer) => {
+    const clips = Object.values(window.MANDAYRIN_AUDIO_INDEX || {});
+    if (!clips.length || clips.some(([offset, length]) => offset + length > buffer.byteLength)) {
+      throw new Error("Incomplete audio pack");
+    }
+    audioPack = buffer;
+  }).catch((error) => {
+    audioPackError = error;
+    console.warn("ManDayRin recordings unavailable:", error);
+  });
   document.querySelector("#closeSpeechDebug").addEventListener("click", () => {
     document.querySelector("#speechDebug").hidden = true;
   });
@@ -140,6 +158,57 @@
   function speakChinese(hanzi, button) {
     const debug = beginSpeechDebug(hanzi);
     configureSpeechAudioSession(debug);
+    const clip = window.MANDAYRIN_AUDIO_INDEX?.[hanzi];
+    if (audioPack && clip) {
+      if (activeWordAudio) {
+        activeWordAudio.pause();
+        if (activeWordAudioUrl) URL.revokeObjectURL(activeWordAudioUrl);
+        if (activeWordButton) activeWordButton.classList.remove("speaking");
+      }
+      if (activeUtterance) window.speechSynthesis?.cancel();
+      const [offset, length] = clip;
+      const blob = new Blob([audioPack.slice(offset, offset + length)], { type: "audio/wav" });
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      activeWordAudio = audio;
+      activeWordAudioUrl = url;
+      activeWordButton = button;
+      debug(`Recorded audio: ${length} bytes`);
+      const finish = () => {
+        if (button) button.classList.remove("speaking");
+        if (activeWordAudio === audio) {
+          activeWordAudio = null;
+          activeWordAudioUrl = null;
+          activeWordButton = null;
+        }
+        URL.revokeObjectURL(url);
+      };
+      audio.onplaying = () => {
+        debug("Media: playing");
+        if (button) button.classList.add("speaking");
+      };
+      audio.onended = () => {
+        debug("Media: ended");
+        finish();
+      };
+      audio.onerror = () => {
+        debug(`Media: error (${audio.error?.code || "unknown"})`);
+        finish();
+        showToast("Recording could not play. Try the speaker again.");
+      };
+      audio.play().catch((error) => {
+        debug(`Media: blocked (${error.name || "unknown"})`);
+        finish();
+        showToast("Recording could not play. Try the speaker again.");
+      });
+      return;
+    }
+    if (clip && !audioPackError) {
+      debug("Recordings are still loading");
+      showToast("Audio is loading. Tap the speaker again shortly.");
+      return;
+    }
+    debug(`Recording unavailable: ${audioPackError?.message || "missing clip"}; trying device voice`);
     if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
       debug("Speech synthesis is unavailable.");
       showToast("Speech is not available in this browser");
