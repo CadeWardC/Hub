@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hollowkeep Design</title>
+    <meta name="description" content="Hollowkeep pre-production: pillars, core loop, paper prototype, art direction and the NOT-in-1.0 list.">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="stylesheet" href="design.css?v=1">
+</head>
+<body>
+    <header class="top">
+        <a href="index.html" class="back">&#8592; Play</a>
+        <span class="title">Hollowkeep · design</span>
+        <a href="../index.html" class="back">Hub</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Hollowkeep</h1>
+            <p class="lede">A pocket-sized Rise to Ruins. You build a village by day and hold it by night, with one thumb, in five-minute bites.</p>
+            <nav class="toc">
+                <a href="#pillars">Pillars</a><a href="#loop">Core loop</a><a href="#session">Session</a>
+                <a href="#moments">Moments</a><a href="#mockup">Mockup</a><a href="#art">Art</a>
+                <a href="#paper">Paper prototype</a><a href="#cut">NOT in 1.0</a><a href="#homework">Homework</a>
+            </nav>
+        </section>
+
+        <section id="pillars">
+            <h2>Pillars</h2>
+            <ol class="cards">
+                <li><strong>Night judges the day.</strong> Every daytime choice is a bet on the coming night, and the night delivers the verdict. There's no combat micro: the fight plays out from your preparation.</li>
+                <li><strong>A village that lives without you.</strong> Villagers choose their own jobs from your priorities. You set zones, priorities and blueprints, and never give orders to individual villagers.</li>
+                <li><strong>Readable at a glance, playable with a thumb.</strong> The far zoom level tells the whole story: the threat side, wall health, stockpiles and corruption. Every action can be reached from the bottom-right thumb zone.</li>
+            </ol>
+        </section>
+
+        <section id="loop">
+            <h2>Core loop</h2>
+            <div class="loop">
+                <div><b>Dawn</b>An omen shows where tonight's wave comes from (fuzzy from night 3). Repair, and pick 1 of 3 upgrades every third dawn.</div>
+                <div><b>Day</b><span class="dim">≈3 min at 1x</span>Set job priorities and place blueprints. Villagers chop, quarry, farm, mine and build on their own.</div>
+                <div><b>Dusk</b><span class="dim">20 s bell</span>Guards post, gates shut, villagers run home.</div>
+                <div><b>Night</b><span class="dim">≈90 s</span>Corrupted waves hit from the omen side. Towers, walls and guards resolve it; you can only drop emergency walls and ring the bell.</div>
+            </div>
+            <p>Long-term pressure: each night the corruption claims more of the map, so resources get scarcer and the waves get closer. Purifying a corruption node is a risky daytime expedition that wins land back.</p>
+        </section>
+
+        <section id="session">
+            <h2>Session length</h2>
+            <ul>
+                <li>One day and night is about <b>5 min</b> at 1x, or about 3 min at 2x.</li>
+                <li>A run is <b>12–15 nights, about 45–70 min</b>. The game autosaves every dawn, so any 5–10 minute sitting ends at a clean stopping point.</li>
+                <li>The target is 1–3 cycles per sitting: a commute, a coffee, or a queue.</li>
+            </ul>
+        </section>
+
+        <section id="moments">
+            <h2>Three moments to remember</h2>
+            <ol class="cards">
+                <li><strong>"The wall at one."</strong> On night 1 the wall drops to 1 HP and the last monster dies against it. You won, just, and you can see exactly why. (This came straight from paper run B.)</li>
+                <li><strong>"Wrong side."</strong> The omen said East, but on night 7 a second wave comes from the North. Villagers ring the bell and sprint for the keep while you drop an emergency palisade across the gap.</li>
+                <li><strong>"Pushing back the dark."</strong> The dawn after a brutal night, you send a torch party into the corruption, and when the node falls, grass creeps back across the map in front of you.</li>
+            </ol>
+        </section>
+
+        <section id="mockup">
+            <h2>Mockup</h2>
+            <p>Night 3, with a wave coming from the east. It's deliberately rough: it's here to test readability, not to show final art.</p>
+            <img src="mockup.svg" alt="Mockup: a walled village at night with towers firing at purple monsters coming from the corrupted east edge" width="1280" height="720">
+            <p class="note"><b>Finding:</b> purple monsters vanish against purple corruption at night. Monsters need a bright rim or glowing eyes, or the corruption ground should shift toward a darker, desaturated tone.</p>
+        </section>
+
+        <section id="art">
+            <h2>Art direction</h2>
+            <p>Top-down pixel art with 16&nbsp;px tiles and 8×10&nbsp;px villagers. Characters and buildings get 1&nbsp;px <code>ink</code> outlines; terrain doesn't. Nearest-neighbour scaling everywhere.</p>
+            <ul>
+                <li>Terrain is muted and mid-value so that villagers, buildings and monsters read on top of it.</li>
+                <li><b>Warm = ours</b> (torch, wood, cloth). <b>Cold/purple = theirs</b> (corruption, monsters).</li>
+                <li>Accent orange is reserved for "your attention, please": selection, alerts, and the active speed button.</li>
+                <li>Night is a cold multiply overlay with additive warm light pools, so the same sprites work for day and night.</li>
+            </ul>
+            <div class="swatches" id="swatches"></div>
+        </section>
+
+        <section id="paper">
+            <h2>Paper prototype: wave vs. economy</h2>
+            <p>Played by hand on a 12×12 grid with a d6 and a d4. The dice came from a seeded roller and were used in order, so both runs are reproducible.</p>
+
+            <details open>
+                <summary>Rules v0</summary>
+                <ul>
+                    <li><b>Setup:</b> Hall 6 HP (0 = loss). 4 villagers. 6 wood, 2 stone, 6 food.</li>
+                    <li><b>Dawn:</b> roll the omen (d4 = N/E/S/W). That's tonight's attack side.</li>
+                    <li><b>Day:</b> 3 phases, and each villager does 1 job per phase. Chop gives 1 wood (2 on a 4+), Quarry 1 stone (2 on a 5+), Forage 1 food (2 on a 5+), Farm 2 food (needs a farm, max 2 farmers), and Build 1 build point.</li>
+                    <li><b>Buildings:</b> Farm costs 2 wood and 1 BP. House costs 4 wood and 2 BP, and adds 2 villagers. Tower costs 2 wood, 2 stone and 2 BP; it covers its own side and hits on a 3+ at distance ≤2. A wall on one side costs 3 stone and 2 BP and has 6 HP.</li>
+                    <li><b>Dusk:</b> each villager eats 1 food. Guards skip the next morning phase; they hit on a 5+ once monsters arrive.</li>
+                    <li><b>Night <i>n</i>:</b> 1 + 2<i>n</i> monsters (2 HP each) start 3 steps out. There are 6 rounds of fire, then advance, then attack. Walls absorb hits. Without a wall, each monster rolls: 1–2 steals, 3–5 hits the Hall, 6 kills a villager.</li>
+                </ul>
+            </details>
+
+            <div class="run bad">
+                <h3>Run A (v0): lost on night 2</h3>
+                <p>Night 1 (North): survived, but the first attack round killed a villager before the guards could act. Night 2 (South): the North tower was useless, there was no stone for a wall, and the waves grew from 3 to 5 monsters. The Hall fell in round 4.</p>
+                <ul>
+                    <li>A wave growth of +2 per night outruns the workforce.</li>
+                    <li>Deaths on first contact feel unfair.</li>
+                    <li>Towers that cover a single side are a trap when the omen changes every night.</li>
+                    <li>Without stone there are no walls, and without walls there's no time.</li>
+                </ul>
+            </div>
+
+            <details>
+                <summary>Rules v1 (changes)</summary>
+                <ul>
+                    <li>2 + <i>n</i> monsters per night. Start with 5 villagers.</li>
+                    <li>Guards fire at distance ≤1. Towers also fire at adjacent sides at distance ≤1.</li>
+                    <li>An unwalled 6 wounds a villager; a second wound kills.</li>
+                </ul>
+            </details>
+
+            <div class="run good">
+                <h3>Run B (v1): survived 3 nights</h3>
+                <p>Night 1 (West): the <b>wall ended at 1/6</b> and the last monster died on it, the best moment in either run. Night 2 (South): the wall was breached in round 5, but the last monster died in round 6. Night 3 (East): 7 villagers and 4 towers left the wall at 2/6, with no losses.</p>
+                <ul>
+                    <li>v1 night 1 is the target feel.</li>
+                    <li>By night 3 the village snowballs. Wave size needs to grow superlinearly from about night 4, with multi-side waves from about night 5.</li>
+                    <li>A perfect omen turns into a checklist, so it should go fuzzy from night 3.</li>
+                    <li>Food is too easy. Farms should yield 1 food, or 2 on a 4+.</li>
+                    <li>Stone is the real bottleneck; keep it that way.</li>
+                    <li>The tired-guards rule creates a real choice.</li>
+                </ul>
+            </div>
+
+            <h3>Tuning targets</h3>
+            <ul>
+                <li>On average, walls should end each night at <b>0–30% HP</b>.</li>
+                <li><b>No villager deaths before night 3</b> unless the omen is ignored.</li>
+                <li>First contact should come about 30 s into a 90 s night.</li>
+                <li>Stone income should roughly equal wall-repair demand.</li>
+            </ul>
+        </section>
+
+        <section id="cut">
+            <h2>NOT in 1.0</h2>
+            <table>
+                <tr><td>Multiplayer</td><td>Needs netcode and a lockstep sim, so it's a second game.</td></tr>
+                <tr><td>Campaign / story</td><td>1.0 is the endless sandbox run.</td></tr>
+                <tr><td>Mod support</td><td>Needs a stable data format first.</td></tr>
+                <tr><td>Trade, caravans, diplomacy</td><td>The loop has to work without a second economy.</td></tr>
+                <tr><td>Direct unit control / heroes</td><td>Breaks pillar 2.</td></tr>
+                <tr><td>Villager traits &amp; relationships</td><td>Dwarf Fortress depth is a trap at this size.</td></tr>
+                <tr><td>Seasons, weather, biomes</td><td>One biome and one cycle, done well.</td></tr>
+                <tr><td>Big tech tree</td><td>About 15 buildings that fit a phone-sized build menu.</td></tr>
+                <tr><td>Accounts, cloud saves, leaderboards</td><td>No backend; saves stay local.</td></tr>
+                <tr><td>Ads / IAP</td><td>No monetization design work.</td></tr>
+                <tr><td>Map editor</td><td>Seeds are the levels.</td></tr>
+                <tr><td>Localization</td><td>Keep strings in one table so it's possible later.</td></tr>
+            </table>
+        </section>
+
+        <section id="homework">
+            <h2>Homework (only you can do this)</h2>
+            <ul class="checklist">
+                <li>Play Rise to Ruins for 5+ hours, logging each moment you feel tense, bored, delighted or confused, with the game day and your guess at why.</li>
+                <li>Kingdom Two Crowns: how little UI it needs, and the dread at dusk.</li>
+                <li>Bad North: mobile readability on a small, tactical map.</li>
+                <li>They Are Billions: wave telegraphing, and how one breach cascades.</li>
+                <li>Dwarf Fortress (Classic): autonomous jobs from designations, and what <i>not</i> to copy for a phone.</li>
+                <li>Afterwards, write down 3 things to steal, 3 to avoid, and the one feeling Hollowkeep must deliver, then update this page.</li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="js/sim.js?v=1"></script>
+    <script>
+        // palette swatches straight from the tile definitions + the shared palette
+        (function () {
+            const extra = [
+                ['ink', '#1b1a24'], ['wood', '#8a5a36'], ['stone wall', '#9a948a'], ['cloth', '#c9c2a8'],
+                ['skin', '#f2d4b0'], ['torch', '#f2a03d'], ['fire', '#f6d365'], ['corruption', '#6d3a7a'],
+                ['corruption glow', '#b35bc4'], ['danger', '#c23b3b'], ['night', '#1c2a4a']
+            ];
+            const all = HK.TILE_DEFS.flatMap(d => [[d.name, d.color], [d.name + ' accent', d.accent]]).concat(extra);
+            const box = document.getElementById('swatches');
+            all.forEach(([name, hex]) => {
+                const s = document.createElement('div');
+                s.className = 'swatch';
+                s.innerHTML = `<span style="background:${hex}"></span><b>${name}</b><code>${hex}</code>`;
+                box.appendChild(s);
+            });
+        })();
+    </script>
+</body>
+</html>

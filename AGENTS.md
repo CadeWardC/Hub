@@ -11,6 +11,7 @@
 - `smolov/` — Smolov Jr. strength training calculator (static HTML/CSS/JS)
 - `paypers/` — PubMed paper discovery app with swipe interface (static HTML/CSS/JS)
 - `laser-engraving/` — Laser engraver bed layout tool with CAD-style SVG engine
+- `hollowkeep/` — Installable, offline colony-defence game prototype (Rise to Ruins–style), Phase 2 core economy. `js/sim.js` is pure data advanced by a fixed 10 Hz tick (`SimClock`, pause/1x/2x/3x) and also runs under Node; `js/colony.js` (also pure data, Node-runnable) holds the economy: villagers with hunger/rest and an idle → seek → travel → work → haul → eat/sleep state machine, a priority job board (score = priority / distance; player sets Build/Wood/Stone/Food priorities), A*/Dijkstra pathfinding, chop/quarry/forage/farm gathering into a global stock via stores, blueprint → deliver → build construction, house beds as the population cap, and newcomers at dawn; all tuning lives in its `BAL`, `DAY` and `BUILDINGS` tables (balance target: 8 villagers finish 3 houses + a woodcutter before dusk on day 1). `js/render.js` bakes the procedural map into an offscreen canvas (repainting tiles the colony clears) and draws pixel-art buildings, construction, villagers with carry icons, effects and the night overlay; `js/camera.js` handles drag + inertia, pinch/wheel zoom snapping to 3 levels, edge clamping, taps and a `dragHandler` hook for the placement ghost; `main.js` owns the HUD (top stores bar, bottom build menu, ghost placement with ✓/✕, jobs panel, cards, toasts) and exposes `HK.debug` for the console; `design.html` holds the Phase 0 design doc, paper prototype, mockup and NOT-in-1.0 list. URL params `?seed=N&agents=N` (agents = Phase 1 load-test wanderers, default 0)
 - `conversions/` — Local file converter, all client-side: audio/video → MP3 (vendored `lame.min.js`, a lamejs build), WAV via Web Audio `decodeAudioData`, Opus/M4A/WebM/MP4 via MediaRecorder (feature-detected, real-time), animated GIF (vendored `gifenc.js`); images → JPEG/PNG/WebP via canvas plus BMP/GIF/ICO/PDF hand-written encoders; CSV/TSV ⇄ JSON; TXT/MD → PDF; batch results download as a store-only ZIP
 
 Each static sub-project has its own `index.html`.
@@ -32,6 +33,7 @@ Each static sub-project has its own `index.html`.
 - `smolov/` — Supabase (Postgres via PostgREST): `lift_maxes`, `smolov_plans`
 - `paypers/` — localStorage (`paypersState`)
 - `laser-engraving/` — localStorage (`laserEngraving_bedSize`, `laserEngraving_presets`)
+- `hollowkeep/` — none yet (the map is regenerated from a seed and the colony is not saved); service-worker Cache Storage (`hollowkeep-v*`) for offline play
 - `conversions/` — none; source files are decoded in memory and results download straight to disk
 
 ## Artifacts to ignore

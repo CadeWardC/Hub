@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "hub",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8765", "--directory", "C:/Users/cadel/Documents/Coding_Projects/Hub"],
+      "port": 8765
+    },
+    {
+      "name": "hub-alt",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8766", "--directory", "C:/Users/cadel/Documents/Coding_Projects/Hub"],
+      "port": 8766
+    }
+  ]
+}

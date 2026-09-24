@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#1b1a24">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Hollowkeep</title>
+    <meta name="description" content="Hollowkeep: a mobile-first colony-defence game. Build by day, hold the keep by night, and wield god powers against the creeping corruption.">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body>
+    <canvas id="game" aria-label="Game map"></canvas>
+
+    <div class="hud">
+        <header class="panel topbar" aria-label="Village stores">
+            <div class="chip" id="chip-wood" title="Wood"><img data-icon="wood" alt="Wood"><span id="res-wood">0</span></div>
+            <div class="chip" id="chip-stone" title="Stone"><img data-icon="stone" alt="Stone"><span id="res-stone">0</span></div>
+            <div class="chip" id="chip-food" title="Food"><img data-icon="food" alt="Food"><span id="res-food">0</span></div>
+            <div class="chip goods" id="chip-ore" title="Ore" hidden><img data-icon="ore" alt="Ore"><span id="res-ore">0</span></div>
+            <div class="chip goods" id="chip-planks" title="Planks" hidden><img data-icon="planks" alt="Planks"><span id="res-planks">0</span></div>
+            <div class="chip goods" id="chip-bricks" title="Bricks" hidden><img data-icon="bricks" alt="Bricks"><span id="res-bricks">0</span></div>
+            <div class="chip goods" id="chip-iron" title="Iron" hidden><img data-icon="iron" alt="Iron"><span id="res-iron">0</span></div>
+            <div class="chip goods" id="chip-tools" title="Tools in store" hidden><img data-icon="tools" alt="Tools"><span id="res-tools">0</span></div>
+            <div class="chip" id="chip-gold" title="Gold: from monsters, ore and trade. Spent on tech."><img data-icon="gold" alt="Gold"><span id="res-gold">0</span></div>
+            <div class="chip mana" id="chip-mana" title="Mana: from the keep, shrines and purified corruption"><img data-icon="mana" alt="Mana"><span id="res-mana">0</span><span class="mana-bar"><i id="mana-fill"></i></span></div>
+            <div class="chip" id="chip-pop" title="Villagers / beds"><img data-icon="pop" alt="Villagers"><span id="res-pop">0/0</span></div>
+            <div class="chip day" title="Day, time and tonight's omen"><span class="sky" id="day-icon"></span><span class="day-text"><span id="day-label">Day 1</span><span id="day-sub"></span></span></div>
+        </header>
+
+        <button type="button" class="btn caravan-btn" id="caravan-btn" hidden>Caravan: trade</button>
+
+        <section class="panel debug" id="debug-panel" aria-label="Debug stats" hidden>
+            <div class="fps" id="fps">FPS --</div>
+            <pre class="stats" id="stats"></pre>
+            <div class="row">
+                <button type="button" class="btn" id="agents-minus">-100</button>
+                <button type="button" class="btn" id="agents-plus">+100</button>
+                <button type="button" class="btn" id="new-map">New map</button>
+            </div>
+        </section>
+
+        <nav class="panel controls" aria-label="Simulation speed">
+            <button type="button" class="btn speed" data-speed="0" aria-label="Pause">II</button>
+            <button type="button" class="btn speed" data-speed="1">1x</button>
+            <button type="button" class="btn speed" data-speed="2">2x</button>
+            <button type="button" class="btn speed" data-speed="3">3x</button>
+            <button type="button" class="btn" id="log-btn" aria-label="Chronicle" aria-pressed="false">&#128220;</button>
+            <button type="button" class="btn" id="debug-toggle" aria-label="Toggle debug stats">i</button>
+            <a class="btn" href="design.html" aria-label="Design notes">&#9776;</a>
+            <a class="btn" href="../index.html" aria-label="Back to Hub">&#8962;</a>
+        </nav>
+
+        <div class="toasts" id="toasts" aria-live="polite"></div>
+
+        <section class="panel tile-card" id="tile-card" hidden>
+            <div class="tile-head">
+                <h2 id="tile-title"></h2>
+                <button type="button" class="btn" id="tile-close" aria-label="Close">&#10005;</button>
+            </div>
+            <p id="tile-body"></p>
+            <div class="bars" id="tile-bars"></div>
+            <button type="button" class="btn danger" id="tile-action" hidden></button>
+        </section>
+
+        <section class="panel jobs" id="jobs-panel" aria-label="Job priorities" hidden>
+            <h2>Job priorities</h2>
+            <div id="jobs-rows"></div>
+        </section>
+
+        <section class="panel tray" id="build-tray" aria-label="Buildings" hidden>
+            <h2 id="tray-title"></h2>
+            <div class="tray-items" id="tray-items"></div>
+        </section>
+
+        <section class="panel tech" id="tech-panel" aria-label="Tech tree" hidden>
+            <div class="panel-head">
+                <h2>Tech tree</h2>
+                <span class="tech-head" id="tech-head"></span>
+                <button type="button" class="btn" id="tech-close" aria-label="Close">&#10005;</button>
+            </div>
+            <div class="tech-cols" id="tech-cols"></div>
+        </section>
+
+        <section class="panel log" id="log-panel" aria-label="Chronicle" hidden>
+            <div class="panel-head">
+                <h2>Chronicle</h2>
+                <button type="button" class="btn" id="log-close" aria-label="Close">&#10005;</button>
+            </div>
+            <ol class="log-list" id="log-list"></ol>
+        </section>
+
+        <section class="panel trade" id="trade-panel" aria-label="Caravan" hidden>
+            <div class="panel-head">
+                <h2>Merchant caravan</h2>
+                <button type="button" class="btn" id="trade-close" aria-label="Close">&#10005;</button>
+            </div>
+            <div id="trade-rows"></div>
+            <p class="hint">It leaves at dusk.</p>
+        </section>
+
+        <div class="powers" id="powers">
+            <div class="power-ring" id="power-ring" hidden></div>
+            <button type="button" class="power-main" id="power-toggle" aria-label="God powers" aria-expanded="false">&#10022;</button>
+        </div>
+
+        <nav class="panel buildbar" id="buildbar" aria-label="Build menu"></nav>
+
+        <div class="panel placebar" id="placebar" hidden>
+            <button type="button" class="btn big" id="place-cancel" aria-label="Cancel">&#10005;</button>
+            <div class="place-info">
+                <strong id="place-name"></strong>
+                <span id="place-cost"></span>
+                <span id="place-hint"></span>
+            </div>
+            <button type="button" class="btn big confirm" id="place-ok" aria-label="Confirm">&#10003;</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="gameover" hidden>
+        <section class="panel over-card" role="dialog" aria-labelledby="over-title">
+            <h2 id="over-title"></h2>
+            <p id="over-body"></p>
+            <div class="row">
+                <button type="button" class="btn confirm" id="new-run">New run</button>
+                <button type="button" class="btn" id="over-log">Read the chronicle</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/sim.js?v=3"></script>
+    <script src="js/colony.js?v=3"></script>
+    <script src="js/war.js?v=3"></script>
+    <script src="js/blight.js?v=3"></script>
+    <script src="js/divine.js?v=3"></script>
+    <script src="js/story.js?v=3"></script>
+    <script src="js/render.js?v=3"></script>
+    <script src="js/render-war.js?v=3"></script>
+    <script src="js/camera.js?v=3"></script>
+    <script src="js/main.js?v=3"></script>
+</body>
+</html>
