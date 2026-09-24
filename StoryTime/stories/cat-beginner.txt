@@ -1,0 +1,31 @@
+title: Where is the cat?
+level: beginner
+series: cat
+symbol: 猫
+description: A quiet home, a missing cat, and a search from room to room.
+note: Practice 找 (look for), 在 (at/in), and 房间 (room). Location words: 哪里 (nǎlǐ, where), 这里 (zhèlǐ, here), 下面 (xiàmian, underneath).
+---
+我有一只小猫。 | Wǒ yǒu yì zhī xiǎo māo. | I have a little cat.
+它叫小白。 | Tā jiào Xiǎobái. | Its name is Xiaobai.
+小白很可爱。 | Xiǎobái hěn kě’ài. | Xiaobai is very cute.
+它喜欢在家里跑。 | Tā xǐhuan zài jiā lǐ pǎo. | It likes running around at home.
+今天，我回家了。 | Jīntiān, wǒ huí jiā le. | Today, I come home.
+家里很安静。 | Jiā lǐ hěn ānjìng. | The house is very quiet.
+小白在哪里？ | Xiǎobái zài nǎlǐ? | Where is Xiaobai?
+我叫它的名字。 | Wǒ jiào tā de míngzi. | I call its name.
+小白没有来。 | Xiǎobái méiyǒu lái. | Xiaobai does not come.
+我去厨房找它。 | Wǒ qù chúfáng zhǎo tā. | I go to the kitchen to look for it.
+我看了看桌子下面。 | Wǒ kàn le kan zhuōzi xiàmian. | I take a look under the table.
+桌子下面只有一把椅子。 | Zhuōzi xiàmian zhǐ yǒu yì bǎ yǐzi. | There is only a chair under the table.
+小白不在这里。 | Xiǎobái bú zài zhèlǐ. | Xiaobai is not here.
+妈妈在厨房喝水。 | Māma zài chúfáng hē shuǐ. | Mom is drinking water in the kitchen.
+我问：“妈妈，小白在哪里？” | Wǒ wèn: “Māma, Xiǎobái zài nǎlǐ?” | I ask, “Mom, where is Xiaobai?”
+妈妈说：“去你的房间看看吧。” | Māma shuō: “Qù nǐ de fángjiān kàn kan ba.” | Mom says, “Go and look in your room.”
+我走到房间门口。 | Wǒ zǒu dào fángjiān ménkǒu. | I walk to my bedroom door.
+我听见了小猫的声音。 | Wǒ tīngjiàn le xiǎo māo de shēngyīn. | I hear the little cat.
+我开门，走进房间。 | Wǒ kāi mén, zǒu jìn fángjiān. | I open the door and walk into the room.
+啊，小白在我的床上！ | À, Xiǎobái zài wǒ de chuáng shang! | Ah, Xiaobai is on my bed!
+它看了看我。 | Tā kàn le kan wǒ. | It takes a look at me.
+我说：“你在这里啊！” | Wǒ shuō: “Nǐ zài zhèlǐ a!” | I say, “So this is where you are!”
+小白没有起来，又睡了。 | Xiǎobái méiyǒu qǐlái, yòu shuì le. | Xiaobai does not get up and goes back to sleep.
+我坐在床边，安静地看书。 | Wǒ zuò zài chuáng biān, ānjìng de kàn shū. | I sit beside the bed and read quietly.

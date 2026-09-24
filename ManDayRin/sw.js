@@ -1,4 +1,4 @@
-const CACHE_NAME = "mandayrin-v19";
+const CACHE_NAME = "mandayrin-v20";
 const APP_SHELL = ["./", "./index.html", "./styles.css", "./vocabulary.js", "./audio-index.js", "./app.js", "./words.audio", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 const REMINDER_DB = "mandayrin-reminders";
 const REMINDER_STORE = "settings";
@@ -9,7 +9,7 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))));
+  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key.startsWith("mandayrin-") && key !== CACHE_NAME).map((key) => caches.delete(key)))));
   self.clients.claim();
 });
 

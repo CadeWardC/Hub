@@ -1,0 +1,25 @@
+title: A cup of tea
+level: advanced
+series: tea
+symbol: 茶
+description: An unexpected visitor discovers that she does not need an excuse to stay.
+note: Explore 不约而同 (bù yuē ér tóng, without planning it), 与其…不如… (rather than…better to…), and 借口 (jièkǒu, excuse).
+---
+雨声渐密，小林合上书，把水壶重新放回炉上。 | Yǔshēng jiàn mì, Xiǎolín hé shàng shū, bǎ shuǐhú chóngxīn fàng huí lú shang. | As the rain grows heavier, Xiaolin closes his book and puts the kettle back on the stove.
+门铃响起时，他还以为是邻居来借东西。 | Ménlíng xiǎng qǐ shí, tā hái yǐwéi shì línjū lái jiè dōngxi. | When the doorbell rings, he assumes a neighbor has come to borrow something.
+站在门外的却是小月，湿透的伞歪歪斜斜地垂在她手里。 | Zhàn zài mén wài de què shì Xiǎoyuè, shī tòu de sǎn wāiwāixiéxié de chuí zài tā shǒu lǐ. | Instead, Xiaoyue stands outside, a soaked umbrella hanging crookedly from her hand.
+她神情疲惫，却只说自己恰好路过，想进来躲一会儿雨。 | Tā shénqíng píbèi, què zhǐ shuō zìjǐ qiàhǎo lùguò, xiǎng jìnlái duǒ yíhuìr yǔ. | She looks exhausted, but says only that she happened to be passing by and wants to shelter from the rain.
+小林接过那把坏伞，没有追问，把干毛巾递给了她。 | Xiǎolín jiē guò nà bǎ huài sǎn, méiyǒu zhuīwèn, bǎ gān máojīn dì gěi le tā. | Xiaolin takes the broken umbrella without pressing her and hands her a dry towel.
+拿杯子时，他发现蓝杯底下还压着一张字迹歪斜的小纸条。 | Ná bēizi shí, tā fāxiàn lán bēi dǐxia hái yā zhe yì zhāng zìjì wāixié de xiǎo zhǐtiáo. | When fetching the cups, he discovers a small note in crooked handwriting still tucked beneath the blue one.
+“这是小月的杯子”，是她上次来时随手写下的玩笑。 | “Zhè shì Xiǎoyuè de bēizi”, shì tā shàng cì lái shí suíshǒu xiě xià de wánxiào. | “This is Xiaoyue's cup” was a joke she had scribbled on her last visit.
+他把纸条放到桌上，将一杯热茶轻轻推到她面前。 | Tā bǎ zhǐtiáo fàng dào zhuō shang, jiāng yì bēi rè chá qīngqīng tuī dào tā miànqián. | He puts the note on the table and gently slides a cup of hot tea toward her.
+小月盯着自己的字看了一会儿，紧绷的神情终于松动了一点。 | Xiǎoyuè dīng zhe zìjǐ de zì kàn le yíhuìr, jǐnbēng de shénqíng zhōngyú sōngdòng le yì diǎn. | Xiaoyue studies her own handwriting for a while, and her tense expression finally softens a little.
+她原本准备好的那句“我没事”，也没有再说出口。 | Tā yuánběn zhǔnbèi hǎo de nà jù “Wǒ méi shì”, yě méiyǒu zài shuō chū kǒu. | The words “I'm fine,” which she had prepared to say, never leave her lips.
+小林在对面坐下，心想，与其急着安慰，不如给彼此留一点沉默的余地。 | Xiǎolín zài duìmiàn zuò xià, xīn xiǎng, yǔqí jí zhe ānwèi, bùrú gěi bǐcǐ liú yì diǎn chénmò de yúdì. | Xiaolin sits opposite her, thinking that rather than rush to offer comfort, it is better to leave each other some room for silence.
+过了好一会儿，小月才说起最近的工作，以及那些一直不知该向谁诉说的烦恼。 | Guò le hǎo yíhuìr, Xiǎoyuè cái shuō qǐ zuìjìn de gōngzuò, yǐjí nàxiē yìzhí bù zhī gāi xiàng shéi sùshuō de fánnǎo. | Only after a long while does Xiaoyue begin talking about work and the worries she has not known whom to tell.
+他耐心地听着，偶尔问一句，并不急于替她安排答案。 | Tā nàixīn de tīng zhe, ǒu’ěr wèn yí jù, bìng bù jí yú tì tā ānpái dá’àn. | He listens patiently, asking an occasional question without rushing to supply her with answers.
+窗外的雨渐渐小了，杯里的茶也凉了，两个人却都没有起身。 | Chuāng wài de yǔ jiànjiàn xiǎo le, bēi lǐ de chá yě liáng le, liǎng ge rén què dōu méiyǒu qǐshēn. | The rain outside gradually eases and the tea cools, but neither of them gets up.
+临走时，小月拿起桌上的纸条，问他能不能继续替她保管那个杯子。 | Lín zǒu shí, Xiǎoyuè ná qǐ zhuō shang de zhǐtiáo, wèn tā néng bu néng jìxù tì tā bǎoguǎn nà ge bēizi. | As she is leaving, Xiaoyue picks up the note and asks whether he can keep looking after her cup.
+小林递给她一把好伞，说：“杯子一直都在，下次不用等下雨再来。” | Xiǎolín dì gěi tā yì bǎ hǎo sǎn, shuō: “Bēizi yìzhí dōu zài, xià cì bú yòng děng xià yǔ zài lái.” | Xiaolin hands her a good umbrella and says, “Your cup is always here. Next time, you don't have to wait for rain to visit.”
+两人不约而同地笑了，她这才发现，自己一直在寻找的其实只是一个可以留下来的借口。 | Liǎng rén bù yuē ér tóng de xiào le, tā zhè cái fāxiàn, zìjǐ yìzhí zài xúnzhǎo de qíshí zhǐshì yí ge kěyǐ liú xiàlái de jièkǒu. | They smile at the same moment, and she realizes that what she has been seeking all along is simply an excuse to stay.
+门关上后，小林洗好蓝杯子，把那张纸条重新放在了下面。 | Mén guān shàng hòu, Xiǎolín xǐ hǎo lán bēizi, bǎ nà zhāng zhǐtiáo chóngxīn fàng zài le xiàmian. | After the door closes, Xiaolin washes the blue cup and puts the note beneath it again.

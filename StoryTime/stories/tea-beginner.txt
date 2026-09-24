@@ -1,0 +1,31 @@
+title: A cup of tea
+level: beginner
+series: tea
+symbol: 茶
+description: A friend comes to visit, but the tea is much too hot.
+note: Practice 喝 (drink), 热 (hot), 杯子 (cup), and 等 (wait). New words: 一起 (yìqǐ, together), 再 (zài, again), 好喝 (hǎohē, good to drink).
+---
+我叫小林。 | Wǒ jiào Xiǎolín. | My name is Xiaolin.
+我喜欢喝茶。 | Wǒ xǐhuan hē chá. | I like drinking tea.
+今天，我在家看书。 | Jīntiān, wǒ zài jiā kàn shū. | Today, I am reading at home.
+我的朋友小月来我家。 | Wǒ de péngyou Xiǎoyuè lái wǒ jiā. | My friend Xiaoyue comes to my home.
+她说：“你好，小林！” | Tā shuō: “Nǐ hǎo, Xiǎolín!” | She says, “Hello, Xiaolin!”
+我说：“小月，你好！” | Wǒ shuō: “Xiǎoyuè, nǐ hǎo!” | I say, “Hello, Xiaoyue!”
+她坐在椅子上。 | Tā zuò zài yǐzi shang. | She sits on a chair.
+她说：“我很渴。” | Tā shuō: “Wǒ hěn kě.” | She says, “I am very thirsty.”
+我问：“你喝茶吗？” | Wǒ wèn: “Nǐ hē chá ma?” | I ask, “Would you like some tea?”
+她说：“好，谢谢！” | Tā shuō: “Hǎo, xièxie!” | She says, “Yes, thank you!”
+我去厨房拿杯子。 | Wǒ qù chúfáng ná bēizi. | I go to the kitchen to get cups.
+我有两个杯子。 | Wǒ yǒu liǎng ge bēizi. | I have two cups.
+一个是白的，一个是蓝的。 | Yí ge shì bái de, yí ge shì lán de. | One is white, and one is blue.
+我给她一杯热茶。 | Wǒ gěi tā yì bēi rè chá. | I give her a cup of hot tea.
+她拿起杯子，想喝茶。 | Tā ná qǐ bēizi, xiǎng hē chá. | She picks up the cup, wanting to drink the tea.
+我说：“茶很热，等一等！” | Wǒ shuō: “Chá hěn rè, děng yi děng!” | I say, “The tea is hot. Wait a little!”
+她放下杯子。 | Tā fàng xià bēizi. | She puts down the cup.
+桌子上有两个苹果。 | Zhuōzi shang yǒu liǎng ge píngguǒ. | There are two apples on the table.
+我给她一个苹果。 | Wǒ gěi tā yí ge píngguǒ. | I give her an apple.
+她说：“苹果很甜！” | Tā shuō: “Píngguǒ hěn tián!” | She says, “The apple is sweet!”
+我们吃苹果，也说说话。 | Wǒmen chī píngguǒ, yě shuō shuo huà. | We eat our apples and chat a little.
+现在，茶不太热了。 | Xiànzài, chá bú tài rè le. | Now the tea is not too hot.
+小月喝了茶，说：“很好喝！” | Xiǎoyuè hē le chá, shuō: “Hěn hǎohē!” | Xiaoyue drinks the tea and says, “It tastes good!”
+我说：“明天，我们再一起喝茶吧！” | Wǒ shuō: “Míngtiān, wǒmen zài yìqǐ hē chá ba!” | I say, “Let's have tea together again tomorrow!”

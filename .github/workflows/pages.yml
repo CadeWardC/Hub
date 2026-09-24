@@ -27,9 +27,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          node StoryTime/export-vocabulary.cjs
+          python3 StoryTime/build_stories.py
           mkdir -p _site
           cp index.html script.js styles.css _site/
-          for project in ManDayRin conversions laser-engraving md2pdf paypers smolov; do
+          for project in ManDayRin StoryTime conversions laser-engraving md2pdf paypers smolov; do
             cp -R "$project" "_site/$project"
           done
           touch _site/.nojekyll
