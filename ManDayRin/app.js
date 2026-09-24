@@ -10,12 +10,32 @@
   let activeFilter = "all";
   let historyQuery = "";
   let reminderTimer = null;
+  let activeUtterance = null;
+  let activeWordAudio = null;
+  let activeWordAudioUrl = null;
+  let activeWordButton = null;
+  let audioPack = null;
+  let audioPackError = null;
   let quizState = { current: null, choices: [], correct: 0, attempts: 0, questionNumber: 0, answered: false, previousKey: "" };
 
   const state = loadState();
   const day = getCourseDay(state.startedOn);
   ensureTodaySelection();
   renderToday();
+  configureSpeechAudioSession();
+  fetch("./words.audio").then((response) => {
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.arrayBuffer();
+  }).then((buffer) => {
+    const clips = Object.values(window.MANDAYRIN_AUDIO_INDEX || {});
+    if (!clips.length || clips.some(([offset, length]) => offset + length > buffer.byteLength)) {
+      throw new Error("Incomplete audio pack");
+    }
+    audioPack = buffer;
+  }).catch((error) => {
+    audioPackError = error;
+    console.warn("ManDayRin recordings unavailable:", error);
+  });
   bindNavigation();
   bindHistoryFilters();
   bindHistorySearch();
@@ -130,20 +150,106 @@
   }
 
   function speakChinese(hanzi, button) {
+    configureSpeechAudioSession();
+    const clip = window.MANDAYRIN_AUDIO_INDEX?.[hanzi];
+    if (audioPack && clip) {
+      if (activeWordAudio) {
+        activeWordAudio.pause();
+        if (activeWordAudioUrl) URL.revokeObjectURL(activeWordAudioUrl);
+        if (activeWordButton) activeWordButton.classList.remove("speaking");
+      }
+      if (activeUtterance) window.speechSynthesis?.cancel();
+      const [offset, length] = clip;
+      const blob = new Blob([audioPack.slice(offset, offset + length)], { type: "audio/wav" });
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      activeWordAudio = audio;
+      activeWordAudioUrl = url;
+      activeWordButton = button;
+      const finish = () => {
+        if (button) button.classList.remove("speaking");
+        if (activeWordAudio === audio) {
+          activeWordAudio = null;
+          activeWordAudioUrl = null;
+          activeWordButton = null;
+        }
+        URL.revokeObjectURL(url);
+      };
+      audio.onplaying = () => {
+        if (button) button.classList.add("speaking");
+      };
+      audio.onended = () => {
+        finish();
+      };
+      audio.onerror = () => {
+        finish();
+        showToast("Recording could not play. Try the speaker again.");
+      };
+      audio.play().catch(() => {
+        finish();
+        showToast("Recording could not play. Try the speaker again.");
+      });
+      return;
+    }
+    if (clip && !audioPackError) {
+      showToast("Audio is loading. Tap the speaker again shortly.");
+      return;
+    }
     if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
       showToast("Speech is not available in this browser");
       return;
     }
+    const synthesis = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(hanzi);
-    const voices = window.speechSynthesis.getVoices();
-    utterance.voice = voices.find((voice) => /^zh-CN$/i.test(voice.lang)) || voices.find((voice) => /^zh/i.test(voice.lang)) || null;
+    const voices = synthesis.getVoices();
+    const mandarinVoices = voices.filter((voice) => /^zh/i.test(voice.lang));
+    utterance.voice = mandarinVoices.find((voice) => /^zh-CN$/i.test(voice.lang)) || mandarinVoices[0] || null;
     utterance.lang = "zh-CN";
     utterance.rate = 0.78;
     utterance.pitch = 1;
-    utterance.onstart = () => { if (button) button.classList.add("speaking"); };
-    utterance.onend = utterance.onerror = () => { if (button) button.classList.remove("speaking"); };
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
+    utterance.onstart = () => {
+      if (button) button.classList.add("speaking");
+    };
+    utterance.onend = () => {
+      if (button) button.classList.remove("speaking");
+      if (activeUtterance === utterance) activeUtterance = null;
+    };
+    utterance.onerror = (event) => {
+      if (button) button.classList.remove("speaking");
+      if (activeUtterance !== utterance) return;
+      activeUtterance = null;
+      if (event.error === "canceled" || event.error === "interrupted") return;
+      const message = event.error === "language-unavailable" || event.error === "voice-unavailable"
+        ? "Mandarin speech voice is unavailable on this device"
+        : event.error === "not-allowed"
+          ? "Speech was blocked. Tap the speaker again."
+          : "Speech failed. Check your device sound settings.";
+      showToast(message);
+      console.warn("ManDayRin speech failed:", event.error);
+    };
+    activeUtterance = utterance;
+    try {
+      if (synthesis.speaking || synthesis.pending) {
+        synthesis.cancel();
+      }
+      if (synthesis.paused) {
+        synthesis.resume();
+      }
+      synthesis.speak(utterance);
+    } catch (error) {
+      activeUtterance = null;
+      showToast("Speech failed. Try the speaker again.");
+      console.warn("ManDayRin speech failed:", error);
+    }
+  }
+
+  function configureSpeechAudioSession() {
+    if (!("audioSession" in navigator)) return;
+    try {
+      navigator.audioSession.type = "playback";
+    } catch (_) {
+      // The media element still plays normally on browsers without this API.
+    }
   }
 
   function reroll(kind) {

@@ -8,6 +8,7 @@
 ## Project structure
 - `index.html` / `script.js` / `styles.css` — the hub landing page
 - `ManDayRin/` — Installable, offline-first daily Mandarin PWA with a 365-day beginner curriculum and local vocabulary history
+- `StoryTime/` — Installable Mandarin story reader with three levels, synchronized device speech, and plain-text story files in `StoryTime/stories/`; run `python3 StoryTime/build_stories.py` to rebuild the library (see `StoryTime/README.md`)
 - `smolov/` — Smolov Jr. strength training calculator (static HTML/CSS/JS)
 - `paypers/` — PubMed paper discovery app with swipe interface (static HTML/CSS/JS)
 - `laser-engraving/` — Laser engraver bed layout tool with CAD-style SVG engine
@@ -31,6 +32,7 @@ Each static sub-project has its own `index.html`.
 ## Persistence
 - `ManDayRin/` — localStorage (`mandayrinState.v1`: start date, daily selections, vocabulary history, and reminder settings) plus service-worker IndexedDB for best-effort background reminder checks
 - `smolov/` — Supabase (Postgres via PostgREST): `lift_maxes`, `smolov_plans`
+- `StoryTime/` — localStorage (`storytime.v1`: reading progress and listening preferences); app shell and starter stories cached by service worker
 - `paypers/` — localStorage (`paypersState`)
 - `laser-engraving/` — localStorage (`laserEngraving_bedSize`, `laserEngraving_presets`)
 - `hollowkeep/` — none yet (the map is regenerated from a seed and the colony is not saved); service-worker Cache Storage (`hollowkeep-v*`) for offline play

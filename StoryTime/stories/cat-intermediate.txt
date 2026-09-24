@@ -1,0 +1,27 @@
+title: Where is the cat?
+level: intermediate
+series: cat
+symbol: 猫
+description: A missing cat leaves a few clues and finds a very comfortable bed.
+note: Notice 找不到 (cannot find), 原来 (yuánlái, it turns out), and 一…就… (as soon as).
+---
+每天回家，小白都会跑到门口来迎接我。 | Měitiān huí jiā, Xiǎobái dōu huì pǎo dào ménkǒu lái yíngjiē wǒ. | Every day when I come home, Xiaobai runs to the door to greet me.
+它是一只白色的小猫，最喜欢跟着我走来走去。 | Tā shì yì zhī báisè de xiǎo māo, zuì xǐhuan gēn zhe wǒ zǒu lái zǒu qù. | It is a little white cat whose favorite thing is following me around.
+可是今天，门口没有它的影子。 | Kěshì jīntiān, ménkǒu méiyǒu tā de yǐngzi. | But today, there is no sign of it at the door.
+我叫了好几次，它都没有出现。 | Wǒ jiào le hǎo jǐ cì, tā dōu méiyǒu chūxiàn. | I call several times, but it does not appear.
+我先去厨房，看见它的水碗还在桌子旁边。 | Wǒ xiān qù chúfáng, kànjiàn tā de shuǐwǎn hái zài zhuōzi pángbiān. | I go to the kitchen first and see its water bowl still beside the table.
+我弯下腰，看了看桌子下面。 | Wǒ wān xià yāo, kàn le kan zhuōzi xiàmian. | I bend down and look under the table.
+那里只有一个小球，没有小猫。 | Nàlǐ zhǐ yǒu yí ge xiǎo qiú, méiyǒu xiǎo māo. | There is only a little ball there, not a cat.
+接着，我到客厅里找，也没有找到它。 | Jiēzhe, wǒ dào kètīng lǐ zhǎo, yě méiyǒu zhǎo dào tā. | Next, I search the living room, but do not find it there either.
+我开始担心，是不是早上出门时忘了关门。 | Wǒ kāishǐ dānxīn, shì bu shì zǎoshang chū mén shí wàng le guān mén. | I start to worry that I may have forgotten to close the door that morning.
+妈妈看见我着急的样子，就问我在找什么。 | Māma kànjiàn wǒ zháojí de yàngzi, jiù wèn wǒ zài zhǎo shénme. | Mom sees how worried I look and asks what I am looking for.
+“小白不见了，我找不到它。” | “Xiǎobái bú jiàn le, wǒ zhǎo bu dào tā.” | “Xiaobai is missing. I can't find it.”
+妈妈说：“别担心，我刚才还看见它了。” | Māma shuō: “Bié dānxīn, wǒ gāngcái hái kànjiàn tā le.” | Mom says, “Don't worry. I saw it just a little while ago.”
+她指了指我的房间，让我去那里看看。 | Tā zhǐ le zhǐ wǒ de fángjiān, ràng wǒ qù nàlǐ kàn kan. | She points toward my room and tells me to look there.
+我刚走到门口，就听见里面传来一声猫叫。 | Wǒ gāng zǒu dào ménkǒu, jiù tīngjiàn lǐmian chuán lái yì shēng māo jiào. | As soon as I reach the door, I hear a meow from inside.
+我轻轻推开门，看见床上的被子动了一下。 | Wǒ qīngqīng tuī kāi mén, kànjiàn chuáng shang de bèizi dòng le yí xià. | I gently push the door open and see the quilt on my bed move a little.
+原来，小白躲在被子下面，睡得正舒服呢。 | Yuánlái, Xiǎobái duǒ zài bèizi xiàmian, shuì de zhèng shūfu ne. | It turns out Xiaobai is hiding under the quilt, sleeping very comfortably.
+我坐到床边，它只看了我一眼。 | Wǒ zuò dào chuáng biān, tā zhǐ kàn le wǒ yì yǎn. | I sit beside the bed, and it gives me just one glance.
+“小白，你让我找了这么久！” | “Xiǎobái, nǐ ràng wǒ zhǎo le zhème jiǔ!” | “Xiaobai, you made me search for so long!”
+它没有理我，又把头放了下去。 | Tā méiyǒu lǐ wǒ, yòu bǎ tóu fàng le xiàqù. | It ignores me and puts its head back down.
+我终于放心了，拿起书，陪它安静地坐了一会儿。 | Wǒ zhōngyú fàngxīn le, ná qǐ shū, péi tā ānjìng de zuò le yíhuìr. | Finally relieved, I pick up a book and sit quietly with it for a while.

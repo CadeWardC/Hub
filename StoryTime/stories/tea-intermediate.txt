@@ -1,0 +1,27 @@
+title: A cup of tea
+level: intermediate
+series: tea
+symbol: 茶
+description: A rainy visit and a broken umbrella turn into an afternoon together.
+note: Notice 虽然…但是… (although…but…), 一边…一边… (while), and 原来 (yuánlái, it turns out).
+---
+下午，小林正在看书，突然听见有人敲门。 | Xiàwǔ, Xiǎolín zhèngzài kàn shū, tūrán tīngjiàn yǒu rén qiāo mén. | In the afternoon, Xiaolin is reading when he suddenly hears someone knocking.
+他打开门，看见朋友小月站在外面。 | Tā dǎkāi mén, kànjiàn péngyou Xiǎoyuè zhàn zài wàimian. | He opens the door and sees his friend Xiaoyue standing outside.
+她的头发湿了，手里拿着一把坏了的伞。 | Tā de tóufa shī le, shǒu lǐ ná zhe yì bǎ huài le de sǎn. | Her hair is wet, and she is holding a broken umbrella.
+“风太大了，我的伞坏了！” | “Fēng tài dà le, wǒ de sǎn huài le!” | “The wind was so strong that my umbrella broke!”
+小林请她进来，又给她拿了一条干毛巾。 | Xiǎolín qǐng tā jìnlái, yòu gěi tā ná le yì tiáo gān máojīn. | Xiaolin invites her in and gets her a dry towel.
+小月坐下来，说自己又冷又渴。 | Xiǎoyuè zuò xiàlái, shuō zìjǐ yòu lěng yòu kě. | Xiaoyue sits down and says she is both cold and thirsty.
+小林去厨房，准备给她泡一杯热茶。 | Xiǎolín qù chúfáng, zhǔnbèi gěi tā pào yì bēi rè chá. | Xiaolin goes to the kitchen to make her a cup of hot tea.
+他拿出一个蓝杯子，却发现杯子里有一张小纸条。 | Tā ná chū yí ge lán bēizi, què fāxiàn bēizi lǐ yǒu yì zhāng xiǎo zhǐtiáo. | He takes out a blue cup, but discovers a little note inside it.
+纸条上写着：“这是小月的杯子。” | Zhǐtiáo shang xiě zhe: “Zhè shì Xiǎoyuè de bēizi.” | The note says, “This is Xiaoyue's cup.”
+原来，上次小月来喝茶时，开玩笑地留下了这张纸条。 | Yuánlái, shàng cì Xiǎoyuè lái hē chá shí, kāi wánxiào de liú xià le zhè zhāng zhǐtiáo. | It turns out Xiaoyue left the note as a joke the last time she came for tea.
+小林把纸条拿给她看，两个人都笑了。 | Xiǎolín bǎ zhǐtiáo ná gěi tā kàn, liǎng ge rén dōu xiào le. | Xiaolin shows her the note, and they both laugh.
+他洗好杯子，倒上热茶，放在她面前。 | Tā xǐ hǎo bēizi, dào shàng rè chá, fàng zài tā miànqián. | He washes the cup, pours in hot tea, and sets it in front of her.
+“茶很热，先吃点面包吧。” | “Chá hěn rè, xiān chī diǎn miànbāo ba.” | “The tea is hot. Have some bread first.”
+他们一边吃面包，一边聊最近的生活。 | Tāmen yìbiān chī miànbāo, yìbiān liáo zuìjìn de shēnghuó. | They eat bread while talking about their lives lately.
+小月说，这个星期工作很忙，她每天都很累。 | Xiǎoyuè shuō, zhège xīngqī gōngzuò hěn máng, tā měitiān dōu hěn lèi. | Xiaoyue says work has been busy this week, and she has been tired every day.
+小林没有急着说话，只是认真地听着。 | Xiǎolín méiyǒu jí zhe shuōhuà, zhǐshì rènzhēn de tīng zhe. | Xiaolin does not rush to speak; he simply listens carefully.
+虽然外面还在下雨，但是小月已经觉得暖和多了。 | Suīrán wàimian hái zài xià yǔ, dànshì Xiǎoyuè yǐjīng juéde nuǎnhuo duō le. | Although it is still raining outside, Xiaoyue already feels much warmer.
+雨小了以后，小林找了一把好伞借给她。 | Yǔ xiǎo le yǐhòu, Xiǎolín zhǎo le yì bǎ hǎo sǎn jiè gěi tā. | After the rain eases, Xiaolin finds a good umbrella to lend her.
+小月说：“明天我来还伞，也来看看我的杯子。” | Xiǎoyuè shuō: “Míngtiān wǒ lái huán sǎn, yě lái kàn kan wǒ de bēizi.” | Xiaoyue says, “Tomorrow I'll return the umbrella and visit my cup, too.”
+小林笑着回答：“好，我给你准备茶。” | Xiǎolín xiào zhe huídá: “Hǎo, wǒ gěi nǐ zhǔnbèi chá.” | Xiaolin replies with a smile, “All right. I'll have tea ready for you.”

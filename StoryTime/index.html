@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f1e8"><meta name="description" content="Learn Mandarin through small stories. Listen, follow along, and grow at your own pace.">
+<title>StoryTime · A little Mandarin, a little story</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icon-192.png"><link rel="stylesheet" href="styles.css">
+<script defer src="stories.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="./index.html"><span class="brand-icon">文</span> StoryTime<span class="brand-note">MANDARIN, ONE STORY AT A TIME</span></a><nav><a href="../index.html">Hub ↗</a><button id="install" hidden>Install app</button></nav></header>
+<main>
+<section id="library">
+<div class="intro"><p class="eyebrow">SMALL STORIES. EVERYDAY DISCOVERIES.</p><h1>A little story.<br>A little more Mandarin.</h1><p>Listen slowly. Read along. Let a few familiar words<br class="desktop"> become a world you understand.</p><span class="intro-stamp" aria-hidden="true">故<br>事</span></div>
+<div class="library-heading"><div><p class="eyebrow">YOUR READING CORNER</p><h2>Find your next small adventure</h2></div><span id="read-count" class="muted"></span></div>
+<div class="filters" aria-label="Filter stories by level"><button data-level="beginner" aria-pressed="true">Beginner</button><button data-level="intermediate" aria-pressed="false">Intermediate</button><button data-level="advanced" aria-pressed="false">Advanced</button><button data-level="all" aria-pressed="false">All stories</button></div>
+<p id="level-note" class="muted"></p><div id="story-grid" class="story-grid"></div>
+<div class="gentle-note"><span>慢慢来</span><div><strong>There’s no rush.</strong><p>Start with pinyin and English. Hide them when you’re ready. One sentence is progress.</p></div></div>
+</section>
+<section id="reader" hidden>
+<button id="back" class="text-button">← Back to your stories</button>
+<div class="reader-layout"><article><p id="reader-level" class="eyebrow"></p><h1 id="reader-title" tabindex="-1"></h1><p id="reader-description" class="muted"></p><div id="sentences" class="sentences"></div><div class="finish-row"><button id="complete" class="primary">Mark as read ✓</button></div></article>
+<aside class="reading-settings"><p class="eyebrow">MAKE IT YOUR PACE</p><label>Story level<select id="reader-difficulty"></select></label><label>Reading support<select id="support"><option value="guided">Guided · pinyin + English</option><option value="pinyin">Practice · pinyin only</option><option value="hanzi">Challenge · Chinese only</option></select></label><label>Mandarin voice<select id="voice"></select></label><p class="small muted">Uses your device’s speech voices. Offline listening needs a downloaded Mandarin voice.</p><label class="check"><input id="step-mode" type="checkbox"> Pause after each sentence</label><p class="small muted">Tap any sentence to listen from there. Pausing and resuming replays the current sentence.</p><p id="speech-message" role="status" class="small"></p></aside></div>
+<div class="player"><div class="transport"><button id="previous" aria-label="Previous sentence">←</button><button id="play" class="primary">▶ Listen</button><button id="next" aria-label="Next sentence">→</button></div><div class="play-progress"><span id="position"></span><progress id="progress" value="0" max="1" aria-label="Story position"></progress></div><label class="speed">Speed <select id="speed"><option value="0.5">0.5×</option><option value="0.65">0.65×</option><option value="0.8">0.8×</option><option value="1">1×</option><option value="1.2">1.2×</option></select></label></div>
+</section>
+<p id="notice" class="notice" role="status" hidden></p>
+</main><footer>StoryTime <span>Little by little, a whole new world.</span><button id="install-help" class="text-button">How to install</button></footer>
+</body></html>

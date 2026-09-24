@@ -1,0 +1,10 @@
+# Starter format only: expand to 20–30 short beginner sentences with a beginning, small problem, and ending.
+title: My new story
+level: beginner
+series: my-new-story
+symbol: 文
+description: A short description of your story.
+note: Practice 你好 (hello) and 叫 (to be called).
+---
+你好！ | Nǐ hǎo! | Hello!
+我叫小林。 | Wǒ jiào Xiǎolín. | My name is Xiaolin.
