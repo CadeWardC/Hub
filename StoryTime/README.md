@@ -23,7 +23,7 @@ level: beginner
 我在家喝茶。 | Wǒ zài jiā hē chá. | I drink tea at home.
 ```
 
-3. Commit and deploy as usual. **GitHub Pages automatically builds all story files.** No app editor, import, registration list, or timing data needed. New stories can use device speech immediately; run the audio generator to add Kokoro narration.
+3. Commit and deploy as usual. **GitHub Pages automatically builds all story files.** No app editor, import, registration list, or timing data needed. New stories can use device speech immediately; run the audio generator to add Qwen3 narration.
 
 For a local preview, run this from the Hub folder after changing files:
 
@@ -62,7 +62,7 @@ Add `series: rainy-day` to the beginner version too. The reader automatically of
 
 ## Listening
 
-The included stories use locally generated **Kokoro Mandarin narration**: `hexgrad/Kokoro-82M-v1.1-zh`, voice `zf_001`, synthesized at 1×. Each sentence has a separate 24 kHz WAV recording. Playback defaults to 0.65×, with pitch-preserving 0.5×–1.2× controls. Choose a device voice in the voice menu to use browser speech instead.
+The included stories use locally generated **Qwen3 Mandarin narration**: `Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice`, voice `Serena`, with a warm, clear Mandarin reading instruction. Each sentence has a separate 24 kHz WAV recording. Playback defaults to 0.65×, with pitch-preserving 0.5×–1.2× controls. Choose a device voice in the voice menu to use browser speech instead.
 
 Sentence highlighting advances on the recording's actual end event. Tap a sentence to start there. Pause cancels playback; resume replays that sentence. The step option waits between sentences. Changing story or leaving the reader cancels old callbacks. Recorded audio provides sentence highlighting; browser speech can additionally highlight words when boundary events are available.
 
@@ -76,15 +76,34 @@ Audio generation is a separate local Python step; the website itself remains dep
 python StoryTime/generate_audio.py
 ```
 
-On this Windows checkout, the prepared environment is:
+On this Windows checkout, Qwen TTS is installed in the default Python environment:
 
 ```powershell
-StoryTime/.venv-kokoro/Scripts/python.exe StoryTime/generate_audio.py
+python StoryTime/generate_audio.py
 ```
 
-The first run downloads the model to the standard Hugging Face cache. Later runs reuse clips matching the text, model, voice, and synthesis speed. Optional `--voice` and `--speed` arguments select another voice from the same model or a different synthesis rate. Commit the generated `audio/` files, `stories.js`, and `sw.js` with the source changes. The audio manifest records provenance, text, and duration. A normal story build only attaches recordings whose text still matches, so stale narration is never used for edited sentences. No synthesis runs in Pages deployment.
+The generator first looks for the model in the sibling `Coding_Projects/models/Qwen3-TTS-12Hz-1.7B-CustomVoice` folder, then falls back to the model ID. Use `--model-path` to select another local location. CUDA is used when available; `--device cpu` is also supported. Later runs reuse clips matching the text, model, voice, and reading instruction. Use `--voice` to choose another preset and `--batch-size` to tune memory use (default 4). The complete replacement is built before recordings referenced only by the old manifest are removed. Commit the generated `audio/` files, `stories.js`, and `sw.js` with the source changes. The audio manifest records the model, voice, reading instruction, text, and duration. A normal story build only attaches recordings whose text still matches, so stale narration is never used for edited sentences. No synthesis runs in Pages deployment.
 
-Model documentation: [Kokoro Mandarin](https://huggingface.co/hexgrad/Kokoro-82M-v1.1-zh). Preferences and reading position remain in `storytime.v1`. The service worker deletes only caches prefixed `storytime-`.
+### Preset voices and voice cloning
+
+List all nine presets without loading a model:
+
+```sh
+python StoryTime/generate_audio.py --list-voices
+python StoryTime/generate_audio.py --voice Serena
+```
+
+Presets: Vivian, Serena, Uncle_Fu, Dylan, Eric, Ryan, Aiden, Ono_Anna, and Sohee. These are local generation options, not separate audio packs in the website. Every run replaces the story narration with the selected voice. The CustomVoice model contains all presets; no per-voice download is required.
+
+For cloning, provide a clear reference recording and its exact transcript:
+
+```sh
+python StoryTime/generate_audio.py --reference-audio "C:/audio/reference.wav" --reference-text "Exact words spoken in the reference."
+```
+
+Cloning automatically selects `Qwen3-TTS-12Hz-1.7B-Base` from the same sibling `models` folder and reuses one reference prompt across sentences. The reference recording and transcript are not copied into the website. The manifest stores only a reference-audio checksum. `--model-path` can override the model folder for either mode. The shared `Qwen3-TTS-Tokenizer-12Hz` model is also downloaded locally; the model folders contain their required speech tokenizer assets.
+
+Model documentation: [Qwen3 Mandarin](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice). Preferences and reading position remain in `storytime.v1`. The service worker deletes only caches prefixed `storytime-`.
 
 ## Verification
 

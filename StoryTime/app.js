@@ -175,7 +175,7 @@
   function loadVoices() {
     // Exclude Cantonese (zh-HK / yue); prefer mainland Mandarin, then Taiwan.
     voices = capable ? synth.getVoices().filter(v => /^(zh(?:[-_](?:CN|TW|SG|Hans|Hant))?|cmn)(?:[-_]|$)/i.test(v.lang) && !/[-_]HK/i.test(v.lang)) : [];
-    $('voice').replaceChildren(); const auto = node('option','',hasRecordings() ? 'Kokoro · recorded Mandarin' : 'Automatic Mandarin'); auto.value = ''; $('voice').append(auto);
+    $('voice').replaceChildren(); const auto = node('option','',hasRecordings() ? 'Qwen3 · recorded Mandarin' : 'Automatic Mandarin'); auto.value = ''; $('voice').append(auto);
     voices.forEach(v => { const option = node('option','',`${v.name}${v.localService ? ' · on device' : ' · online'}`); option.value = v.voiceURI; $('voice').append(option); });
     if (!voices.some(v => v.voiceURI === state.voice)) state.voice = '';
     $('voice').value = state.voice;

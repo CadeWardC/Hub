@@ -113,7 +113,7 @@ const { chromium } = require('playwright');
       await ctx.close();
       return audio.duration;
     });
-    assert.ok(decoded > 0.1, 'Real Kokoro recording decodes while offline');
+    assert.ok(decoded > 0.1, 'Real Qwen3 recording decodes while offline');
     await recorded.close();
     console.log('PASS: levels, speech synchronization/cancellation/rate/step mode, support, file-backed library, progress persistence, mobile overflow, offline cache, unsupported speech/storage.');
   } finally { await browser.close(); }

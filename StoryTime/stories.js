@@ -7,145 +7,145 @@ window.STORYTIME_STORIES = [
         "zh": "我叫小林。",
         "pinyin": "Wǒ jiào Xiǎolín.",
         "en": "My name is Xiaolin.",
-        "audio": "audio/9164b952b58456a572c6d7fd.wav"
+        "audio": "audio/20cb202e61335409a5de41ff.wav"
       },
       {
         "zh": "我喜欢喝茶。",
         "pinyin": "Wǒ xǐhuan hē chá.",
         "en": "I like drinking tea.",
-        "audio": "audio/92c260c59a73c3f65e3390f0.wav"
+        "audio": "audio/799a1664006a84aa1ec20026.wav"
       },
       {
         "zh": "今天，我在家看书。",
         "pinyin": "Jīntiān, wǒ zài jiā kàn shū.",
         "en": "Today, I am reading at home.",
-        "audio": "audio/1bfe8415ab1d3da86cd687ea.wav"
+        "audio": "audio/c3910a9b337cf163459e6c66.wav"
       },
       {
         "zh": "我的朋友小月来我家。",
         "pinyin": "Wǒ de péngyou Xiǎoyuè lái wǒ jiā.",
         "en": "My friend Xiaoyue comes to my home.",
-        "audio": "audio/a03decf415119df6bf990ff5.wav"
+        "audio": "audio/92f0ad025720437e3818e235.wav"
       },
       {
         "zh": "她说：“你好，小林！”",
         "pinyin": "Tā shuō: “Nǐ hǎo, Xiǎolín!”",
         "en": "She says, “Hello, Xiaolin!”",
-        "audio": "audio/175c14b0e89749d7026762f0.wav"
+        "audio": "audio/8841ac20a89abeb51ecdcc20.wav"
       },
       {
         "zh": "我说：“小月，你好！”",
         "pinyin": "Wǒ shuō: “Xiǎoyuè, nǐ hǎo!”",
         "en": "I say, “Hello, Xiaoyue!”",
-        "audio": "audio/ba627dcbcfd2abb4d7444682.wav"
+        "audio": "audio/3a988428ab9e1ba1a111a0e2.wav"
       },
       {
         "zh": "她坐在椅子上。",
         "pinyin": "Tā zuò zài yǐzi shang.",
         "en": "She sits on a chair.",
-        "audio": "audio/de59204db0cb460a4866862e.wav"
+        "audio": "audio/a333a97764dadb86f1c04d62.wav"
       },
       {
         "zh": "她说：“我很渴。”",
         "pinyin": "Tā shuō: “Wǒ hěn kě.”",
         "en": "She says, “I am very thirsty.”",
-        "audio": "audio/b823fdd61d25e8eaf3766a9b.wav"
+        "audio": "audio/6fe6d9d811c027234b061e21.wav"
       },
       {
         "zh": "我问：“你喝茶吗？”",
         "pinyin": "Wǒ wèn: “Nǐ hē chá ma?”",
         "en": "I ask, “Would you like some tea?”",
-        "audio": "audio/4696c6a982a8751cd5d9f020.wav"
+        "audio": "audio/5d101e0c4ea55b7bd6ffd673.wav"
       },
       {
         "zh": "她说：“好，谢谢！”",
         "pinyin": "Tā shuō: “Hǎo, xièxie!”",
         "en": "She says, “Yes, thank you!”",
-        "audio": "audio/ce2dfdaf6a6fe9ba6e73a55d.wav"
+        "audio": "audio/0ede231d5b1f6af6c8651241.wav"
       },
       {
         "zh": "我去厨房拿杯子。",
         "pinyin": "Wǒ qù chúfáng ná bēizi.",
         "en": "I go to the kitchen to get cups.",
-        "audio": "audio/372a16daa4b10fa488c8f1e2.wav"
+        "audio": "audio/7c1a4a0ef8dcc53dfac48166.wav"
       },
       {
         "zh": "我有两个杯子。",
         "pinyin": "Wǒ yǒu liǎng ge bēizi.",
         "en": "I have two cups.",
-        "audio": "audio/89b65ec1da09f563045f6e15.wav"
+        "audio": "audio/82df9c549b4053f9f0c127f9.wav"
       },
       {
         "zh": "一个是白的，一个是蓝的。",
         "pinyin": "Yí ge shì bái de, yí ge shì lán de.",
         "en": "One is white, and one is blue.",
-        "audio": "audio/6b29c160de5355bbb5c6e0d1.wav"
+        "audio": "audio/8046caa8e606816fc31dc3f5.wav"
       },
       {
         "zh": "我给她一杯热茶。",
         "pinyin": "Wǒ gěi tā yì bēi rè chá.",
         "en": "I give her a cup of hot tea.",
-        "audio": "audio/0bb96b0447486fff86f20a48.wav"
+        "audio": "audio/590832541d86ae4fad28bbe4.wav"
       },
       {
         "zh": "她拿起杯子，想喝茶。",
         "pinyin": "Tā ná qǐ bēizi, xiǎng hē chá.",
         "en": "She picks up the cup, wanting to drink the tea.",
-        "audio": "audio/b9a36143192d38cc623d91e9.wav"
+        "audio": "audio/198d77d7983f47b7a0bedca8.wav"
       },
       {
         "zh": "我说：“茶很热，等一等！”",
         "pinyin": "Wǒ shuō: “Chá hěn rè, děng yi děng!”",
         "en": "I say, “The tea is hot. Wait a little!”",
-        "audio": "audio/79e964e469846291a885c533.wav"
+        "audio": "audio/ebeff0b8b54cc3024f8c67d4.wav"
       },
       {
         "zh": "她放下杯子。",
         "pinyin": "Tā fàng xià bēizi.",
         "en": "She puts down the cup.",
-        "audio": "audio/cf46baa499b328fedc412c53.wav"
+        "audio": "audio/d40517c9f39306538fa7cc86.wav"
       },
       {
         "zh": "桌子上有两个苹果。",
         "pinyin": "Zhuōzi shang yǒu liǎng ge píngguǒ.",
         "en": "There are two apples on the table.",
-        "audio": "audio/0b241f815c4fb8c71724a7d8.wav"
+        "audio": "audio/50a60436d8411a57427f8e30.wav"
       },
       {
         "zh": "我给她一个苹果。",
         "pinyin": "Wǒ gěi tā yí ge píngguǒ.",
         "en": "I give her an apple.",
-        "audio": "audio/feb4c078cc128e8cf86b2b45.wav"
+        "audio": "audio/978c97a2902e8e5678b3d3a3.wav"
       },
       {
         "zh": "她说：“苹果很甜！”",
         "pinyin": "Tā shuō: “Píngguǒ hěn tián!”",
         "en": "She says, “The apple is sweet!”",
-        "audio": "audio/fd26e0b91d6fd3cf01221b29.wav"
+        "audio": "audio/6676311cb138b335a20de9c2.wav"
       },
       {
         "zh": "我们吃苹果，也说说话。",
         "pinyin": "Wǒmen chī píngguǒ, yě shuō shuo huà.",
         "en": "We eat our apples and chat a little.",
-        "audio": "audio/40e4a5aa58f9966006334440.wav"
+        "audio": "audio/46bfaa798f6713d9d9367e6f.wav"
       },
       {
         "zh": "现在，茶不太热了。",
         "pinyin": "Xiànzài, chá bú tài rè le.",
         "en": "Now the tea is not too hot.",
-        "audio": "audio/af4d3d0917f3b68e3289a1f3.wav"
+        "audio": "audio/d71c3e24c7596938b98301fa.wav"
       },
       {
         "zh": "小月喝了茶，说：“很好喝！”",
         "pinyin": "Xiǎoyuè hē le chá, shuō: “Hěn hǎohē!”",
         "en": "Xiaoyue drinks the tea and says, “It tastes good!”",
-        "audio": "audio/461814025425c81cbb1c1c2c.wav"
+        "audio": "audio/1a304c9384e8289fcbbeccf6.wav"
       },
       {
         "zh": "我说：“明天，我们再一起喝茶吧！”",
         "pinyin": "Wǒ shuō: “Míngtiān, wǒmen zài yìqǐ hē chá ba!”",
         "en": "I say, “Let's have tea together again tomorrow!”",
-        "audio": "audio/1305818f4a06156fdb18f864.wav"
+        "audio": "audio/f2186c8be1e15a78a6788582.wav"
       }
     ],
     "title": "A cup of tea",
@@ -162,145 +162,145 @@ window.STORYTIME_STORIES = [
         "zh": "我有一只小猫。",
         "pinyin": "Wǒ yǒu yì zhī xiǎo māo.",
         "en": "I have a little cat.",
-        "audio": "audio/ca3edaeca4cd1b4619eb10ae.wav"
+        "audio": "audio/7aef20a3c94deb2a2b016120.wav"
       },
       {
         "zh": "它叫小白。",
         "pinyin": "Tā jiào Xiǎobái.",
         "en": "Its name is Xiaobai.",
-        "audio": "audio/221bdc3906c8c74c9cfeec0a.wav"
+        "audio": "audio/1418becaa5ff48d7a17466bd.wav"
       },
       {
         "zh": "小白很可爱。",
         "pinyin": "Xiǎobái hěn kě’ài.",
         "en": "Xiaobai is very cute.",
-        "audio": "audio/b362db373ed0e3bb19324632.wav"
+        "audio": "audio/218c5d64add2982e74d791aa.wav"
       },
       {
         "zh": "它喜欢在家里跑。",
         "pinyin": "Tā xǐhuan zài jiā lǐ pǎo.",
         "en": "It likes running around at home.",
-        "audio": "audio/269f915dbce1869c0a3a8672.wav"
+        "audio": "audio/adc570fd5df19df1bcf3e813.wav"
       },
       {
         "zh": "今天，我回家了。",
         "pinyin": "Jīntiān, wǒ huí jiā le.",
         "en": "Today, I come home.",
-        "audio": "audio/17c378bc040b5a3ad7cd6cdb.wav"
+        "audio": "audio/7cba38b2ae7635732cd742c4.wav"
       },
       {
         "zh": "家里很安静。",
         "pinyin": "Jiā lǐ hěn ānjìng.",
         "en": "The house is very quiet.",
-        "audio": "audio/1cf919129bfcc6c46d374f84.wav"
+        "audio": "audio/420199404ec4b456119cf0ff.wav"
       },
       {
         "zh": "小白在哪里？",
         "pinyin": "Xiǎobái zài nǎlǐ?",
         "en": "Where is Xiaobai?",
-        "audio": "audio/d04e64952733735ed1122793.wav"
+        "audio": "audio/452a28300a54dba195c4dfa3.wav"
       },
       {
         "zh": "我叫它的名字。",
         "pinyin": "Wǒ jiào tā de míngzi.",
         "en": "I call its name.",
-        "audio": "audio/2162d5c291d9736520a30d04.wav"
+        "audio": "audio/6e91a2a2bcfd8a96b940ad6b.wav"
       },
       {
         "zh": "小白没有来。",
         "pinyin": "Xiǎobái méiyǒu lái.",
         "en": "Xiaobai does not come.",
-        "audio": "audio/bc4f19031c0305c16ea5eb11.wav"
+        "audio": "audio/69ffd508d1528648b9a63072.wav"
       },
       {
         "zh": "我去厨房找它。",
         "pinyin": "Wǒ qù chúfáng zhǎo tā.",
         "en": "I go to the kitchen to look for it.",
-        "audio": "audio/ad4ad625d3e1c3465549a4f5.wav"
+        "audio": "audio/be2f1441f83f56b46f329925.wav"
       },
       {
         "zh": "我看了看桌子下面。",
         "pinyin": "Wǒ kàn le kan zhuōzi xiàmian.",
         "en": "I take a look under the table.",
-        "audio": "audio/037b7812f6c412bd02630f41.wav"
+        "audio": "audio/f0e2fcc4112ec58d38209634.wav"
       },
       {
         "zh": "桌子下面只有一把椅子。",
         "pinyin": "Zhuōzi xiàmian zhǐ yǒu yì bǎ yǐzi.",
         "en": "There is only a chair under the table.",
-        "audio": "audio/a33e4d3d841892e6b48be7a1.wav"
+        "audio": "audio/23f027dbaf0ba92d1156adf0.wav"
       },
       {
         "zh": "小白不在这里。",
         "pinyin": "Xiǎobái bú zài zhèlǐ.",
         "en": "Xiaobai is not here.",
-        "audio": "audio/d919b357046bc6c20164b258.wav"
+        "audio": "audio/214bf433a6953879d11639cc.wav"
       },
       {
         "zh": "妈妈在厨房喝水。",
         "pinyin": "Māma zài chúfáng hē shuǐ.",
         "en": "Mom is drinking water in the kitchen.",
-        "audio": "audio/404a362669e4f4b76f08ad09.wav"
+        "audio": "audio/f0b1989dbd6a7a4eac3819eb.wav"
       },
       {
         "zh": "我问：“妈妈，小白在哪里？”",
         "pinyin": "Wǒ wèn: “Māma, Xiǎobái zài nǎlǐ?”",
         "en": "I ask, “Mom, where is Xiaobai?”",
-        "audio": "audio/d4d5dff41b93a5a7cfeb1832.wav"
+        "audio": "audio/986eee27b71bbdabf4c605ca.wav"
       },
       {
         "zh": "妈妈说：“去你的房间看看吧。”",
         "pinyin": "Māma shuō: “Qù nǐ de fángjiān kàn kan ba.”",
         "en": "Mom says, “Go and look in your room.”",
-        "audio": "audio/ca898dede3e47b0445015554.wav"
+        "audio": "audio/029c87c75c2f5b096a0cb6ba.wav"
       },
       {
         "zh": "我走到房间门口。",
         "pinyin": "Wǒ zǒu dào fángjiān ménkǒu.",
         "en": "I walk to my bedroom door.",
-        "audio": "audio/e2c1cdb95a7ef89ae8ad34ed.wav"
+        "audio": "audio/e2b56e5566a36d2e882580fd.wav"
       },
       {
         "zh": "我听见了小猫的声音。",
         "pinyin": "Wǒ tīngjiàn le xiǎo māo de shēngyīn.",
         "en": "I hear the little cat.",
-        "audio": "audio/f61c95f60e8179be9143711d.wav"
+        "audio": "audio/d88b5ac749475304116e1560.wav"
       },
       {
         "zh": "我开门，走进房间。",
         "pinyin": "Wǒ kāi mén, zǒu jìn fángjiān.",
         "en": "I open the door and walk into the room.",
-        "audio": "audio/86b860dcbc8b9972ea9bc29e.wav"
+        "audio": "audio/53e252e49c89e6fc5547d608.wav"
       },
       {
         "zh": "啊，小白在我的床上！",
         "pinyin": "À, Xiǎobái zài wǒ de chuáng shang!",
         "en": "Ah, Xiaobai is on my bed!",
-        "audio": "audio/9a2cf6f1c8f884fcfa937617.wav"
+        "audio": "audio/d58a42ee6b6b76d9d0f3a052.wav"
       },
       {
         "zh": "它看了看我。",
         "pinyin": "Tā kàn le kan wǒ.",
         "en": "It takes a look at me.",
-        "audio": "audio/282f5e009c30c22445fcc7b2.wav"
+        "audio": "audio/16038ad51fea3f589f54b0e8.wav"
       },
       {
         "zh": "我说：“你在这里啊！”",
         "pinyin": "Wǒ shuō: “Nǐ zài zhèlǐ a!”",
         "en": "I say, “So this is where you are!”",
-        "audio": "audio/bcdfa3eddabdd6ebfa029143.wav"
+        "audio": "audio/27b34edfc46deca9d9919ea9.wav"
       },
       {
         "zh": "小白没有起来，又睡了。",
         "pinyin": "Xiǎobái méiyǒu qǐlái, yòu shuì le.",
         "en": "Xiaobai does not get up and goes back to sleep.",
-        "audio": "audio/f95387570db88e1ccf2e084d.wav"
+        "audio": "audio/d3f40610d94f287ace5febfb.wav"
       },
       {
         "zh": "我坐在床边，安静地看书。",
         "pinyin": "Wǒ zuò zài chuáng biān, ānjìng de kàn shū.",
         "en": "I sit beside the bed and read quietly.",
-        "audio": "audio/6e86694c73092cd739aa8d1d.wav"
+        "audio": "audio/c29e490d5847ce3eb9b7650f.wav"
       }
     ],
     "title": "Where is the cat?",
@@ -317,121 +317,121 @@ window.STORYTIME_STORIES = [
         "zh": "下午，小林正在看书，突然听见有人敲门。",
         "pinyin": "Xiàwǔ, Xiǎolín zhèngzài kàn shū, tūrán tīngjiàn yǒu rén qiāo mén.",
         "en": "In the afternoon, Xiaolin is reading when he suddenly hears someone knocking.",
-        "audio": "audio/741d760cb4fd18bc46f8a5cb.wav"
+        "audio": "audio/d10afaf93724a3f24a235f7e.wav"
       },
       {
         "zh": "他打开门，看见朋友小月站在外面。",
         "pinyin": "Tā dǎkāi mén, kànjiàn péngyou Xiǎoyuè zhàn zài wàimian.",
         "en": "He opens the door and sees his friend Xiaoyue standing outside.",
-        "audio": "audio/0e1cb025ee6d1601a3a3d07f.wav"
+        "audio": "audio/2ed02fb36486627635c1c717.wav"
       },
       {
         "zh": "她的头发湿了，手里拿着一把坏了的伞。",
         "pinyin": "Tā de tóufa shī le, shǒu lǐ ná zhe yì bǎ huài le de sǎn.",
         "en": "Her hair is wet, and she is holding a broken umbrella.",
-        "audio": "audio/1ff02da69d0f0b4b8c5cd186.wav"
+        "audio": "audio/bf4e446c529966142534625e.wav"
       },
       {
         "zh": "“风太大了，我的伞坏了！”",
         "pinyin": "“Fēng tài dà le, wǒ de sǎn huài le!”",
         "en": "“The wind was so strong that my umbrella broke!”",
-        "audio": "audio/6c4c6e3eb34519acf7c224e1.wav"
+        "audio": "audio/6d91a8243df4b7692dabdce6.wav"
       },
       {
         "zh": "小林请她进来，又给她拿了一条干毛巾。",
         "pinyin": "Xiǎolín qǐng tā jìnlái, yòu gěi tā ná le yì tiáo gān máojīn.",
         "en": "Xiaolin invites her in and gets her a dry towel.",
-        "audio": "audio/da20f33bf72c435b34671f8c.wav"
+        "audio": "audio/5e3f0f6027308c543efc4e1f.wav"
       },
       {
         "zh": "小月坐下来，说自己又冷又渴。",
         "pinyin": "Xiǎoyuè zuò xiàlái, shuō zìjǐ yòu lěng yòu kě.",
         "en": "Xiaoyue sits down and says she is both cold and thirsty.",
-        "audio": "audio/f8ba3f2a064824c6602246d5.wav"
+        "audio": "audio/8fc51c5c09018ad775a996ef.wav"
       },
       {
         "zh": "小林去厨房，准备给她泡一杯热茶。",
         "pinyin": "Xiǎolín qù chúfáng, zhǔnbèi gěi tā pào yì bēi rè chá.",
         "en": "Xiaolin goes to the kitchen to make her a cup of hot tea.",
-        "audio": "audio/2ba8d73e40b89d724ae0623d.wav"
+        "audio": "audio/663b891326f76c1887e5519a.wav"
       },
       {
         "zh": "他拿出一个蓝杯子，却发现杯子里有一张小纸条。",
         "pinyin": "Tā ná chū yí ge lán bēizi, què fāxiàn bēizi lǐ yǒu yì zhāng xiǎo zhǐtiáo.",
         "en": "He takes out a blue cup, but discovers a little note inside it.",
-        "audio": "audio/a16dff94e86508ad14272943.wav"
+        "audio": "audio/eea9a0138dfb7dcf7bb52d5a.wav"
       },
       {
         "zh": "纸条上写着：“这是小月的杯子。”",
         "pinyin": "Zhǐtiáo shang xiě zhe: “Zhè shì Xiǎoyuè de bēizi.”",
         "en": "The note says, “This is Xiaoyue's cup.”",
-        "audio": "audio/51f4d2ae96872ac94afa1116.wav"
+        "audio": "audio/152660bc3f48390bfe3ea0e0.wav"
       },
       {
         "zh": "原来，上次小月来喝茶时，开玩笑地留下了这张纸条。",
         "pinyin": "Yuánlái, shàng cì Xiǎoyuè lái hē chá shí, kāi wánxiào de liú xià le zhè zhāng zhǐtiáo.",
         "en": "It turns out Xiaoyue left the note as a joke the last time she came for tea.",
-        "audio": "audio/f15e5ddeed1f84d05d108e02.wav"
+        "audio": "audio/01704a7fb4bc169e956af823.wav"
       },
       {
         "zh": "小林把纸条拿给她看，两个人都笑了。",
         "pinyin": "Xiǎolín bǎ zhǐtiáo ná gěi tā kàn, liǎng ge rén dōu xiào le.",
         "en": "Xiaolin shows her the note, and they both laugh.",
-        "audio": "audio/2030e7fcbf722542abd97149.wav"
+        "audio": "audio/5f366ef72ed1fcf715321ed9.wav"
       },
       {
         "zh": "他洗好杯子，倒上热茶，放在她面前。",
         "pinyin": "Tā xǐ hǎo bēizi, dào shàng rè chá, fàng zài tā miànqián.",
         "en": "He washes the cup, pours in hot tea, and sets it in front of her.",
-        "audio": "audio/eab0673bde9cb5c5ee957746.wav"
+        "audio": "audio/c52678cd14dc4f06559061b7.wav"
       },
       {
         "zh": "“茶很热，先吃点面包吧。”",
         "pinyin": "“Chá hěn rè, xiān chī diǎn miànbāo ba.”",
         "en": "“The tea is hot. Have some bread first.”",
-        "audio": "audio/a1315795707a8d720604cf36.wav"
+        "audio": "audio/a4457828f5754ca286998a52.wav"
       },
       {
         "zh": "他们一边吃面包，一边聊最近的生活。",
         "pinyin": "Tāmen yìbiān chī miànbāo, yìbiān liáo zuìjìn de shēnghuó.",
         "en": "They eat bread while talking about their lives lately.",
-        "audio": "audio/c076d6a6a9a1a4024b6346c6.wav"
+        "audio": "audio/0e23b7b6d7577a4e29e0783f.wav"
       },
       {
         "zh": "小月说，这个星期工作很忙，她每天都很累。",
         "pinyin": "Xiǎoyuè shuō, zhège xīngqī gōngzuò hěn máng, tā měitiān dōu hěn lèi.",
         "en": "Xiaoyue says work has been busy this week, and she has been tired every day.",
-        "audio": "audio/018ca85a17e2e64473f829a6.wav"
+        "audio": "audio/459bdf3f7f89c477784e07fd.wav"
       },
       {
         "zh": "小林没有急着说话，只是认真地听着。",
         "pinyin": "Xiǎolín méiyǒu jí zhe shuōhuà, zhǐshì rènzhēn de tīng zhe.",
         "en": "Xiaolin does not rush to speak; he simply listens carefully.",
-        "audio": "audio/f36449a2110aa85d0b703e13.wav"
+        "audio": "audio/8e8864b50f8061c6814edd5a.wav"
       },
       {
         "zh": "虽然外面还在下雨，但是小月已经觉得暖和多了。",
         "pinyin": "Suīrán wàimian hái zài xià yǔ, dànshì Xiǎoyuè yǐjīng juéde nuǎnhuo duō le.",
         "en": "Although it is still raining outside, Xiaoyue already feels much warmer.",
-        "audio": "audio/8ed1ac04734fdeebfd6a045c.wav"
+        "audio": "audio/1ecb9e972d746533a9792d83.wav"
       },
       {
         "zh": "雨小了以后，小林找了一把好伞借给她。",
         "pinyin": "Yǔ xiǎo le yǐhòu, Xiǎolín zhǎo le yì bǎ hǎo sǎn jiè gěi tā.",
         "en": "After the rain eases, Xiaolin finds a good umbrella to lend her.",
-        "audio": "audio/a248365210dbc7df3d3266fb.wav"
+        "audio": "audio/9ef38e29c8184876d2cf27cd.wav"
       },
       {
         "zh": "小月说：“明天我来还伞，也来看看我的杯子。”",
         "pinyin": "Xiǎoyuè shuō: “Míngtiān wǒ lái huán sǎn, yě lái kàn kan wǒ de bēizi.”",
         "en": "Xiaoyue says, “Tomorrow I'll return the umbrella and visit my cup, too.”",
-        "audio": "audio/9870be348ea231ebe29b85de.wav"
+        "audio": "audio/b899c793c1f96923eb0ee97a.wav"
       },
       {
         "zh": "小林笑着回答：“好，我给你准备茶。”",
         "pinyin": "Xiǎolín xiào zhe huídá: “Hǎo, wǒ gěi nǐ zhǔnbèi chá.”",
         "en": "Xiaolin replies with a smile, “All right. I'll have tea ready for you.”",
-        "audio": "audio/cf050027472e2c819693ef50.wav"
+        "audio": "audio/9fd2fc04a5f55709e75b30ff.wav"
       }
     ],
     "title": "A cup of tea",
@@ -448,121 +448,121 @@ window.STORYTIME_STORIES = [
         "zh": "每天回家，小白都会跑到门口来迎接我。",
         "pinyin": "Měitiān huí jiā, Xiǎobái dōu huì pǎo dào ménkǒu lái yíngjiē wǒ.",
         "en": "Every day when I come home, Xiaobai runs to the door to greet me.",
-        "audio": "audio/80541568b597805d28b3cf1b.wav"
+        "audio": "audio/3f90284160073d0970113bb0.wav"
       },
       {
         "zh": "它是一只白色的小猫，最喜欢跟着我走来走去。",
         "pinyin": "Tā shì yì zhī báisè de xiǎo māo, zuì xǐhuan gēn zhe wǒ zǒu lái zǒu qù.",
         "en": "It is a little white cat whose favorite thing is following me around.",
-        "audio": "audio/bb0ab60712618039adb49aa3.wav"
+        "audio": "audio/88734714133be55750166007.wav"
       },
       {
         "zh": "可是今天，门口没有它的影子。",
         "pinyin": "Kěshì jīntiān, ménkǒu méiyǒu tā de yǐngzi.",
         "en": "But today, there is no sign of it at the door.",
-        "audio": "audio/8ee09c3001a1944bb74e3255.wav"
+        "audio": "audio/7e1441b668f4f64f15dd0e7c.wav"
       },
       {
         "zh": "我叫了好几次，它都没有出现。",
         "pinyin": "Wǒ jiào le hǎo jǐ cì, tā dōu méiyǒu chūxiàn.",
         "en": "I call several times, but it does not appear.",
-        "audio": "audio/174a7bb4f049e12c4db52c11.wav"
+        "audio": "audio/9e3d3ebe7739b1bd894b3e1c.wav"
       },
       {
         "zh": "我先去厨房，看见它的水碗还在桌子旁边。",
         "pinyin": "Wǒ xiān qù chúfáng, kànjiàn tā de shuǐwǎn hái zài zhuōzi pángbiān.",
         "en": "I go to the kitchen first and see its water bowl still beside the table.",
-        "audio": "audio/f350dea57f53ea957fad9632.wav"
+        "audio": "audio/5b5ee21c38bdd337d2140efc.wav"
       },
       {
         "zh": "我弯下腰，看了看桌子下面。",
         "pinyin": "Wǒ wān xià yāo, kàn le kan zhuōzi xiàmian.",
         "en": "I bend down and look under the table.",
-        "audio": "audio/3b37ce9121f178a5d52d1d6e.wav"
+        "audio": "audio/354bfe9e23c3ed2a7216cd64.wav"
       },
       {
         "zh": "那里只有一个小球，没有小猫。",
         "pinyin": "Nàlǐ zhǐ yǒu yí ge xiǎo qiú, méiyǒu xiǎo māo.",
         "en": "There is only a little ball there, not a cat.",
-        "audio": "audio/8ce669dd52284166b968aa0e.wav"
+        "audio": "audio/d09a52c29b71f3419bc49a73.wav"
       },
       {
         "zh": "接着，我到客厅里找，也没有找到它。",
         "pinyin": "Jiēzhe, wǒ dào kètīng lǐ zhǎo, yě méiyǒu zhǎo dào tā.",
         "en": "Next, I search the living room, but do not find it there either.",
-        "audio": "audio/9a104bb8297d99b6b66f4710.wav"
+        "audio": "audio/2898dc07796e15957ee3c9bc.wav"
       },
       {
         "zh": "我开始担心，是不是早上出门时忘了关门。",
         "pinyin": "Wǒ kāishǐ dānxīn, shì bu shì zǎoshang chū mén shí wàng le guān mén.",
         "en": "I start to worry that I may have forgotten to close the door that morning.",
-        "audio": "audio/4f44ab3356afbaacd851ff20.wav"
+        "audio": "audio/cc9288092d515eee1b258c83.wav"
       },
       {
         "zh": "妈妈看见我着急的样子，就问我在找什么。",
         "pinyin": "Māma kànjiàn wǒ zháojí de yàngzi, jiù wèn wǒ zài zhǎo shénme.",
         "en": "Mom sees how worried I look and asks what I am looking for.",
-        "audio": "audio/7133f6e693007ecb134c6a98.wav"
+        "audio": "audio/134abda15f38f3a0a7ad321f.wav"
       },
       {
         "zh": "“小白不见了，我找不到它。”",
         "pinyin": "“Xiǎobái bú jiàn le, wǒ zhǎo bu dào tā.”",
         "en": "“Xiaobai is missing. I can't find it.”",
-        "audio": "audio/ff6a557aec39f6563ba19500.wav"
+        "audio": "audio/bcfd958b127531c0fe0c420f.wav"
       },
       {
         "zh": "妈妈说：“别担心，我刚才还看见它了。”",
         "pinyin": "Māma shuō: “Bié dānxīn, wǒ gāngcái hái kànjiàn tā le.”",
         "en": "Mom says, “Don't worry. I saw it just a little while ago.”",
-        "audio": "audio/919bb0191b79abc9eada776e.wav"
+        "audio": "audio/5670783d4a8695a008a4667a.wav"
       },
       {
         "zh": "她指了指我的房间，让我去那里看看。",
         "pinyin": "Tā zhǐ le zhǐ wǒ de fángjiān, ràng wǒ qù nàlǐ kàn kan.",
         "en": "She points toward my room and tells me to look there.",
-        "audio": "audio/7d72dd64c5bbc79f27c46cc3.wav"
+        "audio": "audio/5b4d044943b58e5bc68c2459.wav"
       },
       {
         "zh": "我刚走到门口，就听见里面传来一声猫叫。",
         "pinyin": "Wǒ gāng zǒu dào ménkǒu, jiù tīngjiàn lǐmian chuán lái yì shēng māo jiào.",
         "en": "As soon as I reach the door, I hear a meow from inside.",
-        "audio": "audio/4698a4ba135b523614b33a2d.wav"
+        "audio": "audio/7e4f8883ad5b88af76211502.wav"
       },
       {
         "zh": "我轻轻推开门，看见床上的被子动了一下。",
         "pinyin": "Wǒ qīngqīng tuī kāi mén, kànjiàn chuáng shang de bèizi dòng le yí xià.",
         "en": "I gently push the door open and see the quilt on my bed move a little.",
-        "audio": "audio/8eba2a9eb090660c2b7b7309.wav"
+        "audio": "audio/9e6b519339789dc97741b83d.wav"
       },
       {
         "zh": "原来，小白躲在被子下面，睡得正舒服呢。",
         "pinyin": "Yuánlái, Xiǎobái duǒ zài bèizi xiàmian, shuì de zhèng shūfu ne.",
         "en": "It turns out Xiaobai is hiding under the quilt, sleeping very comfortably.",
-        "audio": "audio/646b085f29bdcf2078ae5202.wav"
+        "audio": "audio/95027f5c23115c9f78010828.wav"
       },
       {
         "zh": "我坐到床边，它只看了我一眼。",
         "pinyin": "Wǒ zuò dào chuáng biān, tā zhǐ kàn le wǒ yì yǎn.",
         "en": "I sit beside the bed, and it gives me just one glance.",
-        "audio": "audio/eb8472c0d673d2d71733a68c.wav"
+        "audio": "audio/82d96805710a79e8c4843561.wav"
       },
       {
         "zh": "“小白，你让我找了这么久！”",
         "pinyin": "“Xiǎobái, nǐ ràng wǒ zhǎo le zhème jiǔ!”",
         "en": "“Xiaobai, you made me search for so long!”",
-        "audio": "audio/a940e8361455eb359369439a.wav"
+        "audio": "audio/c96f0ecb3b07882cb3583bf8.wav"
       },
       {
         "zh": "它没有理我，又把头放了下去。",
         "pinyin": "Tā méiyǒu lǐ wǒ, yòu bǎ tóu fàng le xiàqù.",
         "en": "It ignores me and puts its head back down.",
-        "audio": "audio/456bc3581225896ce6b4f08d.wav"
+        "audio": "audio/26ac736e7f3883149f24e1e2.wav"
       },
       {
         "zh": "我终于放心了，拿起书，陪它安静地坐了一会儿。",
         "pinyin": "Wǒ zhōngyú fàngxīn le, ná qǐ shū, péi tā ānjìng de zuò le yíhuìr.",
         "en": "Finally relieved, I pick up a book and sit quietly with it for a while.",
-        "audio": "audio/f229288c90d19e40507333e7.wav"
+        "audio": "audio/ed3308fb750eba09fa9a3556.wav"
       }
     ],
     "title": "Where is the cat?",
@@ -579,109 +579,109 @@ window.STORYTIME_STORIES = [
         "zh": "雨声渐密，小林合上书，把水壶重新放回炉上。",
         "pinyin": "Yǔshēng jiàn mì, Xiǎolín hé shàng shū, bǎ shuǐhú chóngxīn fàng huí lú shang.",
         "en": "As the rain grows heavier, Xiaolin closes his book and puts the kettle back on the stove.",
-        "audio": "audio/bbea706d655ab98953e2260d.wav"
+        "audio": "audio/e58423bb0c25ed928ce1a7c2.wav"
       },
       {
         "zh": "门铃响起时，他还以为是邻居来借东西。",
         "pinyin": "Ménlíng xiǎng qǐ shí, tā hái yǐwéi shì línjū lái jiè dōngxi.",
         "en": "When the doorbell rings, he assumes a neighbor has come to borrow something.",
-        "audio": "audio/831bce5b33771832e5a0e6f9.wav"
+        "audio": "audio/648eed33e66da434be14c1a4.wav"
       },
       {
         "zh": "站在门外的却是小月，湿透的伞歪歪斜斜地垂在她手里。",
         "pinyin": "Zhàn zài mén wài de què shì Xiǎoyuè, shī tòu de sǎn wāiwāixiéxié de chuí zài tā shǒu lǐ.",
         "en": "Instead, Xiaoyue stands outside, a soaked umbrella hanging crookedly from her hand.",
-        "audio": "audio/0f297aa3138ba79f94fb827a.wav"
+        "audio": "audio/46f7e12096932f726166f567.wav"
       },
       {
         "zh": "她神情疲惫，却只说自己恰好路过，想进来躲一会儿雨。",
         "pinyin": "Tā shénqíng píbèi, què zhǐ shuō zìjǐ qiàhǎo lùguò, xiǎng jìnlái duǒ yíhuìr yǔ.",
         "en": "She looks exhausted, but says only that she happened to be passing by and wants to shelter from the rain.",
-        "audio": "audio/73268efb0c6e4e0afdfbf704.wav"
+        "audio": "audio/7c7d435948e2a74f5dc17c9d.wav"
       },
       {
         "zh": "小林接过那把坏伞，没有追问，把干毛巾递给了她。",
         "pinyin": "Xiǎolín jiē guò nà bǎ huài sǎn, méiyǒu zhuīwèn, bǎ gān máojīn dì gěi le tā.",
         "en": "Xiaolin takes the broken umbrella without pressing her and hands her a dry towel.",
-        "audio": "audio/92d10e59a1a6fade5cd8af07.wav"
+        "audio": "audio/a6a6e00fa97dbb3a21835f7c.wav"
       },
       {
         "zh": "拿杯子时，他发现蓝杯底下还压着一张字迹歪斜的小纸条。",
         "pinyin": "Ná bēizi shí, tā fāxiàn lán bēi dǐxia hái yā zhe yì zhāng zìjì wāixié de xiǎo zhǐtiáo.",
         "en": "When fetching the cups, he discovers a small note in crooked handwriting still tucked beneath the blue one.",
-        "audio": "audio/912eb00fc5b4cfd8222e9df3.wav"
+        "audio": "audio/80e36eb5223a55f3ce939730.wav"
       },
       {
         "zh": "“这是小月的杯子”，是她上次来时随手写下的玩笑。",
         "pinyin": "“Zhè shì Xiǎoyuè de bēizi”, shì tā shàng cì lái shí suíshǒu xiě xià de wánxiào.",
         "en": "“This is Xiaoyue's cup” was a joke she had scribbled on her last visit.",
-        "audio": "audio/8f39df8b0f74de45c8d31782.wav"
+        "audio": "audio/751745c2b33dbadd5f6af23f.wav"
       },
       {
         "zh": "他把纸条放到桌上，将一杯热茶轻轻推到她面前。",
         "pinyin": "Tā bǎ zhǐtiáo fàng dào zhuō shang, jiāng yì bēi rè chá qīngqīng tuī dào tā miànqián.",
         "en": "He puts the note on the table and gently slides a cup of hot tea toward her.",
-        "audio": "audio/2985a0f6b83f84ec03bad052.wav"
+        "audio": "audio/437eaeba3a6b6be234b3aafb.wav"
       },
       {
         "zh": "小月盯着自己的字看了一会儿，紧绷的神情终于松动了一点。",
         "pinyin": "Xiǎoyuè dīng zhe zìjǐ de zì kàn le yíhuìr, jǐnbēng de shénqíng zhōngyú sōngdòng le yì diǎn.",
         "en": "Xiaoyue studies her own handwriting for a while, and her tense expression finally softens a little.",
-        "audio": "audio/2772aa57de88f3ad456630af.wav"
+        "audio": "audio/6cf8291bef31ca7180d4c5f3.wav"
       },
       {
         "zh": "她原本准备好的那句“我没事”，也没有再说出口。",
         "pinyin": "Tā yuánběn zhǔnbèi hǎo de nà jù “Wǒ méi shì”, yě méiyǒu zài shuō chū kǒu.",
         "en": "The words “I'm fine,” which she had prepared to say, never leave her lips.",
-        "audio": "audio/51e30c6c2c7306476d94af82.wav"
+        "audio": "audio/5464637520217c21c5cc3e73.wav"
       },
       {
         "zh": "小林在对面坐下，心想，与其急着安慰，不如给彼此留一点沉默的余地。",
         "pinyin": "Xiǎolín zài duìmiàn zuò xià, xīn xiǎng, yǔqí jí zhe ānwèi, bùrú gěi bǐcǐ liú yì diǎn chénmò de yúdì.",
         "en": "Xiaolin sits opposite her, thinking that rather than rush to offer comfort, it is better to leave each other some room for silence.",
-        "audio": "audio/4f93b8830e4b50852909a10e.wav"
+        "audio": "audio/79bff0723641ca4c222d1dcc.wav"
       },
       {
         "zh": "过了好一会儿，小月才说起最近的工作，以及那些一直不知该向谁诉说的烦恼。",
         "pinyin": "Guò le hǎo yíhuìr, Xiǎoyuè cái shuō qǐ zuìjìn de gōngzuò, yǐjí nàxiē yìzhí bù zhī gāi xiàng shéi sùshuō de fánnǎo.",
         "en": "Only after a long while does Xiaoyue begin talking about work and the worries she has not known whom to tell.",
-        "audio": "audio/29c01073ce6efc7d3a30638f.wav"
+        "audio": "audio/0eb435177aea4df8e32df0a9.wav"
       },
       {
         "zh": "他耐心地听着，偶尔问一句，并不急于替她安排答案。",
         "pinyin": "Tā nàixīn de tīng zhe, ǒu’ěr wèn yí jù, bìng bù jí yú tì tā ānpái dá’àn.",
         "en": "He listens patiently, asking an occasional question without rushing to supply her with answers.",
-        "audio": "audio/f46729e25f9f0b712bc163ea.wav"
+        "audio": "audio/0449ac153ebc7335c2b8e20b.wav"
       },
       {
         "zh": "窗外的雨渐渐小了，杯里的茶也凉了，两个人却都没有起身。",
         "pinyin": "Chuāng wài de yǔ jiànjiàn xiǎo le, bēi lǐ de chá yě liáng le, liǎng ge rén què dōu méiyǒu qǐshēn.",
         "en": "The rain outside gradually eases and the tea cools, but neither of them gets up.",
-        "audio": "audio/3b9bedfa6017b787ee4293bc.wav"
+        "audio": "audio/45622cd9d64244c8766ecb83.wav"
       },
       {
         "zh": "临走时，小月拿起桌上的纸条，问他能不能继续替她保管那个杯子。",
         "pinyin": "Lín zǒu shí, Xiǎoyuè ná qǐ zhuō shang de zhǐtiáo, wèn tā néng bu néng jìxù tì tā bǎoguǎn nà ge bēizi.",
         "en": "As she is leaving, Xiaoyue picks up the note and asks whether he can keep looking after her cup.",
-        "audio": "audio/0b00bf35fe3703414cf19c98.wav"
+        "audio": "audio/f589dc9edf34c004870d3c6a.wav"
       },
       {
         "zh": "小林递给她一把好伞，说：“杯子一直都在，下次不用等下雨再来。”",
         "pinyin": "Xiǎolín dì gěi tā yì bǎ hǎo sǎn, shuō: “Bēizi yìzhí dōu zài, xià cì bú yòng děng xià yǔ zài lái.”",
         "en": "Xiaolin hands her a good umbrella and says, “Your cup is always here. Next time, you don't have to wait for rain to visit.”",
-        "audio": "audio/cfcdab997fe4504e23cb3cff.wav"
+        "audio": "audio/d246f0dc060b22f485cc56e9.wav"
       },
       {
         "zh": "两人不约而同地笑了，她这才发现，自己一直在寻找的其实只是一个可以留下来的借口。",
         "pinyin": "Liǎng rén bù yuē ér tóng de xiào le, tā zhè cái fāxiàn, zìjǐ yìzhí zài xúnzhǎo de qíshí zhǐshì yí ge kěyǐ liú xiàlái de jièkǒu.",
         "en": "They smile at the same moment, and she realizes that what she has been seeking all along is simply an excuse to stay.",
-        "audio": "audio/7f74cb0e9ed3477a12d9ec98.wav"
+        "audio": "audio/5cb26d0038664ce9f0c156e2.wav"
       },
       {
         "zh": "门关上后，小林洗好蓝杯子，把那张纸条重新放在了下面。",
         "pinyin": "Mén guān shàng hòu, Xiǎolín xǐ hǎo lán bēizi, bǎ nà zhāng zhǐtiáo chóngxīn fàng zài le xiàmian.",
         "en": "After the door closes, Xiaolin washes the blue cup and puts the note beneath it again.",
-        "audio": "audio/2d1c736fb17bd92438f55f4b.wav"
+        "audio": "audio/7e27f61c69888ca1fa962a2d.wav"
       }
     ],
     "title": "A cup of tea",
@@ -698,109 +698,109 @@ window.STORYTIME_STORIES = [
         "zh": "推开家门时，屋里异常安静，我才发现自己早已习惯了那声迎接我的猫叫。",
         "pinyin": "Tuī kāi jiā mén shí, wū lǐ yìcháng ānjìng, wǒ cái fāxiàn zìjǐ zǎoyǐ xíguàn le nà shēng yíngjiē wǒ de māo jiào.",
         "en": "Opening the door to an unusually quiet home, I realize how accustomed I have become to that welcoming meow.",
-        "audio": "audio/05a22f3c112c5a7c49d6cd50.wav"
+        "audio": "audio/05bbc921896060fbb225edf5.wav"
       },
       {
         "zh": "小白平时总嫌我回来得晚，今天却连一点动静也没有。",
         "pinyin": "Xiǎobái píngshí zǒng xián wǒ huílái de wǎn, jīntiān què lián yì diǎn dòngjing yě méiyǒu.",
         "en": "Xiaobai usually seems to resent my coming home late, yet today there is not even the slightest sound.",
-        "audio": "audio/26bb0534fcec7373f5378b12.wav"
+        "audio": "audio/ba1e73f137a93e261da054c4.wav"
       },
       {
         "zh": "我放下包，先叫了它两声，随后又去厨房看了看。",
         "pinyin": "Wǒ fàng xià bāo, xiān jiào le tā liǎng shēng, suíhòu yòu qù chúfáng kàn le kan.",
         "en": "I put down my bag, call to it twice, and then go to check the kitchen.",
-        "audio": "audio/e1369beaf01161b988eb24ac.wav"
+        "audio": "audio/6d563167a90a97bdd540cda4.wav"
       },
       {
         "zh": "食盆原封不动，窗户也关得严严实实，它究竟能躲到哪里去？",
         "pinyin": "Shípén yuán fēng bú dòng, chuānghu yě guān de yányánshíshí, tā jiūjìng néng duǒ dào nǎlǐ qù?",
         "en": "The food bowl is untouched and the windows are tightly shut. Where on earth could it be hiding?",
-        "audio": "audio/a30a8f65c1c6984f8389da34.wav"
+        "audio": "audio/83352a3c73839f5eadac8fe7.wav"
       },
       {
         "zh": "桌下那个它最爱的小球滚到了墙角，旁边却没有熟悉的白色身影。",
         "pinyin": "Zhuō xià nà ge tā zuì ài de xiǎo qiú gǔn dào le qiángjiǎo, pángbiān què méiyǒu shúxī de báisè shēnyǐng.",
         "en": "Its favorite little ball has rolled from under the table into a corner, but the familiar white figure is nowhere beside it.",
-        "audio": "audio/8c6f091f0e4464852d9ddf31.wav"
+        "audio": "audio/9f4e57322912b48e1ff8b8d1.wav"
       },
       {
         "zh": "我越找越着急，连平时从不留意的角落也仔细检查了一遍。",
         "pinyin": "Wǒ yuè zhǎo yuè zháojí, lián píngshí cóng bù liúyì de jiǎoluò yě zǐxì jiǎnchá le yí biàn.",
         "en": "Growing more anxious as I search, I carefully check even the corners I usually overlook.",
-        "audio": "audio/e84ea5164be7ee726482b47a.wav"
+        "audio": "audio/5ec25b5d04428bc5c437f885.wav"
       },
       {
         "zh": "早上出门时，我好像接了一个电话，会不会就是那时忘了关门？",
         "pinyin": "Zǎoshang chū mén shí, wǒ hǎoxiàng jiē le yí ge diànhuà, huì bu huì jiù shì nà shí wàng le guān mén?",
         "en": "I seem to remember answering a call as I left that morning. Could that be when I forgot to shut the door?",
-        "audio": "audio/b00bb234b9dc171ec90c630e.wav"
+        "audio": "audio/862c37b2bf3c4907def09fe5.wav"
       },
       {
         "zh": "这个念头刚冒出来，我就忍不住责怪起自己的粗心。",
         "pinyin": "Zhège niàntou gāng mào chūlái, wǒ jiù rěn bu zhù zéguài qǐ zìjǐ de cūxīn.",
         "en": "As soon as the thought occurs to me, I cannot help blaming myself for being careless.",
-        "audio": "audio/be06064426586f53460e134a.wav"
+        "audio": "audio/168c286b0490c788df1cdbab.wav"
       },
       {
         "zh": "正准备出门继续找时，我忽然想起，昨天整理衣柜时曾把门留了一条缝。",
         "pinyin": "Zhèng zhǔnbèi chū mén jìxù zhǎo shí, wǒ hūrán xiǎng qǐ, zuótiān zhěnglǐ yīguì shí céng bǎ mén liú le yì tiáo fèng.",
         "en": "Just as I prepare to keep searching outside, I suddenly remember leaving the wardrobe door slightly open while tidying it yesterday.",
-        "audio": "audio/ab15c960b497036e0ba3e4d7.wav"
+        "audio": "audio/0f44b6812eec50cb1379e548.wav"
       },
       {
         "zh": "我停下脚步，屏住呼吸，卧室里果然传来了一阵细微的响动。",
         "pinyin": "Wǒ tíng xià jiǎobù, bǐng zhù hūxī, wòshì lǐ guǒrán chuán lái le yí zhèn xìwēi de xiǎngdòng.",
         "en": "I stop and hold my breath. Sure enough, a faint rustling comes from the bedroom.",
-        "audio": "audio/a3a952ded5bc7aea8fb6b84c.wav"
+        "audio": "audio/5a7d9437d494d5493c3bbaab.wav"
       },
       {
         "zh": "直到拉开衣柜，看见那对半睁的眼睛，我悬着的心才终于放了下来。",
         "pinyin": "Zhídào lā kāi yīguì, kànjiàn nà duì bàn zhēng de yǎnjing, wǒ xuán zhe de xīn cái zhōngyú fàng le xiàlái.",
         "en": "Only when I open the wardrobe and see those half-open eyes does my anxious heart finally settle.",
-        "audio": "audio/5fc987a131c6a79208062d69.wav"
+        "audio": "audio/a577b8806202a8645e03a936.wav"
       },
       {
         "zh": "它窝在我的旧毛衣上，一脸无辜，仿佛这一切都理所当然。",
         "pinyin": "Tā wō zài wǒ de jiù máoyī shang, yì liǎn wúgū, fǎngfú zhè yíqiè dōu lǐ suǒ dāng rán.",
         "en": "It is curled up on my old sweater, looking innocent, as though all of this were perfectly natural.",
-        "audio": "audio/c4347927253cc824b566290a.wav"
+        "audio": "audio/798174fae1683270e98a36fc.wav"
       },
       {
         "zh": "那件毛衣早已不合身，我昨天还犹豫着要不要把它送走。",
         "pinyin": "Nà jiàn máoyī zǎoyǐ bù héshēn, wǒ zuótiān hái yóuyù zhe yào bu yào bǎ tā sòng zǒu.",
         "en": "The sweater has not fitted me for a long time, and just yesterday I was wondering whether to give it away.",
-        "audio": "audio/a96cf7337786b63ead67c68e.wav"
+        "audio": "audio/1e476ea41eba506300e7839b.wav"
       },
       {
         "zh": "可小白刚到我家时，正是裹着这件毛衣，在我怀里睡着的。",
         "pinyin": "Kě Xiǎobái gāng dào wǒ jiā shí, zhèng shì guǒ zhe zhè jiàn máoyī, zài wǒ huái lǐ shuìzháo de.",
         "en": "Yet when Xiaobai first came to my home, it was wrapped in this very sweater when it fell asleep in my arms.",
-        "audio": "audio/4d174097103cad5d684377ac.wav"
+        "audio": "audio/714340c37577462d630bfc0d.wav"
       },
       {
         "zh": "原来，我早已不需要的东西，对它来说仍然是最安心的地方。",
         "pinyin": "Yuánlái, wǒ zǎoyǐ bù xūyào de dōngxi, duì tā lái shuō réngrán shì zuì ānxīn de dìfang.",
         "en": "It turns out that something I no longer need is still the place where it feels safest.",
-        "audio": "audio/06e4904908e121acb5160628.wav"
+        "audio": "audio/856041c9ce81f6d5f044d972.wav"
       },
       {
         "zh": "我把毛衣连同小猫一起轻轻抱出来，安置在床边的小篮子里。",
         "pinyin": "Wǒ bǎ máoyī liántóng xiǎo māo yìqǐ qīngqīng bào chūlái, ānzhì zài chuáng biān de xiǎo lánzi lǐ.",
         "en": "I gently lift out the sweater with the cat and settle them in a little basket beside the bed.",
-        "audio": "audio/6448598d2427ae0b7a7c94af.wav"
+        "audio": "audio/24e9503eb4340d3609293300.wav"
       },
       {
         "zh": "“这次不收走了，”我低声说，也不知道它有没有听懂。",
         "pinyin": "“Zhè cì bù shōu zǒu le,” wǒ dīshēng shuō, yě bù zhīdào tā yǒu méiyǒu tīng dǒng.",
         "en": "“I won't put it away this time,” I whisper, not knowing whether it understands.",
-        "audio": "audio/12c49fbaffd8cf3f10a5b92a.wav"
+        "audio": "audio/a569d76ec01920c50cc8195c.wav"
       },
       {
         "zh": "小白把头埋进毛衣里，安心地闭上眼睛，而我终于也能安静地坐下了。",
         "pinyin": "Xiǎobái bǎ tóu mái jìn máoyī lǐ, ānxīn de bì shàng yǎnjing, ér wǒ zhōngyú yě néng ānjìng de zuò xià le.",
         "en": "Xiaobai buries its head in the sweater and contentedly closes its eyes, and at last I, too, can sit down in peace.",
-        "audio": "audio/6a61fa1d6950aed0988795c4.wav"
+        "audio": "audio/7a61bd90b45ffc53bf8d6291.wav"
       }
     ],
     "title": "Where is the cat?",
