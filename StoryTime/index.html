@@ -5,11 +5,21 @@
 <meta name="theme-color" content="#f5f1e8"><meta name="description" content="Learn Mandarin through small stories. Listen, follow along, and grow at your own pace.">
 <title>StoryTime · A little Mandarin, a little story</title>
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icon-192.png"><link rel="stylesheet" href="styles.css">
-<script defer src="stories.js"></script><script defer src="app.js"></script>
+<script defer src="stories.js"></script><script defer src="app.js"></script><script defer src="listening.js"></script>
 </head>
 <body>
 <header class="topbar"><a class="brand" href="./index.html"><span class="brand-icon">文</span> StoryTime<span class="brand-note">MANDARIN, ONE STORY AT A TIME</span></a><nav><a href="../index.html">Hub ↗</a><button id="install" hidden>Install app</button></nav></header>
 <main>
+<nav class="mode-tabs" aria-label="Practice mode"><button id="stories-tab" aria-pressed="true" aria-controls="library">Read stories</button><button id="listening-tab" aria-pressed="false" aria-controls="listening">Listening practice</button></nav>
+<section id="listening" hidden aria-labelledby="listening-title">
+<div class="listening-heading"><p class="eyebrow">LISTEN FIRST. FIND THE MEANING.</p><h1 id="listening-title" tabindex="-1">A little listening.</h1><p class="muted">Hear a short passage, then choose what it means. The words stay hidden until you answer.</p></div>
+<div class="practice-settings"><label>Level<select id="listening-level"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option></select></label><label>Speed<select id="listening-speed"><option value="0.5">0.5×</option><option value="0.65">0.65×</option><option value="0.8" selected>0.8×</option><option value="1">1×</option></select></label></div>
+<p id="listening-note" class="muted"></p>
+<div class="listening-card"><p id="listening-progress" class="eyebrow"></p><div class="listen-stage"><span aria-hidden="true">♫</span><button id="listening-play" class="primary">▶ Listen</button><p id="listening-status" role="status">Listen to the whole passage to unlock the answers.</p></div>
+<h2 id="listening-question" tabindex="-1"></h2><div id="listening-choices" class="listening-choices" role="group" aria-labelledby="listening-question"></div>
+<p id="listening-feedback" role="status"></p><details id="listening-review" hidden><summary>Review transcript & translation</summary><div id="listening-transcript"></div></details>
+<button id="listening-next" class="primary" hidden>Next question →</button></div>
+</section>
 <section id="library">
 <div class="intro"><p class="eyebrow">SMALL STORIES. EVERYDAY DISCOVERIES.</p><h1>A little story.<br>A little more Mandarin.</h1><p>Listen slowly. Read along. Let a few familiar words<br class="desktop"> become a world you understand.</p><span class="intro-stamp" aria-hidden="true">故<br>事</span></div>
 <div class="library-heading"><div><p class="eyebrow">YOUR READING CORNER</p><h2>Find your next small adventure</h2></div><span id="read-count" class="muted"></span></div>
@@ -20,9 +30,18 @@
 <section id="reader" hidden>
 <button id="back" class="text-button">← Back to your stories</button>
 <div class="reader-layout"><article><p id="reader-level" class="eyebrow"></p><h1 id="reader-title" tabindex="-1"></h1><p id="reader-description" class="muted"></p><div id="sentences" class="sentences"></div><div class="finish-row"><button id="complete" class="primary">Mark as read ✓</button></div></article>
-<aside class="reading-settings"><p class="eyebrow">MAKE IT YOUR PACE</p><label>Story level<select id="reader-difficulty"></select></label><label>Reading support<select id="support"><option value="guided">Guided · pinyin + English</option><option value="pinyin">Practice · pinyin only</option><option value="hanzi">Challenge · Chinese only</option></select></label><label>Mandarin voice<select id="voice"></select></label><p class="small muted">Qwen3 narration is included for these stories and saved for offline listening. You can also choose a device voice.</p><label class="check"><input id="step-mode" type="checkbox"> Pause after each sentence</label><p class="small muted">Tap any sentence to listen from there. Pausing and resuming replays the current sentence.</p><p id="speech-message" role="status" class="small"></p></aside></div>
+<aside class="reading-settings"><p class="eyebrow">MAKE IT YOUR PACE</p><label>Story level<select id="reader-difficulty"></select></label><label>Reading support<select id="support"><option value="guided">Guided · pinyin + English</option><option value="pinyin">Practice · pinyin only</option><option value="hanzi">Challenge · Chinese only</option></select></label><label>Mandarin voice<select id="voice"></select></label><p class="small muted">Qwen3 narration is included for these stories and saved for offline listening. You can also choose a device voice.</p><label class="check"><input id="step-mode" type="checkbox"> Pause after each sentence</label><p class="small muted">Tap a word for pinyin, meanings, and word-by-word listening. Use the sentence play button to hear the whole sentence.</p><p id="speech-message" role="status" class="small"></p></aside></div>
 <div class="player"><div class="transport"><button id="previous" aria-label="Previous sentence">←</button><button id="play" class="primary">▶ Listen</button><button id="next" aria-label="Next sentence">→</button></div><div class="play-progress"><span id="position"></span><progress id="progress" value="0" max="1" aria-label="Story position"></progress></div><label class="speed">Speed <select id="speed"><option value="0.5">0.5×</option><option value="0.65">0.65×</option><option value="0.8">0.8×</option><option value="1">1×</option><option value="1.2">1.2×</option></select></label></div>
 </section>
 <p id="notice" class="notice" role="status" hidden></p>
+<dialog id="word-card" aria-labelledby="word-title">
+<button id="word-close" class="word-close" aria-label="Close word details">✕</button>
+<p class="eyebrow">ONE WORD AT A TIME</p><h2 id="word-title" lang="zh-CN"></h2>
+<p id="word-pinyin" lang="zh-Latn"></p><p class="small muted">Dictionary meanings</p><ul id="word-meanings"></ul>
+<p id="word-context" class="small muted"></p>
+<div class="word-actions"><button id="word-replay" class="primary">▶ Hear word</button><button id="word-from-here">Listen from here →</button></div>
+<div class="word-navigation"><button id="word-previous">← Previous word</button><button id="word-next">Next word →</button></div>
+<p class="dictionary-credit">Definitions adapted from <a href="https://www.mdbg.net/chinese/dictionary?page=cc-cedict" target="_blank" rel="noopener">CC-CEDICT</a>, MDBG and contributors · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>
+</dialog>
 </main><footer>StoryTime <span>Little by little, a whole new world.</span><button id="install-help" class="text-button">How to install</button></footer>
 </body></html>

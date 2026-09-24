@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from build_stories import ROOT, compile_library, parse_story
+from prepare_audio_speeds import find_rubberband, prepare_speeds
 
 MODEL = 'Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice'
 BASE_MODEL = 'Qwen/Qwen3-TTS-12Hz-1.7B-Base'
@@ -23,6 +24,7 @@ def main():
     parser.add_argument('--reference-text', help='Exact transcript of the reference recording')
     parser.add_argument('--device', default='auto')
     parser.add_argument('--batch-size', type=int, default=4)
+    parser.add_argument('--rubberband', help='Path to Rubber Band 4 for preparing slow playback')
     args = parser.parse_args()
     if args.list_voices:
         print('\n'.join(VOICES))
@@ -37,6 +39,7 @@ def main():
     reference_hash = hashlib.sha256(args.reference_audio.read_bytes()).hexdigest() if args.reference_audio else None
     if not 1 <= args.batch_size <= 8:
         parser.error('--batch-size must be between 1 and 8')
+    rubberband = find_rubberband(args.rubberband)
     import numpy as np
     import soundfile as sf
     import torch
@@ -99,6 +102,9 @@ def main():
             clips.append({'zh': text, 'src': source, 'duration': info.duration})
             print(f'{story["id"]} {i+1}/{len(story["sentences"])}: {info.duration:.2f}s', flush=True)
         manifest['stories'][story['id']] = clips
+    prepare_speeds(manifest, directory, rubberband)
+    for clips in manifest['stories'].values():
+        retained.update(variant['src'] for clip in clips for variant in clip.get('speeds', {}).values())
     temporary = target.with_suffix('.tmp')
     temporary.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     temporary.replace(target)
@@ -106,7 +112,7 @@ def main():
     # Only remove former manifest entries, after the complete replacement is built.
     removed = 0
     for clips in old['stories'].values():
-        for clip in clips:
+        for clip in [item for original in clips for item in [original, *original.get('speeds', {}).values()]]:
             source = clip.get('src', '')
             if source in retained or not re.fullmatch(r'audio/[a-f0-9]{24}\.wav', source):
                 continue

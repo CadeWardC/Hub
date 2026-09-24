@@ -20,7 +20,7 @@
 
   const state = loadState();
   const day = getCourseDay(state.startedOn);
-  ensureTodaySelection();
+  ensureCourseHistory();
   renderToday();
   configureSpeechAudioSession();
   fetch("./words.audio").then((response) => {
@@ -72,10 +72,9 @@
 
   function getCourseDay(startKey) {
     const [sy, sm, sd] = startKey.split("-").map(Number);
-    const start = new Date(sy, sm - 1, sd);
     const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    return Math.min(365, Math.max(1, Math.floor((now - start) / 86400000) + 1));
+    const elapsedDays = (Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(sy, sm - 1, sd)) / 86400000;
+    return Math.min(365, Math.max(1, elapsedDays + 1));
   }
 
   function scheduledIndex(kind, dayNumber) {
@@ -91,6 +90,24 @@
     return 2;
   }
 
+  function ensureCourseHistory() {
+    const [year, month, date] = state.startedOn.split("-").map(Number);
+    for (let courseDay = 1; courseDay <= day; courseDay += 1) {
+      const dateKey = localDateKey(new Date(year, month - 1, date + courseDay - 1));
+      if (!state.selections[dateKey]) state.selections[dateKey] = {};
+      kinds.forEach((kind) => {
+        if (typeof state.selections[dateKey][kind] !== "number") {
+          state.selections[dateKey][kind] = scheduledIndex(kind, courseDay);
+        }
+        recordWord(kind, state.selections[dateKey][kind], false, dateKey, courseDay);
+      });
+    }
+    // Keep today's selection available after the 365-day course ends.
+    ensureTodaySelection();
+    state.history.sort((a, b) => a.date.localeCompare(b.date) || a.seenAt - b.seenAt);
+    saveState();
+  }
+
   function ensureTodaySelection() {
     if (!state.selections[todayKey]) state.selections[todayKey] = {};
     kinds.forEach((kind) => {
@@ -99,14 +116,13 @@
       }
       recordWord(kind, state.selections[todayKey][kind], false);
     });
-    saveState();
   }
 
-  function recordWord(kind, index, rerolled) {
+  function recordWord(kind, index, rerolled, date = todayKey, courseDay = day) {
     const word = vocab[kind][index];
-    const fingerprint = `${todayKey}:${kind}:${word[0]}`;
+    const fingerprint = `${date}:${kind}:${word[0]}`;
     if (state.history.some((entry) => entry.fingerprint === fingerprint)) return;
-    state.history.push({ fingerprint, date: todayKey, day, kind, word, rerolled, seenAt: Date.now() });
+    state.history.push({ fingerprint, date, day: courseDay, kind, word, rerolled, seenAt: Date.now() });
   }
 
   function renderToday() {

@@ -10,6 +10,7 @@
   let story, index = 0, playing = false, token = 0, utterance, voices = [], view = 'library', installPrompt;
   let noticeTimer;
   let recording;
+  let selectedWord = null, wordFrame = 0, activeWord = -1;
   const hasRecordings = () => builtins.some(s => s.sentences.some(sentence => sentence.audio));
   const recordedSentence = () => story?.sentences[index]?.audio && !state.voice;
   function notice(message) {
@@ -25,6 +26,18 @@
       if (!s || typeof s.zh !== 'string' || !s.zh.trim() || s.zh.length > 1000) throw Error('Each sentence needs Chinese text, up to 1,000 characters. Split longer passages into sentences.');
       const clean = {zh: s.zh.trim()};
       if (typeof s.audio === 'string' && /^audio\/[a-f0-9]{24}\.wav$/.test(s.audio)) clean.audio = s.audio;
+      for (const speed of ['0.5', '0.65', '0.8']) {
+        const src = s.audioSpeeds?.[speed];
+        if (typeof src === 'string' && /^audio\/[a-f0-9]{24}\.wav$/.test(src)) (clean.audioSpeeds ||= {})[speed] = src;
+      }
+      if (Array.isArray(s.words)) {
+        const words = s.words.filter(w => w && typeof w.text === 'string' && Number.isInteger(w.offset) && w.offset >= 0 && clean.zh.slice(w.offset, w.offset + w.text.length) === w.text && Number.isFinite(w.start) && Number.isFinite(w.end) && w.start >= 0 && w.end > w.start);
+        if (words.length === s.words.length) clean.words = words.map(w => ({text:w.text, offset:w.offset, start:w.start, end:w.end, pinyin:typeof w.pinyin === 'string' ? w.pinyin : '', meanings:Array.isArray(w.meanings) ? w.meanings.filter(m => typeof m === 'string') : []}));
+        for (const speed of ['0.5', '0.65', '0.8']) {
+          const times = s.wordTimings?.[speed];
+          if (clean.words && Array.isArray(times) && times.length === words.length && times.every(t => Array.isArray(t) && t.length === 2 && t.every(Number.isFinite) && t[0] >= 0 && t[1] > t[0])) (clean.wordTimings ||= {})[speed] = times;
+        }
+      }
       for (const key of ['pinyin', 'en']) {
         if (s[key] != null && typeof s[key] !== 'string') throw Error('Pinyin and English must be text.');
         clean[key] = (s[key] || '').trim();
@@ -59,7 +72,11 @@
   }
   function switchView(next) {
     stop(); view = next;
-    for (const name of ['library', 'reader']) $(name).hidden = name !== next;
+    window.dispatchEvent(new Event('storytime:stop-listening'));
+    selectedWord = null; $('word-card').close();
+    for (const name of ['library', 'reader', 'listening']) $(name).hidden = name !== next;
+    $('stories-tab').setAttribute('aria-pressed', String(next !== 'listening'));
+    $('listening-tab').setAttribute('aria-pressed', String(next === 'listening'));
     window.scrollTo(0, 0);
   }
   function renderLibrary() {
@@ -99,14 +116,52 @@
   function renderSentences() {
     $('sentences').replaceChildren();
     story.sentences.forEach((s, i) => {
-      const button = node('button', 'sentence'); button.setAttribute('aria-label', `Listen to sentence ${i+1}: ${s.zh}`);
-      const zh = node('span', 'hanzi', s.zh); zh.lang = 'zh-CN'; button.append(zh);
+      const button = node('div', 'sentence');
+      const zh = node('span', 'hanzi'); zh.lang = 'zh-CN';
+      let cursor = 0;
+      for (const [wordIndex, word] of (s.words || []).entries()) {
+        zh.append(document.createTextNode(s.zh.slice(cursor, word.offset)));
+        const part = node('button', 'word', word.text); part.type = 'button'; part.dataset.word = wordIndex;
+        part.setAttribute('aria-label', `${word.text}: show pinyin, meaning, and listening options`);
+        part.onclick = () => showWord(i, wordIndex);
+        zh.append(part); cursor = word.offset + word.text.length;
+      }
+      zh.append(document.createTextNode(s.zh.slice(cursor))); button.append(zh);
       if (state.support !== 'hanzi' && s.pinyin) { const py = node('span','pinyin',s.pinyin); py.lang = 'zh-Latn'; button.append(py); }
       if (state.support === 'guided' && s.en) button.append(node('span', 'english', s.en));
-      button.addEventListener('click', () => { stop(); index = i; remember(); updatePlayer(); speak(); });
+      const listen = node('button', 'sentence-play', `▶ Sentence ${i+1}`);
+      listen.setAttribute('aria-label', `Listen to sentence ${i+1}`);
+      listen.onclick = () => { stop(); index = i; remember(); updatePlayer(); speak(); };
+      button.append(listen);
       $('sentences').append(button);
     });
-    highlight();
+    highlight(); markWord(activeWord);
+  }
+  function markWord(which) {
+    activeWord = which;
+    $('sentences').querySelectorAll('.word.speaking').forEach(el => el.classList.remove('speaking'));
+    if (which >= 0) $('sentences').children[index]?.querySelector(`[data-word="${which}"]`)?.classList.add('speaking');
+  }
+  function showWord(sentenceIndex, which) {
+    stop(); index = sentenceIndex; selectedWord = {sentence: sentenceIndex, word: which};
+    const word = story.sentences[index].words[which];
+    $('word-title').textContent = word.text; $('word-pinyin').textContent = word.pinyin;
+    $('word-meanings').replaceChildren(...word.meanings.map(meaning => node('li', '', meaning)));
+    $('word-context').textContent = story.sentences[index].en;
+    $('word-previous').disabled = index === 0 && which === 0;
+    $('word-next').disabled = index === story.sentences.length - 1 && which === story.sentences[index].words.length - 1;
+    remember(); updatePlayer(); markWord(which);
+    if (!$('word-card').open) $('word-card').showModal();
+  }
+  function moveWord(delta) {
+    if (!selectedWord) return;
+    let sentenceIndex = selectedWord.sentence, which = selectedWord.word + delta;
+    while (sentenceIndex >= 0 && sentenceIndex < story.sentences.length) {
+      const count = story.sentences[sentenceIndex].words?.length || 0;
+      if (which >= 0 && which < count) { showWord(sentenceIndex, which); return; }
+      sentenceIndex += delta;
+      which = delta > 0 ? 0 : (story.sentences[sentenceIndex]?.words?.length || 0) - 1;
+    }
   }
   function highlight(scroll = false) {
     [...$('sentences').children].forEach((el, i) => { el.classList.toggle('active', i === index); if (i === index) el.setAttribute('aria-current','step'); else el.removeAttribute('aria-current'); });
@@ -121,15 +176,17 @@
   }
   function stop() {
     token++; playing = false; utterance = null; synth?.cancel();
-    if (recording) { recording.onplaying = recording.onended = recording.onerror = null; recording.pause(); recording.removeAttribute('src'); recording.load(); }
-    if (story) { $('sentences').querySelectorAll('.hanzi').forEach((el,i) => { el.textContent = story.sentences[i]?.zh || ''; }); updatePlayer(); }
+    cancelAnimationFrame(wordFrame); wordFrame = 0; markWord(-1);
+    if (recording) { recording.onloadedmetadata = recording.ontimeupdate = recording.onplaying = recording.onended = recording.onerror = null; recording.pause(); recording.removeAttribute('src'); recording.load(); }
+    if (story) updatePlayer();
   }
-  function speak() {
+  function speak(startWord = 0, onlyWord = false) {
     if (!capable && !recordedSentence()) { $('speech-message').textContent = 'Speech is unavailable in this browser. You can still read every story.'; return; }
     stop(); playing = true; const run = token; updatePlayer();
     const sentence = story.sentences[index];
     const ended = () => {
       if (token !== run) return;
+      if (onlyWord) { stop(); markWord(startWord); return; }
       if (index === story.sentences.length-1) {
         remember(true); stop(); $('complete').textContent = '✓ Read — practice again anytime';
         $('speech-message').textContent = 'Story finished. Listen again whenever you like.';
@@ -137,9 +194,25 @@
     };
     if (recordedSentence()) {
       // Reuse the element unlocked by the user's first tap for mobile playback.
-      const audio = recording || (recording = new Audio()); audio.src = sentence.audio;
-      audio.playbackRate = state.speed; audio.preservesPitch = true;
-      audio.onplaying = () => { if (token === run) { highlight(true); $('speech-message').textContent = ''; } };
+      const speedKey = String(state.speed);
+      const prepared = (!sentence.words || sentence.wordTimings?.[speedKey]) ? sentence.audioSpeeds?.[speedKey] : null;
+      const audio = recording || (recording = new Audio()); audio.src = prepared || sentence.audio;
+      audio.playbackRate = prepared ? 1 : state.speed; audio.preservesPitch = true;
+      const timings = prepared ? sentence.wordTimings?.[String(state.speed)] : sentence.words?.map(w => [w.start, w.end]);
+      const startAt = timings?.[startWord]?.[0] || 0;
+      const endAt = onlyWord ? timings?.[startWord]?.[1] : null;
+      audio.onloadedmetadata = () => { if (token === run) audio.currentTime = startAt; };
+      const follow = () => {
+        if (token !== run) return;
+        if (endAt != null && audio.currentTime >= endAt) { ended(); return; }
+        if (timings) {
+          const which = timings.findIndex(t => audio.currentTime >= t[0] && audio.currentTime < t[1]);
+          if (which !== activeWord) markWord(which);
+        }
+        wordFrame = requestAnimationFrame(follow);
+      };
+      audio.ontimeupdate = () => { if (token === run && endAt != null && audio.currentTime >= endAt) ended(); };
+      audio.onplaying = () => { if (token === run) { highlight(true); $('speech-message').textContent = ''; cancelAnimationFrame(wordFrame); follow(); } };
       audio.onended = ended;
       const failed = () => {
         if (token !== run) return;
@@ -152,15 +225,16 @@
       } catch { failed(); }
       return;
     }
-    const u = new SpeechSynthesisUtterance(sentence.zh); utterance = u;
+    const offset = sentence.words?.[startWord]?.offset || 0;
+    const text = onlyWord ? sentence.words?.[startWord]?.text || sentence.zh : sentence.zh.slice(offset);
+    const u = new SpeechSynthesisUtterance(text); utterance = u;
     u.voice = voices.find(v => v.voiceURI === state.voice) || voices.find(v => /^zh[-_]CN$/i.test(v.lang)) || voices[0] || null;
     u.lang = u.voice?.lang || 'zh-CN'; u.rate = state.speed;
-    u.onstart = () => { if (token === run) { highlight(true); $('speech-message').textContent = ''; } };
+    u.onstart = () => { if (token === run) { highlight(true); if (sentence.words) markWord(startWord); $('speech-message').textContent = ''; } };
     u.onboundary = (event) => {
       if (token !== run || event.charIndex < 0 || event.charIndex >= sentence.zh.length) return;
-      const target = $('sentences').children[index].querySelector('.hanzi');
-      const start = event.charIndex, end = start + (event.charLength || [...sentence.zh.slice(start)][0].length);
-      target.replaceChildren(document.createTextNode(sentence.zh.slice(0,start)), node('mark','',sentence.zh.slice(start,end)), document.createTextNode(sentence.zh.slice(end)));
+      const position = event.charIndex + offset;
+      markWord(sentence.words?.findIndex(w => position >= w.offset && position < w.offset + w.text.length) ?? -1);
     };
     u.onend = ended;
     u.onerror = (event) => {
@@ -184,7 +258,14 @@
   }
   document.querySelectorAll('[data-level]').forEach(b => b.addEventListener('click', () => { state.level = b.dataset.level; save(); renderLibrary(); }));
   $('back').onclick = () => { switchView('library'); renderLibrary(); };
+  $('stories-tab').onclick = () => { switchView('library'); renderLibrary(); };
+  $('listening-tab').onclick = () => { switchView('listening'); $('listening-title').focus({preventScroll:true}); };
   $('play').onclick = () => playing ? stop() : speak();
+  $('word-close').onclick = () => { stop(); $('word-card').close(); };
+  $('word-card').addEventListener('cancel', stop);
+  $('word-replay').onclick = () => { if (selectedWord) speak(selectedWord.word, true); };
+  $('word-from-here').onclick = () => { if (selectedWord) { $('word-card').close(); speak(selectedWord.word); } };
+  $('word-previous').onclick = () => moveWord(-1); $('word-next').onclick = () => moveWord(1);
   function move(delta) { const resume = playing; stop(); index = Math.max(0, Math.min(story.sentences.length-1,index+delta)); remember(); updatePlayer(); highlight(true); if (resume) speak(); }
   $('previous').onclick = () => move(-1); $('next').onclick = () => move(1);
   $('speed').value = state.speed; $('support').value = state.support; $('step-mode').checked = !!state.step;

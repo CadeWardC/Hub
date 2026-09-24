@@ -6,3 +6,4 @@ smolov/config.js
 # Python story-builder artifacts
 __pycache__/
 StoryTime/.venv-kokoro/
+StoryTime/.venv-align/

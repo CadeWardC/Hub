@@ -9,633 +9,2370 @@
       {
         "zh": "推开家门时，屋里异常安静，我才发现自己早已习惯了那声迎接我的猫叫。",
         "src": "audio/05bbc921896060fbb225edf5.wav",
-        "duration": 6.4
+        "duration": 6.4,
+        "speeds": {
+          "0.5": {
+            "src": "audio/db3d652c0bd0eb66ba799514.wav",
+            "duration": 12.8
+          },
+          "0.65": {
+            "src": "audio/ba03d625b812af907a8da6cc.wav",
+            "duration": 9.846166666666667
+          },
+          "0.8": {
+            "src": "audio/ad8877a06bdbb53c67c1fa7a.wav",
+            "duration": 8.0
+          }
+        }
       },
       {
         "zh": "小白平时总嫌我回来得晚，今天却连一点动静也没有。",
         "src": "audio/ba1e73f137a93e261da054c4.wav",
-        "duration": 4.48
+        "duration": 4.48,
+        "speeds": {
+          "0.5": {
+            "src": "audio/7ea965bb0559f2267ae9d965.wav",
+            "duration": 8.96
+          },
+          "0.65": {
+            "src": "audio/cdd0beed9a22429788869969.wav",
+            "duration": 6.892291666666667
+          },
+          "0.8": {
+            "src": "audio/1bc0c6b70c47e4e6da92337c.wav",
+            "duration": 5.6
+          }
+        }
       },
       {
         "zh": "我放下包，先叫了它两声，随后又去厨房看了看。",
         "src": "audio/6d563167a90a97bdd540cda4.wav",
-        "duration": 3.84
+        "duration": 3.84,
+        "speeds": {
+          "0.5": {
+            "src": "audio/b1d28ad4cd90f62b682057ff.wav",
+            "duration": 7.68
+          },
+          "0.65": {
+            "src": "audio/d414c18514e47ba3ee3cc52b.wav",
+            "duration": 5.907708333333333
+          },
+          "0.8": {
+            "src": "audio/3e8efa99b903086e1039476f.wav",
+            "duration": 4.8
+          }
+        }
       },
       {
         "zh": "食盆原封不动，窗户也关得严严实实，它究竟能躲到哪里去？",
         "src": "audio/83352a3c73839f5eadac8fe7.wav",
-        "duration": 5.28
+        "duration": 5.28,
+        "speeds": {
+          "0.5": {
+            "src": "audio/1022a842f6df40cface8be7f.wav",
+            "duration": 10.56
+          },
+          "0.65": {
+            "src": "audio/09b1cc5e6d3515226246265a.wav",
+            "duration": 8.123083333333334
+          },
+          "0.8": {
+            "src": "audio/7a2ef8d1723a0e2fce03637e.wav",
+            "duration": 6.6
+          }
+        }
       },
       {
         "zh": "桌下那个它最爱的小球滚到了墙角，旁边却没有熟悉的白色身影。",
         "src": "audio/9f4e57322912b48e1ff8b8d1.wav",
-        "duration": 6.16
+        "duration": 6.16,
+        "speeds": {
+          "0.5": {
+            "src": "audio/9a8ba7906189e44466440543.wav",
+            "duration": 12.32
+          },
+          "0.65": {
+            "src": "audio/29037dc70ad154ca47b24fab.wav",
+            "duration": 9.476916666666666
+          },
+          "0.8": {
+            "src": "audio/bbef8cf6fbaf6b24a0463ef6.wav",
+            "duration": 7.7
+          }
+        }
       },
       {
         "zh": "我越找越着急，连平时从不留意的角落也仔细检查了一遍。",
         "src": "audio/5ec25b5d04428bc5c437f885.wav",
-        "duration": 5.04
+        "duration": 5.04,
+        "speeds": {
+          "0.5": {
+            "src": "audio/38e7f200f9c34ef58d1f3c0b.wav",
+            "duration": 10.08
+          },
+          "0.65": {
+            "src": "audio/ef4afc72af205c24750a9473.wav",
+            "duration": 7.753833333333334
+          },
+          "0.8": {
+            "src": "audio/546e1cd5111f928d1145a543.wav",
+            "duration": 6.3
+          }
+        }
       },
       {
         "zh": "早上出门时，我好像接了一个电话，会不会就是那时忘了关门？",
         "src": "audio/862c37b2bf3c4907def09fe5.wav",
-        "duration": 5.12
+        "duration": 5.12,
+        "speeds": {
+          "0.5": {
+            "src": "audio/9a080f29ef388b60618340b9.wav",
+            "duration": 10.24
+          },
+          "0.65": {
+            "src": "audio/d896d2e518ef49c9c826e016.wav",
+            "duration": 7.876916666666666
+          },
+          "0.8": {
+            "src": "audio/cf90bd30987484695c9c7c4a.wav",
+            "duration": 6.4
+          }
+        }
       },
       {
         "zh": "这个念头刚冒出来，我就忍不住责怪起自己的粗心。",
         "src": "audio/168c286b0490c788df1cdbab.wav",
-        "duration": 4.08
+        "duration": 4.08,
+        "speeds": {
+          "0.5": {
+            "src": "audio/00669eb1a66a99083c356908.wav",
+            "duration": 8.16
+          },
+          "0.65": {
+            "src": "audio/7b469239f38197b29fb39609.wav",
+            "duration": 6.276916666666667
+          },
+          "0.8": {
+            "src": "audio/044ae8007c1a8108da83b847.wav",
+            "duration": 5.1
+          }
+        }
       },
       {
         "zh": "正准备出门继续找时，我忽然想起，昨天整理衣柜时曾把门留了一条缝。",
         "src": "audio/0f44b6812eec50cb1379e548.wav",
-        "duration": 6.48
+        "duration": 6.48,
+        "speeds": {
+          "0.5": {
+            "src": "audio/a7abcfeda07970451fd9fb8c.wav",
+            "duration": 12.96
+          },
+          "0.65": {
+            "src": "audio/687b6f89e4e633487aec09e0.wav",
+            "duration": 9.96925
+          },
+          "0.8": {
+            "src": "audio/c26d700ffc79e5f7081b33cf.wav",
+            "duration": 8.1
+          }
+        }
       },
       {
         "zh": "我停下脚步，屏住呼吸，卧室里果然传来了一阵细微的响动。",
         "src": "audio/5a7d9437d494d5493c3bbaab.wav",
-        "duration": 6.16
+        "duration": 6.16,
+        "speeds": {
+          "0.5": {
+            "src": "audio/8b7c1477c40528f7636dbfdf.wav",
+            "duration": 12.32
+          },
+          "0.65": {
+            "src": "audio/0b3d333e6b97dff6381dc76e.wav",
+            "duration": 9.476916666666666
+          },
+          "0.8": {
+            "src": "audio/4c4c4706a35f8eea38b82345.wav",
+            "duration": 7.7
+          }
+        }
       },
       {
         "zh": "直到拉开衣柜，看见那对半睁的眼睛，我悬着的心才终于放了下来。",
         "src": "audio/a577b8806202a8645e03a936.wav",
-        "duration": 6.72
+        "duration": 6.72,
+        "speeds": {
+          "0.5": {
+            "src": "audio/8a1a11541b7b543561355b45.wav",
+            "duration": 13.44
+          },
+          "0.65": {
+            "src": "audio/b5138676cf9d6549ff4d218d.wav",
+            "duration": 10.338458333333334
+          },
+          "0.8": {
+            "src": "audio/0c7e03b0bcfb0b60d7bc62e6.wav",
+            "duration": 8.4
+          }
+        }
       },
       {
         "zh": "它窝在我的旧毛衣上，一脸无辜，仿佛这一切都理所当然。",
         "src": "audio/798174fae1683270e98a36fc.wav",
-        "duration": 5.68
+        "duration": 5.68,
+        "speeds": {
+          "0.5": {
+            "src": "audio/f1195da022cfc2fa8e37118c.wav",
+            "duration": 11.36
+          },
+          "0.65": {
+            "src": "audio/ce10879db3a1f96f12fb8e7d.wav",
+            "duration": 8.738458333333334
+          },
+          "0.8": {
+            "src": "audio/55a939ce557c62faf7b4b4be.wav",
+            "duration": 7.1
+          }
+        }
       },
       {
         "zh": "那件毛衣早已不合身，我昨天还犹豫着要不要把它送走。",
         "src": "audio/1e476ea41eba506300e7839b.wav",
-        "duration": 5.2
+        "duration": 5.2,
+        "speeds": {
+          "0.5": {
+            "src": "audio/eaca612e1c3079ebc0d996b3.wav",
+            "duration": 10.4
+          },
+          "0.65": {
+            "src": "audio/b06bfd1233946b19484b250a.wav",
+            "duration": 8.0
+          },
+          "0.8": {
+            "src": "audio/2e3ba912a7137d10b46a9fb0.wav",
+            "duration": 6.5
+          }
+        }
       },
       {
         "zh": "可小白刚到我家时，正是裹着这件毛衣，在我怀里睡着的。",
         "src": "audio/714340c37577462d630bfc0d.wav",
-        "duration": 4.32
+        "duration": 4.32,
+        "speeds": {
+          "0.5": {
+            "src": "audio/ff23d5b31314407d83098138.wav",
+            "duration": 8.64
+          },
+          "0.65": {
+            "src": "audio/20137386d01ea0bdb8169e77.wav",
+            "duration": 6.646166666666667
+          },
+          "0.8": {
+            "src": "audio/f503c3b2e8907003ce8a8017.wav",
+            "duration": 5.4
+          }
+        }
       },
       {
         "zh": "原来，我早已不需要的东西，对它来说仍然是最安心的地方。",
         "src": "audio/856041c9ce81f6d5f044d972.wav",
-        "duration": 5.68
+        "duration": 5.68,
+        "speeds": {
+          "0.5": {
+            "src": "audio/16e8aafd47765b12e5c4e06a.wav",
+            "duration": 11.36
+          },
+          "0.65": {
+            "src": "audio/240370a1854956a4159692ea.wav",
+            "duration": 8.738458333333334
+          },
+          "0.8": {
+            "src": "audio/108655858fcb54a557b6ad13.wav",
+            "duration": 7.1
+          }
+        }
       },
       {
         "zh": "我把毛衣连同小猫一起轻轻抱出来，安置在床边的小篮子里。",
         "src": "audio/24e9503eb4340d3609293300.wav",
-        "duration": 5.44
+        "duration": 5.44,
+        "speeds": {
+          "0.5": {
+            "src": "audio/e06b369d1573d0184941a977.wav",
+            "duration": 10.88
+          },
+          "0.65": {
+            "src": "audio/52e4ba23fe07d4da5d18ddcb.wav",
+            "duration": 8.36925
+          },
+          "0.8": {
+            "src": "audio/3dc0025b35df33778f230d0d.wav",
+            "duration": 6.8
+          }
+        }
       },
       {
         "zh": "“这次不收走了，”我低声说，也不知道它有没有听懂。",
         "src": "audio/a569d76ec01920c50cc8195c.wav",
-        "duration": 6.0
+        "duration": 6.0,
+        "speeds": {
+          "0.5": {
+            "src": "audio/e41a47e6306bae2235c47971.wav",
+            "duration": 12.0
+          },
+          "0.65": {
+            "src": "audio/a3d37376e93af34491661a6b.wav",
+            "duration": 9.23075
+          },
+          "0.8": {
+            "src": "audio/932e46734c39928512e0c4fc.wav",
+            "duration": 7.5
+          }
+        }
       },
       {
         "zh": "小白把头埋进毛衣里，安心地闭上眼睛，而我终于也能安静地坐下了。",
         "src": "audio/7a61bd90b45ffc53bf8d6291.wav",
-        "duration": 6.24
+        "duration": 6.24,
+        "speeds": {
+          "0.5": {
+            "src": "audio/193dc66264df46de87cf3e92.wav",
+            "duration": 12.48
+          },
+          "0.65": {
+            "src": "audio/21f966fe5c04870966eb5196.wav",
+            "duration": 9.6
+          },
+          "0.8": {
+            "src": "audio/7c41f03c18f7770372f09cea.wav",
+            "duration": 7.8
+          }
+        }
       }
     ],
     "cat-beginner": [
       {
         "zh": "我有一只小猫。",
         "src": "audio/7aef20a3c94deb2a2b016120.wav",
-        "duration": 1.2
+        "duration": 1.2,
+        "speeds": {
+          "0.5": {
+            "src": "audio/f71ee5898535f33af787bb09.wav",
+            "duration": 2.4
+          },
+          "0.65": {
+            "src": "audio/1e8a6a4599414c1c8e3cc20c.wav",
+            "duration": 1.8461666666666667
+          },
+          "0.8": {
+            "src": "audio/a45031551d4aa1cbe1ca5f34.wav",
+            "duration": 1.5
+          }
+        }
       },
       {
         "zh": "它叫小白。",
         "src": "audio/1418becaa5ff48d7a17466bd.wav",
-        "duration": 1.04
+        "duration": 1.04,
+        "speeds": {
+          "0.5": {
+            "src": "audio/930c49a6db5fb77de68b6d9b.wav",
+            "duration": 2.08
+          },
+          "0.65": {
+            "src": "audio/822db78d639d6b69d5c0ad1c.wav",
+            "duration": 1.6
+          },
+          "0.8": {
+            "src": "audio/ff7023cef48deccb679c21c0.wav",
+            "duration": 1.3
+          }
+        }
       },
       {
         "zh": "小白很可爱。",
         "src": "audio/218c5d64add2982e74d791aa.wav",
-        "duration": 1.36
+        "duration": 1.36,
+        "speeds": {
+          "0.5": {
+            "src": "audio/8c3bb83388a4ee60e44e18e1.wav",
+            "duration": 2.72
+          },
+          "0.65": {
+            "src": "audio/57189a68d57af45ca6de3973.wav",
+            "duration": 2.0922916666666667
+          },
+          "0.8": {
+            "src": "audio/df12a1302f1482ed097de15f.wav",
+            "duration": 1.7
+          }
+        }
       },
       {
         "zh": "它喜欢在家里跑。",
         "src": "audio/adc570fd5df19df1bcf3e813.wav",
-        "duration": 1.44
+        "duration": 1.44,
+        "speeds": {
+          "0.5": {
+            "src": "audio/c976897ccbf47e15c8821f95.wav",
+            "duration": 2.88
+          },
+          "0.65": {
+            "src": "audio/82b68dffaabdcb7bf209cff2.wav",
+            "duration": 2.215375
+          },
+          "0.8": {
+            "src": "audio/58665904a8e0bea4229119df.wav",
+            "duration": 1.8
+          }
+        }
       },
       {
         "zh": "今天，我回家了。",
         "src": "audio/7cba38b2ae7635732cd742c4.wav",
-        "duration": 2.08
+        "duration": 2.08,
+        "speeds": {
+          "0.5": {
+            "src": "audio/2383b9b879c57dfeef845137.wav",
+            "duration": 4.16
+          },
+          "0.65": {
+            "src": "audio/20682591c2a4141fb7062ec8.wav",
+            "duration": 3.2
+          },
+          "0.8": {
+            "src": "audio/de6f84350cf54609486250e3.wav",
+            "duration": 2.6
+          }
+        }
       },
       {
         "zh": "家里很安静。",
         "src": "audio/420199404ec4b456119cf0ff.wav",
-        "duration": 1.04
+        "duration": 1.04,
+        "speeds": {
+          "0.5": {
+            "src": "audio/d67ac60569217403dbb31781.wav",
+            "duration": 2.08
+          },
+          "0.65": {
+            "src": "audio/a4c6dd0fe91ec138668273b1.wav",
+            "duration": 1.6
+          },
+          "0.8": {
+            "src": "audio/68930b05b3a313ec26826eaf.wav",
+            "duration": 1.3
+          }
+        }
       },
       {
         "zh": "小白在哪里？",
         "src": "audio/452a28300a54dba195c4dfa3.wav",
-        "duration": 0.88
+        "duration": 0.88,
+        "speeds": {
+          "0.5": {
+            "src": "audio/fd7dcb26200c8949e9b656d8.wav",
+            "duration": 1.76
+          },
+          "0.65": {
+            "src": "audio/81c0dd9853c9650f2e70f244.wav",
+            "duration": 1.3538333333333334
+          },
+          "0.8": {
+            "src": "audio/88789906fdbe26ba58e8accc.wav",
+            "duration": 1.1
+          }
+        }
       },
       {
         "zh": "我叫它的名字。",
         "src": "audio/6e91a2a2bcfd8a96b940ad6b.wav",
-        "duration": 1.2
+        "duration": 1.2,
+        "speeds": {
+          "0.5": {
+            "src": "audio/1f8a80336d913d6e9afa50ca.wav",
+            "duration": 2.4
+          },
+          "0.65": {
+            "src": "audio/e291d381d72c953ba7c8f3c6.wav",
+            "duration": 1.8461666666666667
+          },
+          "0.8": {
+            "src": "audio/35656fdaf7f4b7fb408488d2.wav",
+            "duration": 1.5
+          }
+        }
       },
       {
         "zh": "小白没有来。",
         "src": "audio/69ffd508d1528648b9a63072.wav",
-        "duration": 1.2
+        "duration": 1.2,
+        "speeds": {
+          "0.5": {
+            "src": "audio/eaaae22348eac1867e474484.wav",
+            "duration": 2.4
+          },
+          "0.65": {
+            "src": "audio/e23440d6c7e6ae45bda0d002.wav",
+            "duration": 1.8461666666666667
+          },
+          "0.8": {
+            "src": "audio/7911ef800478b33ca88d6e26.wav",
+            "duration": 1.5
+          }
+        }
       },
       {
         "zh": "我去厨房找它。",
         "src": "audio/be2f1441f83f56b46f329925.wav",
-        "duration": 1.28
+        "duration": 1.28,
+        "speeds": {
+          "0.5": {
+            "src": "audio/276268af51986aeec2591edf.wav",
+            "duration": 2.56
+          },
+          "0.65": {
+            "src": "audio/2c3c53f06d3cdd0eb8ad0a74.wav",
+            "duration": 1.96925
+          },
+          "0.8": {
+            "src": "audio/4bcd2b5fb9572f9dd4b4d75a.wav",
+            "duration": 1.6
+          }
+        }
       },
       {
         "zh": "我看了看桌子下面。",
         "src": "audio/f0e2fcc4112ec58d38209634.wav",
-        "duration": 1.76
+        "duration": 1.76,
+        "speeds": {
+          "0.5": {
+            "src": "audio/acaf09cbeeadf19f5d995a7e.wav",
+            "duration": 3.52
+          },
+          "0.65": {
+            "src": "audio/29d3fecb21844cd5d5dda183.wav",
+            "duration": 2.707708333333333
+          },
+          "0.8": {
+            "src": "audio/043240357c7823caa59493cc.wav",
+            "duration": 2.2
+          }
+        }
       },
       {
         "zh": "桌子下面只有一把椅子。",
         "src": "audio/23f027dbaf0ba92d1156adf0.wav",
-        "duration": 2.08
+        "duration": 2.08,
+        "speeds": {
+          "0.5": {
+            "src": "audio/58ed01a52e4d69413249c82f.wav",
+            "duration": 4.16
+          },
+          "0.65": {
+            "src": "audio/fd8065875a43bee62a619f3d.wav",
+            "duration": 3.2
+          },
+          "0.8": {
+            "src": "audio/69fd8cd507bc679adbb225fe.wav",
+            "duration": 2.6
+          }
+        }
       },
       {
         "zh": "小白不在这里。",
         "src": "audio/214bf433a6953879d11639cc.wav",
-        "duration": 1.44
+        "duration": 1.44,
+        "speeds": {
+          "0.5": {
+            "src": "audio/fad5b5774e7eacab0e7024ab.wav",
+            "duration": 2.88
+          },
+          "0.65": {
+            "src": "audio/2092b1bc00e01809591d2aa7.wav",
+            "duration": 2.215375
+          },
+          "0.8": {
+            "src": "audio/829ca828b2c92b86c9f159da.wav",
+            "duration": 1.8
+          }
+        }
       },
       {
         "zh": "妈妈在厨房喝水。",
         "src": "audio/f0b1989dbd6a7a4eac3819eb.wav",
-        "duration": 1.52
+        "duration": 1.52,
+        "speeds": {
+          "0.5": {
+            "src": "audio/7b4f4ec6747ee0f7bbf70411.wav",
+            "duration": 3.04
+          },
+          "0.65": {
+            "src": "audio/05e797334161b664ecab26e1.wav",
+            "duration": 2.3384583333333335
+          },
+          "0.8": {
+            "src": "audio/442f42cf58e720b035da769e.wav",
+            "duration": 1.9
+          }
+        }
       },
       {
         "zh": "我问：“妈妈，小白在哪里？”",
         "src": "audio/986eee27b71bbdabf4c605ca.wav",
-        "duration": 2.72
+        "duration": 2.72,
+        "speeds": {
+          "0.5": {
+            "src": "audio/15ca0c9b0484a18b4addb8b3.wav",
+            "duration": 5.44
+          },
+          "0.65": {
+            "src": "audio/ee28c68e859791da0663d6e4.wav",
+            "duration": 4.184625
+          },
+          "0.8": {
+            "src": "audio/ed52e86d2c49fac81147fd68.wav",
+            "duration": 3.4
+          }
+        }
       },
       {
         "zh": "妈妈说：“去你的房间看看吧。”",
         "src": "audio/029c87c75c2f5b096a0cb6ba.wav",
-        "duration": 2.48
+        "duration": 2.48,
+        "speeds": {
+          "0.5": {
+            "src": "audio/b4aeb9f2bb7f2ecbe2d8d659.wav",
+            "duration": 4.96
+          },
+          "0.65": {
+            "src": "audio/c7c36b20771c96f9abbe65ef.wav",
+            "duration": 3.815375
+          },
+          "0.8": {
+            "src": "audio/a3794a4cbdd2cca1850648e5.wav",
+            "duration": 3.1
+          }
+        }
       },
       {
         "zh": "我走到房间门口。",
         "src": "audio/e2b56e5566a36d2e882580fd.wav",
-        "duration": 1.36
+        "duration": 1.36,
+        "speeds": {
+          "0.5": {
+            "src": "audio/a144f1283243c97dfaa236f3.wav",
+            "duration": 2.72
+          },
+          "0.65": {
+            "src": "audio/4475f2e279b0c76029d1f128.wav",
+            "duration": 2.0922916666666667
+          },
+          "0.8": {
+            "src": "audio/9a908be75ec9443d5987c030.wav",
+            "duration": 1.7
+          }
+        }
       },
       {
         "zh": "我听见了小猫的声音。",
         "src": "audio/d88b5ac749475304116e1560.wav",
-        "duration": 1.84
+        "duration": 1.84,
+        "speeds": {
+          "0.5": {
+            "src": "audio/bf2b14ace86eb186a3f5a10a.wav",
+            "duration": 3.68
+          },
+          "0.65": {
+            "src": "audio/d5a171594de8d2f8a1145ffd.wav",
+            "duration": 2.83075
+          },
+          "0.8": {
+            "src": "audio/ba5cd8f6afb8e29d9a6b9678.wav",
+            "duration": 2.3
+          }
+        }
       },
       {
         "zh": "我开门，走进房间。",
         "src": "audio/53e252e49c89e6fc5547d608.wav",
-        "duration": 1.92
+        "duration": 1.92,
+        "speeds": {
+          "0.5": {
+            "src": "audio/c9d1df389ea2e305274b85b3.wav",
+            "duration": 3.84
+          },
+          "0.65": {
+            "src": "audio/61955308b5700ddf687c3374.wav",
+            "duration": 2.9538333333333333
+          },
+          "0.8": {
+            "src": "audio/9b426a4fed67078ad221c4a9.wav",
+            "duration": 2.4
+          }
+        }
       },
       {
         "zh": "啊，小白在我的床上！",
         "src": "audio/d58a42ee6b6b76d9d0f3a052.wav",
-        "duration": 1.6
+        "duration": 1.6,
+        "speeds": {
+          "0.5": {
+            "src": "audio/244128f7e8d5a13343444f72.wav",
+            "duration": 3.2
+          },
+          "0.65": {
+            "src": "audio/d07bf5f001bd1813ea4f7e73.wav",
+            "duration": 2.4615416666666667
+          },
+          "0.8": {
+            "src": "audio/1919f795b9bb65392a6a3284.wav",
+            "duration": 2.0
+          }
+        }
       },
       {
         "zh": "它看了看我。",
         "src": "audio/16038ad51fea3f589f54b0e8.wav",
-        "duration": 1.04
+        "duration": 1.04,
+        "speeds": {
+          "0.5": {
+            "src": "audio/c871ee8a93bd09bfce61b497.wav",
+            "duration": 2.08
+          },
+          "0.65": {
+            "src": "audio/ca0de388ccd37e1259121f00.wav",
+            "duration": 1.6
+          },
+          "0.8": {
+            "src": "audio/216fc99c16389c43d20795f9.wav",
+            "duration": 1.3
+          }
+        }
       },
       {
         "zh": "我说：“你在这里啊！”",
         "src": "audio/27b34edfc46deca9d9919ea9.wav",
-        "duration": 1.76
+        "duration": 1.76,
+        "speeds": {
+          "0.5": {
+            "src": "audio/e23fca55649ce2111e611987.wav",
+            "duration": 3.52
+          },
+          "0.65": {
+            "src": "audio/b449d00a6f5b13d8e5254b72.wav",
+            "duration": 2.707708333333333
+          },
+          "0.8": {
+            "src": "audio/165b68f496b1d26c73019f8f.wav",
+            "duration": 2.2
+          }
+        }
       },
       {
         "zh": "小白没有起来，又睡了。",
         "src": "audio/d3f40610d94f287ace5febfb.wav",
-        "duration": 3.28
+        "duration": 3.28,
+        "speeds": {
+          "0.5": {
+            "src": "audio/1c966b2c3fdc0e576f8a557e.wav",
+            "duration": 6.56
+          },
+          "0.65": {
+            "src": "audio/acbf15a5636e5ffe5ccfc0b8.wav",
+            "duration": 5.046166666666666
+          },
+          "0.8": {
+            "src": "audio/6f3b47f8d1fadbdddc3a7d60.wav",
+            "duration": 4.1
+          }
+        }
       },
       {
         "zh": "我坐在床边，安静地看书。",
         "src": "audio/c29e490d5847ce3eb9b7650f.wav",
-        "duration": 2.24
+        "duration": 2.24,
+        "speeds": {
+          "0.5": {
+            "src": "audio/94834d8aa0c30897fc926f3c.wav",
+            "duration": 4.48
+          },
+          "0.65": {
+            "src": "audio/05ad19f26beb83acf39c3c0f.wav",
+            "duration": 3.4461666666666666
+          },
+          "0.8": {
+            "src": "audio/98180fc9ec00c759a9a312e4.wav",
+            "duration": 2.8
+          }
+        }
       }
     ],
     "cat-intermediate": [
       {
         "zh": "每天回家，小白都会跑到门口来迎接我。",
         "src": "audio/3f90284160073d0970113bb0.wav",
-        "duration": 3.44
+        "duration": 3.44,
+        "speeds": {
+          "0.5": {
+            "src": "audio/2fa8b4b9e987899df59c7448.wav",
+            "duration": 6.88
+          },
+          "0.65": {
+            "src": "audio/36c88db6baf480eea52dfae6.wav",
+            "duration": 5.292291666666666
+          },
+          "0.8": {
+            "src": "audio/d3f09a172898837fea61de35.wav",
+            "duration": 4.3
+          }
+        }
       },
       {
         "zh": "它是一只白色的小猫，最喜欢跟着我走来走去。",
         "src": "audio/88734714133be55750166007.wav",
-        "duration": 3.84
+        "duration": 3.84,
+        "speeds": {
+          "0.5": {
+            "src": "audio/bdb5ddcd43ee93bb9132e238.wav",
+            "duration": 7.68
+          },
+          "0.65": {
+            "src": "audio/4b9b863361e88532f100c19c.wav",
+            "duration": 5.907708333333333
+          },
+          "0.8": {
+            "src": "audio/58ad664f0f3214b585841363.wav",
+            "duration": 4.8
+          }
+        }
       },
       {
         "zh": "可是今天，门口没有它的影子。",
         "src": "audio/7e1441b668f4f64f15dd0e7c.wav",
-        "duration": 3.28
+        "duration": 3.28,
+        "speeds": {
+          "0.5": {
+            "src": "audio/97b314832f8f0e0a58cf13be.wav",
+            "duration": 6.56
+          },
+          "0.65": {
+            "src": "audio/a05bebd92902ff6d0b2a23dd.wav",
+            "duration": 5.046166666666666
+          },
+          "0.8": {
+            "src": "audio/6d86bf983d7850770d282e21.wav",
+            "duration": 4.1
+          }
+        }
       },
       {
         "zh": "我叫了好几次，它都没有出现。",
         "src": "audio/9e3d3ebe7739b1bd894b3e1c.wav",
-        "duration": 2.08
+        "duration": 2.08,
+        "speeds": {
+          "0.5": {
+            "src": "audio/afd3d79f02717d64667909d3.wav",
+            "duration": 4.16
+          },
+          "0.65": {
+            "src": "audio/374c9e279669022c0e383f56.wav",
+            "duration": 3.2
+          },
+          "0.8": {
+            "src": "audio/7ab0bdff501f392ec2e48cf0.wav",
+            "duration": 2.6
+          }
+        }
       },
       {
         "zh": "我先去厨房，看见它的水碗还在桌子旁边。",
         "src": "audio/5b5ee21c38bdd337d2140efc.wav",
-        "duration": 3.36
+        "duration": 3.36,
+        "speeds": {
+          "0.5": {
+            "src": "audio/6024688ba3ef9c1f97b3db85.wav",
+            "duration": 6.72
+          },
+          "0.65": {
+            "src": "audio/80ecacf6563d25e74b05d4dd.wav",
+            "duration": 5.16925
+          },
+          "0.8": {
+            "src": "audio/5ad55c20dfe246462d00ab67.wav",
+            "duration": 4.2
+          }
+        }
       },
       {
         "zh": "我弯下腰，看了看桌子下面。",
         "src": "audio/354bfe9e23c3ed2a7216cd64.wav",
-        "duration": 3.12
+        "duration": 3.12,
+        "speeds": {
+          "0.5": {
+            "src": "audio/44fd8978fed71fae886fa396.wav",
+            "duration": 6.24
+          },
+          "0.65": {
+            "src": "audio/1f6cb8774e46a87439ab779e.wav",
+            "duration": 4.8
+          },
+          "0.8": {
+            "src": "audio/72ecc284f683bb12b5a34cde.wav",
+            "duration": 3.9
+          }
+        }
       },
       {
         "zh": "那里只有一个小球，没有小猫。",
         "src": "audio/d09a52c29b71f3419bc49a73.wav",
-        "duration": 2.24
+        "duration": 2.24,
+        "speeds": {
+          "0.5": {
+            "src": "audio/833100d0bebaafc0b8a8d378.wav",
+            "duration": 4.48
+          },
+          "0.65": {
+            "src": "audio/2b52d0d2dd743f8dc40b5099.wav",
+            "duration": 3.4461666666666666
+          },
+          "0.8": {
+            "src": "audio/40d881ec973087f16f72599b.wav",
+            "duration": 2.8
+          }
+        }
       },
       {
         "zh": "接着，我到客厅里找，也没有找到它。",
         "src": "audio/2898dc07796e15957ee3c9bc.wav",
-        "duration": 3.6
+        "duration": 3.6,
+        "speeds": {
+          "0.5": {
+            "src": "audio/c42418101f601113bf1fd058.wav",
+            "duration": 7.2
+          },
+          "0.65": {
+            "src": "audio/72576a9c90669882d0917fa2.wav",
+            "duration": 5.538458333333334
+          },
+          "0.8": {
+            "src": "audio/e311dd6f208da2d0f8af2686.wav",
+            "duration": 4.5
+          }
+        }
       },
       {
         "zh": "我开始担心，是不是早上出门时忘了关门。",
         "src": "audio/cc9288092d515eee1b258c83.wav",
-        "duration": 3.36
+        "duration": 3.36,
+        "speeds": {
+          "0.5": {
+            "src": "audio/92b38172cef0d7a785d726fc.wav",
+            "duration": 6.72
+          },
+          "0.65": {
+            "src": "audio/f0622686cfc51d81eaa4d9c3.wav",
+            "duration": 5.16925
+          },
+          "0.8": {
+            "src": "audio/d5030b677b08240a31a35806.wav",
+            "duration": 4.2
+          }
+        }
       },
       {
         "zh": "妈妈看见我着急的样子，就问我在找什么。",
         "src": "audio/134abda15f38f3a0a7ad321f.wav",
-        "duration": 3.12
+        "duration": 3.12,
+        "speeds": {
+          "0.5": {
+            "src": "audio/a41c501c744e403ca46adc6f.wav",
+            "duration": 6.24
+          },
+          "0.65": {
+            "src": "audio/a0f0d6e13bceeaf44ec46e40.wav",
+            "duration": 4.8
+          },
+          "0.8": {
+            "src": "audio/4622d643590647a050df58cf.wav",
+            "duration": 3.9
+          }
+        }
       },
       {
         "zh": "“小白不见了，我找不到它。”",
         "src": "audio/bcfd958b127531c0fe0c420f.wav",
-        "duration": 2.64
+        "duration": 2.64,
+        "speeds": {
+          "0.5": {
+            "src": "audio/e4438c37a99dba2ab51e64b2.wav",
+            "duration": 5.28
+          },
+          "0.65": {
+            "src": "audio/0a84e2e09fd81609300efd8d.wav",
+            "duration": 4.061541666666667
+          },
+          "0.8": {
+            "src": "audio/1d9974d933de629793d127fc.wav",
+            "duration": 3.3
+          }
+        }
       },
       {
         "zh": "妈妈说：“别担心，我刚才还看见它了。”",
         "src": "audio/5670783d4a8695a008a4667a.wav",
-        "duration": 3.28
+        "duration": 3.28,
+        "speeds": {
+          "0.5": {
+            "src": "audio/05177645406ea167619e316e.wav",
+            "duration": 6.56
+          },
+          "0.65": {
+            "src": "audio/344d2f6a9209fe13f4509d6b.wav",
+            "duration": 5.046166666666666
+          },
+          "0.8": {
+            "src": "audio/38be3e1e4d6c4f29523bd2be.wav",
+            "duration": 4.1
+          }
+        }
       },
       {
         "zh": "她指了指我的房间，让我去那里看看。",
         "src": "audio/5b4d044943b58e5bc68c2459.wav",
-        "duration": 2.56
+        "duration": 2.56,
+        "speeds": {
+          "0.5": {
+            "src": "audio/113709d3653c91393602c22b.wav",
+            "duration": 5.12
+          },
+          "0.65": {
+            "src": "audio/fb190c45f5fa5bb93dc6c286.wav",
+            "duration": 3.938458333333333
+          },
+          "0.8": {
+            "src": "audio/e15c68434207c291ddd2511d.wav",
+            "duration": 3.2
+          }
+        }
       },
       {
         "zh": "我刚走到门口，就听见里面传来一声猫叫。",
         "src": "audio/7e4f8883ad5b88af76211502.wav",
-        "duration": 3.44
+        "duration": 3.44,
+        "speeds": {
+          "0.5": {
+            "src": "audio/73da346f1c0e8e9ba02e5c8b.wav",
+            "duration": 6.88
+          },
+          "0.65": {
+            "src": "audio/d7df50a0dd7c63de2d483961.wav",
+            "duration": 5.292291666666666
+          },
+          "0.8": {
+            "src": "audio/69f5cdd16ad83bc8152c2815.wav",
+            "duration": 4.3
+          }
+        }
       },
       {
         "zh": "我轻轻推开门，看见床上的被子动了一下。",
         "src": "audio/9e6b519339789dc97741b83d.wav",
-        "duration": 3.68
+        "duration": 3.68,
+        "speeds": {
+          "0.5": {
+            "src": "audio/195d8780573100d447513557.wav",
+            "duration": 7.36
+          },
+          "0.65": {
+            "src": "audio/3d7c399b8b2f0bc1e193e08f.wav",
+            "duration": 5.6615416666666665
+          },
+          "0.8": {
+            "src": "audio/192e9ea6002d8920eaf24258.wav",
+            "duration": 4.6
+          }
+        }
       },
       {
         "zh": "原来，小白躲在被子下面，睡得正舒服呢。",
         "src": "audio/95027f5c23115c9f78010828.wav",
-        "duration": 3.44
+        "duration": 3.44,
+        "speeds": {
+          "0.5": {
+            "src": "audio/d72499f9f008980e81090f9d.wav",
+            "duration": 6.88
+          },
+          "0.65": {
+            "src": "audio/00babb046f7176e6aca97866.wav",
+            "duration": 5.292291666666666
+          },
+          "0.8": {
+            "src": "audio/e1fb8333266a421707e68e8a.wav",
+            "duration": 4.3
+          }
+        }
       },
       {
         "zh": "我坐到床边，它只看了我一眼。",
         "src": "audio/82d96805710a79e8c4843561.wav",
-        "duration": 2.72
+        "duration": 2.72,
+        "speeds": {
+          "0.5": {
+            "src": "audio/cbd1925742c872369af1776d.wav",
+            "duration": 5.44
+          },
+          "0.65": {
+            "src": "audio/da0890db758dad68ecb51b88.wav",
+            "duration": 4.184625
+          },
+          "0.8": {
+            "src": "audio/a208c577104f59636e1467d1.wav",
+            "duration": 3.4
+          }
+        }
       },
       {
         "zh": "“小白，你让我找了这么久！”",
         "src": "audio/c96f0ecb3b07882cb3583bf8.wav",
-        "duration": 2.72
+        "duration": 2.72,
+        "speeds": {
+          "0.5": {
+            "src": "audio/9dfc5070ada19b0fe7135313.wav",
+            "duration": 5.44
+          },
+          "0.65": {
+            "src": "audio/f61ec49a63ea86b29d7b02ec.wav",
+            "duration": 4.184625
+          },
+          "0.8": {
+            "src": "audio/76b7528a443d13d3954d880b.wav",
+            "duration": 3.4
+          }
+        }
       },
       {
         "zh": "它没有理我，又把头放了下去。",
         "src": "audio/26ac736e7f3883149f24e1e2.wav",
-        "duration": 2.0
+        "duration": 2.0,
+        "speeds": {
+          "0.5": {
+            "src": "audio/6c2b1e43d72e453a3a5a21fc.wav",
+            "duration": 4.0
+          },
+          "0.65": {
+            "src": "audio/bea6f2cbac7f3ab0bf914148.wav",
+            "duration": 3.0769166666666665
+          },
+          "0.8": {
+            "src": "audio/354ff7e8701570bea62bda60.wav",
+            "duration": 2.5
+          }
+        }
       },
       {
         "zh": "我终于放心了，拿起书，陪它安静地坐了一会儿。",
         "src": "audio/ed3308fb750eba09fa9a3556.wav",
-        "duration": 4.24
+        "duration": 4.24,
+        "speeds": {
+          "0.5": {
+            "src": "audio/3d610fa14f7f179770c8e174.wav",
+            "duration": 8.48
+          },
+          "0.65": {
+            "src": "audio/1afdc20f2222adcec6c10e41.wav",
+            "duration": 6.523083333333333
+          },
+          "0.8": {
+            "src": "audio/4a67e1124699d7a39bd1181d.wav",
+            "duration": 5.3
+          }
+        }
       }
     ],
     "tea-advanced": [
       {
         "zh": "雨声渐密，小林合上书，把水壶重新放回炉上。",
         "src": "audio/e58423bb0c25ed928ce1a7c2.wav",
-        "duration": 4.48
+        "duration": 4.48,
+        "speeds": {
+          "0.5": {
+            "src": "audio/f45420abd818d1a7a8632ebe.wav",
+            "duration": 8.96
+          },
+          "0.65": {
+            "src": "audio/bc5eb5c4a218f395f00265fd.wav",
+            "duration": 6.892291666666667
+          },
+          "0.8": {
+            "src": "audio/8f03f27eee23c1beb3f5df14.wav",
+            "duration": 5.6
+          }
+        }
       },
       {
         "zh": "门铃响起时，他还以为是邻居来借东西。",
         "src": "audio/648eed33e66da434be14c1a4.wav",
-        "duration": 3.52
+        "duration": 3.52,
+        "speeds": {
+          "0.5": {
+            "src": "audio/0ac979135535e4188723e7b5.wav",
+            "duration": 7.04
+          },
+          "0.65": {
+            "src": "audio/2ddd0f9e85b4dd3920179b3e.wav",
+            "duration": 5.415375
+          },
+          "0.8": {
+            "src": "audio/f51fe1d48a379b3483b570c3.wav",
+            "duration": 4.4
+          }
+        }
       },
       {
         "zh": "站在门外的却是小月，湿透的伞歪歪斜斜地垂在她手里。",
         "src": "audio/46f7e12096932f726166f567.wav",
-        "duration": 4.64
+        "duration": 4.64,
+        "speeds": {
+          "0.5": {
+            "src": "audio/890341816c4aaab634fa0ea3.wav",
+            "duration": 9.28
+          },
+          "0.65": {
+            "src": "audio/58c510af88bb26eeade9849e.wav",
+            "duration": 7.138458333333333
+          },
+          "0.8": {
+            "src": "audio/5ccdd7d9ebb83875011d7c20.wav",
+            "duration": 5.8
+          }
+        }
       },
       {
         "zh": "她神情疲惫，却只说自己恰好路过，想进来躲一会儿雨。",
         "src": "audio/7c7d435948e2a74f5dc17c9d.wav",
-        "duration": 4.72
+        "duration": 4.72,
+        "speeds": {
+          "0.5": {
+            "src": "audio/efbda429f9349d83d4001f14.wav",
+            "duration": 9.44
+          },
+          "0.65": {
+            "src": "audio/3f96fdc1a98f9fc535d54c9b.wav",
+            "duration": 7.261541666666667
+          },
+          "0.8": {
+            "src": "audio/25b073116cdc84af12844e4d.wav",
+            "duration": 5.9
+          }
+        }
       },
       {
         "zh": "小林接过那把坏伞，没有追问，把干毛巾递给了她。",
         "src": "audio/a6a6e00fa97dbb3a21835f7c.wav",
-        "duration": 3.92
+        "duration": 3.92,
+        "speeds": {
+          "0.5": {
+            "src": "audio/015927e4adfab6f6dd2be4f8.wav",
+            "duration": 7.84
+          },
+          "0.65": {
+            "src": "audio/ae5e1deb390e4538644ea851.wav",
+            "duration": 6.03075
+          },
+          "0.8": {
+            "src": "audio/f612b32b3109cfc46c82902c.wav",
+            "duration": 4.9
+          }
+        }
       },
       {
         "zh": "拿杯子时，他发现蓝杯底下还压着一张字迹歪斜的小纸条。",
         "src": "audio/80e36eb5223a55f3ce939730.wav",
-        "duration": 5.36
+        "duration": 5.36,
+        "speeds": {
+          "0.5": {
+            "src": "audio/a49f78ad3dec3794fb3dc96a.wav",
+            "duration": 10.72
+          },
+          "0.65": {
+            "src": "audio/5721f820ab4182e517735e3b.wav",
+            "duration": 8.246166666666667
+          },
+          "0.8": {
+            "src": "audio/8a5e150a75d9a28de448de25.wav",
+            "duration": 6.7
+          }
+        }
       },
       {
         "zh": "“这是小月的杯子”，是她上次来时随手写下的玩笑。",
         "src": "audio/751745c2b33dbadd5f6af23f.wav",
-        "duration": 4.72
+        "duration": 4.72,
+        "speeds": {
+          "0.5": {
+            "src": "audio/70ed97f001a8c5bf77b6eef5.wav",
+            "duration": 9.44
+          },
+          "0.65": {
+            "src": "audio/96523937c59f407c1b51f823.wav",
+            "duration": 7.261541666666667
+          },
+          "0.8": {
+            "src": "audio/05ecf28bacc204fb02886ae1.wav",
+            "duration": 5.9
+          }
+        }
       },
       {
         "zh": "他把纸条放到桌上，将一杯热茶轻轻推到她面前。",
         "src": "audio/437eaeba3a6b6be234b3aafb.wav",
-        "duration": 4.32
+        "duration": 4.32,
+        "speeds": {
+          "0.5": {
+            "src": "audio/9432cea3e095822625199d39.wav",
+            "duration": 8.64
+          },
+          "0.65": {
+            "src": "audio/ce14109d53a047c587f20955.wav",
+            "duration": 6.646166666666667
+          },
+          "0.8": {
+            "src": "audio/50257d1c2e1a0af69fa52c82.wav",
+            "duration": 5.4
+          }
+        }
       },
       {
         "zh": "小月盯着自己的字看了一会儿，紧绷的神情终于松动了一点。",
         "src": "audio/6cf8291bef31ca7180d4c5f3.wav",
-        "duration": 4.64
+        "duration": 4.64,
+        "speeds": {
+          "0.5": {
+            "src": "audio/149dff6db30a35ff926b742b.wav",
+            "duration": 9.28
+          },
+          "0.65": {
+            "src": "audio/4f7b360d65b3af846b5cb6f5.wav",
+            "duration": 7.138458333333333
+          },
+          "0.8": {
+            "src": "audio/1062a699cee955b45731c7a1.wav",
+            "duration": 5.8
+          }
+        }
       },
       {
         "zh": "她原本准备好的那句“我没事”，也没有再说出口。",
         "src": "audio/5464637520217c21c5cc3e73.wav",
-        "duration": 4.16
+        "duration": 4.16,
+        "speeds": {
+          "0.5": {
+            "src": "audio/0ecce7a86e46e87b4fbca9dd.wav",
+            "duration": 8.32
+          },
+          "0.65": {
+            "src": "audio/cfc31c95af08044871ec1f4c.wav",
+            "duration": 6.4
+          },
+          "0.8": {
+            "src": "audio/eb752b144b177aea4a75607b.wav",
+            "duration": 5.2
+          }
+        }
       },
       {
         "zh": "小林在对面坐下，心想，与其急着安慰，不如给彼此留一点沉默的余地。",
         "src": "audio/79bff0723641ca4c222d1dcc.wav",
-        "duration": 7.2
+        "duration": 7.2,
+        "speeds": {
+          "0.5": {
+            "src": "audio/5273e537b33fcd5d7d0a8b62.wav",
+            "duration": 14.4
+          },
+          "0.65": {
+            "src": "audio/eabae9be77cc1e5e36fe910b.wav",
+            "duration": 11.076916666666667
+          },
+          "0.8": {
+            "src": "audio/b434db3092e5557d7840e2b7.wav",
+            "duration": 9.0
+          }
+        }
       },
       {
         "zh": "过了好一会儿，小月才说起最近的工作，以及那些一直不知该向谁诉说的烦恼。",
         "src": "audio/0eb435177aea4df8e32df0a9.wav",
-        "duration": 6.24
+        "duration": 6.24,
+        "speeds": {
+          "0.5": {
+            "src": "audio/30e22417cb09ecb220b80d2a.wav",
+            "duration": 12.48
+          },
+          "0.65": {
+            "src": "audio/2bbabe73ada0f868451f64c5.wav",
+            "duration": 9.6
+          },
+          "0.8": {
+            "src": "audio/c44fbe9c1626ce92e8e663b7.wav",
+            "duration": 7.8
+          }
+        }
       },
       {
         "zh": "他耐心地听着，偶尔问一句，并不急于替她安排答案。",
         "src": "audio/0449ac153ebc7335c2b8e20b.wav",
-        "duration": 4.16
+        "duration": 4.16,
+        "speeds": {
+          "0.5": {
+            "src": "audio/e88d81569560b6128cd8b21b.wav",
+            "duration": 8.32
+          },
+          "0.65": {
+            "src": "audio/c5e52d12722d67d409e86b07.wav",
+            "duration": 6.4
+          },
+          "0.8": {
+            "src": "audio/83d43a6f7bb450aa24bf2fcf.wav",
+            "duration": 5.2
+          }
+        }
       },
       {
         "zh": "窗外的雨渐渐小了，杯里的茶也凉了，两个人却都没有起身。",
         "src": "audio/45622cd9d64244c8766ecb83.wav",
-        "duration": 5.92
+        "duration": 5.92,
+        "speeds": {
+          "0.5": {
+            "src": "audio/b46d3d08fc5b436385a69035.wav",
+            "duration": 11.84
+          },
+          "0.65": {
+            "src": "audio/e5bbd64c8f54e9399cde65f6.wav",
+            "duration": 9.107708333333333
+          },
+          "0.8": {
+            "src": "audio/d3166e2f3bb230bb45cd6b41.wav",
+            "duration": 7.4
+          }
+        }
       },
       {
         "zh": "临走时，小月拿起桌上的纸条，问他能不能继续替她保管那个杯子。",
         "src": "audio/f589dc9edf34c004870d3c6a.wav",
-        "duration": 5.68
+        "duration": 5.68,
+        "speeds": {
+          "0.5": {
+            "src": "audio/bdd6183a04fe5cfc5c945750.wav",
+            "duration": 11.36
+          },
+          "0.65": {
+            "src": "audio/2f5ea9334b4c4b1323e5f546.wav",
+            "duration": 8.738458333333334
+          },
+          "0.8": {
+            "src": "audio/3aa02b5fce18c7ab944fa5b8.wav",
+            "duration": 7.1
+          }
+        }
       },
       {
         "zh": "小林递给她一把好伞，说：“杯子一直都在，下次不用等下雨再来。”",
         "src": "audio/d246f0dc060b22f485cc56e9.wav",
-        "duration": 6.48
+        "duration": 6.48,
+        "speeds": {
+          "0.5": {
+            "src": "audio/4edad624754351d22ebf3ff7.wav",
+            "duration": 12.96
+          },
+          "0.65": {
+            "src": "audio/fd7638bb1a76e5f91523dd02.wav",
+            "duration": 9.96925
+          },
+          "0.8": {
+            "src": "audio/b7331a72de5871e1d685d691.wav",
+            "duration": 8.1
+          }
+        }
       },
       {
         "zh": "两人不约而同地笑了，她这才发现，自己一直在寻找的其实只是一个可以留下来的借口。",
         "src": "audio/5cb26d0038664ce9f0c156e2.wav",
-        "duration": 8.0
+        "duration": 8.0,
+        "speeds": {
+          "0.5": {
+            "src": "audio/65201a51d30d921f144d0c2d.wav",
+            "duration": 16.0
+          },
+          "0.65": {
+            "src": "audio/34aef8456152ef1112cdb73a.wav",
+            "duration": 12.307708333333334
+          },
+          "0.8": {
+            "src": "audio/2607ebf56b32cd5c814d4b3b.wav",
+            "duration": 10.0
+          }
+        }
       },
       {
         "zh": "门关上后，小林洗好蓝杯子，把那张纸条重新放在了下面。",
         "src": "audio/7e27f61c69888ca1fa962a2d.wav",
-        "duration": 5.04
+        "duration": 5.04,
+        "speeds": {
+          "0.5": {
+            "src": "audio/222bb7f86971853862379049.wav",
+            "duration": 10.08
+          },
+          "0.65": {
+            "src": "audio/8d8814d4c62a6d951fc58f1d.wav",
+            "duration": 7.753833333333334
+          },
+          "0.8": {
+            "src": "audio/f01adeb81e69bf0fab84f619.wav",
+            "duration": 6.3
+          }
+        }
       }
     ],
     "tea-beginner": [
       {
         "zh": "我叫小林。",
         "src": "audio/20cb202e61335409a5de41ff.wav",
-        "duration": 1.12
+        "duration": 1.12,
+        "speeds": {
+          "0.5": {
+            "src": "audio/7ec21ee6625058dd3211cd8e.wav",
+            "duration": 2.24
+          },
+          "0.65": {
+            "src": "audio/4ae36a766e42e55aca1876e1.wav",
+            "duration": 1.7230833333333333
+          },
+          "0.8": {
+            "src": "audio/36e9466a199807786a1b8b6e.wav",
+            "duration": 1.4
+          }
+        }
       },
       {
         "zh": "我喜欢喝茶。",
         "src": "audio/799a1664006a84aa1ec20026.wav",
-        "duration": 1.12
+        "duration": 1.12,
+        "speeds": {
+          "0.5": {
+            "src": "audio/ee5a83a5224dad8a504ea98b.wav",
+            "duration": 2.24
+          },
+          "0.65": {
+            "src": "audio/054809552d111e9c8187668d.wav",
+            "duration": 1.7230833333333333
+          },
+          "0.8": {
+            "src": "audio/80325d66786eb60890950b66.wav",
+            "duration": 1.4
+          }
+        }
       },
       {
         "zh": "今天，我在家看书。",
         "src": "audio/c3910a9b337cf163459e6c66.wav",
-        "duration": 2.48
+        "duration": 2.48,
+        "speeds": {
+          "0.5": {
+            "src": "audio/6f8f9b6aa61f998f827ddc9a.wav",
+            "duration": 4.96
+          },
+          "0.65": {
+            "src": "audio/f8346888f1570dc1cc993d50.wav",
+            "duration": 3.815375
+          },
+          "0.8": {
+            "src": "audio/34e86e2ef91d3b3c10e92d5a.wav",
+            "duration": 3.1
+          }
+        }
       },
       {
         "zh": "我的朋友小月来我家。",
         "src": "audio/92f0ad025720437e3818e235.wav",
-        "duration": 1.68
+        "duration": 1.68,
+        "speeds": {
+          "0.5": {
+            "src": "audio/2bb61c842910e940c3b0791c.wav",
+            "duration": 3.36
+          },
+          "0.65": {
+            "src": "audio/08a37299d73612c71deb7b0c.wav",
+            "duration": 2.584625
+          },
+          "0.8": {
+            "src": "audio/112415afe86c24b884265570.wav",
+            "duration": 2.1
+          }
+        }
       },
       {
         "zh": "她说：“你好，小林！”",
         "src": "audio/8841ac20a89abeb51ecdcc20.wav",
-        "duration": 1.6
+        "duration": 1.6,
+        "speeds": {
+          "0.5": {
+            "src": "audio/c439acb291cd6e100fe99aa0.wav",
+            "duration": 3.2
+          },
+          "0.65": {
+            "src": "audio/477f7cd2577a9d75f6dc0293.wav",
+            "duration": 2.4615416666666667
+          },
+          "0.8": {
+            "src": "audio/566671bfbe60f2771f91c3cd.wav",
+            "duration": 2.0
+          }
+        }
       },
       {
         "zh": "我说：“小月，你好！”",
         "src": "audio/3a988428ab9e1ba1a111a0e2.wav",
-        "duration": 2.32
+        "duration": 2.32,
+        "speeds": {
+          "0.5": {
+            "src": "audio/120a2559b8a17dce9969e97b.wav",
+            "duration": 4.64
+          },
+          "0.65": {
+            "src": "audio/faf4cf3dfbd0a62ea6d9f7c3.wav",
+            "duration": 3.56925
+          },
+          "0.8": {
+            "src": "audio/0555113d3577015be309e716.wav",
+            "duration": 2.9
+          }
+        }
       },
       {
         "zh": "她坐在椅子上。",
         "src": "audio/a333a97764dadb86f1c04d62.wav",
-        "duration": 1.2
+        "duration": 1.2,
+        "speeds": {
+          "0.5": {
+            "src": "audio/b711b22072b596eb76f1b992.wav",
+            "duration": 2.4
+          },
+          "0.65": {
+            "src": "audio/7398fe2fea79d522b8696939.wav",
+            "duration": 1.8461666666666667
+          },
+          "0.8": {
+            "src": "audio/9f8d2365fb5390984a7a7dbe.wav",
+            "duration": 1.5
+          }
+        }
       },
       {
         "zh": "她说：“我很渴。”",
         "src": "audio/6fe6d9d811c027234b061e21.wav",
-        "duration": 1.76
+        "duration": 1.76,
+        "speeds": {
+          "0.5": {
+            "src": "audio/a061d2f88035f328e4511e48.wav",
+            "duration": 3.52
+          },
+          "0.65": {
+            "src": "audio/d23039f1aa3e4642db26add9.wav",
+            "duration": 2.707708333333333
+          },
+          "0.8": {
+            "src": "audio/0e4e196f397645a928ab8227.wav",
+            "duration": 2.2
+          }
+        }
       },
       {
         "zh": "我问：“你喝茶吗？”",
         "src": "audio/5d101e0c4ea55b7bd6ffd673.wav",
-        "duration": 1.6
+        "duration": 1.6,
+        "speeds": {
+          "0.5": {
+            "src": "audio/c3fb010fdc9fbafeb896a284.wav",
+            "duration": 3.2
+          },
+          "0.65": {
+            "src": "audio/4212fe31a9dfc19d008e3eb6.wav",
+            "duration": 2.4615416666666667
+          },
+          "0.8": {
+            "src": "audio/efa1bcac19f343e9f6009cb3.wav",
+            "duration": 2.0
+          }
+        }
       },
       {
         "zh": "她说：“好，谢谢！”",
         "src": "audio/0ede231d5b1f6af6c8651241.wav",
-        "duration": 2.4
+        "duration": 2.4,
+        "speeds": {
+          "0.5": {
+            "src": "audio/104571e1693ed9aee760eb17.wav",
+            "duration": 4.8
+          },
+          "0.65": {
+            "src": "audio/6ced26167bf5809693e3cf05.wav",
+            "duration": 3.6922916666666667
+          },
+          "0.8": {
+            "src": "audio/1c47fe8e6cc2eb36cd7fc71a.wav",
+            "duration": 3.0
+          }
+        }
       },
       {
         "zh": "我去厨房拿杯子。",
         "src": "audio/7c1a4a0ef8dcc53dfac48166.wav",
-        "duration": 1.52
+        "duration": 1.52,
+        "speeds": {
+          "0.5": {
+            "src": "audio/e0676d08f860819d4f0f9b2f.wav",
+            "duration": 3.04
+          },
+          "0.65": {
+            "src": "audio/73685c2549f83c9f3354125a.wav",
+            "duration": 2.3384583333333335
+          },
+          "0.8": {
+            "src": "audio/a3f26b3cd2bbd471a75dfce8.wav",
+            "duration": 1.9
+          }
+        }
       },
       {
         "zh": "我有两个杯子。",
         "src": "audio/82df9c549b4053f9f0c127f9.wav",
-        "duration": 1.2
+        "duration": 1.2,
+        "speeds": {
+          "0.5": {
+            "src": "audio/95d55e0e67066883259239b4.wav",
+            "duration": 2.4
+          },
+          "0.65": {
+            "src": "audio/3cb84c12b646d1921cf4caf9.wav",
+            "duration": 1.8461666666666667
+          },
+          "0.8": {
+            "src": "audio/5b159c3813d2b26fbfbcb5bb.wav",
+            "duration": 1.5
+          }
+        }
       },
       {
         "zh": "一个是白的，一个是蓝的。",
         "src": "audio/8046caa8e606816fc31dc3f5.wav",
-        "duration": 1.68
+        "duration": 1.68,
+        "speeds": {
+          "0.5": {
+            "src": "audio/99ddeb267033b393335818af.wav",
+            "duration": 3.36
+          },
+          "0.65": {
+            "src": "audio/0aab0c2fd62464fd7afb33f6.wav",
+            "duration": 2.584625
+          },
+          "0.8": {
+            "src": "audio/deb795ce53a060c905f3d647.wav",
+            "duration": 2.1
+          }
+        }
       },
       {
         "zh": "我给她一杯热茶。",
         "src": "audio/590832541d86ae4fad28bbe4.wav",
-        "duration": 1.44
+        "duration": 1.44,
+        "speeds": {
+          "0.5": {
+            "src": "audio/b3bb69a5de38f71eed00d407.wav",
+            "duration": 2.88
+          },
+          "0.65": {
+            "src": "audio/dd820b99bc833002f29eed7e.wav",
+            "duration": 2.215375
+          },
+          "0.8": {
+            "src": "audio/35e6256489f6bd9831bf3f63.wav",
+            "duration": 1.8
+          }
+        }
       },
       {
         "zh": "她拿起杯子，想喝茶。",
         "src": "audio/198d77d7983f47b7a0bedca8.wav",
-        "duration": 1.68
+        "duration": 1.68,
+        "speeds": {
+          "0.5": {
+            "src": "audio/ce895fb005ac6f5de06ef3c1.wav",
+            "duration": 3.36
+          },
+          "0.65": {
+            "src": "audio/909e886a5fb11e68a96b5fe0.wav",
+            "duration": 2.584625
+          },
+          "0.8": {
+            "src": "audio/a3e0f7447210ddf7d1ffbad1.wav",
+            "duration": 2.1
+          }
+        }
       },
       {
         "zh": "我说：“茶很热，等一等！”",
         "src": "audio/ebeff0b8b54cc3024f8c67d4.wav",
-        "duration": 2.24
+        "duration": 2.24,
+        "speeds": {
+          "0.5": {
+            "src": "audio/e1d0a95cd7a1cd36debd8289.wav",
+            "duration": 4.48
+          },
+          "0.65": {
+            "src": "audio/9c05d2deb7ae40bf10947c33.wav",
+            "duration": 3.4461666666666666
+          },
+          "0.8": {
+            "src": "audio/0c8e003f32899a9c6b3f7634.wav",
+            "duration": 2.8
+          }
+        }
       },
       {
         "zh": "她放下杯子。",
         "src": "audio/d40517c9f39306538fa7cc86.wav",
-        "duration": 1.2
+        "duration": 1.2,
+        "speeds": {
+          "0.5": {
+            "src": "audio/aee2954229a5c1c03899f6e9.wav",
+            "duration": 2.4
+          },
+          "0.65": {
+            "src": "audio/fcf439b43b1e8c31b2b0dc15.wav",
+            "duration": 1.8461666666666667
+          },
+          "0.8": {
+            "src": "audio/59ca127cabae7e595063fb7a.wav",
+            "duration": 1.5
+          }
+        }
       },
       {
         "zh": "桌子上有两个苹果。",
         "src": "audio/50a60436d8411a57427f8e30.wav",
-        "duration": 1.76
+        "duration": 1.76,
+        "speeds": {
+          "0.5": {
+            "src": "audio/c614e8b3223f416e52ef5a72.wav",
+            "duration": 3.52
+          },
+          "0.65": {
+            "src": "audio/5a992968267e2a2b030e96b4.wav",
+            "duration": 2.707708333333333
+          },
+          "0.8": {
+            "src": "audio/a24591322d11cf33798618d4.wav",
+            "duration": 2.2
+          }
+        }
       },
       {
         "zh": "我给她一个苹果。",
         "src": "audio/978c97a2902e8e5678b3d3a3.wav",
-        "duration": 1.44
+        "duration": 1.44,
+        "speeds": {
+          "0.5": {
+            "src": "audio/5c8f5306a23017d5819c40aa.wav",
+            "duration": 2.88
+          },
+          "0.65": {
+            "src": "audio/c03fa4309a352dd280c849c1.wav",
+            "duration": 2.215375
+          },
+          "0.8": {
+            "src": "audio/111961d8c4b3f1aa5cedb3a0.wav",
+            "duration": 1.8
+          }
+        }
       },
       {
         "zh": "她说：“苹果很甜！”",
         "src": "audio/6676311cb138b335a20de9c2.wav",
-        "duration": 1.6
+        "duration": 1.6,
+        "speeds": {
+          "0.5": {
+            "src": "audio/4d344c7dca81616c066dc03d.wav",
+            "duration": 3.2
+          },
+          "0.65": {
+            "src": "audio/565343059787736b74c5fd99.wav",
+            "duration": 2.4615416666666667
+          },
+          "0.8": {
+            "src": "audio/4953137871acff39971a371b.wav",
+            "duration": 2.0
+          }
+        }
       },
       {
         "zh": "我们吃苹果，也说说话。",
         "src": "audio/46bfaa798f6713d9d9367e6f.wav",
-        "duration": 1.6
+        "duration": 1.6,
+        "speeds": {
+          "0.5": {
+            "src": "audio/7171a73d9ca3af203d20151d.wav",
+            "duration": 3.2
+          },
+          "0.65": {
+            "src": "audio/297b144896a5880aceda5d85.wav",
+            "duration": 2.4615416666666667
+          },
+          "0.8": {
+            "src": "audio/8dff1df0055902ded43a9924.wav",
+            "duration": 2.0
+          }
+        }
       },
       {
         "zh": "现在，茶不太热了。",
         "src": "audio/d71c3e24c7596938b98301fa.wav",
-        "duration": 1.76
+        "duration": 1.76,
+        "speeds": {
+          "0.5": {
+            "src": "audio/b6fd58fe0d8ba9fc5403774e.wav",
+            "duration": 3.52
+          },
+          "0.65": {
+            "src": "audio/b59f2bfb6d926283bd8b4adb.wav",
+            "duration": 2.707708333333333
+          },
+          "0.8": {
+            "src": "audio/22bb7acf333da0af61de22a1.wav",
+            "duration": 2.2
+          }
+        }
       },
       {
         "zh": "小月喝了茶，说：“很好喝！”",
         "src": "audio/1a304c9384e8289fcbbeccf6.wav",
-        "duration": 3.6
+        "duration": 3.6,
+        "speeds": {
+          "0.5": {
+            "src": "audio/3c3f760c07fb93b1bb47da8e.wav",
+            "duration": 7.2
+          },
+          "0.65": {
+            "src": "audio/ddd82a8b917a8c4c260e24e2.wav",
+            "duration": 5.538458333333334
+          },
+          "0.8": {
+            "src": "audio/1aa61d80a2309521901c99b3.wav",
+            "duration": 4.5
+          }
+        }
       },
       {
         "zh": "我说：“明天，我们再一起喝茶吧！”",
         "src": "audio/f2186c8be1e15a78a6788582.wav",
-        "duration": 3.52
+        "duration": 3.52,
+        "speeds": {
+          "0.5": {
+            "src": "audio/0a5ffec6eab854407c9e9283.wav",
+            "duration": 7.04
+          },
+          "0.65": {
+            "src": "audio/904d9201c38511e3e51a8d7f.wav",
+            "duration": 5.415375
+          },
+          "0.8": {
+            "src": "audio/f8bc12512f618b57baff6c9d.wav",
+            "duration": 4.4
+          }
+        }
       }
     ],
     "tea-intermediate": [
       {
         "zh": "下午，小林正在看书，突然听见有人敲门。",
         "src": "audio/d10afaf93724a3f24a235f7e.wav",
-        "duration": 5.68
+        "duration": 5.68,
+        "speeds": {
+          "0.5": {
+            "src": "audio/9d4829ed9f27e1ae13759327.wav",
+            "duration": 11.36
+          },
+          "0.65": {
+            "src": "audio/545a62c6d08c4540702b317b.wav",
+            "duration": 8.738458333333334
+          },
+          "0.8": {
+            "src": "audio/c3b68ce2da128986a68e2c1f.wav",
+            "duration": 7.1
+          }
+        }
       },
       {
         "zh": "他打开门，看见朋友小月站在外面。",
         "src": "audio/2ed02fb36486627635c1c717.wav",
-        "duration": 3.28
+        "duration": 3.28,
+        "speeds": {
+          "0.5": {
+            "src": "audio/3d963dec100c003b3ece619a.wav",
+            "duration": 6.56
+          },
+          "0.65": {
+            "src": "audio/947736f4785f01fe3ff470c5.wav",
+            "duration": 5.046166666666666
+          },
+          "0.8": {
+            "src": "audio/793a0cab8291a8a9f6a08c19.wav",
+            "duration": 4.1
+          }
+        }
       },
       {
         "zh": "她的头发湿了，手里拿着一把坏了的伞。",
         "src": "audio/bf4e446c529966142534625e.wav",
-        "duration": 3.36
+        "duration": 3.36,
+        "speeds": {
+          "0.5": {
+            "src": "audio/41dc907752bb4455a95524eb.wav",
+            "duration": 6.72
+          },
+          "0.65": {
+            "src": "audio/399adb611cebbdace027d69b.wav",
+            "duration": 5.16925
+          },
+          "0.8": {
+            "src": "audio/772b2ae68209802b7e318f78.wav",
+            "duration": 4.2
+          }
+        }
       },
       {
         "zh": "“风太大了，我的伞坏了！”",
         "src": "audio/6d91a8243df4b7692dabdce6.wav",
-        "duration": 3.6
+        "duration": 3.6,
+        "speeds": {
+          "0.5": {
+            "src": "audio/8443a4b351fdb86b48dc3392.wav",
+            "duration": 7.2
+          },
+          "0.65": {
+            "src": "audio/4853132aec9c6e9f5f9e4eea.wav",
+            "duration": 5.538458333333334
+          },
+          "0.8": {
+            "src": "audio/d2e1b77d8570ba65fd3ea361.wav",
+            "duration": 4.5
+          }
+        }
       },
       {
         "zh": "小林请她进来，又给她拿了一条干毛巾。",
         "src": "audio/5e3f0f6027308c543efc4e1f.wav",
-        "duration": 2.96
+        "duration": 2.96,
+        "speeds": {
+          "0.5": {
+            "src": "audio/940fdf09cf63b8dd434e0792.wav",
+            "duration": 5.92
+          },
+          "0.65": {
+            "src": "audio/f5e47012727c87bd1fae313b.wav",
+            "duration": 4.553833333333333
+          },
+          "0.8": {
+            "src": "audio/bae26dbe2c2951e16d9d9df5.wav",
+            "duration": 3.7
+          }
+        }
       },
       {
         "zh": "小月坐下来，说自己又冷又渴。",
         "src": "audio/8fc51c5c09018ad775a996ef.wav",
-        "duration": 3.36
+        "duration": 3.36,
+        "speeds": {
+          "0.5": {
+            "src": "audio/8e3121ee60c22ba1761a8b4a.wav",
+            "duration": 6.72
+          },
+          "0.65": {
+            "src": "audio/9ae43bdf310064ec4c2354a6.wav",
+            "duration": 5.16925
+          },
+          "0.8": {
+            "src": "audio/ed6908b202f39d2df170d9af.wav",
+            "duration": 4.2
+          }
+        }
       },
       {
         "zh": "小林去厨房，准备给她泡一杯热茶。",
         "src": "audio/663b891326f76c1887e5519a.wav",
-        "duration": 2.64
+        "duration": 2.64,
+        "speeds": {
+          "0.5": {
+            "src": "audio/966d5660410eb602f7732140.wav",
+            "duration": 5.28
+          },
+          "0.65": {
+            "src": "audio/49f3ee7dcba4685726adcbba.wav",
+            "duration": 4.061541666666667
+          },
+          "0.8": {
+            "src": "audio/28c4c4ab47987a86280ab20c.wav",
+            "duration": 3.3
+          }
+        }
       },
       {
         "zh": "他拿出一个蓝杯子，却发现杯子里有一张小纸条。",
         "src": "audio/eea9a0138dfb7dcf7bb52d5a.wav",
-        "duration": 3.76
+        "duration": 3.76,
+        "speeds": {
+          "0.5": {
+            "src": "audio/4d2c94f916d991f5fdb46f92.wav",
+            "duration": 7.52
+          },
+          "0.65": {
+            "src": "audio/6b99d93aa6f105424b61e2a0.wav",
+            "duration": 5.784625
+          },
+          "0.8": {
+            "src": "audio/e323915d82bac8aae897196e.wav",
+            "duration": 4.7
+          }
+        }
       },
       {
         "zh": "纸条上写着：“这是小月的杯子。”",
         "src": "audio/152660bc3f48390bfe3ea0e0.wav",
-        "duration": 2.64
+        "duration": 2.64,
+        "speeds": {
+          "0.5": {
+            "src": "audio/57f7f99ebe3913e4dc2d95da.wav",
+            "duration": 5.28
+          },
+          "0.65": {
+            "src": "audio/bf65d76ca8adad1881991ba1.wav",
+            "duration": 4.061541666666667
+          },
+          "0.8": {
+            "src": "audio/0fa3652b12e2f492bcf55760.wav",
+            "duration": 3.3
+          }
+        }
       },
       {
         "zh": "原来，上次小月来喝茶时，开玩笑地留下了这张纸条。",
         "src": "audio/01704a7fb4bc169e956af823.wav",
-        "duration": 4.48
+        "duration": 4.48,
+        "speeds": {
+          "0.5": {
+            "src": "audio/b42b1d8f4d80a36e4f86ee07.wav",
+            "duration": 8.96
+          },
+          "0.65": {
+            "src": "audio/5c87d6b38b349bf550da87d6.wav",
+            "duration": 6.892291666666667
+          },
+          "0.8": {
+            "src": "audio/ef0e9bd301f24089a0073608.wav",
+            "duration": 5.6
+          }
+        }
       },
       {
         "zh": "小林把纸条拿给她看，两个人都笑了。",
         "src": "audio/5f366ef72ed1fcf715321ed9.wav",
-        "duration": 3.28
+        "duration": 3.28,
+        "speeds": {
+          "0.5": {
+            "src": "audio/587d57e9699798f0db793fed.wav",
+            "duration": 6.56
+          },
+          "0.65": {
+            "src": "audio/5892b23efbb391a3ecafcad4.wav",
+            "duration": 5.046166666666666
+          },
+          "0.8": {
+            "src": "audio/a0443166b83a448d5abac756.wav",
+            "duration": 4.1
+          }
+        }
       },
       {
         "zh": "他洗好杯子，倒上热茶，放在她面前。",
         "src": "audio/c52678cd14dc4f06559061b7.wav",
-        "duration": 2.8
+        "duration": 2.8,
+        "speeds": {
+          "0.5": {
+            "src": "audio/45e799872e2629648d2d0f54.wav",
+            "duration": 5.6
+          },
+          "0.65": {
+            "src": "audio/666e5c37f83e1c4a22f72392.wav",
+            "duration": 4.307708333333333
+          },
+          "0.8": {
+            "src": "audio/09f7803a2d4aaeef85e9effb.wav",
+            "duration": 3.5
+          }
+        }
       },
       {
         "zh": "“茶很热，先吃点面包吧。”",
         "src": "audio/a4457828f5754ca286998a52.wav",
-        "duration": 2.16
+        "duration": 2.16,
+        "speeds": {
+          "0.5": {
+            "src": "audio/9d9bd5d2efad418a764c328a.wav",
+            "duration": 4.32
+          },
+          "0.65": {
+            "src": "audio/84ea8d868199c189c73162b6.wav",
+            "duration": 3.3230833333333334
+          },
+          "0.8": {
+            "src": "audio/38de9cfe5198521157f2af50.wav",
+            "duration": 2.7
+          }
+        }
       },
       {
         "zh": "他们一边吃面包，一边聊最近的生活。",
         "src": "audio/0e23b7b6d7577a4e29e0783f.wav",
-        "duration": 3.92
+        "duration": 3.92,
+        "speeds": {
+          "0.5": {
+            "src": "audio/18a6396ba5ffc43ffba78d38.wav",
+            "duration": 7.84
+          },
+          "0.65": {
+            "src": "audio/7fb34f4d695d7ed54f11889d.wav",
+            "duration": 6.03075
+          },
+          "0.8": {
+            "src": "audio/8828cde70cba21cf22400931.wav",
+            "duration": 4.9
+          }
+        }
       },
       {
         "zh": "小月说，这个星期工作很忙，她每天都很累。",
         "src": "audio/459bdf3f7f89c477784e07fd.wav",
-        "duration": 3.52
+        "duration": 3.52,
+        "speeds": {
+          "0.5": {
+            "src": "audio/c48d154e43c8655a6a18bf15.wav",
+            "duration": 7.04
+          },
+          "0.65": {
+            "src": "audio/9374e9637ac761b3566041ed.wav",
+            "duration": 5.415375
+          },
+          "0.8": {
+            "src": "audio/738273dd2640599bed723bfd.wav",
+            "duration": 4.4
+          }
+        }
       },
       {
         "zh": "小林没有急着说话，只是认真地听着。",
         "src": "audio/8e8864b50f8061c6814edd5a.wav",
-        "duration": 3.52
+        "duration": 3.52,
+        "speeds": {
+          "0.5": {
+            "src": "audio/05c4a5322ea57a572e9081a8.wav",
+            "duration": 7.04
+          },
+          "0.65": {
+            "src": "audio/9843f4cdfb68ce83021ae385.wav",
+            "duration": 5.415375
+          },
+          "0.8": {
+            "src": "audio/7ee924065de4c486d6f1ad0e.wav",
+            "duration": 4.4
+          }
+        }
       },
       {
         "zh": "虽然外面还在下雨，但是小月已经觉得暖和多了。",
         "src": "audio/1ecb9e972d746533a9792d83.wav",
-        "duration": 3.36
+        "duration": 3.36,
+        "speeds": {
+          "0.5": {
+            "src": "audio/664185eed10da6e6aff23ae7.wav",
+            "duration": 6.72
+          },
+          "0.65": {
+            "src": "audio/11616123df57386d9c576631.wav",
+            "duration": 5.16925
+          },
+          "0.8": {
+            "src": "audio/34a39bfd9be636f4b214c39f.wav",
+            "duration": 4.2
+          }
+        }
       },
       {
         "zh": "雨小了以后，小林找了一把好伞借给她。",
         "src": "audio/9ef38e29c8184876d2cf27cd.wav",
-        "duration": 3.2
+        "duration": 3.2,
+        "speeds": {
+          "0.5": {
+            "src": "audio/ae16f12e4bdca2a39829e204.wav",
+            "duration": 6.4
+          },
+          "0.65": {
+            "src": "audio/10e189a081f9b048803faccd.wav",
+            "duration": 4.9230833333333335
+          },
+          "0.8": {
+            "src": "audio/4fb907857fb52f036cbd9ac8.wav",
+            "duration": 4.0
+          }
+        }
       },
       {
         "zh": "小月说：“明天我来还伞，也来看看我的杯子。”",
         "src": "audio/b899c793c1f96923eb0ee97a.wav",
-        "duration": 4.72
+        "duration": 4.72,
+        "speeds": {
+          "0.5": {
+            "src": "audio/ef7c89a74cb477aac7c27d6c.wav",
+            "duration": 9.44
+          },
+          "0.65": {
+            "src": "audio/7591f0ebf0804d43f02432a3.wav",
+            "duration": 7.261541666666667
+          },
+          "0.8": {
+            "src": "audio/7f94c5dd5b61b26dccb8fdf3.wav",
+            "duration": 5.9
+          }
+        }
       },
       {
         "zh": "小林笑着回答：“好，我给你准备茶。”",
         "src": "audio/9fd2fc04a5f55709e75b30ff.wav",
-        "duration": 3.28
+        "duration": 3.28,
+        "speeds": {
+          "0.5": {
+            "src": "audio/e69d3697fe9ea0090da6ea47.wav",
+            "duration": 6.56
+          },
+          "0.65": {
+            "src": "audio/f097781302bf637ee5bf9138.wav",
+            "duration": 5.046166666666666
+          },
+          "0.8": {
+            "src": "audio/15bfe048cb4af2ab6424c877.wav",
+            "duration": 4.1
+          }
+        }
       }
     ]
-  }
+  },
+  "slowProcessing": "Rubber Band 4 R3, offline tempo adjustment, unchanged pitch"
 }

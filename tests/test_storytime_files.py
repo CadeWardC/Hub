@@ -1,6 +1,7 @@
 """File authoring and build regressions. Run with unittest discover."""
 import importlib.util
 import json
+import hashlib
 import tempfile
 import unittest
 from pathlib import Path
@@ -37,7 +38,7 @@ class StoryFilesTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / 'stories').mkdir()
-            for name in ('index.html', 'app.js', 'styles.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'sw.js'):
+            for name in ('index.html', 'app.js', 'listening.js', 'styles.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'sw.js'):
                 (root / name).write_bytes((ROOT / name).read_bytes())
             (root / 'stories' / '_template.txt').write_text('ignored')
             path = root / 'stories' / 'hello.txt'
@@ -69,21 +70,36 @@ class StoryFilesTest(unittest.TestCase):
             root = Path(directory)
             (root / 'stories').mkdir()
             (root / 'audio').mkdir()
-            for name in ('index.html', 'app.js', 'styles.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'sw.js'):
+            for name in ('index.html', 'app.js', 'listening.js', 'styles.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'sw.js'):
                 (root / name).write_bytes((ROOT / name).read_bytes())
             source = 'audio/' + 'a' * 24 + '.wav'
             (root / source).write_bytes(b'test audio')
+            slow_source = 'audio/' + 'b' * 24 + '.wav'
+            (root / slow_source).write_bytes(b'test slow audio')
             path = root / 'stories' / 'hello.txt'
             path.write_text('title: Hello\nlevel: beginner\n---\n你好！', encoding='utf-8')
-            manifest = {'stories': {'hello': [{'zh': '你好！', 'src': source}]}}
+            manifest = {'stories': {'hello': [{'zh': '你好！', 'src': source, 'speeds': {'0.65': {'src': slow_source}}}]}}
             (root / 'audio' / 'manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
+            words = [{'text': '你好', 'offset': 0, 'pinyin': 'nǐ hǎo', 'meanings': ['hello'], 'start': 0, 'end': 1}]
+            word_data = {'clips': {src: {'zh': '你好！', 'sha256': hashlib.sha256((root / src).read_bytes()).hexdigest(), 'words': words} for src in (source, slow_source)}}
+            (root / 'word-data.json').write_text(json.dumps(word_data), encoding='utf-8')
             builder.compile_library(root)
+            self.assertIn('"wordTimings"', (root / 'stories.js').read_text(encoding='utf-8'))
+            self.assertIn('"meanings"', (root / 'stories.js').read_text(encoding='utf-8'))
             self.assertIn(source, (root / 'stories.js').read_text(encoding='utf-8'))
             self.assertIn(source, (root / 'sw.js').read_text(encoding='utf-8'))
+            self.assertIn(slow_source, (root / 'stories.js').read_text(encoding='utf-8'))
+            self.assertIn(slow_source, (root / 'sw.js').read_text(encoding='utf-8'))
+            (root / source).write_bytes(b'changed recording with the same name')
+            builder.compile_library(root)
+            self.assertNotIn('"words"', (root / 'stories.js').read_text(encoding='utf-8'))
+            self.assertNotIn('"wordTimings"', (root / 'stories.js').read_text(encoding='utf-8'))
             path.write_text('title: Hello\nlevel: beginner\n---\n再见！', encoding='utf-8')
             builder.compile_library(root)
             self.assertNotIn(source, (root / 'stories.js').read_text(encoding='utf-8'))
             self.assertNotIn(source, (root / 'sw.js').read_text(encoding='utf-8'))
+            self.assertNotIn(slow_source, (root / 'stories.js').read_text(encoding='utf-8'))
+            self.assertNotIn(slow_source, (root / 'sw.js').read_text(encoding='utf-8'))
 
 
 if __name__ == '__main__':

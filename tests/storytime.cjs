@@ -23,7 +23,7 @@ const { chromium } = require('playwright');
     await page.locator('#play').click();
     assert.equal(await page.evaluate(()=>__speech.at(-1).rate),.65);
     await page.evaluate(()=>__speech.at(-1).onboundary({charIndex:1,charLength:1}));
-    assert.equal(await page.locator('mark').textContent(),'叫');
+    assert.equal(await page.locator('.word.speaking').textContent(),'叫');
     await page.evaluate(()=>__speech.at(-1).onend());
     assert.match(await page.locator('#position').textContent(), /Sentence 2/);
     await page.locator('#speed').selectOption('0.5');
@@ -78,7 +78,8 @@ const { chromium } = require('playwright');
     await recorded.addInitScript(() => {
       window.__clips = [];
       window.Audio = class {
-        play() { window.__clips.push({src:this.src, playbackRate:this.playbackRate, onended:this.onended, onerror:this.onerror}); this.onplaying?.(); return Promise.resolve(); }
+        constructor() { window.__audio = this; this.currentTime = 0; }
+        play() { this.onloadedmetadata?.(); window.__clips.push({src:this.src, playbackRate:this.playbackRate, start:this.currentTime, onended:this.onended, onerror:this.onerror}); this.onplaying?.(); return Promise.resolve(); }
         pause() { this.paused = true; }
         removeAttribute() {} load() {}
       };
@@ -88,13 +89,21 @@ const { chromium } = require('playwright');
     await r.locator('.story-card').first().click();
     await r.locator('#play').click();
     assert.match(await r.evaluate(() => __clips.at(-1).src), /^audio\/.+\.wav$/);
-    assert.equal(await r.evaluate(() => __clips.at(-1).playbackRate), .65);
+    assert.equal(await r.evaluate(() => __clips.at(-1).playbackRate), 1);
+    assert.equal(await r.evaluate(() => __clips.at(-1).src), await r.evaluate(() => STORYTIME_STORIES[0].sentences[0].audioSpeeds['0.65']));
     await r.evaluate(() => __clips.at(-1).onended());
     assert.match(await r.locator('#position').textContent(), /Sentence 2/);
     await r.evaluate(() => __clips[0].onended());
     assert.match(await r.locator('#position').textContent(), /Sentence 2/);
     await r.locator('#speed').selectOption('0.8');
-    assert.equal(await r.evaluate(() => __clips.at(-1).playbackRate), .8);
+    assert.equal(await r.evaluate(() => __clips.at(-1).playbackRate), 1);
+    assert.equal(await r.evaluate(() => __clips.at(-1).src), await r.evaluate(() => STORYTIME_STORIES[0].sentences[1].audioSpeeds['0.8']));
+    await r.locator('#speed').selectOption('0.5');
+    assert.equal(await r.evaluate(() => __clips.at(-1).playbackRate), 1);
+    assert.equal(await r.evaluate(() => __clips.at(-1).src), await r.evaluate(() => STORYTIME_STORIES[0].sentences[1].audioSpeeds['0.5']));
+    await r.locator('#speed').selectOption('1.2');
+    assert.equal(await r.evaluate(() => __clips.at(-1).playbackRate), 1.2);
+    assert.equal(await r.evaluate(() => __clips.at(-1).src), await r.evaluate(() => STORYTIME_STORIES[0].sentences[1].audio));
     await r.locator('#step-mode').check();
     await r.evaluate(() => __clips.at(-1).onended());
     assert.match(await r.locator('#position').textContent(), /Sentence 3/);
@@ -108,12 +117,33 @@ const { chromium } = require('playwright');
     await recorded.setOffline(true);
     const decoded = await r.evaluate(async () => {
       const ctx = new AudioContext();
-      const buffer = await (await fetch(STORYTIME_STORIES[0].sentences[0].audio)).arrayBuffer();
+      const buffer = await (await fetch(STORYTIME_STORIES[0].sentences[0].audioSpeeds['0.65'])).arrayBuffer();
       const audio = await ctx.decodeAudioData(buffer);
       await ctx.close();
       return audio.duration;
     });
-    assert.ok(decoded > 0.1, 'Real Qwen3 recording decodes while offline');
+    assert.ok(decoded > 0.1, 'Prepared slow Qwen3 recording decodes while offline');
+    await r.locator('.story-card').first().click();
+    await r.locator('.sentence').first().locator('.word').nth(1).click();
+    assert.equal(await r.locator('#word-title').textContent(), '叫');
+    assert.ok((await r.locator('#word-pinyin').textContent()).length > 0);
+    assert.ok(await r.locator('#word-meanings li').count() > 0);
+    await r.locator('#word-replay').click();
+    const replay = await r.evaluate(() => ({actual: __audio.currentTime, expected: STORYTIME_STORIES[0].sentences[0].wordTimings[String(JSON.parse(localStorage.getItem('storytime.v1')).speed)]?.[1]?.[0] ?? STORYTIME_STORIES[0].sentences[0].words[1].start}));
+    assert.equal(replay.actual, replay.expected);
+    await r.evaluate(() => { __audio.currentTime = 999; __audio.ontimeupdate(); });
+    assert.match(await r.locator('#position').textContent(), /Sentence 1 /);
+    assert.match(await r.locator('#play').textContent(), /Listen/);
+    await r.locator('#word-next').click();
+    assert.equal(await r.locator('#word-title').textContent(), '小林');
+    assert.match(await r.locator('#word-meanings').textContent(), /Xiaolin/);
+    await r.locator('#word-from-here').click();
+    assert.equal(await r.locator('#word-card').evaluate(el => el.open), false);
+    assert.ok(await r.evaluate(() => __audio.currentTime > 0));
+    await r.evaluate(() => { window.__oldWordEnd = __clips.at(-1).onended; });
+    await r.locator('#back').click();
+    await r.evaluate(() => __oldWordEnd());
+    assert.equal(await r.locator('#library').isVisible(), true);
     await recorded.close();
     console.log('PASS: levels, speech synchronization/cancellation/rate/step mode, support, file-backed library, progress persistence, mobile overflow, offline cache, unsupported speech/storage.');
   } finally { await browser.close(); }
