@@ -9,6 +9,9 @@
   let state = {...defaults};
   let story, index = 0, playing = false, token = 0, utterance, voices = [], view = 'library', installPrompt;
   let noticeTimer;
+  let recording;
+  const hasRecordings = () => builtins.some(s => s.sentences.some(sentence => sentence.audio));
+  const recordedSentence = () => story?.sentences[index]?.audio && !state.voice;
   function notice(message) {
     $('notice').textContent = message; $('notice').hidden = false;
     clearTimeout(noticeTimer); noticeTimer = setTimeout(() => { $('notice').hidden = true; }, 6500);
@@ -21,6 +24,7 @@
     const sentences = raw.sentences.map((s) => {
       if (!s || typeof s.zh !== 'string' || !s.zh.trim() || s.zh.length > 1000) throw Error('Each sentence needs Chinese text, up to 1,000 characters. Split longer passages into sentences.');
       const clean = {zh: s.zh.trim()};
+      if (typeof s.audio === 'string' && /^audio\/[a-f0-9]{24}\.wav$/.test(s.audio)) clean.audio = s.audio;
       for (const key of ['pinyin', 'en']) {
         if (s[key] != null && typeof s[key] !== 'string') throw Error('Pinyin and English must be text.');
         clean[key] = (s[key] || '').trim();
@@ -109,7 +113,7 @@
     if (scroll) $('sentences').children[index]?.scrollIntoView({block:'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
   }
   function updatePlayer() {
-    $('play').textContent = playing ? 'Ⅱ Pause' : '▶ Listen'; $('play').disabled = !capable;
+    $('play').textContent = playing ? 'Ⅱ Pause' : '▶ Listen'; $('play').disabled = !capable && !recordedSentence();
     $('position').textContent = `Sentence ${index+1} of ${story.sentences.length}`;
     $('progress').max = story.sentences.length; $('progress').value = index+1;
     $('previous').disabled = index === 0; $('next').disabled = index === story.sentences.length-1;
@@ -117,12 +121,37 @@
   }
   function stop() {
     token++; playing = false; utterance = null; synth?.cancel();
+    if (recording) { recording.onplaying = recording.onended = recording.onerror = null; recording.pause(); recording.removeAttribute('src'); recording.load(); }
     if (story) { $('sentences').querySelectorAll('.hanzi').forEach((el,i) => { el.textContent = story.sentences[i]?.zh || ''; }); updatePlayer(); }
   }
   function speak() {
-    if (!capable) { $('speech-message').textContent = 'Speech is unavailable in this browser. You can still read every story.'; return; }
+    if (!capable && !recordedSentence()) { $('speech-message').textContent = 'Speech is unavailable in this browser. You can still read every story.'; return; }
     stop(); playing = true; const run = token; updatePlayer();
     const sentence = story.sentences[index];
+    const ended = () => {
+      if (token !== run) return;
+      if (index === story.sentences.length-1) {
+        remember(true); stop(); $('complete').textContent = '✓ Read — practice again anytime';
+        $('speech-message').textContent = 'Story finished. Listen again whenever you like.';
+      } else { const step = state.step; stop(); index++; remember(); updatePlayer(); if (!step) speak(); }
+    };
+    if (recordedSentence()) {
+      // Reuse the element unlocked by the user's first tap for mobile playback.
+      const audio = recording || (recording = new Audio()); audio.src = sentence.audio;
+      audio.playbackRate = state.speed; audio.preservesPitch = true;
+      audio.onplaying = () => { if (token === run) { highlight(true); $('speech-message').textContent = ''; } };
+      audio.onended = ended;
+      const failed = () => {
+        if (token !== run) return;
+        stop(); $('speech-message').textContent = 'Recording could not play. Reopen online to download it, or choose a device voice.';
+      };
+      audio.onerror = failed;
+      try {
+        if (navigator.audioSession) navigator.audioSession.type = 'playback';
+        audio.play().catch(failed);
+      } catch { failed(); }
+      return;
+    }
     const u = new SpeechSynthesisUtterance(sentence.zh); utterance = u;
     u.voice = voices.find(v => v.voiceURI === state.voice) || voices.find(v => /^zh[-_]CN$/i.test(v.lang)) || voices[0] || null;
     u.lang = u.voice?.lang || 'zh-CN'; u.rate = state.speed;
@@ -133,13 +162,7 @@
       const start = event.charIndex, end = start + (event.charLength || [...sentence.zh.slice(start)][0].length);
       target.replaceChildren(document.createTextNode(sentence.zh.slice(0,start)), node('mark','',sentence.zh.slice(start,end)), document.createTextNode(sentence.zh.slice(end)));
     };
-    u.onend = () => {
-      if (token !== run) return;
-      if (index === story.sentences.length-1) {
-        remember(true); stop(); $('complete').textContent = '✓ Read — practice again anytime';
-        $('speech-message').textContent = 'Story finished. Listen again whenever you like.';
-      } else { const step = state.step; stop(); index++; remember(); updatePlayer(); if (!step) speak(); }
-    };
+    u.onend = ended;
     u.onerror = (event) => {
       if (token !== run) return;
       stop(); $('speech-message').textContent = ['voice-unavailable','language-unavailable'].includes(event.error) ? 'Add a Mandarin voice in your device’s speech settings, then reopen StoryTime.' : 'Speech could not play. Check your voice, sound, and connection, then tap Listen again.';
@@ -152,10 +175,12 @@
   function loadVoices() {
     // Exclude Cantonese (zh-HK / yue); prefer mainland Mandarin, then Taiwan.
     voices = capable ? synth.getVoices().filter(v => /^(zh(?:[-_](?:CN|TW|SG|Hans|Hant))?|cmn)(?:[-_]|$)/i.test(v.lang) && !/[-_]HK/i.test(v.lang)) : [];
-    $('voice').replaceChildren(); const auto = node('option','','Automatic Mandarin'); auto.value = ''; $('voice').append(auto);
+    $('voice').replaceChildren(); const auto = node('option','',hasRecordings() ? 'Kokoro · recorded Mandarin' : 'Automatic Mandarin'); auto.value = ''; $('voice').append(auto);
     voices.forEach(v => { const option = node('option','',`${v.name}${v.localService ? ' · on device' : ' · online'}`); option.value = v.voiceURI; $('voice').append(option); });
-    $('voice').value = voices.some(v => v.voiceURI === state.voice) ? state.voice : '';
-    $('speech-message').textContent = !capable ? 'Speech is unavailable in this browser. Reading still works.' : !voices.length ? 'No Mandarin voice listed yet. Your browser will try its default; you may need to download a Mandarin voice in device settings.' : '';
+    if (!voices.some(v => v.voiceURI === state.voice)) state.voice = '';
+    $('voice').value = state.voice;
+    $('speech-message').textContent = hasRecordings() ? '' : !capable ? 'Speech is unavailable in this browser. Reading still works.' : !voices.length ? 'No Mandarin voice listed yet. Your browser will try its default; you may need to download a Mandarin voice in device settings.' : '';
+    if (story) updatePlayer();
   }
   document.querySelectorAll('[data-level]').forEach(b => b.addEventListener('click', () => { state.level = b.dataset.level; save(); renderLibrary(); }));
   $('back').onclick = () => { switchView('library'); renderLibrary(); };

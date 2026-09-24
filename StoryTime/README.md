@@ -23,7 +23,7 @@ level: beginner
 我在家喝茶。 | Wǒ zài jiā hē chá. | I drink tea at home.
 ```
 
-3. Commit and deploy as usual. **GitHub Pages automatically builds all story files.** No app editor, import, registration list, audio files, or timing data needed.
+3. Commit and deploy as usual. **GitHub Pages automatically builds all story files.** No app editor, import, registration list, or timing data needed. New stories can use device speech immediately; run the audio generator to add Kokoro narration.
 
 For a local preview, run this from the Hub folder after changing files:
 
@@ -62,16 +62,32 @@ Add `series: rainy-day` to the beginner version too. The reader automatically of
 
 ## Listening
 
-Uses the same browser SpeechSynthesis approach as ManDayRin's fallback. ManDayRin's recorded single-word clips cannot narrate arbitrary prose. Playback defaults to 0.65×, with 0.5×–1.2× controls. Actual speed and voice quality depend on the device.
+The included stories use locally generated **Kokoro Mandarin narration**: `hexgrad/Kokoro-82M-v1.1-zh`, voice `zf_001`, synthesized at 1×. Each sentence has a separate 24 kHz WAV recording. Playback defaults to 0.65×, with pitch-preserving 0.5×–1.2× controls. Choose a device voice in the voice menu to use browser speech instead.
 
-Each sentence is its own utterance, highlighted on playback and advanced only on its `end` event, so timing stays synchronized without estimated timestamps. Where speech boundary events are available, the spoken range is also highlighted. Boundary support varies by browser; sentence highlighting remains available. Tap a sentence to start there. Pause cancels speech; resume deliberately replays that sentence for reliable mobile behavior. The step option waits between sentences. Switching story or leaving the reader cancels old speech callbacks.
+Sentence highlighting advances on the recording's actual end event. Tap a sentence to start there. Pause cancels playback; resume replays that sentence. The step option waits between sentences. Changing story or leaving the reader cancels old callbacks. Recorded audio provides sentence highlighting; browser speech can additionally highlight words when boundary events are available.
 
-The app and stories work offline after the first successful hosted visit. Offline **speech** requires a locally installed Mandarin voice; remote voices need a connection. A browser without speech support still supports reading stories. Installation requires HTTPS or localhost and a browser that supports installed web apps.
+The service worker caches all current recordings with the app for offline listening after a successful hosted visit. No installed speech voice or model is needed for recorded narration. New or edited sentences without matching recordings use browser speech; offline browser speech needs an installed Mandarin voice. Installation requires HTTPS or localhost.
 
-Preferences and reading position are stored under `storytime.v1`. There are no external services, AI generation, accounts or runtime dependencies. The service worker deletes only caches prefixed `storytime-` so it can coexist with other Hub PWAs.
+### Regenerate narration
+
+Audio generation is a separate local Python step; the website itself remains dependency-free. Install `requirements-audio.txt` in a virtual environment, then run:
+
+```sh
+python StoryTime/generate_audio.py
+```
+
+On this Windows checkout, the prepared environment is:
+
+```powershell
+StoryTime/.venv-kokoro/Scripts/python.exe StoryTime/generate_audio.py
+```
+
+The first run downloads the model to the standard Hugging Face cache. Later runs reuse clips matching the text, model, voice, and synthesis speed. Optional `--voice` and `--speed` arguments select another voice from the same model or a different synthesis rate. Commit the generated `audio/` files, `stories.js`, and `sw.js` with the source changes. The audio manifest records provenance, text, and duration. A normal story build only attaches recordings whose text still matches, so stale narration is never used for edited sentences. No synthesis runs in Pages deployment.
+
+Model documentation: [Kokoro Mandarin](https://huggingface.co/hexgrad/Kokoro-82M-v1.1-zh). Preferences and reading position remain in `storytime.v1`. The service worker deletes only caches prefixed `storytime-`.
 
 ## Verification
 
-With a local Hub server running and Playwright installed, run `STORYTIME_URL=http://127.0.0.1:8765/StoryTime/ node tests/storytime.cjs` from the repository root. Speech events are mocked to exercise synchronization deterministically; audible quality and device-specific voice behavior need a real-device check. Run `python3 -m unittest discover -s tests -p "test_storytime*.py"` to check file parsing and the build. The browser test also checks reading progress, storage, responsive overflow, service-worker offline loading, and reading without speech/storage support.
+With a local Hub server running and Playwright installed, run `STORYTIME_URL=http://127.0.0.1:8765/StoryTime/ node tests/storytime.cjs` from the repository root. Speech and recording events are mocked to exercise synchronization deterministically, and a real recording is decoded offline; audible quality and device-specific voice behavior need a real-device check. Run `python3 -m unittest discover -s tests -p "test_storytime*.py"` to check file parsing and the build. The browser test also checks reading progress, storage, responsive overflow, service-worker offline loading, and reading without speech/storage support.
 
 Speech event reference: [MDN: speech boundary events](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance/boundary_event).

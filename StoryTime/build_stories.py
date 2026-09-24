@@ -63,6 +63,18 @@ def compile_library(root=ROOT):
         raise ValueError('No stories found in stories/*.txt.')
     # Validate everything before replacing any generated file.
     stories = [parse_story(path) for path in paths]
+    manifest_path = root / 'audio' / 'manifest.json'
+    recordings = json.loads(manifest_path.read_text(encoding='utf-8'))['stories'] if manifest_path.exists() else {}
+    audio_assets = set()
+    for story in stories:
+        clips = recordings.get(story['id'], [])
+        for index, sentence in enumerate(story['sentences']):
+            clip = clips[index] if index < len(clips) else {}
+            source = clip.get('src', '')
+            # Edited sentences must never play a stale recording.
+            if clip.get('zh') == sentence['zh'] and re.fullmatch(r'audio/[a-f0-9]{24}\.wav', source) and (root / source).is_file():
+                sentence['audio'] = source
+                audio_assets.add('./' + source)
     versions = set()
     for story in stories:
         if story.get('series'):
@@ -76,6 +88,7 @@ def compile_library(root=ROOT):
     # Story and app changes update the PWA together, without a manual version bump.
     worker = root / 'sw.js'
     worker_text = worker.read_text(encoding='utf-8')
+    worker_text = re.sub(r'const AUDIO_ASSETS = .*?;', 'const AUDIO_ASSETS = ' + json.dumps(sorted(audio_assets)) + ';', worker_text, count=1)
     normalized_worker = re.sub(r"const CACHE = '[^']+';", "const CACHE = '';", worker_text, count=1)
     digest = hashlib.sha256(normalized_worker.encode())
     for name in ('index.html', 'app.js', 'stories.js', 'styles.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'):

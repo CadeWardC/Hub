@@ -1,5 +1,6 @@
 """File authoring and build regressions. Run with unittest discover."""
 import importlib.util
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -42,26 +43,47 @@ class StoryFilesTest(unittest.TestCase):
             path = root / 'stories' / 'hello.txt'
             path.write_text('title: Hello\nlevel: beginner\n---\n你好！', encoding='utf-8')
             self.assertEqual(builder.compile_library(root), 1)
-            first_cache = (root / 'sw.js').read_text()
+            first_cache = (root / 'sw.js').read_text(encoding='utf-8')
             builder.compile_library(root)
-            self.assertEqual(first_cache, (root / 'sw.js').read_text())
+            self.assertEqual(first_cache, (root / 'sw.js').read_text(encoding='utf-8'))
             (root / 'stories' / 'tea.txt').write_text('title: Tea\nlevel: intermediate\n---\n我喝茶。', encoding='utf-8')
             self.assertEqual(builder.compile_library(root), 2)
-            self.assertNotEqual(first_cache, (root / 'sw.js').read_text())
-            self.assertIn('我喝茶。', (root / 'stories.js').read_text())
-            previous = (root / 'stories.js').read_text()
+            self.assertNotEqual(first_cache, (root / 'sw.js').read_text(encoding='utf-8'))
+            self.assertIn('我喝茶。', (root / 'stories.js').read_text(encoding='utf-8'))
+            previous = (root / 'stories.js').read_text(encoding='utf-8')
             path.write_text('invalid')
             with self.assertRaises(ValueError):
                 builder.compile_library(root)
-            self.assertEqual(previous, (root / 'stories.js').read_text())
+            self.assertEqual(previous, (root / 'stories.js').read_text(encoding='utf-8'))
 
     def test_existing_stories_and_template(self):
         for path in (ROOT / 'stories').glob('*.txt'):
             if path.name.startswith('_'):
                 # Template uses an intentionally ignored filename; check its contents.
-                self.parse(path.read_text())
+                self.parse(path.read_text(encoding='utf-8'))
             else:
                 builder.parse_story(path)
+
+    def test_audio_requires_matching_text_and_existing_local_clip(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'stories').mkdir()
+            (root / 'audio').mkdir()
+            for name in ('index.html', 'app.js', 'styles.css', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png', 'sw.js'):
+                (root / name).write_bytes((ROOT / name).read_bytes())
+            source = 'audio/' + 'a' * 24 + '.wav'
+            (root / source).write_bytes(b'test audio')
+            path = root / 'stories' / 'hello.txt'
+            path.write_text('title: Hello\nlevel: beginner\n---\n你好！', encoding='utf-8')
+            manifest = {'stories': {'hello': [{'zh': '你好！', 'src': source}]}}
+            (root / 'audio' / 'manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
+            builder.compile_library(root)
+            self.assertIn(source, (root / 'stories.js').read_text(encoding='utf-8'))
+            self.assertIn(source, (root / 'sw.js').read_text(encoding='utf-8'))
+            path.write_text('title: Hello\nlevel: beginner\n---\n再见！', encoding='utf-8')
+            builder.compile_library(root)
+            self.assertNotIn(source, (root / 'stories.js').read_text(encoding='utf-8'))
+            self.assertNotIn(source, (root / 'sw.js').read_text(encoding='utf-8'))
 
 
 if __name__ == '__main__':

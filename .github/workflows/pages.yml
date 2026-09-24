@@ -32,6 +32,10 @@ jobs:
           for project in ManDayRin conversions hollowkeep laser-engraving md2pdf paypers smolov; do
             cp -R "$project" "_site/$project"
           done
+          python3 StoryTime/build_stories.py
+          mkdir -p _site/StoryTime
+          cp StoryTime/*.html StoryTime/*.js StoryTime/*.css StoryTime/*.webmanifest StoryTime/*.svg StoryTime/*.png _site/StoryTime/
+          if [ -d StoryTime/audio ]; then cp -R StoryTime/audio _site/StoryTime/audio; fi
           touch _site/.nojekyll
 
       - name: Assert private files are absent
