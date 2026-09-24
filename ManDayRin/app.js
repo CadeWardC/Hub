@@ -16,8 +16,6 @@
   let activeWordButton = null;
   let audioPack = null;
   let audioPackError = null;
-  let activeTestAudio = null;
-  let speechDebugSequence = 0;
   let quizState = { current: null, choices: [], correct: 0, attempts: 0, questionNumber: 0, answered: false, previousKey: "" };
 
   const state = loadState();
@@ -38,10 +36,6 @@
     audioPackError = error;
     console.warn("ManDayRin recordings unavailable:", error);
   });
-  document.querySelector("#closeSpeechDebug").addEventListener("click", () => {
-    document.querySelector("#speechDebug").hidden = true;
-  });
-  document.querySelector("#testMediaAudio").addEventListener("click", testMediaAudio);
   bindNavigation();
   bindHistoryFilters();
   bindHistorySearch();
@@ -156,8 +150,7 @@
   }
 
   function speakChinese(hanzi, button) {
-    const debug = beginSpeechDebug(hanzi);
-    configureSpeechAudioSession(debug);
+    configureSpeechAudioSession();
     const clip = window.MANDAYRIN_AUDIO_INDEX?.[hanzi];
     if (audioPack && clip) {
       if (activeWordAudio) {
@@ -173,7 +166,6 @@
       activeWordAudio = audio;
       activeWordAudioUrl = url;
       activeWordButton = button;
-      debug(`Recorded audio: ${length} bytes`);
       const finish = () => {
         if (button) button.classList.remove("speaking");
         if (activeWordAudio === audio) {
@@ -184,33 +176,26 @@
         URL.revokeObjectURL(url);
       };
       audio.onplaying = () => {
-        debug("Media: playing");
         if (button) button.classList.add("speaking");
       };
       audio.onended = () => {
-        debug("Media: ended");
         finish();
       };
       audio.onerror = () => {
-        debug(`Media: error (${audio.error?.code || "unknown"})`);
         finish();
         showToast("Recording could not play. Try the speaker again.");
       };
-      audio.play().catch((error) => {
-        debug(`Media: blocked (${error.name || "unknown"})`);
+      audio.play().catch(() => {
         finish();
         showToast("Recording could not play. Try the speaker again.");
       });
       return;
     }
     if (clip && !audioPackError) {
-      debug("Recordings are still loading");
       showToast("Audio is loading. Tap the speaker again shortly.");
       return;
     }
-    debug(`Recording unavailable: ${audioPackError?.message || "missing clip"}; trying device voice`);
     if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
-      debug("Speech synthesis is unavailable.");
       showToast("Speech is not available in this browser");
       return;
     }
@@ -222,24 +207,14 @@
     utterance.lang = "zh-CN";
     utterance.rate = 0.78;
     utterance.pitch = 1;
-    debug(`Voices: ${voices.length} total, ${mandarinVoices.length} Chinese`);
-    debug(`Selected: ${utterance.voice ? `${utterance.voice.name} (${utterance.voice.lang})` : "browser default (zh-CN)"}`);
-    debug(`Before: speaking=${synthesis.speaking}, pending=${synthesis.pending}, paused=${synthesis.paused}`);
-    let heardEvent = false;
     utterance.onstart = () => {
-      heardEvent = true;
-      debug("Event: start");
       if (button) button.classList.add("speaking");
     };
     utterance.onend = () => {
-      heardEvent = true;
-      debug("Event: end");
       if (button) button.classList.remove("speaking");
       if (activeUtterance === utterance) activeUtterance = null;
     };
     utterance.onerror = (event) => {
-      heardEvent = true;
-      debug(`Event: error (${event.error || "unknown"})`);
       if (button) button.classList.remove("speaking");
       if (activeUtterance !== utterance) return;
       activeUtterance = null;
@@ -255,64 +230,26 @@
     activeUtterance = utterance;
     try {
       if (synthesis.speaking || synthesis.pending) {
-        debug("Canceling previous speech");
         synthesis.cancel();
       }
       if (synthesis.paused) {
-        debug("Resuming paused speech engine");
         synthesis.resume();
       }
       synthesis.speak(utterance);
-      debug(`Queued: speaking=${synthesis.speaking}, pending=${synthesis.pending}, paused=${synthesis.paused}`);
-      setTimeout(() => {
-        if (!heardEvent) debug(`No speech event after 4 seconds; speaking=${synthesis.speaking}, pending=${synthesis.pending}, paused=${synthesis.paused}`);
-      }, 4000);
     } catch (error) {
       activeUtterance = null;
-      debug(`Exception: ${error.name || "Error"}: ${error.message || "No details"}`);
+      showToast("Speech failed. Try the speaker again.");
+      console.warn("ManDayRin speech failed:", error);
     }
   }
 
-  function configureSpeechAudioSession(debug) {
-    if (!("audioSession" in navigator)) {
-      if (debug) debug("Audio session API: unavailable");
-      return;
-    }
+  function configureSpeechAudioSession() {
+    if (!("audioSession" in navigator)) return;
     try {
       navigator.audioSession.type = "playback";
-      if (debug) debug(`Audio session: ${navigator.audioSession.type}`);
-    } catch (error) {
-      if (debug) debug(`Audio session failed: ${error.name || "Error"}`);
+    } catch (_) {
+      // The media element still plays normally on browsers without this API.
     }
-  }
-
-  function beginSpeechDebug(hanzi) {
-    const panel = document.querySelector("#speechDebug");
-    const output = document.querySelector("#speechDebugOutput");
-    const sequence = ++speechDebugSequence;
-    panel.hidden = false;
-    output.textContent = `Word: ${hanzi}\n`;
-    return (message) => {
-      if (sequence === speechDebugSequence) output.textContent += `${message}\n`;
-    };
-  }
-
-  function testMediaAudio() {
-    const output = document.querySelector("#speechDebugOutput");
-    const report = (message) => { output.textContent += `${message}\n`; };
-    if (activeTestAudio) activeTestAudio.pause();
-    const audio = new Audio("./audio-test.wav");
-    activeTestAudio = audio;
-    report("Media test: playing a short tone");
-    audio.onended = () => {
-      report("Media test: ended");
-      if (activeTestAudio === audio) activeTestAudio = null;
-    };
-    audio.onerror = () => {
-      report(`Media test: error (${audio.error?.code || "unknown"})`);
-      if (activeTestAudio === audio) activeTestAudio = null;
-    };
-    audio.play().catch((error) => report(`Media test: blocked (${error.name || "unknown"})`));
   }
 
   function reroll(kind) {
