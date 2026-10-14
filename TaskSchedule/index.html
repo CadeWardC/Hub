@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101418">
+  <meta name="description" content="Plan your day: tasks and a daily schedule, offline on your device.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Task&amp;Schedule">
+  <title>Task &amp; Schedule</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✓</span> Task &amp; Schedule</div>
+      <div class="top-actions">
+        <div class="segmented range-toggle" id="rangeToggle" role="tablist" aria-label="Schedule range">
+          <button class="segment active" data-range="week" type="button" role="tab">Week</button>
+          <button class="segment" data-range="month" type="button" role="tab">Month</button>
+        </div>
+        <button class="icon-button" id="installButton" type="button" hidden aria-label="Install app">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 18v2h14v-2"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="view active" id="scheduleView" aria-label="Schedule">
+        <div class="day-head">
+          <button class="icon-button" id="prevDay" type="button" aria-label="Previous">‹</button>
+          <button class="day-title" id="todayButton" type="button"></button>
+          <button class="icon-button" id="nextDay" type="button" aria-label="Next">›</button>
+        </div>
+        <div class="week-strip" id="weekStrip"></div>
+        <div class="month-grid" id="monthGrid" hidden></div>
+        <h2 class="section-label" id="dueLabel">Due this day</h2>
+        <ul class="task-list" id="dayTasks"></ul>
+        <h2 class="section-label">Schedule</h2>
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <section class="view" id="tasksView" aria-label="Tasks">
+        <div class="segmented" role="tablist">
+          <button class="segment active" data-list="today" type="button" role="tab">Today <span class="count" id="todayCount"></span></button>
+          <button class="segment" data-list="all" type="button" role="tab">All <span class="count" id="allCount"></span></button>
+        </div>
+        <p class="hint">Swipe a task left to edit or delete it.</p>
+        <ul class="task-list" id="taskList"></ul>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" hidden role="status"><span></span><button type="button" id="undoButton">Undo</button></div>
+
+    <button class="fab" id="addButton" type="button" aria-label="Add">+</button>
+
+    <nav class="tabbar">
+      <button class="tab active" data-view="scheduleView" type="button">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4m6-4v4"/></svg>
+        Schedule
+      </button>
+      <button class="tab" data-view="tasksView" type="button">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg>
+        Tasks
+      </button>
+    </nav>
+  </div>
+
+  <dialog id="editor">
+    <form method="dialog" id="editorForm">
+      <div class="kind-toggle">
+        <label><input type="radio" name="kind" value="task" checked> Task</label>
+        <label><input type="radio" name="kind" value="event"> Event</label>
+      </div>
+      <label class="field">Title<input name="title" required maxlength="140" autocomplete="off"></label>
+      <label class="field">Date<input name="date" type="date"></label>
+      <div class="row event-only">
+        <label class="field">Start<input name="start" type="time"></label>
+        <label class="field">End<input name="end" type="time"></label>
+      </div>
+      <label class="field">Notes<textarea name="notes" rows="3"></textarea></label>
+      <div class="actions">
+        <button type="button" class="ghost danger" id="deleteButton" hidden>Delete</button>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" id="cancelButton">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js?v=4"></script>
+</body>
+</html>
