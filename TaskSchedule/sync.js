@@ -134,8 +134,10 @@
       cfg.lastSync = Date.now();
       cfg.lastError = "";
     } catch (e) {
-      cfg.lastError = e.message === "Failed to fetch"
-        ? "Couldn't reach Directus (check the URL, your connection, and CORS)."
+      // Browsers report a blocked or unreachable request only as a TypeError
+      // ("Failed to fetch" in Chrome, "Load failed" in Safari).
+      cfg.lastError = e instanceof TypeError
+        ? `Couldn't reach Directus. Check your connection, and that its CORS_ORIGIN allows ${location.origin}.`
         : e.message;
     } finally {
       saveCfg();
@@ -208,6 +210,8 @@
     form.elements.url.value = cfg.url || DEFAULT_URL;
     form.elements.token.value = cfg.token;
     form.elements.collection.value = cfg.collection;
+    // With the passphrase config the token is filled in for you; no need to show it.
+    $("manualSync").hidden = !!SEALED;
     $("manualSync").open = !SEALED && !configured();
     $("unlockError").hidden = true;
     paint();

@@ -1,4 +1,4 @@
-const CACHE_NAME = "taskschedule-v7";
+const CACHE_NAME = "taskschedule-v8";
 const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./protocols.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (event) => {
