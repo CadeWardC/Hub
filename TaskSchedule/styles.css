@@ -289,6 +289,8 @@ form[data-kind="task"] .event-only { display: none; }
 .sync-status { margin: 0 0 14px; font-size: 0.88rem; color: var(--muted); }
 .sync-status[data-state="ok"] { color: var(--done); }
 .sync-status[data-state="error"] { color: var(--danger); }
+.sync-status[data-state="waiting"] { color: var(--wait); }
+.sync-button[data-state="waiting"] .sync-dot { background: var(--wait); }
 .actions button:disabled { opacity: 0.5; }
 .actions button[hidden] { display: none; }
 #unlockBox[hidden] { display: none; }

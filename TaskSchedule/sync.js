@@ -136,8 +136,11 @@
     } catch (e) {
       // Browsers report a blocked or unreachable request only as a TypeError
       // ("Failed to fetch" in Chrome, "Load failed" in Safari).
-      cfg.lastError = e instanceof TypeError
-        ? `Couldn't reach Directus. Check your connection, and that its CORS_ORIGIN allows ${location.origin}.`
+      // Unreachable is not a failure: everything is saved here and the next
+      // successful sync uploads whatever is newer than the server's copy.
+      cfg.unreachable = e instanceof TypeError;
+      cfg.lastError = cfg.unreachable
+        ? `Directus can't be reached from here (check your connection, and that its CORS_ORIGIN allows ${location.origin}).`
         : e.message;
     } finally {
       saveCfg();
@@ -164,11 +167,13 @@
 
   function paint() {
     const btn = $("syncButton");
-    const st = locked() ? "locked" : !configured() ? "off" : syncing ? "busy" : cfg.lastError ? "error" : "ok";
+    const st = locked() ? "locked" : !configured() ? "off" : syncing ? "busy"
+      : cfg.lastError ? (cfg.unreachable ? "waiting" : "error") : "ok";
     btn.dataset.state = st;
     const text = st === "locked" ? "Locked. Enter the passphrase once on this device to turn on sync."
       : st === "off" ? "Not connected — data stays on this device."
       : st === "busy" ? "Syncing…"
+      : st === "waiting" ? `Saved on this device. Changes will upload automatically once Directus is reachable. ${cfg.lastError}`
       : st === "error" ? `Sync failed: ${cfg.lastError}`
       : cfg.lastSync ? `Synced ${ago(cfg.lastSync)}.` : "Connected.";
     btn.title = text;
