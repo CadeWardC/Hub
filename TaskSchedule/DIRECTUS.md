@@ -40,14 +40,16 @@ The app is a public static site, so it must never hold an admin token.
 
 ## 3. Allow the app's origin (CORS)
 
-`api.opcw032522.uk` already allows `https://cadel4d.github.io`, so the deployed
-app works as is. To also sync while testing locally, add the dev origin in your
-Directus environment and restart it:
+The app is served from `https://cadewardc.github.io`, so Directus must allow
+that origin. In the Directus environment (keep any origins other apps need),
+then restart Directus:
 
 ```
 CORS_ENABLED=true
-CORS_ORIGIN=https://cadel4d.github.io,http://localhost:8765
+CORS_ORIGIN=https://cadewardc.github.io,https://cadel4d.github.io
 ```
+
+Add `http://localhost:8765` too if you want to sync from the local preview.
 
 ## 4. Build the passphrase-locked config
 

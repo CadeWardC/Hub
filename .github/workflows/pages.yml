@@ -29,13 +29,18 @@ jobs:
           set -euo pipefail
           mkdir -p _site
           cp index.html script.js styles.css _site/
+          # Copy whichever projects are in the repo; a missing one is skipped, not fatal.
           for project in ManDayRin TaskSchedule conversions hollowkeep laser-engraving md2pdf paypers smolov; do
-            cp -R "$project" "_site/$project"
+            if [ -d "$project" ]; then cp -R "$project" "_site/$project"; else echo "Skipping $project (not in repo)"; fi
           done
-          python3 StoryTime/build_stories.py
-          mkdir -p _site/StoryTime
-          cp StoryTime/*.html StoryTime/*.js StoryTime/*.css StoryTime/*.webmanifest StoryTime/*.svg StoryTime/*.png _site/StoryTime/
-          if [ -d StoryTime/audio ]; then cp -R StoryTime/audio _site/StoryTime/audio; fi
+          if [ -f StoryTime/build_stories.py ]; then
+            python3 StoryTime/build_stories.py
+            mkdir -p _site/StoryTime
+            cp StoryTime/*.html StoryTime/*.js StoryTime/*.css StoryTime/*.webmanifest StoryTime/*.svg StoryTime/*.png _site/StoryTime/
+            if [ -d StoryTime/audio ]; then cp -R StoryTime/audio _site/StoryTime/audio; fi
+          else
+            echo "Skipping StoryTime (not in repo)"
+          fi
           touch _site/.nojekyll
 
       - name: Assert private files are absent
