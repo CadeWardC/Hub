@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
   <div class="app-shell">
@@ -23,8 +23,9 @@
           <button class="segment active" data-range="week" type="button" role="tab">Week</button>
           <button class="segment" data-range="month" type="button" role="tab">Month</button>
         </div>
-        <button class="icon-button" id="installButton" type="button" hidden aria-label="Install app">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 18v2h14v-2"/></svg>
+        <button class="icon-button sync-button" id="syncButton" type="button" aria-label="Sync settings" data-state="off">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1-.6-7.96A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9H7z"/></svg>
+          <i class="sync-dot"></i>
         </button>
       </div>
     </header>
@@ -52,6 +53,12 @@
         <p class="hint">Swipe a task left to edit or delete it.</p>
         <ul class="task-list" id="taskList"></ul>
       </section>
+
+      <section class="view" id="protocolsView" aria-label="Protocols">
+        <div id="protoList"></div>
+        <div id="protoEditor" hidden></div>
+        <div id="protoRun" hidden></div>
+      </section>
     </main>
 
     <div class="toast" id="toast" hidden role="status"><span></span><button type="button" id="undoButton">Undo</button></div>
@@ -66,6 +73,10 @@
       <button class="tab" data-view="tasksView" type="button">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg>
         Tasks
+      </button>
+      <button class="tab" data-view="protocolsView" type="button">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="5" rx="1.5"/><rect x="4" y="16" width="16" height="5" rx="1.5"/><path d="M12 8v8m-3-3 3 3 3-3"/></svg>
+        Protocols
       </button>
     </nav>
   </div>
@@ -92,6 +103,81 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=4"></script>
+  <dialog id="waitDialog" class="wait-dialog">
+    <div class="segmented wait-mode">
+      <button class="segment active" data-wait-mode="timer" type="button">⏱ Timer</button>
+      <button class="segment" data-wait-mode="overnight" type="button">☾ Overnight</button>
+    </div>
+    <div id="timerPane">
+      <div class="mw-display" id="mwDisplay" aria-live="polite">
+        <span class="d"></span><span class="d"></span><span class="u">h</span>
+        <span class="d"></span><span class="d"></span><span class="u">m</span>
+        <span class="d"></span><span class="d"></span><span class="u">s</span>
+      </div>
+      <p class="mw-summary" id="mwSummary"></p>
+      <div class="keypad">
+        <button type="button" data-key="1">1</button><button type="button" data-key="2">2</button><button type="button" data-key="3">3</button>
+        <button type="button" data-key="4">4</button><button type="button" data-key="5">5</button><button type="button" data-key="6">6</button>
+        <button type="button" data-key="7">7</button><button type="button" data-key="8">8</button><button type="button" data-key="9">9</button>
+        <button type="button" data-key="clear" class="soft">Clear</button><button type="button" data-key="0">0</button><button type="button" data-key="back" class="soft" aria-label="Delete digit">⌫</button>
+      </div>
+      <div class="quick-add">
+        <button type="button" data-add="10">+10s</button><button type="button" data-add="30">+30s</button>
+        <button type="button" data-add="60">+1m</button><button type="button" data-add="300">+5m</button>
+        <button type="button" data-add="900">+15m</button><button type="button" data-add="3600">+1h</button>
+      </div>
+    </div>
+    <div id="overnightPane" hidden>
+      <label class="field">Wait until<input id="overnightTime" type="time" value="08:00"></label>
+      <p class="hint">Starts when this step begins and ends the next time the clock reaches this time, usually the next morning.</p>
+    </div>
+    <p class="form-error" id="waitError" hidden>Enter how long to wait.</p>
+    <div class="actions">
+      <span class="spacer"></span>
+      <button type="button" class="ghost" id="waitCancel">Cancel</button>
+      <button type="button" class="primary" id="waitSave">Save</button>
+    </div>
+  </dialog>
+
+  <dialog id="syncDialog">
+    <form id="syncForm" autocomplete="off">
+      <h2 class="dialog-title">Sync with Directus</h2>
+      <p class="sync-status" id="syncStatus"></p>
+      <div id="unlockBox" hidden>
+        <label class="field">Passphrase<input id="syncPassphrase" type="password" autocomplete="current-password" autocapitalize="off" spellcheck="false" placeholder="Enter the sync passphrase"></label>
+        <p class="form-error" id="unlockError" hidden></p>
+        <div class="actions">
+          <span class="spacer"></span>
+          <button type="button" class="primary" id="syncUnlock">Unlock sync</button>
+        </div>
+      </div>
+      <details class="manual-sync" id="manualSync">
+        <summary>Server and token</summary>
+        <label class="field">Directus URL<input name="url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="https://api.opcw032522.uk"></label>
+        <label class="field">Access token<input name="token" type="password" placeholder="Static token for your sync user"></label>
+        <label class="field">Collection<input name="collection" placeholder="taskschedule_items"></label>
+        <p class="hint">Saved only on this device. Use a Directus user that can only access this collection.</p>
+        <div class="actions">
+          <span class="spacer"></span>
+          <button type="submit" class="primary">Save &amp; sync</button>
+        </div>
+      </details>
+      <div class="actions">
+        <button type="button" class="ghost danger" id="syncDisconnect" hidden>Disconnect</button>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" id="syncNow">Sync now</button>
+      </div>
+      <div class="actions">
+        <button type="button" class="ghost" id="installButton" hidden>Install app</button>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" id="syncClose">Close</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js?v=6"></script>
+  <script src="protocols.js?v=2"></script>
+  <script src="sync-config.js"></script>
+  <script src="sync.js?v=3"></script>
 </body>
 </html>

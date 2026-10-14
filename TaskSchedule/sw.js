@@ -1,5 +1,5 @@
-const CACHE_NAME = "taskschedule-v4";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+const CACHE_NAME = "taskschedule-v7";
+const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./protocols.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
@@ -12,7 +12,8 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
+  // Only this app's own files; Directus requests go straight to the network.
+  if (event.request.method !== "GET" || new URL(event.request.url).origin !== self.location.origin) return;
   if (event.request.mode === "navigate") {
     event.respondWith(fetch(event.request).then((response) => {
       const copy = response.clone();
