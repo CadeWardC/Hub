@@ -41,11 +41,12 @@
       const raw = JSON.parse(localStorage.getItem(STORAGE_KEY));
       if (raw && Array.isArray(raw.tasks) && Array.isArray(raw.events)) {
         raw.protocols = Array.isArray(raw.protocols) ? raw.protocols : [];
+        raw.settings = Array.isArray(raw.settings) ? raw.settings : [];
         raw.deleted = raw.deleted && typeof raw.deleted === "object" ? raw.deleted : {};
         return raw;
       }
     } catch (e) { /* fall through */ }
-    return { tasks: [], events: [], protocols: [], deleted: {} };
+    return { tasks: [], events: [], protocols: [], settings: [], deleted: {} };
   }
   const state = load();
   const saveHooks = [];

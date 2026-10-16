@@ -8,7 +8,7 @@
   const { state, writeLocal, render } = window.TS;
   const $ = (id) => document.getElementById(id);
   const KEY = "taskschedule.sync";
-  const LISTS = { task: "tasks", event: "events", protocol: "protocols" };
+  const LISTS = { task: "tasks", event: "events", protocol: "protocols", setting: "settings" };
   const PAGE = 500;
   const DEFAULT_URL = "https://api.opcw032522.uk";
 

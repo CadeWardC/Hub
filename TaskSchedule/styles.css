@@ -503,3 +503,17 @@ form[data-kind="task"] .event-only { display: none; }
   .fab { right: max(32px, calc(50vw - 640px + 32px)); bottom: 32px; }
   .toast { bottom: 40px; }
 }
+
+/* number presets under the action being edited */
+.preset-bar { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.block-action.editing .preset-bar, .block-action:focus-within .preset-bar { display: grid; gap: 6px; }
+.preset-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.preset-chip {
+  min-width: 38px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--bg); font-size: 0.85rem; font-weight: 600; font-variant-numeric: tabular-nums;
+  touch-action: manipulation; -webkit-user-select: none; user-select: none;
+}
+.preset-chip.num { color: var(--accent); border-color: var(--accent-soft); }
+.preset-chip.unit { color: var(--text); }
+.preset-chip.edit { border-style: dashed; color: var(--muted); font-weight: 500; }
+.preset-chip:active { background: var(--accent-soft); }

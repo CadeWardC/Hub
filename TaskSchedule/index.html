@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="stylesheet" href="styles.css?v=10">
+  <link rel="stylesheet" href="styles.css?v=11">
 </head>
 <body>
   <div class="app-shell">
@@ -142,6 +142,19 @@
     </div>
   </dialog>
 
+  <dialog id="presetDialog">
+    <h2 class="dialog-title">Number presets</h2>
+    <p class="hint">Tap these while editing an action to type them in. Separate with commas.</p>
+    <label class="field">Numbers<textarea id="presetNumbers" rows="2" spellcheck="false"></textarea></label>
+    <label class="field">Units<textarea id="presetUnits" rows="2" spellcheck="false"></textarea></label>
+    <div class="actions">
+      <button type="button" class="ghost" id="presetReset">Defaults</button>
+      <span class="spacer"></span>
+      <button type="button" class="ghost" id="presetCancel">Cancel</button>
+      <button type="button" class="primary" id="presetSave">Save</button>
+    </div>
+  </dialog>
+
   <dialog id="syncDialog">
     <form id="syncForm" autocomplete="off">
       <h2 class="dialog-title">Sync with Directus</h2>
@@ -178,9 +191,9 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=8"></script>
-  <script src="protocols.js?v=3"></script>
+  <script src="app.js?v=9"></script>
+  <script src="protocols.js?v=4"></script>
   <script src="sync-config.js"></script>
-  <script src="sync.js?v=5"></script>
+  <script src="sync.js?v=6"></script>
 </body>
 </html>

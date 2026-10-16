@@ -143,6 +143,70 @@
   // ---- editor ----
   function autoGrow(t) { t.style.height = "auto"; t.style.height = `${t.scrollHeight}px`; }
 
+  // ---- number presets for action text ----
+  // One synced settings item. Until it's edited, every device uses the
+  // defaults without saving them, so a fresh device can't overwrite your list.
+  const PRESETS_ID = "number-presets";
+  const DEFAULT_PRESETS = { numbers: ["1", "2", "5", "10", "25", "50", "100", "250", "500"], units: ["ml", "µL", "g", "mg", "°C", "min", "×"] };
+  const presets = () => state.settings.find((x) => x.id === PRESETS_ID) || DEFAULT_PRESETS;
+
+  // Typed into the action at the cursor, spaced like "Add 250 ml" / "230°C".
+  function insertAtCursor(area, token) {
+    const start = area.selectionStart ?? area.value.length;
+    const end = area.selectionEnd ?? start;
+    const before = area.value.slice(0, start);
+    const glue = /^[°%×]/.test(token) || !before || /\s$/.test(before) ? "" : " ";
+    const after = area.value.slice(end);
+    // Keep a space before following words ("2 Add"), not before punctuation.
+    const tail = after && !/^[\s.,;:!?)°%×]/.test(after) ? " " : "";
+    area.value = before + glue + token + tail + after;
+    const caret = start + glue.length + token.length;
+    area.focus();
+    area.setSelectionRange(caret, caret);
+    area.dispatchEvent(new Event("input"));
+  }
+
+  function showPresets(area) {
+    document.querySelectorAll(".block-action.editing").forEach((x) => x.classList.remove("editing"));
+    area.closest(".block").classList.add("editing");
+  }
+
+  function presetBar(area) {
+    const { numbers, units } = presets();
+    const chip = (text, cls) => el("button", {
+      type: "button", className: `preset-chip ${cls}`,
+      // Act on press so the textarea keeps focus (and the phone keyboard stays up).
+      onpointerdown: (e) => { e.preventDefault(); insertAtCursor(area, text); },
+      onclick: (e) => e.preventDefault(),
+    }, text);
+    return el("div", { className: "preset-bar" },
+      el("div", { className: "preset-row" }, numbers.map((n) => chip(n, "num"))),
+      el("div", { className: "preset-row" }, units.map((u) => chip(u, "unit")),
+        el("button", { type: "button", className: "preset-chip edit", "aria-label": "Edit presets", onclick: openPresets }, "✎ Edit")));
+  }
+
+  const presetDialog = $("presetDialog");
+  function openPresets() {
+    const { numbers, units } = presets();
+    $("presetNumbers").value = numbers.join(", ");
+    $("presetUnits").value = units.join(", ");
+    presetDialog.showModal();
+  }
+  const splitList = (s) => [...new Set(s.split(/[,\n]/).map((x) => x.trim()).filter(Boolean))].slice(0, 30);
+  $("presetCancel").addEventListener("click", () => presetDialog.close());
+  $("presetReset").addEventListener("click", () => {
+    $("presetNumbers").value = DEFAULT_PRESETS.numbers.join(", ");
+    $("presetUnits").value = DEFAULT_PRESETS.units.join(", ");
+  });
+  $("presetSave").addEventListener("click", () => {
+    const item = touch({ id: PRESETS_ID, numbers: splitList($("presetNumbers").value), units: splitList($("presetUnits").value) });
+    const at = state.settings.findIndex((x) => x.id === PRESETS_ID);
+    if (at === -1) state.settings.push(item); else state.settings[at] = item;
+    presetDialog.close();
+    saveNow();
+    renderEditor();
+  });
+
   function renderEditor() {
     const root = $("protoEditor");
     root.replaceChildren();
@@ -198,11 +262,14 @@
       } }, "✕"));
 
     if (b.type === "action") {
-      return el("li", { className: "block block-action" }, head,
-        el("textarea", {
-          className: "block-text", rows: 1, placeholder: "What to do…", value: b.text || "",
-          oninput: (e) => { b.text = e.target.value; autoGrow(e.target); saveSoon(p); },
-        }));
+      const area = el("textarea", {
+        className: "block-text", rows: 1, placeholder: "What to do…", value: b.text || "",
+        oninput: (e) => { b.text = e.target.value; autoGrow(e.target); saveSoon(p); },
+        // Show the number presets under the action being edited.
+        onfocus: () => showPresets(area),
+        onpointerdown: () => showPresets(area),
+      });
+      return el("li", { className: "block block-action" }, head, area, presetBar(area));
     }
     return el("li", { className: "block block-wait" }, head,
       el("button", { type: "button", className: `wait-display ${b.wait.mode}`, onclick: () => openWait(b.wait, (w) => { b.wait = w; saveNow(p); renderEditor(); }) },
