@@ -37,19 +37,13 @@
     const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
     return h ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
   }
-  function fmtTimeOfDay(hhmm) {
-    const [h, m] = hhmm.split(":").map(Number);
-    return new Date(2000, 0, 1, h, m).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
-  }
-  // Next moment the clock reads hh:mm (today if still ahead, otherwise tomorrow).
-  function nextOccurrence(hhmm, from) {
-    const [h, m] = hhmm.split(":").map(Number);
-    const d = new Date(from);
-    d.setHours(h, m, 0, 0);
-    if (d.getTime() <= from) d.setDate(d.getDate() + 1);
-    return d.getTime();
-  }
-  const waitLabel = (w) => w.mode === "overnight" ? `Overnight · until ${fmtTimeOfDay(w.until)}` : fmtDuration(w.seconds);
+  // An overnight wait has no clock time: it is ready once the calendar day
+  // has changed since the step started, and then waits for you to continue.
+  const dayStart = (t) => new Date(t).setHours(0, 0, 0, 0);
+  const overnightReady = () => dayStart(Date.now()) > dayStart(run.stepStart);
+  const isOvernight = (b) => b && b.type === "wait" && b.wait.mode === "overnight";
+
+  const waitLabel = (w) => w.mode === "overnight" ? "Overnight" : fmtDuration(w.seconds);
 
   function summary(p) {
     const actions = p.blocks.filter((b) => b.type === "action").length;
@@ -273,7 +267,6 @@
     onWaitSave = onSave;
     waitMode = wait.mode;
     buffer = wait.mode === "timer" ? bufferFromSeconds(wait.seconds || 0) : "";
-    $("overnightTime").value = wait.mode === "overnight" ? wait.until : "08:00";
     paintWait();
     waitDialog.showModal();
   }
@@ -306,7 +299,7 @@
       if (!seconds) { $("waitError").hidden = false; return; }
       wait = { mode: "timer", seconds };
     } else {
-      wait = { mode: "overnight", until: $("overnightTime").value || "08:00" };
+      wait = { mode: "overnight" };
     }
     waitDialog.close();
     onWaitSave?.(wait);
@@ -370,7 +363,7 @@
     run.pausedLeft = null;
     const b = run.blocks[i];
     if (b && b.type === "wait") {
-      run.waitEnd = b.wait.mode === "overnight" ? nextOccurrence(b.wait.until, at) : at + b.wait.seconds * 1000;
+      run.waitEnd = b.wait.mode === "overnight" ? null : at + b.wait.seconds * 1000;
     } else {
       run.waitEnd = null;
     }
@@ -383,7 +376,7 @@
     if (!run) return;
     let advanced = false;
     let b = run.blocks[run.index];
-    while (b && b.type === "wait" && run.pausedLeft == null && Date.now() >= run.waitEnd) {
+    while (b && b.type === "wait" && !isOvernight(b) && run.pausedLeft == null && Date.now() >= run.waitEnd) {
       enterStep(run.index + 1, run.waitEnd);
       advanced = true;
       b = run.blocks[run.index];
@@ -393,8 +386,10 @@
       renderAll();
       return;
     }
+    // Crossing midnight with the run screen open: show that it's ready.
+    if (isOvernight(b) && screen === "run" && overnightReady() && !$("overnightReady")) { renderAll(); return; }
     const left = $("runCountdown");
-    if (left && b && b.type === "wait") {
+    if (left && b && b.type === "wait" && !isOvernight(b)) {
       const ms = run.pausedLeft ?? run.waitEnd - Date.now();
       left.textContent = fmtClock(ms / 1000);
       const total = run.waitEnd - run.stepStart;
@@ -413,6 +408,7 @@
     if (!b) return "Complete";
     const step = `Step ${run.index + 1}/${run.blocks.length}`;
     if (b.type === "action") return `${step} · ${b.text || "Action"}`;
+    if (isOvernight(b)) return `${step} · ${overnightReady() ? "Overnight done, ready to continue" : "Overnight, continue tomorrow"}`;
     const ms = run.pausedLeft ?? run.waitEnd - Date.now();
     return `${step} · ${run.pausedLeft != null ? "Paused" : "Waiting"} ${fmtClock(ms / 1000)}`;
   }
@@ -444,11 +440,25 @@
         el("p", { className: "now-kind" }, `Step ${run.index + 1} of ${run.blocks.length} · Action`),
         el("p", { className: "now-text" }, b.text || "Action"),
         el("button", { type: "button", className: "primary-btn big", onclick: () => { unlockAudio(); enterStep(run.index + 1, Date.now()); renderAll(); } }, "Done ✓")));
+    } else if (isOvernight(b)) {
+      const ready = overnightReady();
+      const next = () => { unlockAudio(); enterStep(run.index + 1, Date.now()); renderAll(); };
+      root.append(el("div", { className: "now-card wait-card" },
+        el("p", { className: "now-kind" }, `Step ${run.index + 1} of ${run.blocks.length} · Overnight`),
+        el("p", { className: "countdown moon", ...(ready ? { id: "overnightReady" } : {}) }, "☾"),
+        b.text ? el("p", { className: "now-text" }, b.text) : null,
+        el("p", { className: "now-sub" }, ready
+          ? "It's the next day. Continue when you're ready."
+          : `Started ${new Date(run.stepStart).toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" })}. Come back tomorrow.`),
+        ready
+          ? el("button", { type: "button", className: "primary-btn big", onclick: next }, "Continue")
+          : el("div", { className: "run-controls" },
+            el("button", { type: "button", className: "ghost-btn", onclick: () => { if (confirm("Continue before the night is over?")) next(); } }, "Continue now"))));
     } else {
       const paused = run.pausedLeft != null;
       const ms = paused ? run.pausedLeft : run.waitEnd - Date.now();
       root.append(el("div", { className: "now-card wait-card" },
-        el("p", { className: "now-kind" }, `Step ${run.index + 1} of ${run.blocks.length} · ${b.wait.mode === "overnight" ? "Overnight wait" : "Wait"}`),
+        el("p", { className: "now-kind" }, `Step ${run.index + 1} of ${run.blocks.length} · Wait`),
         b.text ? el("p", { className: "now-sub" }, b.text) : null,
         el("p", { className: "countdown", id: "runCountdown" }, fmtClock(ms / 1000)),
         el("div", { className: "progress" }, el("div", { id: "runProgress" })),

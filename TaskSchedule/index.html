@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
   <div class="app-shell">
@@ -132,8 +132,7 @@
       </div>
     </div>
     <div id="overnightPane" hidden>
-      <label class="field">Wait until<input id="overnightTime" type="time" value="08:00"></label>
-      <p class="hint">Starts when this step begins and ends the next time the clock reaches this time, usually the next morning.</p>
+      <p class="overnight-note">☾ Waits until the next day. When you come back tomorrow, tap <strong>Continue</strong> to carry on.</p>
     </div>
     <p class="form-error" id="waitError" hidden>Enter how long to wait.</p>
     <div class="actions">
@@ -180,7 +179,7 @@
   </dialog>
 
   <script src="app.js?v=8"></script>
-  <script src="protocols.js?v=2"></script>
+  <script src="protocols.js?v=3"></script>
   <script src="sync-config.js"></script>
   <script src="sync.js?v=5"></script>
 </body>
