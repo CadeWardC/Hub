@@ -164,42 +164,67 @@
     area.dispatchEvent(new Event("input"));
   }
 
-  // Each action block has one preset list (block.presets) shared by all of
-  // its blanks. Shown under the block once it has a blank: tap × to remove a
-  // preset, tap its value to edit it, or type new ones and press Add.
-  const HAS_BLANK = /_{3,}/;
+  // Each action block has one preset list (block.presets). A preset holds one
+  // value per blank, in order (["250", "5"] fills "Add ___ ml and ___ g"); a
+  // one-value preset fills whichever blank you're on. Edited under the block:
+  // Add, × to remove, tap a preset to load it back into the fields.
+  const blankTotal = (text) => ((text || "").match(BLANK) || []).length;
+  const presetValues = (v) => (Array.isArray(v) ? v : [v]);
+  const presetKey = (v) => presetValues(v).join("\u0001");
+  const presetLabel = (v) => presetValues(v).join(" · ");
+
   function renderPresetEditor(box, p, b) {
-    const has = HAS_BLANK.test(b.text || "");
-    box.hidden = !has;
-    if (!has) { box.replaceChildren(); return; }
+    const n = blankTotal(b.text);
+    box.hidden = !n;
+    box.dataset.blanks = String(n);
+    if (!n) { box.replaceChildren(); return; }
     b.presets = b.presets || [];
-    const input = el("input", {
-      className: "preset-add", placeholder: b.presets.length ? "Add more, e.g. 750" : "Add presets, e.g. 100, 250, 500",
+
+    const fields = Array.from({ length: n }, (_, k) => el("input", {
+      className: "preset-add",
+      placeholder: n > 1 ? `Blank ${k + 1}` : (b.presets.length ? "Add more, e.g. 750" : "Add presets, e.g. 100, 250, 500"),
       inputMode: "decimal", autocomplete: "off", spellcheck: false,
-    });
+    }));
+    const has = (key) => b.presets.some((x) => presetKey(x) === key);
     const add = () => {
-      const fresh = splitList(input.value).filter((v) => !b.presets.includes(v));
-      if (!fresh.length) { input.value = ""; return; }
+      let fresh;
+      if (n === 1) {
+        fresh = splitList(fields[0].value).map((v) => [v]);
+      } else {
+        const values = fields.map((f) => f.value.trim());
+        const empty = values.findIndex((v) => !v);
+        if (empty !== -1) { fields[empty].focus(); return; }
+        fresh = [values];
+      }
+      fresh = fresh.filter((v) => !has(presetKey(v)));
+      fields.forEach((f) => { f.value = ""; });
+      if (!fresh.length) return;
       b.presets.push(...fresh);
       saveNow(p);
       renderPresetEditor(box, p, b);
       box.querySelector(".preset-add").focus();
     };
-    input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); add(); } });
-    const remove = (v) => { b.presets = b.presets.filter((x) => x !== v); saveNow(p); };
+    fields.forEach((f, k) => f.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter") return;
+      e.preventDefault();
+      if (k < n - 1) fields[k + 1].focus(); else add();
+    }));
+    const remove = (v) => { b.presets = b.presets.filter((x) => presetKey(x) !== presetKey(v)); saveNow(p); };
+
     box.replaceChildren(
-      el("span", { className: "preset-title" }, "Presets for the blanks"),
+      el("span", { className: "preset-title" }, n > 1 ? `Presets · one value per blank (${n})` : "Presets for the blank"),
       b.presets.length ? el("div", { className: "preset-tags" }, b.presets.map((v) => el("span", { className: "preset-tag" },
         el("button", { type: "button", className: "preset-val", title: "Edit", onclick: () => {
           remove(v);
           renderPresetEditor(box, p, b);
-          const field = box.querySelector(".preset-add");
-          field.value = v;
-          field.focus();
-          field.select();
-        } }, v),
-        el("button", { type: "button", className: "preset-x", "aria-label": `Remove ${v}`, onclick: () => { remove(v); renderPresetEditor(box, p, b); } }, "×")))) : null,
-      el("div", { className: "preset-add-row" }, input, el("button", { type: "button", className: "ghost-btn", onclick: add }, "Add")));
+          const inputs = box.querySelectorAll(".preset-add");
+          presetValues(v).slice(0, inputs.length).forEach((val, k) => { inputs[k].value = val; });
+          inputs[0].focus();
+        } }, presetLabel(v)),
+        el("button", { type: "button", className: "preset-x", "aria-label": `Remove ${presetLabel(v)}`, onclick: () => { remove(v); renderPresetEditor(box, p, b); } }, "×")))) : null,
+      el("div", { className: "preset-add-row" },
+        el("div", { className: `preset-fields${n > 1 ? " multi" : ""}` }, fields),
+        el("button", { type: "button", className: "ghost-btn", onclick: add }, "Add")));
   }
 
   // Action text with each blank replaced by its value (or left as ___).
@@ -267,10 +292,9 @@
       const area = el("textarea", {
         className: "block-text", rows: 1, placeholder: "What to do… (use ___ for a blank)", value: b.text || "",
         oninput: (e) => {
-          const had = HAS_BLANK.test(b.text || "");
           b.text = e.target.value;
           autoGrow(e.target);
-          if (HAS_BLANK.test(b.text) !== had) renderPresetEditor(presetBox, p, b);
+          if (String(blankTotal(b.text)) !== presetBox.dataset.blanks) renderPresetEditor(presetBox, p, b);
           saveSoon(p);
         },
       });
@@ -526,13 +550,29 @@
     if (active == null) return [text];
 
     const presets = b.presets || [];
+    // A preset with several values fills the blanks in order; one value fills this blank.
+    const apply = (v) => {
+      const values = presetValues(v);
+      if (values.length > 1) {
+        values.slice(0, n).forEach((val, k) => { fills[k] = val; });
+        run.pick = null;
+        saveRun();
+        renderAll();
+      } else {
+        choose(active, values[0]);
+      }
+    };
+    const isOn = (v) => {
+      const values = presetValues(v);
+      return values.length > 1 ? values.slice(0, n).every((val, k) => fills[k] === val) : fills[active] === values[0];
+    };
     const other = el("input", { className: "blank-other", placeholder: presets.length ? "Other…" : "Type a value", inputMode: "decimal", autocomplete: "off" });
     const submitOther = () => { const v = other.value.trim(); if (v) choose(active, v); };
     other.addEventListener("keydown", (e) => { if (e.key === "Enter") submitOther(); });
     const pop = el("div", { className: "blank-pop" },
       el("p", { className: "blank-pop-title" }, n > 1 ? `Fill blank ${active + 1} of ${n}` : "Fill the blank"),
       presets.length ? el("div", { className: "blank-chips" },
-        presets.map((v) => el("button", { type: "button", className: `blank-chip${fills[active] === v ? " on" : ""}`, onclick: () => choose(active, v) }, v))) : null,
+        presets.map((v) => el("button", { type: "button", className: `blank-chip${isOn(v) ? " on" : ""}`, onclick: () => apply(v) }, presetLabel(v)))) : null,
       el("div", { className: "blank-other-row" }, other,
         el("button", { type: "button", className: "ghost-btn", onclick: submitOther }, "Set")));
     return [text, pop];

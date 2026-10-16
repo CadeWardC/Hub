@@ -526,7 +526,9 @@ form[data-kind="task"] .event-only { display: none; }
   color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums;
 }
 .preset-x { padding: 5px 10px 5px 6px; border: 0; background: none; color: var(--muted); font-size: 1rem; line-height: 1; }
-.preset-add-row { display: flex; gap: 8px; }
+.preset-add-row { display: flex; gap: 8px; align-items: flex-start; }
+.preset-fields { flex: 1; min-width: 0; display: flex; }
+.preset-fields.multi { display: grid; grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 6px; }
 .preset-add {
   flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
   background: var(--bg); color: var(--text); font: inherit; font-size: 0.9rem;
