@@ -144,11 +144,9 @@
   function autoGrow(t) { t.style.height = "auto"; t.style.height = `${t.scrollHeight}px`; }
 
   // ---- blanks in action text ----
-  // "___" (three or more underscores) in an action is a blank. Each blank has
-  // its own presets (block.blanks[i].presets); when the step comes up in a
-  // run, the presets pop up so you can fill the blank in.
+  // "___" (three or more underscores) in an action is a blank. When the step
+  // comes up in a run, that block's presets pop up so you can fill each one in.
   const BLANK = /_{3,}/g;
-  const blankCount = (text) => ((text || "").match(BLANK) || []).length;
   const splitList = (str) => [...new Set(str.split(/[,\n]/).map((x) => x.trim()).filter(Boolean))].slice(0, 30);
 
   // Typed into the action at the cursor, spaced like "Add ___ ml".
@@ -166,19 +164,42 @@
     area.dispatchEvent(new Event("input"));
   }
 
-  // One row per blank: where you set the presets that pop up during a run.
-  function renderBlankRows(box, p, b) {
-    const n = blankCount(b.text);
-    b.blanks = (b.blanks || []).slice(0, n);
-    while (b.blanks.length < n) b.blanks.push({ presets: [] });
-    box.replaceChildren(...b.blanks.map((blank, i) => el("label", { className: "blank-row" },
-      el("span", { className: "blank-tag" }, n > 1 ? `Blank ${i + 1}` : "Blank"),
-      el("input", {
-        className: "blank-presets", value: blank.presets.join(", "), placeholder: "Presets, e.g. 100, 250, 500",
-        autocomplete: "off", spellcheck: false,
-        oninput: (e) => { blank.presets = splitList(e.target.value); saveSoon(p); },
-      }))));
-    box.hidden = !n;
+  // Each action block has one preset list (block.presets) shared by all of
+  // its blanks. Shown under the block once it has a blank: tap × to remove a
+  // preset, tap its value to edit it, or type new ones and press Add.
+  const HAS_BLANK = /_{3,}/;
+  function renderPresetEditor(box, p, b) {
+    const has = HAS_BLANK.test(b.text || "");
+    box.hidden = !has;
+    if (!has) { box.replaceChildren(); return; }
+    b.presets = b.presets || [];
+    const input = el("input", {
+      className: "preset-add", placeholder: b.presets.length ? "Add more, e.g. 750" : "Add presets, e.g. 100, 250, 500",
+      inputMode: "decimal", autocomplete: "off", spellcheck: false,
+    });
+    const add = () => {
+      const fresh = splitList(input.value).filter((v) => !b.presets.includes(v));
+      if (!fresh.length) { input.value = ""; return; }
+      b.presets.push(...fresh);
+      saveNow(p);
+      renderPresetEditor(box, p, b);
+      box.querySelector(".preset-add").focus();
+    };
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); add(); } });
+    const remove = (v) => { b.presets = b.presets.filter((x) => x !== v); saveNow(p); };
+    box.replaceChildren(
+      el("span", { className: "preset-title" }, "Presets for the blanks"),
+      b.presets.length ? el("div", { className: "preset-tags" }, b.presets.map((v) => el("span", { className: "preset-tag" },
+        el("button", { type: "button", className: "preset-val", title: "Edit", onclick: () => {
+          remove(v);
+          renderPresetEditor(box, p, b);
+          const field = box.querySelector(".preset-add");
+          field.value = v;
+          field.focus();
+          field.select();
+        } }, v),
+        el("button", { type: "button", className: "preset-x", "aria-label": `Remove ${v}`, onclick: () => { remove(v); renderPresetEditor(box, p, b); } }, "×")))) : null,
+      el("div", { className: "preset-add-row" }, input, el("button", { type: "button", className: "ghost-btn", onclick: add }, "Add")));
   }
 
   // Action text with each blank replaced by its value (or left as ___).
@@ -242,18 +263,18 @@
       } }, "✕"));
 
     if (b.type === "action") {
-      const blanksBox = el("div", { className: "blank-rows" });
+      const presetBox = el("div", { className: "block-presets" });
       const area = el("textarea", {
         className: "block-text", rows: 1, placeholder: "What to do… (use ___ for a blank)", value: b.text || "",
         oninput: (e) => {
-          const before = blankCount(b.text);
+          const had = HAS_BLANK.test(b.text || "");
           b.text = e.target.value;
           autoGrow(e.target);
-          if (blankCount(b.text) !== before) renderBlankRows(blanksBox, p, b);
+          if (HAS_BLANK.test(b.text) !== had) renderPresetEditor(presetBox, p, b);
           saveSoon(p);
         },
       });
-      renderBlankRows(blanksBox, p, b);
+      renderPresetEditor(presetBox, p, b);
       return el("li", { className: "block block-action" }, head, area,
         el("div", { className: "block-tools" },
           el("button", {
@@ -262,7 +283,7 @@
             onpointerdown: (e) => { e.preventDefault(); insertAtCursor(area, "___"); },
             onclick: (e) => { if (e.detail === 0) insertAtCursor(area, "___"); },
           }, "+ Blank")),
-        blanksBox);
+        presetBox);
     }
     return el("li", { className: "block block-wait" }, head,
       el("button", { type: "button", className: `wait-display ${b.wait.mode}`, onclick: () => openWait(b.wait, (w) => { b.wait = w; saveNow(p); renderEditor(); }) },
@@ -504,7 +525,7 @@
     });
     if (active == null) return [text];
 
-    const presets = b.blanks?.[active]?.presets || [];
+    const presets = b.presets || [];
     const other = el("input", { className: "blank-other", placeholder: presets.length ? "Other…" : "Type a value", inputMode: "decimal", autocomplete: "off" });
     const submitOther = () => { const v = other.value.trim(); if (v) choose(active, v); };
     other.addEventListener("keydown", (e) => { if (e.key === "Enter") submitOther(); });
