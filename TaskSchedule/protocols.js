@@ -9,6 +9,9 @@
   let screen = "list"; // list | editor | run
   let currentId = null;
   let currentView = document.querySelector(".view.active").id;
+  let selecting = false; // editor "Select" mode
+  const selected = new Set(); // block ids picked in Select mode
+  let trail = []; // parent protocol ids when you open a nested protocol
 
   // Small DOM builder: el("div", { className: "x", onclick: fn }, child, "text")
   function el(tag, props, ...children) {
@@ -45,12 +48,31 @@
 
   const waitLabel = (w) => w.mode === "overnight" ? "Overnight" : fmtDuration(w.seconds);
 
+  // A wait's words wrap around its time: "Incubate for" -> "Incubate for 10
+  // minutes"; "Incubate ___ at 37°C" puts the time where the ___ is.
+  function fmtLong(sec) {
+    const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+    const unit = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+    const parts = [];
+    if (h) parts.push(unit(h, "hour"));
+    if (m) parts.push(unit(m, "minute"));
+    if (s || !parts.length) parts.push(unit(s, "second"));
+    return parts.join(" ");
+  }
+  function waitSentence(b) {
+    const time = b.wait.mode === "overnight" ? "overnight" : fmtLong(b.wait.seconds);
+    const words = (b.text || "").trim();
+    if (!words) return `Wait ${time}`;
+    return /_{3,}/.test(words) ? words.replace(/_{3,}/, time) : `${words} ${time}`;
+  }
+
   function summary(p) {
-    const actions = p.blocks.filter((b) => b.type === "action").length;
-    const waits = p.blocks.filter((b) => b.type === "wait");
+    const blocks = flatten(p);
+    const actions = blocks.filter((b) => b.type === "action").length;
+    const waits = blocks.filter((b) => b.type === "wait");
     const timed = waits.filter((b) => b.wait.mode === "timer").reduce((n, b) => n + b.wait.seconds, 0);
     const nights = waits.filter((b) => b.wait.mode === "overnight").length;
-    const parts = [`${p.blocks.length} step${p.blocks.length === 1 ? "" : "s"}`];
+    const parts = [`${blocks.length} step${blocks.length === 1 ? "" : "s"}`];
     if (actions) parts.push(`${actions} action${actions === 1 ? "" : "s"}`);
     if (timed) parts.push(`${fmtDuration(timed)} waiting`);
     if (nights) parts.push(nights === 1 ? "overnight" : `${nights} nights`);
@@ -58,6 +80,29 @@
   }
 
   const current = () => state.protocols.find((p) => p.id === currentId);
+
+  // ---- nested protocols ----
+  // A block { type: "protocol", protocolId } runs another protocol's steps in
+  // its place. Loops are blocked when adding, and skipped when running.
+  const byId = (id) => state.protocols.find((x) => x.id === id);
+  const titleOf = (p) => (p && p.title) || "Untitled protocol";
+  function includes(p, targetId, seen = new Set()) {
+    if (!p || seen.has(p.id)) return false;
+    seen.add(p.id);
+    return p.blocks.some((b) => b.type === "protocol" && (b.protocolId === targetId || includes(byId(b.protocolId), targetId, seen)));
+  }
+  // Steps with nested protocols opened up in place; `path` names the nested
+  // protocol(s) each step came from.
+  function flatten(p, path = [], seen = new Set()) {
+    if (!p || seen.has(p.id)) return [];
+    const inside = new Set(seen).add(p.id);
+    return p.blocks.flatMap((b) => {
+      if (b.type !== "protocol") return [{ ...JSON.parse(JSON.stringify(b)), path }];
+      const sub = byId(b.protocolId);
+      return sub ? flatten(sub, [...path, titleOf(sub)], inside) : [];
+    });
+  }
+  const usedIn = (p) => state.protocols.filter((x) => x !== p && x.blocks.some((b) => b.type === "protocol" && b.protocolId === p.id));
 
   let saveTimer = 0;
   function saveSoon(p) {
@@ -72,6 +117,8 @@
   }
 
   function go(next, id) {
+    if (next === "list") trail = [];
+    if (next !== "editor" || id !== currentId) { selecting = false; selected.clear(); }
     screen = next;
     if (id !== undefined) currentId = id;
     renderAll(true);
@@ -104,8 +151,9 @@
       const card = el("div", { className: "proto-card swipe-card" },
         el("button", { type: "button", className: "proto-open", onclick: () => go("editor", p.id) },
           el("span", { className: "task-title" }, p.title || "Untitled protocol"),
-          el("span", { className: "task-meta" }, summary(p))),
-        el("button", { type: "button", className: "run-chip", "aria-label": `Run ${p.title || "protocol"}`, disabled: !p.blocks.length, onclick: () => startRun(p) }, "▶ Run"));
+          el("span", { className: "task-meta" }, summary(p)),
+          usedIn(p).length ? el("span", { className: "task-meta used-in" }, `Used in ${usedIn(p).map(titleOf).join(", ")}`) : null),
+        el("button", { type: "button", className: "run-chip", "aria-label": `Run ${p.title || "protocol"}`, disabled: !flatten(p).length, onclick: () => startRun(p) }, "▶ Run"));
       window.TS.enableSwipe(row, card);
       row.append(actions, card);
       list.append(row);
@@ -133,7 +181,13 @@
   }
 
   function removeProtocol(p) {
-    if (!confirm(`Delete “${p.title || "Untitled protocol"}”?`)) return;
+    const parents = usedIn(p);
+    const note = parents.length ? `\n\nIt's used in ${parents.map(titleOf).join(", ")}; that step will be removed there.` : "";
+    if (!confirm(`Delete “${titleOf(p)}”?${note}`)) return;
+    parents.forEach((parent) => {
+      parent.blocks = parent.blocks.filter((b) => !(b.type === "protocol" && b.protocolId === p.id));
+      touch(parent);
+    });
     state.protocols = state.protocols.filter((x) => x !== p);
     bury("protocol", p.id);
     saveNow();
@@ -239,24 +293,43 @@
     const p = current();
     if (!p) { screen = "list"; return; }
 
+    const parent = byId(trail[trail.length - 1]);
     root.append(el("div", { className: "screen-head" },
-      el("button", { type: "button", className: "back", onclick: () => go("list", null) }, "‹ Protocols"),
+      el("button", { type: "button", className: "back", onclick: () => {
+        const up = trail.pop();
+        if (up && byId(up)) go("editor", up); else go("list", null);
+      } }, parent ? `‹ ${titleOf(parent)}` : "‹ Protocols"),
       el("span", { className: "spacer" }),
-      el("button", { type: "button", className: "primary-btn", disabled: !p.blocks.length, onclick: () => startRun(p) }, "▶ Run")));
+      p.blocks.length ? el("button", { type: "button", className: "ghost-btn", onclick: () => {
+        selecting = !selecting;
+        selected.clear();
+        renderEditor();
+      } }, selecting ? "Cancel" : "Select") : null,
+      selecting ? null : el("button", { type: "button", className: "primary-btn", disabled: !flatten(p).length, onclick: () => startRun(p) }, "▶ Run")));
 
     root.append(el("input", {
       id: "protoTitle", className: "proto-title", placeholder: "Protocol name", value: p.title, maxLength: 120,
       autocomplete: "off", oninput: (e) => { p.title = e.target.value; saveSoon(p); },
     }));
 
-    const list = el("ol", { className: "block-list" });
-    p.blocks.forEach((b, i) => list.append(blockCard(p, b, i)));
+    const list = el("ol", { className: `block-list${selecting ? " selecting" : ""}` });
+    p.blocks.forEach((b, i) => list.append(selecting ? selectCard(p, b, i) : blockCard(p, b, i)));
     if (!p.blocks.length) list.append(el("li", { className: "empty" }, "Add action and wait blocks to build the protocol."));
     root.append(list);
 
-    root.append(el("div", { className: "add-blocks" },
+    if (selecting) {
+      root.append(el("p", { className: "hint" }, "Tap the steps to move into a new protocol. They'll be replaced here by one step that runs it."));
+      root.append(el("div", { className: "select-bar" },
+        el("span", {}, `${selected.size} selected`),
+        el("span", { className: "spacer" }),
+        el("button", { type: "button", className: "primary-btn", disabled: !selected.size, onclick: () => extractProtocol(p) }, "Make protocol")));
+      return;
+    }
+
+    root.append(el("div", { className: "add-blocks three" },
       el("button", { type: "button", className: "add-action", onclick: () => addBlock(p, "action") }, "+ Action"),
-      el("button", { type: "button", className: "add-wait", onclick: () => addBlock(p, "wait") }, "+ Wait")));
+      el("button", { type: "button", className: "add-wait", onclick: () => addBlock(p, "wait") }, "+ Wait"),
+      el("button", { type: "button", className: "add-protocol", onclick: () => pickProtocol(p) }, "+ Protocol")));
 
     root.append(el("button", { type: "button", className: "delete-protocol", onclick: () => removeProtocol(p) }, "Delete protocol"));
     root.querySelectorAll("textarea").forEach(autoGrow);
@@ -272,7 +345,7 @@
     };
     const head = el("div", { className: "block-head" },
       el("span", { className: "step-no" }, String(i + 1)),
-      el("span", { className: "block-kind" }, b.type === "action" ? "Action" : "Wait"),
+      el("span", { className: "block-kind" }, b.type === "action" ? "Action" : b.type === "wait" ? "Wait" : "Protocol"),
       el("span", { className: "spacer" }),
       el("button", { type: "button", className: "mini", "aria-label": "Move up", disabled: i === 0, onclick: () => move(-1) }, "↑"),
       el("button", { type: "button", className: "mini", "aria-label": "Move down", disabled: i === p.blocks.length - 1, onclick: () => move(1) }, "↓"),
@@ -309,16 +382,80 @@
           }, "+ Blank")),
         presetBox);
     }
+    if (b.type === "protocol") {
+      const sub = byId(b.protocolId);
+      return el("li", { className: "block block-protocol" }, head,
+        sub
+          ? el("button", { type: "button", className: "proto-ref", onclick: () => { trail.push(p.id); go("editor", sub.id); } },
+            el("span", { className: "proto-ref-icon" }, "▤"),
+            el("span", { className: "proto-ref-text" }, el("strong", {}, titleOf(sub)), el("small", {}, summary(sub))),
+            el("span", { className: "edit-hint" }, "Open ›"))
+          : el("p", { className: "missing" }, "This protocol was deleted."));
+    }
     return el("li", { className: "block block-wait" }, head,
       el("button", { type: "button", className: `wait-display ${b.wait.mode}`, onclick: () => openWait(b.wait, (w) => { b.wait = w; saveNow(p); renderEditor(); }) },
         el("span", { className: "wait-icon" }, b.wait.mode === "overnight" ? "☾" : "⏱"),
         waitLabel(b.wait),
         el("span", { className: "edit-hint" }, "Change")),
       el("input", {
-        className: "block-note", placeholder: "Label (optional), e.g. Let it rest", value: b.text || "", maxLength: 120,
-        oninput: (e) => { b.text = e.target.value; saveSoon(p); },
-      }));
+        className: "block-note", placeholder: "Words, e.g. Incubate for (use ___ to place the time)", value: b.text || "", maxLength: 120,
+        oninput: (e) => {
+          b.text = e.target.value;
+          e.target.nextElementSibling.textContent = waitSentence(b);
+          saveSoon(p);
+        },
+      }),
+      el("p", { className: "wait-sentence" }, waitSentence(b)));
   }
+
+  // Compact, tappable card used in Select mode.
+  function selectCard(p, b, i) {
+    const on = selected.has(b.id);
+    const label = b.type === "action" ? (b.text || "Action")
+      : b.type === "wait" ? waitSentence(b)
+      : `▤ ${titleOf(byId(b.protocolId))}`;
+    return el("li", { className: `block block-${b.type} select-card${on ? " picked" : ""}`, onclick: () => {
+      if (on) selected.delete(b.id); else selected.add(b.id);
+      renderEditor();
+    } },
+      el("span", { className: "pick-box" }, on ? "✓" : ""),
+      el("span", { className: "step-no" }, String(i + 1)),
+      el("span", { className: "select-label" }, label));
+  }
+
+  // Move the selected steps into a new protocol and leave one step that runs it.
+  function extractProtocol(p) {
+    const idx = p.blocks.map((b, i) => (selected.has(b.id) ? i : -1)).filter((i) => i !== -1);
+    if (!idx.length) return;
+    const together = idx[idx.length - 1] - idx[0] + 1 === idx.length;
+    if (!together && !confirm("The selected steps aren't next to each other. They'll run together, where the first one is. Continue?")) return;
+    const name = prompt("Name for the new protocol", `${titleOf(p)} – part`);
+    if (name === null) return;
+    const sub = touch({ id: uid(), created: Date.now(), title: name.trim() || "Untitled protocol", blocks: idx.map((i) => p.blocks[i]) });
+    const ref = { id: uid(), type: "protocol", protocolId: sub.id };
+    p.blocks = p.blocks.filter((b) => !selected.has(b.id));
+    p.blocks.splice(idx[0], 0, ref);
+    state.protocols.push(sub);
+    selecting = false;
+    selected.clear();
+    saveNow(p);
+    renderEditor();
+  }
+
+  // Choose an existing protocol to add as a step (never one that contains this one).
+  const pickDialog = $("pickDialog");
+  function pickProtocol(p) {
+    const options = state.protocols.filter((x) => x !== p && !includes(x, p.id));
+    const list = $("pickList");
+    list.replaceChildren(...(options.length ? options.map((x) => el("button", { type: "button", className: "pick-item", onclick: () => {
+      pickDialog.close();
+      p.blocks.push({ id: uid(), type: "protocol", protocolId: x.id });
+      saveNow(p);
+      renderEditor();
+    } }, el("strong", {}, titleOf(x)), el("small", {}, summary(x)))) : [el("p", { className: "empty" }, "No other protocols to add yet. Make one first, or use Select to turn steps into one.")]));
+    pickDialog.showModal();
+  }
+  $("pickCancel").addEventListener("click", () => pickDialog.close());
 
   function addBlock(p, type) {
     if (type === "action") {
@@ -449,13 +586,14 @@
   }
 
   function startRun(p) {
-    if (!p.blocks.length) return;
+    const blocks = flatten(p);
+    if (!blocks.length) return;
     if (run && run.blocks[run.index] && !confirm(`Stop “${run.title}” and start “${p.title || "Untitled protocol"}”?`)) return;
     unlockAudio();
     if ("Notification" in window && Notification.permission === "default") Notification.requestPermission().catch(() => {});
     run = {
       protocolId: p.id, title: p.title || "Untitled protocol",
-      blocks: JSON.parse(JSON.stringify(p.blocks)),
+      blocks,
       index: 0, startedAt: Date.now(), stepStart: 0, waitEnd: null, pausedLeft: null,
     };
     enterStep(0, Date.now());
@@ -611,7 +749,7 @@
       root.append(el("div", { className: "now-card wait-card" },
         el("p", { className: "now-kind" }, `Step ${run.index + 1} of ${run.blocks.length} · Overnight`),
         el("p", { className: "countdown moon", ...(ready ? { id: "overnightReady" } : {}) }, "☾"),
-        b.text ? el("p", { className: "now-text" }, b.text) : null,
+        el("p", { className: "now-text" }, waitSentence(b)),
         el("p", { className: "now-sub" }, ready
           ? "It's the next day. Continue when you're ready."
           : `Started ${new Date(run.stepStart).toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" })}. Come back tomorrow.`),
@@ -624,7 +762,7 @@
       const ms = paused ? run.pausedLeft : run.waitEnd - Date.now();
       root.append(el("div", { className: "now-card wait-card" },
         el("p", { className: "now-kind" }, `Step ${run.index + 1} of ${run.blocks.length} · Wait`),
-        b.text ? el("p", { className: "now-sub" }, b.text) : null,
+        el("p", { className: "now-text wait-words" }, waitSentence(b)),
         el("p", { className: "countdown", id: "runCountdown" }, fmtClock(ms / 1000)),
         el("div", { className: "progress" }, el("div", { id: "runProgress" })),
         el("p", { className: "now-sub" }, paused ? "Paused" : `Ends ${new Date(run.waitEnd).toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" })}`),
@@ -641,11 +779,16 @@
           el("button", { type: "button", className: "ghost-btn", onclick: () => { enterStep(run.index + 1, Date.now()); renderAll(); } }, "Skip"))));
     }
 
+    // Steps from a nested protocol say which one they belong to.
+    if (b?.path?.length) root.querySelector(".now-card")?.prepend(el("p", { className: "now-path" }, b.path.join(" › ")));
+
     const steps = el("ol", { className: "run-steps" });
     run.blocks.forEach((s, i) => {
       steps.append(el("li", { className: `run-step ${s.type}${i < run.index ? " past" : ""}${i === run.index ? " now" : ""}` },
         el("span", { className: "step-no" }, i < run.index ? "✓" : String(i + 1)),
-        el("span", {}, s.type === "action" ? fillText(s.text, run.fills?.[i]) : `${waitLabel(s.wait)}${s.text ? ` — ${s.text}` : ""}`)));
+        el("span", {},
+          s.path?.length ? el("small", { className: "step-path" }, `${s.path.join(" › ")} · `) : null,
+          s.type === "action" ? fillText(s.text, run.fills?.[i]) : waitSentence(s))));
     });
     root.append(el("h3", { className: "section-label" }, "Steps"), steps);
     if (b && run.index > 0) {

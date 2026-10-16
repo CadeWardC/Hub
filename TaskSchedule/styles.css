@@ -10,6 +10,8 @@
   --danger: #d94a3d;
   --wait: #d98a1c;
   --wait-soft: rgba(217, 138, 28, 0.14);
+  --nest: #7a5af0;
+  --nest-soft: rgba(122, 90, 240, 0.13);
   --radius: 14px;
   color-scheme: light;
 }
@@ -25,6 +27,8 @@
     --accent-soft: rgba(106, 155, 255, 0.18);
     --wait: #f0a83c;
     --wait-soft: rgba(240, 168, 60, 0.16);
+    --nest: #a48bff;
+    --nest-soft: rgba(164, 139, 255, 0.16);
     color-scheme: dark;
   }
 }
@@ -556,3 +560,49 @@ form[data-kind="task"] .event-only { display: none; }
   flex: 1; min-width: 0; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px;
   background: var(--surface); color: var(--text); font: inherit;
 }
+
+/* nested protocols */
+.add-blocks.three { grid-template-columns: repeat(3, 1fr); }
+.add-blocks .add-protocol { border-color: var(--nest); color: var(--nest); }
+.block-protocol { border-left-color: var(--nest); }
+.block-protocol .step-no, .select-card.block-protocol .step-no { background: var(--nest-soft); color: var(--nest); }
+.proto-ref {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 10px 12px; border: 0; border-radius: 10px; background: var(--nest-soft); text-align: left;
+}
+.proto-ref-icon { color: var(--nest); font-size: 1.2rem; }
+.proto-ref-text { flex: 1; min-width: 0; display: grid; }
+.proto-ref-text small { color: var(--muted); }
+.proto-ref .edit-hint { color: var(--nest); }
+.missing { margin: 4px 0 0; color: var(--danger); font-size: 0.9rem; }
+.used-in { color: var(--nest); }
+
+.select-card { display: flex; align-items: center; gap: 10px; padding: 12px; cursor: pointer; }
+.select-card.picked { background: var(--accent-soft); border-color: var(--accent); }
+.select-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pick-box {
+  display: grid; place-items: center; flex: none; width: 22px; height: 22px;
+  border: 2px solid var(--muted); border-radius: 6px; color: #fff; font-size: 0.8rem; font-weight: 700;
+}
+.select-card.picked .pick-box { background: var(--accent); border-color: var(--accent); }
+.select-bar {
+  position: sticky; bottom: calc(80px + env(safe-area-inset-bottom)); z-index: 3;
+  display: flex; align-items: center; gap: 10px; margin-top: 14px;
+  padding: 10px 12px; border: 1px solid var(--line); border-radius: 14px;
+  background: var(--surface); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18); font-weight: 600;
+}
+@media (min-width: 1000px) { .select-bar { bottom: 16px; } }
+
+.pick-list { display: grid; gap: 8px; max-height: 50vh; overflow-y: auto; margin: 10px 0; }
+.pick-item {
+  display: grid; gap: 2px; padding: 12px; border: 1px solid var(--line); border-radius: 12px;
+  background: var(--bg); text-align: left;
+}
+.pick-item small { color: var(--muted); }
+
+.now-path { margin: 0 0 6px; font-size: 0.78rem; font-weight: 600; color: var(--nest); }
+.step-path { color: var(--nest); font-weight: 600; }
+
+/* wait words: "Incubate for 10 minutes" */
+.wait-sentence { margin: 2px 2px 0; font-size: 0.85rem; color: var(--wait); font-weight: 600; }
+.now-text.wait-words { font-size: 1.1rem; margin-top: 6px; }

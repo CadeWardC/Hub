@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="stylesheet" href="styles.css?v=15">
+  <link rel="stylesheet" href="styles.css?v=17">
 </head>
 <body>
   <div class="app-shell">
@@ -142,6 +142,16 @@
     </div>
   </dialog>
 
+  <dialog id="pickDialog">
+    <h2 class="dialog-title">Add a protocol</h2>
+    <p class="hint">Its steps run here, in place of this one step.</p>
+    <div class="pick-list" id="pickList"></div>
+    <div class="actions">
+      <span class="spacer"></span>
+      <button type="button" class="ghost" id="pickCancel">Cancel</button>
+    </div>
+  </dialog>
+
   <dialog id="syncDialog">
     <form id="syncForm" autocomplete="off">
       <h2 class="dialog-title">Sync with Directus</h2>
@@ -179,7 +189,7 @@
   </dialog>
 
   <script src="app.js?v=9"></script>
-  <script src="protocols.js?v=8"></script>
+  <script src="protocols.js?v=10"></script>
   <script src="sync-config.js"></script>
   <script src="sync.js?v=6"></script>
 </body>
