@@ -59,6 +59,18 @@
   const touch = (item) => { item.updated = Date.now(); return item; };
   const bury = (kind, id) => { state.deleted[id] = { kind, updated: Date.now() }; };
 
+  // Finished tasks are deleted a day after they were checked off (on every
+  // device, since the deletion syncs like any other).
+  const DONE_KEEP_MS = 24 * 60 * 60 * 1000;
+  function purgeDone() {
+    const cutoff = Date.now() - DONE_KEEP_MS;
+    const old = state.tasks.filter((t) => t.done && (t.doneAt || t.updated || 0) < cutoff);
+    if (!old.length) return;
+    state.tasks = state.tasks.filter((t) => !old.includes(t));
+    old.forEach((t) => bury("task", t.id));
+    save();
+  }
+
   let selectedDay = toKey(new Date());
   const RANGE_KEY = "taskschedule.range";
   let range = "week";
@@ -397,6 +409,7 @@
   }
 
   function render() {
+    purgeDone();
     const monthly = range === "month";
     $("todayButton").textContent = monthly
       ? fromKey(selectedDay).toLocaleDateString(undefined, { month: "long", year: "numeric" })
