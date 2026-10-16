@@ -62,8 +62,22 @@
   function waitSentence(b) {
     const time = b.wait.mode === "overnight" ? "overnight" : fmtLong(b.wait.seconds);
     const words = (b.text || "").trim();
-    if (!words) return `Wait ${time}`;
+    if (!words.replace(/_{3,}/, "").trim()) return `Wait ${time}`;
     return /_{3,}/.test(words) ? words.replace(/_{3,}/, time) : `${words} ${time}`;
+  }
+  // Width of an input's text in its own font, so word boxes hug their words.
+  const measure = document.createElement("canvas").getContext("2d");
+  function fitWidth(box) {
+    measure.font = getComputedStyle(box).font;
+    box.style.width = `${Math.ceil(measure.measureText(box.value || box.placeholder).width) + 14}px`;
+  }
+
+  // The wait's words split around the time: [before, after].
+  function waitWords(b) {
+    const text = b.text || "";
+    const at = text.search(/_{3,}/);
+    if (at === -1) return [text.trim(), ""];
+    return [text.slice(0, at).trim(), text.slice(at).replace(/^_{3,}/, "").trim()];
   }
 
   function summary(p) {
@@ -392,20 +406,28 @@
             el("span", { className: "edit-hint" }, "Open ›"))
           : el("p", { className: "missing" }, "This protocol was deleted."));
     }
+    // One line that reads like the step: [words before] [timer] [words after].
+    const [beforeText, afterText] = waitWords(b);
+    const before = el("input", { className: "wait-word before", placeholder: "words", value: beforeText, maxLength: 80, autocomplete: "off" });
+    const after = el("input", { className: "wait-word after", placeholder: "words", value: afterText, maxLength: 80, autocomplete: "off" });
+    const sync = () => {
+      const a = before.value.trim(), z = after.value.trim();
+      b.text = z ? [a, "___", z].filter(Boolean).join(" ") : a;
+      saveSoon(p);
+    };
+    // Each box is as wide as its words, so the line reads like a sentence.
+    [before, after].forEach((box) => {
+      requestAnimationFrame(() => fitWidth(box));
+      box.addEventListener("input", () => { fitWidth(box); sync(); });
+    });
     return el("li", { className: "block block-wait" }, head,
-      el("button", { type: "button", className: `wait-display ${b.wait.mode}`, onclick: () => openWait(b.wait, (w) => { b.wait = w; saveNow(p); renderEditor(); }) },
-        el("span", { className: "wait-icon" }, b.wait.mode === "overnight" ? "☾" : "⏱"),
-        waitLabel(b.wait),
-        el("span", { className: "edit-hint" }, "Change")),
-      el("input", {
-        className: "block-note", placeholder: "Words, e.g. Incubate for (use ___ to place the time)", value: b.text || "", maxLength: 120,
-        oninput: (e) => {
-          b.text = e.target.value;
-          e.target.nextElementSibling.textContent = waitSentence(b);
-          saveSoon(p);
-        },
-      }),
-      el("p", { className: "wait-sentence" }, waitSentence(b)));
+      el("div", { className: "wait-line" },
+        before,
+        el("button", {
+          type: "button", className: `time-chip ${b.wait.mode}`, title: "Change the time",
+          onclick: () => openWait(b.wait, (w) => { b.wait = w; saveNow(p); renderEditor(); }),
+        }, el("span", { className: "wait-icon" }, b.wait.mode === "overnight" ? "☾" : "⏱"), waitLabel(b.wait)),
+        after));
   }
 
   // Compact, tappable card used in Select mode.

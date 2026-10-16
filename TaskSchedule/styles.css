@@ -375,19 +375,11 @@ form[data-kind="task"] .event-only { display: none; }
 }
 .mini:disabled { opacity: 0.3; }
 .mini.danger { color: var(--danger); }
-.block-text, .block-note {
+.block-text {
   width: 100%; border: 0; background: none; resize: none; overflow: hidden;
   font: inherit; color: var(--text); padding: 4px 2px;
 }
-.block-text:focus, .block-note:focus { outline: none; }
-.block-note { font-size: 0.88rem; color: var(--muted); }
-.wait-display {
-  display: flex; align-items: center; gap: 10px; width: 100%;
-  padding: 10px 12px; border: 0; border-radius: 10px;
-  background: var(--wait-soft); text-align: left; font-size: 1.15rem; font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-.wait-display.overnight { font-size: 1rem; }
+.block-text:focus { outline: none; }
 .wait-icon { color: var(--wait); }
 .edit-hint { margin-left: auto; font-size: 0.78rem; font-weight: 600; color: var(--wait); }
 .add-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
@@ -562,7 +554,8 @@ form[data-kind="task"] .event-only { display: none; }
 }
 
 /* nested protocols */
-.add-blocks.three { grid-template-columns: repeat(3, 1fr); }
+.add-blocks.three { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.add-blocks.three button { padding: 14px 4px; white-space: nowrap; font-size: 0.92rem; }
 .add-blocks .add-protocol { border-color: var(--nest); color: var(--nest); }
 .block-protocol { border-left-color: var(--nest); }
 .block-protocol .step-no, .select-card.block-protocol .step-no { background: var(--nest-soft); color: var(--nest); }
@@ -603,6 +596,19 @@ form[data-kind="task"] .event-only { display: none; }
 .now-path { margin: 0 0 6px; font-size: 0.78rem; font-weight: 600; color: var(--nest); }
 .step-path { color: var(--nest); font-weight: 600; }
 
-/* wait words: "Incubate for 10 minutes" */
-.wait-sentence { margin: 2px 2px 0; font-size: 0.85rem; color: var(--wait); font-weight: 600; }
+/* wait line: [words before] [timer chip] [words after] */
+.wait-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.wait-word {
+  flex: 0 1 auto; min-width: 3em; max-width: 100%; padding: 6px 2px;
+  border: 0; border-bottom: 1px dashed var(--line); background: none;
+  font: inherit; color: var(--text);
+}
+.wait-word:focus { outline: none; border-bottom-color: var(--wait); }
+.wait-word.after { text-align: left; }
+.time-chip {
+  display: inline-flex; align-items: center; gap: 6px; flex: none;
+  padding: 7px 12px; border: 1px solid var(--wait); border-radius: 999px;
+  background: var(--wait-soft); color: var(--text);
+  font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
 .now-text.wait-words { font-size: 1.1rem; margin-top: 6px; }
