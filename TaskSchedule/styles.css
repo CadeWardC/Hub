@@ -504,16 +504,44 @@ form[data-kind="task"] .event-only { display: none; }
   .toast { bottom: 40px; }
 }
 
-/* number presets under the action being edited */
-.preset-bar { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); }
-.block-action.editing .preset-bar, .block-action:focus-within .preset-bar { display: grid; gap: 6px; }
-.preset-row { display: flex; flex-wrap: wrap; gap: 6px; }
-.preset-chip {
-  min-width: 38px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px;
-  background: var(--bg); font-size: 0.85rem; font-weight: 600; font-variant-numeric: tabular-nums;
+/* blanks: "___" in an action, filled from presets during a run */
+.block-tools { display: flex; gap: 6px; margin-top: 6px; }
+.add-blank {
+  padding: 5px 12px; border: 1px dashed var(--accent); border-radius: 999px;
+  background: none; color: var(--accent); font-size: 0.82rem; font-weight: 700;
   touch-action: manipulation; -webkit-user-select: none; user-select: none;
 }
-.preset-chip.num { color: var(--accent); border-color: var(--accent-soft); }
-.preset-chip.unit { color: var(--text); }
-.preset-chip.edit { border-style: dashed; color: var(--muted); font-weight: 500; }
-.preset-chip:active { background: var(--accent-soft); }
+.blank-rows { display: grid; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.blank-rows[hidden] { display: none; }
+.blank-row { display: flex; align-items: center; gap: 8px; }
+.blank-tag {
+  flex: none; padding: 3px 8px; border-radius: 6px;
+  background: var(--accent-soft); color: var(--accent); font-size: 0.75rem; font-weight: 700;
+}
+.blank-presets {
+  flex: 1; min-width: 0; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--bg); color: var(--text); font: inherit; font-size: 0.9rem;
+}
+.blank-fill {
+  display: inline-block; min-width: 3.2em; margin: 0 2px; padding: 0 8px;
+  border: 0; border-bottom: 3px solid var(--muted); border-radius: 6px 6px 0 0;
+  background: var(--bg); color: var(--muted); font: inherit; font-weight: 700; line-height: 1.4;
+}
+.blank-fill.filled { color: var(--accent); border-bottom-color: var(--accent); background: var(--accent-soft); }
+.blank-fill.active { border-bottom-color: var(--wait); box-shadow: 0 0 0 2px var(--wait-soft); }
+.blank-pop {
+  margin-top: 14px; padding: 12px; border: 1px solid var(--wait); border-radius: 14px;
+  background: var(--wait-soft); text-align: left;
+}
+.blank-pop-title { margin: 0 0 8px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.blank-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.blank-chip {
+  min-width: 52px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px;
+  background: var(--surface); font-size: 1.05rem; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+.blank-chip.on { border-color: var(--accent); color: var(--accent); }
+.blank-other-row { display: flex; gap: 8px; }
+.blank-other {
+  flex: 1; min-width: 0; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--surface); color: var(--text); font: inherit;
+}

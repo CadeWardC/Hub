@@ -143,21 +143,21 @@
   // ---- editor ----
   function autoGrow(t) { t.style.height = "auto"; t.style.height = `${t.scrollHeight}px`; }
 
-  // ---- number presets for action text ----
-  // One synced settings item. Until it's edited, every device uses the
-  // defaults without saving them, so a fresh device can't overwrite your list.
-  const PRESETS_ID = "number-presets";
-  const DEFAULT_PRESETS = { numbers: ["1", "2", "5", "10", "25", "50", "100", "250", "500"], units: ["ml", "µL", "g", "mg", "°C", "min", "×"] };
-  const presets = () => state.settings.find((x) => x.id === PRESETS_ID) || DEFAULT_PRESETS;
+  // ---- blanks in action text ----
+  // "___" (three or more underscores) in an action is a blank. Each blank has
+  // its own presets (block.blanks[i].presets); when the step comes up in a
+  // run, the presets pop up so you can fill the blank in.
+  const BLANK = /_{3,}/g;
+  const blankCount = (text) => ((text || "").match(BLANK) || []).length;
+  const splitList = (str) => [...new Set(str.split(/[,\n]/).map((x) => x.trim()).filter(Boolean))].slice(0, 30);
 
-  // Typed into the action at the cursor, spaced like "Add 250 ml" / "230°C".
+  // Typed into the action at the cursor, spaced like "Add ___ ml".
   function insertAtCursor(area, token) {
     const start = area.selectionStart ?? area.value.length;
     const end = area.selectionEnd ?? start;
     const before = area.value.slice(0, start);
-    const glue = /^[°%×]/.test(token) || !before || /\s$/.test(before) ? "" : " ";
+    const glue = !before || /\s$/.test(before) ? "" : " ";
     const after = area.value.slice(end);
-    // Keep a space before following words ("2 Add"), not before punctuation.
     const tail = after && !/^[\s.,;:!?)°%×]/.test(after) ? " " : "";
     area.value = before + glue + token + tail + after;
     const caret = start + glue.length + token.length;
@@ -166,46 +166,26 @@
     area.dispatchEvent(new Event("input"));
   }
 
-  function showPresets(area) {
-    document.querySelectorAll(".block-action.editing").forEach((x) => x.classList.remove("editing"));
-    area.closest(".block").classList.add("editing");
+  // One row per blank: where you set the presets that pop up during a run.
+  function renderBlankRows(box, p, b) {
+    const n = blankCount(b.text);
+    b.blanks = (b.blanks || []).slice(0, n);
+    while (b.blanks.length < n) b.blanks.push({ presets: [] });
+    box.replaceChildren(...b.blanks.map((blank, i) => el("label", { className: "blank-row" },
+      el("span", { className: "blank-tag" }, n > 1 ? `Blank ${i + 1}` : "Blank"),
+      el("input", {
+        className: "blank-presets", value: blank.presets.join(", "), placeholder: "Presets, e.g. 100, 250, 500",
+        autocomplete: "off", spellcheck: false,
+        oninput: (e) => { blank.presets = splitList(e.target.value); saveSoon(p); },
+      }))));
+    box.hidden = !n;
   }
 
-  function presetBar(area) {
-    const { numbers, units } = presets();
-    const chip = (text, cls) => el("button", {
-      type: "button", className: `preset-chip ${cls}`,
-      // Act on press so the textarea keeps focus (and the phone keyboard stays up).
-      onpointerdown: (e) => { e.preventDefault(); insertAtCursor(area, text); },
-      onclick: (e) => e.preventDefault(),
-    }, text);
-    return el("div", { className: "preset-bar" },
-      el("div", { className: "preset-row" }, numbers.map((n) => chip(n, "num"))),
-      el("div", { className: "preset-row" }, units.map((u) => chip(u, "unit")),
-        el("button", { type: "button", className: "preset-chip edit", "aria-label": "Edit presets", onclick: openPresets }, "✎ Edit")));
+  // Action text with each blank replaced by its value (or left as ___).
+  function fillText(text, fills) {
+    let k = 0;
+    return (text || "Action").replace(BLANK, () => (fills && fills[k++]) || "___");
   }
-
-  const presetDialog = $("presetDialog");
-  function openPresets() {
-    const { numbers, units } = presets();
-    $("presetNumbers").value = numbers.join(", ");
-    $("presetUnits").value = units.join(", ");
-    presetDialog.showModal();
-  }
-  const splitList = (s) => [...new Set(s.split(/[,\n]/).map((x) => x.trim()).filter(Boolean))].slice(0, 30);
-  $("presetCancel").addEventListener("click", () => presetDialog.close());
-  $("presetReset").addEventListener("click", () => {
-    $("presetNumbers").value = DEFAULT_PRESETS.numbers.join(", ");
-    $("presetUnits").value = DEFAULT_PRESETS.units.join(", ");
-  });
-  $("presetSave").addEventListener("click", () => {
-    const item = touch({ id: PRESETS_ID, numbers: splitList($("presetNumbers").value), units: splitList($("presetUnits").value) });
-    const at = state.settings.findIndex((x) => x.id === PRESETS_ID);
-    if (at === -1) state.settings.push(item); else state.settings[at] = item;
-    presetDialog.close();
-    saveNow();
-    renderEditor();
-  });
 
   function renderEditor() {
     const root = $("protoEditor");
@@ -262,14 +242,27 @@
       } }, "✕"));
 
     if (b.type === "action") {
+      const blanksBox = el("div", { className: "blank-rows" });
       const area = el("textarea", {
-        className: "block-text", rows: 1, placeholder: "What to do…", value: b.text || "",
-        oninput: (e) => { b.text = e.target.value; autoGrow(e.target); saveSoon(p); },
-        // Show the number presets under the action being edited.
-        onfocus: () => showPresets(area),
-        onpointerdown: () => showPresets(area),
+        className: "block-text", rows: 1, placeholder: "What to do… (use ___ for a blank)", value: b.text || "",
+        oninput: (e) => {
+          const before = blankCount(b.text);
+          b.text = e.target.value;
+          autoGrow(e.target);
+          if (blankCount(b.text) !== before) renderBlankRows(blanksBox, p, b);
+          saveSoon(p);
+        },
       });
-      return el("li", { className: "block block-action" }, head, area, presetBar(area));
+      renderBlankRows(blanksBox, p, b);
+      return el("li", { className: "block block-action" }, head, area,
+        el("div", { className: "block-tools" },
+          el("button", {
+            type: "button", className: "add-blank",
+            // Act on press so the cursor stays in the text (and the keyboard stays up).
+            onpointerdown: (e) => { e.preventDefault(); insertAtCursor(area, "___"); },
+            onclick: (e) => { if (e.detail === 0) insertAtCursor(area, "___"); },
+          }, "+ Blank")),
+        blanksBox);
     }
     return el("li", { className: "block block-wait" }, head,
       el("button", { type: "button", className: `wait-display ${b.wait.mode}`, onclick: () => openWait(b.wait, (w) => { b.wait = w; saveNow(p); renderEditor(); }) },
@@ -426,6 +419,7 @@
 
   function enterStep(i, at) {
     run.index = i;
+    run.pick = null;
     run.stepStart = at;
     run.pausedLeft = null;
     const b = run.blocks[i];
@@ -480,6 +474,49 @@
     return `${step} · ${run.pausedLeft != null ? "Paused" : "Waiting"} ${fmtClock(ms / 1000)}`;
   }
 
+  // The current action's text with tappable blanks, plus the preset pop-up
+  // for the blank being filled (the first empty one, or the one you tapped).
+  function actionWithBlanks(b) {
+    const parts = (b.text || "Action").split(/_{3,}/);
+    const n = parts.length - 1;
+    if (!n) return [el("p", { className: "now-text" }, b.text || "Action")];
+    run.fills = run.fills || {};
+    const fills = run.fills[run.index] = run.fills[run.index] || [];
+    let active = run.pick;
+    if (active == null) { active = fills.findIndex((v, k) => k < n && !v); if (active === -1 && fills.length < n) active = fills.length; }
+    if (active === -1 || active >= n) active = null;
+
+    const choose = (k, value) => {
+      fills[k] = value;
+      run.pick = null;
+      saveRun();
+      renderAll();
+    };
+    const text = el("p", { className: "now-text" });
+    parts.forEach((part, k) => {
+      text.append(part);
+      if (k < n) {
+        text.append(el("button", {
+          type: "button", className: `blank-fill${fills[k] ? " filled" : ""}${k === active ? " active" : ""}`,
+          onclick: () => { run.pick = k; saveRun(); renderAll(); },
+        }, fills[k] || "___"));
+      }
+    });
+    if (active == null) return [text];
+
+    const presets = b.blanks?.[active]?.presets || [];
+    const other = el("input", { className: "blank-other", placeholder: presets.length ? "Other…" : "Type a value", inputMode: "decimal", autocomplete: "off" });
+    const submitOther = () => { const v = other.value.trim(); if (v) choose(active, v); };
+    other.addEventListener("keydown", (e) => { if (e.key === "Enter") submitOther(); });
+    const pop = el("div", { className: "blank-pop" },
+      el("p", { className: "blank-pop-title" }, n > 1 ? `Fill blank ${active + 1} of ${n}` : "Fill the blank"),
+      presets.length ? el("div", { className: "blank-chips" },
+        presets.map((v) => el("button", { type: "button", className: `blank-chip${fills[active] === v ? " on" : ""}`, onclick: () => choose(active, v) }, v))) : null,
+      el("div", { className: "blank-other-row" }, other,
+        el("button", { type: "button", className: "ghost-btn", onclick: submitOther }, "Set")));
+    return [text, pop];
+  }
+
   function renderRun() {
     const root = $("protoRun");
     root.replaceChildren();
@@ -505,7 +542,7 @@
     } else if (b.type === "action") {
       root.append(el("div", { className: "now-card action-card" },
         el("p", { className: "now-kind" }, `Step ${run.index + 1} of ${run.blocks.length} · Action`),
-        el("p", { className: "now-text" }, b.text || "Action"),
+        ...actionWithBlanks(b),
         el("button", { type: "button", className: "primary-btn big", onclick: () => { unlockAudio(); enterStep(run.index + 1, Date.now()); renderAll(); } }, "Done ✓")));
     } else if (isOvernight(b)) {
       const ready = overnightReady();
@@ -547,7 +584,7 @@
     run.blocks.forEach((s, i) => {
       steps.append(el("li", { className: `run-step ${s.type}${i < run.index ? " past" : ""}${i === run.index ? " now" : ""}` },
         el("span", { className: "step-no" }, i < run.index ? "✓" : String(i + 1)),
-        el("span", {}, s.type === "action" ? (s.text || "Action") : `${waitLabel(s.wait)}${s.text ? ` — ${s.text}` : ""}`)));
+        el("span", {}, s.type === "action" ? fillText(s.text, run.fills?.[i]) : `${waitLabel(s.wait)}${s.text ? ` — ${s.text}` : ""}`)));
     });
     root.append(el("h3", { className: "section-label" }, "Steps"), steps);
     if (b && run.index > 0) {
