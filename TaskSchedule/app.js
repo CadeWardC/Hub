@@ -241,6 +241,7 @@
     move.addEventListener("click", () => moveTask(task));
 
     card.append(check, body, move);
+    card.addEventListener("dblclick", (e) => { if (!e.target.closest("button")) openEditor("task", task); });
     enableSwipe(row, card);
     row.append(actions, card);
     return row;
@@ -280,6 +281,9 @@
     }
   }
 
+  const wide = window.matchMedia("(min-width: 720px)");
+  wide.addEventListener?.("change", () => render());
+
   function renderMonth() {
     const grid = $("monthGrid");
     grid.replaceChildren();
@@ -316,16 +320,17 @@
       num.textContent = d.getDate();
       cell.append(num);
       const list = items.get(key) || [];
-      list.slice(0, 2).forEach((it) => {
+      const chipMax = wide.matches ? 4 : 2;
+      list.slice(0, chipMax).forEach((it) => {
         const chip = document.createElement("span");
         chip.className = "chip-" + it.kind;
         chip.textContent = it.title;
         cell.append(chip);
       });
-      if (list.length > 2) {
+      if (list.length > chipMax) {
         const more = document.createElement("span");
         more.className = "more";
-        more.textContent = `+${list.length - 2}`;
+        more.textContent = `+${list.length - chipMax}`;
         cell.append(more);
       }
       cell.setAttribute("aria-label", `${d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}, ${list.length} item${list.length === 1 ? "" : "s"}`);
