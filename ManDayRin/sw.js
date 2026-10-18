@@ -1,5 +1,5 @@
-const CACHE_NAME = "mandayrin-v21";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./vocabulary.js", "./audio-index.js", "./app.js", "./words.audio", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+const CACHE_NAME = "mandayrin-v23";
+const APP_SHELL = ["./", "./index.html", "./styles.css", "./weeks.js", "./audio-index.js", "./app.js", "./words.audio", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 const REMINDER_DB = "mandayrin-reminders";
 const REMINDER_STORE = "settings";
 
@@ -91,9 +91,9 @@ async function checkDailyReminder() {
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
   const [hours, minutes] = reminder.time.split(":").map(Number);
   if (((now.getHours() * 60) + now.getMinutes()) < ((hours * 60) + minutes) || reminder.lastNotified === today) return;
-  const words = Array.isArray(reminder.words) ? reminder.words.join(" · ") : "Your noun, verb, and adjective";
-  await self.registration.showNotification("Three new words are waiting", {
-    body: `${words} — keep your Mandarin streak moving.`,
+  const title = now.getDay() === 1 ? "A new word list is ready" : "Time for your Mandarin";
+  await self.registration.showNotification(title, {
+    body: reminder.body || "This week’s list and scenarios are waiting.",
     icon: "./icon-192.png",
     badge: "./icon-192.png",
     tag: `mandayrin-${today}`,

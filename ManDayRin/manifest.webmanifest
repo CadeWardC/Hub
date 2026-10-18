@@ -1,7 +1,7 @@
 {
-  "name": "ManDayRin — Daily Mandarin",
+  "name": "ManDayRin — Weekly Mandarin",
   "short_name": "ManDayRin",
-  "description": "A noun, verb, and adjective every day for one beginner-friendly year.",
+  "description": "A themed Mandarin word list every week, with read-along scenarios, for one beginner-friendly year.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

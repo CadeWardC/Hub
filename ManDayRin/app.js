@@ -1,11 +1,20 @@
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "mandayrinState.v1";
-  const kinds = ["noun", "verb", "adjective"];
-  const labels = { noun: "Noun", verb: "Verb", adjective: "Adjective" };
-  const vocab = window.MANDAYRIN_VOCAB;
+  const STORAGE_KEY = "mandayrinState.v2";
+  const LEGACY_STORAGE_KEY = "mandayrinState.v1";
+  const course = window.MANDAYRIN_COURSE;
+  const TOTAL_WEEKS = course.themes.length;
+  const mainKinds = ["noun", "verb", "adjective"];
+  const labels = {
+    noun: "Noun", verb: "Verb", adjective: "Adjective", pronoun: "Pronoun", number: "Number",
+    measure: "Measure word", question: "Question word", adverb: "Adverb", particle: "Particle",
+    conjunction: "Conjunction", phrase: "Phrase"
+  };
+  const speakerIcon = `<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 10v4h3l4 4V6L8 10H5zM16 9a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10"/></svg>`;
   const todayKey = localDateKey(new Date());
+  const words = buildWords();
+  const wordById = new Map(words.map((word) => [word.id, word]));
   let deferredInstallPrompt = null;
   let activeFilter = "all";
   let historyQuery = "";
@@ -16,12 +25,18 @@
   let activeWordButton = null;
   let audioPack = null;
   let audioPackError = null;
+  let playback = null;
+  let sheetReturnFocus = null;
   let quizState = { current: null, choices: [], correct: 0, attempts: 0, questionNumber: 0, answered: false, previousKey: "" };
 
   const state = loadState();
-  const day = getCourseDay(state.startedOn);
-  ensureCourseHistory();
-  renderToday();
+  // ?week=N previews the course as if N weeks had unlocked (nothing is saved for it).
+  const previewWeek = Number(new URLSearchParams(location.search).get("week"));
+  const currentWeek = Number.isInteger(previewWeek) && previewWeek >= 1 && previewWeek <= TOTAL_WEEKS ? previewWeek : weekNumber(state.startedOn);
+  let selectedWeek = currentWeek;
+  let scenarioIndex = 0;
+  saveState();
+  renderWeek();
   configureSpeechAudioSession();
   fetch("./words.audio").then((response) => {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -37,26 +52,53 @@
     console.warn("ManDayRin recordings unavailable:", error);
   });
   bindNavigation();
+  bindSpeakButtons();
+  bindWeekControls();
+  bindScenarioView();
   bindHistoryFilters();
   bindHistorySearch();
+  setupSheets();
   setupQuiz();
   setupInstall();
   setupReminders();
   registerWebMcpTools();
   registerServiceWorker();
 
+  function buildWords() {
+    return Object.keys(course.weeks).map(Number).sort((a, b) => a - b).flatMap((week) =>
+      course.weeks[week].words.map(([hanzi, pinyin, meaning, kind, exZh, exPy, exEn], index) => ({
+        id: `${week}-${index}`, week, index, hanzi, pinyin, meaning, kind, example: { zh: exZh, py: exPy, en: exEn }
+      })));
+  }
+
   function defaultState() {
-    return { startedOn: todayKey, selections: {}, history: [], reminder: { enabled: false, time: "09:00", lastNotified: "" } };
+    return {
+      startedOn: localDateKey(mondayOf(new Date())),
+      reminder: { enabled: false, time: "09:00", lastNotified: "" },
+      prefs: { pinyin: true, english: true }
+    };
   }
 
   function loadState() {
+    const defaults = defaultState();
     try {
-      const defaults = defaultState();
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-      return { ...defaults, ...saved, reminder: { ...defaults.reminder, ...(saved.reminder || {}) } };
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      if (saved) {
+        return {
+          ...defaults,
+          ...saved,
+          startedOn: /^\d{4}-\d{2}-\d{2}$/.test(saved.startedOn || "") ? saved.startedOn : defaults.startedOn,
+          reminder: { ...defaults.reminder, ...(saved.reminder || {}) },
+          prefs: { ...defaults.prefs, ...(saved.prefs || {}) }
+        };
+      }
+      // The weekly course starts fresh; only reminder settings carry over from the daily version.
+      const legacy = JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || "null");
+      if (legacy?.reminder) defaults.reminder = { ...defaults.reminder, ...legacy.reminder };
     } catch (_) {
-      return defaultState();
+      // Fall back to a fresh course.
     }
+    return defaults;
   }
 
   function saveState() {
@@ -70,102 +112,402 @@
     return `${year}-${month}-${dayOfMonth}`;
   }
 
-  function getCourseDay(startKey) {
-    const [sy, sm, sd] = startKey.split("-").map(Number);
+  function parseDateKey(key) {
+    const [year, month, date] = key.split("-").map(Number);
+    return new Date(year, month - 1, date);
+  }
+
+  function mondayOf(date) {
+    const monday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
+    return monday;
+  }
+
+  function weekNumber(startKey) {
+    const start = parseDateKey(startKey);
     const now = new Date();
-    const elapsedDays = (Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(sy, sm - 1, sd)) / 86400000;
-    return Math.min(365, Math.max(1, elapsedDays + 1));
+    const elapsedDays = Math.round((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(start.getFullYear(), start.getMonth(), start.getDate())) / 86400000);
+    return Math.min(TOTAL_WEEKS, Math.max(1, Math.floor(elapsedDays / 7) + 1));
   }
 
-  function scheduledIndex(kind, dayNumber) {
-    const band = bandForDay(dayNumber);
-    const bandStart = band * 40;
-    const dayInBand = dayNumber - (band * 120) - 1;
-    return bandStart + (dayInBand % 40);
+  function weekStart(week) {
+    const date = parseDateKey(state.startedOn);
+    date.setDate(date.getDate() + ((week - 1) * 7));
+    return date;
   }
 
-  function bandForDay(dayNumber) {
-    if (dayNumber <= 120) return 0;
-    if (dayNumber <= 240) return 1;
-    return 2;
+  function levelFor(week) {
+    return course.levels.find((level) => week >= level.from && week <= level.to) || course.levels[0];
   }
 
-  function ensureCourseHistory() {
-    const [year, month, date] = state.startedOn.split("-").map(Number);
-    for (let courseDay = 1; courseDay <= day; courseDay += 1) {
-      const dateKey = localDateKey(new Date(year, month - 1, date + courseDay - 1));
-      if (!state.selections[dateKey]) state.selections[dateKey] = {};
-      kinds.forEach((kind) => {
-        if (typeof state.selections[dateKey][kind] !== "number") {
-          state.selections[dateKey][kind] = scheduledIndex(kind, courseDay);
-        }
-        recordWord(kind, state.selections[dateKey][kind], false, dateKey, courseDay);
-      });
-    }
-    // Keep today's selection available after the 365-day course ends.
-    ensureTodaySelection();
-    state.history.sort((a, b) => a.date.localeCompare(b.date) || a.seenAt - b.seenAt);
-    saveState();
+  function theme(week) {
+    const [en, zh, py] = course.themes[week - 1];
+    return { en, zh, py };
   }
 
-  function ensureTodaySelection() {
-    if (!state.selections[todayKey]) state.selections[todayKey] = {};
-    kinds.forEach((kind) => {
-      if (typeof state.selections[todayKey][kind] !== "number") {
-        state.selections[todayKey][kind] = scheduledIndex(kind, day);
-      }
-      recordWord(kind, state.selections[todayKey][kind], false);
-    });
+  function pad(number) {
+    return String(number).padStart(2, "0");
   }
 
-  function recordWord(kind, index, rerolled, date = todayKey, courseDay = day) {
-    const word = vocab[kind][index];
-    const fingerprint = `${date}:${kind}:${word[0]}`;
-    if (state.history.some((entry) => entry.fingerprint === fingerprint)) return;
-    state.history.push({ fingerprint, date, day: courseDay, kind, word, rerolled, seenAt: Date.now() });
+  function esc(value) {
+    return String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[char]));
   }
 
-  function renderToday() {
-    const formatted = new Intl.DateTimeFormat(undefined, { weekday: "long", month: "long", day: "numeric" }).format(new Date());
-    document.querySelector("#dateLabel").textContent = formatted;
-    document.querySelector("#dayNumber").textContent = String(day).padStart(3, "0");
-    document.querySelector("#progressFill").style.width = `${(day / 365) * 100}%`;
-    document.querySelector("#levelLabel").textContent = day <= 120 ? "First steps · very basic" : day <= 240 ? "Everyday basics · still beginner" : "Growing basics · beginner";
+  function accentKind(kind) {
+    return mainKinds.includes(kind) ? kind : "other";
+  }
 
-    document.querySelector("#wordStack").innerHTML = kinds.map((kind) => {
-      const word = vocab[kind][state.selections[todayKey][kind]];
-      return `<article class="word-card" data-kind="${kind}">
+  function sayButton(text, label) {
+    return `<button class="mini-speak" type="button" data-say="${esc(text)}" aria-label="${esc(label)}">${speakerIcon}</button>`;
+  }
+
+  function formatShortDate(date) {
+    return new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" }).format(date);
+  }
+
+  // ----- Week view -----
+
+  function renderWeek() {
+    const weekTheme = theme(selectedWeek);
+    const isCurrent = selectedWeek === currentWeek;
+    const level = levelFor(selectedWeek);
+    const start = new Intl.DateTimeFormat(undefined, { month: "long", day: "numeric" }).format(weekStart(selectedWeek));
+    document.querySelector("#weekDateLabel").textContent = isCurrent ? `This week · from ${start}` : `Week of ${start}`;
+    document.querySelector("#weekNumber").textContent = pad(selectedWeek);
+    document.querySelector("#progressFill").style.width = `${(currentWeek / TOTAL_WEEKS) * 100}%`;
+    document.querySelector("#levelLabel").textContent = `Level ${level.number} · ${level.name}`;
+    document.querySelector("#themeZh").textContent = weekTheme.zh;
+    document.querySelector("#themePinyin").textContent = weekTheme.py;
+    document.querySelector("#themeEn").textContent = weekTheme.en;
+    document.querySelector("#themeSpeak").dataset.say = weekTheme.zh;
+    document.querySelector("#prevWeekButton").disabled = selectedWeek <= 1;
+    document.querySelector("#nextWeekButton").disabled = selectedWeek >= currentWeek;
+    document.querySelector("#weekPickerLabel").textContent = isCurrent ? "This week" : `Week ${pad(selectedWeek)}`;
+
+    const data = course.weeks[selectedWeek];
+    document.querySelector("#weekContent").innerHTML = data ? weekContentHtml(data) : `<div class="empty-state">
+      <strong>Week ${selectedWeek}’s list is on its way</strong>
+      The theme is set, but its 15 words and scenarios haven’t been written yet.
+    </div>`;
+  }
+
+  function weekContentHtml(data) {
+    const listWords = words.filter((word) => word.week === selectedWeek);
+    return `<section class="week-block" aria-labelledby="wordListHeading">
+      <div class="block-heading"><h2 id="wordListHeading">Word list</h2><span>${listWords.length} words</span></div>
+      <div class="word-list">${listWords.map(wordRowHtml).join("")}</div>
+    </section>
+
+    <section class="week-block" aria-labelledby="patternsHeading">
+      <div class="block-heading"><h2 id="patternsHeading">Patterns</h2><span>${pad(data.patterns.length)}</span></div>
+      ${data.patterns.map(([zh, py, en, exZh, exPy, exEn]) => `<article class="pattern">
         <div>
-          <p class="part-of-speech">${labels[kind]}</p>
-          <p class="hanzi" lang="zh-Hans">${word[0]}</p>
-          <p class="pinyin">${word[1]}</p>
-          <p class="meaning">${word[2]}</p>
+          <p class="pattern-frame" lang="zh-Hans">${esc(zh)}</p>
+          <p class="pattern-meaning">${esc(py)} · ${esc(en)}</p>
+          <p class="pattern-example"><span lang="zh-Hans">${esc(exZh)}</span> ${esc(exPy)} — ${esc(exEn)}</p>
         </div>
-        <div class="card-actions">
-          <button class="word-action speak-button" type="button" data-speak="${kind}" aria-label="Hear ${word[0]} pronounced">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 10v4h3l4 4V6L8 10H5zM16 9a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10"/></svg>
-          </button>
-          <button class="word-action reroll-button" type="button" data-reroll="${kind}" aria-label="Reroll the ${labels[kind].toLowerCase()}">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 7h-5V2M4 17h5v5M19 12a7 7 0 0 0-12-5l-3 3m1 2a7 7 0 0 0 12 5l3-3"/></svg>
-          </button>
+        ${sayButton(exZh, `Hear: ${exEn}`)}
+      </article>`).join("")}
+    </section>
+
+    <section class="week-block" aria-labelledby="scenariosHeading">
+      <div class="block-heading"><h2 id="scenariosHeading">Scenarios</h2><span>Read along</span></div>
+      <div class="scenario-list">
+        ${data.scenarios.map((scenario, index) => `<button class="scenario-card" type="button" data-open-scenario="${index}">
+          <span class="scenario-index">${pad(index + 1)}</span>
+          <strong>${esc(scenario.title)}</strong>
+          <span class="scenario-card-zh" lang="zh-Hans">${esc(scenario.zh)}</span>
+          <span class="scenario-card-setting">${esc(scenario.setting)}</span>
+          <span class="scenario-card-meta">${scenario.lines.length} lines · Read along →</span>
+        </button>`).join("")}
+      </div>
+    </section>`;
+  }
+
+  function wordRowHtml(word) {
+    return `<article class="list-word" data-kind="${accentKind(word.kind)}">
+      <div class="list-word-row">
+        <button class="list-word-toggle" type="button" aria-expanded="false" data-expand-word="${word.id}">
+          <span class="lw-hanzi" lang="zh-Hans">${esc(word.hanzi)}</span>
+          <span class="lw-text"><strong>${esc(word.pinyin)}</strong><span>${esc(word.meaning)}</span><small>${labels[word.kind] || word.kind}</small></span>
+        </button>
+        ${sayButton(word.hanzi, `Hear ${word.hanzi} pronounced`)}
+      </div>
+      <div class="list-word-example" hidden>
+        <div>
+          <p class="ex-zh" lang="zh-Hans">${esc(word.example.zh)}</p>
+          <p class="ex-py">${esc(word.example.py)}</p>
+          <p class="ex-en">${esc(word.example.en)}</p>
         </div>
-      </article>`;
+        ${sayButton(word.example.zh, "Hear the example sentence")}
+      </div>
+    </article>`;
+  }
+
+  function selectWeek(week) {
+    selectedWeek = Math.min(currentWeek, Math.max(1, week));
+    renderWeek();
+  }
+
+  function bindWeekControls() {
+    document.querySelector("#prevWeekButton").addEventListener("click", () => selectWeek(selectedWeek - 1));
+    document.querySelector("#nextWeekButton").addEventListener("click", () => selectWeek(selectedWeek + 1));
+    document.querySelector("#weekPickerButton").addEventListener("click", (event) => {
+      renderWeekList();
+      openSheet(document.querySelector("#weekSheet"), event.currentTarget);
+      document.querySelector("#weekList .week-row.active")?.scrollIntoView({ block: "center" });
+    });
+    document.querySelector("#weekList").addEventListener("click", (event) => {
+      const row = event.target.closest("[data-pick-week]");
+      if (!row || row.disabled) return;
+      closeSheet(document.querySelector("#weekSheet"));
+      selectWeek(Number(row.dataset.pickWeek));
+      showView("weekView");
+      window.scrollTo({ top: 0 });
+    });
+    document.querySelector("#weekContent").addEventListener("click", (event) => {
+      const toggle = event.target.closest("[data-expand-word]");
+      if (toggle) {
+        const open = toggle.getAttribute("aria-expanded") !== "true";
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.closest(".list-word").querySelector(".list-word-example").hidden = !open;
+        return;
+      }
+      const card = event.target.closest("[data-open-scenario]");
+      if (card) openScenario(Number(card.dataset.openScenario));
+    });
+  }
+
+  function renderWeekList() {
+    document.querySelector("#weekList").innerHTML = course.levels.map((level) => {
+      const rows = [];
+      for (let week = level.from; week <= level.to; week += 1) {
+        const weekTheme = theme(week);
+        const locked = week > currentWeek;
+        const status = locked ? `Opens ${formatShortDate(weekStart(week))}` : week === currentWeek ? "This week" : course.weeks[week] ? "Open" : "Coming soon";
+        rows.push(`<button class="week-row${week === selectedWeek ? " active" : ""}" type="button" data-pick-week="${week}"${locked ? " disabled" : ""}>
+          <span class="wr-num">${pad(week)}</span>
+          <span class="wr-theme"><strong>${esc(weekTheme.en)}</strong><span lang="zh-Hans">${esc(weekTheme.zh)}</span></span>
+          <span class="wr-status">${status}</span>
+        </button>`);
+      }
+      return `<p class="week-list-level">Level ${level.number} · ${esc(level.name)}</p>${rows.join("")}`;
     }).join("");
+  }
 
-    document.querySelectorAll("[data-reroll]").forEach((button) => {
-      button.addEventListener("click", () => reroll(button.dataset.reroll));
+  // ----- Scenario read-along -----
+
+  function openScenario(index) {
+    scenarioIndex = index;
+    showView("scenarioView");
+    renderScenario();
+    window.scrollTo({ top: 0 });
+  }
+
+  function renderScenario() {
+    stopPlayback();
+    const data = course.weeks[selectedWeek];
+    const scenario = data.scenarios[scenarioIndex];
+    const dictionary = dictionaryFor(selectedWeek);
+    document.querySelector("#scenarioBackLabel").textContent = `Week ${pad(selectedWeek)} · ${theme(selectedWeek).en}`;
+    document.querySelector("#scenarioLabel").textContent = `Scenario ${pad(scenarioIndex + 1)} / ${pad(data.scenarios.length)}`;
+    document.querySelector("#scenarioHeading").textContent = scenario.title;
+    document.querySelector("#scenarioZh").textContent = scenario.zh;
+    document.querySelector("#scenarioSetting").textContent = scenario.setting;
+    document.querySelector("#dialogue").innerHTML = scenario.lines.map(([who, zh, py, en], index) => {
+      const [name, namePinyin] = scenario.cast[who];
+      return `<li class="line" data-speaker="${who % 2}" data-line="${index}">
+        <div class="line-body">
+          <p class="line-who"><span lang="zh-Hans">${esc(name)}</span> ${esc(namePinyin)}</p>
+          <p class="line-zh" lang="zh-Hans">${tokenize(zh, dictionary)}</p>
+          <p class="line-py">${esc(py)}</p>
+          <p class="line-en">${esc(en)}</p>
+        </div>
+        ${sayButton(zh, `Hear line ${index + 1}`)}
+      </li>`;
+    }).join("");
+    document.querySelector("#prevScenarioButton").disabled = scenarioIndex === 0;
+    document.querySelector("#nextScenarioButton").disabled = scenarioIndex >= data.scenarios.length - 1;
+    applyPrefs();
+  }
+
+  function dictionaryFor(week) {
+    const known = new Map(words.filter((word) => word.week <= week).map((word) => [word.hanzi, word]));
+    const names = new Set(course.names || []);
+    const maxLength = Math.max(1, ...[...known.keys(), ...names].map((key) => key.length));
+    return { week, known, names, maxLength };
+  }
+
+  // Greedy longest match against every word unlocked by this week, so taps work on earlier weeks' words too.
+  function tokenize(text, dictionary) {
+    let html = "";
+    let position = 0;
+    while (position < text.length) {
+      let match = null;
+      for (let length = Math.min(dictionary.maxLength, text.length - position); length > 0; length -= 1) {
+        const piece = text.slice(position, position + length);
+        if (dictionary.names.has(piece)) { match = { piece }; break; }
+        const word = dictionary.known.get(piece);
+        if (word) { match = { piece, word }; break; }
+      }
+      if (match?.word) {
+        // Inline spans (not buttons) so Chinese punctuation never wraps onto its own line.
+        html += `<span class="tok${match.word.week === dictionary.week ? " tok-new" : ""}" role="button" tabindex="0" data-word="${match.word.id}">${esc(match.piece)}</span>`;
+      } else {
+        html += esc(match ? match.piece : text[position]);
+      }
+      position += match ? match.piece.length : 1;
+    }
+    return html;
+  }
+
+  function bindScenarioView() {
+    document.querySelector("#scenarioBack").addEventListener("click", () => {
+      showView("weekView");
+      document.querySelector(`[data-open-scenario="${scenarioIndex}"]`)?.focus();
     });
-    document.querySelectorAll("[data-speak]").forEach((button) => {
-      button.addEventListener("click", () => speakWord(button.dataset.speak, button));
+    document.querySelector("#prevScenarioButton").addEventListener("click", () => openScenario(scenarioIndex - 1));
+    document.querySelector("#nextScenarioButton").addEventListener("click", () => openScenario(scenarioIndex + 1));
+    document.querySelector("#playAllButton").addEventListener("click", togglePlayAll);
+    document.querySelectorAll("[data-pref]").forEach((button) => {
+      button.addEventListener("click", () => {
+        state.prefs[button.dataset.pref] = !state.prefs[button.dataset.pref];
+        saveState();
+        applyPrefs();
+      });
+    });
+    const dialogue = document.querySelector("#dialogue");
+    dialogue.addEventListener("click", (event) => {
+      const token = event.target.closest("[data-word]");
+      if (token) openWordSheet(wordById.get(token.dataset.word), token);
+    });
+    dialogue.addEventListener("keydown", (event) => {
+      const token = event.target.closest("[data-word]");
+      if (!token || (event.key !== "Enter" && event.key !== " ")) return;
+      event.preventDefault();
+      openWordSheet(wordById.get(token.dataset.word), token);
     });
   }
 
-  function speakWord(kind, button) {
-    const word = vocab[kind][state.selections[todayKey][kind]];
-    speakChinese(word[0], button);
+  function applyPrefs() {
+    const dialogue = document.querySelector("#dialogue");
+    dialogue.classList.toggle("hide-pinyin", !state.prefs.pinyin);
+    dialogue.classList.toggle("hide-english", !state.prefs.english);
+    document.querySelectorAll("[data-pref]").forEach((button) => {
+      const on = Boolean(state.prefs[button.dataset.pref]);
+      button.setAttribute("aria-pressed", String(on));
+      button.classList.toggle("active", on);
+    });
   }
 
-  function speakChinese(hanzi, button) {
+  function togglePlayAll() {
+    if (playback) {
+      stopPlayback();
+      return;
+    }
+    const lines = course.weeks[selectedWeek].scenarios[scenarioIndex].lines;
+    const token = {};
+    playback = token;
+    document.querySelector("#playAllButton").textContent = "Stop";
+    const playLine = (index) => {
+      if (playback !== token) return;
+      if (index >= lines.length) {
+        stopPlayback();
+        return;
+      }
+      document.querySelectorAll(".line").forEach((line) => line.classList.toggle("playing", Number(line.dataset.line) === index));
+      const line = document.querySelector(`.line[data-line="${index}"]`);
+      line.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      speakChinese(lines[index][1], line.querySelector("[data-say]"), (finished) => {
+        if (playback !== token) return;
+        if (!finished) {
+          stopPlayback();
+          return;
+        }
+        setTimeout(() => playLine(index + 1), 450);
+      });
+    };
+    playLine(0);
+  }
+
+  function stopPlayback() {
+    const wasPlaying = Boolean(playback);
+    playback = null;
+    document.querySelectorAll(".line.playing").forEach((line) => line.classList.remove("playing"));
+    document.querySelector("#playAllButton").textContent = "Play all";
+    if (wasPlaying) cancelSpeech();
+  }
+
+  // ----- Word sheet -----
+
+  function openWordSheet(word, opener) {
+    if (!word) return;
+    const weekTheme = theme(word.week);
+    document.querySelector("#sheetWeek").textContent = `WEEK ${pad(word.week)} · ${weekTheme.en.toUpperCase()} · ${(labels[word.kind] || word.kind).toUpperCase()}`;
+    document.querySelector("#sheetHanzi").textContent = word.hanzi;
+    document.querySelector("#sheetPinyin").textContent = word.pinyin;
+    document.querySelector("#sheetMeaning").textContent = word.meaning;
+    document.querySelector("#sheetExZh").textContent = word.example.zh;
+    document.querySelector("#sheetExPy").textContent = word.example.py;
+    document.querySelector("#sheetExEn").textContent = word.example.en;
+    document.querySelector("#sheetExSpeak").dataset.say = word.example.zh;
+    document.querySelector("#sheetSpeak").dataset.say = word.hanzi;
+    openSheet(document.querySelector("#wordSheet"), opener);
+  }
+
+  function setupSheets() {
+    document.querySelectorAll("[data-close-sheet]").forEach((button) => {
+      button.addEventListener("click", () => closeSheet(button.closest(".install-dialog")));
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      document.querySelectorAll("#wordSheet, #weekSheet").forEach((sheet) => { if (!sheet.hidden) closeSheet(sheet); });
+    });
+  }
+
+  function openSheet(sheet, opener) {
+    sheetReturnFocus = opener || document.activeElement;
+    sheet.hidden = false;
+    document.body.style.overflow = "hidden";
+    sheet.querySelector(".dialog-close").focus();
+  }
+
+  function closeSheet(sheet) {
+    sheet.hidden = true;
+    document.body.style.overflow = "";
+    if (sheetReturnFocus && document.contains(sheetReturnFocus)) sheetReturnFocus.focus();
+    sheetReturnFocus = null;
+  }
+
+  // ----- Speech -----
+
+  function bindSpeakButtons() {
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-say]");
+      if (!button || !button.dataset.say) return;
+      stopPlayback();
+      speakChinese(button.dataset.say, button);
+    });
+  }
+
+  function cancelSpeech() {
+    if (activeWordAudio) {
+      activeWordAudio.pause();
+      if (activeWordAudioUrl) URL.revokeObjectURL(activeWordAudioUrl);
+      if (activeWordButton) activeWordButton.classList.remove("speaking");
+      activeWordAudio = null;
+      activeWordAudioUrl = null;
+      activeWordButton = null;
+    }
+    if (activeUtterance) {
+      activeUtterance = null;
+      window.speechSynthesis?.cancel();
+    }
+    document.querySelectorAll(".speaking").forEach((element) => element.classList.remove("speaking"));
+  }
+
+  // onDone(true) fires when speech finishes normally, onDone(false) when it fails or is cut off.
+  function speakChinese(hanzi, button, onDone = () => {}) {
     configureSpeechAudioSession();
     const clip = window.MANDAYRIN_AUDIO_INDEX?.[hanzi];
     if (audioPack && clip) {
@@ -196,23 +538,28 @@
       };
       audio.onended = () => {
         finish();
+        onDone(true);
       };
       audio.onerror = () => {
         finish();
         showToast("Recording could not play. Try the speaker again.");
+        onDone(false);
       };
       audio.play().catch(() => {
         finish();
         showToast("Recording could not play. Try the speaker again.");
+        onDone(false);
       });
       return;
     }
     if (clip && !audioPackError) {
       showToast("Audio is loading. Tap the speaker again shortly.");
+      onDone(false);
       return;
     }
     if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
       showToast("Speech is not available in this browser");
+      onDone(false);
       return;
     }
     const synthesis = window.speechSynthesis;
@@ -229,9 +576,11 @@
     utterance.onend = () => {
       if (button) button.classList.remove("speaking");
       if (activeUtterance === utterance) activeUtterance = null;
+      onDone(true);
     };
     utterance.onerror = (event) => {
       if (button) button.classList.remove("speaking");
+      onDone(false);
       if (activeUtterance !== utterance) return;
       activeUtterance = null;
       if (event.error === "canceled" || event.error === "interrupted") return;
@@ -256,6 +605,7 @@
       activeUtterance = null;
       showToast("Speech failed. Try the speaker again.");
       console.warn("ManDayRin speech failed:", error);
+      onDone(false);
     }
   }
 
@@ -268,34 +618,30 @@
     }
   }
 
-  function reroll(kind) {
-    const current = state.selections[todayKey][kind];
-    const bandStart = bandForDay(day) * 40;
-    const bandIndexes = Array.from({ length: 40 }, (_, index) => bandStart + index);
-    const seenToday = new Set(state.history.filter((entry) => entry.date === todayKey && entry.kind === kind).map((entry) => entry.word[0]));
-    let candidates = bandIndexes.filter((index) => index !== current && !seenToday.has(vocab[kind][index][0]));
-    if (!candidates.length) candidates = bandIndexes.filter((index) => index !== current);
-    const next = candidates[Math.floor(Math.random() * candidates.length)];
-    state.selections[todayKey][kind] = next;
-    recordWord(kind, next, true);
-    saveState();
-    renderToday();
-    showToast(`New ${labels[kind].toLowerCase()} added to history`);
-    return { kind, hanzi: vocab[kind][next][0], pinyin: vocab[kind][next][1], meaning: vocab[kind][next][2] };
+  // ----- Navigation -----
+
+  function showView(id) {
+    if (id !== "scenarioView") stopPlayback();
+    const navTarget = id === "scenarioView" ? "weekView" : id;
+    document.querySelectorAll(".view").forEach((view) => { view.hidden = view.id !== id; });
+    document.querySelectorAll("[data-view]").forEach((item) => {
+      const active = item.dataset.view === navTarget;
+      item.classList.toggle("active", active);
+      if (active) item.setAttribute("aria-current", "page"); else item.removeAttribute("aria-current");
+    });
+    if (id === "historyView") renderHistory();
   }
 
   function bindNavigation() {
     document.querySelectorAll("[data-view]").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".view").forEach((view) => { view.hidden = view.id !== button.dataset.view; });
-        document.querySelectorAll("[data-view]").forEach((item) => {
-          const active = item === button;
-          item.classList.toggle("active", active);
-          if (active) item.setAttribute("aria-current", "page"); else item.removeAttribute("aria-current");
-        });
-        if (button.dataset.view === "historyView") renderHistory();
-      });
+      button.addEventListener("click", () => showView(button.dataset.view));
     });
+  }
+
+  // ----- Words archive -----
+
+  function unlockedWords() {
+    return words.filter((word) => word.week <= currentWeek);
   }
 
   function bindHistoryFilters() {
@@ -328,38 +674,43 @@
   function normalizeSearch(value) {
     return String(value || "")
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[̀-ͯ]/g, "")
       .replace(/[’']/g, "")
       .toLocaleLowerCase()
       .trim();
   }
 
+  function matchesFilter(word) {
+    if (activeFilter === "all") return true;
+    if (activeFilter === "week") return word.week === currentWeek;
+    if (activeFilter === "other") return !mainKinds.includes(word.kind);
+    return word.kind === activeFilter;
+  }
+
   function renderHistory() {
     const queryTokens = normalizeSearch(historyQuery).split(/\s+/).filter(Boolean);
-    const entries = state.history.filter((entry) => {
-      if (activeFilter !== "all" && entry.kind !== activeFilter) return false;
+    const unlocked = unlockedWords();
+    const entries = unlocked.filter((word) => {
+      if (!matchesFilter(word)) return false;
       if (!queryTokens.length) return true;
-      const searchable = normalizeSearch(entry.word.join(" "));
+      const searchable = normalizeSearch(`${word.hanzi} ${word.pinyin} ${word.meaning}`);
       return queryTokens.every((token) => searchable.includes(token));
-    }).slice().reverse();
+    }).sort((a, b) => b.week - a.week || a.index - b.index);
     const filtered = activeFilter !== "all" || queryTokens.length > 0;
     document.querySelector("#historyTotal").textContent = filtered
       ? `${entries.length} ${entries.length === 1 ? "match" : "matches"}`
-      : `${state.history.length} ${state.history.length === 1 ? "word" : "words"}`;
-    document.querySelector("#historyList").innerHTML = entries.length ? entries.map((entry, position) => `<article class="history-entry">
-      <span class="history-hanzi" lang="zh-Hans">${entry.word[0]}</span>
-      <div class="history-word"><strong>${entry.word[1]} · ${entry.word[2]}</strong><span>Day ${entry.day}${entry.rerolled ? " · rerolled" : ""}</span></div>
+      : `${unlocked.length} ${unlocked.length === 1 ? "word" : "words"}`;
+    document.querySelector("#historyList").innerHTML = entries.length ? entries.map((word) => `<article class="history-entry">
+      <span class="history-hanzi" lang="zh-Hans">${esc(word.hanzi)}</span>
+      <div class="history-word"><strong>${esc(word.pinyin)} · ${esc(word.meaning)}</strong><span>Week ${pad(word.week)} · ${esc(theme(word.week).en)}</span></div>
       <div class="history-actions">
-        <span class="history-kind">${labels[entry.kind]}</span>
-        <button class="history-speak" type="button" data-history-speak="${position}" aria-label="Hear ${entry.word[0]} pronounced">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 10v4h3l4 4V6L8 10H5zM16 9a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10"/></svg>
-        </button>
+        <span class="history-kind">${labels[word.kind] || word.kind}</span>
+        <button class="history-speak" type="button" data-say="${esc(word.hanzi)}" aria-label="Hear ${esc(word.hanzi)} pronounced">${speakerIcon}</button>
       </div>
-    </article>`).join("") : `<div class="empty-state"><strong>${queryTokens.length ? "No matching words" : "No words here yet"}</strong>${queryTokens.length ? "Try another English word, pinyin spelling, or Chinese character." : "Your vocabulary will appear as you learn."}</div>`;
-    document.querySelectorAll("[data-history-speak]").forEach((button) => {
-      button.addEventListener("click", () => speakChinese(entries[Number(button.dataset.historySpeak)].word[0], button));
-    });
+    </article>`).join("") : `<div class="empty-state"><strong>${queryTokens.length ? "No matching words" : "No words here yet"}</strong>${queryTokens.length ? "Try another English word, pinyin spelling, or Chinese character." : "Words appear here as each week’s list unlocks."}</div>`;
   }
+
+  // ----- Quiz -----
 
   function setupQuiz() {
     const toggleButton = document.querySelector("#quizToggleButton");
@@ -369,7 +720,7 @@
     toggleButton.addEventListener("click", () => toggleQuiz(toggleButton.getAttribute("aria-expanded") !== "true"));
     nextButton.addEventListener("click", nextQuizQuestion);
     speakButton.addEventListener("click", () => {
-      if (quizState.current) speakChinese(quizState.current.word[0], speakButton);
+      if (quizState.current) speakChinese(quizState.current.hanzi, speakButton);
     });
   }
 
@@ -388,37 +739,27 @@
     }
   }
 
-  function learnedWords() {
-    const seen = new Set();
-    return state.history.slice().reverse().filter((entry) => {
-      const key = `${entry.kind}:${entry.word[0]}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-  }
-
   function nextQuizQuestion() {
-    const learned = learnedWords();
+    const learned = unlockedWords();
     if (!learned.length) return;
-    const alternatives = learned.filter((entry) => `${entry.kind}:${entry.word[0]}` !== quizState.previousKey);
+    // Half the questions come from this week's list; the rest review earlier weeks.
+    const thisWeek = learned.filter((word) => word.week === currentWeek);
+    const source = thisWeek.length && Math.random() < 0.5 ? thisWeek : learned;
+    const alternatives = source.filter((word) => word.id !== quizState.previousKey);
     const pool = alternatives.length ? alternatives : learned;
     const current = pool[Math.floor(Math.random() * pool.length)];
-    const currentIndex = vocab[current.kind].findIndex((word) => word[0] === current.word[0]);
-    const bandStart = Math.max(0, Math.floor(currentIndex / 40) * 40);
-    const correctMeaning = current.word[2];
-    const distractors = shuffle(vocab[current.kind].slice(bandStart, bandStart + 40)
-      .map((word) => word[2])
-      .filter((meaning, index, meanings) => meaning !== correctMeaning && meanings.indexOf(meaning) === index))
-      .slice(0, 3);
+    const meanings = (candidates) => candidates.map((word) => word.meaning)
+      .filter((meaning, index, list) => meaning !== current.meaning && list.indexOf(meaning) === index);
+    const sameKind = meanings(learned.filter((word) => accentKind(word.kind) === accentKind(current.kind)));
+    const distractors = shuffle(sameKind.length >= 3 ? sameKind : meanings(learned.length >= 4 ? learned : words)).slice(0, 3);
 
     quizState = {
       ...quizState,
       current,
-      choices: shuffle([correctMeaning, ...distractors]),
+      choices: shuffle([current.meaning, ...distractors]),
       questionNumber: quizState.questionNumber + 1,
       answered: false,
-      previousKey: `${current.kind}:${current.word[0]}`
+      previousKey: current.id
     };
     renderQuiz();
   }
@@ -435,10 +776,10 @@
   function renderQuiz() {
     const current = quizState.current;
     if (!current) return;
-    document.querySelector("#quizKind").textContent = `${labels[current.kind]} · ${String(quizState.questionNumber).padStart(2, "0")}`;
+    document.querySelector("#quizKind").textContent = `Week ${pad(current.week)} · ${String(quizState.questionNumber).padStart(2, "0")}`;
     document.querySelector("#quizScore").textContent = `${quizState.correct} / ${quizState.attempts}`;
-    document.querySelector("#quizHanzi").textContent = current.word[0];
-    document.querySelector("#quizPinyin").textContent = current.word[1];
+    document.querySelector("#quizHanzi").textContent = current.hanzi;
+    document.querySelector("#quizPinyin").textContent = current.pinyin;
     document.querySelector("#quizFeedback").textContent = "";
     document.querySelector("#quizNextButton").hidden = true;
     const options = document.querySelector("#quizOptions");
@@ -455,7 +796,7 @@
 
   function answerQuiz(choice, selectedButton) {
     if (quizState.answered || !quizState.current) return;
-    const correctMeaning = quizState.current.word[2];
+    const correctMeaning = quizState.current.meaning;
     const correct = choice === correctMeaning;
     quizState.answered = true;
     quizState.attempts += 1;
@@ -469,7 +810,7 @@
     document.querySelector("#quizScore").textContent = `${quizState.correct} / ${quizState.attempts}`;
     document.querySelector("#quizFeedback").textContent = correct
       ? "Correct. Nice work."
-      : `Not quite — ${quizState.current.word[0]} means ${correctMeaning}.`;
+      : `Not quite — ${quizState.current.hanzi} means ${correctMeaning}.`;
     document.querySelector("#quizNextButton").hidden = false;
   }
 
@@ -480,6 +821,8 @@
     clearTimeout(showToast.timer);
     showToast.timer = setTimeout(() => toast.classList.remove("show"), 1800);
   }
+
+  // ----- Reminders -----
 
   function setupReminders() {
     const toggle = document.querySelector("#reminderToggle");
@@ -604,12 +947,17 @@
     if (currentMinutes >= (hours * 60) + minutes) await showReminderNotification(false);
   }
 
+  function reminderBody() {
+    const weekTheme = theme(currentWeek);
+    return `Week ${currentWeek} · ${weekTheme.zh} ${weekTheme.en} — your list and scenarios are waiting.`;
+  }
+
   async function showReminderNotification(test) {
     if (!("Notification" in window) || Notification.permission !== "granted") return;
-    const todaysWords = kinds.map((kind) => vocab[kind][state.selections[todayKey][kind]][0]).join(" · ");
-    const title = test ? "ManDayRin notifications are ready" : "Three new words are waiting";
+    const isMonday = new Date().getDay() === 1;
+    const title = test ? "ManDayRin notifications are ready" : isMonday ? "A new word list is ready" : "Time for your Mandarin";
     const options = {
-      body: test ? "Your daily reminder will sound like this." : `${todaysWords} — keep your Mandarin streak moving.`,
+      body: test ? "Your daily reminder will sound like this." : reminderBody(),
       icon: "./icon-192.png",
       badge: "./icon-192.png",
       tag: test ? `mandayrin-test-${Date.now()}` : `mandayrin-${todayKey}`,
@@ -634,8 +982,7 @@
     if (!("serviceWorker" in navigator) || location.protocol === "file:") return;
     navigator.serviceWorker.ready.then(async (registration) => {
       const worker = registration.active || registration.waiting || registration.installing;
-      const words = kinds.map((kind) => vocab[kind][state.selections[todayKey][kind]][0]);
-      if (worker) worker.postMessage({ type: "SAVE_REMINDER", reminder: { ...state.reminder, words } });
+      if (worker) worker.postMessage({ type: "SAVE_REMINDER", reminder: { ...state.reminder, body: reminderBody() } });
       if (!("periodicSync" in registration)) return;
       try {
         if (state.reminder.enabled) {
@@ -660,9 +1007,9 @@
     const calendar = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "CALSCALE:GREGORIAN", "PRODID:-//ManDayRin//Daily Reminder//EN",
       "BEGIN:VEVENT", `UID:mandayrin-${Date.now()}@local`, `DTSTAMP:${utcStamp}`, `DTSTART:${localStamp}`,
-      "DURATION:PT10M", "RRULE:FREQ=DAILY;COUNT=365", "SUMMARY:Learn today’s Mandarin words",
-      "DESCRIPTION:Open ManDayRin for today’s noun, verb, and adjective.",
-      "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY", "DESCRIPTION:Your ManDayRin words are ready.",
+      "DURATION:PT10M", "RRULE:FREQ=DAILY;COUNT=365", "SUMMARY:Practice this week’s Mandarin",
+      "DESCRIPTION:Open ManDayRin for this week’s word list and scenarios.",
+      "BEGIN:VALARM", "TRIGGER:PT0M", "ACTION:DISPLAY", "DESCRIPTION:Your ManDayRin week is waiting.",
       "END:VALARM", "END:VEVENT", "END:VCALENDAR"
     ].join("\r\n");
     const url = URL.createObjectURL(new Blob([calendar], { type: "text/calendar;charset=utf-8" }));
@@ -713,43 +1060,33 @@
     if (!context || typeof context.registerTool !== "function") return;
     try {
       Promise.resolve(context.registerTool({
-        name: "reroll_daily_word",
-        title: "Reroll a daily word",
-        description: "Replace today's noun, verb, or adjective with another beginner word and add it to vocabulary history.",
+        name: "get_week_list",
+        title: "Get a week's word list",
+        description: "Return the theme, 15 words, and scenario titles for an unlocked week (defaults to the current week).",
         inputSchema: {
           type: "object",
-          properties: { partOfSpeech: { type: "string", enum: kinds } },
-          required: ["partOfSpeech"],
-          additionalProperties: false
-        },
-        annotations: { readOnlyHint: false, untrustedContentHint: false },
-        execute(input) {
-          if (!input || !kinds.includes(input.partOfSpeech)) throw new Error("Choose noun, verb, or adjective.");
-          return reroll(input.partOfSpeech);
-        }
-      })).catch(() => {});
-      Promise.resolve(context.registerTool({
-        name: "speak_daily_word",
-        title: "Speak a daily word",
-        description: "Pronounce today's noun, verb, or adjective with the device's Mandarin voice.",
-        inputSchema: {
-          type: "object",
-          properties: { partOfSpeech: { type: "string", enum: kinds } },
-          required: ["partOfSpeech"],
+          properties: { week: { type: "integer", minimum: 1, maximum: TOTAL_WEEKS } },
           additionalProperties: false
         },
         annotations: { readOnlyHint: true, untrustedContentHint: false },
         execute(input) {
-          if (!input || !kinds.includes(input.partOfSpeech)) throw new Error("Choose noun, verb, or adjective.");
-          const word = vocab[input.partOfSpeech][state.selections[todayKey][input.partOfSpeech]];
-          speakWord(input.partOfSpeech, document.querySelector(`[data-speak="${input.partOfSpeech}"]`));
-          return { kind: input.partOfSpeech, hanzi: word[0], pinyin: word[1] };
+          const week = input?.week ?? currentWeek;
+          if (!Number.isInteger(week) || week < 1 || week > TOTAL_WEEKS) throw new Error(`Choose a week from 1 to ${TOTAL_WEEKS}.`);
+          if (week > currentWeek) throw new Error(`Week ${week} unlocks on ${formatShortDate(weekStart(week))}.`);
+          const data = course.weeks[week];
+          return {
+            week,
+            theme: theme(week),
+            written: Boolean(data),
+            words: words.filter((word) => word.week === week).map(({ hanzi, pinyin, meaning, kind }) => ({ hanzi, pinyin, meaning, kind })),
+            scenarios: data ? data.scenarios.map((scenario) => scenario.title) : []
+          };
         }
       })).catch(() => {});
       Promise.resolve(context.registerTool({
         name: "set_daily_reminder",
         title: "Set the daily reminder",
-        description: "Turn the device-local daily vocabulary reminder on or off and set its time.",
+        description: "Turn the device-local daily practice reminder on or off and set its time.",
         inputSchema: {
           type: "object",
           properties: {

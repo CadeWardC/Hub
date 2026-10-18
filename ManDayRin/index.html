@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#090b0d">
-  <meta name="description" content="Learn one beginner Mandarin noun, verb, and adjective every day.">
+  <meta name="description" content="A themed Mandarin word list every week, with read-along scenarios.">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="ManDayRin">
@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="stylesheet" href="styles.css?v=19">
+  <link rel="stylesheet" href="styles.css?v=21">
 </head>
 <body>
   <div class="app-shell">
@@ -30,35 +30,81 @@
     </header>
 
     <main>
-      <section class="view active" id="todayView" aria-labelledby="todayHeading">
+      <section class="view active" id="weekView" aria-labelledby="weekHeading">
         <div class="day-stage">
           <div class="day-copy">
-            <p class="signal-label" id="dateLabel"></p>
-            <h1 id="todayHeading">Today<span class="title-dot">.</span></h1>
-            <p class="level-label" id="levelLabel">First steps · very basic</p>
+            <p class="signal-label" id="weekDateLabel"></p>
+            <h1 id="weekHeading">Week<span class="title-dot">.</span></h1>
+            <p class="level-label" id="levelLabel">Level 1 · First steps</p>
           </div>
-          <div class="day-counter" aria-label="Year progress">
-            <span>DAY</span>
-            <strong id="dayNumber">001</strong>
-            <small>OF 365</small>
+          <div class="day-counter" aria-label="Week number">
+            <span>WEEK</span>
+            <strong id="weekNumber">01</strong>
+            <small>OF 52</small>
           </div>
         </div>
 
         <div class="progress-module" aria-label="Year progress">
           <div class="progress-track"><span id="progressFill"></span></div>
-          <div class="progress-scale" aria-hidden="true"><span>START</span><span>FOUNDATION YEAR</span><span>365</span></div>
+          <div class="progress-scale" aria-hidden="true"><span>START</span><span>FOUNDATION YEAR</span><span>52</span></div>
         </div>
 
-        <div class="word-stack" id="wordStack" aria-live="polite"></div>
+        <div class="week-switcher">
+          <button class="icon-button" id="prevWeekButton" type="button" aria-label="Previous week">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg>
+          </button>
+          <button class="week-picker-button" id="weekPickerButton" type="button" aria-haspopup="dialog">
+            <span id="weekPickerLabel">This week</span>
+            <small>All weeks</small>
+          </button>
+          <button class="icon-button" id="nextWeekButton" type="button" aria-label="Next week">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+          </button>
+        </div>
 
-        <div class="review-note"><span>↺</span><p><strong>Built to stick.</strong> Words return during the year for spaced review.</p></div>
+        <div class="theme-block">
+          <div>
+            <p class="theme-zh" id="themeZh" lang="zh-Hans"></p>
+            <p class="theme-pinyin" id="themePinyin"></p>
+            <p class="theme-en" id="themeEn"></p>
+          </div>
+          <button class="mini-speak" id="themeSpeak" type="button" data-say="" aria-label="Hear the theme pronounced">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 10v4h3l4 4V6L8 10H5zM16 9a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10"/></svg>
+          </button>
+        </div>
+
+        <div id="weekContent"></div>
+      </section>
+
+      <section class="view" id="scenarioView" aria-labelledby="scenarioHeading" hidden>
+        <button class="back-button" id="scenarioBack" type="button"><span aria-hidden="true">←</span> <span id="scenarioBackLabel">Back to the week</span></button>
+        <p class="signal-label" id="scenarioLabel">Scenario 01 / 03</p>
+        <h2 class="scenario-title" id="scenarioHeading"></h2>
+        <p class="scenario-title-zh" id="scenarioZh" lang="zh-Hans"></p>
+        <p class="scenario-setting" id="scenarioSetting"></p>
+
+        <div class="read-controls">
+          <button class="primary-button play-all-button" id="playAllButton" type="button">Play all</button>
+          <div class="filter-row toggle-row" role="group" aria-label="Show or hide translations">
+            <button class="filter-chip" type="button" data-pref="pinyin" aria-pressed="true">Pinyin</button>
+            <button class="filter-chip" type="button" data-pref="english" aria-pressed="true">English</button>
+          </div>
+        </div>
+        <p class="read-hint">Tap any word to look it up. <span class="tok tok-new">Underlined</span> words are from this week’s list.</p>
+
+        <ol class="dialogue" id="dialogue"></ol>
+
+        <div class="scenario-pager">
+          <button class="secondary-button" id="prevScenarioButton" type="button">← Previous</button>
+          <button class="secondary-button" id="nextScenarioButton" type="button">Next →</button>
+        </div>
       </section>
 
       <section class="view" id="historyView" aria-labelledby="historyHeading" hidden>
         <div class="section-heading">
-          <p class="signal-label">Vocabulary archive</p>
+          <p class="signal-label">Every unlocked list</p>
           <div>
-            <h1 id="historyHeading">History<span class="title-dot">.</span></h1>
+            <h1 id="historyHeading">Words<span class="title-dot">.</span></h1>
             <div class="history-heading-actions">
               <strong class="history-total" id="historyTotal">0 words</strong>
               <button class="history-quiz-button" id="quizToggleButton" type="button" aria-controls="quizPanel" aria-expanded="false">
@@ -76,11 +122,13 @@
             <button id="clearHistorySearch" type="button" aria-label="Clear vocabulary search" hidden>×</button>
           </label>
 
-          <div class="filter-row" role="group" aria-label="Filter vocabulary history">
+          <div class="filter-row" role="group" aria-label="Filter vocabulary">
             <button class="filter-chip active" type="button" data-filter="all">All</button>
+            <button class="filter-chip" type="button" data-filter="week">This week</button>
             <button class="filter-chip" type="button" data-filter="noun">Nouns</button>
             <button class="filter-chip" type="button" data-filter="verb">Verbs</button>
             <button class="filter-chip" type="button" data-filter="adjective">Adjectives</button>
+            <button class="filter-chip" type="button" data-filter="other">Other</button>
           </div>
           <div class="history-list" id="historyList"></div>
         </div>
@@ -117,7 +165,7 @@
             <span class="setting-number">01</span>
             <div class="setting-copy">
               <h2 id="dailyReminderTitle">Daily notification</h2>
-              <p>Get a nudge when today’s words are ready.</p>
+              <p>Get a daily nudge to practice this week’s list.</p>
             </div>
             <label class="switch" aria-label="Enable daily reminder">
               <input id="reminderToggle" type="checkbox">
@@ -152,13 +200,13 @@
     </main>
 
     <nav class="bottom-nav" aria-label="Primary navigation">
-      <button class="nav-item active" type="button" data-view="todayView" aria-current="page">
+      <button class="nav-item active" type="button" data-view="weekView" aria-current="page">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg>
-        <span>Today</span>
+        <span>Week</span>
       </button>
       <button class="nav-item" type="button" data-view="historyView">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12M6 10h12M6 16h8"/></svg>
-        <span>History</span>
+        <span>Words</span>
       </button>
       <button class="nav-item" type="button" data-view="settingsView">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 7h14M5 17h14M9 4v6m6 4v6"/></svg>
@@ -182,9 +230,47 @@
     </section>
   </div>
 
+  <div class="install-dialog" id="wordSheet" role="dialog" aria-modal="true" aria-labelledby="sheetHanzi" hidden>
+    <button class="dialog-backdrop" type="button" data-close-sheet aria-label="Close word"></button>
+    <section class="dialog-sheet">
+      <div class="dialog-index" id="sheetWeek">WEEK 01</div>
+      <div class="dialog-title-row">
+        <div>
+          <p class="sheet-hanzi" id="sheetHanzi" lang="zh-Hans"></p>
+          <p class="sheet-pinyin" id="sheetPinyin"></p>
+          <p class="sheet-meaning" id="sheetMeaning"></p>
+        </div>
+        <button class="dialog-close" type="button" data-close-sheet aria-label="Close">×</button>
+      </div>
+      <div class="sheet-example">
+        <div>
+          <p class="ex-zh" lang="zh-Hans" id="sheetExZh"></p>
+          <p class="ex-py" id="sheetExPy"></p>
+          <p class="ex-en" id="sheetExEn"></p>
+        </div>
+        <button class="mini-speak" id="sheetExSpeak" type="button" data-say="" aria-label="Hear the example sentence">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 10v4h3l4 4V6L8 10H5zM16 9a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10"/></svg>
+        </button>
+      </div>
+      <button class="primary-button" id="sheetSpeak" type="button" data-say="">Hear the word</button>
+    </section>
+  </div>
+
+  <div class="install-dialog" id="weekSheet" role="dialog" aria-modal="true" aria-labelledby="weekSheetTitle" hidden>
+    <button class="dialog-backdrop" type="button" data-close-sheet aria-label="Close the week list"></button>
+    <section class="dialog-sheet week-sheet">
+      <div class="dialog-index">ALL WEEKS / 52</div>
+      <div class="dialog-title-row">
+        <h2 id="weekSheetTitle">Your<br>year<span class="title-dot">.</span></h2>
+        <button class="dialog-close" type="button" data-close-sheet aria-label="Close">×</button>
+      </div>
+      <div class="week-list" id="weekList"></div>
+    </section>
+  </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="vocabulary.js"></script>
+  <script src="weeks.js?v=1"></script>
   <script src="audio-index.js?v=17"></script>
-  <script src="app.js?v=20"></script>
+  <script src="app.js?v=22"></script>
 </body>
 </html>

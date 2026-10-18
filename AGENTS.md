@@ -7,7 +7,7 @@
 
 ## Project structure
 - `index.html` / `script.js` / `styles.css` — the hub landing page
-- `ManDayRin/` — Installable, offline-first daily Mandarin PWA with a 365-day beginner curriculum and local vocabulary history
+- `ManDayRin/` — Installable, offline-first Mandarin PWA with a 52-week themed course: a new 15-word list every Monday (week 1 = the Monday of first launch; earlier weeks stay open, later ones locked), 2 sentence patterns and 3 read-along scenarios per week. Content lives in `weeks.js` (`MANDAYRIN_COURSE`: `levels`, `themes` for all 52 weeks, character `names`, and `weeks[n]` with `words` `[hanzi, pinyin, en, kind, exZh, exPy, exEn]`, `patterns`, `scenarios` with `cast` + `lines`); only weeks 1–4 are written so far. Rule: no word appears in two weeks' lists; scenarios use only this and earlier weeks' words. Scenario lines are tokenized by greedy longest match against unlocked words (names never split) so each word is tappable. Words tab lists every unlocked word with a quiz. `words.audio`/`audio-index.js` hold recordings from the old daily list; anything not in it uses device speech. `?week=N` previews week N unlocked (not saved)
 - `StoryTime/` — Installable Mandarin story reader with three levels, synchronized device speech, and plain-text story files in `StoryTime/stories/`; run `python3 StoryTime/build_stories.py` to rebuild the library (see `StoryTime/README.md`)
 - `smolov/` — Smolov Jr. strength training calculator (static HTML/CSS/JS)
 - `paypers/` — PubMed paper discovery app with swipe interface (static HTML/CSS/JS)
@@ -31,7 +31,7 @@ Each static sub-project has its own `index.html`.
 - `laser-engraving/` has a CAD engine rendering to SVG with pan/zoom/draw/drag tools. `doggo.gc` is a sample G-code file.
 
 ## Persistence
-- `ManDayRin/` — localStorage (`mandayrinState.v1`: start date, daily selections, vocabulary history, and reminder settings) plus service-worker IndexedDB for best-effort background reminder checks
+- `ManDayRin/` — localStorage (`mandayrinState.v2`: course start Monday, reminder settings, pinyin/English toggles; reminder settings migrate from the old `mandayrinState.v1`) plus service-worker IndexedDB for best-effort background reminder checks
 - `smolov/` — Supabase (Postgres via PostgREST): `lift_maxes`, `smolov_plans`
 - `StoryTime/` — localStorage (`storytime.v1`: reading progress and listening preferences); app shell and starter stories cached by service worker
 - `paypers/` — localStorage (`paypersState`)
