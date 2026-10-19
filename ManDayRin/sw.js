@@ -1,4 +1,4 @@
-const CACHE_NAME = "mandayrin-v23";
+const CACHE_NAME = "mandayrin-v24";
 const APP_SHELL = ["./", "./index.html", "./styles.css", "./weeks.js", "./audio-index.js", "./app.js", "./words.audio", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 const REMINDER_DB = "mandayrin-reminders";
 const REMINDER_STORE = "settings";
@@ -23,11 +23,18 @@ self.addEventListener("fetch", (event) => {
     }).catch(() => caches.match("./index.html")));
     return;
   }
-  event.respondWith(caches.match(event.request, { ignoreSearch: true }).then((cached) => cached || fetch(event.request).then((response) => {
-    const copy = response.clone();
-    caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+  if (event.request.url.includes("words.audio")) {
+    event.respondWith(caches.match(event.request, { ignoreSearch: true }).then((cached) => cached || fetch(event.request)));
+    return;
+  }
+  // Network first so a new index.html never runs with last version's CSS/JS; cache is the offline fallback.
+  event.respondWith(fetch(event.request).then((response) => {
+    if (response.ok) {
+      const copy = response.clone();
+      caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+    }
     return response;
-  }).catch(() => caches.match("./index.html"))));
+  }).catch(() => caches.match(event.request, { ignoreSearch: true })));
 });
 
 self.addEventListener("message", (event) => {
