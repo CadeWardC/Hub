@@ -633,20 +633,18 @@ form[data-kind="task"] .event-only, form[data-kind="event"] .task-only { display
   background: var(--bg); color: var(--text); font-size: 0.9rem; font-weight: 600; cursor: pointer;
 }
 .due-chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
-.due-chip.pick { border-style: dashed; }
 .due-calendar {
-  margin-top: 10px; padding: 10px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg);
+  margin-top: 10px; padding: 8px 8px 6px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg);
 }
-.due-calendar[hidden] { display: none; }
-.cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
 .cal-nav {
-  width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 10px;
+  width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 10px;
   background: var(--surface); font-size: 1.2rem;
 }
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
 .cal-dow { padding: 4px 0; font-size: 0.72rem; color: var(--muted); }
 .cal-day {
-  aspect-ratio: 1; min-height: 36px; border: 0; border-radius: 50%;
+  justify-self: center; width: 36px; height: 34px; border: 0; border-radius: 999px;
   background: none; color: var(--text); font-size: 0.95rem; font-variant-numeric: tabular-nums;
 }
 .cal-day.past { color: var(--muted); opacity: 0.6; }

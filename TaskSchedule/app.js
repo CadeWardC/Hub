@@ -566,23 +566,16 @@
       b.className = "due-chip";
       b.dataset.value = c.value;
       b.textContent = c.label;
-      b.addEventListener("click", () => { dueValue = c.value; refreshDue(); });
+      b.addEventListener("click", () => {
+        dueValue = c.value;
+        if (dueValue) calMonth = dueValue.slice(0, 7); // show the picked day
+        refreshDue();
+      });
       return b;
     }));
-    // "Pick date" opens the app's own little calendar under the chips. Native
-    // date fields behave differently in installed apps on each platform, so
-    // this one doesn't depend on them.
-    const pick = document.createElement("button");
-    pick.type = "button";
-    pick.className = "due-chip pick";
-    pick.append(document.createElement("span"));
-    pick.addEventListener("click", () => {
-      const cal = $("dueCalendar");
-      if (cal.hidden) { calMonth = (dueValue || toKey(new Date())).slice(0, 7); paintCalendar(); }
-      cal.hidden = !cal.hidden;
-    });
-    chips.append(pick);
-    $("dueCalendar").hidden = true;
+    // The app's own month calendar sits right in the sheet (native date
+    // fields misbehave in installed apps), starting on the due date's month.
+    calMonth = (dueValue || toKey(new Date())).slice(0, 7);
     refreshDue();
   }
 
@@ -621,9 +614,9 @@
       b.type = "button";
       b.className = "cal-day" + (key === dueValue ? " on" : "") + (key === today ? " today" : "") + (key < today ? " past" : "");
       b.textContent = d;
+      // Tap a day to set it; tap it again to clear the due date.
       b.addEventListener("click", () => {
-        dueValue = key;
-        cal.hidden = true;
+        dueValue = dueValue === key ? "" : key;
         refreshDue();
       });
       grid.append(b);
@@ -632,17 +625,8 @@
   }
   function refreshDue() {
     const chips = $("dueChips");
-    let matched = false;
-    chips.querySelectorAll(".due-chip[data-value]").forEach((b) => {
-      const on = b.dataset.value === dueValue;
-      b.classList.toggle("on", on);
-      matched = matched || on;
-    });
-    const pick = chips.querySelector(".due-chip.pick");
-    if (pick) {
-      pick.classList.toggle("on", !matched && !!dueValue);
-      pick.querySelector("span").textContent = !matched && dueValue ? formatDay(dueValue, "short") : "Pick date";
-    }
+    chips.querySelectorAll(".due-chip[data-value]").forEach((b) => b.classList.toggle("on", b.dataset.value === dueValue));
+    paintCalendar();
     $("dueText").textContent = dueValue
       ? `${dueText(dueValue)} · ${fromKey(dueValue).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}`
       : "No due date";
