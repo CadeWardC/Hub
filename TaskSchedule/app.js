@@ -569,14 +569,20 @@
       b.addEventListener("click", () => { dueValue = c.value; paintDue(); });
       return b;
     }));
-    // A real date picker dressed as the last chip.
-    const pick = document.createElement("label");
+    // The last chip opens the device's date picker. Clicking a hidden date
+    // field doesn't open its calendar everywhere, so ask for it directly.
+    const pick = document.createElement("button");
+    pick.type = "button";
     pick.className = "due-chip pick" + (!known && dueValue ? " on" : "");
     pick.textContent = !known && dueValue ? formatDay(dueValue, "short") : "Pick date";
     const input = document.createElement("input");
     input.type = "date";
-    input.value = dueValue;
-    input.addEventListener("change", () => { dueValue = input.value; paintDue(); });
+    input.tabIndex = -1;
+    input.value = dueValue || toKey(new Date());
+    input.addEventListener("change", () => { if (input.value) { dueValue = input.value; paintDue(); } });
+    pick.addEventListener("click", () => {
+      try { input.showPicker(); } catch (e) { input.focus(); input.click(); }
+    });
     pick.append(input);
     chips.append(pick);
     $("dueText").textContent = dueValue
