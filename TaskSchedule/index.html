@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=26">
+  <link rel="stylesheet" href="styles.css?v=27">
 </head>
 <body>
   <div class="app-shell">
@@ -42,7 +42,7 @@
         <div class="month-grid" id="monthGrid" hidden></div>
         <div class="section-row">
           <h2 class="section-label" id="dueLabel">Due this day</h2>
-          <button type="button" class="plan-btn" id="planButton" title="Book work time before each due date">Plan week</button>
+          <button type="button" class="plan-btn" id="planButton" title="Book work time before due dates">Plan</button>
         </div>
         <ul class="task-list" id="dayTasks"></ul>
         </div>
@@ -105,6 +105,10 @@
         <label class="switch-row">
           <span><strong>Add to Today</strong><small>Show it in your Today list</small></span>
           <input type="checkbox" name="today" class="switch">
+        </label>
+        <label class="switch-row">
+          <span><strong>Plan work sessions</strong><small>Book work time before it's due when you press Plan</small></span>
+          <input type="checkbox" name="planWork" class="switch">
         </label>
       </div>
 
@@ -175,6 +179,17 @@
     </div>
   </dialog>
 
+  <dialog id="planDialog">
+    <h2 class="dialog-title">Plan work sessions</h2>
+    <p class="hint">Turn on the tasks to book work time for, from now until each due date. Sessions get longer as the date gets closer.</p>
+    <div class="plan-list" id="planList"></div>
+    <div class="actions">
+      <span class="spacer"></span>
+      <button type="button" class="ghost" id="planCancel">Cancel</button>
+      <button type="button" class="primary" id="planGo">Plan</button>
+    </div>
+  </dialog>
+
   <dialog id="runDialog">
     <h2 class="dialog-title" id="runTitle">Run</h2>
     <p class="hint">Pick a preset: its steps run and its blanks are filled in.</p>
@@ -221,7 +236,7 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=14"></script>
+  <script src="app.js?v=15"></script>
   <script src="protocols.js?v=15"></script>
   <script src="sync-config.js"></script>
   <script src="sync.js?v=6"></script>

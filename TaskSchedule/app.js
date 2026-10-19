@@ -135,14 +135,22 @@
   }
 
   // ---- planner ----
-  // "Plan week" books one work session a day for each unfinished task with a
-  // due date: up to 7 days before it, 10 minutes at first growing to 30 as
-  // the due date gets close, in free time between 8am and 9pm (evenings
-  // first). Re-planning replaces a task's upcoming sessions.
+  // "Plan" asks which tasks (with a due date) should get work sessions
+  // (task.plan) and books them from today until the day before each is due,
+  // spaced out: every 3rd day when the due date is over two weeks away, every
+  // other day within two weeks, daily in the last three days (counted back
+  // from the due date). Far out a
+  // session runs 20 min to 1 h (longer as the date nears); in the last three
+  // days 30 min to 2 h, favouring long (2 h the day before). If that length
+  // doesn't fit, shorter ones are tried. Sessions go in free time 8am-9pm
+  // (evenings first), 10 min clear of events and 30 min clear of other
+  // sessions. Planning again replaces the upcoming sessions.
   const PLAN_FROM = 8 * 60, PLAN_TO = 21 * 60, PLAN_PREFER = 16 * 60;
   const hhmm = (min) => `${pad(Math.floor(min / 60))}:${pad(min % 60)}`;
   const nowMinutes = () => { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); };
   const upcoming = (ev) => ev.date > toKey(new Date()) || (ev.date === toKey(new Date()) && toMinutes(ev.start) > nowMinutes());
+  const fmtMins = (m) => (m >= 60 ? `${Math.floor(m / 60)}h${m % 60 ? ` ${m % 60}m` : ""}` : `${m}m`);
+  const sessionMinutes = (ev) => toMinutes(ev.end) - toMinutes(ev.start);
 
   // Remove a task's planned sessions: the ones still to come, or all of them
   // (when the task itself is deleted).
@@ -154,10 +162,21 @@
     return gone;
   }
 
+  // "3 sessions · 2h 15m" for a task's upcoming planned time.
+  function sessionsSummary(taskId) {
+    const list = state.events.filter((ev) => ev.auto && ev.taskId === taskId && upcoming(ev));
+    if (!list.length) return "";
+    const total = list.reduce((n, ev) => n + sessionMinutes(ev), 0);
+    return `${list.length} session${list.length === 1 ? "" : "s"} · ${fmtMins(total)}`;
+  }
+
   function findSlot(day, minutes, earliest) {
-    const busy = state.events.filter((ev) => ev.date === day)
-      .map((ev) => [toMinutes(ev.start), Math.max(toMinutes(ev.start) + 15, toMinutes(ev.end || ev.start))]);
-    const free = (s) => s + minutes <= PLAN_TO && busy.every(([a, b]) => s + minutes + 5 <= a || s >= b + 5);
+    const busy = state.events.filter((ev) => ev.date === day).map((ev) => {
+      const a = toMinutes(ev.start), b = Math.max(a + 15, toMinutes(ev.end || ev.start));
+      const gap = ev.auto ? 30 : 10;
+      return [a - gap, b + gap];
+    });
+    const free = (s) => s + minutes <= PLAN_TO && busy.every(([a, b]) => s + minutes <= a || s >= b);
     const starts = [];
     for (let s = PLAN_PREFER; s < PLAN_TO; s += 15) starts.push(s);
     for (let s = PLAN_FROM; s < PLAN_PREFER; s += 15) starts.push(s);
@@ -165,43 +184,100 @@
     return hit === undefined ? null : hit;
   }
 
-  function planAll() {
+  // Session length by days left until the due date.
+  function sessionShape(daysLeft, farthest) {
+    if (daysLeft <= 3) return { want: [120, 120, 105, 90][Math.max(0, daysLeft)], min: 30 };
+    const t = Math.min(1, (daysLeft - 4) / Math.max(1, farthest - 4)); // 0 = nearest of the far days
+    return { want: Math.round((60 - 40 * t) / 5) * 5, min: 20 };
+  }
+  // Which days get a session, counted back from the due date so the gaps
+  // shrink evenly: 1, 2, 3 days before, then every other day to two weeks out,
+  // then every third day.
+  function sessionDaysLeft(farthest) {
+    if (farthest <= 0) return [0];
+    const out = [];
+    for (let l = 1; l <= farthest; l += l < 3 ? 1 : l < 14 ? 2 : 3) out.push(l);
+    if (out[out.length - 1] !== farthest) out.push(farthest); // always start today
+    return out;
+  }
+
+  const plannable = () => {
     const today = toKey(new Date());
-    const tasks = state.tasks.filter((t) => !t.done && t.date && t.date >= today)
+    return state.tasks.filter((t) => !t.done && t.date && t.date >= today)
       .sort((a, b) => a.date.localeCompare(b.date) || a.created - b.created);
-    if (!tasks.length) { showToast("Nothing to plan: add a due date to a task first."); return; }
-    const removed = tasks.flatMap((t) => dropSessions(t.id));
+  };
+
+  function planTasks() {
+    const today = toKey(new Date());
+    const open = plannable();
+    // Every open task loses its upcoming sessions; only ticked ones get new ones.
+    const removed = open.flatMap((t) => dropSessions(t.id));
     const added = [];
-    tasks.forEach((task) => {
-      const last = task.date > today ? addDays(task.date, -1) : today;
-      const first = addDays(task.date, -7) > today ? addDays(task.date, -7) : today;
-      const days = [];
-      for (let d = first; d <= last; d = addDays(d, 1)) days.push(d);
-      days.forEach((day, i) => {
-        const frac = days.length === 1 ? 1 : i / (days.length - 1);
-        const minutes = Math.round((10 + 20 * frac) / 5) * 5;
+    open.filter((t) => t.plan).forEach((task) => {
+      const left = (key) => Math.round((fromKey(task.date) - fromKey(key)) / 86400000);
+      const farthest = left(today);
+      sessionDaysLeft(farthest).reverse().forEach((daysLeft) => {
+        const day = addDays(task.date, -daysLeft);
+        const { want, min } = sessionShape(daysLeft, farthest);
         const earliest = day === today ? Math.ceil((nowMinutes() + 15) / 15) * 15 : PLAN_FROM;
-        const start = findSlot(day, minutes, earliest);
-        if (start === null) return;
-        const ev = touch({
-          id: uid(), created: Date.now(), title: task.title, date: day,
-          start: hhmm(start), end: hhmm(start + minutes), notes: "", taskId: task.id, auto: true,
-        });
-        state.events.push(ev);
-        added.push(ev);
+        for (let len = want; len >= min; len -= 10) {
+          const start = findSlot(day, len, earliest);
+          if (start === null) continue;
+          const ev = touch({
+            id: uid(), created: Date.now(), title: task.title, date: day,
+            start: hhmm(start), end: hhmm(start + len), notes: "", taskId: task.id, auto: true,
+          });
+          state.events.push(ev);
+          added.push(ev);
+          break;
+        }
       });
     });
     save();
     render();
     const n = new Set(added.map((ev) => ev.taskId)).size;
+    const total = added.reduce((m, ev) => m + sessionMinutes(ev), 0);
     showToast(added.length
-      ? `Planned ${added.length} session${added.length === 1 ? "" : "s"} for ${n} task${n === 1 ? "" : "s"}`
-      : "No free time found before the due dates.", () => {
+      ? `Planned ${added.length} session${added.length === 1 ? "" : "s"} (${fmtMins(total)}) for ${n} task${n === 1 ? "" : "s"}`
+      : removed.length ? "Removed the planned sessions." : "No free time found before the due dates.", () => {
       state.events = state.events.filter((ev) => !added.includes(ev));
       added.forEach((ev) => bury("event", ev.id));
       removed.forEach((ev) => restore(state.events, ev));
     });
   }
+
+  // Tick which tasks to plan; the ticks are remembered on each task.
+  function openPlanDialog() {
+    const open = plannable();
+    if (!open.length) { showToast("Nothing to plan: give a task a due date first."); return; }
+    $("planList").replaceChildren(...open.map((t) => {
+      const row = document.createElement("label");
+      row.className = "plan-row";
+      const box = document.createElement("input");
+      box.type = "checkbox";
+      box.className = "switch";
+      box.checked = !!t.plan;
+      box.dataset.id = t.id;
+      const text = document.createElement("span");
+      const title = document.createElement("strong");
+      title.textContent = t.title;
+      const meta = document.createElement("small");
+      meta.textContent = [dueText(t.date), sessionsSummary(t.id)].filter(Boolean).join(" · ");
+      text.append(title, meta);
+      row.append(text, box);
+      return row;
+    }));
+    $("planDialog").showModal();
+  }
+  $("planCancel").addEventListener("click", () => $("planDialog").close());
+  $("planGo").addEventListener("click", () => {
+    $("planList").querySelectorAll("input[data-id]").forEach((box) => {
+      const t = state.tasks.find((x) => x.id === box.dataset.id);
+      if (t && !!t.plan !== box.checked) { t.plan = box.checked; touch(t); }
+    });
+    $("planDialog").close();
+    planTasks();
+  });
 
   // ---- swipe rows ----
   const SWIPE_OPEN = -144; // width of the Edit + Delete buttons
@@ -322,6 +398,7 @@
     body.append(title);
     const metaParts = [];
     if (task.date) metaParts.push(dueText(task.date));
+    if (!task.done && task.plan) { const planned = sessionsSummary(task.id); if (planned) metaParts.push(planned); }
     if (task.notes) metaParts.push(task.notes.split("\n")[0]);
     if (metaParts.length) {
       const meta = document.createElement("span");
@@ -472,7 +549,7 @@
       b.style.width = `calc(${100 / laneCount}% - 8px)`;
       b.style.right = "auto";
       const title = document.createElement("strong");
-      title.textContent = ev.title;
+      title.textContent = ev.auto ? `${ev.title} · ${fmtMins(sessionMinutes(ev))}` : ev.title;
       const time = document.createElement("small");
       time.textContent = ev.end ? `${formatTime(ev.start)} – ${formatTime(ev.end)}` : formatTime(ev.start);
       b.append(title, time);
@@ -643,6 +720,7 @@
     f.end.value = item?.end || "";
     f.notes.value = item?.notes || "";
     $("notesBox").open = !!item?.notes;
+    f.planWork.checked = kind === "task" && item ? !!item.plan : false;
     f.today.checked = kind === "task" && item
       ? inToday(item)
       : $("tasksView").classList.contains("active") && taskTab === "today";
@@ -671,11 +749,15 @@
       if (f.end.value && f.end.value <= f.start.value) f.end.value = "";
     }
     const data = { title, date: kind === "task" ? dueValue : f.eventDate.value, notes: f.notes.value.trim() };
+    if (kind === "task") data.plan = f.planWork.checked;
     if (kind === "event") Object.assign(data, { start: f.start.value, end: f.end.value });
     const list = kind === "event" ? state.events : state.tasks;
     if (editing) {
       const item = list.find((x) => x.id === editing.id);
-      if (kind === "task") data.planned = f.today.checked ? (inToday(item) ? item.planned : toKey(new Date())) : null;
+      if (kind === "task") {
+        data.planned = f.today.checked ? (inToday(item) ? item.planned : toKey(new Date())) : null;
+        if (!data.plan) dropSessions(item.id); // switched off: its upcoming sessions go
+      }
       touch(Object.assign(item, data));
     } else {
       const extra = kind === "task" ? { done: false, planned: f.today.checked ? toKey(new Date()) : null } : {};
@@ -687,7 +769,7 @@
   });
 
   $("cancelButton").addEventListener("click", () => dialog.close());
-  $("planButton").addEventListener("click", planAll);
+  $("planButton").addEventListener("click", openPlanDialog);
   $("deleteButton").addEventListener("click", () => {
     if (!editing) return;
     const key = editing.kind === "event" ? "events" : "tasks";

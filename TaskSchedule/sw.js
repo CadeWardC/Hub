@@ -1,4 +1,4 @@
-const CACHE_NAME = "taskschedule-v29";
+const CACHE_NAME = "taskschedule-v30";
 const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./protocols.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", (event) => {
