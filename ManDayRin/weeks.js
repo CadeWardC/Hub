@@ -149,8 +149,8 @@ window.MANDAYRIN_COURSE = {
         ["谁", "shéi", "who", "question", "她是谁？", "Tā shì shéi?", "Who is she?"],
         ["他", "tā", "he; him", "pronoun", "他是中国人。", "Tā shì Zhōngguó rén.", "He's Chinese."],
         ["她", "tā", "she; her", "pronoun", "她叫王芳。", "Tā jiào Wáng Fāng.", "Her name is Wang Fang."],
-        ["我们", "wǒmen", "we; us", "pronoun", "我们是美国人。", "Wǒmen shì Měiguó rén.", "We're American."],
-        ["人", "rén", "person; people", "noun", "他是哪国人？", "Tā shì nǎ guó rén?", "Which country is he from?"],
+        ["们", "men", "(plural for people: 我们 we, 你们 you all, 他们 they)", "particle", "你们好！我们是美国人。", "Nǐmen hǎo! Wǒmen shì Měiguó rén.", "Hi, everyone! We're American."],
+        ["人", "rén", "person; people", "noun", "我是美国人，他是中国人。", "Wǒ shì Měiguó rén, tā shì Zhōngguó rén.", "I'm American, and he's Chinese."],
         ["中国", "Zhōngguó", "China", "noun", "王芳是中国人。", "Wáng Fāng shì Zhōngguó rén.", "Wang Fang is Chinese."],
         ["美国", "Měiguó", "the United States", "noun", "你是美国人吗？", "Nǐ shì Měiguó rén ma?", "Are you American?"],
         ["哪", "nǎ", "which", "question", "你是哪国人？", "Nǐ shì nǎ guó rén?", "Where are you from?"],
@@ -160,7 +160,7 @@ window.MANDAYRIN_COURSE = {
       ],
       patterns: [
         ["我叫……", "Wǒ jiào …", "My name is …", "我叫大卫。", "Wǒ jiào Dàwèi.", "My name is David."],
-        ["你是哪国人？", "Nǐ shì nǎ guó rén?", "Where are you from?", "我是美国人。", "Wǒ shì Měiguó rén.", "I'm American."]
+        ["你是……人吗？", "Nǐ shì … rén ma?", "Are you …? (nationality)", "你是中国人吗？——不是，我是美国人。", "Nǐ shì Zhōngguó rén ma? — Bú shì, wǒ shì Měiguó rén.", "Are you Chinese? — No, I'm American."]
       ],
       scenarios: [
         {
@@ -192,18 +192,18 @@ window.MANDAYRIN_COURSE = {
           ]
         },
         {
-          title: "Where are you from?",
-          zh: "你是哪国人？",
+          title: "Are you Chinese?",
+          zh: "你是中国人吗？",
           setting: "Li Ming comes over to meet David.",
           cast: [["李明", "Lǐ Míng"], ["大卫", "Dàwèi"]],
           lines: [
-            [0, "你好！你是哪国人？", "Nǐ hǎo! Nǐ shì nǎ guó rén?", "Hi! Where are you from?"],
-            [1, "我是美国人。我叫大卫。", "Wǒ shì Měiguó rén. Wǒ jiào Dàwèi.", "I'm American. I'm David."],
+            [0, "你好！你是中国人吗？", "Nǐ hǎo! Nǐ shì Zhōngguó rén ma?", "Hi! Are you Chinese?"],
+            [1, "不是，我是美国人。我叫大卫。", "Bú shì, wǒ shì Měiguó rén. Wǒ jiào Dàwèi.", "No, I'm American. I'm David."],
             [0, "我叫李明。认识你很高兴！", "Wǒ jiào Lǐ Míng. Rènshi nǐ hěn gāoxìng!", "I'm Li Ming. Nice to meet you!"],
             [1, "我也很高兴。她是谁？", "Wǒ yě hěn gāoxìng. Tā shì shéi?", "Me too. Who's she?"],
             [0, "她叫安娜。她不是中国人。", "Tā jiào Ānnà. Tā bú shì Zhōngguó rén.", "That's Anna. She's not Chinese."],
             [1, "她也是美国人吗？", "Tā yě shì Měiguó rén ma?", "Is she American too?"],
-            [0, "是，她也是美国人。", "Shì, tā yě shì Měiguó rén.", "Yes, she's American too."]
+            [0, "是。你们是美国人，我们是中国人。", "Shì. Nǐmen shì Měiguó rén, wǒmen shì Zhōngguó rén.", "Yes. You two are American, and we're Chinese."]
           ]
         }
       ]
@@ -288,7 +288,7 @@ window.MANDAYRIN_COURSE = {
         ["弟弟", "dìdi", "younger brother", "noun", "我弟弟八岁。", "Wǒ dìdi bā suì.", "My little brother is eight."],
         ["妹妹", "mèimei", "younger sister", "noun", "你有妹妹吗？", "Nǐ yǒu mèimei ma?", "Do you have a younger sister?"],
         ["有", "yǒu", "to have", "verb", "你有哥哥吗？", "Nǐ yǒu gēge ma?", "Do you have an older brother?"],
-        ["没有", "méiyǒu", "to not have", "verb", "我没有姐姐。", "Wǒ méiyǒu jiějie.", "I don't have an older sister."],
+        ["没", "méi", "not; didn't; don't have (没有 = don't have)", "adverb", "我没有姐姐，也没有妹妹。", "Wǒ méiyǒu jiějie, yě méiyǒu mèimei.", "I don't have an older sister or a younger sister."],
         ["口", "kǒu", "(measure word for family members)", "measure", "我家有四口人。", "Wǒ jiā yǒu sì kǒu rén.", "There are four people in my family."],
         ["和", "hé", "and", "conjunction", "我爸爸和妈妈都是美国人。", "Wǒ bàba hé māma dōu shì Měiguó rén.", "My dad and mom are both American."],
         ["都", "dōu", "all; both", "adverb", "我们都很好。", "Wǒmen dōu hěn hǎo.", "We're all well."],
@@ -297,7 +297,7 @@ window.MANDAYRIN_COURSE = {
       ],
       patterns: [
         ["你家有几口人？", "Nǐ jiā yǒu jǐ kǒu rén?", "How many people are in your family?", "我家有五口人。", "Wǒ jiā yǒu wǔ kǒu rén.", "There are five people in my family."],
-        ["我有…… / 我没有……", "Wǒ yǒu … / Wǒ méiyǒu …", "I have … / I don't have …", "我有妹妹，没有哥哥。", "Wǒ yǒu mèimei, méiyǒu gēge.", "I have younger sisters but no older brother."]
+        ["我有…… / 我没有……", "Wǒ yǒu … / Wǒ méiyǒu …", "I have … / I don't have …", "我有妹妹，没有哥哥。", "Wǒ yǒu mèimei, méiyǒu gēge.", "I have a younger sister, but no older brother."]
       ],
       scenarios: [
         {
@@ -309,7 +309,7 @@ window.MANDAYRIN_COURSE = {
             [0, "大卫，你家有几口人？", "Dàwèi, nǐ jiā yǒu jǐ kǒu rén?", "David, how many people are in your family?"],
             [1, "我家有五口人：爸爸、妈妈、两个妹妹和我。", "Wǒ jiā yǒu wǔ kǒu rén: bàba, māma, liǎng ge mèimei hé wǒ.", "Five: my dad, my mom, my two younger sisters and me."],
             [0, "你有哥哥吗？", "Nǐ yǒu gēge ma?", "Do you have an older brother?"],
-            [1, "没有，我没有哥哥。你呢？", "Méiyǒu, wǒ méiyǒu gēge. Nǐ ne?", "No, I don't. And you?"],
+            [1, "没有。你呢？", "Méiyǒu. Nǐ ne?", "No, I don't. What about you?"],
             [0, "我家有四口人。我有一个弟弟。", "Wǒ jiā yǒu sì kǒu rén. Wǒ yǒu yí ge dìdi.", "There are four of us. I have a younger brother."],
             [1, "你弟弟多大？", "Nǐ dìdi duō dà?", "How old is your brother?"],
             [0, "他十九岁。", "Tā shíjiǔ suì.", "He's nineteen."]
@@ -353,20 +353,20 @@ window.MANDAYRIN_COURSE = {
         ["昨天", "zuótiān", "yesterday", "noun", "昨天是星期五。", "Zuótiān shì xīngqīwǔ.", "Yesterday was Friday."],
         ["星期", "xīngqī", "week (星期一 = Monday)", "noun", "今天星期一。", "Jīntiān xīngqīyī.", "Today is Monday."],
         ["天", "tiān", "day (星期天 = Sunday)", "noun", "星期天我不忙。", "Xīngqītiān wǒ bù máng.", "I'm not busy on Sunday."],
-        ["月", "yuè", "month", "noun", "十月八号是我的生日。", "Shí yuè bā hào shì wǒ de shēngrì.", "October 8th is my birthday."],
+        ["月", "yuè", "month", "noun", "我十月去中国。", "Wǒ shí yuè qù Zhōngguó.", "I'm going to China in October."],
         ["号", "hào", "day of the month (date)", "measure", "今天几号？", "Jīntiān jǐ hào?", "What's the date today?"],
         ["年", "nián", "year", "noun", "一年有十二个月。", "Yì nián yǒu shí'èr ge yuè.", "A year has twelve months."],
-        ["生日", "shēngrì", "birthday", "noun", "你的生日是几月几号？", "Nǐ de shēngrì shì jǐ yuè jǐ hào?", "When is your birthday?"],
+        ["今年", "jīnnián", "this year", "noun", "我今年二十五岁。", "Wǒ jīnnián èrshíwǔ suì.", "I'm twenty-five this year."],
         ["周末", "zhōumò", "weekend", "noun", "周末你忙吗？", "Zhōumò nǐ máng ma?", "Are you busy this weekend?"],
         ["去", "qù", "to go", "verb", "周末你去吗？", "Zhōumò nǐ qù ma?", "Are you going this weekend?"],
         ["来", "lái", "to come", "verb", "明天你来吗？", "Míngtiān nǐ lái ma?", "Are you coming tomorrow?"],
         ["忙", "máng", "busy", "adjective", "我今天很忙。", "Wǒ jīntiān hěn máng.", "I'm very busy today."],
         ["上", "shàng", "last; previous (上个星期 = last week)", "time", "上个星期我很忙。", "Shàng ge xīngqī wǒ hěn máng.", "I was busy last week."],
-        ["下", "xià", "next (下个月 = next month)", "time", "下个月是我的生日。", "Xià ge yuè shì wǒ de shēngrì.", "My birthday is next month."]
+        ["下", "xià", "next (下个月 = next month)", "time", "我妈妈下个月来。", "Wǒ māma xià ge yuè lái.", "My mom is coming next month."]
       ],
       patterns: [
         ["今天星期几？", "Jīntiān xīngqī jǐ?", "What day is it today?", "今天星期三。", "Jīntiān xīngqīsān.", "Today is Wednesday."],
-        ["……月……号", "… yuè … hào", "month + day (dates)", "我的生日是五月九号。", "Wǒ de shēngrì shì wǔ yuè jiǔ hào.", "My birthday is May 9th."]
+        ["……月……号", "… yuè … hào", "month + day (dates)", "我爸爸五月九号来。", "Wǒ bàba wǔ yuè jiǔ hào lái.", "My dad is coming on May 9th."]
       ],
       scenarios: [
         {
@@ -379,22 +379,22 @@ window.MANDAYRIN_COURSE = {
             [1, "今天星期五。", "Jīntiān xīngqīwǔ.", "It's Friday."],
             [0, "今天几号？", "Jīntiān jǐ hào?", "What's the date?"],
             [1, "今天十月九号。", "Jīntiān shí yuè jiǔ hào.", "It's October 9th."],
-            [0, "十月九号？明天是李明的生日！", "Shí yuè jiǔ hào? Míngtiān shì Lǐ Míng de shēngrì!", "October 9th? Tomorrow is Li Ming's birthday!"],
-            [1, "是！明天我们都去。", "Shì! Míngtiān wǒmen dōu qù.", "That's right! We're all going tomorrow."]
+            [0, "十月九号？明天李明二十九岁！", "Shí yuè jiǔ hào? Míngtiān Lǐ Míng èrshíjiǔ suì!", "October 9th? Li Ming turns twenty-nine tomorrow!"],
+            [1, "是！明天我们都去他家。", "Shì! Míngtiān wǒmen dōu qù tā jiā.", "That's right! We're all going to his place tomorrow."]
           ]
         },
         {
-          title: "When's your birthday?",
-          zh: "你的生日是几月几号？",
-          setting: "Li Ming and Anna talk about birthdays.",
+          title: "How old this year?",
+          zh: "你今年多大？",
+          setting: "Li Ming and Anna talk about their ages.",
           cast: [["李明", "Lǐ Míng"], ["安娜", "Ānnà"]],
           lines: [
-            [0, "安娜，你的生日是几月几号？", "Ānnà, nǐ de shēngrì shì jǐ yuè jǐ hào?", "Anna, when's your birthday?"],
-            [1, "我的生日是五月二十号。你呢？", "Wǒ de shēngrì shì wǔ yuè èrshí hào. Nǐ ne?", "May 20th. And yours?"],
-            [0, "我的生日是十月十号——明天！", "Wǒ de shēngrì shì shí yuè shí hào — míngtiān!", "October 10th — tomorrow!"],
-            [1, "明天？你多大？", "Míngtiān? Nǐ duō dà?", "Tomorrow? How old will you be?"],
-            [0, "明天我二十九岁。", "Míngtiān wǒ èrshíjiǔ suì.", "Tomorrow I'll be twenty-nine."],
-            [1, "我们都去！", "Wǒmen dōu qù!", "We'll all be there!"]
+            [0, "安娜，你今年多大？", "Ānnà, nǐ jīnnián duō dà?", "Anna, how old are you this year?"],
+            [1, "我今年二十六岁。你呢？", "Wǒ jīnnián èrshíliù suì. Nǐ ne?", "I'm twenty-six this year. And you?"],
+            [0, "今天二十八岁，明天二十九岁！", "Jīntiān èrshíbā suì, míngtiān èrshíjiǔ suì!", "Twenty-eight today, twenty-nine tomorrow!"],
+            [1, "明天？明天几号？", "Míngtiān? Míngtiān jǐ hào?", "Tomorrow? What's the date tomorrow?"],
+            [0, "明天十月十号。", "Míngtiān shí yuè shí hào.", "Tomorrow is October 10th."],
+            [1, "明天我们都来！", "Míngtiān wǒmen dōu lái!", "We'll all come over tomorrow!"]
           ]
         },
         {
@@ -408,7 +408,7 @@ window.MANDAYRIN_COURSE = {
             [0, "星期天你来我家吗？", "Xīngqītiān nǐ lái wǒ jiā ma?", "Do you want to come to my place on Sunday?"],
             [1, "好！你爸爸妈妈也来吗？", "Hǎo! Nǐ bàba māma yě lái ma?", "Sure! Are your parents coming too?"],
             [0, "不来。我爸爸妈妈下个月来。", "Bù lái. Wǒ bàba māma xià ge yuè lái.", "No. My parents are coming next month."],
-            [1, "好，星期天见！", "Hǎo, xīngqītiān jiàn!", "Great, see you Sunday!"]
+            [1, "好，星期天我去你家！", "Hǎo, xīngqītiān wǒ qù nǐ jiā!", "Great, I'll come over on Sunday!"]
           ]
         }
       ]
@@ -492,7 +492,7 @@ window.MANDAYRIN_COURSE = {
         ["鸡蛋", "jīdàn", "egg", "noun", "早饭我吃两个鸡蛋。", "Zǎofàn wǒ chī liǎng ge jīdàn.", "I eat two eggs for breakfast."],
         ["水果", "shuǐguǒ", "fruit", "noun", "你喜欢吃水果吗？", "Nǐ xǐhuan chī shuǐguǒ ma?", "Do you like fruit?"],
         ["包子", "bāozi", "steamed bun", "noun", "我想吃包子。", "Wǒ xiǎng chī bāozi.", "I'd like some steamed buns."],
-        ["早饭", "zǎofàn", "breakfast", "noun", "你吃早饭了吗？", "Nǐ chī zǎofàn le ma?", "Did you have breakfast?"],
+        ["真", "zhēn", "really; truly", "adverb", "妈妈做的包子真好吃！", "Māma zuò de bāozi zhēn hǎochī!", "Mom's steamed buns are really good!"],
         ["饿", "è", "hungry", "adjective", "我很饿！", "Wǒ hěn è!", "I'm so hungry!"],
         ["好吃", "hǎochī", "tasty; delicious", "adjective", "很好吃！", "Hěn hǎochī!", "Delicious!"],
         ["想", "xiǎng", "to want to; would like", "verb", "你想吃什么？", "Nǐ xiǎng chī shénme?", "What do you want to eat?"],
@@ -514,7 +514,7 @@ window.MANDAYRIN_COURSE = {
             [1, "没有。我很饿！", "Méiyǒu. Wǒ hěn è!", "No. I'm starving!"],
             [0, "你想吃什么？", "Nǐ xiǎng chī shénme?", "What do you want to eat?"],
             [1, "我想吃面条。你呢？", "Wǒ xiǎng chī miàntiáo. Nǐ ne?", "I'd like noodles. You?"],
-            [0, "我也想吃面条。我做！", "Wǒ yě xiǎng chī miàntiáo. Wǒ zuò!", "Noodles for me too. I'll make them!"],
+            [0, "我也想吃面条。我来做！", "Wǒ yě xiǎng chī miàntiáo. Wǒ lái zuò!", "Noodles for me too. I'll make them!"],
             [1, "谢谢你！", "Xièxie nǐ!", "Thank you!"]
           ]
         },
@@ -529,7 +529,7 @@ window.MANDAYRIN_COURSE = {
             [1, "有包子和鸡蛋。", "Yǒu bāozi hé jīdàn.", "Steamed buns and eggs."],
             [0, "我喜欢吃包子！有肉包子吗？", "Wǒ xǐhuan chī bāozi! Yǒu ròu bāozi ma?", "I love buns! Are there meat ones?"],
             [1, "有。你也吃水果。", "Yǒu. Nǐ yě chī shuǐguǒ.", "Yes. Have some fruit too."],
-            [0, "好。很好吃！谢谢妈妈！", "Hǎo. Hěn hǎochī! Xièxie māma!", "Okay. Delicious! Thanks, Mom!"]
+            [0, "好。真好吃！谢谢妈妈！", "Hǎo. Zhēn hǎochī! Xièxie māma!", "Okay. So good! Thanks, Mom!"]
           ]
         },
         {
@@ -556,8 +556,8 @@ window.MANDAYRIN_COURSE = {
         ["水", "shuǐ", "water", "noun", "给我一杯水，谢谢。", "Gěi wǒ yì bēi shuǐ, xièxie.", "A glass of water, please."],
         ["牛奶", "niúnǎi", "milk", "noun", "咖啡要牛奶吗？", "Kāfēi yào niúnǎi ma?", "Milk in your coffee?"],
         ["果汁", "guǒzhī", "juice", "noun", "小美喜欢喝果汁。", "Xiǎoměi xǐhuan hē guǒzhī.", "Xiaomei likes juice."],
-        ["糖", "táng", "sugar", "noun", "我不要糖。", "Wǒ bú yào táng.", "No sugar for me."],
-        ["冰", "bīng", "ice (冰的 = iced)", "noun", "果汁要冰吗？", "Guǒzhī yào bīng ma?", "Do you want ice in your juice?"],
+        ["吧", "ba", "(makes a suggestion or softens a request: let's …)", "particle", "我们去喝咖啡吧！", "Wǒmen qù hē kāfēi ba!", "Let's go get a coffee!"],
+        ["冰", "bīng", "ice (冰的 = iced)", "noun", "果汁要冰的吗？", "Guǒzhī yào bīng de ma?", "Do you want your juice iced?"],
         ["钱", "qián", "money", "noun", "一杯咖啡多少钱？", "Yì bēi kāfēi duōshao qián?", "How much is a coffee?"],
         ["要", "yào", "to want; would like", "verb", "你要什么？", "Nǐ yào shénme?", "What would you like?"],
         ["给", "gěi", "to give", "verb", "给你。", "Gěi nǐ.", "Here you go."],
@@ -581,7 +581,7 @@ window.MANDAYRIN_COURSE = {
             [0, "你好！你要什么？", "Nǐ hǎo! Nǐ yào shénme?", "Hi! What can I get you?"],
             [1, "我要一杯咖啡。", "Wǒ yào yì bēi kāfēi.", "A coffee, please."],
             [0, "热的还是冰的？", "Rè de háishi bīng de?", "Hot or iced?"],
-            [1, "冰的。不要糖，谢谢。", "Bīng de. Bú yào táng, xièxie.", "Iced. No sugar, thanks."],
+            [1, "冰的吧，今天很热。", "Bīng de ba, jīntiān hěn rè.", "Iced, I think — it's hot today."],
             [0, "要牛奶吗？", "Yào niúnǎi ma?", "Any milk?"],
             [1, "要。多少钱？", "Yào. Duōshao qián?", "Yes, please. How much?"],
             [0, "二十八块。", "Èrshíbā kuài.", "28 yuan."],
@@ -612,9 +612,9 @@ window.MANDAYRIN_COURSE = {
             [0, "小美，你想喝什么？", "Xiǎoměi, nǐ xiǎng hē shénme?", "Xiaomei, what would you like to drink?"],
             [1, "我要咖啡！", "Wǒ yào kāfēi!", "I want coffee!"],
             [0, "咖啡？你六岁！", "Kāfēi? Nǐ liù suì!", "Coffee? You're six!"],
-            [1, "好……我要果汁。", "Hǎo… wǒ yào guǒzhī.", "Fine… I'll have juice."],
-            [0, "果汁要冰吗？", "Guǒzhī yào bīng ma?", "Do you want ice in your juice?"],
-            [1, "要！我也要水，很热！", "Yào! Wǒ yě yào shuǐ, hěn rè!", "Yes! And water too, it's so hot!"],
+            [1, "好吧……我要果汁。", "Hǎo ba… wǒ yào guǒzhī.", "Fine… I'll have juice."],
+            [0, "果汁要冰的吗？", "Guǒzhī yào bīng de ma?", "Do you want your juice iced?"],
+            [1, "要！我也要水，今天真热！", "Yào! Wǒ yě yào shuǐ, jīntiān zhēn rè!", "Yes! And water too, it's so hot today!"],
             [0, "好，给你。", "Hǎo, gěi nǐ.", "Okay, here you go."]
           ]
         }
@@ -627,20 +627,20 @@ window.MANDAYRIN_COURSE = {
         ["卖", "mài", "to sell", "verb", "你们卖鸡蛋吗？", "Nǐmen mài jīdàn ma?", "Do you sell eggs?"],
         ["东西", "dōngxi", "thing; stuff", "noun", "我去买东西。", "Wǒ qù mǎi dōngxi.", "I'm going shopping."],
         ["苹果", "píngguǒ", "apple", "noun", "我要三个苹果。", "Wǒ yào sān ge píngguǒ.", "Three apples, please."],
-        ["香蕉", "xiāngjiāo", "banana", "noun", "小美很喜欢吃香蕉。", "Xiǎoměi hěn xǐhuan chī xiāngjiāo.", "Xiaomei loves bananas."],
-        ["西瓜", "xīguā", "watermelon", "noun", "这个西瓜很大！", "Zhège xīguā hěn dà!", "This watermelon is huge!"],
+        ["百", "bǎi", "hundred", "number", "我有一百块，我们去买东西吧！", "Wǒ yǒu yìbǎi kuài, wǒmen qù mǎi dōngxi ba!", "I've got a hundred yuan — let's go shopping!"],
+        ["只", "zhǐ", "only (also zhī: measure word for animals)", "adverb", "我只要一斤。", "Wǒ zhǐ yào yì jīn.", "I only want one jin."],
         ["鱼", "yú", "fish", "noun", "你喜欢吃鱼吗？", "Nǐ xǐhuan chī yú ma?", "Do you like fish?"],
         ["斤", "jīn", "jin (half a kilo)", "measure", "一斤苹果多少钱？", "Yì jīn píngguǒ duōshao qián?", "How much is a jin of apples?"],
         ["贵", "guì", "expensive", "adjective", "今天鱼很贵。", "Jīntiān yú hěn guì.", "Fish is expensive today."],
-        ["便宜", "piányi", "cheap", "adjective", "香蕉很便宜。", "Xiāngjiāo hěn piányi.", "Bananas are cheap."],
+        ["便宜", "piányi", "cheap", "adjective", "今天苹果很便宜。", "Jīntiān píngguǒ hěn piányi.", "Apples are cheap today."],
         ["太", "tài", "too (太贵了 = too expensive)", "adverb", "太贵了！", "Tài guì le!", "That's too expensive!"],
         ["一点儿", "yìdiǎnr", "a little", "phrase", "便宜一点儿，好吗？", "Piányi yìdiǎnr, hǎo ma?", "Could you make it a bit cheaper?"],
         ["这", "zhè", "this", "pronoun", "这是什么？", "Zhè shì shénme?", "What's this?"],
-        ["那", "nà", "that", "pronoun", "那是西瓜吗？", "Nà shì xīguā ma?", "Is that a watermelon?"],
-        ["怎么卖", "zěnme mài", "how much (per unit)?", "phrase", "苹果怎么卖？", "Píngguǒ zěnme mài?", "How much are the apples?"]
+        ["那", "nà", "that", "pronoun", "那是什么鱼？", "Nà shì shénme yú?", "What kind of fish is that?"],
+        ["怎么", "zěnme", "how (怎么卖 = how much is it?)", "question", "这个怎么卖？", "Zhège zěnme mài?", "How much is this one?"]
       ],
       patterns: [
-        ["……怎么卖？——……块一斤。", "… zěnme mài? — … kuài yì jīn.", "How much is …? — … yuan a jin.", "香蕉怎么卖？——三块一斤。", "Xiāngjiāo zěnme mài? — Sān kuài yì jīn.", "How much are the bananas? — Three yuan a jin."],
+        ["……怎么卖？——……块一斤。", "… zěnme mài? — … kuài yì jīn.", "How much is …? — … yuan a jin.", "鱼怎么卖？——三十块一斤。", "Yú zěnme mài? — Sānshí kuài yì jīn.", "How much is the fish? — Thirty yuan a jin."],
         ["太……了！", "Tài … le!", "Too …! / So …!", "太贵了！便宜一点儿，好吗？", "Tài guì le! Piányi yìdiǎnr, hǎo ma?", "That's too expensive! Could you make it a bit cheaper?"]
       ],
       scenarios: [
@@ -656,22 +656,22 @@ window.MANDAYRIN_COURSE = {
             [0, "太贵了！便宜一点儿，好吗？", "Tài guì le! Piányi yìdiǎnr, hǎo ma?", "That's too much! Could you go a bit lower?"],
             [1, "好，四块一斤。", "Hǎo, sì kuài yì jīn.", "Okay, four yuan a jin."],
             [0, "好，我要两斤。", "Hǎo, wǒ yào liǎng jīn.", "Great, I'll take two jin."],
-            [1, "八块。要香蕉吗？香蕉很便宜。", "Bā kuài. Yào xiāngjiāo ma? Xiāngjiāo hěn piányi.", "That's eight yuan. Want some bananas? They're cheap."],
-            [0, "不要，谢谢。给你八块。", "Bú yào, xièxie. Gěi nǐ bā kuài.", "No, thanks. Here's eight yuan."]
+            [1, "八块。你只买苹果吗？", "Bā kuài. Nǐ zhǐ mǎi píngguǒ ma?", "That's eight yuan. Just the apples?"],
+            [0, "只买苹果，谢谢。给你八块。", "Zhǐ mǎi píngguǒ, xièxie. Gěi nǐ bā kuài.", "Just the apples, thanks. Here's eight yuan."]
           ]
         },
         {
-          title: "A big watermelon",
-          zh: "大西瓜",
-          setting: "On a hot afternoon, David wants a watermelon from a street stall.",
+          title: "A big fish",
+          zh: "大鱼",
+          setting: "David stops at a fish stall in the market.",
           cast: [["大卫", "Dàwèi"], ["店员", "diànyuán (seller)"]],
           lines: [
-            [1, "西瓜！很好吃的西瓜！", "Xīguā! Hěn hǎochī de xīguā!", "Watermelons! Delicious watermelons!"],
-            [0, "这个西瓜怎么卖？", "Zhège xīguā zěnme mài?", "How much is this watermelon?"],
-            [1, "两块一斤。这个十斤，二十块。", "Liǎng kuài yì jīn. Zhège shí jīn, èrshí kuài.", "Two yuan a jin. This one's ten jin, so twenty yuan."],
-            [0, "太大了！那个小的呢？", "Tài dà le! Nàge xiǎo de ne?", "That's way too big! What about that small one?"],
-            [1, "那个五斤，十块。", "Nàge wǔ jīn, shí kuài.", "That one's five jin — ten yuan."],
-            [0, "很便宜！我买那个。", "Hěn piányi! Wǒ mǎi nàge.", "That's cheap! I'll take that one."],
+            [1, "卖鱼！便宜的鱼！", "Mài yú! Piányi de yú!", "Fish for sale! Cheap fish!"],
+            [0, "鱼怎么卖？", "Yú zěnme mài?", "How much is the fish?"],
+            [1, "二十块一斤。这个大的五斤，一百块。", "Èrshí kuài yì jīn. Zhège dà de wǔ jīn, yìbǎi kuài.", "Twenty yuan a jin. This big one's five jin, so a hundred yuan."],
+            [0, "太大了！我只想买一个小的。", "Tài dà le! Wǒ zhǐ xiǎng mǎi yí ge xiǎo de.", "That's way too big! I only want a small one."],
+            [1, "那个小的两斤，四十块。", "Nàge xiǎo de liǎng jīn, sìshí kuài.", "That small one's two jin — forty yuan."],
+            [0, "好，我买那个。", "Hǎo, wǒ mǎi nàge.", "Great, I'll take that one."],
             [1, "好，给你。", "Hǎo, gěi nǐ.", "Okay, here you go."]
           ]
         },
@@ -685,8 +685,8 @@ window.MANDAYRIN_COURSE = {
             [1, "好！我们买什么？", "Hǎo! Wǒmen mǎi shénme?", "Okay! What are we getting?"],
             [0, "买鱼和菜。晚上我做鱼。", "Mǎi yú hé cài. Wǎnshang wǒ zuò yú.", "Fish and vegetables. I'm cooking fish tonight."],
             [1, "妈妈，那是什么？他卖什么？", "Māma, nà shì shénme? Tā mài shénme?", "Mom, what's that? What's he selling?"],
-            [0, "他卖香蕉。你想吃吗？", "Tā mài xiāngjiāo. Nǐ xiǎng chī ma?", "He's selling bananas. Do you want some?"],
-            [1, "想！香蕉贵吗？", "Xiǎng! Xiāngjiāo guì ma?", "Yes! Are they expensive?"],
+            [0, "他卖苹果。你想吃吗？", "Tā mài píngguǒ. Nǐ xiǎng chī ma?", "He's selling apples. Do you want some?"],
+            [1, "想！苹果贵吗？", "Xiǎng! Píngguǒ guì ma?", "Yes! Are they expensive?"],
             [0, "不贵，三块一斤。", "Bú guì, sān kuài yì jīn.", "Not at all, three yuan a jin."]
           ]
         }
@@ -702,9 +702,9 @@ window.MANDAYRIN_COURSE = {
         ["洗手间", "xǐshǒujiān", "bathroom", "noun", "我家有两个洗手间。", "Wǒ jiā yǒu liǎng ge xǐshǒujiān.", "Our place has two bathrooms."],
         ["床", "chuáng", "bed", "noun", "我的床太小了。", "Wǒ de chuáng tài xiǎo le.", "My bed is way too small."],
         ["桌子", "zhuōzi", "table; desk", "noun", "桌子上有咖啡。", "Zhuōzi shàng yǒu kāfēi.", "There's coffee on the table."],
-        ["椅子", "yǐzi", "chair", "noun", "我想买新椅子。", "Wǒ xiǎng mǎi xīn yǐzi.", "I want to buy new chairs."],
+        ["张", "zhāng", "(measure word for flat things: beds, tables, tickets, photos)", "measure", "我的房间里有一张床和一张桌子。", "Wǒ de fángjiān lǐ yǒu yì zhāng chuáng hé yì zhāng zhuōzi.", "My room has a bed and a desk."],
         ["门", "mén", "door", "noun", "谁在门口？", "Shéi zài ménkǒu?", "Who's at the door?"],
-        ["窗户", "chuānghu", "window", "noun", "我的房间有两个窗户。", "Wǒ de fángjiān yǒu liǎng ge chuānghu.", "My room has two windows."],
+        ["可以", "kěyǐ", "can; may", "verb", "我可以去洗手间吗？", "Wǒ kěyǐ qù xǐshǒujiān ma?", "May I use the bathroom?"],
         ["住", "zhù", "to live (somewhere)", "verb", "我爸爸妈妈住在美国。", "Wǒ bàba māma zhù zài Měiguó.", "My parents live in the US."],
         ["在", "zài", "to be at; in", "verb", "王芳在家吗？", "Wáng Fāng zài jiā ma?", "Is Wang Fang home?"],
         ["里", "lǐ", "inside", "position", "厨房里有什么？", "Chúfáng lǐ yǒu shénme?", "What's in the kitchen?"],
@@ -713,7 +713,7 @@ window.MANDAYRIN_COURSE = {
       ],
       patterns: [
         ["……在……（里）", "… zài … (lǐ)", "… is in …", "王芳在厨房里。", "Wáng Fāng zài chúfáng lǐ.", "Wang Fang is in the kitchen."],
-        ["……里有……", "… lǐ yǒu …", "There is/are … in …", "客厅里有桌子和椅子。", "Kètīng lǐ yǒu zhuōzi hé yǐzi.", "There's a table and chairs in the living room."]
+        ["……里有……", "… lǐ yǒu …", "There is/are … in …", "客厅里有一张新桌子。", "Kètīng lǐ yǒu yì zhāng xīn zhuōzi.", "There's a new table in the living room."]
       ],
       scenarios: [
         {
@@ -722,12 +722,12 @@ window.MANDAYRIN_COURSE = {
           setting: "Wang Fang shows Anna around the apartment she shares with David.",
           cast: [["王芳", "Wáng Fāng"], ["安娜", "Ānnà"]],
           lines: [
-            [1, "你的房子很漂亮！", "Nǐ de fángzi hěn piàoliang!", "Your place is beautiful!"],
-            [0, "谢谢！这是客厅。桌子和椅子都是新的。", "Xièxie! Zhè shì kètīng. Zhuōzi hé yǐzi dōu shì xīn de.", "Thanks! This is the living room. The table and chairs are new."],
+            [1, "你们的家真漂亮！", "Nǐmen de jiā zhēn piàoliang!", "Your place is beautiful!"],
+            [0, "谢谢！这是客厅。这张桌子是新的。", "Xièxie! Zhè shì kètīng. Zhè zhāng zhuōzi shì xīn de.", "Thanks! This is the living room. This table is new."],
             [1, "那是厨房吗？很大！", "Nà shì chúfáng ma? Hěn dà!", "Is that the kitchen? It's big!"],
             [0, "是。这是我的房间。", "Shì. Zhè shì wǒ de fángjiān.", "Yes. And this is my room."],
-            [1, "窗户很大，很漂亮！大卫的房间呢？", "Chuānghu hěn dà, hěn piàoliang! Dàwèi de fángjiān ne?", "What a big window — so pretty! And David's room?"],
-            [0, "大卫在房间里睡觉。我们不去！", "Dàwèi zài fángjiān lǐ shuìjiào. Wǒmen bú qù!", "David's in there asleep. Let's skip it!"]
+            [1, "你的房间很漂亮！大卫的房间呢？", "Nǐ de fángjiān hěn piàoliang! Dàwèi de fángjiān ne?", "Your room is lovely! And David's room?"],
+            [0, "大卫在房间里睡觉。我们不去吧！", "Dàwèi zài fángjiān lǐ shuìjiào. Wǒmen bú qù ba!", "David's in there asleep. Let's not go in!"]
           ]
         },
         {
@@ -737,11 +737,11 @@ window.MANDAYRIN_COURSE = {
           cast: [["王芳", "Wáng Fāng"], ["大卫", "Dàwèi"], ["小美", "Xiǎoměi"]],
           lines: [
             [0, "大卫，门口有人！", "Dàwèi, ménkǒu yǒu rén!", "David, someone's at the door!"],
-            [1, "我在洗手间里！你去！", "Wǒ zài xǐshǒujiān lǐ! Nǐ qù!", "I'm in the bathroom! You get it!"],
+            [1, "我在洗手间里！你去吧！", "Wǒ zài xǐshǒujiān lǐ! Nǐ qù ba!", "I'm in the bathroom! You get it!"],
             [0, "谁在门口？", "Shéi zài ménkǒu?", "Who is it?"],
             [2, "是我，小美！大卫在家吗？", "Shì wǒ, Xiǎoměi! Dàwèi zài jiā ma?", "It's me, Xiaomei! Is David home?"],
             [0, "在。来，我们在客厅等他。", "Zài. Lái, wǒmen zài kètīng děng tā.", "He is. Come on in, we'll wait for him in the living room."],
-            [2, "你们的客厅很漂亮！这个椅子是新的吗？", "Nǐmen de kètīng hěn piàoliang! Zhège yǐzi shì xīn de ma?", "Your living room is so pretty! Is this chair new?"],
+            [2, "你们的客厅很漂亮！这张桌子是新的吗？", "Nǐmen de kètīng hěn piàoliang! Zhè zhāng zhuōzi shì xīn de ma?", "Your living room is so pretty! Is this table new?"],
             [0, "是，是新的。", "Shì, shì xīn de.", "Yes, it's new."]
           ]
         },
@@ -756,8 +756,8 @@ window.MANDAYRIN_COURSE = {
             [0, "有几个房间？", "Yǒu jǐ ge fángjiān?", "How many rooms?"],
             [1, "五个房间，两个洗手间。你的房间大吗？", "Wǔ ge fángjiān, liǎng ge xǐshǒujiān. Nǐ de fángjiān dà ma?", "Five rooms and two bathrooms. Is your room big?"],
             [0, "不大。我的床太小了！", "Bú dà. Wǒ de chuáng tài xiǎo le!", "Not really. My bed is way too small!"],
-            [1, "星期六你来我家吃饭，好吗？", "Xīngqīliù nǐ lái wǒ jiā chī fàn, hǎo ma?", "Come to my place for dinner on Saturday, okay?"],
-            [0, "好！谢谢！", "Hǎo! Xièxie!", "Sure! Thanks!"]
+            [1, "星期六你可以来我家吃饭吗？", "Xīngqīliù nǐ kěyǐ lái wǒ jiā chī fàn ma?", "Can you come to my place for dinner on Saturday?"],
+            [0, "可以！谢谢！", "Kěyǐ! Xièxie!", "Sure! Thanks!"]
           ]
         }
       ]
@@ -768,7 +768,7 @@ window.MANDAYRIN_COURSE = {
         ["每", "měi", "every", "pronoun", "我每天六点起床。", "Wǒ měi tiān liù diǎn qǐchuáng.", "I get up at six every day."],
         ["洗澡", "xǐzǎo", "to shower; to bathe", "verb", "我晚上洗澡。", "Wǒ wǎnshang xǐzǎo.", "I shower in the evening."],
         ["刷牙", "shuāyá", "to brush your teeth", "verb", "你刷牙了吗？", "Nǐ shuāyá le ma?", "Have you brushed your teeth?"],
-        ["洗脸", "xǐliǎn", "to wash your face", "verb", "起床了，去洗脸！", "Qǐchuáng le, qù xǐliǎn!", "Up you get — go wash your face!"],
+        ["可是", "kěshì", "but", "conjunction", "我想去，可是我太累了。", "Wǒ xiǎng qù, kěshì wǒ tài lèi le.", "I'd like to go, but I'm too tired."],
         ["穿", "chuān", "to wear; to put on", "verb", "今天你穿什么？", "Jīntiān nǐ chuān shénme?", "What are you wearing today?"],
         ["回家", "huíjiā", "to go home", "verb", "你几点回家？", "Nǐ jǐ diǎn huíjiā?", "What time are you coming home?"],
         ["出门", "chūmén", "to go out", "verb", "我八点出门。", "Wǒ bā diǎn chūmén.", "I leave the house at eight."],
@@ -782,7 +782,7 @@ window.MANDAYRIN_COURSE = {
         ["看", "kàn", "to look; to watch; to read", "verb", "你看，那是小美！", "Nǐ kàn, nà shì Xiǎoměi!", "Look, that's Xiaomei!"]
       ],
       patterns: [
-        ["先……，然后……", "Xiān …, ránhòu …", "First …, then …", "我先刷牙，然后洗脸。", "Wǒ xiān shuāyá, ránhòu xǐliǎn.", "I brush my teeth first, then wash my face."],
+        ["先……，然后……", "Xiān …, ránhòu …", "First …, then …", "我先刷牙，然后吃早饭。", "Wǒ xiān shuāyá, ránhòu chī zǎofàn.", "I brush my teeth first, then have breakfast."],
         ["我每天……", "Wǒ měi tiān …", "Every day I …", "我每天七点出门。", "Wǒ měi tiān qī diǎn chūmén.", "I leave the house at seven every day."]
       ],
       scenarios: [
@@ -798,7 +798,7 @@ window.MANDAYRIN_COURSE = {
             [1, "七点。你呢？", "Qī diǎn. Nǐ ne?", "Seven. What about you?"],
             [0, "我常常八点五十起床，九点出门！", "Wǒ chángcháng bā diǎn wǔshí qǐchuáng, jiǔ diǎn chūmén!", "I usually get up at 8:50 and leave at nine!"],
             [1, "你不吃早饭吗？", "Nǐ bù chī zǎofàn ma?", "You don't eat breakfast?"],
-            [0, "不吃。我喝一杯咖啡。", "Bù chī. Wǒ hē yì bēi kāfēi.", "Nope. I just have a cup of coffee."]
+            [0, "不吃。我只喝一杯咖啡。", "Bù chī. Wǒ zhǐ hē yì bēi kāfēi.", "Nope. I just have a cup of coffee."]
           ]
         },
         {
@@ -808,7 +808,7 @@ window.MANDAYRIN_COURSE = {
           cast: [["王芳", "Wáng Fāng"], ["大卫", "Dàwèi"]],
           lines: [
             [0, "大卫，我先洗澡，好吗？", "Dàwèi, wǒ xiān xǐzǎo, hǎo ma?", "David, can I shower first?"],
-            [1, "好。我先刷牙、洗脸。", "Hǎo. Wǒ xiān shuāyá, xǐliǎn.", "Sure. I'll brush my teeth and wash my face first."],
+            [1, "好吧。我先吃早饭。", "Hǎo ba. Wǒ xiān chī zǎofàn.", "Fine. I'll have breakfast first."],
             [0, "今天你几点回家？", "Jīntiān nǐ jǐ diǎn huíjiā?", "What time are you coming home today?"],
             [1, "六点。今天我做晚饭！", "Liù diǎn. Jīntiān wǒ zuò wǎnfàn!", "Six. I'm making dinner tonight!"],
             [0, "太好了！你做什么？", "Tài hǎo le! Nǐ zuò shénme?", "Great! What are you making?"],
@@ -822,11 +822,11 @@ window.MANDAYRIN_COURSE = {
           cast: [["王芳", "Wáng Fāng"], ["大卫", "Dàwèi"]],
           lines: [
             [1, "我回家了！", "Wǒ huíjiā le!", "I'm home!"],
-            [0, "你好！你累了吗？", "Nǐ hǎo! Nǐ lèi le ma?", "Hi! Are you tired?"],
-            [1, "很累。今天很忙，午饭也没有吃。", "Hěn lèi. Jīntiān hěn máng, wǔfàn yě méiyǒu chī.", "Really tired. It was so busy I didn't even have lunch."],
+            [0, "你好！累了吧？", "Nǐ hǎo! Lèi le ba?", "Hi! You must be tired."],
+            [1, "真累。今天太忙了，午饭也没吃。", "Zhēn lèi. Jīntiān tài máng le, wǔfàn yě méi chī.", "Really tired. It was so busy I didn't even have lunch."],
             [0, "你先休息。晚饭七点。", "Nǐ xiān xiūxi. Wǎnfàn qī diǎn.", "Rest first. Dinner's at seven."],
-            [1, "好。我先洗澡，然后休息。", "Hǎo. Wǒ xiān xǐzǎo, ránhòu xiūxi.", "Okay. I'll shower, then have a rest."],
-            [0, "你看，桌子上有水果。你先吃一点儿。", "Nǐ kàn, zhuōzi shàng yǒu shuǐguǒ. Nǐ xiān chī yìdiǎnr.", "Look, there's fruit on the table. Have a little first."],
+            [1, "我很饿，可是我想先洗澡。", "Wǒ hěn è, kěshì wǒ xiǎng xiān xǐzǎo.", "I'm hungry, but I want to shower first."],
+            [0, "你看，桌子上有水果。你先吃一点儿吧。", "Nǐ kàn, zhuōzi shàng yǒu shuǐguǒ. Nǐ xiān chī yìdiǎnr ba.", "Look, there's fruit on the table. Have a little first."],
             [1, "谢谢你！", "Xièxie nǐ!", "Thank you!"]
           ]
         }
@@ -841,7 +841,7 @@ window.MANDAYRIN_COURSE = {
         ["黑", "hēi", "black", "adjective", "我喜欢穿黑裤子。", "Wǒ xǐhuan chuān hēi kùzi.", "I like wearing black pants."],
         ["蓝", "lán", "blue", "adjective", "这件蓝衣服很漂亮。", "Zhè jiàn lán yīfu hěn piàoliang.", "This blue top is pretty."],
         ["绿", "lǜ", "green", "adjective", "我喜欢喝绿茶。", "Wǒ xǐhuan hē lǜchá.", "I like green tea."],
-        ["黄", "huáng", "yellow", "adjective", "香蕉是黄的。", "Xiāngjiāo shì huáng de.", "Bananas are yellow."],
+        ["黄", "huáng", "yellow", "adjective", "小美的帽子是黄的。", "Xiǎoměi de màozi shì huáng de.", "Xiaomei's hat is yellow."],
         ["衣服", "yīfu", "clothes", "noun", "我想去买衣服。", "Wǒ xiǎng qù mǎi yīfu.", "I want to go clothes shopping."],
         ["裤子", "kùzi", "pants", "noun", "裤子太大了！", "Kùzi tài dà le!", "These pants are too big!"],
         ["裙子", "qúnzi", "skirt; dress", "noun", "你的裙子很漂亮！", "Nǐ de qúnzi hěn piàoliang!", "Your dress is lovely!"],
@@ -866,7 +866,7 @@ window.MANDAYRIN_COURSE = {
             [1, "我想买一件衣服。这件有什么颜色？", "Wǒ xiǎng mǎi yí jiàn yīfu. Zhè jiàn yǒu shénme yánsè?", "I'd like a top. What colors does this one come in?"],
             [0, "有白的、黑的和蓝的。", "Yǒu bái de, hēi de hé lán de.", "White, black and blue."],
             [1, "有红的吗？", "Yǒu hóng de ma?", "Do you have red?"],
-            [0, "没有红的。蓝的很好看！", "Méiyǒu hóng de. Lán de hěn hǎokàn!", "No red, sorry. The blue one looks great!"],
+            [0, "没有红的。可是蓝的也很好看！", "Méiyǒu hóng de. Kěshì lán de yě hěn hǎokàn!", "No red, sorry. But the blue one looks great too!"],
             [1, "好，我要蓝的。多少钱？", "Hǎo, wǒ yào lán de. Duōshao qián?", "Okay, I'll take the blue one. How much?"],
             [0, "九十块。", "Jiǔshí kuài.", "Ninety yuan."]
           ]
@@ -878,7 +878,7 @@ window.MANDAYRIN_COURSE = {
           cast: [["大卫", "Dàwèi"], ["王芳", "Wáng Fāng"]],
           lines: [
             [0, "王芳，你看！我的新鞋！", "Wáng Fāng, nǐ kàn! Wǒ de xīn xié!", "Wang Fang, look! My new shoes!"],
-            [1, "很好看！是绿的和黄的！", "Hěn hǎokàn! Shì lǜ de hé huáng de!", "They look great! Green and yellow!"],
+            [1, "真好看！是绿的和黄的！", "Zhēn hǎokàn! Shì lǜ de hé huáng de!", "They look great! Green and yellow!"],
             [0, "你喜欢这个颜色吗？", "Nǐ xǐhuan zhège yánsè ma?", "Do you like the colors?"],
             [1, "喜欢。多少钱？", "Xǐhuan. Duōshao qián?", "I do. How much were they?"],
             [0, "两双鞋，九十块！", "Liǎng shuāng xié, jiǔshí kuài!", "Two pairs for ninety yuan!"],
@@ -896,7 +896,7 @@ window.MANDAYRIN_COURSE = {
             [0, "我也有新帽子，是黄的！", "Wǒ yě yǒu xīn màozi, shì huáng de!", "I've got a new hat too — a yellow one!"],
             [1, "红裙子，黄帽子，很好看！", "Hóng qúnzi, huáng màozi, hěn hǎokàn!", "Red dress, yellow hat — you look great!"],
             [0, "你喜欢穿裙子吗？", "Nǐ xǐhuan chuān qúnzi ma?", "Do you like wearing dresses?"],
-            [1, "喜欢。我常常穿裤子。今天我穿黑裤子和白鞋。", "Xǐhuan. Wǒ chángcháng chuān kùzi. Jīntiān wǒ chuān hēi kùzi hé bái xié.", "I do, but I usually wear pants. Today it's black pants and white shoes."]
+            [1, "喜欢，可是我常常穿裤子。今天我穿黑裤子和白鞋。", "Xǐhuan, kěshì wǒ chángcháng chuān kùzi. Jīntiān wǒ chuān hēi kùzi hé bái xié.", "I do, but I usually wear pants. Today it's black pants and white shoes."]
           ]
         }
       ]
@@ -910,11 +910,11 @@ window.MANDAYRIN_COURSE = {
         ["同学", "tóngxué", "classmate", "noun", "李明是我的同学。", "Lǐ Míng shì wǒ de tóngxué.", "Li Ming is my classmate."],
         ["书", "shū", "book", "noun", "这是谁的书？", "Zhè shì shéi de shū?", "Whose book is this?"],
         ["本", "běn", "(measure word for books)", "measure", "我买了三本书。", "Wǒ mǎi le sān běn shū.", "I bought three books."],
-        ["笔", "bǐ", "pen", "noun", "你有笔吗？", "Nǐ yǒu bǐ ma?", "Do you have a pen?"],
+        ["用", "yòng", "to use", "verb", "我可以用你的书吗？", "Wǒ kěyǐ yòng nǐ de shū ma?", "Can I use your book?"],
         ["上课", "shàngkè", "to have class", "verb", "我们几点上课？", "Wǒmen jǐ diǎn shàngkè?", "What time does class start?"],
         ["学习", "xuéxí", "to study", "verb", "你喜欢学习吗？", "Nǐ xǐhuan xuéxí ma?", "Do you like studying?"],
         ["写", "xiě", "to write", "verb", "他写了一本书。", "Tā xiě le yì běn shū.", "He wrote a book."],
-        ["读", "dú", "to read (aloud)", "verb", "老师读，我们也读。", "Lǎoshī dú, wǒmen yě dú.", "The teacher reads it, then we read it too."],
+        ["学", "xué", "to learn", "verb", "我想学做中国菜。", "Wǒ xiǎng xué zuò Zhōngguó cài.", "I want to learn to cook Chinese food."],
         ["问题", "wèntí", "question; problem", "noun", "你有问题吗？", "Nǐ yǒu wèntí ma?", "Do you have any questions?"],
         ["懂", "dǒng", "to understand", "verb", "你懂吗？——我懂了。", "Nǐ dǒng ma? — Wǒ dǒng le.", "Do you get it? — Got it."],
         ["难", "nán", "difficult", "adjective", "这个问题很难。", "Zhège wèntí hěn nán.", "This question is hard."],
@@ -935,17 +935,17 @@ window.MANDAYRIN_COURSE = {
             [1, "是，我叫大卫。我是美国人。", "Shì, wǒ jiào Dàwèi. Wǒ shì Měiguó rén.", "Yes, I'm David. I'm American."],
             [0, "我是张老师。我们九点上课。", "Wǒ shì Zhāng lǎoshī. Wǒmen jiǔ diǎn shàngkè.", "I'm Teacher Zhang. Class starts at nine."],
             [1, "老师，我没有书。", "Lǎoshī, wǒ méiyǒu shū.", "Teacher, I don't have the book."],
-            [0, "没关系。给你一本。你有笔吗？", "Méi guānxi. Gěi nǐ yì běn. Nǐ yǒu bǐ ma?", "No problem. Here's one. Do you have a pen?"],
-            [1, "有。谢谢老师！", "Yǒu. Xièxie lǎoshī!", "Yes. Thank you!"]
+            [0, "没关系。给你一本，你先用吧。", "Méi guānxi. Gěi nǐ yì běn, nǐ xiān yòng ba.", "No problem. Here's one — use it for now."],
+            [1, "太好了！谢谢老师！", "Tài hǎo le! Xièxie lǎoshī!", "Great! Thank you!"]
           ]
         },
         {
           title: "A hard one",
           zh: "很难！",
-          setting: "Teacher Zhang reads a sentence and asks David to read it back.",
+          setting: "Teacher Zhang writes a sentence and asks David to write it too.",
           cast: [["张老师", "Zhāng lǎoshī (teacher)"], ["大卫", "Dàwèi"], ["安娜", "Ānnà"]],
           lines: [
-            [0, "大卫，我先读，然后你读。", "Dàwèi, wǒ xiān dú, ránhòu nǐ dú.", "David, I'll read it first, then you read it."],
+            [0, "大卫，你看我写，然后你也写。", "Dàwèi, nǐ kàn wǒ xiě, ránhòu nǐ yě xiě.", "David, watch me write it, then you write it too."],
             [1, "好。", "Hǎo.", "Okay."],
             [0, "你懂吗？", "Nǐ dǒng ma?", "Do you understand it?"],
             [1, "对不起，老师，我不懂。这个很难！", "Duìbuqǐ, lǎoshī, wǒ bù dǒng. Zhège hěn nán!", "Sorry, I don't get it. This one's hard!"],
@@ -966,9 +966,9 @@ window.MANDAYRIN_COURSE = {
             [0, "你的同学是谁？", "Nǐ de tóngxué shì shéi?", "Who are your classmates?"],
             [1, "安娜是我的同学。她也是美国人。", "Ānnà shì wǒ de tóngxué. Tā yě shì Měiguó rén.", "Anna's in my class. She's American too."],
             [0, "学习难吗？", "Xuéxí nán ma?", "Is it hard?"],
-            [1, "读不难，写很难！", "Dú bù nán, xiě hěn nán!", "Reading's okay, but writing is tough!"],
-            [0, "周末我做你的老师！", "Zhōumò wǒ zuò nǐ de lǎoshī!", "I'll be your teacher this weekend!"],
-            [1, "太好了！谢谢你！", "Tài hǎo le! Xièxie nǐ!", "Awesome! Thank you!"]
+            [1, "看不难，可是写很难！", "Kàn bù nán, kěshì xiě hěn nán!", "Reading's okay, but writing is tough!"],
+            [0, "周末我做你的老师！你想学什么？", "Zhōumò wǒ zuò nǐ de lǎoshī! Nǐ xiǎng xué shénme?", "I'll be your teacher this weekend! What do you want to learn?"],
+            [1, "太好了！我想学写。谢谢你！", "Tài hǎo le! Wǒ xiǎng xué xiě. Xièxie nǐ!", "Awesome! I want to learn to write. Thanks!"]
           ]
         }
       ]
@@ -984,7 +984,7 @@ window.MANDAYRIN_COURSE = {
         ["左边", "zuǒbian", "left side", "position", "左边的门是我的房间。", "Zuǒbian de mén shì wǒ de fángjiān.", "The door on the left is my room."],
         ["右边", "yòubian", "right side", "position", "大卫在王芳右边。", "Dàwèi zài Wáng Fāng yòubian.", "David is on Wang Fang's right."],
         ["旁边", "pángbiān", "next to", "position", "我家旁边有一个学校。", "Wǒ jiā pángbiān yǒu yí ge xuéxiào.", "There's a school next to my home."],
-        ["上面", "shàngmiàn", "on top", "position", "你的笔在桌子上面。", "Nǐ de bǐ zài zhuōzi shàngmiàn.", "Your pen is on the table."],
+        ["上面", "shàngmiàn", "on top", "position", "茶在桌子上面。", "Chá zài zhuōzi shàngmiàn.", "The tea is on the table."],
         ["下面", "xiàmiàn", "underneath", "position", "鞋在床下面。", "Xié zài chuáng xiàmiàn.", "The shoes are under the bed."],
         ["中间", "zhōngjiān", "in the middle", "position", "小美在爸爸妈妈中间。", "Xiǎoměi zài bàba māma zhōngjiān.", "Xiaomei is between her mom and dad."],
         ["对面", "duìmiàn", "across from", "position", "我住在学校对面。", "Wǒ zhù zài xuéxiào duìmiàn.", "I live across from the school."],
@@ -994,7 +994,7 @@ window.MANDAYRIN_COURSE = {
       ],
       patterns: [
         ["……在哪儿？", "… zài nǎr?", "Where is …?", "你的帽子在哪儿？", "Nǐ de màozi zài nǎr?", "Where's your hat?"],
-        ["A在B（的）上面／下面／旁边……", "A zài B (de) shàngmiàn / xiàmiàn / pángbiān …", "A is on / under / next to … B", "我的笔在书下面。", "Wǒ de bǐ zài shū xiàmiàn.", "My pen is under the book."]
+        ["A在B（的）上面／下面／旁边……", "A zài B (de) shàngmiàn / xiàmiàn / pángbiān …", "A is on / under / next to … B", "我的书在桌子下面。", "Wǒ de shū zài zhuōzi xiàmiàn.", "My book is under the table."]
       ],
       scenarios: [
         {
@@ -1007,10 +1007,10 @@ window.MANDAYRIN_COURSE = {
             [1, "你找哪双鞋？", "Nǐ zhǎo nǎ shuāng xié?", "Which pair are you looking for?"],
             [0, "白的。不在床下面。", "Bái de. Bú zài chuáng xiàmiàn.", "The white ones. They're not under the bed."],
             [1, "在门旁边吗？", "Zài mén pángbiān ma?", "Are they by the door?"],
-            [0, "门旁边没有。", "Mén pángbiān méiyǒu.", "Not by the door."],
-            [1, "你看，在那儿！在椅子上面！", "Nǐ kàn, zài nàr! Zài yǐzi shàngmiàn!", "Look, there! On the chair!"],
-            [0, "椅子上面？谢谢！", "Yǐzi shàngmiàn? Xièxie!", "On the chair? Thanks!"],
-            [1, "你的帽子也在这儿。", "Nǐ de màozi yě zài zhèr.", "Your hat's here too."]
+            [0, "门旁边也没有。", "Mén pángbiān yě méiyǒu.", "Not by the door either."],
+            [1, "你看，在那儿！在桌子下面！", "Nǐ kàn, zài nàr! Zài zhuōzi xiàmiàn!", "Look, there! Under the table!"],
+            [0, "桌子下面？谢谢！", "Zhuōzi xiàmiàn? Xièxie!", "Under the table? Thanks!"],
+            [1, "你的帽子也在这儿，在桌子上面。", "Nǐ de màozi yě zài zhèr, zài zhuōzi shàngmiàn.", "Your hat is here too — on the table."]
           ]
         },
         {
@@ -1076,14 +1076,14 @@ window.MANDAYRIN_COURSE = {
           setting: "Late in the evening, David finds there's no milk at home.",
           cast: [["大卫", "Dàwèi"], ["王芳", "Wáng Fāng"]],
           lines: [
-            [0, "王芳，家里没有牛奶了。", "Wáng Fāng, jiā lǐ méiyǒu niúnǎi le.", "Wang Fang, we're out of milk."],
+            [0, "王芳，家里没牛奶了。", "Wáng Fāng, jiā lǐ méi niúnǎi le.", "Wang Fang, we're out of milk."],
             [1, "现在几点？", "Xiànzài jǐ diǎn?", "What time is it?"],
             [0, "十点半。超市关门了吗？", "Shí diǎn bàn. Chāoshì guān mén le ma?", "10:30. Is the supermarket closed?"],
             [1, "超市十点关门。", "Chāoshì shí diǎn guān mén.", "It closes at ten."],
             [0, "十点？", "Shí diǎn?", "Ten?"],
             [1, "街对面有一个小商店，晚上不关门。", "Jiē duìmiàn yǒu yí ge xiǎo shāngdiàn, wǎnshang bù guān mén.", "There's a little shop across the street that stays open at night."],
             [0, "太好了！我去买。", "Tài hǎo le! Wǒ qù mǎi.", "Great! I'll go get some."],
-            [1, "也给我买一点儿水果！", "Yě gěi wǒ mǎi yìdiǎnr shuǐguǒ!", "Get me some fruit too!"]
+            [1, "也给我买一点儿水果吧！", "Yě gěi wǒ mǎi yìdiǎnr shuǐguǒ ba!", "Get me some fruit too!"]
           ]
         },
         {
@@ -1098,7 +1098,7 @@ window.MANDAYRIN_COURSE = {
             [1, "有一个图书馆和一个书店。我常常去看书。", "Yǒu yí ge túshūguǎn hé yí ge shūdiàn. Wǒ chángcháng qù kàn shū.", "A library and a bookstore. I often go there to read."],
             [0, "有饭馆吗？", "Yǒu fànguǎn ma?", "Any restaurants?"],
             [1, "有，楼下有一个饭馆，菜很好吃。", "Yǒu, lóu xià yǒu yí ge fànguǎn, cài hěn hǎochī.", "Yes, there's one downstairs. The vegetable dishes are great."],
-            [0, "这个地方很好！周末我们去电影院，好吗？", "Zhège dìfang hěn hǎo! Zhōumò wǒmen qù diànyǐngyuàn, hǎo ma?", "Sounds like a great spot! Shall we go to the movies this weekend?"],
+            [0, "这个地方真好！周末我们去电影院吧！", "Zhège dìfang zhēn hǎo! Zhōumò wǒmen qù diànyǐngyuàn ba!", "Sounds like a great spot! Let's go to the movies this weekend!"],
             [1, "好！", "Hǎo!", "Sure!"]
           ]
         },
@@ -1129,7 +1129,7 @@ window.MANDAYRIN_COURSE = {
         ["音乐", "yīnyuè", "music", "noun", "你喜欢听什么音乐？", "Nǐ xǐhuan tīng shénme yīnyuè?", "What kind of music do you like?"],
         ["唱歌", "chànggē", "to sing", "verb", "王芳很喜欢唱歌。", "Wáng Fāng hěn xǐhuan chànggē.", "Wang Fang really likes to sing."],
         ["跳舞", "tiàowǔ", "to dance", "verb", "安娜周末常常去跳舞。", "Ānnà zhōumò chángcháng qù tiàowǔ.", "Anna often goes dancing on weekends."],
-        ["画画儿", "huà huàr", "to draw; to paint", "verb", "小美每天画画儿。", "Xiǎoměi měi tiān huà huàr.", "Xiaomei draws every day."],
+        ["大家", "dàjiā", "everyone", "pronoun", "大家好！我叫大卫。", "Dàjiā hǎo! Wǒ jiào Dàwèi.", "Hi, everyone! I'm David."],
         ["游泳", "yóuyǒng", "to swim", "verb", "我星期六去游泳。", "Wǒ xīngqīliù qù yóuyǒng.", "I'm going swimming on Saturday."],
         ["旅游", "lǚyóu", "to travel; tourism", "verb", "我想去中国旅游。", "Wǒ xiǎng qù Zhōngguó lǚyóu.", "I'd like to travel to China."],
         ["照片", "zhàopiàn", "photo", "noun", "这是我妈妈的照片。", "Zhè shì wǒ māma de zhàopiàn.", "This is a photo of my mom."],
@@ -1152,11 +1152,11 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "大卫，你有什么爱好？", "Dàwèi, nǐ yǒu shénme àihào?", "David, what are your hobbies?"],
             [1, "我喜欢游泳，也爱听音乐。你呢？", "Wǒ xǐhuan yóuyǒng, yě ài tīng yīnyuè. Nǐ ne?", "I like swimming, and I love listening to music. You?"],
-            [0, "我喜欢画画儿和唱歌。", "Wǒ xǐhuan huà huàr hé chànggē.", "I like drawing and singing."],
+            [0, "我喜欢唱歌和跳舞。", "Wǒ xǐhuan chànggē hé tiàowǔ.", "I like singing and dancing."],
             [1, "你喜欢什么音乐？", "Nǐ xǐhuan shénme yīnyuè?", "What kind of music do you like?"],
             [0, "我最喜欢中国音乐。你听中国音乐吗？", "Wǒ zuì xǐhuan Zhōngguó yīnyuè. Nǐ tīng Zhōngguó yīnyuè ma?", "Chinese music is my favorite. Do you listen to Chinese music?"],
             [1, "常常听！不懂也喜欢。", "Chángcháng tīng! Bù dǒng yě xǐhuan.", "All the time! I don't understand it, but I still like it."],
-            [0, "星期六我们一起去唱歌，好吗？", "Xīngqīliù wǒmen yìqǐ qù chànggē, hǎo ma?", "Shall we go to karaoke together on Saturday?"],
+            [0, "星期六大家一起去唱歌，你也来吧！", "Xīngqīliù dàjiā yìqǐ qù chànggē, nǐ yě lái ba!", "A bunch of us are going to karaoke on Saturday — come along!"],
             [1, "好！", "Hǎo!", "Sure!"]
           ]
         },
@@ -1182,13 +1182,13 @@ window.MANDAYRIN_COURSE = {
           setting: "Little Xiaomei shows David everything she likes to do.",
           cast: [["小美", "Xiǎoměi"], ["大卫", "Dàwèi"]],
           lines: [
-            [0, "大卫，你看我画画儿！", "Dàwèi, nǐ kàn wǒ huà huàr!", "David, watch me draw!"],
-            [1, "很好看！你爱画画儿吗？", "Hěn hǎokàn! Nǐ ài huà huàr ma?", "That's lovely! Do you love drawing?"],
-            [0, "爱！我也爱唱歌和跳舞。", "Ài! Wǒ yě ài chànggē hé tiàowǔ.", "Yes! I love singing and dancing too."],
-            [1, "你的爱好很多！", "Nǐ de àihào hěn duō!", "You've got lots of hobbies!"],
+            [0, "大卫，你听我唱歌！", "Dàwèi, nǐ tīng wǒ chànggē!", "David, listen to me sing!"],
+            [1, "真好听！你爱唱歌吗？", "Zhēn hǎotīng! Nǐ ài chànggē ma?", "That's lovely! Do you love singing?"],
+            [0, "爱！我也爱跳舞。", "Ài! Wǒ yě ài tiàowǔ.", "Yes! I love dancing too."],
+            [1, "你的爱好真多！", "Nǐ de àihào zhēn duō!", "You've got so many hobbies!"],
             [0, "你跳舞吗？", "Nǐ tiàowǔ ma?", "Do you dance?"],
             [1, "我不跳舞。", "Wǒ bú tiàowǔ.", "I don't dance."],
-            [0, "我们一起跳舞！很好玩！", "Wǒmen yìqǐ tiàowǔ! Hěn hǎowán!", "Let's dance together! It's fun!"],
+            [0, "我们一起跳舞吧！很好玩！", "Wǒmen yìqǐ tiàowǔ ba! Hěn hǎowán!", "Let's dance together! It's fun!"],
             [1, "好好好！", "Hǎo hǎo hǎo!", "Okay, okay!"]
           ]
         }
@@ -1206,7 +1206,7 @@ window.MANDAYRIN_COURSE = {
         ["网", "wǎng", "net", "noun", "我在网前面，你在后面。", "Wǒ zài wǎng qiánmiàn, nǐ zài hòumiàn.", "I'll be at the net, you take the back."],
         ["跳", "tiào", "to jump", "verb", "跳的时候看球。", "Tiào de shíhou kàn qiú.", "Watch the ball when you jump."],
         ["跑", "pǎo", "to run", "verb", "快跑！球来了！", "Kuài pǎo! Qiú lái le!", "Run! Here comes the ball!"],
-        ["踢", "tī", "to kick", "verb", "我们星期天去公园踢球。", "Wǒmen xīngqītiān qù gōngyuán tī qiú.", "We're going to the park on Sunday to kick a ball around."],
+        ["得", "de", "(links a verb to how well it's done: 跑得很快 = runs fast)", "particle", "大卫排球打得很好。", "Dàwèi páiqiú dǎ de hěn hǎo.", "David plays volleyball really well."],
         ["足球", "zúqiú", "soccer", "noun", "你喜欢足球还是篮球？", "Nǐ xǐhuan zúqiú háishi lánqiú?", "Do you like soccer or basketball?"],
         ["篮球", "lánqiú", "basketball", "noun", "王芳的弟弟每天打篮球。", "Wáng Fāng de dìdi měi tiān dǎ lánqiú.", "Wang Fang's brother plays basketball every day."],
         ["会", "huì", "can; know how to", "verb", "你会打排球吗？", "Nǐ huì dǎ páiqiú ma?", "Can you play volleyball?"],
@@ -1215,7 +1215,7 @@ window.MANDAYRIN_COURSE = {
       ],
       patterns: [
         ["你会……吗？", "Nǐ huì … ma?", "Can you …? (a skill you've learned)", "你会游泳吗？", "Nǐ huì yóuyǒng ma?", "Can you swim?"],
-        ["打……／踢……", "dǎ … / tī …", "play (a ball game): 打 for hand games, 踢 for kicking games", "我打排球，李明踢足球。", "Wǒ dǎ páiqiú, Lǐ Míng tī zúqiú.", "I play volleyball; Li Ming plays soccer."]
+        ["……得很好／很快", "… de hěn hǎo / hěn kuài", "does … well / fast (verb + 得 + how it's done)", "李明跑得很快。", "Lǐ Míng pǎo de hěn kuài.", "Li Ming runs really fast."]
       ],
       scenarios: [
         {
@@ -1227,7 +1227,7 @@ window.MANDAYRIN_COURSE = {
             [0, "你好！你们打排球吗？我也想打！", "Nǐ hǎo! Nǐmen dǎ páiqiú ma? Wǒ yě xiǎng dǎ!", "Hi! Are you playing volleyball? I want to play too!"],
             [1, "好！你会打吗？", "Hǎo! Nǐ huì dǎ ma?", "Sure! Do you know how to play?"],
             [0, "会！我在美国常常打。", "Huì! Wǒ zài Měiguó chángcháng dǎ.", "Yes! I played all the time in America."],
-            [1, "太好了！我们队有五个人，你来我们队。", "Tài hǎo le! Wǒmen duì yǒu wǔ ge rén, nǐ lái wǒmen duì.", "Great! Our team has five, so you're with us."],
+            [1, "太好了！我们队有五个人，你来我们队吧。", "Tài hǎo le! Wǒmen duì yǒu wǔ ge rén, nǐ lái wǒmen duì ba.", "Great! Our team has five, so join us."],
             [0, "好！谁发球？", "Hǎo! Shéi fāqiú?", "Okay! Who's serving?"],
             [1, "你先发球！", "Nǐ xiān fāqiú!", "You serve first!"],
             [0, "好，我来！", "Hǎo, wǒ lái!", "Okay, here goes!"]
@@ -1246,7 +1246,7 @@ window.MANDAYRIN_COURSE = {
             [0, "球打在网上了！", "Qiú dǎ zài wǎng shang le!", "It hit the net!"],
             [1, "没关系！不要看网，看球！", "Méi guānxi! Bú yào kàn wǎng, kàn qiú!", "No problem! Don't look at the net — watch the ball!"],
             [0, "好球！我会发球了！", "Hǎo qiú! Wǒ huì fāqiú le!", "Nice one! I can serve now!"],
-            [1, "很好！明天我们一起打！", "Hěn hǎo! Míngtiān wǒmen yìqǐ dǎ!", "Great! Let's play together tomorrow!"]
+            [1, "你学得真快！明天我们一起打吧！", "Nǐ xué de zhēn kuài! Míngtiān wǒmen yìqǐ dǎ ba!", "You learn fast! Let's play together tomorrow!"]
           ]
         },
         {
@@ -1258,8 +1258,8 @@ window.MANDAYRIN_COURSE = {
             [0, "大卫，累吗？", "Dàwèi, lèi ma?", "Tired, David?"],
             [1, "很累！今天跑了很多，也跳了很多。", "Hěn lèi! Jīntiān pǎo le hěn duō, yě tiào le hěn duō.", "Very! We ran a lot and jumped a lot today."],
             [0, "你们队里有谁？", "Nǐmen duì lǐ yǒu shéi?", "Who's on your team?"],
-            [1, "有李明和林美。李明很高，也很快。", "Yǒu Lǐ Míng hé Lín Měi. Lǐ Míng hěn gāo, yě hěn kuài.", "Li Ming and Lin Mei. Li Ming is tall, and he's quick."],
-            [0, "李明打排球？他不是踢足球吗？", "Lǐ Míng dǎ páiqiú? Tā bú shì tī zúqiú ma?", "Li Ming plays volleyball? Doesn't he play soccer?"],
+            [1, "有李明和林美。李明很高，跑得也很快。", "Yǒu Lǐ Míng hé Lín Měi. Lǐ Míng hěn gāo, pǎo de yě hěn kuài.", "Li Ming and Lin Mei. Li Ming is tall, and he's fast, too."],
+            [0, "李明也打排球？他不是喜欢足球吗？", "Lǐ Míng yě dǎ páiqiú? Tā bú shì xǐhuan zúqiú ma?", "Li Ming plays volleyball too? Isn't he a soccer guy?"],
             [1, "他足球、篮球、排球都会！", "Tā zúqiú, lánqiú, páiqiú dōu huì!", "Soccer, basketball, volleyball — he can play them all!"],
             [0, "你呢？你最喜欢什么运动？", "Nǐ ne? Nǐ zuì xǐhuan shénme yùndòng?", "And you? What's your favorite sport?"],
             [1, "排球！我每天都想打。", "Páiqiú! Wǒ měi tiān dōu xiǎng dǎ.", "Volleyball! I'd play every day if I could."]
@@ -1302,7 +1302,7 @@ window.MANDAYRIN_COURSE = {
             [0, "在哪儿换？", "Zài nǎr huàn?", "Where do we change?"],
             [1, "在图书馆站换。", "Zài túshūguǎn zhàn huàn.", "At the Library stop."],
             [0, "车来了！人太多了！", "Chē lái le! Rén tài duō le!", "The train's here! There are so many people!"],
-            [1, "现在很挤，没关系。快上车！", "Xiànzài hěn jǐ, méi guānxi. Kuài shàngchē!", "It's crowded right now — never mind. Quick, get on!"]
+            [1, "挤也没关系，快上车！", "Jǐ yě méi guānxi, kuài shàngchē!", "Crowded or not — quick, get on!"]
           ]
         },
         {
@@ -1313,7 +1313,7 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "你好，这个车到医院吗？", "Nǐ hǎo, zhège chē dào yīyuàn ma?", "Hi, does this bus go to the hospital?"],
             [1, "到。你有卡吗？", "Dào. Nǐ yǒu kǎ ma?", "It does. Do you have a card?"],
-            [0, "没有卡。买票多少钱？", "Méiyǒu kǎ. Mǎi piào duōshao qián?", "No card. How much is a ticket?"],
+            [0, "没有。买票多少钱？", "Méiyǒu. Mǎi piào duōshao qián?", "No. How much is a ticket?"],
             [1, "两块。", "Liǎng kuài.", "Two yuan."],
             [0, "给你。我在哪儿下车？", "Gěi nǐ. Wǒ zài nǎr xiàchē?", "Here you go. Where do I get off?"],
             [1, "医院站。从这儿到医院五站。", "Yīyuàn zhàn. Cóng zhèr dào yīyuàn wǔ zhàn.", "The Hospital stop. It's five stops from here."],
@@ -1329,11 +1329,11 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "李明，你每天坐地铁还是坐公交车？", "Lǐ Míng, nǐ měi tiān zuò dìtiě háishi zuò gōngjiāochē?", "Li Ming, do you take the subway or the bus every day?"],
             [1, "公交车。六点公交车不挤。", "Gōngjiāochē. Liù diǎn gōngjiāochē bù jǐ.", "The bus. At six it isn't crowded."],
-            [0, "公交车很慢！地铁快。", "Gōngjiāochē hěn màn! Dìtiě kuài.", "The bus is so slow! The subway's faster."],
+            [0, "公交车太慢了！地铁快多了。", "Gōngjiāochē tài màn le! Dìtiě kuài duō le.", "The bus is so slow! The subway's way faster."],
             [1, "地铁八点太挤了！", "Dìtiě bā diǎn tài jǐ le!", "The subway at eight is way too packed!"],
             [0, "是……我每天八点坐地铁。", "Shì… wǒ měi tiān bā diǎn zuò dìtiě.", "Yeah… I take the subway at eight every day."],
-            [1, "你也六点起床，坐公交车！", "Nǐ yě liù diǎn qǐchuáng, zuò gōngjiāochē!", "Get up at six too, and take the bus!"],
-            [0, "六点？不要！我坐地铁！", "Liù diǎn? Bú yào! Wǒ zuò dìtiě!", "Six? No way! I'll take the subway!"]
+            [1, "那你也六点起床，坐公交车吧！", "Nà nǐ yě liù diǎn qǐchuáng, zuò gōngjiāochē ba!", "Then get up at six too, and take the bus!"],
+            [0, "六点？不要！我还是坐地铁吧！", "Liù diǎn? Bú yào! Wǒ háishi zuò dìtiě ba!", "Six? No way! I'll stick with the subway!"]
           ]
         }
       ]
@@ -1341,11 +1341,11 @@ window.MANDAYRIN_COURSE = {
 
     19: {
       words: [
-        ["出租车", "chūzūchē", "taxi", "noun", "很晚了，我们坐出租车回家。", "Hěn wǎn le, wǒmen zuò chūzūchē huíjiā.", "It's late. Let's take a taxi home."],
+        ["出租车", "chūzūchē", "taxi", "noun", "很晚了，我们坐出租车回家吧。", "Hěn wǎn le, wǒmen zuò chūzūchē huíjiā ba.", "It's late. Let's take a taxi home."],
         ["司机", "sījī", "driver", "noun", "司机，我们到了吗？", "Sījī, wǒmen dào le ma?", "Driver, are we there yet?"],
         ["路", "lù", "road", "noun", "今天路上车很多。", "Jīntiān lù shang chē hěn duō.", "There's a lot of traffic on the roads today."],
         ["路口", "lùkǒu", "intersection", "noun", "我在路口等你。", "Wǒ zài lùkǒu děng nǐ.", "I'll wait for you at the intersection."],
-        ["走", "zǒu", "to walk; to go", "verb", "不远，我们走路去。", "Bù yuǎn, wǒmen zǒulù qù.", "It's not far. Let's walk."],
+        ["走", "zǒu", "to walk; to go", "verb", "不远，我们走路去吧。", "Bù yuǎn, wǒmen zǒulù qù ba.", "It's not far. Let's walk."],
         ["往", "wǎng", "toward", "preposition", "往这儿走。", "Wǎng zhèr zǒu.", "This way."],
         ["拐", "guǎi", "to turn", "verb", "到路口往右边拐。", "Dào lùkǒu wǎng yòubian guǎi.", "Turn right at the intersection."],
         ["一直", "yìzhí", "straight ahead; all the way", "adverb", "一直往前面走，五分钟。", "Yìzhí wǎng qiánmiàn zǒu, wǔ fēnzhōng.", "Go straight ahead for five minutes."],
@@ -1485,18 +1485,18 @@ window.MANDAYRIN_COURSE = {
 
     21: {
       words: [
-        ["味道", "wèidào", "taste; flavor", "noun", "这个菜味道很好。", "Zhège cài wèidào hěn hǎo.", "This dish tastes great."],
+        ["味道", "wèidào", "taste; flavor", "noun", "这个菜味道真好。", "Zhège cài wèidào zhēn hǎo.", "This dish tastes really good."],
         ["辣", "là", "spicy", "adjective", "你吃辣的吗？", "Nǐ chī là de ma?", "Do you eat spicy food?"],
-        ["甜", "tián", "sweet", "adjective", "这个西瓜很甜。", "Zhège xīguā hěn tián.", "This watermelon is really sweet."],
+        ["甜", "tián", "sweet", "adjective", "这个水果真甜！", "Zhège shuǐguǒ zhēn tián!", "This fruit is so sweet!"],
         ["酸", "suān", "sour", "adjective", "这个苹果有一点儿酸。", "Zhège píngguǒ yǒu yìdiǎnr suān.", "This apple is a bit sour."],
         ["咸", "xián", "salty", "adjective", "汤太咸了。", "Tāng tài xián le.", "The soup is too salty."],
-        ["苦", "kǔ", "bitter", "adjective", "这个咖啡太苦了，我要糖。", "Zhège kāfēi tài kǔ le, wǒ yào táng.", "This coffee is too bitter. I need sugar."],
+        ["这样", "zhèyàng", "like this; this way", "pronoun", "你看，这样切。", "Nǐ kàn, zhèyàng qiē.", "Look, cut it like this."],
         ["油", "yóu", "oil", "noun", "这个菜油太多了。", "Zhège cài yóu tài duō le.", "This dish is way too oily."],
         ["盐", "yán", "salt", "noun", "汤里要放一点儿盐。", "Tāng li yào fàng yìdiǎnr yán.", "The soup needs a little salt."],
         ["炒", "chǎo", "to stir-fry", "verb", "我会炒鸡蛋。", "Wǒ huì chǎo jīdàn.", "I can make stir-fried eggs."],
         ["煮", "zhǔ", "to boil", "verb", "我早饭吃一个煮鸡蛋。", "Wǒ zǎofàn chī yí ge zhǔ jīdàn.", "I have a boiled egg for breakfast."],
         ["切", "qiē", "to cut", "verb", "我切菜，你炒菜。", "Wǒ qiē cài, nǐ chǎo cài.", "I'll chop the vegetables, you stir-fry them."],
-        ["放", "fàng", "to put", "verb", "你咖啡里放糖吗？", "Nǐ kāfēi li fàng táng ma?", "Do you take sugar in your coffee?"],
+        ["放", "fàng", "to put", "verb", "你咖啡里放牛奶吗？", "Nǐ kāfēi li fàng niúnǎi ma?", "Do you take milk in your coffee?"],
         ["尝", "cháng", "to taste; to try", "verb", "你尝尝这个。", "Nǐ chángchang zhège.", "Try this."],
         ["鸡", "jī", "chicken", "noun", "我喜欢吃鸡，不喜欢吃鱼。", "Wǒ xǐhuan chī jī, bù xǐhuan chī yú.", "I like chicken, but not fish."],
         ["牛肉", "niúròu", "beef", "noun", "安娜不吃牛肉。", "Ānnà bù chī niúròu.", "Anna doesn't eat beef."]
@@ -1513,8 +1513,8 @@ window.MANDAYRIN_COURSE = {
           cast: [["王芳", "Wáng Fāng"], ["大卫", "Dàwèi"]],
           lines: [
             [0, "今天我们一起做饭。你切牛肉，我炒。", "Jīntiān wǒmen yìqǐ zuò fàn. Nǐ qiē niúròu, wǒ chǎo.", "Let's cook together today. You cut the beef, I'll stir-fry."],
-            [1, "好。放多少油？", "Hǎo. Fàng duōshao yóu?", "Okay. How much oil?"],
-            [0, "一点儿油。然后放牛肉。", "Yìdiǎnr yóu. Ránhòu fàng niúròu.", "A little oil. Then put in the beef."],
+            [1, "好。牛肉怎么切？", "Hǎo. Niúròu zěnme qiē?", "Okay. How do I cut the beef?"],
+            [0, "你看，这样切。然后放一点儿油，放牛肉。", "Nǐ kàn, zhèyàng qiē. Ránhòu fàng yìdiǎnr yóu, fàng niúròu.", "Look, like this. Then add a little oil and put in the beef."],
             [1, "要放盐吗？", "Yào fàng yán ma?", "Does it need salt?"],
             [0, "要。好了，你尝尝，味道好吗？", "Yào. Hǎo le, nǐ chángchang, wèidào hǎo ma?", "Yes. Okay, done. Have a taste. How is it?"],
             [1, "有一点儿咸……", "Yǒu yìdiǎnr xián…", "It's a little salty…"],
@@ -1529,11 +1529,11 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "大卫，你尝尝这个鸡。", "Dàwèi, nǐ chángchang zhège jī.", "David, try this chicken."],
             [1, "很好吃！……太辣了！", "Hěn hǎochī! … Tài là le!", "Delicious! …Whoa, that's spicy!"],
-            [0, "你不吃辣的？你喝一点儿汤。", "Nǐ bù chī là de? Nǐ hē yìdiǎnr tāng.", "You don't eat spicy food? Have some soup."],
+            [0, "你不吃辣的吗？喝一点儿汤吧。", "Nǐ bù chī là de ma? Hē yìdiǎnr tāng ba.", "You don't eat spicy food? Have some soup."],
             [1, "这个汤有一点儿酸，很好喝。", "Zhège tāng yǒu yìdiǎnr suān, hěn hǎohē.", "This soup is a little sour. It's really good."],
             [0, "这是酸辣汤。", "Zhè shì suānlà tāng.", "It's hot and sour soup."],
-            [1, "酸辣汤？也辣！", "Suānlà tāng? Yě là!", "Hot and sour? So it's spicy too!"],
-            [0, "那你多吃米饭！", "Nà nǐ duō chī mǐfàn!", "Then eat lots of rice!"]
+            [1, "酸辣汤？那也是辣的！", "Suānlà tāng? Nà yě shì là de!", "Hot and sour? So it's spicy too!"],
+            [0, "那你多吃米饭吧！", "Nà nǐ duō chī mǐfàn ba!", "Then have lots of rice!"]
           ]
         },
         {
@@ -1542,10 +1542,10 @@ window.MANDAYRIN_COURSE = {
           setting: "Wang Fang makes a quick lunch for Xiaomei from next door.",
           cast: [["王芳", "Wáng Fāng"], ["小美", "Xiǎoměi"]],
           lines: [
-            [0, "小美，你饿吗？我煮面条。", "Xiǎoměi, nǐ è ma? Wǒ zhǔ miàntiáo.", "Xiaomei, are you hungry? I'm making noodles."],
+            [0, "小美，你饿不饿？我给你煮面条吧。", "Xiǎoměi, nǐ è bu è? Wǒ gěi nǐ zhǔ miàntiáo ba.", "Xiaomei, are you hungry? I'll make you some noodles."],
             [1, "饿！我要放鸡蛋！", "È! Wǒ yào fàng jīdàn!", "Yes! I want egg in mine!"],
             [0, "好。你喝什么？咖啡？", "Hǎo. Nǐ hē shénme? Kāfēi?", "Okay. What do you want to drink? Coffee?"],
-            [1, "不要！咖啡很苦。我要果汁，甜的！", "Bú yào! Kāfēi hěn kǔ. Wǒ yào guǒzhī, tián de!", "No way! Coffee's bitter. I want juice, a sweet one!"],
+            [1, "不要！咖啡不好喝。我要果汁，甜的！", "Bú yào! Kāfēi bù hǎohē. Wǒ yào guǒzhī, tián de!", "No way! Coffee's yucky. I want juice, a sweet one!"],
             [0, "好了。你尝尝，味道好吗？", "Hǎo le. Nǐ chángchang, wèidào hǎo ma?", "Ready. Try it. How does it taste?"],
             [1, "好吃！我要再吃一碗！", "Hǎochī! Wǒ yào zài chī yì wǎn!", "Yummy! I want another bowl!"]
           ]
@@ -1582,27 +1582,27 @@ window.MANDAYRIN_COURSE = {
           setting: "David limps home after a long volleyball game.",
           cast: [["王芳", "Wáng Fāng"], ["大卫", "Dàwèi"]],
           lines: [
-            [0, "大卫，你很累吗？", "Dàwèi, nǐ hěn lèi ma?", "David, are you really tired?"],
-            [1, "今天打排球，我的腿很疼。", "Jīntiān dǎ páiqiú, wǒ de tuǐ hěn téng.", "I played volleyball today. My legs are so sore."],
+            [0, "大卫，你怎么了？很累吗？", "Dàwèi, nǐ zěnme le? Hěn lèi ma?", "David, what's wrong? Are you tired?"],
+            [1, "今天打排球，腿真疼。", "Jīntiān dǎ páiqiú, tuǐ zhēn téng.", "I played volleyball today. My legs are so sore."],
             [0, "哪儿疼？是脚吗？", "Nǎr téng? Shì jiǎo ma?", "Where does it hurt? Your feet?"],
             [1, "脚不疼，腿疼。手也有一点儿疼。", "Jiǎo bù téng, tuǐ téng. Shǒu yě yǒu yìdiǎnr téng.", "Not my feet, my legs. My hands hurt a bit too."],
-            [0, "你先休息，我给你一杯水。", "Nǐ xiān xiūxi, wǒ gěi nǐ yì bēi shuǐ.", "Rest first. I'll get you some water."],
+            [0, "你先休息吧，我给你一杯水。", "Nǐ xiān xiūxi ba, wǒ gěi nǐ yì bēi shuǐ.", "Rest first. I'll get you some water."],
             [1, "谢谢。没关系，我身体很好！", "Xièxie. Méi guānxi, wǒ shēntǐ hěn hǎo!", "Thanks. Don't worry, I'm tough!"],
-            [1, "我的肚子也饿了！", "Wǒ de dùzi yě è le!", "And I'm starving!"],
-            [0, "好，我们吃饭！", "Hǎo, wǒmen chī fàn!", "Okay, let's eat!"]
+            [1, "可是我肚子饿了！", "Kěshì wǒ dùzi è le!", "But I'm starving!"],
+            [0, "好，我们吃饭吧！", "Hǎo, wǒmen chī fàn ba!", "Okay, let's eat!"]
           ]
         },
         {
-          title: "Xiaomei draws Anna",
-          zh: "我给你画画儿",
-          setting: "Xiaomei draws a picture of Anna.",
+          title: "Xiaomei takes Anna's photo",
+          zh: "我给你拍照片",
+          setting: "Xiaomei takes a photo of Anna and shows it to her.",
           cast: [["小美", "Xiǎoměi"], ["安娜", "Ānnà"]],
           lines: [
-            [0, "安娜姐姐，我给你画画儿！", "Ānnà jiějie, wǒ gěi nǐ huà huàr!", "Anna, I'm going to draw you!"],
+            [0, "安娜姐姐，我给你拍照片！", "Ānnà jiějie, wǒ gěi nǐ pāi zhàopiàn!", "Anna, I'm going to take your picture!"],
             [1, "好！我坐这儿。", "Hǎo! Wǒ zuò zhèr.", "Okay! I'll sit here."],
-            [0, "这是你的头，这是你的眼睛。", "Zhè shì nǐ de tóu, zhè shì nǐ de yǎnjing.", "This is your head, and these are your eyes."],
+            [0, "你看，这是你的头，这是你的眼睛。", "Nǐ kàn, zhè shì nǐ de tóu, zhè shì nǐ de yǎnjing.", "Look, this is your head, and these are your eyes."],
             [1, "我的眼睛很大！", "Wǒ de yǎnjing hěn dà!", "My eyes are huge!"],
-            [0, "你的鼻子很高。这是嘴，这是牙，很白！", "Nǐ de bízi hěn gāo. Zhè shì zuǐ, zhè shì yá, hěn bái!", "Your nose is tall. Here's your mouth and your teeth, all white!"],
+            [0, "你的鼻子很高。这是嘴，这是牙，真白！", "Nǐ de bízi hěn gāo. Zhè shì zuǐ, zhè shì yá, zhēn bái!", "Your nose is tall. Here's your mouth and your teeth, so white!"],
             [1, "耳朵呢？", "Ěrduo ne?", "What about my ears?"],
             [0, "你的头发很长，耳朵在里头！", "Nǐ de tóufa hěn cháng, ěrduo zài lǐtou!", "Your hair's long, your ears are hiding in there!"],
             [1, "很好看！谢谢小美。", "Hěn hǎokàn! Xièxie Xiǎoměi.", "It's lovely! Thank you, Xiaomei."]
@@ -1614,7 +1614,7 @@ window.MANDAYRIN_COURSE = {
           setting: "Lin Mei sees Wang Fang's new haircut.",
           cast: [["林美", "Lín Měi"], ["王芳", "Wáng Fāng"]],
           lines: [
-            [0, "王芳，你的头发很短！", "Wáng Fāng, nǐ de tóufa hěn duǎn!", "Wang Fang, your hair is so short!"],
+            [0, "王芳，你的头发真短！", "Wáng Fāng, nǐ de tóufa zhēn duǎn!", "Wang Fang, your hair is so short!"],
             [1, "是，我喜欢短头发。好看吗？", "Shì, wǒ xǐhuan duǎn tóufa. Hǎokàn ma?", "Yep, I like short hair. Does it look good?"],
             [0, "很好看！我的头发太长了。", "Hěn hǎokàn! Wǒ de tóufa tài cháng le.", "It looks great! My hair's way too long."],
             [1, "长头发也很漂亮。", "Cháng tóufa yě hěn piàoliang.", "Long hair is pretty too."],
@@ -1630,7 +1630,7 @@ window.MANDAYRIN_COURSE = {
         ["医生", "yīshēng", "doctor", "noun", "我不舒服，想去看医生。", "Wǒ bù shūfu, xiǎng qù kàn yīshēng.", "I don't feel well. I want to see a doctor."],
         ["病", "bìng", "illness", "noun", "我的病好了。", "Wǒ de bìng hǎo le.", "I'm over my illness."],
         ["生病", "shēngbìng", "to get sick", "verb", "大卫生病了，今天在家休息。", "Dàwèi shēngbìng le, jīntiān zài jiā xiūxi.", "David is sick, so he's resting at home today."],
-        ["药", "yào", "medicine", "noun", "这个药很苦。", "Zhège yào hěn kǔ.", "This medicine is really bitter."],
+        ["药", "yào", "medicine", "noun", "吃了药，我舒服一点儿了。", "Chī le yào, wǒ shūfu yìdiǎnr le.", "I took the medicine, and I feel a bit better."],
         ["发烧", "fāshāo", "to have a fever", "verb", "我昨天晚上发烧了。", "Wǒ zuótiān wǎnshang fāshāo le.", "I had a fever last night."],
         ["感冒", "gǎnmào", "a cold; to catch a cold", "verb", "感冒了要多喝水。", "Gǎnmào le yào duō hē shuǐ.", "When you have a cold, drink lots of water."],
         ["咳嗽", "késou", "to cough", "verb", "他咳嗽了三天。", "Tā késou le sān tiān.", "He's been coughing for three days."],
@@ -1675,7 +1675,7 @@ window.MANDAYRIN_COURSE = {
             [0, "打针很疼！", "Dǎzhēn hěn téng!", "Shots hurt!"],
             [2, "别看，很快。一，二，三……好了！", "Bié kàn, hěn kuài. Yī, èr, sān… hǎo le!", "Don't look, it's quick. One, two, three… done!"],
             [0, "……不疼！", "… Bù téng!", "…It didn't hurt!"],
-            [1, "小美很好！我们回家休息。", "Xiǎoměi hěn hǎo! Wǒmen huíjiā xiūxi.", "Good girl, Xiaomei! Let's go home and rest."]
+            [1, "小美真好！我们回家休息吧。", "Xiǎoměi zhēn hǎo! Wǒmen huíjiā xiūxi ba.", "Good girl, Xiaomei! Let's go home and rest."]
           ]
         },
         {
@@ -1685,12 +1685,12 @@ window.MANDAYRIN_COURSE = {
           cast: [["林美", "Lín Měi"], ["李明", "Lǐ Míng"]],
           lines: [
             [0, "李明，你不舒服吗？", "Lǐ Míng, nǐ bù shūfu ma?", "Li Ming, are you not feeling well?"],
-            [1, "我感冒了，咳嗽。", "Wǒ gǎnmào le, késou.", "I've got a cold and a cough."],
+            [1, "我感冒了，有一点儿咳嗽。", "Wǒ gǎnmào le, yǒu yìdiǎnr késou.", "I've got a cold and a bit of a cough."],
             [0, "你生病了，应该去看医生。", "Nǐ shēngbìng le, yīnggāi qù kàn yīshēng.", "You're sick. You should see a doctor."],
             [1, "我昨天去医院了，等了两个小时！", "Wǒ zuótiān qù yīyuàn le, děng le liǎng ge xiǎoshí!", "I went to the hospital yesterday and waited two hours!"],
             [0, "你吃药了吗？", "Nǐ chī yào le ma?", "Have you taken your medicine?"],
             [1, "吃了，一天两次。没关系，小病。", "Chī le, yì tiān liǎng cì. Méi guānxi, xiǎo bìng.", "Yes, twice a day. Don't worry, it's nothing serious."],
-            [0, "别喝冰咖啡，多休息！", "Bié hē bīng kāfēi, duō xiūxi!", "No iced coffee, and get some rest!"]
+            [0, "别喝冰咖啡了，多休息吧！", "Bié hē bīng kāfēi le, duō xiūxi ba!", "No more iced coffee, and get some rest!"]
           ]
         }
       ]
@@ -1705,7 +1705,7 @@ window.MANDAYRIN_COURSE = {
         ["短信", "duǎnxìn", "text message", "noun", "你看我的短信了吗？", "Nǐ kàn wǒ de duǎnxìn le ma?", "Did you read my text?"],
         ["微信", "Wēixìn", "WeChat", "noun", "你有微信吗？", "Nǐ yǒu Wēixìn ma?", "Are you on WeChat?"],
         ["喂", "wéi", "hello (on the phone)", "phrase", "喂，你好！", "Wéi, nǐ hǎo!", "Hello?"],
-        ["接", "jiē", "to answer; to pick up", "verb", "他不接电话。", "Tā bù jiē diànhuà.", "He's not picking up."],
+        ["接", "jiē", "to answer; to pick up", "verb", "他没接电话。", "Tā méi jiē diànhuà.", "He didn't pick up."],
         ["回", "huí", "to reply; to return", "verb", "我晚上回你。", "Wǒ wǎnshang huí nǐ.", "I'll get back to you tonight."],
         ["说", "shuō", "to say; to speak", "verb", "你说什么？", "Nǐ shuō shénme?", "What did you say?"],
         ["声音", "shēngyīn", "sound; voice", "noun", "声音太小了。", "Shēngyīn tài xiǎo le.", "The sound is too low."],
@@ -1727,11 +1727,11 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "大卫，你看我的微信了吗？", "Dàwèi, nǐ kàn wǒ de Wēixìn le ma?", "David, did you see my WeChat message?"],
             [1, "没有。对不起，我的手机没电了。", "Méiyǒu. Duìbuqǐ, wǒ de shǒujī méi diàn le.", "No. Sorry, my phone died."],
-            [0, "我给你打电话，你也不接！", "Wǒ gěi nǐ dǎ diànhuà, nǐ yě bù jiē!", "I called you and you didn't pick up either!"],
-            [1, "我现在充电。你发什么了？", "Wǒ xiànzài chōngdiàn. Nǐ fā shénme le?", "I'm charging it now. What did you send?"],
+            [0, "我给你打了电话，你也没接！", "Wǒ gěi nǐ dǎ le diànhuà, nǐ yě méi jiē!", "I called you and you didn't pick up either!"],
+            [1, "我在充电呢。你发什么了？", "Wǒ zài chōngdiàn ne. Nǐ fā shénme le?", "I'm charging it now. What did you send?"],
             [0, "今天晚上李明来我们家吃饭。", "Jīntiān wǎnshang Lǐ Míng lái wǒmen jiā chī fàn.", "Li Ming is coming over for dinner tonight."],
             [1, "几点？", "Jǐ diǎn?", "What time?"],
-            [0, "七点。你马上回家，好吗？", "Qī diǎn. Nǐ mǎshàng huíjiā, hǎo ma?", "Seven. Can you come home now?"],
+            [0, "七点。你马上回来，好吗？", "Qī diǎn. Nǐ mǎshàng huílai, hǎo ma?", "Seven. Can you come home now?"],
             [1, "好，我马上回家！", "Hǎo, wǒ mǎshàng huíjiā!", "Okay, I'm on my way!"]
           ]
         },
@@ -1756,12 +1756,12 @@ window.MANDAYRIN_COURSE = {
           setting: "Lin Mei is waiting to hear back from Li Ming.",
           cast: [["林美", "Lín Měi"], ["王芳", "Wáng Fāng"]],
           lines: [
-            [0, "王芳，他不回我的短信。", "Wáng Fāng, tā bù huí wǒ de duǎnxìn.", "Wang Fang, he's not answering my texts."],
+            [0, "王芳，他没回我的短信。", "Wáng Fāng, tā méi huí wǒ de duǎnxìn.", "Wang Fang, he hasn't answered my texts."],
             [1, "谁？李明吗？", "Shéi? Lǐ Míng ma?", "Who? Li Ming?"],
             [0, "是。我昨天给他发了三个短信。", "Shì. Wǒ zuótiān gěi tā fā le sān ge duǎnxìn.", "Yes. I sent him three texts yesterday."],
             [1, "你给他打电话了吗？", "Nǐ gěi tā dǎ diànhuà le ma?", "Did you call him?"],
-            [0, "打了。他不接。", "Dǎ le. Tā bù jiē.", "I did. He didn't pick up."],
-            [1, "他说今天他很忙。", "Tā shuō jīntiān tā hěn máng.", "He said he's busy today."],
+            [0, "打了，他没接。", "Dǎ le, tā méi jiē.", "I did. He didn't pick up."],
+            [1, "他说他今天很忙。", "Tā shuō tā jīntiān hěn máng.", "He said he's busy today."],
             [0, "……是他！喂，李明！", "… Shì tā! Wéi, Lǐ Míng!", "… It's him! Hello, Li Ming!"]
           ]
         }
@@ -1784,7 +1784,7 @@ window.MANDAYRIN_COURSE = {
         ["付", "fù", "to pay", "verb", "我来付。", "Wǒ lái fù.", "I'll pay."],
         ["现金", "xiànjīn", "cash", "noun", "我没有现金。", "Wǒ méiyǒu xiànjīn.", "I don't have any cash."],
         ["刷卡", "shuākǎ", "to pay by card", "verb", "刷卡还是现金？", "Shuākǎ háishi xiànjīn?", "Card or cash?"],
-        ["退", "tuì", "to return (an item)", "verb", "这条裤子太长了，我想退。", "Zhè tiáo kùzi tài cháng le, wǒ xiǎng tuì.", "These pants are too long. I'd like to return them."]
+        ["这么", "zhème", "so; this (这么贵 = so expensive)", "adverb", "这件外套怎么这么贵？", "Zhè jiàn wàitào zěnme zhème guì?", "Why is this coat so expensive?"]
       ],
       patterns: [
         ["A 比 B ……", "A bǐ B …", "A is more … than B", "这条裙子比那条便宜。", "Zhè tiáo qúnzi bǐ nà tiáo piányi.", "This skirt is cheaper than that one."],
@@ -1804,7 +1804,8 @@ window.MANDAYRIN_COURSE = {
             [0, "很合适。有黑的吗？", "Hěn héshì. Yǒu hēi de ma?", "It fits well. Do you have it in black?"],
             [1, "有。黑的比红的更好看！", "Yǒu. Hēi de bǐ hóng de gèng hǎokàn!", "We do. The black one looks even better than the red!"],
             [0, "好，我要黑的。多少钱？", "Hǎo, wǒ yào hēi de. Duōshao qián?", "Okay, I'll take the black one. How much?"],
-            [1, "今天打折，九十块。", "Jīntiān dǎzhé, jiǔshí kuài.", "It's on sale today: 90 yuan."]
+            [1, "今天打折，九十块。", "Jīntiān dǎzhé, jiǔshí kuài.", "It's on sale today: 90 yuan."],
+            [0, "这么便宜？太好了！", "Zhème piányi? Tài hǎo le!", "That cheap? Great!"]
           ]
         },
         {
@@ -1817,7 +1818,7 @@ window.MANDAYRIN_COURSE = {
             [1, "刷卡。", "Shuākǎ.", "Card."],
             [0, "对不起，今天刷卡有问题。", "Duìbuqǐ, jīntiān shuākǎ yǒu wèntí.", "Sorry, the card machine isn't working today."],
             [1, "好，我付现金。给你。", "Hǎo, wǒ fù xiànjīn. Gěi nǐ.", "Okay, I'll pay cash. Here you go."],
-            [0, "谢谢！不合适，你再来退。", "Xièxie! Bù héshì, nǐ zài lái tuì.", "Thanks! If they don't fit, come back and return them."],
+            [0, "谢谢！不合适可以再来换。", "Xièxie! Bù héshì kěyǐ zài lái huàn.", "Thanks! If they don't fit, you can come back and exchange them."],
             [1, "好的，谢谢！", "Hǎo de, xièxie!", "Great, thanks!"]
           ]
         },
@@ -1832,7 +1833,7 @@ window.MANDAYRIN_COURSE = {
             [0, "我也有一件，和你的一样！", "Wǒ yě yǒu yí jiàn, hé nǐ de yíyàng!", "I have one just like it!"],
             [1, "一样？什么颜色？", "Yíyàng? Shénme yánsè?", "The same one? What color?"],
             [0, "也是蓝的。我的比你的长一点儿。", "Yě shì lán de. Wǒ de bǐ nǐ de cháng yìdiǎnr.", "Blue too. Mine's a little longer than yours."],
-            [1, "明天我们都穿，好吗？", "Míngtiān wǒmen dōu chuān, hǎo ma?", "Let's both wear them tomorrow!"],
+            [1, "明天我们都穿吧！", "Míngtiān wǒmen dōu chuān ba!", "Let's both wear them tomorrow!"],
             [0, "好！", "Hǎo!", "Deal!"]
           ]
         }
@@ -1871,9 +1872,9 @@ window.MANDAYRIN_COURSE = {
             [0, "王芳，你下班了吗？", "Wáng Fāng, nǐ xiàbān le ma?", "Wang Fang, are you off work yet?"],
             [1, "还没有。我还在办公室。", "Hái méiyǒu. Wǒ hái zài bàngōngshì.", "Not yet. I'm still at the office."],
             [0, "已经八点了！你今天加班吗？", "Yǐjīng bā diǎn le! Nǐ jīntiān jiābān ma?", "It's already eight! Are you working late today?"],
-            [1, "是，老板说工作今天要做完。", "Shì, lǎobǎn shuō gōngzuò jīntiān yào zuò wán.", "Yes, the boss says the work has to be finished today."],
+            [1, "是，工作太多了，今天要做完。", "Shì, gōngzuò tài duō le, jīntiān yào zuò wán.", "Yes, there is too much work, and it has to be done today."],
             [0, "你吃晚饭了吗？", "Nǐ chī wǎnfàn le ma?", "Have you had dinner?"],
-            [1, "没有。我很饿……", "Méiyǒu. Wǒ hěn è…", "No. I'm starving…"],
+            [1, "还没呢。我很饿……", "Hái méi ne. Wǒ hěn è…", "Not yet. I'm starving…"],
             [0, "我给你做面条。你几点能回家？", "Wǒ gěi nǐ zuò miàntiáo. Nǐ jǐ diǎn néng huíjiā?", "I'll make you noodles. What time can you get home?"],
             [1, "九点。谢谢你！", "Jiǔ diǎn. Xièxie nǐ!", "Nine. Thank you!"]
           ]
@@ -1886,7 +1887,7 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "李明，早上好！你几点来上班？", "Lǐ Míng, zǎoshang hǎo! Nǐ jǐ diǎn lái shàngbān?", "Morning, Li Ming! What time did you get in?"],
             [1, "七点。", "Qī diǎn.", "Seven."],
-            [0, "很早！今天十点开会，你知道吗？", "Hěn zǎo! Jīntiān shí diǎn kāihuì, nǐ zhīdào ma?", "That's early! There's a meeting at ten today, did you know?"],
+            [0, "这么早！今天十点开会，你知道吗？", "Zhème zǎo! Jīntiān shí diǎn kāihuì, nǐ zhīdào ma?", "That early! There's a meeting at ten today, did you know?"],
             [1, "知道。我的电脑有问题……", "Zhīdào. Wǒ de diànnǎo yǒu wèntí…", "I know. My computer has a problem…"],
             [0, "什么问题？", "Shénme wèntí?", "What kind of problem?"],
             [1, "太慢了！", "Tài màn le!", "It's way too slow!"],
@@ -1906,7 +1907,7 @@ window.MANDAYRIN_COURSE = {
             [1, "谢谢！老板的办公室在哪儿？", "Xièxie! Lǎobǎn de bàngōngshì zài nǎr?", "Thanks! Where's the boss's office?"],
             [0, "在那儿，左边。他现在开会。", "Zài nàr, zuǒbian. Tā xiànzài kāihuì.", "Over there, on the left. He's in a meeting right now."],
             [1, "我们公司几点下班？", "Wǒmen gōngsī jǐ diǎn xiàbān?", "What time do we finish here?"],
-            [0, "六点。我们常常加班。", "Liù diǎn. Wǒmen chángcháng jiābān.", "Six. But we often work late."]
+            [0, "六点。可是我们常常加班。", "Liù diǎn. Kěshì wǒmen chángcháng jiābān.", "Six. But we often work late."]
           ]
         }
       ]
@@ -1920,15 +1921,15 @@ window.MANDAYRIN_COURSE = {
         ["有空", "yǒukòng", "to be free", "phrase", "你周末有空吗？", "Nǐ zhōumò yǒukòng ma?", "Are you free this weekend?"],
         ["时间", "shíjiān", "time", "noun", "我今天没有时间。", "Wǒ jīntiān méiyǒu shíjiān.", "I don't have time today."],
         ["打算", "dǎsuan", "to plan to", "verb", "你明天打算做什么？", "Nǐ míngtiān dǎsuan zuò shénme?", "What are you planning to do tomorrow?"],
-        ["可以", "kěyǐ", "can; may", "verb", "我可以去吗？", "Wǒ kěyǐ qù ma?", "Can I come?"],
-        ["吧", "ba", "(makes a suggestion: let's …)", "particle", "我们去吃饭吧！", "Wǒmen qù chī fàn ba!", "Let's go eat!"],
+        ["安排", "ānpái", "to arrange; plans", "verb", "你周末有什么安排？", "Nǐ zhōumò yǒu shénme ānpái?", "Do you have any plans this weekend?"],
+        ["一会儿", "yíhuìr", "a little while", "phrase", "我一会儿给你打电话。", "Wǒ yíhuìr gěi nǐ dǎ diànhuà.", "I'll call you in a little while."],
         ["怎么样", "zěnmeyàng", "how about it?; how is it?", "question", "星期六怎么样？", "Xīngqīliù zěnmeyàng?", "How about Saturday?"],
         ["行", "xíng", "okay; that works", "adjective", "三点？行！", "Sān diǎn? Xíng!", "Three o'clock? Works for me!"],
         ["门口", "ménkǒu", "entrance; doorway", "noun", "我在门口等你。", "Wǒ zài ménkǒu děng nǐ.", "I'll wait for you at the entrance."],
         ["迟到", "chídào", "to be late", "verb", "对不起，我迟到了！", "Duìbuqǐ, wǒ chídào le!", "Sorry I'm late!"],
         ["见", "jiàn", "to see; to meet", "verb", "明天见！", "Míngtiān jiàn!", "See you tomorrow!"],
         ["决定", "juédìng", "to decide", "verb", "你决定了吗？", "Nǐ juédìng le ma?", "Have you decided?"],
-        ["改天", "gǎitiān", "another day", "adverb", "今天不行，改天吧。", "Jīntiān bù xíng, gǎitiān ba.", "Today doesn't work. Another day."]
+        ["明年", "míngnián", "next year", "noun", "明年我打算去中国旅游。", "Míngnián wǒ dǎsuan qù Zhōngguó lǚyóu.", "Next year I'm planning to travel to China."]
       ],
       patterns: [
         ["……怎么样？", "… zěnmeyàng?", "How about …?", "我们去公园，怎么样？", "Wǒmen qù gōngyuán, zěnmeyàng?", "How about we go to the park?"],
@@ -1942,7 +1943,7 @@ window.MANDAYRIN_COURSE = {
           cast: [["大卫", "Dàwèi"], ["李明", "Lǐ Míng"]],
           lines: [
             [0, "李明，你周末有空吗？", "Lǐ Míng, nǐ zhōumò yǒukòng ma?", "Li Ming, are you free this weekend?"],
-            [1, "星期六没有时间，星期天有空。", "Xīngqīliù méiyǒu shíjiān, xīngqītiān yǒukòng.", "I'm busy Saturday, but free Sunday."],
+            [1, "星期六不行，星期天有空。", "Xīngqīliù bù xíng, xīngqītiān yǒukòng.", "Saturday's no good, but I'm free Sunday."],
             [0, "星期天我们去打排球吧！", "Xīngqītiān wǒmen qù dǎ páiqiú ba!", "Let's play volleyball on Sunday!"],
             [1, "好！几点？", "Hǎo! Jǐ diǎn?", "Sure! What time?"],
             [0, "上午十点怎么样？", "Shàngwǔ shí diǎn zěnmeyàng?", "How about ten in the morning?"],
@@ -1960,22 +1961,22 @@ window.MANDAYRIN_COURSE = {
             [0, "喂，安娜，你在哪儿？", "Wéi, Ānnà, nǐ zài nǎr?", "Hello, Anna? Where are you?"],
             [1, "对不起，我要迟到了！地铁太挤了。", "Duìbuqǐ, wǒ yào chídào le! Dìtiě tài jǐ le.", "Sorry, I'm going to be late! The subway is packed."],
             [0, "没关系。你几点能到？", "Méi guānxi. Nǐ jǐ diǎn néng dào?", "No problem. When can you get here?"],
-            [1, "十分钟。你可以先喝咖啡。", "Shí fēnzhōng. Nǐ kěyǐ xiān hē kāfēi.", "Ten minutes. Go ahead and get a coffee."],
+            [1, "再等一会儿，十分钟。你先喝杯咖啡吧。", "Zài děng yíhuìr, shí fēnzhōng. Nǐ xiān hē bēi kāfēi ba.", "Give me a little while, ten minutes. Grab a coffee first."],
             [0, "行，我等你。", "Xíng, wǒ děng nǐ.", "Okay, I'll wait for you."],
             [1, "谢谢！我马上到！", "Xièxie! Wǒ mǎshàng dào!", "Thanks! I'll be right there!"]
           ]
         },
         {
-          title: "Another day",
-          zh: "改天吧",
+          title: "Plans tonight",
+          zh: "今天晚上的安排",
           setting: "Wang Fang tries to get David to come out tonight.",
           cast: [["王芳", "Wáng Fāng"], ["大卫", "Dàwèi"]],
           lines: [
             [0, "大卫，你今天晚上打算做什么？", "Dàwèi, nǐ jīntiān wǎnshang dǎsuan zuò shénme?", "David, what are you up to tonight?"],
             [1, "我约了朋友吃饭。你呢？", "Wǒ yuē le péngyou chī fàn. Nǐ ne?", "I'm having dinner with a friend. You?"],
             [0, "我和林美去电影院。你也来吧！", "Wǒ hé Lín Měi qù diànyǐngyuàn. Nǐ yě lái ba!", "Lin Mei and I are going to the movies. Come along!"],
-            [1, "今天不行，没有时间。改天吧！", "Jīntiān bù xíng, méiyǒu shíjiān. Gǎitiān ba!", "I can't today, no time. Another day!"],
-            [0, "好，改天。星期五怎么样？", "Hǎo, gǎitiān. Xīngqīwǔ zěnmeyàng?", "Okay, another day. How about Friday?"],
+            [1, "今天不行，我已经有安排了。下次吧！", "Jīntiān bù xíng, wǒ yǐjīng yǒu ānpái le. Xià cì ba!", "Not today, I already have plans. Next time!"],
+            [0, "好吧。那星期五怎么样？", "Hǎo ba. Nà xīngqīwǔ zěnmeyàng?", "Okay. How about Friday, then?"],
             [1, "星期五可以！", "Xīngqīwǔ kěyǐ!", "Friday works!"],
             [0, "好，决定了！星期五见！", "Hǎo, juédìng le! Xīngqīwǔ jiàn!", "Great, it's settled! See you Friday!"]
           ]
@@ -2033,7 +2034,7 @@ window.MANDAYRIN_COURSE = {
             [1, "二十比二十，平了！", "Èrshí bǐ èrshí, píng le!", "Twenty all. It's tied!"],
             [0, "大卫，加油！加油！", "Dàwèi, jiāyóu! Jiāyóu!", "Go, David! Go!"],
             [1, "大卫发球……好球！", "Dàwèi fāqiú… Hǎo qiú!", "David's serving… Great serve!"],
-            [0, "大卫太厉害了！", "Dàwèi tài lìhai le!", "David is so good!"]
+            [0, "大卫打得真好！太厉害了！", "Dàwèi dǎ de zhēn hǎo! Tài lìhai le!", "David plays so well! He's amazing!"]
           ]
         },
         {
@@ -2061,10 +2062,10 @@ window.MANDAYRIN_COURSE = {
         ["狗", "gǒu", "dog", "noun", "我家有一只狗。", "Wǒ jiā yǒu yì zhī gǒu.", "We have a dog at home."],
         ["猫", "māo", "cat", "noun", "我的猫喜欢睡觉。", "Wǒ de māo xǐhuan shuìjiào.", "My cat loves to sleep."],
         ["鸟", "niǎo", "bird", "noun", "那只鸟是蓝的。", "Nà zhī niǎo shì lán de.", "That bird is blue."],
-        ["马", "mǎ", "horse", "noun", "马很高，也很快。", "Mǎ hěn gāo, yě hěn kuài.", "Horses are tall and fast."],
+        ["它", "tā", "it", "pronoun", "我有一只猫，它叫小白。", "Wǒ yǒu yì zhī māo, tā jiào Xiǎobái.", "I have a cat. Her name is Xiaobai."],
         ["熊猫", "xióngmāo", "panda", "noun", "我想去中国看熊猫。", "Wǒ xiǎng qù Zhōngguó kàn xióngmāo.", "I want to go to China to see pandas."],
         ["老虎", "lǎohǔ", "tiger", "noun", "老虎吃肉。", "Lǎohǔ chī ròu.", "Tigers eat meat."],
-        ["只", "zhī", "(measure word for animals)", "measure", "我有两只猫。", "Wǒ yǒu liǎng zhī māo.", "I have two cats."],
+        ["兔子", "tùzi", "rabbit", "noun", "我妹妹养了两只兔子。", "Wǒ mèimei yǎng le liǎng zhī tùzi.", "My little sister has two rabbits."],
         ["养", "yǎng", "to keep (a pet); to raise", "verb", "你养狗吗？", "Nǐ yǎng gǒu ma?", "Do you have a dog?"],
         ["宠物", "chǒngwù", "pet", "noun", "我的宠物是一只鸟。", "Wǒ de chǒngwù shì yì zhī niǎo.", "My pet is a bird."],
         ["动物园", "dòngwùyuán", "zoo", "noun", "周末我们去动物园吧！", "Zhōumò wǒmen qù dòngwùyuán ba!", "Let's go to the zoo this weekend!"],
@@ -2089,7 +2090,7 @@ window.MANDAYRIN_COURSE = {
             [0, "太可爱了！我想拍照片。", "Tài kě'ài le! Wǒ xiǎng pāi zhàopiàn.", "So cute! I want to take a photo."],
             [1, "好！然后我们去看老虎吧。", "Hǎo! Ránhòu wǒmen qù kàn lǎohǔ ba.", "Sure! Then let's go see the tigers."],
             [0, "老虎？我有一点儿怕。", "Lǎohǔ? Wǒ yǒu yìdiǎnr pà.", "Tigers? I'm a little scared."],
-            [1, "别怕！你看，老虎在睡觉。", "Bié pà! Nǐ kàn, lǎohǔ zài shuìjiào.", "Don't be scared! Look, the tiger's asleep."],
+            [1, "别怕！你看，它在睡觉。", "Bié pà! Nǐ kàn, tā zài shuìjiào.", "Don't be scared! Look, it's asleep."],
             [0, "睡觉的老虎，我不怕！", "Shuìjiào de lǎohǔ, wǒ bú pà!", "A sleeping tiger I'm not afraid of!"]
           ]
         },
@@ -2100,9 +2101,9 @@ window.MANDAYRIN_COURSE = {
           cast: [["安娜", "Ānnà"], ["李明", "Lǐ Míng"]],
           lines: [
             [0, "李明，这是你的狗吗？", "Lǐ Míng, zhè shì nǐ de gǒu ma?", "Li Ming, is this your dog?"],
-            [1, "是的，我的狗叫小黑。", "Shì de, wǒ de gǒu jiào Xiǎohēi.", "Yes, his name is Xiaohei."],
+            [1, "是的，它叫小黑。", "Shì de, tā jiào Xiǎohēi.", "Yes, his name is Xiaohei."],
             [0, "小黑好可爱！几岁了？", "Xiǎohēi hǎo kě'ài! Jǐ suì le?", "Xiaohei is so cute! How old is he?"],
-            [1, "三岁。小黑很聪明，会跳，也会踢球！", "Sān suì. Xiǎohēi hěn cōngming, huì tiào, yě huì tī qiú!", "Three. He's really smart. He can jump, and he can even kick a ball!"],
+            [1, "三岁了。它很聪明，会跳，也会玩球！", "Sān suì le. Tā hěn cōngming, huì tiào, yě huì wán qiú!", "Three. He's really smart. He can jump, and he can even play ball!"],
             [0, "太厉害了！你每天和小黑散步吗？", "Tài lìhai le! Nǐ měi tiān hé Xiǎohēi sànbù ma?", "Amazing! Do you walk him every day?"],
             [1, "是，每天早上六点。你养宠物吗？", "Shì, měi tiān zǎoshang liù diǎn. Nǐ yǎng chǒngwù ma?", "Yes, every morning at six. Do you have a pet?"],
             [0, "我养一只猫。我的猫喜欢睡觉，不散步！", "Wǒ yǎng yì zhī māo. Wǒ de māo xǐhuan shuìjiào, bú sànbù!", "I have a cat. My cat likes sleeping, not walks!"]
@@ -2116,9 +2117,9 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "王芳姐姐，你喜欢什么动物？", "Wáng Fāng jiějie, nǐ xǐhuan shénme dòngwù?", "Wang Fang, what animals do you like?"],
             [1, "我喜欢猫。你呢？", "Wǒ xǐhuan māo. Nǐ ne?", "I like cats. What about you?"],
-            [0, "我最喜欢马！马很高，也很快！", "Wǒ zuì xǐhuan mǎ! Mǎ hěn gāo, yě hěn kuài!", "I love horses most! They're tall and fast!"],
-            [1, "你家能养马吗？", "Nǐ jiā néng yǎng mǎ ma?", "Could your family keep a horse?"],
-            [0, "不能……我们的房子太小了。", "Bù néng… wǒmen de fángzi tài xiǎo le.", "No… our house is too small."],
+            [0, "我最喜欢兔子！兔子很可爱，也跑得很快！", "Wǒ zuì xǐhuan tùzi! Tùzi hěn kě'ài, yě pǎo de hěn kuài!", "I love rabbits most! They're cute, and they run really fast!"],
+            [1, "你家能养兔子吗？", "Nǐ jiā néng yǎng tùzi ma?", "Could your family keep a rabbit?"],
+            [0, "不能……妈妈怕兔子。", "Bù néng… māma pà tùzi.", "No… Mom is scared of rabbits."],
             [1, "养一只鸟吧！鸟很小，也很聪明。", "Yǎng yì zhī niǎo ba! Niǎo hěn xiǎo, yě hěn cōngming.", "Get a bird! Birds are small, and smart too."],
             [0, "鸟会说“你好”吗？", "Niǎo huì shuō “nǐ hǎo” ma?", "Can birds say “hello”?"],
             [1, "有的鸟会！", "Yǒu de niǎo huì!", "Some can!"],
@@ -2286,7 +2287,7 @@ window.MANDAYRIN_COURSE = {
         ["美元", "měiyuán", "US dollar", "noun", "一美元是多少人民币？", "Yì měiyuán shì duōshao rénmínbì?", "How many yuan is one dollar?"],
         ["人民币", "rénmínbì", "RMB (Chinese yuan)", "noun", "我想换人民币。", "Wǒ xiǎng huàn rénmínbì.", "I'd like to change some money into yuan."],
         ["寄", "jì", "to mail", "verb", "你寄到哪儿？", "Nǐ jì dào nǎr?", "Where are you sending it?"],
-        ["信", "xìn", "letter", "noun", "我很喜欢写信。", "Wǒ hěn xǐhuan xiě xìn.", "I really like writing letters."],
+        ["千", "qiān", "thousand", "number", "我的账户里有两千块钱。", "Wǒ de zhànghù lǐ yǒu liǎng qiān kuài qián.", "I have two thousand yuan in my account."],
         ["包裹", "bāoguǒ", "package", "noun", "你的包裹到了。", "Nǐ de bāoguǒ dào le.", "Your package has arrived."],
         ["快递", "kuàidì", "courier delivery", "noun", "今天有你的快递。", "Jīntiān yǒu nǐ de kuàidì.", "There's a delivery for you today."],
         ["填", "tián", "to fill in", "verb", "请先填一下这个表。", "Qǐng xiān tián yíxià zhège biǎo.", "Please fill in this form first."],
@@ -2312,7 +2313,7 @@ window.MANDAYRIN_COURSE = {
             [0, "写你的名字和电话号码，然后在这儿签名。", "Xiě nǐ de míngzi hé diànhuà hàomǎ, ránhòu zài zhèr qiānmíng.", "Your name and phone number, then sign here."],
             [1, "好了！我还想换一点儿人民币。", "Hǎo le! Wǒ hái xiǎng huàn yìdiǎnr rénmínbì.", "Done! I'd also like to change some money into yuan."],
             [0, "你要换多少美元？", "Nǐ yào huàn duōshao měiyuán?", "How many dollars would you like to change?"],
-            [1, "五十美元。", "Wǔshí měiyuán.", "Fifty dollars."]
+            [1, "一千美元。", "Yìqiān měiyuán.", "A thousand dollars."]
           ]
         },
         {
@@ -2323,11 +2324,11 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "邮局人好多！", "Yóujú rén hǎo duō!", "The post office is so busy!"],
             [1, "是，我们要排队。你寄什么？", "Shì, wǒmen yào páiduì. Nǐ jì shénme?", "Yeah, we'll have to wait. What are you sending?"],
-            [0, "一个包裹，寄到美国。我妈妈下个月生日。", "Yí ge bāoguǒ, jì dào Měiguó. Wǒ māma xià ge yuè shēngrì.", "A package to the US. My mom's birthday is next month."],
+            [0, "一个包裹，寄到美国。是给我妈妈的茶。", "Yí ge bāoguǒ, jì dào Měiguó. Shì gěi wǒ māma de chá.", "A package to the US. It's tea for my mom."],
             [1, "寄到美国很贵吧？", "Jì dào Měiguó hěn guì ba?", "Sending it to the US must be expensive."],
-            [0, "有一点儿贵。你呢？", "Yǒu yìdiǎnr guì. Nǐ ne?", "A bit. What about you?"],
-            [1, "我寄信，给我爸爸。他不喜欢手机，喜欢看信！", "Wǒ jì xìn, gěi wǒ bàba. Tā bù xǐhuan shǒujī, xǐhuan kàn xìn!", "A letter to my dad. He doesn't like phones, he likes reading letters!"],
-            [0, "太好了！现在写信的人不多了。", "Tài hǎo le! Xiànzài xiě xìn de rén bù duō le.", "That's lovely! Not many people write letters anymore."]
+            [0, "有一点儿贵，可是我妈妈很喜欢中国茶。你呢？", "Yǒu yìdiǎnr guì, kěshì wǒ māma hěn xǐhuan Zhōngguó chá. Nǐ ne?", "A bit, but my mom loves Chinese tea. What about you?"],
+            [1, "我的包裹到了。我弟弟给我寄了一个大包裹！", "Wǒ de bāoguǒ dào le. Wǒ dìdi gěi wǒ jì le yí ge dà bāoguǒ!", "I have a package to pick up. My younger brother sent me a big one!"],
+            [0, "你弟弟真好！", "Nǐ dìdi zhēn hǎo!", "Your brother's so sweet!"]
           ]
         },
         {
@@ -2355,7 +2356,7 @@ window.MANDAYRIN_COURSE = {
         ["聚会", "jùhuì", "party; get-together", "noun", "周末我家有一个聚会。", "Zhōumò wǒ jiā yǒu yí ge jùhuì.", "We're having a party at my place this weekend."],
         ["礼物", "lǐwù", "gift", "noun", "这是给你的礼物。", "Zhè shì gěi nǐ de lǐwù.", "This present is for you."],
         ["蛋糕", "dàngāo", "cake", "noun", "我们买一个大蛋糕吧！", "Wǒmen mǎi yí ge dà dàngāo ba!", "Let's buy a big cake!"],
-        ["蜡烛", "làzhú", "candle", "noun", "蛋糕上有六个蜡烛。", "Dàngāo shang yǒu liù ge làzhú.", "There are six candles on the cake."],
+        ["生日", "shēngrì", "birthday", "noun", "你的生日是几月几号？", "Nǐ de shēngrì shì jǐ yuè jǐ hào?", "When's your birthday?"],
         ["快乐", "kuàilè", "happy (生日快乐 = happy birthday)", "adjective", "生日快乐，小美！", "Shēngrì kuàilè, Xiǎoměi!", "Happy birthday, Xiaomei!"],
         ["祝", "zhù", "to wish", "verb", "祝你周末快乐！", "Zhù nǐ zhōumò kuàilè!", "Have a great weekend!"],
         ["邀请", "yāoqǐng", "to invite", "verb", "李明邀请我们去他家吃饭。", "Lǐ Míng yāoqǐng wǒmen qù tā jiā chī fàn.", "Li Ming invited us to his place for dinner."],
@@ -2382,7 +2383,7 @@ window.MANDAYRIN_COURSE = {
             [0, "李明，下个星期六是王芳的生日。", "Lǐ Míng, xià ge xīngqīliù shì Wáng Fāng de shēngrì.", "Li Ming, next Saturday is Wang Fang's birthday."],
             [1, "我们给她准备一个惊喜吧！", "Wǒmen gěi tā zhǔnbèi yí ge jīngxǐ ba!", "Let's plan a surprise for her!"],
             [0, "好！我邀请她的朋友来参加聚会。", "Hǎo! Wǒ yāoqǐng tā de péngyou lái cānjiā jùhuì.", "Yes! I'll invite her friends to a party."],
-            [1, "我去买蛋糕和蜡烛。", "Wǒ qù mǎi dàngāo hé làzhú.", "I'll get the cake and candles."],
+            [1, "我去买一个大蛋糕。", "Wǒ qù mǎi yí ge dà dàngāo.", "I'll get a big cake."],
             [0, "我们送她什么礼物？", "Wǒmen sòng tā shénme lǐwù?", "What present should we give her?"],
             [1, "她喜欢看书，送她一本书吧。", "Tā xǐhuan kàn shū, sòng tā yì běn shū ba.", "She loves reading. Let's give her a book."],
             [0, "好。别告诉王芳！", "Hǎo. Bié gàosu Wáng Fāng!", "Okay. Don't tell Wang Fang!"],
@@ -2401,7 +2402,7 @@ window.MANDAYRIN_COURSE = {
             [1, "谢谢大家！", "Xièxie dàjiā!", "Thank you, everyone!"],
             [0, "祝你生日快乐！来，打开礼物吧！", "Zhù nǐ shēngrì kuàilè! Lái, dǎkāi lǐwù ba!", "Happy birthday! Come on, open your present!"],
             [1, "一本书！我很喜欢！", "Yì běn shū! Wǒ hěn xǐhuan!", "A book! I love it!"],
-            [0, "现在吃蛋糕！我们先唱歌。", "Xiànzài chī dàngāo! Wǒmen xiān chànggē.", "Cake time! But first, we sing."]
+            [0, "现在吃蛋糕！我们先唱歌：祝你生日快乐……", "Xiànzài chī dàngāo! Wǒmen xiān chànggē: zhù nǐ shēngrì kuàilè…", "Cake time! But first, a song: happy birthday to you…"]
           ]
         },
         {
@@ -2546,7 +2547,7 @@ window.MANDAYRIN_COURSE = {
             [0, "李明，你很紧张吗？", "Lǐ Míng, nǐ hěn jǐnzhāng ma?", "Li Ming, are you nervous?"],
             [1, "很紧张。下午我要和老板开会。", "Hěn jǐnzhāng. Xiàwǔ wǒ yào hé lǎobǎn kāihuì.", "Very. I have a meeting with my boss this afternoon."],
             [1, "因为这是我第一次和老板开会，所以我很担心。", "Yīnwèi zhè shì wǒ dì-yī cì hé lǎobǎn kāihuì, suǒyǐ wǒ hěn dānxīn.", "It's my first meeting with him, so I'm worried."],
-            [0, "你已经准备了很多，放心吧。", "Nǐ yǐjīng zhǔnbèi le hěn duō, fàngxīn ba.", "You've already prepared a lot. Relax."],
+            [0, "你准备得很好，放心吧。", "Nǐ zhǔnbèi de hěn hǎo, fàngxīn ba.", "You're really well prepared. Relax."],
             [1, "我们老板很厉害，我有一点儿害怕他。", "Wǒmen lǎobǎn hěn lìhai, wǒ yǒu yìdiǎnr hàipà tā.", "My boss is really sharp. I'm a little scared of him."],
             [0, "别着急，慢慢说。你的工作很好，老板会喜欢的。", "Bié zháojí, mànmàn shuō. Nǐ de gōngzuò hěn hǎo, lǎobǎn huì xǐhuan de.", "Take your time and speak slowly. Your work is good — he'll like it."],
             [1, "你觉得我可以吗？", "Nǐ juéde wǒ kěyǐ ma?", "You think I can do it?"],
@@ -2638,7 +2639,7 @@ window.MANDAYRIN_COURSE = {
             [0, "她的性格怎么样？", "Tā de xìnggé zěnmeyàng?", "What's she like?"],
             [1, "她很热情，常常笑。", "Tā hěn rèqíng, chángcháng xiào.", "She's really nice and smiles a lot."],
             [0, "你喜欢她吗？", "Nǐ xǐhuan tā ma?", "Do you like her?"],
-            [1, "喜欢！我很害羞，她常常和我一起画画儿。", "Xǐhuan! Wǒ hěn hàixiū, tā chángcháng hé wǒ yìqǐ huà huàr.", "Yes! I'm shy, so she often draws with me."],
+            [1, "喜欢！我很害羞，可是她常常和我一起玩。", "Xǐhuan! Wǒ hěn hàixiū, kěshì tā chángcháng hé wǒ yìqǐ wán.", "Yes! I'm shy, but she often plays with me."],
             [0, "她很像你的大姐姐！", "Tā hěn xiàng nǐ de dà jiějie!", "She sounds like a big sister to you!"],
             [1, "是！她是我最喜欢的老师！", "Shì! Tā shì wǒ zuì xǐhuan de lǎoshī!", "Yes! She's my favorite teacher!"]
           ]
@@ -2714,7 +2715,7 @@ window.MANDAYRIN_COURSE = {
             [1, "你有很多家具吗？", "Nǐ yǒu hěn duō jiājù ma?", "Do you have a lot of furniture?"],
             [0, "不多。新公寓里有家具，我带衣服和书。", "Bù duō. Xīn gōngyù lǐ yǒu jiājù, wǒ dài yīfu hé shū.", "Not much. The new place is furnished, so I'm just taking clothes and books."],
             [1, "卧室大吗？有阳台吗？", "Wòshì dà ma? Yǒu yángtái ma?", "Is the bedroom big? Is there a balcony?"],
-            [0, "卧室不大，阳台很大！", "Wòshì bú dà, yángtái hěn dà!", "The bedroom is small, but the balcony is big!"],
+            [0, "卧室不大，可是阳台很大！", "Wòshì bú dà, kěshì yángtái hěn dà!", "The bedroom is small, but the balcony is big!"],
             [1, "太好了！我早上几点来？", "Tài hǎo le! Wǒ zǎoshang jǐ diǎn lái?", "Great! What time should I come in the morning?"],
             [0, "八点吧。星期六晚上我请你吃饭！", "Bā diǎn ba. Xīngqīliù wǎnshang wǒ qǐng nǐ chī fàn!", "Eight. And dinner's on me Saturday night!"]
           ]
@@ -2783,9 +2784,9 @@ window.MANDAYRIN_COURSE = {
           cast: [["小美", "Xiǎoměi"], ["王芳", "Wáng Fāng"]],
           lines: [
             [0, "王芳姐姐，我可以帮你吗？", "Wáng Fāng jiějie, wǒ kěyǐ bāng nǐ ma?", "Wang Fang, can I help you?"],
-            [1, "好！你帮我擦窗户吧。", "Hǎo! Nǐ bāng wǒ cā chuānghu ba.", "Sure! Help me wipe the windows."],
-            [0, "窗户好脏！", "Chuānghu hǎo zāng!", "The windows are so dirty!"],
-            [1, "是，很脏。你看，现在干净了！", "Shì, hěn zāng. Nǐ kàn, xiànzài gānjìng le!", "They are. Look, now they're clean!"],
+            [1, "好！你帮我擦桌子吧。", "Hǎo! Nǐ bāng wǒ cā zhuōzi ba.", "Sure! Help me wipe the table."],
+            [0, "桌子好脏！", "Zhuōzi hǎo zāng!", "The table's so dirty!"],
+            [1, "是，真脏。你看，现在干净了！", "Shì, zhēn zāng. Nǐ kàn, xiànzài gānjìng le!", "It really is. Look, now it's clean!"],
             [0, "我在家也做家务！我自己整理房间。", "Wǒ zài jiā yě zuò jiāwù! Wǒ zìjǐ zhěnglǐ fángjiān.", "I do housework at home too! I tidy my room all by myself."],
             [1, "是吗？你妈妈说你的房间很乱！", "Shì ma? Nǐ māma shuō nǐ de fángjiān hěn luàn!", "Oh really? Your mom says your room is messy!"],
             [0, "……明天我整理！", "…Míngtiān wǒ zhěnglǐ!", "…I'll tidy it tomorrow!"]
@@ -2860,7 +2861,7 @@ window.MANDAYRIN_COURSE = {
             [1, "那我能拍花的照片吗？", "Nà wǒ néng pāi huā de zhàopiàn ma?", "Then can I take pictures of the flowers?"],
             [0, "可以。请别在草上跑。", "Kěyǐ. Qǐng bié zài cǎo shang pǎo.", "Sure. Just don't run on the grass, please."],
             [1, "大卫，树上有一只鸟！", "Dàwèi, shù shang yǒu yì zhī niǎo!", "David, there's a bird in the tree!"],
-            [0, "鸟在唱歌呢。", "Niǎo zài chàng gē ne.", "It's singing."],
+            [0, "它在唱歌呢。", "Tā zài chàng gē ne.", "It's singing."],
             [1, "我最喜欢大自然了！", "Wǒ zuì xǐhuan dà zìrán le!", "I love nature the most!"]
           ]
         }
@@ -2903,7 +2904,7 @@ window.MANDAYRIN_COURSE = {
             [0, "我也想看看中国的春节。", "Wǒ yě xiǎng kànkan Zhōngguó de Chūnjié.", "I'd love to see a Chinese Spring Festival too."],
             [1, "那你和我一起回家过年吧！", "Nà nǐ hé wǒ yìqǐ huí jiā guònián ba!", "Then come home with me for New Year!"],
             [0, "可以吗？我要给红包吗？", "Kěyǐ ma? Wǒ yào gěi hóngbāo ma?", "Really? Do I have to give red envelopes?"],
-            [1, "不要，你是客人。我妈妈还会给你一个红包！", "Bú yào, nǐ shì kèrén. Wǒ māma hái huì gěi nǐ yí ge hóngbāo!", "No, you're a guest. My mom will probably give you one!"]
+            [1, "不用，你是客人。我妈妈还会给你一个红包！", "Bú yòng, nǐ shì kèrén. Wǒ māma hái huì gěi nǐ yí ge hóngbāo!", "No need, you're a guest. My mom will probably give you one!"]
           ]
         },
         {
@@ -2934,7 +2935,7 @@ window.MANDAYRIN_COURSE = {
             [1, "你们美国人新年的时候放鞭炮吗？", "Nǐmen Měiguó rén xīnnián de shíhou fàng biānpào ma?", "Do Americans set off firecrackers at New Year?"],
             [0, "我们不放鞭炮。新年晚上，大家一起等十二点。", "Wǒmen bú fàng biānpào. Xīnnián wǎnshang, dàjiā yìqǐ děng shí'èr diǎn.", "We don't do firecrackers. On New Year's Eve, everyone waits for midnight together."],
             [1, "中国人过年喜欢放鞭炮，很热闹。", "Zhōngguó rén guònián xǐhuan fàng biānpào, hěn rènao.", "Chinese people love firecrackers at New Year. It's really noisy and fun."],
-            [0, "我知道！我在中国的第一个春节，晚上都不能睡觉！", "Wǒ zhīdào! Wǒ zài Zhōngguó de dì yī ge Chūnjié, wǎnshang dōu bù néng shuìjiào!", "I know! My first Spring Festival in China, I couldn't sleep all night!"],
+            [0, "我知道！我在中国的第一个春节，一晚上都没睡觉！", "Wǒ zhīdao! Wǒ zài Zhōngguó de dì-yī ge Chūnjié, yì wǎnshang dōu méi shuìjiào!", "I know! My first Spring Festival in China, I didn't sleep all night!"],
             [1, "那圣诞节快乐，新年快乐！", "Nà Shèngdànjié kuàilè, xīnnián kuàilè!", "Well then, merry Christmas and happy New Year!"]
           ]
         }
@@ -2950,7 +2951,7 @@ window.MANDAYRIN_COURSE = {
         ["明星", "míngxīng", "celebrity; star", "noun", "王芳在超市看见了一个明星！", "Wáng Fāng zài chāoshì kànjiàn le yí ge míngxīng!", "Wang Fang saw a celebrity at the supermarket!"],
         ["歌手", "gēshǒu", "singer", "noun", "我最喜欢的歌手是中国人。", "Wǒ zuì xǐhuan de gēshǒu shì Zhōngguó rén.", "My favorite singer is Chinese."],
         ["演唱会", "yǎnchànghuì", "concert", "noun", "下个月我要去听演唱会。", "Xià ge yuè wǒ yào qù tīng yǎnchànghuì.", "I'm going to a concert next month."],
-        ["故事", "gùshi", "story", "noun", "妈妈每天晚上给小美读故事。", "Māma měi tiān wǎnshang gěi Xiǎoměi dú gùshi.", "Mom reads Xiaomei a story every night."],
+        ["故事", "gùshi", "story", "noun", "小美每天晚上都要听妈妈说故事。", "Xiǎoměi měi tiān wǎnshang dōu yào tīng māma shuō gùshi.", "Xiaomei wants Mom to tell her a story every night."],
         ["字幕", "zìmù", "subtitles", "noun", "我看中国电影要看字幕。", "Wǒ kàn Zhōngguó diànyǐng yào kàn zìmù.", "I need subtitles when I watch Chinese films."],
         ["部", "bù", "(measure word for movies)", "measure", "我昨天看了两部电影。", "Wǒ zuótiān kàn le liǎng bù diànyǐng.", "I watched two movies yesterday."],
         ["首", "shǒu", "(measure word for songs)", "measure", "这首歌很好听。", "Zhè shǒu gē hěn hǎotīng.", "This song is lovely."],
@@ -2991,7 +2992,7 @@ window.MANDAYRIN_COURSE = {
             [1, "她的歌好听吗？", "Tā de gē hǎotīng ma?", "Are her songs any good?"],
             [0, "很好听！你听听这首，这是我最喜欢的。", "Hěn hǎotīng! Nǐ tīngting zhè shǒu, zhè shì wǒ zuì xǐhuan de.", "They're great! Listen to this one, it's my favorite."],
             [1, "很好听！票贵不贵？", "Hěn hǎotīng! Piào guì bu guì?", "It's lovely! Are the tickets expensive?"],
-            [0, "有一点儿贵。我很想去！", "Yǒu yìdiǎnr guì. Wǒ hěn xiǎng qù!", "A bit. But I really want to go!"],
+            [0, "有一点儿贵，可是我很想去！", "Yǒu yìdiǎnr guì, kěshì wǒ hěn xiǎng qù!", "A bit. But I really want to go!"],
             [1, "没关系，我去！我们一起去买票吧。", "Méi guānxi, wǒ qù! Wǒmen yìqǐ qù mǎi piào ba.", "That's fine, I'm going! Let's go buy tickets together."]
           ]
         },
@@ -3004,7 +3005,7 @@ window.MANDAYRIN_COURSE = {
             [0, "王芳，电视上的节目都太无聊了！", "Wáng Fāng, diànshì shang de jiémù dōu tài wúliáo le!", "Wang Fang, everything on TV is so boring!"],
             [1, "那你想看什么？", "Nà nǐ xiǎng kàn shénme?", "So what do you want to watch?"],
             [0, "我想看动物的节目！", "Wǒ xiǎng kàn dòngwù de jiémù!", "I want to watch an animal show!"],
-            [1, "现在没有。我给你读一个故事吧。", "Xiànzài méiyǒu. Wǒ gěi nǐ dú yí ge gùshi ba.", "There isn't one on right now. How about I read you a story?"],
+            [1, "现在没有。我给你说一个故事吧。", "Xiànzài méiyǒu. Wǒ gěi nǐ shuō yí ge gùshi ba.", "There isn't one on right now. How about I tell you a story?"],
             [0, "好！我要听熊猫的故事！", "Hǎo! Wǒ yào tīng xióngmāo de gùshi!", "Okay! I want a story about pandas!"],
             [1, "好，你坐在这儿，我们一起看这本书。", "Hǎo, nǐ zuò zài zhèr, wǒmen yìqǐ kàn zhè běn shū.", "Okay, sit here and we'll look at this book together."],
             [0, "这个故事比电视有意思多了！", "Zhège gùshi bǐ diànshì yǒu yìsi duō le!", "This story is way more fun than TV!"]
@@ -3044,7 +3045,7 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "王芳，我饿了，也不想做饭。我们叫外卖吧！", "Wáng Fāng, wǒ è le, yě bù xiǎng zuò fàn. Wǒmen jiào wàimài ba!", "Wang Fang, I'm hungry and I don't feel like cooking. Let's order takeout!"],
             [1, "好。你下载那个外卖软件了吗？", "Hǎo. Nǐ xiàzài nàge wàimài ruǎnjiàn le ma?", "Sure. Did you download that delivery app?"],
-            [0, "下载了。我登录不了，不知道密码是什么。", "Xiàzài le. Wǒ dēnglù bu liǎo, bù zhīdào mìmǎ shì shénme.", "I did. But I can't log in. I don't know what my password is."],
+            [0, "下载了，可是我不知道密码，登录不了。", "Xiàzài le, kěshì wǒ bù zhīdao mìmǎ, dēnglù bù liǎo.", "I did, but I don't know the password, so I can't log in."],
             [1, "那在我的手机上点吧。你想吃什么？", "Nà zài wǒ de shǒujī shang diǎn ba. Nǐ xiǎng chī shénme?", "Then order on my phone. What do you want?"],
             [0, "我搜索一下饺子……这家的评价很好！", "Wǒ sōusuǒ yíxià jiǎozi… zhè jiā de píngjià hěn hǎo!", "Let me search for dumplings… this place has great reviews!"],
             [1, "好，我来支付。", "Hǎo, wǒ lái zhīfù.", "Okay, I'll pay."],
@@ -3060,7 +3061,7 @@ window.MANDAYRIN_COURSE = {
             [0, "安娜，你收到你的毛衣了吗？", "Ānnà, nǐ shōudào nǐ de máoyī le ma?", "Anna, did you get your sweater?"],
             [1, "收到了，太大了。我想退货。", "Shōudào le, tài dà le. Wǒ xiǎng tuìhuò.", "I did. It's too big. I want to return it."],
             [0, "那个网站可以免费退货。", "Nàge wǎngzhàn kěyǐ miǎnfèi tuìhuò.", "That website lets you return things for free."],
-            [1, "太好了！在网上能退吗？", "Tài hǎo le! Zài wǎngshang néng tuì ma?", "Great! Can I do the return online?"],
+            [1, "太好了！在网上可以退货吗？", "Tài hǎo le! Zài wǎngshang kěyǐ tuìhuò ma?", "Great! Can I do the return online?"],
             [0, "能。你上网找到你的订单，点“退货”。", "Néng. Nǐ shàngwǎng zhǎodào nǐ de dìngdān, diǎn “tuìhuò”.", "Yes. Go online, find your order and tap 'Return'."],
             [1, "然后呢？", "Ránhòu ne?", "And then?"],
             [0, "然后等快递来你家。", "Ránhòu děng kuàidì lái nǐ jiā.", "Then just wait for the courier to come to your place."],
@@ -3119,7 +3120,7 @@ window.MANDAYRIN_COURSE = {
             [0, "认识，是“湖”。", "Rènshi, shì “hú”.", "Yes, it's hú, 'lake'."],
             [1, "对！那这个呢？", "Duì! Nà zhège ne?", "Right! What about this one?"],
             [0, "这个……我忘了。", "Zhège… wǒ wàng le.", "This one… I forgot."],
-            [1, "是“声调”的第二个汉字。你再记一下。", "Shì “shēngdiào” de dì èr ge Hànzì. Nǐ zài jì yíxià.", "It's the second character of shēngdiào. Go over it again."],
+            [1, "是“声调”的第二个汉字。你再记一下吧。", "Shì “shēngdiào” de dì èr ge Hànzì. Nǐ zài jì yíxià ba.", "It's the second character of shēngdiào. Go over it again."],
             [0, "汉字太难记了！", "Hànzì tài nán jì le!", "Characters are so hard to remember!"],
             [1, "别着急，你进步很大！", "Bié zháojí, nǐ jìnbù hěn dà!", "Don't stress, you've improved a lot!"]
           ]
@@ -3130,9 +3131,9 @@ window.MANDAYRIN_COURSE = {
           setting: "Teacher Zhang corrects David's tones in class.",
           cast: [["张老师", "Zhāng lǎoshī"], ["大卫", "Dàwèi"]],
           lines: [
-            [0, "大卫，请读这个句子。", "Dàwèi, qǐng dú zhège jùzi.", "David, please read this sentence."],
-            [1, "“我要卖马。”", "“Wǒ yào mài mǎ.”", "'I want to sell a horse.'"],
-            [0, "声调错了。句子是“我要买马”，不是“卖马”。", "Shēngdiào cuò le. Jùzi shì “wǒ yào mǎi mǎ”, bú shì “mài mǎ”.", "Wrong tone. The sentence is 'I want to buy a horse' (mǎi), not 'sell a horse' (mài)."],
+            [0, "大卫，你来说一下这个句子。", "Dàwèi, nǐ lái shuō yíxià zhège jùzi.", "David, can you say this sentence for us?"],
+            [1, "“我要卖书。”", "“Wǒ yào mài shū.”", "'I want to sell books.'"],
+            [0, "声调错了。句子是“我要买书”，不是“卖书”。", "Shēngdiào cuò le. Jùzi shì “wǒ yào mǎi shū”, bú shì “mài shū”.", "Wrong tone. The sentence is 'I want to buy books' (mǎi), not 'sell books' (mài)."],
             [1, "对不起，我说错了。“买”和“卖”的发音不一样吧？", "Duìbuqǐ, wǒ shuō cuò le. “Mǎi” hé “mài” de fāyīn bù yíyàng ba?", "Sorry, I said it wrong. Mǎi and mài sound different, right?"],
             [0, "对。声调不一样，意思也不一样。", "Duì. Shēngdiào bù yíyàng, yìsi yě bù yíyàng.", "Right. Different tone, different meaning."],
             [1, "中文的声调太难了！", "Zhōngwén de shēngdiào tài nán le!", "Chinese tones are so hard!"],
@@ -3151,7 +3152,7 @@ window.MANDAYRIN_COURSE = {
             [1, "你每天记几个词？", "Nǐ měi tiān jì jǐ ge cí?", "How many words do you learn a day?"],
             [0, "十个。我常常忘，所以每天晚上复习。", "Shí ge. Wǒ chángcháng wàng, suǒyǐ měi tiān wǎnshang fùxí.", "Ten. I forget a lot, so I review every evening."],
             [1, "很好！你的中文进步很大。", "Hěn hǎo! Nǐ de Zhōngwén jìnbù hěn dà.", "Great! Your Chinese has come a long way."],
-            [0, "谢谢！我还想学习写汉字。", "Xièxie! Wǒ hái xiǎng xuéxí xiě Hànzì.", "Thanks! I'd like to learn to write characters too."]
+            [0, "谢谢！我还想学写汉字。", "Xièxie! Wǒ hái xiǎng xué xiě Hànzì.", "Thanks! I'd like to learn to write characters too."]
           ]
         }
       ]
@@ -3159,7 +3160,7 @@ window.MANDAYRIN_COURSE = {
 
     44: {
       words: [
-        ["职业", "zhíyè", "occupation", "noun", "你的职业是什么？", "Nǐ de zhíyè shì shénme?", "What's your occupation?"],
+        ["大学", "dàxué", "university; college", "noun", "我弟弟明年上大学。", "Wǒ dìdi míngnián shàng dàxué.", "My little brother starts university next year."],
         ["律师", "lǜshī", "lawyer", "noun", "她姐姐是律师，工作很忙。", "Tā jiějie shì lǜshī, gōngzuò hěn máng.", "Her older sister is a lawyer and is always busy."],
         ["工程师", "gōngchéngshī", "engineer", "noun", "这个工程师每天加班。", "Zhège gōngchéngshī měi tiān jiā bān.", "This engineer works overtime every day."],
         ["护士", "hùshi", "nurse", "noun", "医院里的护士都很热情。", "Yīyuàn lǐ de hùshi dōu hěn rèqíng.", "The nurses at the hospital are all really warm."],
@@ -3188,12 +3189,12 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "李明，你是做什么工作的？", "Lǐ Míng, nǐ shì zuò shénme gōngzuò de?", "Li Ming, what do you do?"],
             [1, "我是工程师。你呢？", "Wǒ shì gōngchéngshī. Nǐ ne?", "I'm an engineer. And you?"],
-            [0, "我是记者。你家人也是工程师吗？", "Wǒ shì jìzhě. Nǐ jiārén yě shì gōngchéngshī ma?", "I'm a journalist. Is your family all engineers too?"],
-            [1, "不是。我们家每个人的职业都不一样。", "Bú shì. Wǒmen jiā měi ge rén de zhíyè dōu bù yíyàng.", "No. Everyone in my family does something different."],
+            [0, "我是记者。你家里人也都是工程师吗？", "Wǒ shì jìzhě. Nǐ jiā lǐ rén yě dōu shì gōngchéngshī ma?", "I'm a journalist. Is everyone in your family an engineer too?"],
+            [1, "不是。我们家每个人的工作都不一样。", "Bú shì. Wǒmen jiā měi ge rén de gōngzuò dōu bù yíyàng.", "No. Everyone in my family does something different."],
             [0, "是吗？你爸爸是做什么的？", "Shì ma? Nǐ bàba shì zuò shénme de?", "Really? What does your dad do?"],
             [1, "他是警察。我姐姐是护士，哥哥是律师。", "Tā shì jǐngchá. Wǒ jiějie shì hùshi, gēge shì lǜshī.", "He's a police officer. My older sister's a nurse and my older brother's a lawyer."],
-            [1, "我弟弟还在学校，他想成为厨师。", "Wǒ dìdi hái zài xuéxiào, tā xiǎng chéngwéi chúshī.", "My little brother's still in school. He wants to be a chef."],
-            [0, "你家人都很厉害！我想常常去你弟弟那儿吃饭！", "Nǐ jiārén dōu hěn lìhai! Wǒ xiǎng chángcháng qù nǐ dìdi nàr chī fàn!", "Your family's amazing! I'd love to eat at your brother's place all the time!"]
+            [1, "我弟弟还在上大学，他想成为厨师。", "Wǒ dìdi hái zài shàng dàxué, tā xiǎng chéngwéi chúshī.", "My little brother's still at university. He wants to be a chef."],
+            [0, "你们家的人都好厉害！我想常常去你弟弟那儿吃饭！", "Nǐmen jiā de rén dōu hǎo lìhai! Wǒ xiǎng chángcháng qù nǐ dìdi nàr chī fàn!", "Your family's amazing! I'd love to eat at your brother's place all the time!"]
           ]
         },
         {
@@ -3204,10 +3205,10 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "经理，你好！我是安娜，我来面试。", "Jīnglǐ, nǐ hǎo! Wǒ shì Ānnà, wǒ lái miànshì.", "Hello! I'm Anna. I'm here for the interview."],
             [1, "你好，请坐。我看了你的简历。你是什么时候毕业的？", "Nǐ hǎo, qǐng zuò. Wǒ kàn le nǐ de jiǎnlì. Nǐ shì shénme shíhou bìyè de?", "Hello, have a seat. I've read your résumé. When did you graduate?"],
-            [0, "我毕业两年了。我的专业是中文。", "Wǒ bìyè liǎng nián le. Wǒ de zhuānyè shì Zhōngwén.", "Two years ago. I majored in Chinese."],
+            [0, "我大学毕业两年了。我的专业是中文。", "Wǒ dàxué bìyè liǎng nián le. Wǒ de zhuānyè shì Zhōngwén.", "I graduated from university two years ago. I majored in Chinese."],
             [1, "你有工作经验吗？", "Nǐ yǒu gōngzuò jīngyàn ma?", "Do you have any work experience?"],
             [0, "有，我在一家美国公司工作了两年。", "Yǒu, wǒ zài yì jiā Měiguó gōngsī gōngzuò le liǎng nián.", "Yes, I worked at an American company for two years."],
-            [1, "很好。这个工作常常要加班，工资也不错。你下星期能来上班吗？", "Hěn hǎo. Zhège gōngzuò chángcháng yào jiā bān, gōngzī yě bú cuò. Nǐ xià xīngqī néng lái shàng bān ma?", "Very good. This job often means overtime, but the pay is good. Can you start next week?"],
+            [1, "很好。这个工作常常要加班，可是工资不错。你下星期能来上班吗？", "Hěn hǎo. Zhège gōngzuò chángcháng yào jiā bān, kěshì gōngzī bú cuò. Nǐ xià xīngqī néng lái shàng bān ma?", "Very good. This job often means overtime, but the pay is good. Can you start next week?"],
             [0, "能！太好了，谢谢！", "Néng! Tài hǎo le, xièxie!", "Yes! That's great, thank you!"]
           ]
         },
@@ -3224,7 +3225,7 @@ window.MANDAYRIN_COURSE = {
             [0, "喜欢。工作很有意思，工资也不错。", "Xǐhuan. Gōngzuò hěn yǒu yìsi, gōngzī yě bú cuò.", "I do. The work is interesting and the pay's not bad."],
             [1, "工资是什么？", "Gōngzī shì shénme?", "What's pay?"],
             [0, "工资是公司每个月给你的钱。", "Gōngzī shì gōngsī měi ge yuè gěi nǐ de qián.", "It's the money your company gives you every month."],
-            [1, "那我要很多工资，买很多糖！", "Nà wǒ yào hěn duō gōngzī, mǎi hěn duō táng!", "Then I want lots of pay, to buy lots of candy!"]
+            [1, "那我要很多很多工资，买很多蛋糕！", "Nà wǒ yào hěn duō hěn duō gōngzī, mǎi hěn duō dàngāo!", "Then I want lots and lots of pay, to buy lots of cake!"]
           ]
         }
       ]
@@ -3246,7 +3247,7 @@ window.MANDAYRIN_COURSE = {
         ["小心", "xiǎoxīn", "careful; watch out", "adjective", "小心！路上有很多车。", "Xiǎoxīn! Lù shang yǒu hěn duō chē.", "Careful! There are lots of cars on the road."],
         ["办法", "bànfǎ", "way; solution", "noun", "别着急，我有办法。", "Bié zháojí, wǒ yǒu bànfǎ.", "Don't worry, I've got an idea."],
         ["解决", "jiějué", "to solve", "verb", "这个问题我们马上解决。", "Zhège wèntí wǒmen mǎshàng jiějué.", "We'll sort this problem out right away."],
-        ["怎么办", "zěnme bàn", "what should I do?", "phrase", "下雨了，我没有伞，怎么办？", "Xià yǔ le, wǒ méiyǒu sǎn, zěnme bàn?", "It's raining and I have no umbrella. What do I do?"]
+        ["怎么办", "zěnme bàn", "what should I do?", "phrase", "下雨了，我没带伞，怎么办？", "Xià yǔ le, wǒ méi dài sǎn, zěnme bàn?", "It's raining and I didn't bring an umbrella. What do I do?"]
       ],
       patterns: [
         ["……了，怎么办？", "… le, zěnme bàn?", "… has happened — what do I do?", "我的钱包丢了，怎么办？", "Wǒ de qiánbāo diū le, zěnme bàn?", "I've lost my wallet. What do I do?"],
@@ -3311,12 +3312,12 @@ window.MANDAYRIN_COURSE = {
         ["请问", "qǐngwèn", "excuse me, may I ask …", "phrase", "请问，洗手间在哪儿？", "Qǐngwèn, xǐshǒujiān zài nǎr?", "Excuse me, where's the restroom?"],
         ["不好意思", "bù hǎo yìsi", "excuse me; sorry (to bother you)", "phrase", "不好意思，我迟到了。", "Bù hǎo yìsi, wǒ chídào le.", "Sorry I'm late."],
         ["需要", "xūyào", "to need", "verb", "我需要一点儿时间。", "Wǒ xūyào yìdiǎnr shíjiān.", "I need a little time."],
-        ["借", "jiè", "to borrow; to lend", "verb", "我可以借你的笔吗？", "Wǒ kěyǐ jiè nǐ de bǐ ma?", "Could I borrow your pen?"],
+        ["借", "jiè", "to borrow; to lend", "verb", "我可以借一下你的伞吗？", "Wǒ kěyǐ jiè yíxià nǐ de sǎn ma?", "Could I borrow your umbrella?"],
         ["问", "wèn", "to ask", "verb", "我想问你一个问题。", "Wǒ xiǎng wèn nǐ yí ge wèntí.", "I'd like to ask you a question."],
         ["急", "jí", "urgent", "adjective", "别急，慢慢来。", "Bié jí, mànmàn lái.", "No rush, take your time."],
         ["危险", "wēixiǎn", "dangerous", "adjective", "晚上一个人去那儿很危险。", "Wǎnshang yí ge rén qù nàr hěn wēixiǎn.", "It's dangerous to go there alone at night."],
         ["安全", "ānquán", "safe", "adjective", "这儿很安全，别担心。", "Zhèr hěn ānquán, bié dānxīn.", "It's safe here, don't worry."],
-        ["受伤", "shòushāng", "to get hurt", "verb", "他踢足球的时候受伤了。", "Tā tī zúqiú de shíhou shòushāng le.", "He got hurt playing soccer."],
+        ["受伤", "shòushāng", "to get hurt", "verb", "他打篮球的时候受伤了。", "Tā dǎ lánqiú de shíhou shòushāng le.", "He got hurt playing basketball."],
         ["救命", "jiùmìng", "help! (emergency)", "phrase", "救命！有人吗？", "Jiùmìng! Yǒu rén ma?", "Help! Is anyone there?"],
         ["报警", "bàojǐng", "to call the police", "verb", "钱包丢了，我们去报警吧。", "Qiánbāo diū le, wǒmen qù bàojǐng ba.", "The wallet's gone. Let's report it to the police."],
         ["救护车", "jiùhùchē", "ambulance", "noun", "快叫救护车！", "Kuài jiào jiùhùchē!", "Call an ambulance, quick!"],
@@ -3338,7 +3339,7 @@ window.MANDAYRIN_COURSE = {
             [0, "谢谢！我还想问一下，这儿晚上安全吗？", "Xièxie! Wǒ hái xiǎng wèn yíxià, zhèr wǎnshang ānquán ma?", "Thanks! Can I also ask, is it safe around here at night?"],
             [1, "很安全。别走那条小路，晚上有一点儿危险。", "Hěn ānquán. Bié zǒu nà tiáo xiǎolù, wǎnshang yǒu yìdiǎnr wēixiǎn.", "It's very safe. Just avoid that little lane — it's a bit dangerous at night."],
             [0, "好，我知道了。感谢你的帮助！", "Hǎo, wǒ zhīdào le. Gǎnxiè nǐ de bāngzhù!", "Okay, got it. Thank you for your help!"],
-            [1, "不客气。需要帮忙，再来找我。", "Bú kèqi. Xūyào bāngmáng, zài lái zhǎo wǒ.", "You're welcome. If you need help, come find me again."]
+            [1, "不客气。要是需要帮忙，再来找我。", "Bú kèqi. Yàoshi xūyào bāngmáng, zài lái zhǎo wǒ.", "You're welcome. If you need help, come find me again."]
           ]
         },
         {
@@ -3358,16 +3359,16 @@ window.MANDAYRIN_COURSE = {
           ]
         },
         {
-          title: "Someone at the window",
+          title: "Someone on the balcony",
           zh: "我要报警",
-          setting: "Late at night, Wang Fang hears a noise outside the apartment window.",
+          setting: "Late at night, Wang Fang hears a noise out on the apartment balcony.",
           cast: [["王芳", "Wáng Fāng"], ["大卫", "Dàwèi"], ["警察", "jǐngchá (police officer)"]],
           lines: [
-            [0, "大卫，你听！窗户那儿有人！", "Dàwèi, nǐ tīng! Chuānghu nàr yǒu rén!", "David, listen! There's someone at the window!"],
+            [0, "大卫，你听！阳台上有人！", "Dàwèi, nǐ tīng! Yángtái shang yǒu rén!", "David, listen! There's someone on the balcony!"],
             [1, "晚上十二点？太危险了，我们报警吧！", "Wǎnshang shí'èr diǎn? Tài wēixiǎn le, wǒmen bàojǐng ba!", "At midnight? That's dangerous — let's call the police!"],
-            [0, "我的手机没电了！我能借你的手机吗？", "Wǒ de shǒujī méi diàn le! Wǒ néng jiè nǐ de shǒujī ma?", "My phone's dead! Can I borrow yours?"],
+            [0, "我的手机没电了！我能借一下你的手机吗？", "Wǒ de shǒujī méi diàn le! Wǒ néng jiè yíxià nǐ de shǒujī ma?", "My phone's dead! Can I borrow yours?"],
             [1, "给你，快！", "Gěi nǐ, kuài!", "Here, quick!"],
-            [0, "喂，你好！我要报警，我家窗户那儿有一个人！", "Wéi, nǐ hǎo! Wǒ yào bàojǐng, wǒ jiā chuānghu nàr yǒu yí ge rén!", "Hello! I need the police — there's someone at my window!"],
+            [0, "喂，你好！我要报警，我家阳台上有一个人！", "Wéi, nǐ hǎo! Wǒ yào bàojǐng, wǒ jiā yángtái shang yǒu yí ge rén!", "Hello! I need the police — there's someone on my balcony!"],
             [1, "等一下……王芳，那是一只猫！", "Děng yíxià… Wáng Fāng, nà shì yì zhī māo!", "Wait… Wang Fang, it's a cat!"],
             [0, "一只猫？对不起，不好意思！", "Yì zhī māo? Duìbuqǐ, bù hǎo yìsi!", "A cat? Sorry, how embarrassing!"],
             [2, "没关系！晚上小心一点儿是对的。", "Méi guānxi! Wǎnshang xiǎoxīn yìdiǎnr shì duì de.", "No problem! It's right to be careful at night."]
@@ -3554,7 +3555,7 @@ window.MANDAYRIN_COURSE = {
             [2, "火锅？但是我不吃肉。", "Huǒguō? Dànshì wǒ bù chī ròu.", "Hotpot? But I don't eat meat."],
             [1, "没关系，火锅里也有很多菜和豆腐。", "Méi guānxi, huǒguō lǐ yě yǒu hěn duō cài hé dòufu.", "That's fine, hotpot has lots of vegetables and tofu too."],
             [2, "真的吗？那我同意！", "Zhēnde ma? Nà wǒ tóngyì!", "Really? Then I'm in!"],
-            [0, "我认为那家火锅比较辣，可以吗？", "Wǒ rènwéi nà jiā huǒguō bǐjiào là, kěyǐ ma?", "I think that hotpot place is pretty spicy. Is that okay?"],
+            [0, "我认为那家火锅比较辣，你们可以吗？", "Wǒ rènwéi nà jiā huǒguō bǐjiào là, nǐmen kěyǐ ma?", "I think that hotpot place is pretty spicy. Are you two okay with that?"],
             [1, "当然可以！我最喜欢辣的。", "Dāngrán kěyǐ! Wǒ zuì xǐhuan là de.", "Of course! I love spicy food."],
             [2, "如果太辣，我就多喝水！", "Rúguǒ tài là, wǒ jiù duō hē shuǐ!", "If it's too spicy, I'll just drink lots of water!"]
           ]
@@ -3644,7 +3645,7 @@ window.MANDAYRIN_COURSE = {
             [1, "五年以前。当时我很年轻，什么都不懂。", "Wǔ nián yǐqián. Dāngshí wǒ hěn niánqīng, shénme dōu bù dǒng.", "Five years ago. I was young and didn't know anything."],
             [0, "你觉得那是一个好经历吗？", "Nǐ juéde nà shì yí ge hǎo jīnglì ma?", "Was it a good experience?"],
             [1, "当然！那是我最难忘的经历。后来我回中国工作了。", "Dāngrán! Nà shì wǒ zuì nánwàng de jīnglì. Hòulái wǒ huí Zhōngguó gōngzuò le.", "Of course! It's my most unforgettable experience. Afterwards I came back to China to work."],
-            [0, "我和你一样！我以前什么都不懂，现在会说一点儿中文了。", "Wǒ hé nǐ yíyàng! Wǒ yǐqián shénme dōu bù dǒng, xiànzài huì shuō yìdiǎnr Zhōngwén le.", "Same as me! I used to know nothing, and now I can speak a bit of Chinese."]
+            [0, "我和你一样！我第一次来中国的时候什么都不懂，现在会说一点儿中文了。", "Wǒ hé nǐ yíyàng! Wǒ dì yī cì lái Zhōngguó de shíhou shénme dōu bù dǒng, xiànzài huì shuō yìdiǎnr Zhōngwén le.", "Same as me! When I first came to China I didn't understand a thing, and now I can speak a bit of Chinese."]
           ]
         },
         {
@@ -3713,7 +3714,7 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "李明，你已经二十九岁了。你什么时候结婚？", "Lǐ Míng, nǐ yǐjīng èrshíjiǔ suì le. Nǐ shénme shíhou jiéhūn?", "Li Ming, you're already twenty-nine. When are you getting married?"],
             [1, "妈妈，我现在工作很忙。", "Māma, wǒ xiànzài gōngzuò hěn máng.", "Mom, I'm really busy with work right now."],
-            [0, "工作忙，也要结婚！你哥哥姐姐都有孩子了。", "Gōngzuò máng, yě yào jiéhūn! Nǐ gēge jiějie dōu yǒu háizi le.", "Busy or not, you still need to get married! Your brother and sisters all have kids."],
+            [0, "工作再忙，也要结婚！你哥哥姐姐都有孩子了。", "Gōngzuò zài máng, yě yào jiéhūn! Nǐ gēge jiějie dōu yǒu háizi le.", "However busy you are, you still need to get married! Your brother and sisters all have kids."],
             [1, "我知道。我的目标是先努力工作，以后一定会结婚的。", "Wǒ zhīdào. Wǒ de mùbiāo shì xiān nǔlì gōngzuò, yǐhòu yídìng huì jiéhūn de.", "I know. My goal is to work hard first. I'll definitely get married later."],
             [0, "好吧。我和你爸爸快退休了，以后可以帮你看孩子！", "Hǎo ba. Wǒ hé nǐ bàba kuài tuìxiū le, yǐhòu kěyǐ bāng nǐ kān háizi!", "All right. Your dad and I are about to retire, so we can look after your kids!"],
             [1, "妈妈，我还不知道和谁结婚呢！", "Māma, wǒ hái bù zhīdào hé shéi jiéhūn ne!", "Mom, I don't even know who I'd marry yet!"]
@@ -3766,7 +3767,7 @@ window.MANDAYRIN_COURSE = {
           cast: [["张老师", "Zhāng lǎoshī"], ["大卫", "Dàwèi"], ["安娜", "Ānnà"]],
           lines: [
             [0, "今天我们来回顾一下过去的一年。大卫，你还记得第一天上课吗？", "Jīntiān wǒmen lái huígù yíxià guòqù de yì nián. Dàwèi, nǐ hái jìde dì yī tiān shàngkè ma?", "Today let's look back on the past year. David, do you remember your first class?"],
-            [1, "记得！当时我就会说“你好”和“谢谢”。", "Jìde! Dāngshí wǒ jiù huì shuō “nǐ hǎo” hé “xièxie”.", "I do! Back then all I could say was “hello” and “thank you”."],
+            [1, "记得！当时我只会说“你好”和“谢谢”。", "Jìde! Dāngshí wǒ zhǐ huì shuō “nǐ hǎo” hé “xièxie”.", "I do! Back then all I could say was “hello” and “thank you”."],
             [0, "现在呢？你觉得你的水平怎么样？", "Xiànzài ne? Nǐ juéde nǐ de shuǐpíng zěnmeyàng?", "And now? How do you think your level is?"],
             [1, "我觉得我的发音提高了很多，但是还不太流利。", "Wǒ juéde wǒ de fāyīn tígāo le hěn duō, dànshì hái bú tài liúlì.", "I think my pronunciation has improved a lot, but I'm still not very fluent."],
             [0, "你每天都坚持学习，进步很大。", "Nǐ měi tiān dōu jiānchí xuéxí, jìnbù hěn dà.", "You kept studying every single day, and you've made huge progress."],
@@ -3783,7 +3784,7 @@ window.MANDAYRIN_COURSE = {
           lines: [
             [0, "大卫，这一年你最大的收获是什么？", "Dàwèi, zhè yì nián nǐ zuì dà de shōuhuò shì shénme?", "David, what's the best thing you got out of this year?"],
             [1, "我最大的收获是可以和中国朋友说中文了。", "Wǒ zuì dà de shōuhuò shì kěyǐ hé Zhōngguó péngyou shuō Zhōngwén le.", "The best thing is that I can speak Chinese with my Chinese friends now."],
-            [0, "对！以前你点菜很紧张，现在什么都会说。", "Duì! Yǐqián nǐ diǎn cài hěn jǐnzhāng, xiànzài shénme dōu huì shuō.", "Right! You used to get nervous ordering food, and now you can say anything."],
+            [0, "对！以前你点菜的时候很紧张，现在说得这么好！", "Duì! Yǐqián nǐ diǎn cài de shíhou hěn jǐnzhāng, xiànzài shuō de zhème hǎo!", "Right! You used to get nervous ordering food, and now you speak so well!"],
             [1, "我感觉自己变了很多。其实我也有一点儿骄傲。", "Wǒ gǎnjué zìjǐ biàn le hěn duō. Qíshí wǒ yě yǒu yìdiǎnr jiāo'ào.", "I feel like I've changed a lot. Honestly, I'm a little proud of myself."],
             [0, "你应该骄傲！你的变化真的很大。不是每个人都能坚持一年。", "Nǐ yīnggāi jiāo'ào! Nǐ de biànhuà zhēnde hěn dà. Bú shì měi ge rén dōu néng jiānchí yì nián.", "You should be! You've really changed. Not everyone can stick with it for a whole year."],
             [1, "谢谢你一直帮我。你是我最好的老师！", "Xièxie nǐ yìzhí bāng wǒ. Nǐ shì wǒ zuì hǎo de lǎoshī!", "Thanks for always helping me. You're my best teacher!"],
@@ -3796,15 +3797,15 @@ window.MANDAYRIN_COURSE = {
           setting: "Friends gather for a dinner to celebrate David's year of Chinese.",
           cast: [["李明", "Lǐ Míng"], ["林美", "Lín Měi"], ["大卫", "Dàwèi"], ["安娜", "Ānnà"]],
           lines: [
-            [0, "来，我们一起祝贺大卫完成了一年的中文学习！", "Lái, wǒmen yìqǐ zhùhè Dàwèi wánchéng le yì nián de Zhōngwén xuéxí!", "Come on, let's all congratulate David on finishing a year of Chinese!"],
+            [0, "来，大家一起祝贺大卫完成了一年的中文学习！", "Lái, dàjiā yìqǐ zhùhè Dàwèi wánchéng le yì nián de Zhōngwén xuéxí!", "Come on, everyone, let's congratulate David on finishing a year of Chinese!"],
             [1, "大卫，请你总结一下过去的这一年！", "Dàwèi, qǐng nǐ zǒngjié yíxià guòqù de zhè yì nián!", "David, sum up your year for us!"],
             [2, "好！过去的一年很难，但是也很有意思。我认识了你们，也吃了很多好吃的中国菜！", "Hǎo! Guòqù de yì nián hěn nán, dànshì yě hěn yǒu yìsi. Wǒ rènshi le nǐmen, yě chī le hěn duō hǎochī de Zhōngguó cài!", "Okay! This past year was hard, but it was so much fun. I met all of you, and I ate lots of delicious Chinese food!"],
-            [3, "你现在说中文真的很流利！", "Nǐ xiànzài shuō Zhōngwén zhēnde hěn liúlì!", "Your Chinese is really fluent now!"],
+            [3, "你现在中文说得真流利！", "Nǐ xiànzài Zhōngwén shuō de zhēn liúlì!", "Your Chinese is so fluent now!"],
             [2, "还不太流利，但是我会继续努力。", "Hái bú tài liúlì, dànshì wǒ huì jìxù nǔlì.", "Not quite fluent yet, but I'll keep working at it."],
             [0, "未来你有什么打算？", "Wèilái nǐ yǒu shénme dǎsuàn?", "What are your plans for the future?"],
-            [2, "我希望未来的一年，我的中文水平可以更高！", "Wǒ xīwàng wèilái de yì nián, wǒ de Zhōngwén shuǐpíng kěyǐ gèng gāo!", "I hope that over the next year my Chinese gets even better!"],
+            [2, "我希望明年我的中文水平能更高，说得更流利！", "Wǒ xīwàng míngnián wǒ de Zhōngwén shuǐpíng néng gèng gāo, shuō de gèng liúlì!", "I hope next year my Chinese gets even better, and I speak even more fluently!"],
             [1, "你一定可以！我们都会帮你。", "Nǐ yídìng kěyǐ! Wǒmen dōu huì bāng nǐ.", "You definitely can! We'll all help you."],
-            [2, "谢谢你们！这是我最难忘的一年。", "Xièxie nǐmen! Zhè shì wǒ zuì nánwàng de yì nián.", "Thank you, all of you! This has been the most unforgettable year of my life."]
+            [2, "谢谢你们！这是我最难忘的一年。", "Xièxie nǐmen! Zhè shì wǒ zuì nánwàng de yì nián.", "Thank you, all of you! This has been my most unforgettable year."]
           ]
         }
       ]
