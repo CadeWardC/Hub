@@ -9,8 +9,11 @@
   const labels = {
     noun: "Noun", verb: "Verb", adjective: "Adjective", pronoun: "Pronoun", number: "Number",
     measure: "Measure word", question: "Question word", adverb: "Adverb", particle: "Particle",
-    conjunction: "Conjunction", phrase: "Phrase"
+    conjunction: "Conjunction", phrase: "Phrase", time: "Time word"
   };
+  // Recorded clips (build_audio.py): per week, a "words" pack (theme + words) and a "lines" pack (sentences).
+  const audioIndex = window.MANDAYRIN_AUDIO || {};
+  const audioPacks = new Map();
   const speakerIcon = `<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 10v4h3l4 4V6L8 10H5zM16 9a4 4 0 0 1 0 6m2-8a7 7 0 0 1 0 10"/></svg>`;
   const todayKey = localDateKey(new Date());
   const words = buildWords();
@@ -23,8 +26,6 @@
   let activeWordAudio = null;
   let activeWordAudioUrl = null;
   let activeWordButton = null;
-  let audioPack = null;
-  let audioPackError = null;
   let playback = null;
   let sheetReturnFocus = null;
   let quizState = { current: null, choices: [], correct: 0, attempts: 0, questionNumber: 0, answered: false, previousKey: "" };
@@ -38,19 +39,6 @@
   saveState();
   renderWeek();
   configureSpeechAudioSession();
-  fetch("./words.audio").then((response) => {
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.arrayBuffer();
-  }).then((buffer) => {
-    const clips = Object.values(window.MANDAYRIN_AUDIO_INDEX || {});
-    if (!clips.length || clips.some(([offset, length]) => offset + length > buffer.byteLength)) {
-      throw new Error("Incomplete audio pack");
-    }
-    audioPack = buffer;
-  }).catch((error) => {
-    audioPackError = error;
-    console.warn("ManDayRin recordings unavailable:", error);
-  });
   bindNavigation();
   bindSpeakButtons();
   bindWeekControls();
@@ -157,8 +145,8 @@
     return mainKinds.includes(kind) ? kind : "other";
   }
 
-  function sayButton(text, label) {
-    return `<button class="mini-speak" type="button" data-say="${esc(text)}" aria-label="${esc(label)}">${speakerIcon}</button>`;
+  function sayButton(text, label, clip = "") {
+    return `<button class="mini-speak" type="button" data-say="${esc(text)}" data-clip="${clip}" aria-label="${esc(label)}">${speakerIcon}</button>`;
   }
 
   function formatShortDate(date) {
@@ -180,6 +168,9 @@
     document.querySelector("#themePinyin").textContent = weekTheme.py;
     document.querySelector("#themeEn").textContent = weekTheme.en;
     document.querySelector("#themeSpeak").dataset.say = weekTheme.zh;
+    document.querySelector("#themeSpeak").dataset.clip = `${selectedWeek}:t`;
+    loadAudio(selectedWeek, "words");
+    loadAudio(selectedWeek, "lines");
     document.querySelector("#prevWeekButton").disabled = selectedWeek <= 1;
     document.querySelector("#nextWeekButton").disabled = selectedWeek >= currentWeek;
     document.querySelector("#weekPickerLabel").textContent = isCurrent ? "This week" : `Week ${pad(selectedWeek)}`;
@@ -200,13 +191,13 @@
 
     <section class="week-block" aria-labelledby="patternsHeading">
       <div class="block-heading"><h2 id="patternsHeading">Patterns</h2><span>${pad(data.patterns.length)}</span></div>
-      ${data.patterns.map(([zh, py, en, exZh, exPy, exEn]) => `<article class="pattern">
+      ${data.patterns.map(([zh, py, en, exZh, exPy, exEn], index) => `<article class="pattern">
         <div>
           <p class="pattern-frame" lang="zh-Hans">${esc(zh)}</p>
           <p class="pattern-meaning">${esc(py)} · ${esc(en)}</p>
           <p class="pattern-example"><span lang="zh-Hans">${esc(exZh)}</span> ${esc(exPy)} — ${esc(exEn)}</p>
         </div>
-        ${sayButton(exZh, `Hear: ${exEn}`)}
+        ${sayButton(exZh, `Hear: ${exEn}`, `${selectedWeek}:p${index}`)}
       </article>`).join("")}
     </section>
 
@@ -231,7 +222,7 @@
           <span class="lw-hanzi" lang="zh-Hans">${esc(word.hanzi)}</span>
           <span class="lw-text"><strong>${esc(word.pinyin)}</strong><span>${esc(word.meaning)}</span><small>${labels[word.kind] || word.kind}</small></span>
         </button>
-        ${sayButton(word.hanzi, `Hear ${word.hanzi} pronounced`)}
+        ${sayButton(word.hanzi, `Hear ${word.hanzi} pronounced`, `${word.week}:w${word.index}`)}
       </div>
       <div class="list-word-example" hidden>
         <div>
@@ -239,7 +230,7 @@
           <p class="ex-py">${esc(word.example.py)}</p>
           <p class="ex-en">${esc(word.example.en)}</p>
         </div>
-        ${sayButton(word.example.zh, "Hear the example sentence")}
+        ${sayButton(word.example.zh, "Hear the example sentence", `${word.week}:x${word.index}`)}
       </div>
     </article>`;
   }
@@ -323,7 +314,7 @@
           <p class="line-py">${esc(py)}</p>
           <p class="line-en">${esc(en)}</p>
         </div>
-        ${sayButton(zh, `Hear line ${index + 1}`)}
+        ${sayButton(zh, `Hear line ${index + 1}`, `${selectedWeek}:s${scenarioIndex}-${index}`)}
       </li>`;
     }).join("");
     document.querySelector("#prevScenarioButton").disabled = scenarioIndex === 0;
@@ -418,7 +409,8 @@
       document.querySelectorAll(".line").forEach((line) => line.classList.toggle("playing", Number(line.dataset.line) === index));
       const line = document.querySelector(`.line[data-line="${index}"]`);
       line.scrollIntoView({ block: "nearest", behavior: "smooth" });
-      speakChinese(lines[index][1], line.querySelector("[data-say]"), (finished) => {
+      const button = line.querySelector("[data-say]");
+      speakChinese(lines[index][1], button, (finished) => {
         if (playback !== token) return;
         if (!finished) {
           stopPlayback();

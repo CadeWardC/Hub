@@ -344,6 +344,281 @@ window.MANDAYRIN_COURSE = {
           ]
         }
       ]
+    },
+
+    5: {
+      words: [
+        ["今天", "jīntiān", "today", "noun", "今天星期几？", "Jīntiān xīngqī jǐ?", "What day is it today?"],
+        ["明天", "míngtiān", "tomorrow", "noun", "明天是星期六。", "Míngtiān shì xīngqīliù.", "Tomorrow is Saturday."],
+        ["昨天", "zuótiān", "yesterday", "noun", "昨天是星期五。", "Zuótiān shì xīngqīwǔ.", "Yesterday was Friday."],
+        ["星期", "xīngqī", "week (星期一 = Monday)", "noun", "今天星期一。", "Jīntiān xīngqīyī.", "Today is Monday."],
+        ["天", "tiān", "day (星期天 = Sunday)", "noun", "星期天我不忙。", "Xīngqītiān wǒ bù máng.", "I'm not busy on Sunday."],
+        ["月", "yuè", "month", "noun", "十月八号是我的生日。", "Shí yuè bā hào shì wǒ de shēngrì.", "October 8th is my birthday."],
+        ["号", "hào", "day of the month (date)", "measure", "今天几号？", "Jīntiān jǐ hào?", "What's the date today?"],
+        ["年", "nián", "year", "noun", "一年有十二个月。", "Yì nián yǒu shí'èr ge yuè.", "A year has twelve months."],
+        ["生日", "shēngrì", "birthday", "noun", "你的生日是几月几号？", "Nǐ de shēngrì shì jǐ yuè jǐ hào?", "When is your birthday?"],
+        ["周末", "zhōumò", "weekend", "noun", "周末你忙吗？", "Zhōumò nǐ máng ma?", "Are you busy this weekend?"],
+        ["去", "qù", "to go", "verb", "周末你去吗？", "Zhōumò nǐ qù ma?", "Are you going this weekend?"],
+        ["来", "lái", "to come", "verb", "明天你来吗？", "Míngtiān nǐ lái ma?", "Are you coming tomorrow?"],
+        ["忙", "máng", "busy", "adjective", "我今天很忙。", "Wǒ jīntiān hěn máng.", "I'm very busy today."],
+        ["上", "shàng", "last; previous (上个星期 = last week)", "time", "上个星期我很忙。", "Shàng ge xīngqī wǒ hěn máng.", "I was busy last week."],
+        ["下", "xià", "next (下个月 = next month)", "time", "下个月是我的生日。", "Xià ge yuè shì wǒ de shēngrì.", "My birthday is next month."]
+      ],
+      patterns: [
+        ["今天星期几？", "Jīntiān xīngqī jǐ?", "What day is it today?", "今天星期三。", "Jīntiān xīngqīsān.", "Today is Wednesday."],
+        ["……月……号", "… yuè … hào", "month + day (dates)", "我的生日是五月九号。", "Wǒ de shēngrì shì wǔ yuè jiǔ hào.", "My birthday is May 9th."]
+      ],
+      scenarios: [
+        {
+          title: "What's the date?",
+          zh: "今天几号？",
+          setting: "David has lost track of the days.",
+          cast: [["大卫", "Dàwèi"], ["王芳", "Wáng Fāng"]],
+          lines: [
+            [0, "王芳，今天星期几？", "Wáng Fāng, jīntiān xīngqī jǐ?", "Wang Fang, what day is it today?"],
+            [1, "今天星期五。", "Jīntiān xīngqīwǔ.", "It's Friday."],
+            [0, "今天几号？", "Jīntiān jǐ hào?", "What's the date?"],
+            [1, "今天十月九号。", "Jīntiān shí yuè jiǔ hào.", "It's October 9th."],
+            [0, "十月九号？明天是李明的生日！", "Shí yuè jiǔ hào? Míngtiān shì Lǐ Míng de shēngrì!", "October 9th? Tomorrow is Li Ming's birthday!"],
+            [1, "是！明天我们都去。", "Shì! Míngtiān wǒmen dōu qù.", "That's right! We're all going tomorrow."]
+          ]
+        },
+        {
+          title: "When's your birthday?",
+          zh: "你的生日是几月几号？",
+          setting: "Li Ming and Anna talk about birthdays.",
+          cast: [["李明", "Lǐ Míng"], ["安娜", "Ānnà"]],
+          lines: [
+            [0, "安娜，你的生日是几月几号？", "Ānnà, nǐ de shēngrì shì jǐ yuè jǐ hào?", "Anna, when's your birthday?"],
+            [1, "我的生日是五月二十号。你呢？", "Wǒ de shēngrì shì wǔ yuè èrshí hào. Nǐ ne?", "May 20th. And yours?"],
+            [0, "我的生日是十月十号——明天！", "Wǒ de shēngrì shì shí yuè shí hào — míngtiān!", "October 10th — tomorrow!"],
+            [1, "明天？你多大？", "Míngtiān? Nǐ duō dà?", "Tomorrow? How old will you be?"],
+            [0, "明天我二十九岁。", "Míngtiān wǒ èrshíjiǔ suì.", "Tomorrow I'll be twenty-nine."],
+            [1, "我们都去！", "Wǒmen dōu qù!", "We'll all be there!"]
+          ]
+        },
+        {
+          title: "Busy this weekend?",
+          zh: "周末你忙吗？",
+          setting: "Wang Fang wants to invite David over.",
+          cast: [["王芳", "Wáng Fāng"], ["大卫", "Dàwèi"]],
+          lines: [
+            [0, "大卫，周末你忙吗？", "Dàwèi, zhōumò nǐ máng ma?", "David, are you busy this weekend?"],
+            [1, "星期六我很忙。星期天不忙。", "Xīngqīliù wǒ hěn máng. Xīngqītiān bù máng.", "I'm busy Saturday, but not Sunday."],
+            [0, "星期天你来我家吗？", "Xīngqītiān nǐ lái wǒ jiā ma?", "Do you want to come to my place on Sunday?"],
+            [1, "好！你爸爸妈妈也来吗？", "Hǎo! Nǐ bàba māma yě lái ma?", "Sure! Are your parents coming too?"],
+            [0, "不来。我爸爸妈妈下个月来。", "Bù lái. Wǒ bàba māma xià ge yuè lái.", "No. My parents are coming next month."],
+            [1, "好，星期天见！", "Hǎo, xīngqītiān jiàn!", "Great, see you Sunday!"]
+          ]
+        }
+      ]
+    },
+
+    6: {
+      words: [
+        ["点", "diǎn", "o'clock", "measure", "现在三点。", "Xiànzài sān diǎn.", "It's three o'clock."],
+        ["分", "fēn", "minute", "measure", "现在八点十分。", "Xiànzài bā diǎn shí fēn.", "It's 8:10."],
+        ["半", "bàn", "half (七点半 = 7:30)", "number", "我七点半起床。", "Wǒ qī diǎn bàn qǐchuáng.", "I get up at 7:30."],
+        ["现在", "xiànzài", "now", "noun", "现在几点？", "Xiànzài jǐ diǎn?", "What time is it now?"],
+        ["时候", "shíhou", "time (什么时候 = when)", "noun", "你什么时候来？", "Nǐ shénme shíhou lái?", "When are you coming?"],
+        ["上午", "shàngwǔ", "morning (a.m.)", "noun", "我上午很忙。", "Wǒ shàngwǔ hěn máng.", "I'm busy in the morning."],
+        ["中午", "zhōngwǔ", "noon", "noun", "中午你来吗？", "Zhōngwǔ nǐ lái ma?", "Are you coming at noon?"],
+        ["下午", "xiàwǔ", "afternoon (p.m.)", "noun", "我下午两点去。", "Wǒ xiàwǔ liǎng diǎn qù.", "I'm going at 2 p.m."],
+        ["晚上", "wǎnshang", "evening; night", "noun", "我晚上十一点睡觉。", "Wǒ wǎnshang shíyī diǎn shuìjiào.", "I go to bed at 11 at night."],
+        ["起床", "qǐchuáng", "to get up", "verb", "你几点起床？", "Nǐ jǐ diǎn qǐchuáng?", "What time do you get up?"],
+        ["睡觉", "shuìjiào", "to sleep; to go to bed", "verb", "你几点睡觉？", "Nǐ jǐ diǎn shuìjiào?", "What time do you go to bed?"],
+        ["等", "děng", "to wait", "verb", "等我！", "Děng wǒ!", "Wait for me!"],
+        ["早", "zǎo", "early", "adjective", "你很早！", "Nǐ hěn zǎo!", "You're early!"],
+        ["晚", "wǎn", "late", "adjective", "对不起，我晚了。", "Duìbuqǐ, wǒ wǎn le.", "Sorry, I'm late."],
+        ["了", "le", "(marks a change or something done)", "particle", "几点了？", "Jǐ diǎn le?", "What time is it?"]
+      ],
+      patterns: [
+        ["现在几点？——现在……点。", "Xiànzài jǐ diǎn? — Xiànzài … diǎn.", "What time is it? — It's … o'clock.", "现在九点半。", "Xiànzài jiǔ diǎn bàn.", "It's 9:30."],
+        ["你几点……？", "Nǐ jǐ diǎn …?", "What time do you …?", "你几点起床？——我六点起床。", "Nǐ jǐ diǎn qǐchuáng? — Wǒ liù diǎn qǐchuáng.", "What time do you get up? — At six."]
+      ],
+      scenarios: [
+        {
+          title: "What time is it?",
+          zh: "几点了？",
+          setting: "David wakes up in a panic and can't find his phone.",
+          cast: [["大卫", "Dàwèi"], ["王芳", "Wáng Fāng"]],
+          lines: [
+            [0, "王芳，几点了？", "Wáng Fāng, jǐ diǎn le?", "Wang Fang, what time is it?"],
+            [1, "现在八点半。", "Xiànzài bā diǎn bàn.", "It's 8:30."],
+            [0, "八点半？我晚了！", "Bā diǎn bàn? Wǒ wǎn le!", "8:30? I'm late!"],
+            [1, "你什么时候去？", "Nǐ shénme shíhou qù?", "When do you have to go?"],
+            [0, "九点！对不起，再见！", "Jiǔ diǎn! Duìbuqǐ, zàijiàn!", "At nine! Sorry, bye!"],
+            [1, "等等！今天星期六！", "Děngdeng! Jīntiān xīngqīliù!", "Wait! It's Saturday!"]
+          ]
+        },
+        {
+          title: "Early bird, night owl",
+          zh: "你几点起床？",
+          setting: "Li Ming and David compare their sleep schedules.",
+          cast: [["李明", "Lǐ Míng"], ["大卫", "Dàwèi"]],
+          lines: [
+            [0, "大卫，你几点起床？", "Dàwèi, nǐ jǐ diǎn qǐchuáng?", "David, what time do you get up?"],
+            [1, "我上午十点起床。", "Wǒ shàngwǔ shí diǎn qǐchuáng.", "I get up at ten in the morning."],
+            [0, "十点？很晚！我六点起床。", "Shí diǎn? Hěn wǎn! Wǒ liù diǎn qǐchuáng.", "Ten? That's late! I get up at six."],
+            [1, "六点？很早！你几点睡觉？", "Liù diǎn? Hěn zǎo! Nǐ jǐ diǎn shuìjiào?", "Six? That's early! What time do you go to bed?"],
+            [0, "晚上十点。你呢？", "Wǎnshang shí diǎn. Nǐ ne?", "Ten at night. You?"],
+            [1, "我两点睡觉。", "Wǒ liǎng diǎn shuìjiào.", "I go to bed at two."]
+          ]
+        },
+        {
+          title: "Lunch at noon",
+          zh: "中午你忙吗？",
+          setting: "Wang Fang calls Anna to make plans.",
+          cast: [["王芳", "Wáng Fāng"], ["安娜", "Ānnà"]],
+          lines: [
+            [0, "安娜，明天中午你忙吗？", "Ānnà, míngtiān zhōngwǔ nǐ máng ma?", "Anna, are you busy tomorrow at noon?"],
+            [1, "中午不忙。下午很忙。", "Zhōngwǔ bù máng. Xiàwǔ hěn máng.", "Not at noon. I'm busy in the afternoon."],
+            [0, "十二点你来我家，好吗？", "Shí'èr diǎn nǐ lái wǒ jiā, hǎo ma?", "Come to my place at twelve, okay?"],
+            [1, "好！我十一点五十分来。", "Hǎo! Wǒ shíyī diǎn wǔshí fēn lái.", "Okay! I'll come at 11:50."],
+            [0, "很早！好，我等你。", "Hěn zǎo! Hǎo, wǒ děng nǐ.", "Nice and early! Okay, I'll be waiting."]
+          ]
+        }
+      ]
+    },
+
+    7: {
+      words: [
+        ["吃", "chī", "to eat", "verb", "你吃饭了吗？", "Nǐ chī fàn le ma?", "Have you eaten? (a friendly greeting)"],
+        ["喝", "hē", "to drink", "verb", "你想喝什么？", "Nǐ xiǎng hē shénme?", "What would you like to drink?"],
+        ["饭", "fàn", "meal; cooked rice", "noun", "我们去吃饭！", "Wǒmen qù chī fàn!", "Let's go eat!"],
+        ["面条", "miàntiáo", "noodles", "noun", "我很喜欢吃面条。", "Wǒ hěn xǐhuan chī miàntiáo.", "I really like noodles."],
+        ["菜", "cài", "dish; vegetables", "noun", "妈妈做的菜很好吃。", "Māma zuò de cài hěn hǎochī.", "Mom's cooking is delicious."],
+        ["肉", "ròu", "meat", "noun", "我不吃肉。", "Wǒ bù chī ròu.", "I don't eat meat."],
+        ["鸡蛋", "jīdàn", "egg", "noun", "早饭我吃两个鸡蛋。", "Zǎofàn wǒ chī liǎng ge jīdàn.", "I eat two eggs for breakfast."],
+        ["水果", "shuǐguǒ", "fruit", "noun", "你喜欢吃水果吗？", "Nǐ xǐhuan chī shuǐguǒ ma?", "Do you like fruit?"],
+        ["包子", "bāozi", "steamed bun", "noun", "我想吃包子。", "Wǒ xiǎng chī bāozi.", "I'd like some steamed buns."],
+        ["早饭", "zǎofàn", "breakfast", "noun", "你吃早饭了吗？", "Nǐ chī zǎofàn le ma?", "Did you have breakfast?"],
+        ["饿", "è", "hungry", "adjective", "我很饿！", "Wǒ hěn è!", "I'm so hungry!"],
+        ["好吃", "hǎochī", "tasty; delicious", "adjective", "很好吃！", "Hěn hǎochī!", "Delicious!"],
+        ["想", "xiǎng", "to want to; would like", "verb", "你想吃什么？", "Nǐ xiǎng chī shénme?", "What do you want to eat?"],
+        ["做", "zuò", "to make; to do", "verb", "我做饭。", "Wǒ zuò fàn.", "I'll cook."],
+        ["喜欢", "xǐhuan", "to like", "verb", "她不喜欢吃鸡蛋。", "Tā bù xǐhuan chī jīdàn.", "She doesn't like eggs."]
+      ],
+      patterns: [
+        ["你想吃什么？——我想吃……", "Nǐ xiǎng chī shénme? — Wǒ xiǎng chī …", "What do you want to eat? — I'd like …", "我想吃面条。", "Wǒ xiǎng chī miàntiáo.", "I'd like noodles."],
+        ["我（不）喜欢……", "Wǒ (bù) xǐhuan …", "I (don't) like …", "我喜欢水果，不喜欢肉。", "Wǒ xǐhuan shuǐguǒ, bù xǐhuan ròu.", "I like fruit, not meat."]
+      ],
+      scenarios: [
+        {
+          title: "Have you eaten?",
+          zh: "你吃饭了吗？",
+          setting: "David comes home in the evening.",
+          cast: [["王芳", "Wáng Fāng"], ["大卫", "Dàwèi"]],
+          lines: [
+            [0, "大卫，你吃饭了吗？", "Dàwèi, nǐ chī fàn le ma?", "David, have you eaten?"],
+            [1, "没有。我很饿！", "Méiyǒu. Wǒ hěn è!", "No. I'm starving!"],
+            [0, "你想吃什么？", "Nǐ xiǎng chī shénme?", "What do you want to eat?"],
+            [1, "我想吃面条。你呢？", "Wǒ xiǎng chī miàntiáo. Nǐ ne?", "I'd like noodles. You?"],
+            [0, "我也想吃面条。我做！", "Wǒ yě xiǎng chī miàntiáo. Wǒ zuò!", "Noodles for me too. I'll make them!"],
+            [1, "谢谢你！", "Xièxie nǐ!", "Thank you!"]
+          ]
+        },
+        {
+          title: "Breakfast",
+          zh: "早饭",
+          setting: "Morning at Li Ming's family home.",
+          cast: [["李明", "Lǐ Míng"], ["李明的妈妈", "Lǐ Míng de māma"]],
+          lines: [
+            [1, "李明，起床了！吃早饭！", "Lǐ Míng, qǐchuáng le! Chī zǎofàn!", "Li Ming, time to get up! Breakfast!"],
+            [0, "妈妈，早上好！早饭有什么？", "Māma, zǎoshang hǎo! Zǎofàn yǒu shénme?", "Morning, Mom! What's for breakfast?"],
+            [1, "有包子和鸡蛋。", "Yǒu bāozi hé jīdàn.", "Steamed buns and eggs."],
+            [0, "我喜欢吃包子！有肉包子吗？", "Wǒ xǐhuan chī bāozi! Yǒu ròu bāozi ma?", "I love buns! Are there meat ones?"],
+            [1, "有。你也吃水果。", "Yǒu. Nǐ yě chī shuǐguǒ.", "Yes. Have some fruit too."],
+            [0, "好。很好吃！谢谢妈妈！", "Hǎo. Hěn hǎochī! Xièxie māma!", "Okay. Delicious! Thanks, Mom!"]
+          ]
+        },
+        {
+          title: "I don't eat meat",
+          zh: "我不吃肉",
+          setting: "Anna comes to Wang Fang's place for dinner.",
+          cast: [["王芳", "Wáng Fāng"], ["安娜", "Ānnà"]],
+          lines: [
+            [0, "安娜，你喜欢吃肉吗？", "Ānnà, nǐ xǐhuan chī ròu ma?", "Anna, do you like meat?"],
+            [1, "对不起，我不吃肉。", "Duìbuqǐ, wǒ bù chī ròu.", "Sorry, I don't eat meat."],
+            [0, "没关系！你吃鸡蛋吗？", "Méi guānxi! Nǐ chī jīdàn ma?", "No problem! Do you eat eggs?"],
+            [1, "吃。我也很喜欢菜和水果。", "Chī. Wǒ yě hěn xǐhuan cài hé shuǐguǒ.", "Yes. I love vegetables and fruit too."],
+            [0, "好，我做鸡蛋面条。", "Hǎo, wǒ zuò jīdàn miàntiáo.", "Great, I'll make egg noodles."],
+            [1, "很好吃！谢谢你！", "Hěn hǎochī! Xièxie nǐ!", "Delicious! Thank you!"]
+          ]
+        }
+      ]
+    },
+
+    8: {
+      words: [
+        ["咖啡", "kāfēi", "coffee", "noun", "我要一杯咖啡。", "Wǒ yào yì bēi kāfēi.", "A coffee, please."],
+        ["茶", "chá", "tea", "noun", "你喝茶还是咖啡？", "Nǐ hē chá háishi kāfēi?", "Tea or coffee?"],
+        ["水", "shuǐ", "water", "noun", "给我一杯水，谢谢。", "Gěi wǒ yì bēi shuǐ, xièxie.", "A glass of water, please."],
+        ["牛奶", "niúnǎi", "milk", "noun", "咖啡要牛奶吗？", "Kāfēi yào niúnǎi ma?", "Milk in your coffee?"],
+        ["果汁", "guǒzhī", "juice", "noun", "小美喜欢喝果汁。", "Xiǎoměi xǐhuan hē guǒzhī.", "Xiaomei likes juice."],
+        ["糖", "táng", "sugar", "noun", "我不要糖。", "Wǒ bú yào táng.", "No sugar for me."],
+        ["冰", "bīng", "ice (冰的 = iced)", "noun", "果汁要冰吗？", "Guǒzhī yào bīng ma?", "Do you want ice in your juice?"],
+        ["钱", "qián", "money", "noun", "一杯咖啡多少钱？", "Yì bēi kāfēi duōshao qián?", "How much is a coffee?"],
+        ["要", "yào", "to want; would like", "verb", "你要什么？", "Nǐ yào shénme?", "What would you like?"],
+        ["给", "gěi", "to give", "verb", "给你。", "Gěi nǐ.", "Here you go."],
+        ["热", "rè", "hot", "adjective", "我要热咖啡。", "Wǒ yào rè kāfēi.", "I'd like a hot coffee."],
+        ["杯", "bēi", "cup; glass (measure word)", "measure", "两杯茶", "liǎng bēi chá", "two cups of tea"],
+        ["还是", "háishi", "or (in questions)", "conjunction", "热的还是冰的？", "Rè de háishi bīng de?", "Hot or iced?"],
+        ["多少", "duōshao", "how much; how many", "question", "多少钱？", "Duōshao qián?", "How much is it?"],
+        ["块", "kuài", "yuan (spoken)", "measure", "二十八块。", "Èrshíbā kuài.", "28 yuan."]
+      ],
+      patterns: [
+        ["我要一杯……", "Wǒ yào yì bēi …", "I'd like a cup of …", "我要一杯热茶。", "Wǒ yào yì bēi rè chá.", "I'd like a hot tea."],
+        ["……还是……？", "… háishi …?", "… or …? (choice question)", "你要茶还是咖啡？", "Nǐ yào chá háishi kāfēi?", "Would you like tea or coffee?"]
+      ],
+      scenarios: [
+        {
+          title: "Ordering a coffee",
+          zh: "我要一杯咖啡",
+          setting: "David orders at the counter of a small café.",
+          cast: [["服务员", "fúwùyuán (server)"], ["大卫", "Dàwèi"]],
+          lines: [
+            [0, "你好！你要什么？", "Nǐ hǎo! Nǐ yào shénme?", "Hi! What can I get you?"],
+            [1, "我要一杯咖啡。", "Wǒ yào yì bēi kāfēi.", "A coffee, please."],
+            [0, "热的还是冰的？", "Rè de háishi bīng de?", "Hot or iced?"],
+            [1, "冰的。不要糖，谢谢。", "Bīng de. Bú yào táng, xièxie.", "Iced. No sugar, thanks."],
+            [0, "要牛奶吗？", "Yào niúnǎi ma?", "Any milk?"],
+            [1, "要。多少钱？", "Yào. Duōshao qián?", "Yes, please. How much?"],
+            [0, "二十八块。", "Èrshíbā kuài.", "28 yuan."],
+            [1, "给你。", "Gěi nǐ.", "Here you go."]
+          ]
+        },
+        {
+          title: "Tea for two",
+          zh: "两杯茶",
+          setting: "Wang Fang orders for herself and her mom.",
+          cast: [["王芳", "Wáng Fāng"], ["服务员", "fúwùyuán (server)"]],
+          lines: [
+            [0, "你好，我要两杯茶。", "Nǐ hǎo, wǒ yào liǎng bēi chá.", "Hi, two teas, please."],
+            [1, "热茶还是冰茶？", "Rè chá háishi bīng chá?", "Hot tea or iced tea?"],
+            [0, "一杯热茶，一杯冰茶。", "Yì bēi rè chá, yì bēi bīng chá.", "One hot, one iced."],
+            [1, "好的。要包子吗？", "Hǎo de. Yào bāozi ma?", "Okay. Would you like some buns?"],
+            [0, "不要，谢谢。多少钱？", "Bú yào, xièxie. Duōshao qián?", "No, thanks. How much?"],
+            [1, "两杯茶，三十块。", "Liǎng bēi chá, sānshí kuài.", "Two teas, 30 yuan."],
+            [0, "给你。", "Gěi nǐ.", "Here you are."]
+          ]
+        },
+        {
+          title: "Juice for Xiaomei",
+          zh: "果汁",
+          setting: "Wang Fang takes little Xiaomei to a café on a hot day.",
+          cast: [["王芳", "Wáng Fāng"], ["小美", "Xiǎoměi"]],
+          lines: [
+            [0, "小美，你想喝什么？", "Xiǎoměi, nǐ xiǎng hē shénme?", "Xiaomei, what would you like to drink?"],
+            [1, "我要咖啡！", "Wǒ yào kāfēi!", "I want coffee!"],
+            [0, "咖啡？你六岁！", "Kāfēi? Nǐ liù suì!", "Coffee? You're six!"],
+            [1, "好……我要果汁。", "Hǎo… wǒ yào guǒzhī.", "Fine… I'll have juice."],
+            [0, "果汁要冰吗？", "Guǒzhī yào bīng ma?", "Do you want ice in your juice?"],
+            [1, "要！我也要水，很热！", "Yào! Wǒ yě yào shuǐ, hěn rè!", "Yes! And water too, it's so hot!"],
+            [0, "好，给你。", "Hǎo, gěi nǐ.", "Okay, here you go."]
+          ]
+        }
+      ]
     }
   }
 };
