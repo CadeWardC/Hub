@@ -557,34 +557,52 @@
     if (days < 7) return `Due ${fromKey(key).toLocaleDateString(undefined, { weekday: "long" })}`;
     return `Due ${formatDay(key, "short")}`;
   }
+  // Built once per opening; afterwards refreshDue() only updates the
+  // highlight, so the date field is never swapped out while its picker is open.
   function paintDue() {
     const chips = $("dueChips");
-    const choices = dueChoices();
-    const known = choices.some((c) => c.value === dueValue);
-    chips.replaceChildren(...choices.map((c) => {
+    chips.replaceChildren(...dueChoices().map((c) => {
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "due-chip" + (c.value === dueValue ? " on" : "");
+      b.className = "due-chip";
+      b.dataset.value = c.value;
       b.textContent = c.label;
-      b.addEventListener("click", () => { dueValue = c.value; paintDue(); });
+      b.addEventListener("click", () => { dueValue = c.value; refreshDue(); });
       return b;
     }));
-    // The last chip opens the device's date picker. Clicking a hidden date
-    // field doesn't open its calendar everywhere, so ask for it directly.
-    const pick = document.createElement("button");
-    pick.type = "button";
-    pick.className = "due-chip pick" + (!known && dueValue ? " on" : "");
-    pick.textContent = !known && dueValue ? formatDay(dueValue, "short") : "Pick date";
+    // "Pick date" is a real date field stretched over the chip and made
+    // see-through, so the tap lands on the field itself. That opens the
+    // native picker everywhere (iPhone/iPad included); with a mouse, the
+    // click also asks for the calendar, since clicking the field alone
+    // doesn't open it on desktop.
+    const pick = document.createElement("div");
+    pick.className = "due-chip pick";
+    const label = document.createElement("span");
     const input = document.createElement("input");
     input.type = "date";
-    input.tabIndex = -1;
+    input.setAttribute("aria-label", "Pick a due date");
     input.value = dueValue || toKey(new Date());
-    input.addEventListener("change", () => { if (input.value) { dueValue = input.value; paintDue(); } });
-    pick.addEventListener("click", () => {
-      try { input.showPicker(); } catch (e) { input.focus(); input.click(); }
-    });
-    pick.append(input);
+    input.addEventListener("click", () => { try { input.showPicker(); } catch (e) { /* the tap already opened it */ } });
+    const take = () => { if (input.value) { dueValue = input.value; refreshDue(); } };
+    input.addEventListener("input", take);
+    input.addEventListener("change", take);
+    pick.append(label, input);
     chips.append(pick);
+    refreshDue();
+  }
+  function refreshDue() {
+    const chips = $("dueChips");
+    let matched = false;
+    chips.querySelectorAll(".due-chip[data-value]").forEach((b) => {
+      const on = b.dataset.value === dueValue;
+      b.classList.toggle("on", on);
+      matched = matched || on;
+    });
+    const pick = chips.querySelector(".due-chip.pick");
+    if (pick) {
+      pick.classList.toggle("on", !matched && !!dueValue);
+      pick.querySelector("span").textContent = !matched && dueValue ? formatDay(dueValue, "short") : "Pick date";
+    }
     $("dueText").textContent = dueValue
       ? `${dueText(dueValue)} · ${fromKey(dueValue).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}`
       : "No due date";
