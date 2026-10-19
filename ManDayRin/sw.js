@@ -1,4 +1,4 @@
-const CACHE_NAME = "mandayrin-v25";
+const CACHE_NAME = "mandayrin-v26";
 const APP_SHELL = ["./", "./index.html", "./styles.css", "./weeks.js", "./audio/index.js", "./app.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
 // Recording packs live in their own cache so app updates don't make every week download again.
 const AUDIO_CACHE = "mandayrin-audio";

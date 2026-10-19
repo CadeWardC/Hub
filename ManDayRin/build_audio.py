@@ -34,6 +34,17 @@ CAST_VOICES = {
     "小美": ("zh-CN-XiaoyiNeural", "-5%", "+20Hz"),
     "李明的妈妈": ("zh-CN-XiaoxiaoNeural", "-10%", "-12Hz"),
     "服务员": ("zh-CN-YunyangNeural", "-5%", "+0Hz"),
+    "司机": ("zh-CN-YunjianNeural", "-5%", "-10Hz"),
+    "医生": ("zh-CN-YunyangNeural", "-10%", "-5Hz"),
+    "店员": ("zh-CN-XiaoyiNeural", "-5%", "-5Hz"),
+    "张老师": ("zh-CN-XiaoxiaoNeural", "-10%", "-6Hz"),
+    "房东": ("zh-CN-YunyangNeural", "-5%", "-12Hz"),
+    "前台": ("zh-CN-XiaoyiNeural", "-5%", "+5Hz"),
+    "教练": ("zh-CN-YunjianNeural", "+0%", "+0Hz"),
+    "导游": ("zh-CN-XiaoxiaoNeural", "-5%", "+6Hz"),
+    "经理": ("zh-CN-YunyangNeural", "-5%", "+5Hz"),
+    "警察": ("zh-CN-YunjianNeural", "-5%", "-5Hz"),
+    "护士": ("zh-CN-XiaoyiNeural", "-10%", "-8Hz"),
 }
 DEFAULT_CAST_VOICE = ("zh-CN-YunyangNeural", "-5%", "+0Hz")
 CONCURRENCY = 6

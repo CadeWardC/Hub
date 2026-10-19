@@ -9,7 +9,8 @@
   const labels = {
     noun: "Noun", verb: "Verb", adjective: "Adjective", pronoun: "Pronoun", number: "Number",
     measure: "Measure word", question: "Question word", adverb: "Adverb", particle: "Particle",
-    conjunction: "Conjunction", phrase: "Phrase", time: "Time word"
+    conjunction: "Conjunction", phrase: "Phrase", time: "Time word", position: "Position word",
+    preposition: "Preposition"
   };
   // Recorded clips (build_audio.py): per week, a "words" pack (theme + words) and a "lines" pack (sentences).
   const audioIndex = window.MANDAYRIN_AUDIO || {};
