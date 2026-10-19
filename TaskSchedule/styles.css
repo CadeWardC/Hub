@@ -270,7 +270,7 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.45); }
   width: 100%; min-width: 0;
 }
 .row { display: flex; gap: 10px; }
-form[data-kind="task"] .event-only { display: none; }
+form[data-kind="task"] .event-only, form[data-kind="event"] .task-only { display: none; }
 .actions { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
 .spacer { flex: 1; }
 .actions button { padding: 10px 16px; border-radius: 10px; border: 1px solid var(--line); background: none; }
@@ -612,3 +612,71 @@ form[data-kind="task"] .event-only { display: none; }
   font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap;
 }
 .now-text.wait-words { font-size: 1.1rem; margin-top: 6px; }
+
+/* ---- add / edit sheet ---- */
+.sheet-grip { display: none; width: 40px; height: 4px; margin: -6px auto 12px; border-radius: 999px; background: var(--line); }
+.kind-switch { margin-bottom: 14px; }
+.kind-switch .segment { cursor: pointer; }
+.kind-switch input { position: absolute; opacity: 0; pointer-events: none; }
+.kind-switch .segment:has(input:checked) { background: var(--accent); color: #fff; }
+.kind-switch .segment:has(input:disabled) { cursor: default; }
+.title-input {
+  width: 100%; margin-bottom: 16px; padding: 6px 2px 10px;
+  border: 0; border-bottom: 2px solid var(--line); background: none;
+  font: inherit; font-size: 1.3rem; font-weight: 600; color: var(--text);
+}
+.title-input:focus { outline: none; border-bottom-color: var(--accent); }
+.sheet-label { margin: 0 0 8px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.due-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.due-chip {
+  position: relative; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--bg); color: var(--text); font-size: 0.9rem; font-weight: 600; cursor: pointer;
+}
+.due-chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.due-chip.pick { border-style: dashed; }
+.due-chip.pick input { position: absolute; inset: 0; opacity: 0; width: 100%; cursor: pointer; }
+.due-text { margin: 10px 2px 14px; font-size: 0.85rem; color: var(--muted); }
+.switch-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-bottom: 14px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg);
+  cursor: pointer;
+}
+.switch-row strong { display: block; font-weight: 600; }
+.switch-row small { color: var(--muted); }
+.switch {
+  appearance: none; -webkit-appearance: none; flex: none; position: relative;
+  width: 46px; height: 28px; border-radius: 999px; background: var(--line); cursor: pointer; transition: background 0.15s;
+}
+.switch::after {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px;
+  border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); transition: transform 0.15s;
+}
+.switch:checked { background: var(--accent); }
+.switch:checked::after { transform: translateX(18px); }
+.notes-box { margin-bottom: 8px; }
+.notes-box summary { cursor: pointer; padding: 6px 2px; color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+.notes-box textarea {
+  width: 100%; margin-top: 6px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--bg); color: var(--text); font: inherit; resize: vertical;
+}
+@media (max-width: 719px) {
+  dialog.sheet {
+    width: 100%; max-width: 100%; margin: auto 0 0;
+    border-radius: 20px 20px 0 0; border-bottom: 0;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+  dialog.sheet[open] { animation: sheet-up 0.22s ease-out; }
+  .sheet-grip { display: block; }
+}
+@keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } }
+
+/* ---- planner ---- */
+.section-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.plan-btn {
+  padding: 5px 12px; border: 1px solid var(--accent); border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); font-size: 0.82rem; font-weight: 700;
+}
+.event.planned { background: none; border: 1px dashed var(--accent); border-left: 3px solid var(--accent); }
+.event.planned strong::before { content: "◔ "; color: var(--accent); }
+.chip-event.planned { background: none; border: 1px dashed var(--accent); }
+.toast button[hidden] { display: none; }

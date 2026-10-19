@@ -68,7 +68,7 @@
     const old = state.tasks.filter((t) => t.done && (t.doneAt || t.updated || 0) < cutoff);
     if (!old.length) return;
     state.tasks = state.tasks.filter((t) => !old.includes(t));
-    old.forEach((t) => bury("task", t.id));
+    old.forEach((t) => { bury("task", t.id); dropSessions(t.id, true); });
     save();
   }
 
@@ -94,31 +94,114 @@
     render();
   }
 
-  let lastDeleted = null;
+  let toastUndo = null;
   let toastTimer = 0;
+  function showToast(text, undo) {
+    const toast = $("toast");
+    toast.querySelector("span").textContent = text;
+    $("undoButton").hidden = !undo;
+    toastUndo = undo || null;
+    toast.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.hidden = true; toastUndo = null; }, 6000);
+  }
+  $("undoButton").addEventListener("click", () => {
+    const undo = toastUndo;
+    toastUndo = null;
+    $("toast").hidden = true;
+    if (!undo) return;
+    undo();
+    save();
+    render();
+  });
+  // Put a deleted item back and drop its deletion record.
+  function restore(list, item, index = list.length) {
+    list.splice(Math.min(index, list.length), 0, touch(item));
+    delete state.deleted[item.id];
+  }
+
   function deleteTask(task) {
     const index = state.tasks.indexOf(task);
     if (index === -1) return;
     state.tasks.splice(index, 1);
     bury("task", task.id);
-    lastDeleted = { task, index };
+    const sessions = dropSessions(task.id, true);
     save();
     render();
-    const toast = $("toast");
-    toast.querySelector("span").textContent = `Deleted “${task.title}”`;
-    toast.hidden = false;
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { toast.hidden = true; lastDeleted = null; }, 5000);
+    showToast(`Deleted “${task.title}”`, () => {
+      restore(state.tasks, task, index);
+      sessions.forEach((ev) => restore(state.events, ev));
+    });
   }
-  $("undoButton").addEventListener("click", () => {
-    if (!lastDeleted) return;
-    state.tasks.splice(Math.min(lastDeleted.index, state.tasks.length), 0, touch(lastDeleted.task));
-    delete state.deleted[lastDeleted.task.id];
-    lastDeleted = null;
-    $("toast").hidden = true;
+
+  // ---- planner ----
+  // "Plan week" books one work session a day for each unfinished task with a
+  // due date: up to 7 days before it, 10 minutes at first growing to 30 as
+  // the due date gets close, in free time between 8am and 9pm (evenings
+  // first). Re-planning replaces a task's upcoming sessions.
+  const PLAN_FROM = 8 * 60, PLAN_TO = 21 * 60, PLAN_PREFER = 16 * 60;
+  const hhmm = (min) => `${pad(Math.floor(min / 60))}:${pad(min % 60)}`;
+  const nowMinutes = () => { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); };
+  const upcoming = (ev) => ev.date > toKey(new Date()) || (ev.date === toKey(new Date()) && toMinutes(ev.start) > nowMinutes());
+
+  // Remove a task's planned sessions: the ones still to come, or all of them
+  // (when the task itself is deleted).
+  function dropSessions(taskId, all = false) {
+    const gone = state.events.filter((ev) => ev.auto && ev.taskId === taskId && (all || upcoming(ev)));
+    if (!gone.length) return [];
+    state.events = state.events.filter((ev) => !gone.includes(ev));
+    gone.forEach((ev) => bury("event", ev.id));
+    return gone;
+  }
+
+  function findSlot(day, minutes, earliest) {
+    const busy = state.events.filter((ev) => ev.date === day)
+      .map((ev) => [toMinutes(ev.start), Math.max(toMinutes(ev.start) + 15, toMinutes(ev.end || ev.start))]);
+    const free = (s) => s + minutes <= PLAN_TO && busy.every(([a, b]) => s + minutes + 5 <= a || s >= b + 5);
+    const starts = [];
+    for (let s = PLAN_PREFER; s < PLAN_TO; s += 15) starts.push(s);
+    for (let s = PLAN_FROM; s < PLAN_PREFER; s += 15) starts.push(s);
+    const hit = starts.find((s) => s >= earliest && free(s));
+    return hit === undefined ? null : hit;
+  }
+
+  function planAll() {
+    const today = toKey(new Date());
+    const tasks = state.tasks.filter((t) => !t.done && t.date && t.date >= today)
+      .sort((a, b) => a.date.localeCompare(b.date) || a.created - b.created);
+    if (!tasks.length) { showToast("Nothing to plan: add a due date to a task first."); return; }
+    const removed = tasks.flatMap((t) => dropSessions(t.id));
+    const added = [];
+    tasks.forEach((task) => {
+      const last = task.date > today ? addDays(task.date, -1) : today;
+      const first = addDays(task.date, -7) > today ? addDays(task.date, -7) : today;
+      const days = [];
+      for (let d = first; d <= last; d = addDays(d, 1)) days.push(d);
+      days.forEach((day, i) => {
+        const frac = days.length === 1 ? 1 : i / (days.length - 1);
+        const minutes = Math.round((10 + 20 * frac) / 5) * 5;
+        const earliest = day === today ? Math.ceil((nowMinutes() + 15) / 15) * 15 : PLAN_FROM;
+        const start = findSlot(day, minutes, earliest);
+        if (start === null) return;
+        const ev = touch({
+          id: uid(), created: Date.now(), title: task.title, date: day,
+          start: hhmm(start), end: hhmm(start + minutes), notes: "", taskId: task.id, auto: true,
+        });
+        state.events.push(ev);
+        added.push(ev);
+      });
+    });
     save();
     render();
-  });
+    const n = new Set(added.map((ev) => ev.taskId)).size;
+    showToast(added.length
+      ? `Planned ${added.length} session${added.length === 1 ? "" : "s"} for ${n} task${n === 1 ? "" : "s"}`
+      : "No free time found before the due dates.", () => {
+      state.events = state.events.filter((ev) => !added.includes(ev));
+      added.forEach((ev) => bury("event", ev.id));
+      removed.forEach((ev) => restore(state.events, ev));
+    });
+  }
 
   // ---- swipe rows ----
   const SWIPE_OPEN = -144; // width of the Edit + Delete buttons
@@ -225,6 +308,7 @@
     check.addEventListener("click", () => {
       task.done = !task.done;
       task.doneAt = task.done ? Date.now() : null;
+      if (task.done) dropSessions(task.id);
       touch(task);
       save();
       render();
@@ -237,7 +321,7 @@
     title.textContent = task.title;
     body.append(title);
     const metaParts = [];
-    if (task.date) metaParts.push(formatDay(task.date, "short"));
+    if (task.date) metaParts.push(dueText(task.date));
     if (task.notes) metaParts.push(task.notes.split("\n")[0]);
     if (metaParts.length) {
       const meta = document.createElement("span");
@@ -318,7 +402,7 @@
 
     const items = new Map();
     const push = (key, item) => { if (!items.has(key)) items.set(key, []); items.get(key).push(item); };
-    [...state.events].sort((a, b) => a.start.localeCompare(b.start)).forEach((e) => push(e.date, { title: e.title, kind: "event" }));
+    [...state.events].sort((a, b) => a.start.localeCompare(b.start)).forEach((e) => push(e.date, { title: e.title, kind: e.auto ? "event planned" : "event" }));
     state.tasks.filter((t) => t.date && !t.done).forEach((t) => push(t.date, { title: t.title, kind: "task" }));
 
     for (let i = 0; i < weeks * 7; i++) {
@@ -381,7 +465,7 @@
       const e = Math.max(s + 30, toMinutes(ev.end || ev.start));
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "event";
+      b.className = "event" + (ev.auto ? " planned" : "");
       b.style.top = `${top(s)}px`;
       b.style.height = `${Math.max(22, ((e - s) / 60) * HOUR_PX - 2)}px`;
       b.style.left = `calc(6px + ${(ev._lane / laneCount) * 100}%)`;
@@ -446,6 +530,58 @@
   function setKind(kind) {
     form.dataset.kind = kind;
     f.kind.value = kind;
+    f.title.placeholder = kind === "task" ? "What needs doing?" : "What's happening?";
+  }
+
+  // Quick due-date picks plus a date picker; the task's due date lives in `dueValue`.
+  let dueValue = "";
+  function dueChoices() {
+    const today = toKey(new Date());
+    const dow = new Date().getDay();
+    const choices = [
+      { label: "None", value: "" },
+      { label: "Today", value: today },
+      { label: "Tomorrow", value: addDays(today, 1) },
+      { label: "Weekend", value: addDays(today, dow === 6 ? 0 : 6 - dow) }, // coming Saturday (next one on Sunday)
+      { label: "Next week", value: addDays(today, ((8 - dow) % 7) || 7) }, // coming Monday
+    ];
+    // Skip a pick that lands on the same day as an earlier one (e.g. Monday on a Sunday).
+    return choices.filter((c, i) => choices.findIndex((x) => x.value === c.value) === i);
+  }
+  function dueText(key) {
+    const today = toKey(new Date());
+    const days = Math.round((fromKey(key) - fromKey(today)) / 86400000);
+    if (days < 0) return `Overdue · ${formatDay(key, "short")}`;
+    if (days === 0) return "Due today";
+    if (days === 1) return "Due tomorrow";
+    if (days < 7) return `Due ${fromKey(key).toLocaleDateString(undefined, { weekday: "long" })}`;
+    return `Due ${formatDay(key, "short")}`;
+  }
+  function paintDue() {
+    const chips = $("dueChips");
+    const choices = dueChoices();
+    const known = choices.some((c) => c.value === dueValue);
+    chips.replaceChildren(...choices.map((c) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "due-chip" + (c.value === dueValue ? " on" : "");
+      b.textContent = c.label;
+      b.addEventListener("click", () => { dueValue = c.value; paintDue(); });
+      return b;
+    }));
+    // A real date picker dressed as the last chip.
+    const pick = document.createElement("label");
+    pick.className = "due-chip pick" + (!known && dueValue ? " on" : "");
+    pick.textContent = !known && dueValue ? formatDay(dueValue, "short") : "Pick date";
+    const input = document.createElement("input");
+    input.type = "date";
+    input.value = dueValue;
+    input.addEventListener("change", () => { dueValue = input.value; paintDue(); });
+    pick.append(input);
+    chips.append(pick);
+    $("dueText").textContent = dueValue
+      ? `${dueText(dueValue)} · ${fromKey(dueValue).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}`
+      : "No due date";
   }
 
   function openEditor(kind, item) {
@@ -453,10 +589,16 @@
     form.reset();
     setKind(kind);
     f.title.value = item?.title || "";
-    f.date.value = item ? (item.date || "") : (kind === "event" || $("scheduleView").classList.contains("active") ? selectedDay : "");
+    dueValue = kind === "task" && item ? (item.date || "") : "";
+    f.eventDate.value = kind === "event" && item ? item.date : selectedDay;
     f.start.value = item?.start || "";
     f.end.value = item?.end || "";
     f.notes.value = item?.notes || "";
+    $("notesBox").open = !!item?.notes;
+    f.today.checked = kind === "task" && item
+      ? inToday(item)
+      : $("tasksView").classList.contains("active") && taskTab === "today";
+    paintDue();
     // Switching kind only makes sense for new items.
     form.querySelectorAll('input[name="kind"]').forEach((r) => { r.disabled = !!item; });
     $("deleteButton").hidden = !item;
@@ -465,10 +607,7 @@
   }
 
   form.addEventListener("change", (e) => {
-    if (e.target.name === "kind") {
-      setKind(e.target.value);
-      if (e.target.value === "event" && !f.date.value) f.date.value = selectedDay;
-    }
+    if (e.target.name === "kind") setKind(e.target.value);
   });
 
   form.addEventListener("submit", (e) => {
@@ -476,22 +615,22 @@
     const title = f.title.value.trim();
     if (!title) { e.preventDefault(); return; }
     if (kind === "event") {
-      if (!f.date.value || !f.start.value) {
+      if (!f.eventDate.value || !f.start.value) {
         e.preventDefault();
-        (f.date.value ? f.start : f.date).focus();
+        (f.eventDate.value ? f.start : f.eventDate).focus();
         return;
       }
       if (f.end.value && f.end.value <= f.start.value) f.end.value = "";
     }
-    const data = { title, date: f.date.value, notes: f.notes.value.trim() };
+    const data = { title, date: kind === "task" ? dueValue : f.eventDate.value, notes: f.notes.value.trim() };
     if (kind === "event") Object.assign(data, { start: f.start.value, end: f.end.value });
     const list = kind === "event" ? state.events : state.tasks;
     if (editing) {
-      touch(Object.assign(list.find((x) => x.id === editing.id), data));
+      const item = list.find((x) => x.id === editing.id);
+      if (kind === "task") data.planned = f.today.checked ? (inToday(item) ? item.planned : toKey(new Date())) : null;
+      touch(Object.assign(item, data));
     } else {
-      const extra = kind === "task"
-        ? { done: false, planned: $("tasksView").classList.contains("active") && taskTab === "today" ? toKey(new Date()) : null }
-        : {};
+      const extra = kind === "task" ? { done: false, planned: f.today.checked ? toKey(new Date()) : null } : {};
       list.push(touch({ id: uid(), created: Date.now(), ...extra, ...data }));
     }
     if (data.date) selectedDay = data.date;
@@ -500,11 +639,13 @@
   });
 
   $("cancelButton").addEventListener("click", () => dialog.close());
+  $("planButton").addEventListener("click", planAll);
   $("deleteButton").addEventListener("click", () => {
     if (!editing) return;
     const key = editing.kind === "event" ? "events" : "tasks";
     state[key] = state[key].filter((x) => x.id !== editing.id);
     bury(editing.kind, editing.id);
+    if (editing.kind === "task") dropSessions(editing.id, true);
     save();
     dialog.close();
     render();

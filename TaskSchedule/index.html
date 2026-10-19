@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="stylesheet" href="styles.css?v=20">
+  <link rel="stylesheet" href="styles.css?v=21">
 </head>
 <body>
   <div class="app-shell">
@@ -40,7 +40,10 @@
         </div>
         <div class="week-strip" id="weekStrip"></div>
         <div class="month-grid" id="monthGrid" hidden></div>
-        <h2 class="section-label" id="dueLabel">Due this day</h2>
+        <div class="section-row">
+          <h2 class="section-label" id="dueLabel">Due this day</h2>
+          <button type="button" class="plan-btn" id="planButton" title="Book work time before each due date">Plan week</button>
+        </div>
         <ul class="task-list" id="dayTasks"></ul>
         </div>
         <div class="sched-day">
@@ -85,19 +88,38 @@
     </nav>
   </div>
 
-  <dialog id="editor">
-    <form method="dialog" id="editorForm">
-      <div class="kind-toggle">
-        <label><input type="radio" name="kind" value="task" checked> Task</label>
-        <label><input type="radio" name="kind" value="event"> Event</label>
+  <dialog id="editor" class="sheet">
+    <form method="dialog" id="editorForm" autocomplete="off">
+      <div class="sheet-grip" aria-hidden="true"></div>
+      <div class="segmented kind-switch">
+        <label class="segment"><input type="radio" name="kind" value="task" checked> Task</label>
+        <label class="segment"><input type="radio" name="kind" value="event"> Event</label>
       </div>
-      <label class="field">Title<input name="title" required maxlength="140" autocomplete="off"></label>
-      <label class="field">Date<input name="date" type="date"></label>
-      <div class="row event-only">
-        <label class="field">Start<input name="start" type="time"></label>
-        <label class="field">End<input name="end" type="time"></label>
+      <input class="title-input" name="title" required maxlength="140" placeholder="What needs doing?">
+
+      <div class="task-only">
+        <p class="sheet-label">Due</p>
+        <div class="due-chips" id="dueChips"></div>
+        <p class="due-text" id="dueText"></p>
+        <label class="switch-row">
+          <span><strong>Add to Today</strong><small>Show it in your Today list</small></span>
+          <input type="checkbox" name="today" class="switch">
+        </label>
       </div>
-      <label class="field">Notes<textarea name="notes" rows="3"></textarea></label>
+
+      <div class="event-only">
+        <label class="field">Date<input name="eventDate" type="date"></label>
+        <div class="row">
+          <label class="field">Start<input name="start" type="time"></label>
+          <label class="field">End<input name="end" type="time"></label>
+        </div>
+      </div>
+
+      <details class="notes-box" id="notesBox">
+        <summary>Notes</summary>
+        <textarea name="notes" rows="3" placeholder="Details, links, anything"></textarea>
+      </details>
+
       <div class="actions">
         <button type="button" class="ghost danger" id="deleteButton" hidden>Delete</button>
         <span class="spacer"></span>
@@ -188,7 +210,7 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=9"></script>
+  <script src="app.js?v=10"></script>
   <script src="protocols.js?v=13"></script>
   <script src="sync-config.js"></script>
   <script src="sync.js?v=6"></script>
