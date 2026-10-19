@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="stylesheet" href="styles.css?v=22">
+  <link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body>
   <div class="app-shell">
@@ -174,6 +174,16 @@
     </div>
   </dialog>
 
+  <dialog id="runDialog">
+    <h2 class="dialog-title" id="runTitle">Run</h2>
+    <p class="hint">Pick a preset: its steps run and its blanks are filled in.</p>
+    <div class="pick-list" id="runList"></div>
+    <div class="actions">
+      <span class="spacer"></span>
+      <button type="button" class="ghost" id="runCancel">Cancel</button>
+    </div>
+  </dialog>
+
   <dialog id="syncDialog">
     <form id="syncForm" autocomplete="off">
       <h2 class="dialog-title">Sync with Directus</h2>
@@ -211,7 +221,7 @@
   </dialog>
 
   <script src="app.js?v=11"></script>
-  <script src="protocols.js?v=13"></script>
+  <script src="protocols.js?v=15"></script>
   <script src="sync-config.js"></script>
   <script src="sync.js?v=6"></script>
 </body>

@@ -680,3 +680,23 @@ form[data-kind="task"] .event-only, form[data-kind="event"] .task-only { display
 .event.planned strong::before { content: "◔ "; color: var(--accent); }
 .chip-event.planned { background: none; border: 1px dashed var(--accent); }
 .toast button[hidden] { display: none; }
+
+/* protocol presets (variants) */
+.variant-bar {
+  display: grid; gap: 8px; margin-bottom: 14px; padding: 12px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+}
+.variant-bar .hint { margin: 0; }
+.preset-tag.variant { background: var(--nest-soft); border-color: var(--nest-soft); }
+.preset-tag.variant .preset-val { color: var(--nest); }
+.variant-box { display: grid; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+.variant-toggles { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.variant-toggle {
+  padding: 4px 10px; border: 1px dashed var(--muted); border-radius: 999px;
+  background: none; color: var(--muted); font-size: 0.8rem; font-weight: 600; text-decoration: line-through;
+}
+.variant-toggle.on { border: 1px solid var(--nest); background: var(--nest-soft); color: var(--nest); text-decoration: none; }
+.variant-values { display: grid; gap: 6px; }
+.variant-row { display: flex; align-items: center; gap: 8px; }
+.variant-name { flex: none; min-width: 64px; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.82rem; font-weight: 700; color: var(--nest); }
+.pick-item.plain { border-style: dashed; }

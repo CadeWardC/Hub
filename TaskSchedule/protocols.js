@@ -107,13 +107,25 @@
   }
   // Steps with nested protocols opened up in place; `path` names the nested
   // protocol(s) each step came from.
-  function flatten(p, path = [], seen = new Set()) {
+  //
+  // With a protocol preset (p.variants: [{id, name}]) chosen by name, steps the
+  // preset leaves out (block.skip has its id) are dropped, and its blank values
+  // (block.values[id]) ride along as `fill`. Nested protocols use their own
+  // preset with the same name, if they have one.
+  const findVariant = (p, name) => (name && (p.variants || []).find((v) => v.name.trim().toLowerCase() === name.trim().toLowerCase())) || null;
+  function flatten(p, path = [], seen = new Set(), variantName = null) {
     if (!p || seen.has(p.id)) return [];
     const inside = new Set(seen).add(p.id);
+    const v = findVariant(p, variantName);
     return p.blocks.flatMap((b) => {
-      if (b.type !== "protocol") return [{ ...JSON.parse(JSON.stringify(b)), path }];
+      if (v && (b.skip || []).includes(v.id)) return [];
+      if (b.type !== "protocol") {
+        const copy = { ...JSON.parse(JSON.stringify(b)), path };
+        if (v && b.values?.[v.id]) copy.fill = [...b.values[v.id]];
+        return [copy];
+      }
       const sub = byId(b.protocolId);
-      return sub ? flatten(sub, [...path, titleOf(sub)], inside) : [];
+      return sub ? flatten(sub, [...path, titleOf(sub)], inside, variantName) : [];
     });
   }
   const usedIn = (p) => state.protocols.filter((x) => x !== p && x.blocks.some((b) => b.type === "protocol" && b.protocolId === p.id));
@@ -280,7 +292,7 @@
     const remove = (v) => { b.presets = b.presets.filter((x) => presetKey(x) !== presetKey(v)); saveNow(p); };
 
     box.replaceChildren(
-      el("span", { className: "preset-title" }, n > 1 ? `Presets · one value per blank (${n})` : "Presets for the blank"),
+      el("span", { className: "preset-title" }, n > 1 ? `Quick picks · one value per blank (${n})` : "Quick picks for the blank"),
       b.presets.length ? el("div", { className: "preset-tags" }, b.presets.map((v) => el("span", { className: "preset-tag" },
         el("button", { type: "button", className: "preset-val", title: "Edit", onclick: () => {
           remove(v);
@@ -326,6 +338,8 @@
       autocomplete: "off", oninput: (e) => { p.title = e.target.value; saveSoon(p); },
     }));
 
+    if (!selecting) root.append(variantBar(p));
+
     const list = el("ol", { className: `block-list${selecting ? " selecting" : ""}` });
     p.blocks.forEach((b, i) => list.append(selecting ? selectCard(p, b, i) : blockCard(p, b, i)));
     if (!p.blocks.length) list.append(el("li", { className: "empty" }, "Add action and wait blocks to build the protocol."));
@@ -349,7 +363,90 @@
     root.querySelectorAll("textarea").forEach(autoGrow);
   }
 
+  // ---- protocol presets ----
+  // Named versions of a protocol (e.g. "Small batch", "Large batch"). Each
+  // preset can leave steps out and has its own values for every blank; Run
+  // asks which one to use and fills the blanks in for you.
+  function variantBar(p) {
+    const vs = p.variants || [];
+    const add = () => {
+      const name = prompt("Name for the preset, e.g. Large batch");
+      if (!name || !name.trim()) return;
+      p.variants = [...vs, { id: uid(), name: name.trim() }];
+      saveNow(p);
+      renderEditor();
+    };
+    return el("div", { className: "variant-bar" },
+      el("span", { className: "preset-title" }, "Protocol presets"),
+      el("div", { className: "preset-tags" },
+        vs.map((v) => el("span", { className: "preset-tag variant" },
+          el("button", { type: "button", className: "preset-val", title: "Rename", onclick: () => {
+            const name = prompt("Rename preset", v.name);
+            if (!name || !name.trim()) return;
+            v.name = name.trim();
+            saveNow(p);
+            renderEditor();
+          } }, v.name),
+          el("button", { type: "button", className: "preset-x", "aria-label": `Remove ${v.name}`, onclick: () => {
+            if (!confirm(`Remove the preset “${v.name}”? Its values are deleted too.`)) return;
+            p.variants = vs.filter((x) => x !== v);
+            p.blocks.forEach((b) => {
+              if (b.skip) { b.skip = b.skip.filter((id) => id !== v.id); if (!b.skip.length) delete b.skip; }
+              if (b.values) delete b.values[v.id];
+            });
+            saveNow(p);
+            renderEditor();
+          } }, "×"))),
+        el("button", { type: "button", className: "add-blank", onclick: add }, "+ Preset")),
+      vs.length ? null : el("span", { className: "hint" }, "Add presets (like Small / Large batch) to fill in blanks and choose steps automatically when you run."));
+  }
+
+  // Under each step: which presets include it, and each preset's blank values.
+  function variantBox(p, b) {
+    const box = el("div", { className: "variant-box" });
+    const paint = () => {
+      const vs = p.variants || [];
+      const n = b.type === "action" ? blankTotal(b.text) : 0;
+      const skip = new Set(b.skip || []);
+      const toggle = (v) => {
+        if (skip.has(v.id)) skip.delete(v.id); else skip.add(v.id);
+        if (skip.size) b.skip = [...skip]; else delete b.skip;
+        saveNow(p);
+        paint();
+      };
+      box.replaceChildren(
+        el("div", { className: "variant-toggles" },
+          el("span", { className: "preset-title" }, "In"),
+          vs.map((v) => el("button", {
+            type: "button", className: `variant-toggle${skip.has(v.id) ? "" : " on"}`,
+            "aria-pressed": String(!skip.has(v.id)), onclick: () => toggle(v),
+          }, v.name))),
+        n ? el("div", { className: "variant-values" }, vs.filter((v) => !skip.has(v.id)).map((v) => el("div", { className: "variant-row" },
+          el("span", { className: "variant-name" }, v.name),
+          el("div", { className: `preset-fields${n > 1 ? " multi" : ""}` },
+            Array.from({ length: n }, (_, k) => el("input", {
+              className: "preset-add", placeholder: n > 1 ? `Blank ${k + 1}` : "Value",
+              value: b.values?.[v.id]?.[k] || "", inputMode: "decimal", autocomplete: "off",
+              oninput: (e) => {
+                b.values = b.values || {};
+                const arr = b.values[v.id] = b.values[v.id] || [];
+                arr[k] = e.target.value.trim();
+                saveSoon(p);
+              },
+            })))))) : null);
+    };
+    box.repaint = paint;
+    paint();
+    return box;
+  }
+
   function blockCard(p, b, i) {
+    const li = blockCardBody(p, b, i);
+    if ((p.variants || []).length) li.append(variantBox(p, b));
+    return li;
+  }
+
+  function blockCardBody(p, b, i) {
     const move = (dir) => {
       const j = i + dir;
       if (j < 0 || j >= p.blocks.length) return;
@@ -381,7 +478,10 @@
         oninput: (e) => {
           b.text = e.target.value;
           autoGrow(e.target);
-          if (String(blankTotal(b.text)) !== presetBox.dataset.blanks) renderPresetEditor(presetBox, p, b);
+          if (String(blankTotal(b.text)) !== presetBox.dataset.blanks) {
+            renderPresetEditor(presetBox, p, b);
+            presetBox.closest("li")?.querySelector(".variant-box")?.repaint();
+          }
           saveSoon(p);
         },
       });
@@ -454,6 +554,9 @@
     const name = prompt("Name for the new protocol", `${titleOf(p)} – part`);
     if (name === null) return;
     const sub = touch({ id: uid(), created: Date.now(), title: name.trim() || "Untitled protocol", blocks: idx.map((i) => p.blocks[i]) });
+    // Same presets (same ids), so the moved steps keep their values and
+    // the parent's preset picks the matching one by name.
+    if ((p.variants || []).length) sub.variants = JSON.parse(JSON.stringify(p.variants));
     const ref = { id: uid(), type: "protocol", protocolId: sub.id };
     p.blocks = p.blocks.filter((b) => !selected.has(b.id));
     p.blocks.splice(idx[0], 0, ref);
@@ -607,15 +710,35 @@
     }
   }
 
+  // A protocol with presets asks which one to run; otherwise it starts straight away.
+  const runDialog = $("runDialog");
+  $("runCancel").addEventListener("click", () => runDialog.close());
   function startRun(p) {
-    const blocks = flatten(p);
+    const vs = p.variants || [];
+    if (!vs.length) { beginRun(p, null); return; }
+    const option = (v) => {
+      const steps = flatten(p, [], new Set(), v ? v.name : null).length;
+      return el("button", { type: "button", className: `pick-item${v ? "" : " plain"}`, onclick: () => { runDialog.close(); beginRun(p, v); } },
+        el("strong", {}, v ? v.name : "No preset"),
+        el("small", {}, v ? `${steps} step${steps === 1 ? "" : "s"}, blanks filled in` : `All ${steps} steps, fill blanks as you go`));
+    };
+    $("runTitle").textContent = `Run “${titleOf(p)}”`;
+    $("runList").replaceChildren(...vs.map(option), option(null));
+    runDialog.showModal();
+  }
+
+  function beginRun(p, variant) {
+    const blocks = flatten(p, [], new Set(), variant ? variant.name : null);
     if (!blocks.length) return;
-    if (run && run.blocks[run.index] && !confirm(`Stop “${run.title}” and start “${p.title || "Untitled protocol"}”?`)) return;
+    if (run && run.blocks[run.index] && !confirm(`Stop “${run.title}” and start “${titleOf(p)}”?`)) return;
     unlockAudio();
     if ("Notification" in window && Notification.permission === "default") Notification.requestPermission().catch(() => {});
+    // The preset's values fill the blanks up front; any left empty pop up as usual.
+    const fills = {};
+    blocks.forEach((b, i) => { if (b.fill && b.fill.some(Boolean)) fills[i] = b.fill.map((x) => x || ""); });
     run = {
-      protocolId: p.id, title: p.title || "Untitled protocol",
-      blocks,
+      protocolId: p.id, title: variant ? `${titleOf(p)} · ${variant.name}` : titleOf(p),
+      blocks, fills,
       index: 0, startedAt: Date.now(), stepStart: 0, waitEnd: null, pausedLeft: null,
     };
     enterStep(0, Date.now());
