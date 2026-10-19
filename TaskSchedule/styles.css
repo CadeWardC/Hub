@@ -634,13 +634,24 @@ form[data-kind="task"] .event-only, form[data-kind="event"] .task-only { display
 }
 .due-chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
 .due-chip.pick { border-style: dashed; }
-.due-chip.pick { overflow: hidden; }
-/* The date field covers the chip so a tap lands on it; near-zero opacity (not 0)
-   keeps iOS treating it as a real, tappable field. 16px avoids iOS zooming in. */
-.due-chip.pick input {
-  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0;
-  border: 0; opacity: 0.011; font-size: 16px; cursor: pointer; -webkit-appearance: none; appearance: none;
+.due-calendar {
+  margin-top: 10px; padding: 10px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg);
 }
+.due-calendar[hidden] { display: none; }
+.cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.cal-nav {
+  width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--surface); font-size: 1.2rem;
+}
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+.cal-dow { padding: 4px 0; font-size: 0.72rem; color: var(--muted); }
+.cal-day {
+  aspect-ratio: 1; min-height: 36px; border: 0; border-radius: 50%;
+  background: none; color: var(--text); font-size: 0.95rem; font-variant-numeric: tabular-nums;
+}
+.cal-day.past { color: var(--muted); opacity: 0.6; }
+.cal-day.today { box-shadow: inset 0 0 0 1.5px var(--accent); color: var(--accent); font-weight: 700; }
+.cal-day.on { background: var(--accent); color: #fff; font-weight: 700; opacity: 1; }
 .due-text { margin: 10px 2px 14px; font-size: 0.85rem; color: var(--muted); }
 .switch-row {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;

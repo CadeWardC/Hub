@@ -557,8 +557,7 @@
     if (days < 7) return `Due ${fromKey(key).toLocaleDateString(undefined, { weekday: "long" })}`;
     return `Due ${formatDay(key, "short")}`;
   }
-  // Built once per opening; afterwards refreshDue() only updates the
-  // highlight, so the date field is never swapped out while its picker is open.
+  // Built once per opening; afterwards refreshDue() only updates the highlight.
   function paintDue() {
     const chips = $("dueChips");
     chips.replaceChildren(...dueChoices().map((c) => {
@@ -570,25 +569,66 @@
       b.addEventListener("click", () => { dueValue = c.value; refreshDue(); });
       return b;
     }));
-    // "Pick date" is a real date field stretched over the chip and made
-    // see-through, so the tap lands on the field itself. That opens the
-    // native picker everywhere (iPhone/iPad included); with a mouse, the
-    // click also asks for the calendar, since clicking the field alone
-    // doesn't open it on desktop.
-    const pick = document.createElement("div");
+    // "Pick date" opens the app's own little calendar under the chips. Native
+    // date fields behave differently in installed apps on each platform, so
+    // this one doesn't depend on them.
+    const pick = document.createElement("button");
+    pick.type = "button";
     pick.className = "due-chip pick";
-    const label = document.createElement("span");
-    const input = document.createElement("input");
-    input.type = "date";
-    input.setAttribute("aria-label", "Pick a due date");
-    input.value = dueValue || toKey(new Date());
-    input.addEventListener("click", () => { try { input.showPicker(); } catch (e) { /* the tap already opened it */ } });
-    const take = () => { if (input.value) { dueValue = input.value; refreshDue(); } };
-    input.addEventListener("input", take);
-    input.addEventListener("change", take);
-    pick.append(label, input);
+    pick.append(document.createElement("span"));
+    pick.addEventListener("click", () => {
+      const cal = $("dueCalendar");
+      if (cal.hidden) { calMonth = (dueValue || toKey(new Date())).slice(0, 7); paintCalendar(); }
+      cal.hidden = !cal.hidden;
+    });
     chips.append(pick);
+    $("dueCalendar").hidden = true;
     refreshDue();
+  }
+
+  let calMonth = ""; // "YYYY-MM" shown in the due-date calendar
+  function paintCalendar() {
+    const cal = $("dueCalendar");
+    const [y, m] = calMonth.split("-").map(Number);
+    const first = new Date(y, m - 1, 1);
+    const lead = (first.getDay() + 6) % 7; // Monday first
+    const today = toKey(new Date());
+    const shift = (n) => { const d = new Date(y, m - 1 + n, 1); calMonth = `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; paintCalendar(); };
+    const head = document.createElement("div");
+    head.className = "cal-head";
+    const prev = document.createElement("button");
+    prev.type = "button"; prev.className = "cal-nav"; prev.textContent = "‹"; prev.setAttribute("aria-label", "Previous month");
+    prev.addEventListener("click", () => shift(-1));
+    const next = document.createElement("button");
+    next.type = "button"; next.className = "cal-nav"; next.textContent = "›"; next.setAttribute("aria-label", "Next month");
+    next.addEventListener("click", () => shift(1));
+    const title = document.createElement("strong");
+    title.textContent = first.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+    head.append(prev, title, next);
+
+    const grid = document.createElement("div");
+    grid.className = "cal-grid";
+    for (let i = 0; i < 7; i++) {
+      const w = document.createElement("span");
+      w.className = "cal-dow";
+      w.textContent = new Date(2024, 0, 1 + i).toLocaleDateString(undefined, { weekday: "narrow" });
+      grid.append(w);
+    }
+    for (let i = 0; i < lead; i++) grid.append(document.createElement("span"));
+    for (let d = 1; d <= daysInMonth(y, m - 1); d++) {
+      const key = `${calMonth}-${pad(d)}`;
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "cal-day" + (key === dueValue ? " on" : "") + (key === today ? " today" : "") + (key < today ? " past" : "");
+      b.textContent = d;
+      b.addEventListener("click", () => {
+        dueValue = key;
+        cal.hidden = true;
+        refreshDue();
+      });
+      grid.append(b);
+    }
+    cal.replaceChildren(head, grid);
   }
   function refreshDue() {
     const chips = $("dueChips");

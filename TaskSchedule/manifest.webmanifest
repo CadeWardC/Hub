@@ -1,7 +1,7 @@
 {
   "name": "Task & Schedule",
   "short_name": "Task&Schedule",
-  "description": "Tasks and a daily schedule, offline on your device.",
+  "description": "Tasks, a week and month schedule, and step-by-step protocols.",
   "id": "./",
   "start_url": "./",
   "scope": "./",
@@ -10,9 +10,23 @@
   "theme_color": "#101418",
   "orientation": "any",
   "icons": [
-    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
