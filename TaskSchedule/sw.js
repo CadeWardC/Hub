@@ -1,5 +1,5 @@
-const CACHE_NAME = "taskschedule-v30";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./protocols.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png"];
+const CACHE_NAME = "taskschedule-v31";
+const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./protocols.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./app-icon-192.png", "./app-icon-512.png", "./app-icon-maskable-512.png", "./app-icon-180.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
@@ -14,6 +14,8 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   // Only this app's own files; Directus requests go straight to the network.
   if (event.request.method !== "GET" || new URL(event.request.url).origin !== self.location.origin) return;
+  // Leave icons and the manifest to the browser so "Add to Home Screen" always gets them fresh.
+  if (event.request.destination === "image" || event.request.destination === "manifest") return;
   if (event.request.mode === "navigate") {
     event.respondWith(fetch(event.request).then((response) => {
       const copy = response.clone();

@@ -11,8 +11,10 @@
   <title>Task &amp; Schedule</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=27">
+  <link rel="icon" href="app-icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="app-icon-180.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="app-icon-180.png">
+  <link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body>
   <div class="app-shell">
@@ -40,10 +42,7 @@
         </div>
         <div class="week-strip" id="weekStrip"></div>
         <div class="month-grid" id="monthGrid" hidden></div>
-        <div class="section-row">
-          <h2 class="section-label" id="dueLabel">Due this day</h2>
-          <button type="button" class="plan-btn" id="planButton" title="Book work time before due dates">Plan</button>
-        </div>
+        <h2 class="section-label" id="dueLabel">Due this day</h2>
         <ul class="task-list" id="dayTasks"></ul>
         </div>
         <div class="sched-day">
@@ -57,7 +56,11 @@
           <button class="segment active" data-list="today" type="button" role="tab">Today <span class="count" id="todayCount"></span></button>
           <button class="segment" data-list="all" type="button" role="tab">All <span class="count" id="allCount"></span></button>
         </div>
-        <p class="hint"><span class="touch-only">Swipe a task left to edit or delete it.</span><span class="mouse-only">Drag a task left to edit or delete it, or double-click to edit.</span></p>
+        <div class="section-row tasks-head">
+          <p class="hint"><span class="touch-only">Swipe a task left to edit or delete it.</span><span class="mouse-only">Drag a task left to edit or delete it, or double-click to edit.</span></p>
+          <button type="button" class="plan-btn" id="planButtonTasks" title="Choose tasks to book work time for">Plan</button>
+        </div>
+        <div id="todaySessions" hidden></div>
         <ul class="task-list" id="taskList"></ul>
       </section>
 
@@ -236,8 +239,8 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=15"></script>
-  <script src="protocols.js?v=15"></script>
+  <script src="app.js?v=16"></script>
+  <script src="protocols.js?v=16"></script>
   <script src="sync-config.js"></script>
   <script src="sync.js?v=6"></script>
 </body>

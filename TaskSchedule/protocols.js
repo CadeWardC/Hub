@@ -705,7 +705,7 @@
     if (navigator.userActivation?.hasBeenActive !== false) navigator.vibrate?.([200, 100, 200, 100, 400]);
     if (document.hidden && "Notification" in window && Notification.permission === "granted") {
       navigator.serviceWorker?.ready.then((reg) => reg.showNotification(run ? run.title : "Task & Schedule", {
-        body: text, tag: "taskschedule-run", icon: "icon-192.png", renotify: true,
+        body: text, tag: "taskschedule-run", icon: "app-icon-192.png", renotify: true,
       })).catch(() => {});
     }
   }

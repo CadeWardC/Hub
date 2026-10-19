@@ -135,22 +135,27 @@
   }
 
   // ---- planner ----
-  // "Plan" asks which tasks (with a due date) should get work sessions
-  // (task.plan) and books them from today until the day before each is due,
-  // spaced out: every 3rd day when the due date is over two weeks away, every
-  // other day within two weeks, daily in the last three days (counted back
-  // from the due date). Far out a
-  // session runs 20 min to 1 h (longer as the date nears); in the last three
-  // days 30 min to 2 h, favouring long (2 h the day before). If that length
-  // doesn't fit, shorter ones are tried. Sessions go in free time 8am-9pm
-  // (evenings first), 10 min clear of events and 30 min clear of other
-  // sessions. Planning again replaces the upcoming sessions.
-  const PLAN_FROM = 8 * 60, PLAN_TO = 21 * 60, PLAN_PREFER = 16 * 60;
+  // Tasks switched on for planning (task.plan) get work sessions from today
+  // until the day before they're due. Sessions are events with auto: true and
+  // a taskId, and they re-plan by themselves whenever a planned task or the
+  // calendar changes, and once a day.
+  //  - Spacing, counted back from the due date: daily in the last three days,
+  //    every other day to two weeks out, then every third day (plus today).
+  //  - Length: 20 min to 1 h far out (longer as the date nears), 30 min to 2 h
+  //    in the last three days, favouring long (2 h the day before). Shorter
+  //    lengths are tried when the wanted one doesn't fit.
+  //  - Missed time: past sessions not ticked off are added back onto the next
+  //    sessions (up to +30 min each, 2 h max per session).
+  //  - Free time only, 8am-9pm (evenings first), 10 min clear of events and
+  //    30 min clear of other sessions.
+  const PLAN_FROM = 8 * 60, PLAN_TO = 21 * 60, PLAN_PREFER = 16 * 60, PLAN_MAX = 120;
   const hhmm = (min) => `${pad(Math.floor(min / 60))}:${pad(min % 60)}`;
   const nowMinutes = () => { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); };
   const upcoming = (ev) => ev.date > toKey(new Date()) || (ev.date === toKey(new Date()) && toMinutes(ev.start) > nowMinutes());
   const fmtMins = (m) => (m >= 60 ? `${Math.floor(m / 60)}h${m % 60 ? ` ${m % 60}m` : ""}` : `${m}m`);
   const sessionMinutes = (ev) => toMinutes(ev.end) - toMinutes(ev.start);
+  // A session whose end time has passed without being ticked off.
+  const missed = (ev) => ev.auto && !ev.done && (ev.date < toKey(new Date()) || (ev.date === toKey(new Date()) && toMinutes(ev.end) <= nowMinutes()));
 
   // Remove a task's planned sessions: the ones still to come, or all of them
   // (when the task itself is deleted).
@@ -170,8 +175,8 @@
     return `${list.length} session${list.length === 1 ? "" : "s"} · ${fmtMins(total)}`;
   }
 
-  function findSlot(day, minutes, earliest) {
-    const busy = state.events.filter((ev) => ev.date === day).map((ev) => {
+  function findSlot(events, day, minutes, earliest) {
+    const busy = events.filter((ev) => ev.date === day).map((ev) => {
       const a = toMinutes(ev.start), b = Math.max(a + 15, toMinutes(ev.end || ev.start));
       const gap = ev.auto ? 30 : 10;
       return [a - gap, b + gap];
@@ -191,13 +196,12 @@
     return { want: Math.round((60 - 40 * t) / 5) * 5, min: 20 };
   }
   // Which days get a session, counted back from the due date so the gaps
-  // shrink evenly: 1, 2, 3 days before, then every other day to two weeks out,
-  // then every third day.
+  // shrink evenly; today is always included.
   function sessionDaysLeft(farthest) {
     if (farthest <= 0) return [0];
     const out = [];
     for (let l = 1; l <= farthest; l += l < 3 ? 1 : l < 14 ? 2 : 3) out.push(l);
-    if (out[out.length - 1] !== farthest) out.push(farthest); // always start today
+    if (out[out.length - 1] !== farthest) out.push(farthest);
     return out;
   }
 
@@ -207,46 +211,93 @@
       .sort((a, b) => a.date.localeCompare(b.date) || a.created - b.created);
   };
 
-  function planTasks() {
+  // Work out the sessions every planned task should have, without changing anything.
+  function computePlan() {
     const today = toKey(new Date());
     const open = plannable();
-    // Every open task loses its upcoming sessions; only ticked ones get new ones.
-    const removed = open.flatMap((t) => dropSessions(t.id));
-    const added = [];
+    const openIds = new Set(open.map((t) => t.id));
+    const ours = (ev) => ev.auto && openIds.has(ev.taskId) && upcoming(ev);
+    const working = state.events.filter((ev) => !ours(ev));
+    const wanted = [];
     open.filter((t) => t.plan).forEach((task) => {
       const left = (key) => Math.round((fromKey(task.date) - fromKey(key)) / 86400000);
       const farthest = left(today);
+      let extra = state.events.filter((ev) => ev.taskId === task.id && missed(ev)).reduce((n, ev) => n + sessionMinutes(ev), 0);
       sessionDaysLeft(farthest).reverse().forEach((daysLeft) => {
         const day = addDays(task.date, -daysLeft);
         const { want, min } = sessionShape(daysLeft, farthest);
+        const bonus = Math.min(30, extra, PLAN_MAX - want);
         const earliest = day === today ? Math.ceil((nowMinutes() + 15) / 15) * 15 : PLAN_FROM;
-        for (let len = want; len >= min; len -= 10) {
-          const start = findSlot(day, len, earliest);
+        for (let len = want + Math.max(0, bonus); len >= min; len -= 10) {
+          const start = findSlot(working, day, len, earliest);
           if (start === null) continue;
-          const ev = touch({
-            id: uid(), created: Date.now(), title: task.title, date: day,
-            start: hhmm(start), end: hhmm(start + len), notes: "", taskId: task.id, auto: true,
-          });
-          state.events.push(ev);
-          added.push(ev);
+          const s = { taskId: task.id, title: task.title, date: day, start: hhmm(start), end: hhmm(start + len), auto: true };
+          working.push(s);
+          wanted.push(s);
+          extra = Math.max(0, extra - Math.max(0, len - want));
           break;
         }
       });
     });
-    save();
-    render();
-    const n = new Set(added.map((ev) => ev.taskId)).size;
-    const total = added.reduce((m, ev) => m + sessionMinutes(ev), 0);
-    showToast(added.length
-      ? `Planned ${added.length} session${added.length === 1 ? "" : "s"} (${fmtMins(total)}) for ${n} task${n === 1 ? "" : "s"}`
-      : removed.length ? "Removed the planned sessions." : "No free time found before the due dates.", () => {
-      state.events = state.events.filter((ev) => !added.includes(ev));
-      added.forEach((ev) => bury("event", ev.id));
-      removed.forEach((ev) => restore(state.events, ev));
-    });
+    return { wanted, current: state.events.filter(ours) };
   }
 
-  // Tick which tasks to plan; the ticks are remembered on each task.
+  // Bring the calendar in line with computePlan(), keeping sessions that
+  // haven't moved (so nothing churns or re-syncs needlessly).
+  function applyPlan() {
+    const tasksById = new Map(state.tasks.map((t) => [t.id, t]));
+    const { wanted, current } = computePlan();
+    const key = (s) => [s.taskId, s.date, s.start, s.end].join("|");
+    const have = new Map(current.map((ev) => [key(ev), ev]));
+    const keep = new Set(wanted.map(key));
+    const removed = current.filter((ev) => !keep.has(key(ev)));
+    const added = wanted.filter((s) => !have.has(key(s))).map((s) => touch({ id: uid(), created: Date.now(), notes: "", ...s }));
+    let renamed = false;
+    current.forEach((ev) => {
+      const t = tasksById.get(ev.taskId);
+      if (t && keep.has(key(ev)) && ev.title !== t.title) { ev.title = t.title; touch(ev); renamed = true; }
+    });
+    if (!removed.length && !added.length && !renamed) return { added, removed };
+    state.events = state.events.filter((ev) => !removed.includes(ev));
+    removed.forEach((ev) => bury("event", ev.id));
+    state.events.push(...added);
+    save();
+    render();
+    return { added, removed };
+  }
+
+  // Re-plan quietly a moment after something changes.
+  let autoPlanTimer = 0;
+  function autoPlan() {
+    clearTimeout(autoPlanTimer);
+    autoPlanTimer = setTimeout(() => {
+      if (plannable().some((t) => t.plan) || state.events.some((ev) => ev.auto && upcoming(ev))) applyPlan();
+    }, 300);
+  }
+  // Once a day (a few seconds after opening, so sync can bring in other
+  // devices' changes first), move missed time forward.
+  const PLAN_DAY_KEY = "taskschedule.planDay";
+  function dailyPlan() {
+    let last = "";
+    try { last = localStorage.getItem(PLAN_DAY_KEY) || ""; } catch (e) { /* storage blocked */ }
+    const today = toKey(new Date());
+    if (last === today) return;
+    try { localStorage.setItem(PLAN_DAY_KEY, today); } catch (e) { /* storage blocked */ }
+    autoPlan();
+  }
+  setTimeout(dailyPlan, 5000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) setTimeout(dailyPlan, 5000); });
+
+  // Tick off (or un-tick) a work session.
+  function toggleSession(ev) {
+    ev.done = !ev.done;
+    touch(ev);
+    save();
+    render();
+    autoPlan();
+  }
+
+  // Switch tasks on or off for planning; the choices are remembered on each task.
   function openPlanDialog() {
     const open = plannable();
     if (!open.length) { showToast("Nothing to plan: give a task a due date first."); return; }
@@ -276,7 +327,19 @@
       if (t && !!t.plan !== box.checked) { t.plan = box.checked; touch(t); }
     });
     $("planDialog").close();
-    planTasks();
+    const { added, removed } = applyPlan();
+    const upcomingAll = state.events.filter((ev) => ev.auto && upcoming(ev));
+    const total = upcomingAll.reduce((m, ev) => m + sessionMinutes(ev), 0);
+    const n = new Set(upcomingAll.map((ev) => ev.taskId)).size;
+    showToast(upcomingAll.length
+      ? `${upcomingAll.length} session${upcomingAll.length === 1 ? "" : "s"} planned (${fmtMins(total)}) for ${n} task${n === 1 ? "" : "s"}`
+      : "No sessions planned.", (added.length || removed.length) ? () => {
+      state.events = state.events.filter((ev) => !added.includes(ev));
+      added.forEach((ev) => bury("event", ev.id));
+      removed.forEach((ev) => restore(state.events, ev));
+    } : null);
+    save();
+    render();
   });
 
   // ---- swipe rows ----
@@ -388,6 +451,7 @@
       touch(task);
       save();
       render();
+      if (!task.done && task.plan) autoPlan();
     });
 
     const body = document.createElement("div");
@@ -542,7 +606,7 @@
       const e = Math.max(s + 30, toMinutes(ev.end || ev.start));
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "event" + (ev.auto ? " planned" : "");
+      b.className = "event" + (ev.auto ? " planned" : "") + (ev.auto && ev.done ? " done" : "") + (missed(ev) ? " missed" : "");
       b.style.top = `${top(s)}px`;
       b.style.height = `${Math.max(22, ((e - s) / 60) * HOUR_PX - 2)}px`;
       b.style.left = `calc(6px + ${(ev._lane / laneCount) * 100}%)`;
@@ -570,6 +634,44 @@
     }
   }
 
+  // Today's work sessions, shown above the Today list with a tick box.
+  function renderTodaySessions() {
+    const box = $("todaySessions");
+    const today = toKey(new Date());
+    const list = taskTab === "today"
+      ? state.events.filter((ev) => ev.auto && ev.date === today).sort((a, b) => a.start.localeCompare(b.start))
+      : [];
+    box.hidden = !list.length;
+    if (!list.length) { box.replaceChildren(); return; }
+    const head = document.createElement("h2");
+    head.className = "section-label";
+    head.textContent = "Work sessions today";
+    const ul = document.createElement("ul");
+    ul.className = "task-list";
+    list.forEach((ev) => {
+      const li = document.createElement("li");
+      li.className = "task session-row" + (ev.done ? " done" : "") + (missed(ev) ? " missed" : "");
+      const check = document.createElement("button");
+      check.type = "button";
+      check.className = "check";
+      check.setAttribute("aria-label", ev.done ? "Mark session not done" : "Mark session done");
+      check.innerHTML = '<svg viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg>';
+      check.addEventListener("click", () => toggleSession(ev));
+      const body = document.createElement("div");
+      body.className = "task-body";
+      const title = document.createElement("span");
+      title.className = "task-title";
+      title.textContent = ev.title;
+      const meta = document.createElement("span");
+      meta.className = "task-meta";
+      meta.textContent = `${formatTime(ev.start)} · ${fmtMins(sessionMinutes(ev))}${missed(ev) ? " · missed, moved to later sessions" : ""}`;
+      body.append(title, meta);
+      li.append(check, body);
+      ul.append(li);
+    });
+    box.replaceChildren(head, ul);
+  }
+
   function render() {
     purgeDone();
     const monthly = range === "month";
@@ -592,6 +694,7 @@
     $("allCount").textContent = otherTasks.filter((t) => !t.done).length || "";
     // Open tasks first, then completed ones (most recently finished on top).
     const order = (a, b) => a.done - b.done || (a.done ? (b.doneAt || 0) - (a.doneAt || 0) : byDateThenCreated(a, b));
+    renderTodaySessions();
     fillList($("taskList"),
       (taskTab === "today" ? todayTasks : otherTasks).sort(order),
       taskTab === "today" ? "Nothing planned for today. Move tasks here from All." : "No tasks. Tap + to add one.");
@@ -766,10 +869,11 @@
     if (data.date) selectedDay = data.date;
     save();
     render();
+    autoPlan();
   });
 
   $("cancelButton").addEventListener("click", () => dialog.close());
-  $("planButton").addEventListener("click", openPlanDialog);
+  $("planButtonTasks").addEventListener("click", openPlanDialog);
   $("deleteButton").addEventListener("click", () => {
     if (!editing) return;
     const key = editing.kind === "event" ? "events" : "tasks";
@@ -779,6 +883,7 @@
     save();
     dialog.close();
     render();
+    autoPlan();
   });
 
   // ---- navigation ----

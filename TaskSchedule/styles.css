@@ -724,3 +724,18 @@ form[data-kind="task"] .event-only, form[data-kind="event"] .task-only { display
 }
 .plan-row strong { display: block; font-weight: 600; overflow-wrap: anywhere; }
 .plan-row small { color: var(--muted); }
+
+/* sessions: today list, done and missed */
+.tasks-head { align-items: center; }
+.tasks-head .hint { flex: 1; }
+#todaySessions[hidden] { display: none; }
+#todaySessions { margin-bottom: 14px; }
+#todaySessions .section-label { margin-top: 4px; }
+.session-row { border-style: dashed; border-color: var(--accent); }
+.session-row.done .task-title { text-decoration: line-through; color: var(--muted); }
+.session-row.done .check { background: var(--done); border-color: var(--done); color: #fff; }
+.session-row.done .check svg { opacity: 1; }
+.session-row.missed .task-meta { color: var(--danger); }
+.event.planned.done { opacity: 0.55; }
+.event.planned.done strong { text-decoration: line-through; }
+.event.planned.missed { border-color: var(--danger); border-left-color: var(--danger); }
