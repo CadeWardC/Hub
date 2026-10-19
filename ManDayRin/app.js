@@ -417,7 +417,7 @@
           return;
         }
         setTimeout(() => playLine(index + 1), 450);
-      });
+      }, button.dataset.clip);
     };
     playLine(0);
   }
@@ -443,7 +443,11 @@
     document.querySelector("#sheetExPy").textContent = word.example.py;
     document.querySelector("#sheetExEn").textContent = word.example.en;
     document.querySelector("#sheetExSpeak").dataset.say = word.example.zh;
+    document.querySelector("#sheetExSpeak").dataset.clip = `${word.week}:x${word.index}`;
     document.querySelector("#sheetSpeak").dataset.say = word.hanzi;
+    document.querySelector("#sheetSpeak").dataset.clip = `${word.week}:w${word.index}`;
+    loadAudio(word.week, "words");
+    loadAudio(word.week, "lines");
     openSheet(document.querySelector("#wordSheet"), opener);
   }
 
@@ -478,8 +482,46 @@
       const button = event.target.closest("[data-say]");
       if (!button || !button.dataset.say) return;
       stopPlayback();
-      speakChinese(button.dataset.say, button);
+      speakChinese(button.dataset.say, button, undefined, button.dataset.clip);
     });
+  }
+
+  function clipPart(key) {
+    return key === "t" || /^w\d/.test(key) ? "words" : "lines";
+  }
+
+  // Fetches a week's pack once; a failed fetch is retried the next time it is asked for.
+  function loadAudio(week, part) {
+    const entry = audioIndex[week]?.[part];
+    if (!entry) return;
+    const id = `${week}:${part}`;
+    if (audioPacks.has(id) && !audioPacks.get(id).failed) return;
+    const pack = { buffer: null, failed: false };
+    audioPacks.set(id, pack);
+    fetch(`./audio/${entry.file}`).then((response) => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.arrayBuffer();
+    }).then((buffer) => {
+      pack.buffer = buffer;
+    }).catch((error) => {
+      pack.failed = true;
+      console.warn(`ManDayRin week ${week} ${part} recordings unavailable:`, error);
+    });
+  }
+
+  // A clip ref is "week:key". Returns the recording, { loading: true }, or null (no recording: use device speech).
+  function findClip(ref) {
+    if (!ref) return null;
+    const [week, key] = ref.split(":");
+    const part = clipPart(key);
+    const range = audioIndex[week]?.[part]?.clips[key];
+    if (!range) return null;
+    const pack = audioPacks.get(`${week}:${part}`);
+    if (!pack || pack.failed) {
+      loadAudio(week, part);
+      return pack?.failed ? null : { loading: true };
+    }
+    return pack.buffer ? { buffer: pack.buffer, range } : { loading: true };
   }
 
   function cancelSpeech() {
@@ -499,18 +541,19 @@
   }
 
   // onDone(true) fires when speech finishes normally, onDone(false) when it fails or is cut off.
-  function speakChinese(hanzi, button, onDone = () => {}) {
+  // Recordings play as media audio (not muted by the iPhone silent switch); device speech is only the fallback.
+  function speakChinese(hanzi, button, onDone = () => {}, clipRef = "") {
     configureSpeechAudioSession();
-    const clip = window.MANDAYRIN_AUDIO_INDEX?.[hanzi];
-    if (audioPack && clip) {
+    const clip = findClip(clipRef);
+    if (clip?.buffer) {
       if (activeWordAudio) {
         activeWordAudio.pause();
         if (activeWordAudioUrl) URL.revokeObjectURL(activeWordAudioUrl);
         if (activeWordButton) activeWordButton.classList.remove("speaking");
       }
       if (activeUtterance) window.speechSynthesis?.cancel();
-      const [offset, length] = clip;
-      const blob = new Blob([audioPack.slice(offset, offset + length)], { type: "audio/wav" });
+      const [offset, length] = clip.range;
+      const blob = new Blob([clip.buffer.slice(offset, offset + length)], { type: "audio/mpeg" });
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       activeWordAudio = audio;
@@ -544,7 +587,7 @@
       });
       return;
     }
-    if (clip && !audioPackError) {
+    if (clip?.loading) {
       showToast("Audio is loading. Tap the speaker again shortly.");
       onDone(false);
       return;
@@ -621,7 +664,10 @@
       item.classList.toggle("active", active);
       if (active) item.setAttribute("aria-current", "page"); else item.removeAttribute("aria-current");
     });
-    if (id === "historyView") renderHistory();
+    if (id === "historyView") {
+      for (let week = 1; week <= currentWeek; week += 1) loadAudio(week, "words");
+      renderHistory();
+    }
   }
 
   function bindNavigation() {
@@ -697,7 +743,7 @@
       <div class="history-word"><strong>${esc(word.pinyin)} · ${esc(word.meaning)}</strong><span>Week ${pad(word.week)} · ${esc(theme(word.week).en)}</span></div>
       <div class="history-actions">
         <span class="history-kind">${labels[word.kind] || word.kind}</span>
-        <button class="history-speak" type="button" data-say="${esc(word.hanzi)}" aria-label="Hear ${esc(word.hanzi)} pronounced">${speakerIcon}</button>
+        <button class="history-speak" type="button" data-say="${esc(word.hanzi)}" data-clip="${word.week}:w${word.index}" aria-label="Hear ${esc(word.hanzi)} pronounced">${speakerIcon}</button>
       </div>
     </article>`).join("") : `<div class="empty-state"><strong>${queryTokens.length ? "No matching words" : "No words here yet"}</strong>${queryTokens.length ? "Try another English word, pinyin spelling, or Chinese character." : "Words appear here as each week’s list unlocks."}</div>`;
   }
@@ -712,7 +758,8 @@
     toggleButton.addEventListener("click", () => toggleQuiz(toggleButton.getAttribute("aria-expanded") !== "true"));
     nextButton.addEventListener("click", nextQuizQuestion);
     speakButton.addEventListener("click", () => {
-      if (quizState.current) speakChinese(quizState.current.hanzi, speakButton);
+      const current = quizState.current;
+      if (current) speakChinese(current.hanzi, speakButton, undefined, `${current.week}:w${current.index}`);
     });
   }
 

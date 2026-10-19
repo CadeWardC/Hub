@@ -1,5 +1,7 @@
-const CACHE_NAME = "mandayrin-v24";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./weeks.js", "./audio-index.js", "./app.js", "./words.audio", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+const CACHE_NAME = "mandayrin-v25";
+const APP_SHELL = ["./", "./index.html", "./styles.css", "./weeks.js", "./audio/index.js", "./app.js", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+// Recording packs live in their own cache so app updates don't make every week download again.
+const AUDIO_CACHE = "mandayrin-audio";
 const REMINDER_DB = "mandayrin-reminders";
 const REMINDER_STORE = "settings";
 
@@ -9,7 +11,7 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key.startsWith("mandayrin-") && key !== CACHE_NAME).map((key) => caches.delete(key)))));
+  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key.startsWith("mandayrin-") && key !== CACHE_NAME && key !== AUDIO_CACHE).map((key) => caches.delete(key)))));
   self.clients.claim();
 });
 
@@ -23,8 +25,15 @@ self.addEventListener("fetch", (event) => {
     }).catch(() => caches.match("./index.html")));
     return;
   }
-  if (event.request.url.includes("words.audio")) {
-    event.respondWith(caches.match(event.request, { ignoreSearch: true }).then((cached) => cached || fetch(event.request)));
+  // Recording packs have content-hashed names, so a cached copy is always current.
+  if (event.request.url.includes("/audio/week-")) {
+    event.respondWith(caches.match(event.request, { ignoreSearch: true }).then((cached) => cached || fetch(event.request).then((response) => {
+      if (response.ok) {
+        const copy = response.clone();
+        caches.open(AUDIO_CACHE).then((cache) => cache.put(event.request, copy));
+      }
+      return response;
+    })));
     return;
   }
   // Network first so a new index.html never runs with last version's CSS/JS; cache is the offline fallback.

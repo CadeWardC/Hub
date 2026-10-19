@@ -7,3 +7,4 @@ smolov/config.js
 __pycache__/
 StoryTime/.venv-kokoro/
 StoryTime/.venv-align/
+ManDayRin/.audio-cache/
