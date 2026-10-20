@@ -146,9 +146,32 @@
   //    lengths are tried when the wanted one doesn't fit.
   //  - Missed time: past sessions not ticked off are added back onto the next
   //    sessions (up to +30 min each, 2 h max per session).
-  //  - Free time only, 8am-9pm (evenings first), 10 min clear of events and
-  //    30 min clear of other sessions.
-  const PLAN_FROM = 8 * 60, PLAN_TO = 21 * 60, PLAN_PREFER = 16 * 60, PLAN_MAX = 120;
+  //  - Free time only, from the "start after" time (one for weekdays, one for
+  //    weekends) to the "finish by" time, earliest first, 10 min clear of
+  //    events and 30 min clear of other sessions. The times are a synced
+  //    setting record (see planTimes()).
+  const PLAN_MAX = 120;
+  const PLAN_SETTING = "setting-plan";
+  const PLAN_DEFAULTS = { weekday: "16:00", weekend: "10:00", until: "21:00" };
+  function planTimes() {
+    const rec = state.settings.find((x) => x.id === PLAN_SETTING) || {};
+    const t = (k) => (/^\d\d:\d\d$/.test(rec[k] || "") ? rec[k] : PLAN_DEFAULTS[k]);
+    return { weekday: t("weekday"), weekend: t("weekend"), until: t("until") };
+  }
+  function setPlanTimes(times) {
+    let rec = state.settings.find((x) => x.id === PLAN_SETTING);
+    if (!rec) { rec = { id: PLAN_SETTING, created: Date.now() }; state.settings.push(rec); }
+    if (["weekday", "weekend", "until"].every((k) => rec[k] === times[k])) return false;
+    Object.assign(rec, times);
+    touch(rec);
+    return true;
+  }
+  // Earliest start for a day ("YYYY-MM-DD") and the latest end, in minutes.
+  function planWindow(day) {
+    const t = planTimes();
+    const dow = fromKey(day).getDay();
+    return { from: toMinutes(dow === 0 || dow === 6 ? t.weekend : t.weekday), to: toMinutes(t.until) };
+  }
   const hhmm = (min) => `${pad(Math.floor(min / 60))}:${pad(min % 60)}`;
   const nowMinutes = () => { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); };
   const upcoming = (ev) => ev.date > toKey(new Date()) || (ev.date === toKey(new Date()) && toMinutes(ev.start) > nowMinutes());
@@ -181,12 +204,10 @@
       const gap = ev.auto ? 30 : 10;
       return [a - gap, b + gap];
     });
-    const free = (s) => s + minutes <= PLAN_TO && busy.every(([a, b]) => s + minutes <= a || s >= b);
-    const starts = [];
-    for (let s = PLAN_PREFER; s < PLAN_TO; s += 15) starts.push(s);
-    for (let s = PLAN_FROM; s < PLAN_PREFER; s += 15) starts.push(s);
-    const hit = starts.find((s) => s >= earliest && free(s));
-    return hit === undefined ? null : hit;
+    const { from, to } = planWindow(day);
+    const free = (s) => s + minutes <= to && busy.every(([a, b]) => s + minutes <= a || s >= b);
+    for (let s = Math.max(from, Math.ceil(earliest / 15) * 15); s < to; s += 15) if (free(s)) return s;
+    return null;
   }
 
   // Session length by days left until the due date.
@@ -227,7 +248,7 @@
         const day = addDays(task.date, -daysLeft);
         const { want, min } = sessionShape(daysLeft, farthest);
         const bonus = Math.min(30, extra, PLAN_MAX - want);
-        const earliest = day === today ? Math.ceil((nowMinutes() + 15) / 15) * 15 : PLAN_FROM;
+        const earliest = day === today ? Math.ceil((nowMinutes() + 15) / 15) * 15 : 0;
         for (let len = want + Math.max(0, bonus); len >= min; len -= 10) {
           const start = findSlot(working, day, len, earliest);
           if (start === null) continue;
@@ -318,6 +339,10 @@
       row.append(text, box);
       return row;
     }));
+    const t = planTimes();
+    $("planWeekday").value = t.weekday;
+    $("planWeekend").value = t.weekend;
+    $("planUntil").value = t.until;
     $("planDialog").showModal();
   }
   $("planCancel").addEventListener("click", () => $("planDialog").close());
@@ -326,6 +351,8 @@
       const t = state.tasks.find((x) => x.id === box.dataset.id);
       if (t && !!t.plan !== box.checked) { t.plan = box.checked; touch(t); }
     });
+    const time = (id, k) => $(id).value || planTimes()[k];
+    setPlanTimes({ weekday: time("planWeekday", "weekday"), weekend: time("planWeekend", "weekend"), until: time("planUntil", "until") });
     $("planDialog").close();
     const { added, removed } = applyPlan();
     const upcomingAll = state.events.filter((ev) => ev.auto && upcoming(ev));
@@ -672,6 +699,27 @@
     box.replaceChildren(head, ul);
   }
 
+  // On today's Schedule, the Today list's open tasks (not already listed as
+  // due) follow the due list as plain bullet points; tap one to edit it.
+  function renderTodayBullets() {
+    const ul = $("todayBullets");
+    const list = selectedDay === toKey(new Date())
+      ? state.tasks.filter((t) => inToday(t) && !t.done && t.date !== selectedDay).sort(byDateThenCreated)
+      : [];
+    ul.hidden = $("todayBulletsLabel").hidden = !list.length;
+    ul.replaceChildren(...list.map((t) => {
+      const li = document.createElement("li");
+      li.textContent = t.title;
+      if (t.date) {
+        const small = document.createElement("small");
+        small.textContent = dueText(t.date);
+        li.append(small);
+      }
+      li.addEventListener("click", () => openEditor("task", t));
+      return li;
+    }));
+  }
+
   function render() {
     purgeDone();
     const monthly = range === "month";
@@ -686,6 +734,7 @@
     fillList($("dayTasks"),
       state.tasks.filter((t) => t.date === selectedDay).sort((a, b) => a.done - b.done || a.created - b.created),
       "Nothing due.");
+    renderTodayBullets();
     renderTimeline();
 
     const todayTasks = state.tasks.filter(inToday);
@@ -938,7 +987,7 @@
   }
 
   window.TS = {
-    state, save, writeLocal, touch, bury, uid, pad, render, enableSwipe, setRowOpen,
+    state, save, writeLocal, touch, bury, uid, pad, render, enableSwipe, setRowOpen, showToast,
     saveHooks, renderHooks, viewHooks, addHandlers,
   };
 

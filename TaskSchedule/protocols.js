@@ -331,6 +331,7 @@
         selected.clear();
         renderEditor();
       } }, selecting ? "Cancel" : "Select") : null,
+      selecting ? null : el("button", { type: "button", className: "ghost-btn", disabled: !p.blocks.length, title: "Copy as bullet points (for OneNote)", onclick: () => startCopy(p) }, "Copy"),
       selecting ? null : el("button", { type: "button", className: "primary-btn", disabled: !flatten(p).length, onclick: () => startRun(p) }, "▶ Run")));
 
     root.append(el("input", {
@@ -714,17 +715,74 @@
   const runDialog = $("runDialog");
   $("runCancel").addEventListener("click", () => runDialog.close());
   function startRun(p) {
+    choosePreset(p, `Run “${titleOf(p)}”`, "Pick a preset: its steps run and its blanks are filled in.",
+      "blanks filled in", "fill blanks as you go", (v) => beginRun(p, v));
+  }
+  function choosePreset(p, title, hint, withText, withoutText, onPick) {
     const vs = p.variants || [];
-    if (!vs.length) { beginRun(p, null); return; }
+    if (!vs.length) { onPick(null); return; }
     const option = (v) => {
       const steps = flatten(p, [], new Set(), v ? v.name : null).length;
-      return el("button", { type: "button", className: `pick-item${v ? "" : " plain"}`, onclick: () => { runDialog.close(); beginRun(p, v); } },
+      return el("button", { type: "button", className: `pick-item${v ? "" : " plain"}`, onclick: () => { runDialog.close(); onPick(v); } },
         el("strong", {}, v ? v.name : "No preset"),
-        el("small", {}, v ? `${steps} step${steps === 1 ? "" : "s"}, blanks filled in` : `All ${steps} steps, fill blanks as you go`));
+        el("small", {}, v ? `${steps} step${steps === 1 ? "" : "s"}, ${withText}` : `All ${steps} steps, ${withoutText}`));
     };
-    $("runTitle").textContent = `Run “${titleOf(p)}”`;
+    $("runTitle").textContent = title;
+    $("runHint").textContent = hint;
     $("runList").replaceChildren(...vs.map(option), option(null));
     runDialog.showModal();
+  }
+
+  // ---- copy as bullet points ----
+  // Steps become a bulleted list (nested protocols as sub-bullets) in Calibri
+  // 11pt, OneNote's default, with a plain-text copy alongside for other apps.
+  function startCopy(p) {
+    choosePreset(p, `Copy “${titleOf(p)}”`, "Pick a preset: its steps are copied with its blanks filled in.",
+      "blanks filled in", "blanks left as ___", (v) => copyProtocol(p, v ? v.name : null));
+  }
+  function bulletTree(p, variantName, seen = new Set()) {
+    if (!p || seen.has(p.id)) return [];
+    const inside = new Set(seen).add(p.id);
+    const v = findVariant(p, variantName);
+    return p.blocks.flatMap((b) => {
+      if (v && (b.skip || []).includes(v.id)) return [];
+      if (b.type === "wait") return [{ text: waitSentence(b) }];
+      if (b.type === "action") return [{ text: fillText(b.text, v && b.values?.[v.id]) }];
+      const sub = byId(b.protocolId);
+      return sub ? [{ text: titleOf(sub), children: bulletTree(sub, variantName, inside) }] : [];
+    });
+  }
+  async function copyProtocol(p, variantName) {
+    const items = bulletTree(p, variantName);
+    const esc = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br>");
+    const font = "font-family:Calibri,sans-serif;font-size:11pt";
+    const html = (list) => `<ul style="${font};margin-top:0;margin-bottom:0">${list.map((it) =>
+      `<li style="${font}">${esc(it.text)}${it.children && it.children.length ? html(it.children) : ""}</li>`).join("")}</ul>`;
+    const plain = (list, depth = 0) => list.map((it) =>
+      `${"\t".repeat(depth)}• ${it.text.replace(/\n/g, " ")}\n${it.children ? plain(it.children, depth + 1) : ""}`).join("");
+    const htmlText = `<html><body><!--StartFragment-->${html(items)}<!--EndFragment--></body></html>`;
+    const plainText = plain(items);
+    try {
+      await navigator.clipboard.write([new ClipboardItem({
+        "text/html": new Blob([htmlText], { type: "text/html" }),
+        "text/plain": new Blob([plainText], { type: "text/plain" }),
+      })]);
+    } catch (e) {
+      // Older browsers: copy a hidden rendered list the old way.
+      const box = el("div", { contentEditable: "true", style: "position:fixed;left:-9999px;top:0" });
+      box.innerHTML = html(items);
+      document.body.append(box);
+      const range = document.createRange();
+      range.selectNodeContents(box);
+      const sel = getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      const ok = document.execCommand("copy");
+      sel.removeAllRanges();
+      box.remove();
+      if (!ok) { window.TS.showToast("Couldn't copy on this device."); return; }
+    }
+    window.TS.showToast(`Copied ${titleOf(p)}${variantName ? ` · ${variantName}` : ""} as bullet points`);
   }
 
   function beginRun(p, variant) {

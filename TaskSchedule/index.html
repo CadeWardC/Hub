@@ -14,7 +14,7 @@
   <link rel="icon" href="app-icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="app-icon-180.png">
   <link rel="apple-touch-icon" sizes="180x180" href="app-icon-180.png">
-  <link rel="stylesheet" href="styles.css?v=28">
+  <link rel="stylesheet" href="styles.css?v=29">
 </head>
 <body>
   <div class="app-shell">
@@ -44,6 +44,8 @@
         <div class="month-grid" id="monthGrid" hidden></div>
         <h2 class="section-label" id="dueLabel">Due this day</h2>
         <ul class="task-list" id="dayTasks"></ul>
+        <p class="today-bullets-label" id="todayBulletsLabel" hidden>Also on today's list</p>
+        <ul class="today-bullets" id="todayBullets" hidden></ul>
         </div>
         <div class="sched-day">
           <h2 class="section-label">Schedule</h2>
@@ -184,8 +186,14 @@
 
   <dialog id="planDialog">
     <h2 class="dialog-title">Plan work sessions</h2>
-    <p class="hint">Turn on the tasks to book work time for, from now until each due date. Sessions get longer as the date gets closer.</p>
+    <p class="hint">Turn on the tasks to book work time for, from now until each due date. Sessions get longer as the date gets closer, and only go in your work time below.</p>
     <div class="plan-list" id="planList"></div>
+    <fieldset class="plan-times">
+      <legend>Work time</legend>
+      <label class="field">Weekdays after<input id="planWeekday" type="time" step="900"></label>
+      <label class="field">Weekends after<input id="planWeekend" type="time" step="900"></label>
+      <label class="field">Finish by<input id="planUntil" type="time" step="900"></label>
+    </fieldset>
     <div class="actions">
       <span class="spacer"></span>
       <button type="button" class="ghost" id="planCancel">Cancel</button>
@@ -195,7 +203,7 @@
 
   <dialog id="runDialog">
     <h2 class="dialog-title" id="runTitle">Run</h2>
-    <p class="hint">Pick a preset: its steps run and its blanks are filled in.</p>
+    <p class="hint" id="runHint">Pick a preset: its steps run and its blanks are filled in.</p>
     <div class="pick-list" id="runList"></div>
     <div class="actions">
       <span class="spacer"></span>
@@ -239,8 +247,8 @@
     </form>
   </dialog>
 
-  <script src="app.js?v=16"></script>
-  <script src="protocols.js?v=16"></script>
+  <script src="app.js?v=17"></script>
+  <script src="protocols.js?v=17"></script>
   <script src="sync-config.js"></script>
   <script src="sync.js?v=6"></script>
 </body>
