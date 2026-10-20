@@ -14,7 +14,7 @@
   <link rel="icon" href="app-icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="app-icon-180.png">
   <link rel="apple-touch-icon" sizes="180x180" href="app-icon-180.png">
-  <link rel="stylesheet" href="styles.css?v=29">
+  <link rel="stylesheet" href="styles.css?v=31">
 </head>
 <body>
   <div class="app-shell">
@@ -107,14 +107,10 @@
         <div class="due-chips" id="dueChips"></div>
         <div class="due-calendar" id="dueCalendar"></div>
         <p class="due-text" id="dueText"></p>
-        <label class="switch-row">
-          <span><strong>Add to Today</strong><small>Show it in your Today list</small></span>
-          <input type="checkbox" name="today" class="switch">
-        </label>
-        <label class="switch-row">
-          <span><strong>Plan work sessions</strong><small>Book work time before it's due when you press Plan</small></span>
-          <input type="checkbox" name="planWork" class="switch">
-        </label>
+        <div class="switch-inline">
+          <label title="Show it in your Today list"><input type="checkbox" name="today" class="switch sm">Today</label>
+          <label title="Book work time before it's due"><input type="checkbox" name="planWork" class="switch sm">Plan sessions</label>
+        </div>
       </div>
 
       <div class="event-only">
@@ -248,7 +244,7 @@
   </dialog>
 
   <script src="app.js?v=17"></script>
-  <script src="protocols.js?v=17"></script>
+  <script src="protocols.js?v=18"></script>
   <script src="sync-config.js"></script>
   <script src="sync.js?v=6"></script>
 </body>

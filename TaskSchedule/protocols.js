@@ -19,7 +19,7 @@
     Object.entries(props || {}).forEach(([k, v]) => {
       if (k.startsWith("on")) node.addEventListener(k.slice(2), v);
       else if (k === "dataset") Object.assign(node.dataset, v);
-      else if (k in node) node[k] = v;
+      else if (k in node && k !== "list") node[k] = v; // input.list is read-only
       else node.setAttribute(k, v);
     });
     children.flat().forEach((c) => { if (c != null && c !== false) node.append(c); });
@@ -168,23 +168,53 @@
       return;
     }
     root.append(el("p", { className: "hint" }, "Tap a protocol to edit it. Swipe left to duplicate or delete."));
-    const list = el("ul", { className: "task-list" });
+    // Grouped by p.group (set in the editor); ungrouped ones come first.
+    const groups = new Map();
     [...state.protocols].sort((a, b) => (b.updated || 0) - (a.updated || 0)).forEach((p) => {
-      const row = el("li", { className: "task-row" });
-      const actions = el("div", { className: "swipe-actions" },
-        el("button", { type: "button", className: "swipe-edit", onclick: () => duplicate(p) }, "Copy"),
-        el("button", { type: "button", className: "swipe-delete", onclick: () => removeProtocol(p) }, "Delete"));
-      const card = el("div", { className: "proto-card swipe-card" },
-        el("button", { type: "button", className: "proto-open", onclick: () => go("editor", p.id) },
-          el("span", { className: "task-title" }, p.title || "Untitled protocol"),
-          el("span", { className: "task-meta" }, summary(p)),
-          usedIn(p).length ? el("span", { className: "task-meta used-in" }, `Used in ${usedIn(p).map(titleOf).join(", ")}`) : null),
-        el("button", { type: "button", className: "run-chip", "aria-label": `Run ${p.title || "protocol"}`, disabled: !flatten(p).length, onclick: () => startRun(p) }, "▶ Run"));
-      window.TS.enableSwipe(row, card);
-      row.append(actions, card);
-      list.append(row);
+      const g = groupOf(p);
+      if (!groups.has(g)) groups.set(g, []);
+      groups.get(g).push(p);
     });
-    root.append(list);
+    const names = [...groups.keys()].sort((a, b) => a.localeCompare(b)); // "" sorts first
+    const folded = foldedGroups();
+    names.forEach((g) => {
+      const list = el("ul", { className: "task-list" });
+      groups.get(g).forEach((p) => list.append(protoRow(p)));
+      if (!g) { root.append(list); return; }
+      const open = !folded.includes(g);
+      list.hidden = !open;
+      root.append(el("button", { type: "button", className: `group-head${open ? " open" : ""}`, "aria-expanded": String(open), onclick: () => {
+        setFolded(g, open);
+        renderList();
+      } }, el("span", { className: "chev" }, "›"), el("span", {}, g), el("small", {}, String(groups.get(g).length))), list);
+    });
+  }
+  const groupOf = (p) => (p.group || "").trim();
+  // Which groups are folded is a per-device view choice, not synced.
+  const FOLD_KEY = "taskschedule.protoGroups";
+  function foldedGroups() {
+    try { return JSON.parse(localStorage.getItem(FOLD_KEY)) || []; } catch (e) { return []; }
+  }
+  function setFolded(g, fold) {
+    const list = foldedGroups().filter((x) => x !== g);
+    if (fold) list.push(g);
+    try { localStorage.setItem(FOLD_KEY, JSON.stringify(list)); } catch (e) { /* storage blocked */ }
+  }
+  function protoRow(p) {
+    const row = el("li", { className: "task-row" });
+    const actions = el("div", { className: "swipe-actions" },
+      el("button", { type: "button", className: "swipe-edit", onclick: () => duplicate(p) }, "Duplicate"),
+      el("button", { type: "button", className: "swipe-delete", onclick: () => removeProtocol(p) }, "Delete"));
+    const card = el("div", { className: "proto-card swipe-card" },
+      el("button", { type: "button", className: "proto-open", onclick: () => go("editor", p.id) },
+        el("span", { className: "task-title" }, p.title || "Untitled protocol"),
+        el("span", { className: "task-meta" }, summary(p)),
+        usedIn(p).length ? el("span", { className: "task-meta used-in" }, `Used in ${usedIn(p).map(titleOf).join(", ")}`) : null),
+      el("button", { type: "button", className: "run-chip copy-chip", title: "Copy as bullet points (for OneNote)", "aria-label": `Copy ${titleOf(p)} as bullet points`, disabled: !p.blocks.length, onclick: () => startCopy(p) }, "Copy"),
+      el("button", { type: "button", className: "run-chip", "aria-label": `Run ${p.title || "protocol"}`, disabled: !flatten(p).length, onclick: () => startRun(p) }, "▶ Run"));
+    window.TS.enableSwipe(row, card);
+    row.append(actions, card);
+    return row;
   }
 
   function createProtocol() {
@@ -339,7 +369,14 @@
       autocomplete: "off", oninput: (e) => { p.title = e.target.value; saveSoon(p); },
     }));
 
-    if (!selecting) root.append(variantBar(p));
+    if (!selecting) {
+      const others = [...new Set(state.protocols.map(groupOf).filter(Boolean))].sort();
+      root.append(el("label", { className: "group-field" }, "Group",
+        el("input", { value: p.group || "", placeholder: "None", maxLength: 60, autocomplete: "off", list: "protoGroupNames",
+          oninput: (e) => { p.group = e.target.value.trim(); saveSoon(p); } }),
+        el("datalist", { id: "protoGroupNames" }, others.map((g) => el("option", { value: g })))));
+      root.append(variantBar(p));
+    }
 
     const list = el("ol", { className: `block-list${selecting ? " selecting" : ""}` });
     p.blocks.forEach((b, i) => list.append(selecting ? selectCard(p, b, i) : blockCard(p, b, i)));
@@ -760,8 +797,9 @@
       `<li style="${font}">${esc(it.text)}${it.children && it.children.length ? html(it.children) : ""}</li>`).join("")}</ul>`;
     const plain = (list, depth = 0) => list.map((it) =>
       `${"\t".repeat(depth)}• ${it.text.replace(/\n/g, " ")}\n${it.children ? plain(it.children, depth + 1) : ""}`).join("");
-    const htmlText = `<html><body><!--StartFragment-->${html(items)}<!--EndFragment--></body></html>`;
-    const plainText = plain(items);
+    const conclusion = `<p style="${font};margin:0"><b>Conclusion:</b></p>`;
+    const htmlText = `<html><body><!--StartFragment-->${html(items)}${conclusion}<!--EndFragment--></body></html>`;
+    const plainText = `${plain(items)}Conclusion:\n`;
     try {
       await navigator.clipboard.write([new ClipboardItem({
         "text/html": new Blob([htmlText], { type: "text/html" }),
@@ -770,7 +808,7 @@
     } catch (e) {
       // Older browsers: copy a hidden rendered list the old way.
       const box = el("div", { contentEditable: "true", style: "position:fixed;left:-9999px;top:0" });
-      box.innerHTML = html(items);
+      box.innerHTML = html(items) + conclusion;
       document.body.append(box);
       const range = document.createRange();
       range.selectNodeContents(box);
