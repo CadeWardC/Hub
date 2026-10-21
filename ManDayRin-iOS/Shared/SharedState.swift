@@ -36,7 +36,14 @@ enum SharedState {
         return key
     }
 
+    /// How many words the widget's ‹ › taps have moved away from the hourly word.
+    static var wordOffset: Int {
+        get { defaults.integer(forKey: Key.wordOffset) }
+        set { defaults.set(newValue, forKey: Key.wordOffset) }
+    }
+
     private enum Key {
+        static let wordOffset = "wordOffset"
         static let widgetStartedOn = "widgetStartedOn"
         static let startedOn = "startedOn"
         static let reminderEnabled = "reminderEnabled"

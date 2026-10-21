@@ -1,5 +1,42 @@
+import AppIntents
 import SwiftUI
 import WidgetKit
+
+/// Tapping the widget's left/right half steps through this week's words; WidgetKit reloads the timeline after it runs.
+struct ShiftWordIntent: AppIntent {
+    static var title: LocalizedStringResource = "Change word"
+    static var isDiscoverable = false
+
+    @Parameter(title: "Step") var step: Int
+
+    init() {}
+
+    init(step: Int) {
+        self.step = step
+    }
+
+    func perform() async throws -> some IntentResult {
+        SharedState.wordOffset += step
+        return .result()
+    }
+}
+
+/// Clear tap areas laid over the widget: left half goes back a word, right half forward.
+private struct WordTapZones: View {
+    var body: some View {
+        HStack(spacing: 0) {
+            zone(step: -1)
+            zone(step: 1)
+        }
+    }
+
+    private func zone(step: Int) -> some View {
+        Button(intent: ShiftWordIntent(step: step)) {
+            Color.clear.contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+}
 
 /// Lock Screen (and small Home Screen) widget: one word from the current week's list,
 /// moving to the next word every hour and to the new list on Monday.
@@ -45,7 +82,7 @@ struct WordProvider: TimelineProvider {
         }
         let weekStart = CourseClock.weekStart(start: start, week: week)
         let hours = max(0, CourseClock.calendar.dateComponents([.hour], from: weekStart, to: date).hour ?? 0)
-        let index = hours % words.count
+        let index = ((hours + SharedState.wordOffset) % words.count + words.count) % words.count
         return WordEntry(date: date, week: week, index: index, count: words.count, word: words[index], theme: course.theme(week))
     }
 }
@@ -71,17 +108,20 @@ struct WordWidgetView: View {
             case .accessoryInline:
                 Text("\(word.hanzi) \(word.pinyin) · \(word.english)")
             case .accessoryCircular:
-                ZStack {
-                    AccessoryWidgetBackground()
-                    Text(word.hanzi)
-                        .font(.system(size: word.hanzi.count > 2 ? 15 : 22, weight: .bold))
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(1)
-                        .padding(4)
+                Button(intent: ShiftWordIntent(step: 1)) {
+                    ZStack {
+                        AccessoryWidgetBackground()
+                        Text(word.hanzi)
+                            .font(.system(size: word.hanzi.count > 2 ? 15 : 22, weight: .bold))
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
+                            .padding(4)
+                    }
                 }
+                .buttonStyle(.plain)
             case .systemSmall:
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("WEEK \(String(format: "%02d", entry.week)) · \(entry.index + 1)/\(entry.count)")
+                    Text("WEEK \(String(format: "%02d", entry.week)) · ‹ \(entry.index + 1)/\(entry.count) ›")
                         .font(.system(size: 11, weight: .semibold, design: .monospaced))
                         .foregroundStyle(Self.acid)
                     Spacer(minLength: 0)
@@ -100,6 +140,7 @@ struct WordWidgetView: View {
                         .lineLimit(2)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .overlay(WordTapZones())
             default:
                 VStack(alignment: .leading, spacing: 0) {
                     HStack(alignment: .firstTextBaseline, spacing: 6) {
@@ -117,12 +158,13 @@ struct WordWidgetView: View {
                         .font(.system(size: 13))
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
-                    Text("Week \(entry.week) · \(entry.index + 1)/\(entry.count)")
+                    Text("‹ \(entry.index + 1)/\(entry.count) ›  Week \(entry.week)")
                         .font(.system(size: 11))
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .overlay(WordTapZones())
             }
         } else {
             switch family {
@@ -152,7 +194,7 @@ struct ManDayRinWordWidget: Widget {
             WordWidgetView(entry: entry)
         }
         .configurationDisplayName("This week's words")
-        .description("A word from this week's list, a new one every hour.")
+        .description("A word from this week's list, a new one every hour. Tap the left or right side to change it.")
         .supportedFamilies([.accessoryRectangular, .accessoryInline, .accessoryCircular, .systemSmall])
     }
 }
