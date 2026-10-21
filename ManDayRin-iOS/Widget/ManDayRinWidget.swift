@@ -35,8 +35,7 @@ struct WordProvider: TimelineProvider {
 
     static func entry(at date: Date) -> WordEntry {
         guard let course = Course.shared,
-              let key = SharedState.startedOn,
-              let start = CourseClock.date(fromKey: key) else {
+              let start = CourseClock.date(fromKey: SharedState.startedOn ?? SharedState.widgetStartedOn) else {
             return WordEntry(date: date, week: 0, index: 0, count: 0, word: nil, theme: nil)
         }
         let week = CourseClock.weekNumber(start: start, at: date, totalWeeks: course.totalWeeks)

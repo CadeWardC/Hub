@@ -3,10 +3,41 @@ import Foundation
 /// The bits of the web app's `mandayrinState.v2` that the widget and native reminders need,
 /// kept in the App Group so the widget extension can read them.
 enum SharedState {
-    static let appGroup = "group.com.cadeward.mandayrin"
+    static let defaultAppGroup = "group.com.cadeward.mandayrin"
+
+    /// Sideloading tools re-sign with their own App Group name (AltStore appends the team ID),
+    /// so use the group this build was actually given: AltStore's ALTAppGroups list, then the
+    /// provisioning profile's entitlements, then the name in the entitlements file.
+    static let appGroup: String = {
+        let candidates = (Bundle.main.object(forInfoDictionaryKey: "ALTAppGroups") as? [String] ?? []) + provisionedAppGroups()
+        return candidates.first { $0.contains("mandayrin") } ?? candidates.first ?? defaultAppGroup
+    }()
+
     static let defaults = UserDefaults(suiteName: appGroup) ?? .standard
 
+    private static func provisionedAppGroups() -> [String] {
+        guard let url = Bundle.main.url(forResource: "embedded", withExtension: "mobileprovision"),
+              let data = try? Data(contentsOf: url),
+              let start = data.range(of: Data("<?xml".utf8)),
+              let end = data.range(of: Data("</plist>".utf8), in: start.lowerBound..<data.endIndex),
+              let plist = (try? PropertyListSerialization.propertyList(from: data.subdata(in: start.lowerBound..<end.upperBound), format: nil)) as? [String: Any],
+              let entitlements = plist["Entitlements"] as? [String: Any] else { return [] }
+        return entitlements["com.apple.security.application-groups"] as? [String] ?? []
+    }
+
+    /// The widget's own start Monday, used only if it can't see the app's (no shared App Group).
+    static var widgetStartedOn: String {
+        if let saved = defaults.string(forKey: Key.widgetStartedOn) { return saved }
+        let calendar = CourseClock.calendar
+        let today = calendar.startOfDay(for: Date())
+        let monday = calendar.date(byAdding: .day, value: -((calendar.component(.weekday, from: today) + 5) % 7), to: today) ?? today
+        let key = CourseClock.key(for: monday)
+        defaults.set(key, forKey: Key.widgetStartedOn)
+        return key
+    }
+
     private enum Key {
+        static let widgetStartedOn = "widgetStartedOn"
         static let startedOn = "startedOn"
         static let reminderEnabled = "reminderEnabled"
         static let reminderTime = "reminderTime"
