@@ -1,0 +1,75 @@
+# XcodeGen spec. Run scripts/prepare.sh first (it fills build/), then `xcodegen generate`.
+name: ManDayRin
+options:
+  bundleIdPrefix: com.cadeward
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    CODE_SIGN_STYLE: Manual
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+targets:
+  ManDayRin:
+    type: application
+    platform: iOS
+    scheme: {}
+    sources:
+      - path: App
+      - path: Shared
+      - path: build/web
+        type: folder
+        buildPhase: resources
+      - path: build/course.json
+        buildPhase: resources
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: ManDayRin
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSRequiresIPhoneOS: true
+        ITSAppUsesNonExemptEncryption: false
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIStatusBarStyle: UIStatusBarStyleLightContent
+        UIViewControllerBasedStatusBarAppearance: false
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    entitlements:
+      path: App/ManDayRin.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.cadeward.mandayrin
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    dependencies:
+      - target: ManDayRinWidget
+  ManDayRinWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Widget
+      - path: Shared
+      - path: build/course.json
+        buildPhase: resources
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: ManDayRin
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: Widget/ManDayRinWidget.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.cadeward.mandayrin.widget
