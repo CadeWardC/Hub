@@ -477,7 +477,7 @@ form[data-kind="task"] .event-only, form[data-kind="event"] .task-only { display
   .month-day .num { font-size: 0.9rem; }
   .week-day { padding: 12px 0; font-size: 0.8rem; }
   .week-day strong { font-size: 1.15rem; }
-  #tasksView, #protocolsView { max-width: 680px; margin: 0 auto; }
+  #tasksView, #protocolsView, #goalsView { max-width: 680px; margin: 0 auto; }
   .tabbar { gap: 40px; }
   .fab { right: max(24px, calc(50vw - 426px)); }
 }
@@ -509,6 +509,7 @@ form[data-kind="task"] .event-only, form[data-kind="event"] .task-only { display
   .sched-day .section-label:first-child { margin-top: 6px; }
   .month-day { min-height: 108px; }
   #tasksView, #protocolsView { max-width: 760px; }
+  #goalsView { max-width: 900px; }
 
   .fab { right: max(32px, calc(50vw - 640px + 32px)); bottom: 32px; }
   .toast { bottom: 40px; }
@@ -761,3 +762,93 @@ form[data-kind="task"] .event-only, form[data-kind="event"] .task-only { display
 .event.planned.done { opacity: 0.55; }
 .event.planned.done strong { text-decoration: line-through; }
 .event.planned.missed { border-color: var(--danger); border-left-color: var(--danger); }
+
+/* ---- goal chart (Goals tab) ---- */
+@media (max-width: 719px) {
+  .tabbar { gap: 4px; }
+  .tab { min-width: 72px; }
+}
+.gc-bar-top { display: flex; align-items: center; gap: 10px; margin: 4px 0 8px; }
+.gc-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 1.05rem; }
+.gc-select {
+  flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--surface); color: var(--text); font: inherit; font-weight: 600;
+}
+.gc-chart {
+  container-type: inline-size;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+  padding: 4px; border-radius: var(--radius); background: var(--text);
+}
+.gc-block {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  padding: 0; border: 0; border-radius: 6px; overflow: hidden; background: var(--line);
+}
+.gc-block:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+.gc-block .gc-cell {
+  display: grid; place-items: center; aspect-ratio: 1; padding: 2px; overflow: hidden;
+  background: var(--surface); color: var(--text);
+  font-size: max(6px, 1.45cqw); line-height: 1.15; text-align: center;
+  overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto;
+}
+.gc-block .gc-cell > span {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden;
+}
+.gc-cell.area { background: color-mix(in srgb, var(--muted) 22%, var(--surface)); font-weight: 700; }
+.gc-cell.goal { background: #ffe14d; color: #15191e; font-weight: 800; }
+.gc-cell.done { background: color-mix(in srgb, var(--done) 24%, var(--surface)); }
+.gc-block .gc-cell.done > span { text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--done) 70%, transparent); }
+
+.gc-progress { display: grid; gap: 6px; margin-top: 16px; }
+.gc-prog {
+  display: grid; grid-template-columns: minmax(0, 9em) 1fr auto; align-items: center; gap: 10px;
+  padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); text-align: left;
+}
+.gc-prog-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.86rem; font-weight: 600; }
+.gc-bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.gc-bar > span { display: block; height: 100%; background: var(--done); }
+.gc-prog-n { font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.gc-zoom-head { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.gc-zoom-head strong { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gc-zoom-head small { color: var(--muted); font-weight: 500; }
+.gc-mini { display: grid; grid-template-columns: repeat(3, 12px); gap: 3px; flex: none; }
+.gc-mini button {
+  width: 12px; height: 12px; padding: 0; border: 1px solid var(--line); border-radius: 3px; background: var(--surface);
+}
+.gc-mini button.centre { background: #ffe14d; border-color: #e0c22e; }
+.gc-mini button.here { background: var(--accent); border-color: var(--accent); }
+
+.gc-edit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.gc-edit .gc-cell {
+  position: relative; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 12px;
+  background: var(--surface); overflow: hidden;
+}
+.gc-edit .gc-cell.goal { border-color: #e0c22e; background: #fff6c2; color: #15191e; }
+.gc-edit .gc-cell.area { background: color-mix(in srgb, var(--muted) 14%, var(--surface)); }
+.gc-edit .gc-cell.done { background: color-mix(in srgb, var(--done) 14%, var(--surface)); border-color: color-mix(in srgb, var(--done) 45%, var(--line)); }
+.gc-input {
+  width: 100%; height: 100%; padding: 10px 8px; border: 0; background: none; resize: none;
+  color: inherit; font: inherit; font-size: 16px; line-height: 1.25; text-align: center; /* 16px stops iOS zooming in */
+}
+.gc-edit .gc-cell:has(.gc-tick) .gc-input, .gc-edit .gc-cell:has(.gc-go) .gc-input { padding-bottom: 34px; }
+.gc-edit .goal .gc-input, .gc-edit .area .gc-input { font-weight: 700; }
+.gc-input:focus { outline: none; }
+.gc-edit .gc-cell:focus-within { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.gc-tick, .gc-go {
+  position: absolute; right: 6px; bottom: 6px; display: grid; place-items: center;
+  width: 26px; height: 26px; padding: 0; border: 2px solid var(--line); border-radius: 50%; background: var(--surface);
+  color: transparent;
+}
+.gc-tick svg { width: 15px; height: 15px; stroke-width: 3; }
+.gc-cell.done .gc-tick { background: var(--done); border-color: var(--done); color: #fff; }
+.gc-go { color: var(--accent); border-color: var(--accent-soft); font-size: 1.1rem; line-height: 1; }
+
+.gc-empty { max-width: 460px; margin: 32px auto; text-align: center; }
+.gc-empty h2 { margin: 0 0 8px; }
+.gc-empty p { color: var(--muted); }
+.gc-example { width: 100%; margin-top: 10px; padding: 12px; }
+
+@media (min-width: 720px) {
+  .gc-chart { gap: 6px; padding: 6px; }
+  .gc-edit { gap: 10px; max-width: 620px; margin: 0 auto; }
+}

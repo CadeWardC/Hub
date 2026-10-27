@@ -1,5 +1,5 @@
-const CACHE_NAME = "taskschedule-v34";
-const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./protocols.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./app-icon-192.png", "./app-icon-512.png", "./app-icon-maskable-512.png", "./app-icon-180.png"];
+const CACHE_NAME = "taskschedule-v35";
+const APP_SHELL = ["./", "./index.html", "./styles.css", "./app.js", "./protocols.js", "./goals.js", "./sync.js", "./manifest.webmanifest", "./icon.svg", "./app-icon-192.png", "./app-icon-512.png", "./app-icon-maskable-512.png", "./app-icon-180.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));

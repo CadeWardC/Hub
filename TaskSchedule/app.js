@@ -42,11 +42,12 @@
       if (raw && Array.isArray(raw.tasks) && Array.isArray(raw.events)) {
         raw.protocols = Array.isArray(raw.protocols) ? raw.protocols : [];
         raw.settings = Array.isArray(raw.settings) ? raw.settings : [];
+        raw.goals = Array.isArray(raw.goals) ? raw.goals : [];
         raw.deleted = raw.deleted && typeof raw.deleted === "object" ? raw.deleted : {};
         return raw;
       }
     } catch (e) { /* fall through */ }
-    return { tasks: [], events: [], protocols: [], settings: [], deleted: {} };
+    return { tasks: [], events: [], protocols: [], settings: [], goals: [], deleted: {} };
   }
   const state = load();
   const saveHooks = [];
