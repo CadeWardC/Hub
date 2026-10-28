@@ -2,7 +2,7 @@ name: Build 365 iOS app
 
 on:
   push:
-    branches: [main]
+    branches: [main, "claude/**"]
     paths:
       - "365-iOS/**"
       - ".github/workflows/365-ios.yml"
