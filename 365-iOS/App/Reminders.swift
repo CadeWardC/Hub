@@ -59,6 +59,9 @@ enum Reminders {
                         : "Still no photo today. Take it to clear these reminders."
                     content.sound = .default
                     content.badge = 1
+                    // Breaks through Focus and stays at the top of the Lock Screen (needs the entitlement).
+                    content.interruptionLevel = .timeSensitive
+                    content.relevanceScore = 1
                     content.categoryIdentifier = category
                     content.threadIdentifier = prefix + dayKey
                     content.userInfo = ["day": dayKey]

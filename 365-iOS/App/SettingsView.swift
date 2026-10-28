@@ -35,7 +35,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Daily photo reminder")
                 } footer: {
-                    Text("iOS doesn't allow notifications that can't be swiped away, so 365 sends one again every interval and leaves them all, with a badge, until today's photo exists. Taking it clears them.")
+                    Text("iOS doesn't allow notifications that can't be swiped away, so 365 sends one again every interval and leaves them all, with a badge, until today's photo exists. Taking it clears them. They're Time Sensitive, so they get through Focus and stay at the top of the Lock Screen; check Settings → 365 → Notifications → Time Sensitive Notifications is on.")
                 }
 
                 Section("Camera") {

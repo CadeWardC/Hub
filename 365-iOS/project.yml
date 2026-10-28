@@ -36,6 +36,8 @@ targets:
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait]
         UIRequiresFullScreen: true
+    entitlements:
+      path: App/ThreeSixtyFive.entitlements
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.cadeward.threesixtyfive

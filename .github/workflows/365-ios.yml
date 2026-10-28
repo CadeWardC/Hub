@@ -51,7 +51,8 @@ jobs:
         run: |
           set -euo pipefail
           app=build/DerivedData/Build/Products/Release-iphoneos/ThreeSixtyFive.app
-          codesign --force --sign - "$app"
+          # Ad-hoc signature carries the Time Sensitive entitlement, so sideloading tools re-sign with it.
+          codesign --force --sign - --entitlements App/ThreeSixtyFive.entitlements "$app"
           rm -rf build/ipa && mkdir -p build/ipa/Payload
           cp -R "$app" build/ipa/Payload/
           (cd build/ipa && zip -qry ../365.ipa Payload)
